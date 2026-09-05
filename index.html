@@ -451,13 +451,16 @@
     </section>
 
     <!-- Floating Audio Subtitle & Toast for Visual & Auditory Feedback -->
-    <div id="speechToast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900/90 text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 backdrop-blur-md transition-all duration-300 opacity-0 pointer-events-none translate-y-4 max-w-[92vw] border border-slate-700/50">
+    <div id="speechToast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900/95 text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 backdrop-blur-md transition-all duration-300 opacity-0 pointer-events-none translate-y-4 max-w-[92vw] border border-slate-700/50">
         <span class="relative flex h-3 w-3">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
         </span>
         <i class="fa-solid fa-volume-high text-amber-400 text-base animate-pulse"></i>
-        <span id="speechToastText" class="text-xs md:text-sm font-bold text-amber-100"></span>
+        <span id="speechToastText" class="text-xs md:text-sm font-bold text-amber-100 line-clamp-1"></span>
+        <button onclick="stopSpeaking()" title="إيقاف الصوت" class="mr-2 text-slate-400 hover:text-white text-xs bg-slate-800 px-2 py-1 rounded-lg border border-slate-700">
+            <i class="fa-solid fa-stop"></i> إيقاف
+        </button>
     </div>
 
     <div id="infoModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
@@ -510,7 +513,7 @@
     </div>
 
     <script>
-        // Branch Data
+        // Branch Data with precise color-coded HTML and Speech Synthesis phrases
         const branchData = [
             {
                 titleHtml: '<span class="text-red-600 font-black">صَـنَـعَ</span>',
@@ -563,83 +566,103 @@
         let checkedFill = false;
         let checkedMatch = false;
         let selectedChip = null;
+        
+        // Robust Independent Audio & Speech Engine (100% Client-Side & Standalone)
+        let globalAudioCtx = null;
+        let speechQueue = [];
+        let isSpeakingQueue = false;
+        let activeSpeakerButton = null;
         let toastTimer = null;
         let isAudioUnlocked = false;
 
-        // تهيئة محرك الصوت عند أول لمس أو نقر للمستخدم لتفادي قيود المتصفح
+        function getAudioContext() {
+            if (!globalAudioCtx) {
+                const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+                if (AudioCtxClass) {
+                    globalAudioCtx = new AudioCtxClass();
+                }
+            }
+            if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
+                globalAudioCtx.resume().catch(() => {});
+            }
+            return globalAudioCtx;
+        }
+
+        // Unlock Mobile Audio Policies on user's first touch/click
         function unlockMobileAudio() {
             if (isAudioUnlocked) return;
             isAudioUnlocked = true;
 
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                if (ctx.state === 'suspended') {
-                    ctx.resume();
-                }
-            } catch (e) {}
+            const ctx = getAudioContext();
+            if (ctx) {
+                try {
+                    const silentBuffer = ctx.createBuffer(1, 1, 22050);
+                    const source = ctx.createBufferSource();
+                    source.buffer = silentBuffer;
+                    source.connect(ctx.destination);
+                    source.start(0);
+                } catch (e) {}
+            }
 
             if ('speechSynthesis' in window) {
                 try {
-                    const silentUtterance = new SpeechSynthesisUtterance(' ');
-                    silentUtterance.volume = 0.01;
-                    window.speechSynthesis.speak(silentUtterance);
+                    window.speechSynthesis.resume();
                 } catch (e) {}
             }
         }
 
-        window.addEventListener('touchstart', unlockMobileAudio, { once: true, passive: true });
-        window.addEventListener('click', unlockMobileAudio, { once: true, passive: true });
+        window.addEventListener('touchstart', unlockMobileAudio, { passive: true });
+        window.addEventListener('click', unlockMobileAudio, { passive: true });
 
-        // مؤثرات صوتية تفاعلية للنقر والنجاح
+        // Synthesize UI SFX via Web Audio API (Guaranteed on all devices without external assets)
         function playSound(type) {
             try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                if (ctx.state === 'suspended') {
-                    ctx.resume();
-                }
+                const ctx = getAudioContext();
+                if (!ctx) return;
+
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
                 osc.connect(gain);
                 gain.connect(ctx.destination);
 
+                const now = ctx.currentTime;
                 if (type === 'click') {
                     osc.type = 'sine';
-                    osc.frequency.setValueAtTime(440, ctx.currentTime);
-                    gain.gain.setValueAtTime(0.08, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.08);
+                    osc.frequency.setValueAtTime(520, now);
+                    gain.gain.setValueAtTime(0.06, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+                    osc.start(now);
+                    osc.stop(now + 0.07);
                 } else if (type === 'success') {
                     osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
-                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
-                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2);
-                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.35);
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.09);
+                    osc.frequency.setValueAtTime(783.99, now + 0.18);
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
+                    osc.start(now);
+                    osc.stop(now + 0.32);
                 } else if (type === 'error') {
                     osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(220, ctx.currentTime);
-                    osc.frequency.setValueAtTime(180, ctx.currentTime + 0.1);
-                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.25);
+                    osc.frequency.setValueAtTime(220, now);
+                    osc.frequency.setValueAtTime(160, now + 0.08);
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+                    osc.start(now);
+                    osc.stop(now + 0.22);
                 }
             } catch (e) {}
         }
 
-        // تنقية النصوص لتسهيل نطقها بفصاحة
+        // Clean text while preserving Arabic diacritics (tashkeel)
         function cleanTextForSpeech(str) {
             if (!str) return '';
             let cleaned = str.replace(/<[^>]*>/g, ' ');
-            cleaned = cleaned.replace(/[\[\]\-«»()'"{}\/⚙️🔨👨‍🔧🏺🏭🎯⭐💡🔗📖👈!]/g, ' ');
-            cleaned = cleaned.replace(/ـ/g, ''); // إزالة الكشيدة
+            cleaned = cleaned.replace(/[\[\]\-«»()'"{}\/⚙️🔨👨‍🔧🏺🏭🎯⭐💡🔗📖👈!#$@%^&*+=_~|\\?]/g, ' ');
+            cleaned = cleaned.replace(/ـ/g, ''); // Remove Tatweel/Kashida
             return cleaned.replace(/\s+/g, ' ').trim();
         }
 
-        // إظهار شريط قراءة النص أسفل الشاشة
         function showSpeechToast(text) {
             const toast = document.getElementById('speechToast');
             const toastText = document.getElementById('speechToastText');
@@ -653,47 +676,145 @@
             toastTimer = setTimeout(() => {
                 toast.classList.remove('opacity-100', 'translate-y-0');
                 toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-            }, 4500);
+            }, 6000);
         }
 
-        // محرك النطق الصوتي الفصيح المباشر والآمن
-        function speakText(rawText, audioBtn = null) {
-            unlockMobileAudio();
-            playSound('click');
+        function hideSpeechToast() {
+            const toast = document.getElementById('speechToast');
+            if (toast) {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+            }
+        }
 
-            const textToSpeak = cleanTextForSpeech(rawText);
-            if (!textToSpeak) return;
+        // Find best available Arabic voice on user's device
+        function getBestArabicVoice() {
+            if (!('speechSynthesis' in window)) return null;
+            const voices = window.speechSynthesis.getVoices() || [];
+            if (!voices || voices.length === 0) return null;
+
+            return voices.find(v => v.lang === 'ar-SA' || v.lang === 'ar_SA') ||
+                   voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ar')) ||
+                   null;
+        }
+
+        // Stop any currently running speech
+        function stopSpeaking() {
+            speechQueue = [];
+            isSpeakingQueue = false;
+            hideSpeechToast();
+            if (activeSpeakerButton) {
+                activeSpeakerButton.innerHTML = '<i class="fa-solid fa-headphones-simple text-base"></i> استمع إلى البطاقة كاملة (الكلمة، الشرح، المتلازمة والمثال)';
+                activeSpeakerButton = null;
+            }
+            if ('speechSynthesis' in window) {
+                try {
+                    window.speechSynthesis.cancel();
+                } catch (e) {}
+            }
+        }
+
+        // Sequential Speech Queue Runner: reads multiple sentences clearly without cutoff
+        function processNextInSpeechQueue() {
+            if (speechQueue.length === 0) {
+                isSpeakingQueue = false;
+                if (activeSpeakerButton) {
+                    activeSpeakerButton.innerHTML = '<i class="fa-solid fa-headphones-simple text-base"></i> استمع إلى البطاقة كاملة (الكلمة، الشرح، المتلازمة والمثال)';
+                    activeSpeakerButton = null;
+                }
+                setTimeout(hideSpeechToast, 1200);
+                return;
+            }
+
+            isSpeakingQueue = true;
+            const rawPhrase = speechQueue.shift();
+            const textToSpeak = cleanTextForSpeech(rawPhrase);
+
+            if (!textToSpeak) {
+                processNextInSpeechQueue();
+                return;
+            }
 
             showSpeechToast(textToSpeak);
 
             if (!('speechSynthesis' in window)) {
-                console.warn('محرك النطق غير مدعوم في هذا المتصفح');
+                processNextInSpeechQueue();
                 return;
             }
 
-            // إيقاف أي نطق سابق معلق
-            window.speechSynthesis.cancel();
+            try {
+                // Ensure speech synthesis is unpaused (fix for Chrome/Safari bug)
+                if (window.speechSynthesis.paused) {
+                    window.speechSynthesis.resume();
+                }
 
-            const utterance = new SpeechSynthesisUtterance(textToSpeak);
-            utterance.lang = 'ar-SA';
-            utterance.rate = 0.88; // سرعة هادئة ومناسبة للمرحلة الابتدائية
-            utterance.pitch = 1.0;
+                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                utterance.lang = 'ar-SA';
+                utterance.rate = 0.86;  // Gentle learning pace
+                utterance.pitch = 1.05; // Friendly tone
 
-            // تحديد الصوت العربي تلقائياً
-            const voices = window.speechSynthesis.getVoices();
-            const arVoice = voices.find(v => v.lang && (v.lang.startsWith('ar-SA') || v.lang.startsWith('ar')));
-            if (arVoice) {
-                utterance.voice = arVoice;
+                const arabicVoice = getBestArabicVoice();
+                if (arabicVoice) {
+                    utterance.voice = arabicVoice;
+                }
+
+                // Keep reference to prevent mobile garbage-collection early termination bug
+                window.__activeUtterance = utterance;
+
+                let hasEnded = false;
+                const finishCurrentPhrase = () => {
+                    if (hasEnded) return;
+                    hasEnded = true;
+                    // Natural pause between learning phrases
+                    setTimeout(processNextInSpeechQueue, 220);
+                };
+
+                utterance.onend = finishCurrentPhrase;
+                utterance.onerror = finishCurrentPhrase;
+
+                // Watchdog timer in case browser stalls the utterance
+                const expectedDurationMs = Math.max(2500, textToSpeak.length * 150);
+                setTimeout(() => {
+                    if (!hasEnded && isSpeakingQueue) {
+                        finishCurrentPhrase();
+                    }
+                }, expectedDurationMs);
+
+                window.speechSynthesis.speak(utterance);
+            } catch (err) {
+                console.warn('Speech error:', err);
+                processNextInSpeechQueue();
+            }
+        }
+
+        // Public Speak Function: accepts single string OR array of phrases
+        function speakText(content, triggerButton = null) {
+            unlockMobileAudio();
+            playSound('click');
+
+            stopSpeaking();
+
+            if (triggerButton) {
+                activeSpeakerButton = triggerButton;
+                triggerButton.innerHTML = '<i class="fa-solid fa-volume-high text-amber-300 animate-pulse"></i> جاري الاستماع...';
             }
 
-            if (audioBtn) {
-                const originalBtnHtml = audioBtn.innerHTML;
-                audioBtn.innerHTML = '<i class="fa-solid fa-volume-high text-amber-300 animate-pulse"></i> جاري النطق...';
-                utterance.onend = () => { audioBtn.innerHTML = originalBtnHtml; };
-                utterance.onerror = () => { audioBtn.innerHTML = originalBtnHtml; };
+            if (Array.isArray(content)) {
+                speechQueue = content.slice();
+            } else if (typeof content === 'string') {
+                // Split multi-sentence text on arabic punctuation for maximum clarity
+                const parts = content.split(/[.\n؛]+/).map(s => s.trim()).filter(Boolean);
+                speechQueue = parts.length > 0 ? parts : [content];
             }
 
-            window.speechSynthesis.speak(utterance);
+            processNextInSpeechQueue();
+        }
+
+        // Cache voices on load
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                getBestArabicVoice();
+            };
         }
 
         function openBranchModal(index) {
@@ -705,13 +826,21 @@
             document.getElementById('modalColloc').innerText = info.col;
             document.getElementById('modalContext').innerText = info.context;
 
-            const fullScript = `${info.speechTitle}. وَزْنُهُ الصَّرْفِيُّ: ${info.weight}. الشَّرْحُ: ${info.desc}. المُتَلَازِمَةُ اللَّفْظِيَّةُ: ${info.col}. المِثَالُ فِي جُمْلَةٍ: ${info.context}.`;
+            // Ordered sequence of distinct sentences for natural pedagogical reading
+            const fullPhrasesList = [
+                `${info.speechTitle}. وَزْنُهُ الصَّرْفِيُّ: ${info.weight}`,
+                `الشَّرْحُ: ${info.desc}`,
+                `المُتَلَازِمَةُ اللَّفْظِيَّةُ: ${info.col}`,
+                `المِثَالُ فِي جُمْلَةٍ: ${info.context}`
+            ];
 
             const modalAudioBtn = document.getElementById('modalAudioBtn');
+            modalAudioBtn.innerHTML = '<i class="fa-solid fa-headphones-simple text-base"></i> استمع إلى البطاقة كاملة (الكلمة، الشرح، المتلازمة والمثال)';
             modalAudioBtn.onclick = function() {
-                speakText(fullScript, modalAudioBtn);
+                speakText(fullPhrasesList, modalAudioBtn);
             };
 
+            // Dedicated sub-buttons for individual item listening
             document.getElementById('modalQuickSpeakBtn').onclick = function() {
                 speakText(`${info.speechTitle}، وَزْنُهُ الصَّرْفِيُّ ${info.weight}`);
             };
@@ -722,19 +851,18 @@
                 speakText(`المُتَلَازِمَةُ اللَّفْظِيَّةُ: ${info.col}`);
             };
             document.getElementById('speakContextBtn').onclick = function() {
-                speakText(`المِثَالُ فِي جُمْلَةٍ: ${info.context}`);
+                speakText(`المِثَالُ: ${info.context}`);
             };
 
             document.getElementById('infoModal').classList.remove('hidden');
 
-            speakText(fullScript, modalAudioBtn);
+            // Automatically read out the complete card details upon opening
+            speakText(fullPhrasesList, modalAudioBtn);
         }
 
         function closeModal() {
             playSound('click');
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-            }
+            stopSpeaking();
             document.getElementById('infoModal').classList.add('hidden');
         }
 
@@ -777,6 +905,7 @@
             });
         }
 
+        // Click / Tap to place chip (Optimized for Touchscreens)
         function handleChipSelect(chip) {
             playSound('click');
             if (selectedChip === chip) {
@@ -818,6 +947,7 @@
             zone.appendChild(chip);
         }
 
+        // Section 1 Verification
         function checkFillBlanks() {
             const drop1 = document.getElementById('dropQ1').querySelector('.drag-chip');
             const drop2 = document.getElementById('dropQ2').querySelector('.drag-chip');
@@ -868,6 +998,7 @@
             }
         }
 
+        // Section 2 Matching Verification
         function checkMatching() {
             const m1 = document.getElementById('dropCol1').querySelector('.drag-chip');
             const m2 = document.getElementById('dropCol2').querySelector('.drag-chip');
@@ -881,7 +1012,7 @@
                 m3 && m3.dataset.match === '3' &&
                 m4 && m4.dataset.match === '4') {
                 
-                fb.innerText = '🎉 أحسنت صنعاً! جميع المتلازمات اللفظية موصولة ببطاقاتها الصحيحة 100%';
+                fb.innerText = '🎉 أحسنت صنعاً! جميع المتلازمات اللفظية مصلولة ببطاقاتها الصحيحة 100%';
                 fb.className = 'text-xs font-bold text-emerald-600 block mt-2';
                 playSound('success');
                 if (!checkedMatch) {
@@ -937,9 +1068,6 @@
             initDragAndDrop();
             drawRadialLines();
             window.addEventListener('resize', drawRadialLines);
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.getVoices();
-            }
         };
     </script>
 </body>
