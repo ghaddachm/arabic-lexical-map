@@ -563,11 +563,6 @@
         let checkedFill = false;
         let checkedMatch = false;
         let selectedChip = null;
-        
-        // Comprehensive Audio & Speech Management
-        let currentUtterance = null;
-        let currentAudioPlayer = null;
-        let availableArabicVoices = [];
         let toastTimer = null;
         let isAudioUnlocked = false;
 
@@ -576,7 +571,6 @@
             if (isAudioUnlocked) return;
             isAudioUnlocked = true;
 
-            // Unlock Web Audio Context
             try {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
                 if (ctx.state === 'suspended') {
@@ -584,7 +578,6 @@
                 }
             } catch (e) {}
 
-            // Prime Mobile Speech Synthesis
             if ('speechSynthesis' in window) {
                 try {
                     const silentUtterance = new SpeechSynthesisUtterance(' ');
@@ -597,18 +590,7 @@
         window.addEventListener('touchstart', unlockMobileAudio, { once: true, passive: true });
         window.addEventListener('click', unlockMobileAudio, { once: true, passive: true });
 
-        function loadVoices() {
-            if ('speechSynthesis' in window) {
-                const voices = window.speechSynthesis.getVoices();
-                availableArabicVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('ar'));
-            }
-        }
-
-        if ('speechSynthesis' in window) {
-            loadVoices();
-            window.speechSynthesis.onvoiceschanged = loadVoices;
-        }
-
+        // System Sound Effects using Web Audio API
         function playSound(type) {
             try {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -645,9 +627,7 @@
                     osc.start();
                     osc.stop(ctx.currentTime + 0.25);
                 }
-            } catch (e) {
-                // Audio context suppressed
-            }
+            } catch (e) {}
         }
 
         // Clean Arabic text thoroughly for clear vocalization
@@ -655,28 +635,11 @@
             if (!str) return '';
             let cleaned = str.replace(/<[^>]*>/g, ' ');
             cleaned = cleaned.replace(/[\[\]\-«»()'"{}\/⚙️🔨👨‍🔧🏺🏭🎯⭐💡🔗📖👈!]/g, ' ');
-            cleaned = cleaned.replace(/ـ/g, ''); // Remove Arabic Tatweel/Kashida
+            cleaned = cleaned.replace(/ـ/g, ''); // Remove Arabic Tatweel
             return cleaned.replace(/\s+/g, ' ').trim();
         }
 
-        // Audio Subtitle Toast
-        function showSpeechToast(text) {
-            const toast = document.getElementById('speechToast');
-            const toastText = document.getElementById('speechToastText');
-            if (!toast || !toastText) return;
-
-            toastText.textContent = text;
-            toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-            toast.classList.add('opacity-100', 'translate-y-0');
-
-            if (toastTimer) clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => {
-                toast.classList.remove('opacity-100', 'translate-y-0');
-                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-            }, 6000);
-        }
-
-        // Audio Subtitle Toast
+        // Single Unified Audio Subtitle Toast
         function showSpeechToast(text) {
             const toast = document.getElementById('speechToast');
             const toastText = document.getElementById('speechToastText');
@@ -693,178 +656,7 @@
             }, 4500);
         }
 
-        function base64ToArrayBuffer(base64) {
-            const binaryString = window.atob(base64);
-            const len = binaryString.length;
-            const bytes = new Uint8Array(len);
-            for (let i = 0; i < len; i++) {
-                bytes[i] = binaryString.charCodeAt(i);
-            }
-            return bytes.buffer;
-        }
-
-        function pcmToWav(pcmData, sampleRate) {
-            const numChannels = 1;
-            const bitsPerSample = 16;
-            const byteRate = sampleRate * numChannels * (bitsPerSample / 8);
-            const blockAlign = numChannels * (bitsPerSample / 8);
-            const dataLength = pcmData.length * 2;
-            const buffer = new ArrayBuffer(44 + dataLength);
-            const view = new DataView(buffer);
-
-            function writeString(v, offset, string) {
-                for (let i = 0; i < string.length; i++) {
-                    v.setUint8(offset + i, string.charCodeAt(i));
-                }
-            }
-
-            writeString(view, 0, 'RIFF');
-            view.setUint32(4, 36 + dataLength, true);
-            writeString(view, 8, 'WAVE');
-            writeString(view, 12, 'fmt ');
-            view.setUint32(16, 16, true);
-            view.setUint16(20, 1, true); // Linear PCM
-            view.setUint16(22, numChannels, true);
-            view.setUint32(24, sampleRate, true);
-            view.setUint32(28, byteRate, true);
-            view.setUint16(32, blockAlign, true);
-            view.setUint16(34, bitsPerSample, true);
-            writeString(view, 36, 'data');
-            view.setUint32(40, dataLength, true);
-
-            let offset = 44;
-            for (let i = 0; i < pcmData.length; i++, offset += 2) {
-                view.setInt16(offset, pcmData[i], true);
-            }
-
-            return new Blob([view], { type: 'audio/wav' });
-        }
-
-        async function fallbackAudioPlayback(text, audioBtn = null) {
-            if (audioBtn) {
-                audioBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> جاري النطق...';
-            }
-
-            // Split text into coherent, bite-sized clauses for seamless fallback audio delivery
-            const clauses = text.split(/[،.؛\n]+/).map(c => c.trim()).filter(c => c.length > 0);
-
-            if (clauses.length === 0) return;
-
-            let currentIndex = 0;
-
-            function playNextClause() {
-                if (currentIndex >= clauses.length) {
-                    if (audioBtn) {
-                        audioBtn.innerHTML = '<i class="fa-solid fa-headphones-simple text-base"></i> استمع إلى البطاقة كاملة (الكلمة، الشرح، المتلازمة والمثال)';
-                    }
-                    return;
-                }
-
-                const currentClause = clauses[currentIndex++];
-                showSpeechToast(currentClause);
-
-                try {
-                    const encodedText = encodeURIComponent(currentClause);
-                    const streamUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=ar&client=tw-ob&q=${encodedText}`;
-
-                    if (currentAudioPlayer) {
-                        currentAudioPlayer.pause();
-                    }
-
-                    const audio = new Audio(streamUrl);
-                    currentAudioPlayer = audio;
-
-                    audio.onplay = () => {
-                        if (audioBtn) {
-                            audioBtn.innerHTML = '<i class="fa-solid fa-volume-high text-amber-300 animate-pulse"></i> جاري الاستماع...';
-                        }
-                    };
-
-                    audio.onended = () => {
-                        // Play the next clause with a natural subtle breath delay
-                        setTimeout(playNextClause, 200);
-                    };
-
-                    audio.onerror = async () => {
-                        // Fallback to Gemini TTS for the remaining combined text
-                        const remaining = clauses.slice(currentIndex - 1).join('، ');
-                        await speakWithGeminiTTS(remaining, audioBtn);
-                    };
-
-                    audio.play().catch(async () => {
-                        const remaining = clauses.slice(currentIndex - 1).join('، ');
-                        await speakWithGeminiTTS(remaining, audioBtn);
-                    });
-                } catch (err) {
-                    console.warn('Audio stream failed, using Gemini TTS:', err);
-                    speakWithGeminiTTS(clauses.slice(currentIndex - 1).join('، '), audioBtn);
-                }
-            }
-
-            playNextClause();
-        }
-
-        // Gemini AI TTS Engine
-        async function speakWithGeminiTTS(text, audioBtn = null) {
-            try {
-                if (audioBtn) audioBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> جاري توليد الصوت...';
-                const systemPrompt = "أنطق الكلمة أو الجملة التالية باللغة العربية الفصحى الواضحة المشوقة للأطفال وبمخارج حروف دقيقة جداً.";
-                const payload = {
-                    contents: [{ parts: [{ text: `${systemPrompt}\n\n${text}` }] }],
-                    generationConfig: {
-                        responseModalities: ["AUDIO"],
-                        speechConfig: {
-                            voiceConfig: { prebuiltVoiceConfig: { voiceName: "Sulafat" } }
-                        }
-                    }
-                };
-
-                const apiKey = "";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
-
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const result = await response.json();
-                const candidate = result.candidates?.[0]?.content?.parts?.[0];
-                const audioData = candidate?.inlineData?.data;
-                const mimeType = candidate?.inlineData?.mimeType;
-
-                if (audioData) {
-                    let sampleRate = 24000;
-                    if (mimeType && mimeType.includes('rate=')) {
-                        const match = mimeType.match(/rate=(\d+)/);
-                        if (match) sampleRate = parseInt(match[1], 10);
-                    }
-                    const pcmBuffer = base64ToArrayBuffer(audioData);
-                    const pcm16 = new Int16Array(pcmBuffer);
-                    const wavBlob = pcmToWav(pcm16, sampleRate);
-                    const audioUrl = URL.createObjectURL(wavBlob);
-
-                    if (currentAudioPlayer) {
-                        currentAudioPlayer.pause();
-                    }
-                    currentAudioPlayer = new Audio(audioUrl);
-                    currentAudioPlayer.play();
-
-                    if (audioBtn) {
-                        audioBtn.innerHTML = '<i class="fa-solid fa-volume-high text-amber-300 animate-pulse"></i> جاري الاستماع...';
-                        currentAudioPlayer.onended = () => {
-                            audioBtn.innerHTML = '<i class="fa-solid fa-headphones-simple text-base"></i> استمع إلى البطاقة كاملة (الكلمة، الشرح، المتلازمة والمثال)';
-                        };
-                    }
-                    return true;
-                }
-            } catch (err) {
-                console.warn('Gemini TTS failed:', err);
-            }
-            if (audioBtn) audioBtn.innerHTML = '<i class="fa-solid fa-headphones-simple text-base"></i> استمع إلى البطاقة كاملة (الكلمة، الشرح، المتلازمة والمثال)';
-            return false;
-        }
-
+        // Robust Native Speech Synthesis Engine
         function speakText(rawText, audioBtn = null) {
             unlockMobileAudio();
             playSound('click');
@@ -874,78 +666,32 @@
 
             showSpeechToast(textToSpeak);
 
-            if (currentAudioPlayer) {
-                try {
-                    currentAudioPlayer.pause();
-                    currentAudioPlayer.currentTime = 0;
-                } catch (e) {}
+            if (!('speechSynthesis' in window)) {
+                console.warn('Speech synthesis is not supported on this browser.');
+                return;
             }
 
-            // Test if Web Speech API is supported with an Arabic Voice
-            let nativeSpeechWorked = false;
+            window.speechSynthesis.cancel();
 
-            if ('speechSynthesis' in window) {
-                try {
-                    window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            utterance.lang = 'ar-SA';
+            utterance.rate = 0.88;
+            utterance.pitch = 1.0;
 
-                    if (availableArabicVoices.length === 0) {
-                        loadVoices();
-                    }
-
-                    const arabicVoice = availableArabicVoices.find(v => v.lang.startsWith('ar-SA')) ||
-                                       availableArabicVoices.find(v => v.lang.startsWith('ar')) ||
-                                       availableArabicVoices[0];
-
-                    // If browser lacks an Arabic voice, directly route to the infallible audio stream
-                    if (!arabicVoice) {
-                        fallbackAudioPlayback(textToSpeak, audioBtn);
-                        return;
-                    }
-
-                    // CRITICAL FOR MOBILE: Run synchronously without setTimeout
-                    const utterance = new SpeechSynthesisUtterance(textToSpeak);
-                    utterance.lang = arabicVoice.lang || 'ar-SA';
-                    utterance.rate = 0.88;
-                    utterance.pitch = 1.05;
-                    utterance.voice = arabicVoice;
-
-                    currentUtterance = utterance; // Keep global reference against mobile garbage collection bug
-
-                    if (audioBtn) {
-                        const originalBtnHtml = audioBtn.innerHTML;
-                        audioBtn.innerHTML = '<i class="fa-solid fa-volume-high text-amber-300 animate-pulse"></i> جاري النطق...';
-                        utterance.onend = () => { audioBtn.innerHTML = originalBtnHtml; };
-                        utterance.onerror = () => {
-                            audioBtn.innerHTML = originalBtnHtml;
-                            fallbackAudioPlayback(textToSpeak, audioBtn);
-                        };
-                    } else {
-                        utterance.onerror = () => {
-                            fallbackAudioPlayback(textToSpeak);
-                        };
-                    }
-
-                    utterance.onstart = () => {
-                        nativeSpeechWorked = true;
-                    };
-
-                    window.speechSynthesis.speak(utterance);
-
-                    // Mobile fallback guard: if speech hasn't triggered after 400ms, route to fallback
-                    setTimeout(() => {
-                        if (!nativeSpeechWorked && !window.speechSynthesis.speaking) {
-                            fallbackAudioPlayback(textToSpeak, audioBtn);
-                        }
-                    }, 400);
-
-                    return;
-                } catch (err) {
-                    console.warn('SpeechSynthesis exception, activating fallback:', err);
-                }
+            const voices = window.speechSynthesis.getVoices();
+            const arVoice = voices.find(v => v.lang && (v.lang.startsWith('ar-SA') || v.lang.startsWith('ar')));
+            if (arVoice) {
+                utterance.voice = arVoice;
             }
 
-            // Fallback if speechSynthesis is unavailable
-            fallbackAudioPlayback(textToSpeak, audioBtn);
+            if (audioBtn) {
+                const originalBtnHtml = audioBtn.innerHTML;
+                audioBtn.innerHTML = '<i class="fa-solid fa-volume-high text-amber-300 animate-pulse"></i> جاري النطق...';
+                utterance.onend = () => { audioBtn.innerHTML = originalBtnHtml; };
+                utterance.onerror = () => { audioBtn.innerHTML = originalBtnHtml; };
+            }
+
+            window.speechSynthesis.speak(utterance);
         }
 
         function openBranchModal(index) {
@@ -957,7 +703,6 @@
             document.getElementById('modalColloc').innerText = info.col;
             document.getElementById('modalContext').innerText = info.context;
 
-            // Full speech script incorporating word, morphological weight, explanation, collocation, and example
             const fullScript = `${info.speechTitle}. وَزْنُهُ الصَّرْفِيُّ: ${info.weight}. الشَّرْحُ: ${info.desc}. المُتَلَازِمَةُ اللَّفْظِيَّةُ: ${info.col}. المِثَالُ فِي جُمْلَةٍ: ${info.context}.`;
 
             const modalAudioBtn = document.getElementById('modalAudioBtn');
@@ -965,7 +710,6 @@
                 speakText(fullScript, modalAudioBtn);
             };
 
-            // Dedicated sub-buttons for individual item listening
             document.getElementById('modalQuickSpeakBtn').onclick = function() {
                 speakText(`${info.speechTitle}، وَزْنُهُ الصَّرْفِيُّ ${info.weight}`);
             };
@@ -981,15 +725,11 @@
 
             document.getElementById('infoModal').classList.remove('hidden');
 
-            // Automatically read out the complete card details upon opening
             speakText(fullScript, modalAudioBtn);
         }
 
         function closeModal() {
             playSound('click');
-            if (currentAudioPlayer) {
-                try { currentAudioPlayer.pause(); } catch (e) {}
-            }
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
             }
@@ -1035,7 +775,6 @@
             });
         }
 
-        // Click / Tap to place chip (Optimized for Touchscreens)
         function handleChipSelect(chip) {
             playSound('click');
             if (selectedChip === chip) {
@@ -1077,7 +816,6 @@
             zone.appendChild(chip);
         }
 
-        // Section 1 Verification
         function checkFillBlanks() {
             const drop1 = document.getElementById('dropQ1').querySelector('.drag-chip');
             const drop2 = document.getElementById('dropQ2').querySelector('.drag-chip');
@@ -1128,7 +866,6 @@
             }
         }
 
-        // Section 2 Matching Verification
         function checkMatching() {
             const m1 = document.getElementById('dropCol1').querySelector('.drag-chip');
             const m2 = document.getElementById('dropCol2').querySelector('.drag-chip');
@@ -1142,7 +879,7 @@
                 m3 && m3.dataset.match === '3' &&
                 m4 && m4.dataset.match === '4') {
                 
-                fb.innerText = '🎉 أحسنت صنعاً! جميع المتلازمات اللفظية مصلولة ببطاقاتها الصحيحة 100%';
+                fb.innerText = '🎉 أحسنت صنعاً! جميع المتلازمات اللفظية موصولة ببطاقاتها الصحيحة 100%';
                 fb.className = 'text-xs font-bold text-emerald-600 block mt-2';
                 playSound('success');
                 if (!checkedMatch) {
@@ -1198,6 +935,9 @@
             initDragAndDrop();
             drawRadialLines();
             window.addEventListener('resize', drawRadialLines);
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.getVoices();
+            }
         };
     </script>
 </body>
