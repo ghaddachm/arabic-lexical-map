@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة بذرة الكلمات التفاعلية | المعجم الصرفي الإدراكي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 50%, #f0f9ff 100%);
+            min-height: 100vh;
+            color: #1e293b;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .clay-card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            box-shadow: 12px 12px 24px rgba(165, 180, 252, 0.4), 
+                        -12px -12px 24px rgba(255, 255, 255, 0.95);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .clay-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 16px 16px 32px rgba(165, 180, 252, 0.5);
+        }
+        .clay-sun {
+            background: radial-gradient(circle, #fef08a 0%, #facc15 60%, #eab308 100%);
+            box-shadow: 0 0 50px rgba(250, 204, 21, 0.6);
+            border: 4px solid #ffffff;
+        }
+        .clay-btn {
+            background: linear-gradient(145deg, #6366f1, #4f46e5);
+            color: white;
+            border-radius: 1.25rem;
+            box-shadow: 4px 4px 12px rgba(99, 102, 241, 0.35);
+            transition: all 0.2s ease;
+        }
+        .clay-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 6px 6px 16px rgba(99, 102, 241, 0.45);
+        }
+        .drop-zone {
+            min-height: 52px;
+            border: 2px dashed #a5b4fc;
+            background-color: rgba(238, 242, 255, 0.6);
+            border-radius: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem 0.75rem;
+        }
+        .drag-chip {
+            cursor: grab;
+            transition: all 0.2s ease;
+        }
+        .drag-chip.selected {
+            ring: 4px;
+            ring-color: #6366f1;
+            transform: scale(1.08);
+        }
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 35px rgba(250, 204, 21, 0.6); }
+            50% { transform: scale(1.05); box-shadow: 0 0 55px rgba(250, 204, 21, 0.9); }
+        }
+        .pulse-sun { animation: pulse-glow 3s ease-in-out infinite; }
+    </style>
+</head>
+<body class="p-4 md:p-8 flex flex-col items-center">
+
+    <!-- وسوم الصوت المرفوعة سابقاً لجذر صنع -->
+    <audio id="audio-root" src="root.mp3.mp3" preload="auto"></audio>
+    <audio id="audio-verb" src="verb.mp3" preload="auto"></audio>
+    <audio id="audio-actor" src="actor.mp3" preload="auto"></audio>
+    <audio id="audio-product" src="product.mp3" preload="auto"></audio>
+    <audio id="audio-place" src="place.mp3" preload="auto"></audio>
+    <audio id="audio-source" src="source.mp3" preload="auto"></audio>
+    <audio id="audio-quiz-fill" src="quiz_fill.mp3" preload="auto"></audio>
+    <audio id="audio-quiz-match" src="quiz_match.mp3" preload="auto"></audio>
+    <audio id="audio-correct" src="correct.mp3" preload="auto"></audio>
+    <audio id="audio-retry" src="retry.mp3" preload="auto"></audio>
+    <audio id="audio-celebration" src="celebration.mp3" preload="auto"></audio>
+
+    <header class="w-full max-w-6xl mb-6 flex flex-col md:flex-row items-center justify-between gap-4 bg-white/70 backdrop-blur-md p-6 rounded-3xl border border-white/60 shadow-lg">
+        <div class="flex items-center gap-4">
+            <div id="headerIcon" class="w-14 h-14 bg-amber-400 rounded-2xl flex items-center justify-center text-3xl shadow-inner font-bold">
+                🏭
+            </div>
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">المستوى السادس ابتدائي</span>
+                <h1 class="text-2xl md:text-3xl font-black text-slate-800 mt-1" id="headerTitle">بذرة الكلمات: [ص-ن-ع]</h1>
+                <p class="text-xs text-slate-500 font-medium" id="headerSubtitle">عائلة الإتقان والعمل ➔ خريطة ذهنية إشعاعية تفاعلية</p>
+            </div>
+        </div>
+
+        <!-- أداة الانتقال بين الجذور (قوة المعمار الجديد) -->
+        <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+            <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-2xl border-2 border-indigo-300 shadow-sm w-full sm:w-auto">
+                <i class="fa-solid fa-seedling text-emerald-600 text-lg"></i>
+                <label for="rootSelector" class="text-xs font-black text-slate-700 whitespace-nowrap">اختر الجذر:</label>
+                <select id="rootSelector" onchange="switchRoot(this.value)" class="bg-transparent font-black text-indigo-700 text-sm focus:outline-none cursor-pointer">
+                    <option value="صنع">🏭 جذر [ص - ن - ع] (العمل والإتقان)</option>
+                    <option value="كتب">✍️ جذر [ك - ت - ب] (التدوين والمعرفة)</option>
+                    <option value="علم">🔬 جذر [ع - ل - م] (المعرفة والاستكشاف)</option>
+                </select>
+            </div>
+
+            <div class="flex items-center gap-3 bg-indigo-50/80 px-4 py-2 rounded-2xl border border-indigo-100">
+                <i class="fa-solid fa-trophy text-amber-500 text-xl animate-bounce"></i>
+                <p class="text-sm font-black text-indigo-900" id="starCounter">⭐ 0 / 7 نجوم</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="w-full max-w-6xl relative min-h-[680px] flex flex-col items-center justify-center my-4">
+        
+        <!-- القرص الشمسي المركزي -->
+        <div id="centerNode" onclick="playRootAudio()" 
+             class="clay-sun pulse-sun w-56 h-56 rounded-full flex flex-col items-center justify-center text-center cursor-pointer z-20 relative transition-transform hover:scale-110 group">
+            <span class="bg-red-500 text-white text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md animate-pulse mb-1">
+                👈 ابدأ هنا!
+            </span>
+            <div id="centerLetters" class="flex gap-1 text-4xl md:text-5xl font-black text-red-600 tracking-wider my-1 drop-shadow-md">
+                [ص-ن-ع]
+            </div>
+            <p id="centerConcept" class="text-xs font-bold text-amber-950 px-2 bg-white/40 rounded-full">الجذر: العمل والإتقان</p>
+            <div class="text-[10px] font-semibold text-amber-900 mt-2 flex items-center gap-1 group-hover:scale-105 transition-transform">
+                <i class="fa-solid fa-volume-high"></i> اضغط للاستماع للجذر
+            </div>
+        </div>
+
+        <svg id="svgCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0 hidden md:block"></svg>
+
+        <!-- الفروع الخمسة -->
+        <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 md:mt-0 md:absolute md:inset-0 pointer-events-none z-10" id="branchesContainer">
+            <!-- تتولد ديناميكياً بواسطة JavaScript لكل جذر -->
+        </div>
+    </main>
+
+    <!-- محطة التحدي والوصل التفاعلية -->
+    <section class="w-full max-w-6xl mt-12 bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 border border-white shadow-xl">
+        <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
+            <span class="w-10 h-10 bg-indigo-600 text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-md">🎯</span>
+            <div>
+                <h2 class="text-xl font-black text-slate-800">محطة التوظيف والوصل التفاعلية (السحب والإفلات)</h2>
+                <p class="text-xs text-slate-500 font-medium">اسحب البطاقة أو انقر عليها ثم انقر على موضعها الصحيح واكسب النجوم!</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- القسم 1: الفراغات -->
+            <div class="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 flex flex-col justify-between space-y-4">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-sm font-extrabold text-indigo-900 flex items-center gap-2">
+                            <i class="fa-solid fa-pen-to-square text-indigo-600"></i> القسم 1: ضع الكلمة المناسبة في مكانها الصحيح
+                        </h3>
+                        <button onclick="playInstruction('fill')" class="bg-indigo-100 hover:bg-indigo-200 text-indigo-800 text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition">
+                            <i class="fa-solid fa-volume-high text-indigo-600 animate-pulse"></i> 
+                            <span>استمع للتعليمة</span>
+                        </button>
+                    </div>
+
+                    <div class="mb-4 p-3 bg-indigo-50/50 rounded-xl border border-indigo-100">
+                        <p class="text-xs font-bold text-indigo-700 mb-2">اسحب البطاقات من هنا أو انقر لاختيارها:</p>
+                        <div id="wordBankSection1" class="flex flex-wrap gap-2 min-h-[48px] items-center"></div>
+                    </div>
+                    
+                    <div id="fillQuestionsList" class="space-y-4 text-sm font-semibold text-slate-700"></div>
+                </div>
+
+                <button onclick="checkFillBlanks()" class="clay-btn w-full py-3 font-bold text-sm flex items-center justify-center gap-2 mt-4">
+                    <i class="fa-solid fa-circle-check"></i> تحقق من إجابات الفراغات
+                </button>
+            </div>
+
+            <!-- القسم 2: الوصل والمطابقة -->
+            <div class="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 flex flex-col justify-between space-y-4">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-sm font-extrabold text-indigo-900 flex items-center gap-2">
+                            <i class="fa-solid fa-link text-indigo-600"></i> القسم 2: صل كل كلمة برفيقتها المتلازمة
+                        </h3>
+                        <button onclick="playInstruction('match')" class="bg-purple-100 hover:bg-purple-200 text-purple-800 text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition">
+                            <i class="fa-solid fa-volume-high text-purple-600 animate-pulse"></i> 
+                            <span>استمع للتعليمة</span>
+                        </button>
+                    </div>
+
+                    <div class="mb-4 p-3 bg-purple-50/50 rounded-xl border border-purple-100">
+                        <p class="text-xs font-bold text-purple-700 mb-2">اسحب بطاقات المتلازمات من هنا:</p>
+                        <div id="collocBank" class="flex flex-wrap gap-2 min-h-[48px] items-center"></div>
+                    </div>
+
+                    <div id="matchQuestionsList" class="space-y-3"></div>
+                    <p id="matchFeedback" class="text-xs font-bold mt-2 hidden text-center"></p>
+                </div>
+
+                <button onclick="checkMatching()" class="clay-btn w-full py-3 font-bold text-sm flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 mt-4">
+                    <i class="fa-solid fa-award"></i> تحقق من الوصل الصحيح
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- النافذة المنبثقة للفرع -->
+    <div id="infoModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border border-white transform transition-all">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2">
+                    <span id="modalIcon" class="text-3xl">🔨</span>
+                    <div>
+                        <h3 id="modalTitle" class="text-xl font-black text-slate-800">صَنَعَ</h3>
+                        <p id="modalWeight" class="text-xs font-bold text-indigo-600">الوزن الصرفي: فَعَلَ</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="speakCurrentModal()" class="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center hover:bg-indigo-100 transition">
+                        <i class="fa-solid fa-volume-high text-xs"></i>
+                    </button>
+                    <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="py-4 space-y-3">
+                <div class="bg-slate-50 p-4 rounded-xl text-right space-y-3 border border-slate-200 text-sm">
+                    <p><strong>💡 الشرح:</strong> <span id="modalDesc"></span></p>
+                    <p class="border-t border-slate-200/60 pt-2"><strong>🔗 المتلازمة اللفظية:</strong> <span id="modalColloc" class="text-indigo-600 font-bold"></span></p>
+                    <p class="border-t border-slate-200/60 pt-2"><strong>📖 المثال في جملة:</strong> «<span id="modalContext" class="italic text-slate-700 font-medium"></span>»</p>
+                </div>
+
+                <button onclick="speakCurrentModal()" class="clay-btn w-full py-3 mt-4 text-xs md:text-sm font-bold flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-headphones-simple text-base"></i> اضغط للاستماع للشرح والنطق الكامل
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // قاعدة البيانات الشاملة للجذور المقررة
+        const database = {
+            "صنع": {
+                icon: "🏭",
+                concept: "العمل والإتقان",
+                rootLetters: "[ص-ن-ع]",
+                isCustomAudio: true, // يستخدم الملفات المرفوعة مسبقاً
+                branches: [
+                    { key: "verb", titleHtml: '<span class="text-red-600 font-black">صَـنَـعَ</span>', weight: "فَعَلَ", icon: "🔨", desc: "فعل ماض يدل على إيجاد الشيء وتكوينه بالعمل والجهد.", col: "صَنَعَ بِيَدَيْهِ", context: "صَنَعَ الحِرَفِيُّ خِزَانَةً جَمِيلَةً", color: "amber" },
+                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">صَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">نِـ</span><span class="text-red-600 font-black">عٌ</span>', weight: "فَاعِل", icon: "👨‍🔧", desc: "اسم فاعل يدل على الشخص الماهر الذي يقوم بعملية الصنع والإنتاج.", col: "صَانِعٌ مَاهِرٌ", context: "كَرَّمَ المُدِيرُ الصَّانِعَ المَاهِرَ", color: "blue" },
+                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـ</span><span class="text-red-600 font-black">نُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">عٌ</span>', weight: "مَفْعُول", icon: "🏺", desc: "اسم مفعول يدل على الشيء أو الأثر الذي تم إنتاجه وإتقانه.", col: "مَصْنُوعٌ بِإِتْقَانٍ", context: "الخَزَفُ مَصْنُوعٌ بِجَمَالِيَّةٍ", color: "orange" },
+                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـ</span><span class="text-red-600 font-black">نَـ</span><span class="text-red-600 font-black">عٌ</span>', weight: "مَفْعَل", icon: "🏭", desc: "اسم مكان يدل على المنشأة أو المكان المجهز للإنتاج والعمل.", col: "مَصْنَعٌ حَدِيثٌ", context: "يَشْتَغِلُ أَبِي فِي مَصْنَعِ السَّمَكِ", color: "emerald" },
+                    { key: "source", titleHtml: '<span class="text-red-600 font-black">صِـ</span><span class="text-red-600 font-black">نَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">عَـ</span><span class="text-purple-500 font-bold">ةٌ</span>', weight: "فِعَالَة", icon: "⚙️", desc: "مصدر يدل على المهنة والنشاط الإنتاجي أو القطاع الاقتصادي.", col: "صِنَاعَةٌ وَطَنِيَّةٌ", context: "تَزْدَهِرُ صِنَاعَةُ الفَخَّارِ فِي بِلَادِنَا", color: "purple" }
+                ],
+                quizFill: {
+                    chips: [{ id: "masnaa", text: "مَصْنَعٍ", word: "مصنع", color: "emerald" }, { id: "sinaa", text: "صِنَاعَةِ", word: "صناعة", color: "purple" }, { id: "masnoo", text: "مَصْنُوعٌ", word: "مصنوع", color: "orange" }],
+                    sentences: [
+                        { prefix: "1. يَشْتَغِلُ العُمَّالُ فِي", target: "مصنع", suffix: "كَبِيرٍ." },
+                        { prefix: "2. يَفْتَخِرُ المَغْرِبُ بِـ", target: "صناعة", suffix: "الجِلْدِ وَالخَزَفِ." },
+                        { prefix: "3. هَذَا الخَاتَمُ الفِضِّيُّ", target: "مصنوع", suffix: "بِدِقَّةٍ وَعِنَايَةٍ." }
+                    ]
+                },
+                quizMatch: [
+                    { wordHtml: "صَانِعٌ", matchId: "1", colloc: "🔗 مَاهِرٌ فِي عَمَلِهِ", color: "blue" },
+                    { wordHtml: "مَصْنُوعٌ", matchId: "2", colloc: "🔗 مِنَ الفَخَّارِ المَصْقُولِ", color: "orange" },
+                    { wordHtml: "مَصْنَعٌ", matchId: "3", colloc: "🔗 حَدِيثٌ وَنَظِيفٌ", color: "emerald" },
+                    { wordHtml: "صِنَاعَةٌ", matchId: "4", colloc: "🔗 تَقْلِيدِيَّةٌ وَطَنِيَّةٌ", color: "purple" }
+                ]
+            },
+            "كتب": {
+                icon: "✍️",
+                concept: "التدوين والجمع",
+                rootLetters: "[ك-ت-ب]",
+                isCustomAudio: false,
+                branches: [
+                    { key: "verb", titleHtml: '<span class="text-red-600 font-black">كَـتَـبَ</span>', weight: "فَعَلَ", icon: "📝", desc: "فعل ماض يدل على خط الحروف وتدوين المعاني بالقلم.", col: "كَتَبَ بِالقَلَمِ", context: "كَتَبَ التِّلْمِيذُ رِسَالَةً مُعَبِّرَةً", color: "amber" },
+                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">كَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">تِـ</span><span class="text-red-600 font-black">بٌ</span>', weight: "فَاعِل", icon: "🧑‍💼", desc: "اسم فاعل يدل على من يمارس التدوين والتأليف والإنشاء.", col: "كَاتِبٌ مُبْدِعٌ", context: "حَصَلَ الكَاتِبُ المُبْدِعُ عَلَى جَائِزَةٍ", color: "blue" },
+                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">كْـ</span><span class="text-red-600 font-black">تُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">بٌ</span>', weight: "مَفْعُول", icon: "📜", desc: "اسم مفعول يدل على الكلام المسطور أو الرسالة المدونة.", col: "مَكْتُوبٌ بِعِنَايَةٍ", context: "المَقَالُ مَكْتُوبٌ بِأُسْلُوبٍ رَاقٍ", color: "orange" },
+                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">كْـ</span><span class="text-red-600 font-black">تَـ</span><span class="text-red-600 font-black">بٌ</span>', weight: "مَفْعَل", icon: "🏢", desc: "اسم مكان يدل على موضع الكتابة أو إدارة الأعمال ومطالعة الكتب.", col: "مَكْتَبٌ مُنَظَّمٌ", context: "جَلَسَ الأُسْتَاذُ إِلَى مَكْتَبِهِ", color: "emerald" },
+                    { key: "source", titleHtml: '<span class="text-red-600 font-black">كِـ</span><span class="text-red-600 font-black">تَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">بَـ</span><span class="text-purple-500 font-bold">ةٌ</span>', weight: "فِعَالَة", icon: "✒️", desc: "مصدر يدل على مهارة التدوين والخط والرسم اللغوي.", col: "كِتَابَةٌ سَلِيمَةٌ", context: "تَتَطَلَّبُ القِصَّةُ كِتَابَةً مُتْقَنَةً", color: "purple" }
+                ],
+                quizFill: {
+                    chips: [{ id: "maktab", text: "مَكْتَبٍ", word: "مكتب", color: "emerald" }, { id: "kitaba", text: "كِتَابَةِ", word: "كتابة", color: "purple" }, { id: "maktoob", text: "مَكْتُوبٌ", word: "مكتوب", color: "orange" }],
+                    sentences: [
+                        { prefix: "1. وَضَعَ المُعَلِّمُ الأَوْرَاقَ عَلَى", target: "مكتب", suffix: "الإِدَارَةِ." },
+                        { prefix: "2. يَتَمَيَّزُ عَلِيٌّ بِـ", target: "كتابة", suffix: "الخَطِّ المَغْرِبِيِّ." },
+                        { prefix: "3. هَذَا الخِطَابُ", target: "مكتوب", suffix: "بِخَطٍّ وَاضِحٍ." }
+                    ]
+                },
+                quizMatch: [
+                    { wordHtml: "كَاتِبٌ", matchId: "1", colloc: "🔗 مُؤَلِّفٌ مُبْدِعٌ", color: "blue" },
+                    { wordHtml: "مَكْتُوبٌ", matchId: "2", colloc: "🔗 فِي سِجِلِّ الشَّرَفِ", color: "orange" },
+                    { wordHtml: "مَكْتَبٌ", matchId: "3", colloc: "🔗 وَاسِعٌ وَمُضِيءٌ", color: "emerald" },
+                    { wordHtml: "كِتَابَةٌ", matchId: "4", colloc: "🔗 فِصَاحَةٌ وَبَيَانٌ", color: "purple" }
+                ]
+            },
+            "علم": {
+                icon: "🔬",
+                concept: "المعرفة والاستكشاف",
+                rootLetters: "[ع-ل-م]",
+                isCustomAudio: false,
+                branches: [
+                    { key: "verb", titleHtml: '<span class="text-red-600 font-black">عَـلِـمَ</span>', weight: "فَعِلَ", icon: "💡", desc: "فعل ماض يدل على إدراك حقيقة الشيء واليقين به.", col: "عَلِمَ بِالأَمْرِ", context: "عَلِمَ البَاحِثُ سِرَّ الظَّاهِرَةِ", color: "amber" },
+                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">عَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">لِـ</span><span class="text-red-600 font-black">مٌ</span>', weight: "فَاعِل", icon: "👨‍🔬", desc: "اسم فاعل يدل على من اتصف بالمعرفة الواسعة والاختصاص العلمي.", col: "عَالِمٌ جَلِيلٌ", context: "يُفِيدُ العَالِمُ البَشَرِيَّةَ بِعِلْمِهِ", color: "blue" },
+                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">عْـ</span><span class="text-red-600 font-black">لُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">مٌ</span>', weight: "مَفْعُول", icon: "📊", desc: "اسم مفعول يدل على ما هو معروف ومتحقق لا شك فيه.", col: "مَعْلُومٌ لَدَى الجَمِيعِ", context: "الحَقُّ مَعْلُومٌ وَوَاضِحٌ", color: "orange" },
+                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">عْـ</span><span class="text-red-600 font-black">لَـ</span><span class="text-red-600 font-black">مٌ</span>', weight: "مَفْعَل", icon: "🏛️", desc: "اسم مكان يدل على البناء أو الموضع البارز الدال على غيره.", col: "مَعْلَمٌ تَارِيخِيٌّ", context: "صَوْمَعَةُ حَسَّانَ مَعْلَمٌ بَارِزٌ", color: "emerald" },
+                    { key: "source", titleHtml: '<span class="text-red-600 font-black">عِـ</span><span class="text-red-600 font-black">لْـ</span><span class="text-red-600 font-black">مٌ</span>', weight: "فِعْل", icon: "📚", desc: "مصدر يدل على مجموع المعارف والحقائق المنظمة.", col: "عِلْمٌ نَافِعٌ", context: "يَسْعَى الطَّالِبُ إِلَى عِلْمٍ نَافِعٍ", color: "purple" }
+                ],
+                quizFill: {
+                    chips: [{ id: "maalam", text: "مَعْلَمٍ", word: "معلم", color: "emerald" }, { id: "ilm", text: "عِلْمِ", word: "علم", color: "purple" }, { id: "maaloom", text: "مَعْلُومٌ", word: "معلوم", color: "orange" }],
+                    sentences: [
+                        { prefix: "1. تَمَّ تَصْنِيفُ القَصْرِ كَـ", target: "معلم", suffix: "تَارِيخِيٍّ عَظِيمٍ." },
+                        { prefix: "2. اجْتَهَدَ فِي طَلَبِ", target: "علم", suffix: "الفَلَكِ وَالهَنْدَسَةِ." },
+                        { prefix: "3. مَوْعِدُ اللِّقَاءِ", target: "معلوم", suffix: "عِنْدَ كُلِّ الحَاضِرِينَ." }
+                    ]
+                },
+                quizMatch: [
+                    { wordHtml: "عَالِمٌ", matchId: "1", colloc: "🔗 مُخْتَرِعٌ عَبْقَرِيٌّ", color: "blue" },
+                    { wordHtml: "مَعْلُومٌ", matchId: "2", colloc: "🔗 حَقِيقَةٌ ثَابِتَةٌ", color: "orange" },
+                    { wordHtml: "مَعْلَمٌ", matchId: "3", colloc: "🔗 حَضَارِيٌّ أَثَرِيٌّ", color: "emerald" },
+                    { wordHtml: "عِلْمٌ", matchId: "4", colloc: "🔗 نُورٌ يُضِيءُ العُقُولَ", color: "purple" }
+                ]
+            }
+        };
+
+        let currentRoot = "صنع";
+        let activeModalData = null;
+        let earnedStars = 0;
+        let checkedFill = false;
+        let checkedMatch = false;
+        let selectedChip = null;
+        let currentPlayingAudio = null;
+
+        // محرك النطق الصوتي الفصيح التلقائي (Web Speech API)
+        function speakArabic(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ar-SA';
+                utterance.rate = 0.85;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function playRootAudio() {
+            const data = database[currentRoot];
+            if (data.isCustomAudio) {
+                playMp3('root');
+            } else {
+                speakArabic(`الجذر: ${data.rootLetters}، عائلة: ${data.concept}`);
+            }
+        }
+
+        function playInstruction(type) {
+            if (currentRoot === "صنع") {
+                playMp3(type === 'fill' ? 'quiz-fill' : 'quiz-match');
+            } else {
+                if (type === 'fill') speakArabic("القسم الأول: ضع الكلمة المناسبة في مكانها الصحيح لتركيب جمل مفيدة.");
+                else speakArabic("القسم الثاني: صل كل كلمة برفيقتها المتلازمة لفظياً.");
+            }
+        }
+
+        function playFeedbackAudio(isCorrect) {
+            if (currentRoot === "صنع") {
+                playMp3(isCorrect ? 'correct' : 'retry');
+            } else {
+                if (isCorrect) speakArabic("أحسنت صنعاً! إجابة صحيحة ومتقنة.");
+                else speakArabic("حاول مرة أخرى، فكر جيداً في المعنى والوزن الصرفي.");
+            }
+        }
+
+        function playCelebrationAudio() {
+            if (currentRoot === "صنع") {
+                playMp3('celebration');
+            } else {
+                speakArabic(`رائع جداً! لقد حققت العلامة الكاملة وأتقنت عائلة الجذر ${currentRoot}!`);
+            }
+        }
+
+        function playMp3(key) {
+            if (currentPlayingAudio) {
+                currentPlayingAudio.pause();
+                currentPlayingAudio.currentTime = 0;
+            }
+            const audio = document.getElementById('audio-' + key);
+            if (audio) {
+                currentPlayingAudio = audio;
+                audio.play().catch(e => console.warn(e));
+            }
+        }
+
+        function playSound(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (ctx.state === 'suspended') ctx.resume();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'click') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(440, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.08);
+                } else if (type === 'success') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
+                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2);
+                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.35);
+                } else if (type === 'error') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, ctx.currentTime);
+                    osc.frequency.setValueAtTime(180, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.25);
+                }
+            } catch (e) {}
+        }
+
+        // بناء الواجهة عند التبديل بين الجذور
+        function switchRoot(rootKey) {
+            playSound('click');
+            currentRoot = rootKey;
+            const data = database[rootKey];
+
+            document.getElementById('headerTitle').innerText = `بذرة الكلمات: ${data.rootLetters}`;
+            document.getElementById('headerSubtitle').innerText = `عائلة ${data.concept} ➔ خريطة ذهنية إشعاعية تفاعلية`;
+            document.getElementById('headerIcon').innerText = data.icon;
+            document.getElementById('centerLetters').innerText = data.rootLetters;
+            document.getElementById('centerConcept').innerText = `الجذر: ${data.concept}`;
+
+            // تصفير النقاط والأنشطة
+            earnedStars = 0;
+            checkedFill = false;
+            checkedMatch = false;
+            updateStars();
+
+            renderBranches();
+            renderQuizzes();
+            setTimeout(drawRadialLines, 100);
+        }
+
+        function renderBranches() {
+            const container = document.getElementById('branchesContainer');
+            const data = database[currentRoot];
+            const positions = [
+                "md:top-0 md:left-1/2 md:-translate-x-1/2",
+                "md:top-12 md:right-4",
+                "md:bottom-4 md:right-8",
+                "md:top-12 md:left-4",
+                "md:bottom-4 md:left-8"
+            ];
+            const branchLabels = [
+                "الفرع 1: الحدث / الفعل",
+                "الفرع 2: الفاعل",
+                "الفرع 3: المفعول",
+                "الفرع 4: المكان",
+                "الفرع 5: النشاط / المصدر"
+            ];
+
+            let html = '';
+            data.branches.forEach((b, i) => {
+                html += `
+                <div id="branch${i+1}" class="pointer-events-auto md:absolute ${positions[i]} w-full md:w-72">
+                    <div onclick="openBranchModal(${i})" class="clay-card p-5 border-t-4 border-${b.color}-500 cursor-pointer group">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
+                            <span class="text-xs font-bold text-${b.color}-600 bg-${b.color}-50 px-2.5 py-1 rounded-lg">${branchLabels[i]}</span>
+                            <span class="text-2xl group-hover:scale-125 transition-transform">${b.icon}</span>
+                        </div>
+                        <h3 class="text-2xl font-black my-1">
+                            ${b.titleHtml}
+                            <span class="text-xs font-normal text-slate-500">(${b.weight})</span>
+                        </h3>
+                        <div class="bg-${b.color}-50/60 p-2.5 rounded-xl border border-${b.color}-100 text-xs space-y-1 mt-2">
+                            <p class="font-bold text-${b.color}-900">🔗 المتلازمة: <span class="text-${b.color}-700">${b.col}</span></p>
+                            <p class="text-slate-600 italic">«${b.context}»</p>
+                        </div>
+                    </div>
+                </div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function renderQuizzes() {
+            const data = database[currentRoot];
+
+            // 1. الفراغات
+            const bank1 = document.getElementById('wordBankSection1');
+            bank1.innerHTML = '';
+            data.quizFill.chips.forEach(c => {
+                bank1.innerHTML += `
+                <div draggable="true" id="chip-${c.id}" data-word="${c.word}" onclick="handleChipSelect(this)" 
+                     class="drag-chip bg-white border-2 border-${c.color}-400 px-4 py-2 rounded-xl text-sm font-black text-slate-800 shadow-sm hover:shadow-md flex items-center gap-1">
+                    ${c.text}
+                </div>`;
+            });
+
+            const qList = document.getElementById('fillQuestionsList');
+            qList.innerHTML = '';
+            data.quizFill.sentences.forEach((s, idx) => {
+                qList.innerHTML += `
+                <div class="p-3 bg-white rounded-xl shadow-sm border border-slate-100 flex flex-wrap items-center gap-2">
+                    <span>${s.prefix}</span>
+                    <div id="dropQ${idx+1}" data-target="${s.target}" onclick="handleDropZoneClick(this)" class="drop-zone inline-flex">
+                        <span class="text-xs text-slate-400 font-bold pointer-events-none">ضع الكلمة هنا</span>
+                    </div>
+                    <span>${s.suffix}</span>
+                    <p id="feedback${idx+1}" class="w-full text-xs font-bold hidden mt-1"></p>
+                </div>`;
+            });
+
+            // 2. الوصل
+            const collocBank = document.getElementById('collocBank');
+            collocBank.innerHTML = '';
+            data.quizMatch.forEach((m, idx) => {
+                collocBank.innerHTML += `
+                <div draggable="true" id="chip-col${idx+1}" data-match="${m.matchId}" onclick="handleChipSelect(this)" 
+                     class="drag-chip bg-white border border-${m.color}-300 px-3 py-1.5 rounded-xl text-xs font-bold text-${m.color}-900 shadow-sm hover:shadow-md">
+                    ${m.colloc}
+                </div>`;
+            });
+
+            const mList = document.getElementById('matchQuestionsList');
+            mList.innerHTML = '';
+            data.quizMatch.forEach((m, idx) => {
+                mList.innerHTML += `
+                <div class="flex items-center justify-between bg-white p-3 rounded-xl border border-slate-100 text-sm">
+                    <span class="font-black text-${m.color}-600 bg-${m.color}-50 px-3 py-1 rounded-lg">
+                        ${m.wordHtml} ➔
+                    </span>
+                    <div id="dropCol${idx+1}" data-target="${m.matchId}" onclick="handleDropZoneClick(this)" class="drop-zone min-w-[160px]">
+                        <span class="text-xs text-slate-400 font-bold pointer-events-none">إفلات المتلازمة هنا</span>
+                    </div>
+                </div>`;
+            });
+
+            document.getElementById('matchFeedback').classList.add('hidden');
+            initDragAndDrop();
+        }
+
+        function openBranchModal(index) {
+            const data = database[currentRoot];
+            const info = data.branches[index];
+            activeModalData = info;
+
+            document.getElementById('modalTitle').innerHTML = info.titleHtml;
+            document.getElementById('modalWeight').innerText = `الوزن الصرفي: (${info.weight})`;
+            document.getElementById('modalIcon').innerText = info.icon;
+            document.getElementById('modalDesc').innerText = info.desc;
+            document.getElementById('modalColloc').innerText = info.col;
+            document.getElementById('modalContext').innerText = info.context;
+
+            document.getElementById('infoModal').classList.remove('hidden');
+            speakCurrentModal();
+        }
+
+        function speakCurrentModal() {
+            if (!activeModalData) return;
+            const data = database[currentRoot];
+            if (data.isCustomAudio) {
+                playMp3(activeModalData.key);
+            } else {
+                speakArabic(`${activeModalData.weight}. الشرح: ${activeModalData.desc}. المتلازمة اللفظية: ${activeModalData.col}. المثال: ${activeModalData.context}`);
+            }
+        }
+
+        function closeModal() {
+            playSound('click');
+            if (currentPlayingAudio) {
+                currentPlayingAudio.pause();
+                currentPlayingAudio.currentTime = 0;
+            }
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            document.getElementById('infoModal').classList.add('hidden');
+        }
+
+        let draggedElement = null;
+        function initDragAndDrop() {
+            const draggables = document.querySelectorAll('.drag-chip');
+            const dropZones = document.querySelectorAll('.drop-zone');
+
+            draggables.forEach(chip => {
+                chip.addEventListener('dragstart', (e) => {
+                    draggedElement = chip;
+                    e.dataTransfer.setData('text/plain', chip.id);
+                    chip.classList.add('opacity-50');
+                });
+                chip.addEventListener('dragend', () => {
+                    chip.classList.remove('opacity-50');
+                    draggedElement = null;
+                });
+            });
+
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    zone.classList.add('drag-over');
+                });
+                zone.addEventListener('dragleave', () => {
+                    zone.classList.remove('drag-over');
+                });
+                zone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    zone.classList.remove('drag-over');
+                    if (draggedElement) placeChipInZone(draggedElement, zone);
+                });
+            });
+        }
+
+        function handleChipSelect(chip) {
+            playSound('click');
+            if (selectedChip === chip) {
+                chip.classList.remove('selected', 'ring-4', 'ring-indigo-500');
+                selectedChip = null;
+            } else {
+                if (selectedChip) selectedChip.classList.remove('selected', 'ring-4', 'ring-indigo-500');
+                selectedChip = chip;
+                chip.classList.add('selected', 'ring-4', 'ring-indigo-500');
+            }
+        }
+
+        function handleDropZoneClick(zone) {
+            if (selectedChip) {
+                placeChipInZone(selectedChip, zone);
+                selectedChip.classList.remove('selected', 'ring-4', 'ring-indigo-500');
+                selectedChip = null;
+            }
+        }
+
+        function placeChipInZone(chip, zone) {
+            playSound('click');
+            const existingChip = zone.querySelector('.drag-chip');
+            if (existingChip) {
+                if (existingChip.dataset.word) {
+                    document.getElementById('wordBankSection1').appendChild(existingChip);
+                } else {
+                    document.getElementById('collocBank').appendChild(existingChip);
+                }
+            }
+            const placeholder = zone.querySelector('.pointer-events-none');
+            if (placeholder) placeholder.classList.add('hidden');
+            zone.appendChild(chip);
+        }
+
+        function checkFillBlanks() {
+            const data = database[currentRoot];
+            let correctCount = 0;
+
+            data.quizFill.sentences.forEach((s, idx) => {
+                const drop = document.getElementById(`dropQ${idx+1}`).querySelector('.drag-chip');
+                const fb = document.getElementById(`feedback${idx+1}`);
+                if (drop && drop.dataset.word === s.target) {
+                    fb.innerText = '✅ إجابة صحيحة ومتقنة!';
+                    fb.className = 'w-full text-xs font-bold text-emerald-600 block mt-1';
+                    correctCount++;
+                } else {
+                    fb.innerText = '❌ حاول مرة أخرى مع التركيز على المعنى.';
+                    fb.className = 'w-full text-xs font-bold text-rose-600 block mt-1';
+                }
+            });
+
+            if (correctCount === 3) {
+                playSound('success');
+                playFeedbackAudio(true);
+                if (!checkedFill) {
+                    earnedStars += 3;
+                    checkedFill = true;
+                    updateStars();
+                }
+            } else {
+                playSound('error');
+                playFeedbackAudio(false);
+            }
+        }
+
+        function checkMatching() {
+            const data = database[currentRoot];
+            let allCorrect = true;
+
+            data.quizMatch.forEach((m, idx) => {
+                const drop = document.getElementById(`dropCol${idx+1}`).querySelector('.drag-chip');
+                if (!drop || drop.dataset.match !== m.matchId) {
+                    allCorrect = false;
+                }
+            });
+
+            const fb = document.getElementById('matchFeedback');
+            if (allCorrect) {
+                fb.innerText = '🎉 أحسنت صنعاً! جميع المتلازمات موصولة بصورة صحيحة 100%';
+                fb.className = 'text-xs font-bold text-emerald-600 block mt-2';
+                playSound('success');
+                playFeedbackAudio(true);
+                if (!checkedMatch) {
+                    earnedStars += 4;
+                    checkedMatch = true;
+                    updateStars();
+                }
+            } else {
+                fb.innerText = '⚠️ هناك وصل غير صحيح، راجع دلالة كل متلازمة وحاول مجدداً!';
+                fb.className = 'text-xs font-bold text-rose-600 block mt-2';
+                playSound('error');
+                playFeedbackAudio(false);
+            }
+        }
+
+        function updateStars() {
+            document.getElementById('starCounter').innerText = `⭐ ${earnedStars} / 7 نجوم`;
+            if (earnedStars >= 7) {
+                setTimeout(playCelebrationAudio, 1000);
+            }
+        }
+
+        function drawRadialLines() {
+            const svg = document.getElementById('svgCanvas');
+            const center = document.getElementById('centerNode');
+            if (!svg || !center) return;
+
+            const centerRect = center.getBoundingClientRect();
+            const svgRect = svg.getBoundingClientRect();
+            const startX = centerRect.left + centerRect.width / 2 - svgRect.left;
+            const startY = centerRect.top + centerRect.height / 2 - svgRect.top;
+
+            let linesHTML = '';
+            const colors = ['#f59e0b', '#3b82f6', '#f97316', '#10b981', '#a855f7'];
+
+            for (let i = 1; i <= 5; i++) {
+                const branch = document.getElementById(`branch${i}`);
+                if (branch) {
+                    const bRect = branch.getBoundingClientRect();
+                    const endX = bRect.left + bRect.width / 2 - svgRect.left;
+                    const endY = bRect.top + bRect.height / 2 - svgRect.top;
+                    linesHTML += `
+                        <line x1="${startX}" y1="${startY}" x2="${endX}" y2="${endY}" 
+                              stroke="${colors[i-1]}" stroke-width="4" stroke-dasharray="8,8" 
+                              opacity="0.8" class="animate-pulse" />
+                    `;
+                }
+            }
+            svg.innerHTML = linesHTML;
+        }
+
+        window.onload = function() {
+            switchRoot("صنع");
+            window.addEventListener('resize', drawRadialLines);
+        };
+    </script>
+</body>
+</html>
