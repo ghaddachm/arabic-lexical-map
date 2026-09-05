@@ -510,7 +510,7 @@
     </div>
 
     <script>
-        // Branch Data with precise color-coded HTML and Speech Synthesis phrases
+        // Branch Data
         const branchData = [
             {
                 titleHtml: '<span class="text-red-600 font-black">صَـنَـعَ</span>',
@@ -566,7 +566,7 @@
         let toastTimer = null;
         let isAudioUnlocked = false;
 
-        // Unlock Mobile Audio Policies on first user interaction
+        // تهيئة محرك الصوت عند أول لمس أو نقر للمستخدم لتفادي قيود المتصفح
         function unlockMobileAudio() {
             if (isAudioUnlocked) return;
             isAudioUnlocked = true;
@@ -590,7 +590,7 @@
         window.addEventListener('touchstart', unlockMobileAudio, { once: true, passive: true });
         window.addEventListener('click', unlockMobileAudio, { once: true, passive: true });
 
-        // System Sound Effects using Web Audio API
+        // مؤثرات صوتية تفاعلية للنقر والنجاح
         function playSound(type) {
             try {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -630,16 +630,16 @@
             } catch (e) {}
         }
 
-        // Clean Arabic text thoroughly for clear vocalization
+        // تنقية النصوص لتسهيل نطقها بفصاحة
         function cleanTextForSpeech(str) {
             if (!str) return '';
             let cleaned = str.replace(/<[^>]*>/g, ' ');
             cleaned = cleaned.replace(/[\[\]\-«»()'"{}\/⚙️🔨👨‍🔧🏺🏭🎯⭐💡🔗📖👈!]/g, ' ');
-            cleaned = cleaned.replace(/ـ/g, ''); // Remove Arabic Tatweel
+            cleaned = cleaned.replace(/ـ/g, ''); // إزالة الكشيدة
             return cleaned.replace(/\s+/g, ' ').trim();
         }
 
-        // Single Unified Audio Subtitle Toast
+        // إظهار شريط قراءة النص أسفل الشاشة
         function showSpeechToast(text) {
             const toast = document.getElementById('speechToast');
             const toastText = document.getElementById('speechToastText');
@@ -656,7 +656,7 @@
             }, 4500);
         }
 
-        // Robust Native Speech Synthesis Engine
+        // محرك النطق الصوتي الفصيح المباشر والآمن
         function speakText(rawText, audioBtn = null) {
             unlockMobileAudio();
             playSound('click');
@@ -667,17 +667,19 @@
             showSpeechToast(textToSpeak);
 
             if (!('speechSynthesis' in window)) {
-                console.warn('Speech synthesis is not supported on this browser.');
+                console.warn('محرك النطق غير مدعوم في هذا المتصفح');
                 return;
             }
 
+            // إيقاف أي نطق سابق معلق
             window.speechSynthesis.cancel();
 
             const utterance = new SpeechSynthesisUtterance(textToSpeak);
             utterance.lang = 'ar-SA';
-            utterance.rate = 0.88;
+            utterance.rate = 0.88; // سرعة هادئة ومناسبة للمرحلة الابتدائية
             utterance.pitch = 1.0;
 
+            // تحديد الصوت العربي تلقائياً
             const voices = window.speechSynthesis.getVoices();
             const arVoice = voices.find(v => v.lang && (v.lang.startsWith('ar-SA') || v.lang.startsWith('ar')));
             if (arVoice) {
