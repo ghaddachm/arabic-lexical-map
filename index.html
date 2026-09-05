@@ -18,7 +18,6 @@
             -webkit-user-select: none;
         }
 
-        /* 3D Claymorphism Cards */
         .clay-card {
             background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(12px);
@@ -36,7 +35,6 @@
                         -16px -16px 32px rgba(255, 255, 255, 1);
         }
 
-        /* Clay Central Sun Disc */
         .clay-sun {
             background: radial-gradient(circle, #fef08a 0%, #facc15 60%, #eab308 100%);
             box-shadow: 0 0 50px rgba(250, 204, 21, 0.6),
@@ -60,12 +58,6 @@
             box-shadow: 6px 6px 16px rgba(99, 102, 241, 0.45);
         }
 
-        .clay-btn:active {
-            transform: translateY(1px);
-            box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Drag & Drop Styles */
         .drop-zone {
             min-height: 52px;
             border: 2px dashed #a5b4fc;
@@ -101,16 +93,6 @@
             box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
         }
 
-        /* Animations */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .animate-float {
-            animation: float 4s ease-in-out infinite;
-        }
-
         @keyframes pulse-glow {
             0%, 100% { transform: scale(1); box-shadow: 0 0 35px rgba(250, 204, 21, 0.6); }
             50% { transform: scale(1.05); box-shadow: 0 0 55px rgba(250, 204, 21, 0.9); }
@@ -119,21 +101,17 @@
         .pulse-sun {
             animation: pulse-glow 3s ease-in-out infinite;
         }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #818cf8;
-            border-radius: 4px;
-        }
     </style>
 </head>
 <body class="p-4 md:p-8 flex flex-col items-center">
+
+    <!-- مسارات الصوت مطابقة تماماً لأسماء الملفات المرفوعة في لقطة الشاشة -->
+    <audio id="audio-root" src="root.mp3.mp3" preload="auto"></audio>
+    <audio id="audio-verb" src="verb.mp3.mp3" preload="auto"></audio>
+    <audio id="audio-actor" src="actor.mp3.mp3" preload="auto"></audio>
+    <audio id="audio-product" src="product.mp3.mp3" preload="auto"></audio>
+    <audio id="audio-place" src="place.mp3.mp3" preload="auto"></audio>
+    <audio id="audio-source" src="source.mp3.mp3" preload="auto"></audio>
 
     <header class="w-full max-w-6xl mb-8 flex flex-col md:flex-row items-center justify-between gap-4 bg-white/70 backdrop-blur-md p-6 rounded-3xl border border-white/60 shadow-lg">
         <div class="flex items-center gap-4">
@@ -147,7 +125,6 @@
             </div>
         </div>
 
-        <!-- Trophy and Star Progress -->
         <div class="flex items-center gap-4 bg-indigo-50/80 px-6 py-3 rounded-2xl border border-indigo-100">
             <div class="flex items-center gap-2">
                 <i class="fa-solid fa-trophy text-amber-500 text-2xl animate-bounce"></i>
@@ -163,8 +140,8 @@
 
     <main class="w-full max-w-6xl relative min-h-[680px] flex flex-col items-center justify-center my-4">
         
-        <!-- Center Sun Disc (Root Core) -->
-        <div id="centerNode" onclick="speakText('الجذر الصرفي صَنَعَ. المعنى: العمل والإتقان.')" 
+        <!-- القرص الشمسي المركزي -->
+        <div id="centerNode" onclick="playMp3('root')" 
              class="clay-sun pulse-sun w-56 h-56 rounded-full flex flex-col items-center justify-center text-center cursor-pointer z-20 relative transition-transform hover:scale-110 group">
             <span class="bg-red-500 text-white text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md animate-pulse mb-1">
                 👈 ابدأ هنا!
@@ -178,15 +155,12 @@
             </div>
         </div>
 
-        <!-- SVG Connection Lines for Radial Branches -->
-        <svg id="svgCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0 hidden md:block">
-            <!-- Dynamic SVG lines rendered via JS -->
-        </svg>
+        <svg id="svgCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0 hidden md:block"></svg>
 
-        <!-- Radial Cards Grid / Absolute Positions -->
+        <!-- الفروع الخمسة -->
         <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 md:mt-0 md:absolute md:inset-0 pointer-events-none z-10">
             
-            <!-- Branch 1: Top Center (Verb/Action) -->
+            <!-- الفرع 1: الفعل -->
             <div id="branch1" class="pointer-events-auto md:absolute md:top-0 md:left-1/2 md:-translate-x-1/2 w-full md:w-72">
                 <div onclick="openBranchModal(0)" class="clay-card p-5 border-t-4 border-amber-400 cursor-pointer group">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
@@ -205,7 +179,7 @@
                 </div>
             </div>
 
-            <!-- Branch 2: Top Right (Subject/Actor) -->
+            <!-- الفرع 2: الفاعل -->
             <div id="branch2" class="pointer-events-auto md:absolute md:top-12 md:right-4 w-full md:w-72">
                 <div onclick="openBranchModal(1)" class="clay-card p-5 border-t-4 border-blue-500 cursor-pointer group">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
@@ -224,7 +198,7 @@
                 </div>
             </div>
 
-            <!-- Branch 3: Bottom Right (Object/Product) -->
+            <!-- الفرع 3: المفعول -->
             <div id="branch3" class="pointer-events-auto md:absolute md:bottom-4 md:right-8 w-full md:w-72">
                 <div onclick="openBranchModal(2)" class="clay-card p-5 border-t-4 border-orange-500 cursor-pointer group">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
@@ -243,7 +217,7 @@
                 </div>
             </div>
 
-            <!-- Branch 4: Top Left (Place) -->
+            <!-- الفرع 4: المكان -->
             <div id="branch4" class="pointer-events-auto md:absolute md:top-12 md:left-4 w-full md:w-72">
                 <div onclick="openBranchModal(3)" class="clay-card p-5 border-t-4 border-emerald-500 cursor-pointer group">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
@@ -262,7 +236,7 @@
                 </div>
             </div>
 
-            <!-- Branch 5: Bottom Left (Activity/Source) -->
+            <!-- الفرع 5: المصدر -->
             <div id="branch5" class="pointer-events-auto md:absolute md:bottom-4 md:left-8 w-full md:w-72">
                 <div onclick="openBranchModal(4)" class="clay-card p-5 border-t-4 border-purple-500 cursor-pointer group">
                     <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
@@ -284,6 +258,7 @@
         </div>
     </main>
 
+    <!-- محطة التحدي والوصل التفاعلية -->
     <section class="w-full max-w-6xl mt-12 bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 border border-white shadow-xl">
         <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
             <span class="w-10 h-10 bg-indigo-600 text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-md">🎯</span>
@@ -294,39 +269,30 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            
-            <!-- Section 1: Fill in blanks with Drag & Drop -->
             <div class="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 flex flex-col justify-between space-y-4">
                 <div>
                     <h3 class="text-sm font-extrabold text-indigo-900 mb-3 flex items-center gap-2">
                         <i class="fa-solid fa-pen-to-square text-indigo-600"></i> القسم 1: ضع الكلمة المناسبة في مكانها الصحيح
                     </h3>
-
-                    <!-- Available Draggable Word Chips -->
                     <div class="mb-4 p-3 bg-indigo-50/50 rounded-xl border border-indigo-100">
                         <p class="text-xs font-bold text-indigo-700 mb-2">اسحب البطاقات من هنا أو انقر لاختيارها:</p>
                         <div id="wordBankSection1" class="flex flex-wrap gap-2 min-h-[48px] items-center">
-                            
                             <div draggable="true" id="chip-masnaa" data-word="مصنع" onclick="handleChipSelect(this)" 
                                  class="drag-chip bg-white border-2 border-emerald-400 px-4 py-2 rounded-xl text-sm font-black text-slate-800 shadow-sm hover:shadow-md flex items-center gap-1">
                                 <span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـ</span><span class="text-red-600 font-black">نَـ</span><span class="text-red-600 font-black">عٍ</span>
                             </div>
-
                             <div draggable="true" id="chip-sinaa" data-word="صناعة" onclick="handleChipSelect(this)" 
                                  class="drag-chip bg-white border-2 border-purple-400 px-4 py-2 rounded-xl text-sm font-black text-slate-800 shadow-sm hover:shadow-md flex items-center gap-1">
                                 <span class="text-red-600 font-black">صِـ</span><span class="text-red-600 font-black">نَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">عَـ</span><span class="text-purple-500 font-bold">ةِ</span>
                             </div>
-
                             <div draggable="true" id="chip-masnoo" data-word="مصنوع" onclick="handleChipSelect(this)" 
                                  class="drag-chip bg-white border-2 border-orange-400 px-4 py-2 rounded-xl text-sm font-black text-slate-800 shadow-sm hover:shadow-md flex items-center gap-1">
                                 <span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـ</span><span class="text-red-600 font-black">نُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">عٌ</span>
                             </div>
-
                         </div>
                     </div>
                     
                     <div class="space-y-4 text-sm font-semibold text-slate-700">
-                        <!-- Q1 Target -->
                         <div class="p-3 bg-white rounded-xl shadow-sm border border-slate-100 flex flex-wrap items-center gap-2">
                             <span>1. يَشْتَغِلُ العُمَّالُ فِي</span>
                             <div id="dropQ1" data-target="مصنع" onclick="handleDropZoneClick(this)" class="drop-zone inline-flex">
@@ -335,8 +301,6 @@
                             <span>كَبِيرٍ.</span>
                             <p id="feedback1" class="w-full text-xs font-bold hidden mt-1"></p>
                         </div>
-
-                        <!-- Q2 Target -->
                         <div class="p-3 bg-white rounded-xl shadow-sm border border-slate-100 flex flex-wrap items-center gap-2">
                             <span>2. يَفْتَخِرُ المَغْرِبُ بِـ</span>
                             <div id="dropQ2" data-target="صناعة" onclick="handleDropZoneClick(this)" class="drop-zone inline-flex">
@@ -345,8 +309,6 @@
                             <span>الجِلْدِ وَالخَزَفِ.</span>
                             <p id="feedback2" class="w-full text-xs font-bold hidden mt-1"></p>
                         </div>
-
-                        <!-- Q3 Target -->
                         <div class="p-3 bg-white rounded-xl shadow-sm border border-slate-100 flex flex-wrap items-center gap-2">
                             <span>3. هَذَا الخَاتَمُ الفِضِّيُّ</span>
                             <div id="dropQ3" data-target="مصنوع" onclick="handleDropZoneClick(this)" class="drop-zone inline-flex">
@@ -363,43 +325,34 @@
                 </button>
             </div>
 
-            <!-- Section 2: Collocations Matching with Drag & Drop -->
             <div class="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 flex flex-col justify-between space-y-4">
                 <div>
                     <h3 class="text-sm font-extrabold text-indigo-900 mb-3 flex items-center gap-2">
                         <i class="fa-solid fa-link text-indigo-600"></i> القسم 2: صل كل كلمة برفيقتها المتلازمة
                     </h3>
-
-                    <!-- Available Collocation Draggable Chips -->
                     <div class="mb-4 p-3 bg-purple-50/50 rounded-xl border border-purple-100">
                         <p class="text-xs font-bold text-purple-700 mb-2">اسحب بطاقات المتلازمات من هنا:</p>
                         <div id="collocBank" class="flex flex-wrap gap-2 min-h-[48px] items-center">
-                            
                             <div draggable="true" id="chip-col1" data-match="1" onclick="handleChipSelect(this)" 
                                  class="drag-chip bg-white border border-blue-300 px-3 py-1.5 rounded-xl text-xs font-bold text-blue-900 shadow-sm hover:shadow-md">
                                 🔗 مَاهِرٌ فِي عَمَلِهِ
                             </div>
-
                             <div draggable="true" id="chip-col2" data-match="2" onclick="handleChipSelect(this)" 
                                  class="drag-chip bg-white border border-orange-300 px-3 py-1.5 rounded-xl text-xs font-bold text-orange-900 shadow-sm hover:shadow-md">
                                 🔗 مِنَ الفَخَّارِ المَصْقُولِ
                             </div>
-
                             <div draggable="true" id="chip-col3" data-match="3" onclick="handleChipSelect(this)" 
                                  class="drag-chip bg-white border border-emerald-300 px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-900 shadow-sm hover:shadow-md">
                                 🔗 حَدِيثٌ وَنَظِيفٌ
                             </div>
-
                             <div draggable="true" id="chip-col4" data-match="4" onclick="handleChipSelect(this)" 
                                  class="drag-chip bg-white border border-purple-300 px-3 py-1.5 rounded-xl text-xs font-bold text-purple-900 shadow-sm hover:shadow-md">
                                 🔗 تَقْلِيدِيَّةٌ وَطَنِيَّةٌ
                             </div>
-
                         </div>
                     </div>
 
                     <div class="space-y-3">
-                        <!-- Match Item 1 -->
                         <div class="flex items-center justify-between bg-white p-3 rounded-xl border border-slate-100 text-sm">
                             <span class="font-black text-blue-600 bg-blue-50 px-3 py-1 rounded-lg">
                                 <span class="text-red-600 font-black">صَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">نِـ</span><span class="text-red-600 font-black">عٌ</span> ➔
@@ -408,8 +361,6 @@
                                 <span class="text-xs text-slate-400 font-bold pointer-events-none">إفلات المتلازمة هنا</span>
                             </div>
                         </div>
-
-                        <!-- Match Item 2 -->
                         <div class="flex items-center justify-between bg-white p-3 rounded-xl border border-slate-100 text-sm">
                             <span class="font-black text-orange-600 bg-orange-50 px-3 py-1 rounded-lg">
                                 <span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـ</span><span class="text-red-600 font-black">نُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">عٌ</span> ➔
@@ -418,8 +369,6 @@
                                 <span class="text-xs text-slate-400 font-bold pointer-events-none">إفلات المتلازمة هنا</span>
                             </div>
                         </div>
-
-                        <!-- Match Item 3 -->
                         <div class="flex items-center justify-between bg-white p-3 rounded-xl border border-slate-100 text-sm">
                             <span class="font-black text-emerald-600 bg-emerald-50 px-3 py-1 rounded-lg">
                                 <span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـ</span><span class="text-red-600 font-black">نَـ</span><span class="text-red-600 font-black">عٌ</span> ➔
@@ -428,8 +377,6 @@
                                 <span class="text-xs text-slate-400 font-bold pointer-events-none">إفلات المتلازمة هنا</span>
                             </div>
                         </div>
-
-                        <!-- Match Item 4 -->
                         <div class="flex items-center justify-between bg-white p-3 rounded-xl border border-slate-100 text-sm">
                             <span class="font-black text-purple-600 bg-purple-50 px-3 py-1 rounded-lg">
                                 <span class="text-red-600 font-black">صِـ</span><span class="text-red-600 font-black">نَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">عَـ</span><span class="text-purple-500 font-bold">ةٌ</span> ➔
@@ -446,25 +393,12 @@
                     <i class="fa-solid fa-award"></i> تحقق من الوصل الصحيح
                 </button>
             </div>
-
         </div>
     </section>
 
-    <!-- Floating Audio Subtitle & Toast for Visual & Auditory Feedback -->
-    <div id="speechToast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900/95 text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 backdrop-blur-md transition-all duration-300 opacity-0 pointer-events-none translate-y-4 max-w-[92vw] border border-slate-700/50">
-        <span class="relative flex h-3 w-3">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
-        </span>
-        <i class="fa-solid fa-volume-high text-amber-400 text-base animate-pulse"></i>
-        <span id="speechToastText" class="text-xs md:text-sm font-bold text-amber-100 line-clamp-1"></span>
-        <button onclick="stopSpeaking()" title="إيقاف الصوت" class="mr-2 text-slate-400 hover:text-white text-xs bg-slate-800 px-2 py-1 rounded-lg border border-slate-700">
-            <i class="fa-solid fa-stop"></i> إيقاف
-        </button>
-    </div>
-
+    <!-- النافذة المنبثقة لكل فرع -->
     <div id="infoModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border border-white transform transition-all scale-100 animate-float">
+        <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border border-white transform transition-all scale-100">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div class="flex items-center gap-2">
                     <span id="modalIcon" class="text-3xl">🔨</span>
@@ -474,7 +408,7 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button id="modalQuickSpeakBtn" title="استمع للكلمة والوزن" class="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center hover:bg-indigo-100 transition">
+                    <button id="modalQuickSpeakBtn" title="استمع للبطاقة" class="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center hover:bg-indigo-100 transition">
                         <i class="fa-solid fa-volume-high text-xs"></i>
                     </button>
                     <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition">
@@ -487,37 +421,27 @@
                 <div class="bg-slate-50 p-4 rounded-xl text-right space-y-3 border border-slate-200 text-sm">
                     <div class="flex items-start justify-between gap-2">
                         <p class="flex-1"><strong>💡 الشرح:</strong> <span id="modalDesc"></span></p>
-                        <button id="speakDescBtn" title="استمع للشرح" class="text-indigo-500 hover:text-indigo-700 p-1">
-                            <i class="fa-solid fa-volume-low"></i>
-                        </button>
                     </div>
                     <div class="flex items-start justify-between gap-2 border-t border-slate-200/60 pt-2">
                         <p class="flex-1"><strong>🔗 المتلازمة اللفظية:</strong> <span id="modalColloc" class="text-indigo-600 font-bold"></span></p>
-                        <button id="speakCollocBtn" title="استمع للمتلازمة" class="text-indigo-500 hover:text-indigo-700 p-1">
-                            <i class="fa-solid fa-volume-low"></i>
-                        </button>
                     </div>
                     <div class="flex items-start justify-between gap-2 border-t border-slate-200/60 pt-2">
                         <p class="flex-1"><strong>📖 المثال في جملة:</strong> «<span id="modalContext" class="italic text-slate-700 font-medium"></span>»</p>
-                        <button id="speakContextBtn" title="استمع للمثال" class="text-indigo-500 hover:text-indigo-700 p-1">
-                            <i class="fa-solid fa-volume-low"></i>
-                        </button>
                     </div>
                 </div>
 
                 <button id="modalAudioBtn" class="clay-btn w-full py-3 mt-4 text-xs md:text-sm font-bold flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-headphones-simple text-base"></i> استمع إلى البطاقة كاملة (الكلمة، الشرح، المتلازمة والمثال)
+                    <i class="fa-solid fa-headphones-simple text-base"></i> اضغط للاستماع للنطق الصوتي الفصيح
                 </button>
             </div>
         </div>
     </div>
 
     <script>
-        // Branch Data with precise color-coded HTML and Speech Synthesis phrases
         const branchData = [
             {
+                key: "verb",
                 titleHtml: '<span class="text-red-600 font-black">صَـنَـعَ</span>',
-                speechTitle: "صَنَعَ",
                 weight: "فَعَلَ",
                 icon: "🔨",
                 desc: "فعل ماض يدل على إيجاد الشيء وتكوينه بالعمل والجهد.",
@@ -525,8 +449,8 @@
                 context: "صَنَعَ الحِرَفِيُّ خِزَانَةً جَمِيلَةً"
             },
             {
+                key: "actor",
                 titleHtml: '<span class="text-red-600 font-black">صَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">نِـ</span><span class="text-red-600 font-black">عٌ</span>',
-                speechTitle: "صَانِعٌ",
                 weight: "فَاعِل",
                 icon: "👨‍🔧",
                 desc: "اسم فاعل يدل على الشخص الماهر الذي يقوم بعملية الصنع والإنتاج.",
@@ -534,8 +458,8 @@
                 context: "كَرَّمَ المُدِيرُ الصَّانِعَ المَاهِرَ"
             },
             {
+                key: "product",
                 titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـ</span><span class="text-red-600 font-black">نُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">عٌ</span>',
-                speechTitle: "مَصْنُوعٌ",
                 weight: "مَفْعُول",
                 icon: "🏺",
                 desc: "اسم مفعول يدل على الشيء أو الأثر الذي تم إنتاجه وإتقانه.",
@@ -543,8 +467,8 @@
                 context: "الخَزَفُ مَصْنُوعٌ بِجَمَالِيَّةٍ"
             },
             {
+                key: "place",
                 titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـ</span><span class="text-red-600 font-black">نَـ</span><span class="text-red-600 font-black">عٌ</span>',
-                speechTitle: "مَصْنَعٌ",
                 weight: "مَفْعَل",
                 icon: "🏭",
                 desc: "اسم مكان يدل على المنشأة أو المكان المجهز للإنتاج والعمل.",
@@ -552,8 +476,8 @@
                 context: "يَشْتَغِلُ أَبِي فِي مَصْنَعِ السَّمَكِ"
             },
             {
+                key: "source",
                 titleHtml: '<span class="text-red-600 font-black">صِـ</span><span class="text-red-600 font-black">نَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">عَـ</span><span class="text-purple-500 font-bold">ةٌ</span>',
-                speechTitle: "صِنَاعَةٌ",
                 weight: "فِعَالَة",
                 icon: "⚙️",
                 desc: "مصدر يدل على المهنة والنشاط الإنتاجي أو القطاع الاقتصادي.",
@@ -566,255 +490,58 @@
         let checkedFill = false;
         let checkedMatch = false;
         let selectedChip = null;
-        
-        // Robust Independent Audio & Speech Engine (100% Client-Side & Standalone)
-        let globalAudioCtx = null;
-        let speechQueue = [];
-        let isSpeakingQueue = false;
-        let activeSpeakerButton = null;
-        let toastTimer = null;
-        let isAudioUnlocked = false;
+        let currentPlayingAudio = null;
 
-        function getAudioContext() {
-            if (!globalAudioCtx) {
-                const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
-                if (AudioCtxClass) {
-                    globalAudioCtx = new AudioCtxClass();
-                }
-            }
-            if (globalAudioCtx && globalAudioCtx.state === 'suspended') {
-                globalAudioCtx.resume().catch(() => {});
-            }
-            return globalAudioCtx;
-        }
-
-        // Unlock Mobile Audio Policies on user's first touch/click
-        function unlockMobileAudio() {
-            if (isAudioUnlocked) return;
-            isAudioUnlocked = true;
-
-            const ctx = getAudioContext();
-            if (ctx) {
-                try {
-                    const silentBuffer = ctx.createBuffer(1, 1, 22050);
-                    const source = ctx.createBufferSource();
-                    source.buffer = silentBuffer;
-                    source.connect(ctx.destination);
-                    source.start(0);
-                } catch (e) {}
+        function playMp3(key) {
+            if (currentPlayingAudio) {
+                currentPlayingAudio.pause();
+                currentPlayingAudio.currentTime = 0;
             }
 
-            if ('speechSynthesis' in window) {
-                try {
-                    window.speechSynthesis.resume();
-                } catch (e) {}
+            const audio = document.getElementById('audio-' + key);
+            if (audio) {
+                currentPlayingAudio = audio;
+                audio.play().catch(e => {
+                    console.warn("تنبيه تشغيل الصوت:", e);
+                });
             }
         }
 
-        window.addEventListener('touchstart', unlockMobileAudio, { passive: true });
-        window.addEventListener('click', unlockMobileAudio, { passive: true });
-
-        // Synthesize UI SFX via Web Audio API (Guaranteed on all devices without external assets)
         function playSound(type) {
             try {
-                const ctx = getAudioContext();
-                if (!ctx) return;
-
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (ctx.state === 'suspended') ctx.resume();
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
                 osc.connect(gain);
                 gain.connect(ctx.destination);
 
-                const now = ctx.currentTime;
                 if (type === 'click') {
                     osc.type = 'sine';
-                    osc.frequency.setValueAtTime(520, now);
-                    gain.gain.setValueAtTime(0.06, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
-                    osc.start(now);
-                    osc.stop(now + 0.07);
+                    osc.frequency.setValueAtTime(440, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.08);
                 } else if (type === 'success') {
                     osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(523.25, now);
-                    osc.frequency.setValueAtTime(659.25, now + 0.09);
-                    osc.frequency.setValueAtTime(783.99, now + 0.18);
-                    gain.gain.setValueAtTime(0.12, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
-                    osc.start(now);
-                    osc.stop(now + 0.32);
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
+                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2);
+                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.35);
                 } else if (type === 'error') {
                     osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(220, now);
-                    osc.frequency.setValueAtTime(160, now + 0.08);
-                    gain.gain.setValueAtTime(0.12, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
-                    osc.start(now);
-                    osc.stop(now + 0.22);
+                    osc.frequency.setValueAtTime(220, ctx.currentTime);
+                    osc.frequency.setValueAtTime(180, ctx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.25);
                 }
             } catch (e) {}
-        }
-
-        // Clean text while preserving Arabic diacritics (tashkeel)
-        function cleanTextForSpeech(str) {
-            if (!str) return '';
-            let cleaned = str.replace(/<[^>]*>/g, ' ');
-            cleaned = cleaned.replace(/[\[\]\-«»()'"{}\/⚙️🔨👨‍🔧🏺🏭🎯⭐💡🔗📖👈!#$@%^&*+=_~|\\?]/g, ' ');
-            cleaned = cleaned.replace(/ـ/g, ''); // Remove Tatweel/Kashida
-            return cleaned.replace(/\s+/g, ' ').trim();
-        }
-
-        function showSpeechToast(text) {
-            const toast = document.getElementById('speechToast');
-            const toastText = document.getElementById('speechToastText');
-            if (!toast || !toastText) return;
-
-            toastText.textContent = text;
-            toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-            toast.classList.add('opacity-100', 'translate-y-0');
-
-            if (toastTimer) clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => {
-                toast.classList.remove('opacity-100', 'translate-y-0');
-                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-            }, 6000);
-        }
-
-        function hideSpeechToast() {
-            const toast = document.getElementById('speechToast');
-            if (toast) {
-                toast.classList.remove('opacity-100', 'translate-y-0');
-                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-            }
-        }
-
-        // Find best available Arabic voice on user's device
-        function getBestArabicVoice() {
-            if (!('speechSynthesis' in window)) return null;
-            const voices = window.speechSynthesis.getVoices() || [];
-            if (!voices || voices.length === 0) return null;
-
-            return voices.find(v => v.lang === 'ar-SA' || v.lang === 'ar_SA') ||
-                   voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ar')) ||
-                   null;
-        }
-
-        // Stop any currently running speech
-        function stopSpeaking() {
-            speechQueue = [];
-            isSpeakingQueue = false;
-            hideSpeechToast();
-            if (activeSpeakerButton) {
-                activeSpeakerButton.innerHTML = '<i class="fa-solid fa-headphones-simple text-base"></i> استمع إلى البطاقة كاملة (الكلمة، الشرح، المتلازمة والمثال)';
-                activeSpeakerButton = null;
-            }
-            if ('speechSynthesis' in window) {
-                try {
-                    window.speechSynthesis.cancel();
-                } catch (e) {}
-            }
-        }
-
-        // Sequential Speech Queue Runner: reads multiple sentences clearly without cutoff
-        function processNextInSpeechQueue() {
-            if (speechQueue.length === 0) {
-                isSpeakingQueue = false;
-                if (activeSpeakerButton) {
-                    activeSpeakerButton.innerHTML = '<i class="fa-solid fa-headphones-simple text-base"></i> استمع إلى البطاقة كاملة (الكلمة، الشرح، المتلازمة والمثال)';
-                    activeSpeakerButton = null;
-                }
-                setTimeout(hideSpeechToast, 1200);
-                return;
-            }
-
-            isSpeakingQueue = true;
-            const rawPhrase = speechQueue.shift();
-            const textToSpeak = cleanTextForSpeech(rawPhrase);
-
-            if (!textToSpeak) {
-                processNextInSpeechQueue();
-                return;
-            }
-
-            showSpeechToast(textToSpeak);
-
-            if (!('speechSynthesis' in window)) {
-                processNextInSpeechQueue();
-                return;
-            }
-
-            try {
-                // Ensure speech synthesis is unpaused (fix for Chrome/Safari bug)
-                if (window.speechSynthesis.paused) {
-                    window.speechSynthesis.resume();
-                }
-
-                const utterance = new SpeechSynthesisUtterance(textToSpeak);
-                utterance.lang = 'ar-SA';
-                utterance.rate = 0.86;  // Gentle learning pace
-                utterance.pitch = 1.05; // Friendly tone
-
-                const arabicVoice = getBestArabicVoice();
-                if (arabicVoice) {
-                    utterance.voice = arabicVoice;
-                }
-
-                // Keep reference to prevent mobile garbage-collection early termination bug
-                window.__activeUtterance = utterance;
-
-                let hasEnded = false;
-                const finishCurrentPhrase = () => {
-                    if (hasEnded) return;
-                    hasEnded = true;
-                    // Natural pause between learning phrases
-                    setTimeout(processNextInSpeechQueue, 220);
-                };
-
-                utterance.onend = finishCurrentPhrase;
-                utterance.onerror = finishCurrentPhrase;
-
-                // Watchdog timer in case browser stalls the utterance
-                const expectedDurationMs = Math.max(2500, textToSpeak.length * 150);
-                setTimeout(() => {
-                    if (!hasEnded && isSpeakingQueue) {
-                        finishCurrentPhrase();
-                    }
-                }, expectedDurationMs);
-
-                window.speechSynthesis.speak(utterance);
-            } catch (err) {
-                console.warn('Speech error:', err);
-                processNextInSpeechQueue();
-            }
-        }
-
-        // Public Speak Function: accepts single string OR array of phrases
-        function speakText(content, triggerButton = null) {
-            unlockMobileAudio();
-            playSound('click');
-
-            stopSpeaking();
-
-            if (triggerButton) {
-                activeSpeakerButton = triggerButton;
-                triggerButton.innerHTML = '<i class="fa-solid fa-volume-high text-amber-300 animate-pulse"></i> جاري الاستماع...';
-            }
-
-            if (Array.isArray(content)) {
-                speechQueue = content.slice();
-            } else if (typeof content === 'string') {
-                // Split multi-sentence text on arabic punctuation for maximum clarity
-                const parts = content.split(/[.\n؛]+/).map(s => s.trim()).filter(Boolean);
-                speechQueue = parts.length > 0 ? parts : [content];
-            }
-
-            processNextInSpeechQueue();
-        }
-
-        // Cache voices on load
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.onvoiceschanged = () => {
-                getBestArabicVoice();
-            };
         }
 
         function openBranchModal(index) {
@@ -826,43 +553,26 @@
             document.getElementById('modalColloc').innerText = info.col;
             document.getElementById('modalContext').innerText = info.context;
 
-            // Ordered sequence of distinct sentences for natural pedagogical reading
-            const fullPhrasesList = [
-                `${info.speechTitle}. وَزْنُهُ الصَّرْفِيُّ: ${info.weight}`,
-                `الشَّرْحُ: ${info.desc}`,
-                `المُتَلَازِمَةُ اللَّفْظِيَّةُ: ${info.col}`,
-                `المِثَالُ فِي جُمْلَةٍ: ${info.context}`
-            ];
-
             const modalAudioBtn = document.getElementById('modalAudioBtn');
-            modalAudioBtn.innerHTML = '<i class="fa-solid fa-headphones-simple text-base"></i> استمع إلى البطاقة كاملة (الكلمة، الشرح، المتلازمة والمثال)';
             modalAudioBtn.onclick = function() {
-                speakText(fullPhrasesList, modalAudioBtn);
+                playMp3(info.key);
             };
 
-            // Dedicated sub-buttons for individual item listening
             document.getElementById('modalQuickSpeakBtn').onclick = function() {
-                speakText(`${info.speechTitle}، وَزْنُهُ الصَّرْفِيُّ ${info.weight}`);
-            };
-            document.getElementById('speakDescBtn').onclick = function() {
-                speakText(`الشَّرْحُ: ${info.desc}`);
-            };
-            document.getElementById('speakCollocBtn').onclick = function() {
-                speakText(`المُتَلَازِمَةُ اللَّفْظِيَّةُ: ${info.col}`);
-            };
-            document.getElementById('speakContextBtn').onclick = function() {
-                speakText(`المِثَالُ: ${info.context}`);
+                playMp3(info.key);
             };
 
             document.getElementById('infoModal').classList.remove('hidden');
 
-            // Automatically read out the complete card details upon opening
-            speakText(fullPhrasesList, modalAudioBtn);
+            playMp3(info.key);
         }
 
         function closeModal() {
             playSound('click');
-            stopSpeaking();
+            if (currentPlayingAudio) {
+                currentPlayingAudio.pause();
+                currentPlayingAudio.currentTime = 0;
+            }
             document.getElementById('infoModal').classList.add('hidden');
         }
 
@@ -905,7 +615,6 @@
             });
         }
 
-        // Click / Tap to place chip (Optimized for Touchscreens)
         function handleChipSelect(chip) {
             playSound('click');
             if (selectedChip === chip) {
@@ -947,7 +656,6 @@
             zone.appendChild(chip);
         }
 
-        // Section 1 Verification
         function checkFillBlanks() {
             const drop1 = document.getElementById('dropQ1').querySelector('.drag-chip');
             const drop2 = document.getElementById('dropQ2').querySelector('.drag-chip');
@@ -992,13 +700,11 @@
                     checkedFill = true;
                     updateStars();
                 }
-                speakText('إجابات رائعة ومكتملة! لقد وضعت الكلمات في أماكنها الصحيحة وحصلت على ثلاث نجوم.');
             } else {
                 playSound('error');
             }
         }
 
-        // Section 2 Matching Verification
         function checkMatching() {
             const m1 = document.getElementById('dropCol1').querySelector('.drag-chip');
             const m2 = document.getElementById('dropCol2').querySelector('.drag-chip');
@@ -1012,7 +718,7 @@
                 m3 && m3.dataset.match === '3' &&
                 m4 && m4.dataset.match === '4') {
                 
-                fb.innerText = '🎉 أحسنت صنعاً! جميع المتلازمات اللفظية مصلولة ببطاقاتها الصحيحة 100%';
+                fb.innerText = '🎉 أحسنت صنعاً! جميع المتلازمات اللفظية موصولة ببطاقاتها الصحيحة 100%';
                 fb.className = 'text-xs font-bold text-emerald-600 block mt-2';
                 playSound('success');
                 if (!checkedMatch) {
@@ -1020,7 +726,6 @@
                     checkedMatch = true;
                     updateStars();
                 }
-                speakText('ممتاز جداً! صَانِعٌ مَاهِرٌ، مَصْنُوعٌ مِنَ الفَخَّارِ، مَصْنَعٌ حَدِيثٌ، صِنَاعَةٌ تَقْلِيدِيَّةٌ.');
             } else {
                 fb.innerText = '⚠️ هناك إفلات غير صحيح. تذكر: صَانِعٌ مَاهِرٌ، مَصْنُوعٌ مِنَ الفَخَّارِ، مَصْنَعٌ حَدِيثٌ، صِنَاعَةٌ تَقْلِيدِيَّةٌ.';
                 fb.className = 'text-xs font-bold text-rose-600 block mt-2';
