@@ -73,7 +73,7 @@
 </head>
 <body class="p-4 md:p-8 flex flex-col items-center">
 
-    <!-- وسوم الصوت المرفوعة سابقاً لجذر صنع -->
+    <!-- وسوم الصوت المرفوعة لجذر صنع -->
     <audio id="audio-root" src="root.mp3.mp3" preload="auto"></audio>
     <audio id="audio-verb" src="verb.mp3" preload="auto"></audio>
     <audio id="audio-actor" src="actor.mp3" preload="auto"></audio>
@@ -98,7 +98,7 @@
             </div>
         </div>
 
-        <!-- أداة الانتقال بين الجذور (قوة المعمار الجديد) -->
+        <!-- أداة الانتقال بين الجذور -->
         <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
             <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-2xl border-2 border-indigo-300 shadow-sm w-full sm:w-auto">
                 <i class="fa-solid fa-seedling text-emerald-600 text-lg"></i>
@@ -137,9 +137,7 @@
         <svg id="svgCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0 hidden md:block"></svg>
 
         <!-- الفروع الخمسة -->
-        <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 md:mt-0 md:absolute md:inset-0 pointer-events-none z-10" id="branchesContainer">
-            <!-- تتولد ديناميكياً بواسطة JavaScript لكل جذر -->
-        </div>
+        <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 md:mt-0 md:absolute md:inset-0 pointer-events-none z-10" id="branchesContainer"></div>
     </main>
 
     <!-- محطة التحدي والوصل التفاعلية -->
@@ -244,13 +242,12 @@
     </div>
 
     <script>
-        // قاعدة البيانات الشاملة للجذور المقررة
         const database = {
             "صنع": {
                 icon: "🏭",
                 concept: "العمل والإتقان",
                 rootLetters: "[ص-ن-ع]",
-                isCustomAudio: true, // يستخدم الملفات المرفوعة مسبقاً
+                isCustomAudio: true,
                 branches: [
                     { key: "verb", titleHtml: '<span class="text-red-600 font-black">صَـنَـعَ</span>', weight: "فَعَلَ", icon: "🔨", desc: "فعل ماض يدل على إيجاد الشيء وتكوينه بالعمل والجهد.", col: "صَنَعَ بِيَدَيْهِ", context: "صَنَعَ الحِرَفِيُّ خِزَانَةً جَمِيلَةً", color: "amber" },
                     { key: "actor", titleHtml: '<span class="text-red-600 font-black">صَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">نِـ</span><span class="text-red-600 font-black">عٌ</span>', weight: "فَاعِل", icon: "👨‍🔧", desc: "اسم فاعل يدل على الشخص الماهر الذي يقوم بعملية الصنع والإنتاج.", col: "صَانِعٌ مَاهِرٌ", context: "كَرَّمَ المُدِيرُ الصَّانِعَ المَاهِرَ", color: "blue" },
@@ -275,7 +272,7 @@
             },
             "كتب": {
                 icon: "✍️",
-                concept: "التدوين والجمع",
+                concept: "التدوين والمعرفة",
                 rootLetters: "[ك-ت-ب]",
                 isCustomAudio: false,
                 branches: [
@@ -336,16 +333,40 @@
         let checkedMatch = false;
         let selectedChip = null;
         let currentPlayingAudio = null;
+        let arabicVoice = null;
 
-        // محرك النطق الصوتي الفصيح التلقائي (Web Speech API)
-        function speakArabic(text) {
+        // تهيئة محرك الصوت العربي للمتصفح وضمان عدم حظره
+        function setupArabicVoices() {
             if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'ar-SA';
-                utterance.rate = 0.85;
-                window.speechSynthesis.speak(utterance);
+                const voices = window.speechSynthesis.getVoices();
+                arabicVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ar')) || null;
             }
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = setupArabicVoices;
+            setupArabicVoices();
+        }
+
+        // دالة نطق فصيحة مدعمة بمعالجة التعليق التلقائي
+        function speakArabic(text) {
+            if (!('speechSynthesis' in window)) return;
+
+            window.speechSynthesis.cancel();
+            if (window.speechSynthesis.paused) {
+                window.speechSynthesis.resume();
+            }
+
+            const cleanText = text.replace(/[«»\[\]\(\)\-\_🔗💡📖🎯]/g, ' ');
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            utterance.lang = 'ar-SA';
+            if (arabicVoice) {
+                utterance.voice = arabicVoice;
+            }
+            utterance.rate = 0.85;
+            utterance.pitch = 1.0;
+
+            window.speechSynthesis.speak(utterance);
         }
 
         function playRootAudio() {
@@ -353,7 +374,8 @@
             if (data.isCustomAudio) {
                 playMp3('root');
             } else {
-                speakArabic(`الجذر: ${data.rootLetters}، عائلة: ${data.concept}`);
+                const rootSpelled = data.rootLetters.replace(/[\-\[\]]/g, ' ');
+                speakArabic(`الجذر: ${rootSpelled}، عائلة: ${data.concept}`);
             }
         }
 
@@ -361,8 +383,11 @@
             if (currentRoot === "صنع") {
                 playMp3(type === 'fill' ? 'quiz-fill' : 'quiz-match');
             } else {
-                if (type === 'fill') speakArabic("القسم الأول: ضع الكلمة المناسبة في مكانها الصحيح لتركيب جمل مفيدة.");
-                else speakArabic("القسم الثاني: صل كل كلمة برفيقتها المتلازمة لفظياً.");
+                if (type === 'fill') {
+                    speakArabic("القسم الأول: ضع الكلمة المناسبة في مكانها الصحيح لتركيب جمل مفيدة.");
+                } else {
+                    speakArabic("القسم الثاني: صل كل كلمة برفيقتها المتلازمة لفظياً.");
+                }
             }
         }
 
@@ -370,8 +395,11 @@
             if (currentRoot === "صنع") {
                 playMp3(isCorrect ? 'correct' : 'retry');
             } else {
-                if (isCorrect) speakArabic("أحسنت صنعاً! إجابة صحيحة ومتقنة.");
-                else speakArabic("حاول مرة أخرى، فكر جيداً في المعنى والوزن الصرفي.");
+                if (isCorrect) {
+                    speakArabic("أحسنت صنعاً! إجابة صحيحة ومتقنة.");
+                } else {
+                    speakArabic("حاول مرة أخرى، فكر جيداً في المعنى والوزن الصرفي.");
+                }
             }
         }
 
@@ -379,7 +407,7 @@
             if (currentRoot === "صنع") {
                 playMp3('celebration');
             } else {
-                speakArabic(`رائع جداً! لقد حققت العلامة الكاملة وأتقنت عائلة الجذر ${currentRoot}!`);
+                speakArabic(`رائع جداً ومبارك! لقد حققت العلامة الكاملة وأتقنت عائلة الجذر ${currentRoot}!`);
             }
         }
 
@@ -388,6 +416,8 @@
                 currentPlayingAudio.pause();
                 currentPlayingAudio.currentTime = 0;
             }
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
             const audio = document.getElementById('audio-' + key);
             if (audio) {
                 currentPlayingAudio = audio;
@@ -432,7 +462,6 @@
             } catch (e) {}
         }
 
-        // بناء الواجهة عند التبديل بين الجذور
         function switchRoot(rootKey) {
             playSound('click');
             currentRoot = rootKey;
@@ -444,7 +473,6 @@
             document.getElementById('centerLetters').innerText = data.rootLetters;
             document.getElementById('centerConcept').innerText = `الجذر: ${data.concept}`;
 
-            // تصفير النقاط والأنشطة
             earnedStars = 0;
             checkedFill = false;
             checkedMatch = false;
@@ -576,7 +604,12 @@
             if (data.isCustomAudio) {
                 playMp3(activeModalData.key);
             } else {
-                speakArabic(`${activeModalData.weight}. الشرح: ${activeModalData.desc}. المتلازمة اللفظية: ${activeModalData.col}. المثال: ${activeModalData.context}`);
+                // استخراج الكلمة مجردة من وسوم HTML لنطقها بوضوح
+                const tempDiv = document.createElement("div");
+                tempDiv.innerHTML = activeModalData.titleHtml;
+                const cleanWord = tempDiv.textContent || tempDiv.innerText || "";
+                
+                speakArabic(`${cleanWord}. الوزن الصرفي: ${activeModalData.weight}. الشرح: ${activeModalData.desc}. المتلازمة اللفظية: ${activeModalData.col}. المثال في جملة: ${activeModalData.context}`);
             }
         }
 
@@ -758,6 +791,8 @@
         window.onload = function() {
             switchRoot("صنع");
             window.addEventListener('resize', drawRadialLines);
+            // تحفيز تحميل حزم الأصوات فور تحميل النافذة
+            setupArabicVoices();
         };
     </script>
 </body>
