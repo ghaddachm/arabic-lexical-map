@@ -1,1007 +1,939 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة بذرة الكلمات التفاعلية | المعجم الصرفي الإدراكي</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
-    
-    <style>
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 50%, #f0f9ff 100%);
-            min-height: 100vh;
-            color: #1e293b;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-        .clay-card {
-            background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(12px);
-            border-radius: 2rem;
-            box-shadow: 12px 12px 24px rgba(165, 180, 252, 0.4), 
-                        -12px -12px 24px rgba(255, 255, 255, 0.95);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .clay-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 16px 16px 32px rgba(165, 180, 252, 0.5);
-        }
-        .clay-sun {
-            background: radial-gradient(circle, #fef08a 0%, #facc15 60%, #eab308 100%);
-            box-shadow: 0 0 50px rgba(250, 204, 21, 0.6);
-            border: 4px solid #ffffff;
-        }
-        .clay-btn {
-            background: linear-gradient(145deg, #6366f1, #4f46e5);
-            color: white;
-            border-radius: 1.25rem;
-            box-shadow: 4px 4px 12px rgba(99, 102, 241, 0.35);
-            transition: all 0.2s ease;
-        }
-        .clay-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 6px 6px 16px rgba(99, 102, 241, 0.45);
-        }
-        .drop-zone {
-            min-height: 52px;
-            border: 2px dashed #a5b4fc;
-            background-color: rgba(238, 242, 255, 0.6);
-            border-radius: 1rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.25rem 0.75rem;
-        }
-        .drag-chip {
-            cursor: grab;
-            transition: all 0.2s ease;
-        }
-        .drag-chip.selected {
-            ring: 4px;
-            ring-color: #6366f1;
-            transform: scale(1.08);
-        }
-        @keyframes pulse-glow {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 35px rgba(250, 204, 21, 0.6); }
-            50% { transform: scale(1.05); box-shadow: 0 0 55px rgba(250, 204, 21, 0.9); }
-        }
-        .pulse-sun { animation: pulse-glow 3s ease-in-out infinite; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الخريطة المعجمية الذكية</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --secondary: #0284c7;
+      --accent: #f59e0b;
+      --success: #10b981;
+      --danger: #ef4444;
+      --root-c: #dc2626;  /* أحمر لأحرف الجذر */
+      --affix-c: #2563eb; /* أزرق لأحرف الزيادة */
+      --bg: #f0f4f8;
+      --card: #ffffff;
+      --text: #1e293b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    /* الشريط العلوي */
+    header {
+      background: linear-gradient(135deg, #1e1b4b, var(--primary));
+      color: white;
+      padding: 0.9rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .header-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .root-picker {
+      padding: 0.5rem 1.2rem;
+      font-size: 1.15rem;
+      font-weight: 800;
+      border-radius: 12px;
+      border: 2px solid #38bdf8;
+      background: white;
+      color: #1e1b4b;
+      cursor: pointer;
+      outline: none;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .badge-rank {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    .badge-score {
+      background: var(--accent);
+      color: #78350f;
+      padding: 0.45rem 1.3rem;
+      border-radius: 20px;
+      font-weight: 900;
+      font-size: 1.15rem;
+      box-shadow: 0 3px 10px rgba(245, 158, 11, 0.4);
+    }
+
+    /* شريط التبويبات */
+    .nav-tabs {
+      background: #e2e8f0;
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem 1rem 0;
+      gap: 0.6rem;
+      border-bottom: 3px solid #cbd5e1;
+    }
+
+    .tab-btn {
+      padding: 0.8rem 1.6rem;
+      border: none;
+      background: transparent;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #475569;
+      cursor: pointer;
+      border-radius: 14px 14px 0 0;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.5);
+      color: var(--primary);
+    }
+
+    .tab-btn.active {
+      background: var(--bg);
+      color: var(--primary);
+      border-top: 4px solid var(--primary);
+      box-shadow: 0 -3px 10px rgba(0,0,0,0.05);
+    }
+
+    /* الحاوية المركزية */
+    main {
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 1.8rem;
+    }
+
+    .tab-content {
+      display: none;
+      animation: slideUp 0.3s ease-in-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 1. لوحة النواة والأبنية */
+    .nucleus-panel {
+      background: white;
+      border-radius: 20px;
+      padding: 1.8rem;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      border: 3px dashed #cbd5e1;
+      margin-bottom: 2rem;
+    }
+
+    .nucleus-letters {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin: 1.2rem 0;
+    }
+
+    .root-cube {
+      width: 75px;
+      height: 75px;
+      background: #fee2e2;
+      border: 3px solid var(--root-c);
+      color: var(--root-c);
+      font-size: 2.3rem;
+      font-weight: 900;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 0 var(--root-c), 0 8px 15px rgba(220, 38, 38, 0.2);
+      transition: transform 0.1s;
+    }
+
+    .root-cube:hover {
+      transform: translateY(-4px);
+    }
+
+    .derivatives-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .der-card {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 1.2rem;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .der-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--secondary);
+      box-shadow: 0 10px 20px rgba(2, 132, 199, 0.15);
+    }
+
+    .der-card.active {
+      background: #eef2ff;
+      border: 3px solid var(--primary);
+      box-shadow: 0 6px 15px rgba(79, 70, 229, 0.25);
+    }
+
+    .der-pattern {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: 0.4rem;
+    }
+
+    .der-word {
+      font-size: 2rem;
+      font-weight: 900;
+      margin: 0.5rem 0;
+    }
+
+    .c-root { color: var(--root-c); }
+    .c-affix { color: var(--affix-c); }
+
+    .speaker-btn {
+      background: #e0f2fe;
+      border: none;
+      color: #0369a1;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: 0.2s;
+    }
+
+    .speaker-btn:hover {
+      background: #0284c7;
+      color: white;
+    }
+
+    /* بطاقة التفاصيل والمعنى */
+    .detail-card {
+      background: white;
+      border-radius: 18px;
+      padding: 1.8rem;
+      border-right: 8px solid var(--primary);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+    }
+
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+    }
+
+    .colloc-pill {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 0.5rem 1.3rem;
+      border-radius: 30px;
+      font-weight: 800;
+      color: #334155;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .colloc-pill:hover {
+      background: #e2e8f0;
+      border-color: var(--primary);
+    }
+
+    /* 2. مسرح القصة السردية */
+    .story-card {
+      background: white;
+      border-radius: 24px;
+      padding: 2.2rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      border: 2px solid #e0e7ff;
+    }
+
+    .story-text {
+      font-size: 1.5rem;
+      line-height: 2.4;
+      color: #1e1b4b;
+      margin-top: 1.5rem;
+    }
+
+    .story-tag {
+      background: #fef08a;
+      padding: 0.2rem 0.7rem;
+      border-radius: 8px;
+      font-weight: 900;
+      color: #854d0e;
+      border-bottom: 3px solid #eab308;
+      cursor: pointer;
+      display: inline-block;
+      transition: 0.2s transform;
+    }
+
+    .story-tag:hover {
+      transform: scale(1.1);
+      background: #fde047;
+    }
+
+    /* 3. مختبر التركيب */
+    .lab-card {
+      background: white;
+      border-radius: 24px;
+      padding: 2.2rem;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    .slots-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin: 2.5rem 0;
+      align-items: center;
+    }
+
+    .lab-slot {
+      width: 80px;
+      height: 80px;
+      border: 3px dashed #94a3b8;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      font-weight: 900;
+      background: #f8fafc;
+    }
+
+    .lab-slot.filled {
+      border: 3px solid var(--secondary);
+      background: #e0f2fe;
+      color: var(--secondary);
+    }
+
+    .pool-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .pool-tile {
+      background: #dbeafe;
+      border: 3px solid var(--affix-c);
+      color: var(--affix-c);
+      width: 75px;
+      height: 75px;
+      border-radius: 16px;
+      font-size: 2rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 5px 0 var(--affix-c);
+      transition: 0.1s transform;
+    }
+
+    .pool-tile:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 var(--affix-c);
+    }
+
+    /* 4. ميدان التحدي */
+    .quiz-box {
+      background: white;
+      border-radius: 20px;
+      padding: 1.8rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.04);
+    }
+
+    .opts-wrap {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1.4rem 0;
+    }
+
+    .quiz-btn {
+      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      padding: 0.9rem 2rem;
+      font-size: 1.3rem;
+      font-weight: 900;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #cbd5e1;
+      transition: 0.1s;
+    }
+
+    .quiz-btn:hover {
+      background: #e2e8f0;
+      border-color: var(--secondary);
+    }
+
+    .quiz-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #cbd5e1;
+    }
+
+    .fb-panel {
+      margin-top: 1rem;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      display: none;
+    }
+
+    .fb-success {
+      background: #dcfce7;
+      color: #166534;
+      border: 2px solid #86efac;
+      display: block;
+    }
+
+    .fb-error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 2px solid #fca5a5;
+      display: block;
+    }
+
+    /* شاشة القصاصات */
+    canvas#confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+  </style>
 </head>
-<body class="p-4 md:p-8 flex flex-col items-center">
+<body>
 
-    <audio id="audio-root" src="root.mp3.mp3" preload="auto"></audio>
-    <audio id="audio-verb" src="verb.mp3" preload="auto"></audio>
-    <audio id="audio-actor" src="actor.mp3" preload="auto"></audio>
-    <audio id="audio-product" src="product.mp3" preload="auto"></audio>
-    <audio id="audio-place" src="place.mp3" preload="auto"></audio>
-    <audio id="audio-source" src="source.mp3" preload="auto"></audio>
-    <audio id="audio-quiz-fill" src="quiz_fill.mp3" preload="auto"></audio>
-    <audio id="audio-quiz-match" src="quiz_match.mp3" preload="auto"></audio>
-    <audio id="audio-correct" src="correct.mp3" preload="auto"></audio>
-    <audio id="audio-retry" src="retry.mp3" preload="auto"></audio>
-    <audio id="audio-celebration" src="celebration.mp3" preload="auto"></audio>
+  <canvas id="confetti"></canvas>
 
-    <header class="w-full max-w-6xl mb-6 flex flex-col md:flex-row items-center justify-between gap-4 bg-white/70 backdrop-blur-md p-6 rounded-3xl border border-white/60 shadow-lg">
-        <div class="flex items-center gap-4">
-            <div id="headerIcon" class="w-14 h-14 bg-amber-400 rounded-2xl flex items-center justify-center text-3xl shadow-inner font-bold">
-                🏭
-            </div>
-            <div>
-                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">المستوى الخامس والسادس ابتدائي</span>
-                <h1 class="text-2xl md:text-3xl font-black text-slate-800 mt-1" id="headerTitle">بذرة الكلمات: [ص-ن-ع]</h1>
-                <p class="text-xs text-slate-500 font-medium" id="headerSubtitle">عائلة العمل والإتقان ➔ هندسة إدراكية للمجرد والمزيد والمشتقات</p>
-            </div>
+  <header>
+    <div class="header-right">
+      <div class="header-title">الخريطة المعجمية الذكية 🧠</div>
+      <select id="rootSelect" class="root-picker" onchange="changeRoot(this.value)">
+        <option value="صنع">الجذر: ص - ن - ع</option>
+        <option value="علم">الجذر: ع - ل - م</option>
+        <option value="كتب">الجذر: ك - ت - ب</option>
+      </select>
+    </div>
+    <div class="header-left">
+      <div class="badge-rank" id="rankBadge">🎖️ الرتبة: مُكْتَشِفُ الجُذُورِ</div>
+      <div class="badge-score">⭐ <span id="scoreVal">0</span> نُقْطَة</div>
+    </div>
+  </header>
+
+  <nav class="nav-tabs">
+    <button class="tab-btn active" onclick="showTab('explorer', this)">1. مصفوفة الأبنية 🧩</button>
+    <button class="tab-btn" onclick="showTab('story', this)">2. مَسْرَحُ القِصَّةِ 📖</button>
+    <button class="tab-btn" onclick="showTab('lab', this)">3. مُخْتَبَرُ التَّرْكِيبِ ⚙️</button>
+    <button class="tab-btn" onclick="showTab('quiz', this)">4. مَيْدَانُ التَّحَدِّي 🏆</button>
+  </nav>
+
+  <main>
+    <!-- 1. مصفوفة الأبنية والصرف -->
+    <div id="explorer" class="tab-content active">
+      <div class="nucleus-panel">
+        <h3 style="color: #475569; font-size: 1.3rem;">النَّوَاةُ المَرْكَزِيَّةُ (الجَذْرُ اللُّغَوِيُّ)</h3>
+        <div class="nucleus-letters" id="rootCubes"></div>
+        <p style="color: #64748b; font-size: 1.05rem;">انقر على إحدى الصيغ المشتقة أدناه لتفعيل التشفير اللوني والاستماع إلى نطقها الفصيح</p>
+      </div>
+
+      <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.25rem;">لوحة الأبنية والمشتقات التوليدية:</h3>
+      <div class="derivatives-grid" id="derGrid"></div>
+
+      <div class="detail-card">
+        <h4 id="detTitle" style="color: var(--primary); font-size: 1.4rem;"></h4>
+        <p id="detMeaning" style="margin: 0.8rem 0; font-size: 1.25rem; line-height: 1.7;"></p>
+        <div style="margin-top: 1.2rem;">
+          <strong style="font-size: 1.1rem;">المتلازمات اللفظية السياقية:</strong>
+          <div class="tags-container" id="detTags"></div>
         </div>
-
-        <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
-            <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-2xl border-2 border-indigo-300 shadow-sm w-full sm:w-auto">
-                <i class="fa-solid fa-seedling text-emerald-600 text-lg"></i>
-                <label for="rootSelector" class="text-xs font-black text-slate-700 whitespace-nowrap">اختر الجذر:</label>
-                <select id="rootSelector" onchange="switchRoot(this.value)" class="bg-transparent font-black text-indigo-700 text-sm focus:outline-none cursor-pointer">
-                    <option value="صنع">🏭 جذر [ص - ن - ع] (العمل والإتقان)</option>
-                    <option value="كتب">✍️ جذر [ك - ت - ب] (التدوين والمعرفة)</option>
-                    <option value="علم">🔬 جذر [ع - ل - م] (المعرفة والاستكشاف)</option>
-                    <option value="سمع">👂 جذر [س - م - ع] (التواصل والتلقي)</option>
-                    <option value="خرج">🚪 جذر [خ - ر - ج] (الحركة والارتقاء)</option>
-                    <option value="لعب">⚽ جذر [ل - ع - ب] (الرياضة والنشاط)</option>
-                </select>
-            </div>
-
-            <div class="flex items-center gap-3 bg-indigo-50/80 px-4 py-2 rounded-2xl border border-indigo-100">
-                <i class="fa-solid fa-trophy text-amber-500 text-xl animate-bounce"></i>
-                <p class="text-sm font-black text-indigo-900" id="starCounter">⭐ 0 / 7 نجوم</p>
-            </div>
-        </div>
-    </header>
-
-    <main class="w-full max-w-6xl relative min-h-[680px] flex flex-col items-center justify-center my-4">
-        <div id="centerNode" onclick="playRootAudio()" 
-             class="clay-sun pulse-sun w-56 h-56 rounded-full flex flex-col items-center justify-center text-center cursor-pointer z-20 relative transition-transform hover:scale-110 group">
-            <span class="bg-red-500 text-white text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md animate-pulse mb-1">
-                👈 النواة الأصلية
-            </span>
-            <div id="centerLetters" class="flex gap-1 text-4xl md:text-5xl font-black text-red-600 tracking-wider my-1 drop-shadow-md">
-                [ص-ن-ع]
-            </div>
-            <p id="centerConcept" class="text-xs font-bold text-amber-950 px-2 bg-white/40 rounded-full">الجذر المجرد: العمل والإتقان</p>
-            <div class="text-[10px] font-semibold text-amber-900 mt-2 flex items-center gap-1 group-hover:scale-105 transition-transform">
-                <i class="fa-solid fa-volume-high"></i> اضغط للاستماع للنواة
-            </div>
-        </div>
-
-        <svg id="svgCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0 hidden md:block"></svg>
-        <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 md:mt-0 md:absolute md:inset-0 pointer-events-none z-10" id="branchesContainer"></div>
-    </main>
-
-    <section class="w-full max-w-6xl mt-12 bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 border border-white shadow-xl">
-        <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
-            <span class="w-10 h-10 bg-indigo-600 text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-md">🎯</span>
-            <div>
-                <h2 class="text-xl font-black text-slate-800">محطة التوظيف والوصل التفاعلية (تحدي الصرف والتحويل)</h2>
-                <p class="text-xs text-slate-500 font-medium">طبّق قواعد المجرد والمزيد والمشتقات واسحب البطاقات إلى مواضعها الصحيحة واكسب النجوم!</p>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div class="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 flex flex-col justify-between space-y-4">
-                <div>
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-sm font-extrabold text-indigo-900 flex items-center gap-2">
-                            <i class="fa-solid fa-pen-to-square text-indigo-600"></i> القسم 1: ميز بين الفعل المزيد والمشتقات في سياقها
-                        </h3>
-                        <button onclick="playInstruction('fill')" class="bg-indigo-100 hover:bg-indigo-200 text-indigo-800 text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition">
-                            <i class="fa-solid fa-volume-high text-indigo-600 animate-pulse"></i> 
-                            <span>استمع للتعليمة</span>
-                        </button>
-                    </div>
-
-                    <div class="mb-4 p-3 bg-indigo-50/50 rounded-xl border border-indigo-100">
-                        <p class="text-xs font-bold text-indigo-700 mb-2">اسحب البطاقة أو انقر عليها ثم اختر موضعها:</p>
-                        <div id="wordBankSection1" class="flex flex-wrap gap-2 min-h-[48px] items-center"></div>
-                    </div>
-                    
-                    <div id="fillQuestionsList" class="space-y-4 text-sm font-semibold text-slate-700"></div>
-                </div>
-
-                <button onclick="checkFillBlanks()" class="clay-btn w-full py-3 font-bold text-sm flex items-center justify-center gap-2 mt-4">
-                    <i class="fa-solid fa-circle-check"></i> تحقق من إجابات الفراغات
-                </button>
-            </div>
-
-            <div class="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 flex flex-col justify-between space-y-4">
-                <div>
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-sm font-extrabold text-indigo-900 flex items-center gap-2">
-                            <i class="fa-solid fa-link text-indigo-600"></i> القسم 2: صل كل كلمة بوزنها ونوعها الصرفي ومتلازمتها
-                        </h3>
-                        <button onclick="playInstruction('match')" class="bg-purple-100 hover:bg-purple-200 text-purple-800 text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition">
-                            <i class="fa-solid fa-volume-high text-purple-600 animate-pulse"></i> 
-                            <span>استمع للتعليمة</span>
-                        </button>
-                    </div>
-
-                    <div class="mb-4 p-3 bg-purple-50/50 rounded-xl border border-purple-100">
-                        <p class="text-xs font-bold text-purple-700 mb-2">اسحب بطاقات المطابقة من هنا:</p>
-                        <div id="collocBank" class="flex flex-wrap gap-2 min-h-[48px] items-center"></div>
-                    </div>
-
-                    <div id="matchQuestionsList" class="space-y-3"></div>
-                    <p id="matchFeedback" class="text-xs font-bold mt-2 hidden text-center"></p>
-                </div>
-
-                <button onclick="checkMatching()" class="clay-btn w-full py-3 font-bold text-sm flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 mt-4">
-                    <i class="fa-solid fa-award"></i> تحقق من الوصل الصحيح
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <div id="infoModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl p-6 max-w-lg w-full shadow-2xl border border-white transform transition-all max-h-[90vh] overflow-y-auto">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <div class="flex items-center gap-3">
-                    <span id="modalIcon" class="text-3xl">🔨</span>
-                    <div>
-                        <h3 id="modalTitle" class="text-xl font-black text-slate-800">صَنَعَ</h3>
-                        <p id="modalWeight" class="text-xs font-bold text-indigo-600">الوزن والموقع: فَعَلَ</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-2">
-                    <button onclick="speakCurrentModal()" class="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center hover:bg-indigo-100 transition">
-                        <i class="fa-solid fa-volume-high text-xs"></i>
-                    </button>
-                    <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="py-4 space-y-4">
-                <div class="bg-slate-50 p-4 rounded-xl text-right space-y-2 border border-slate-200 text-sm">
-                    <p><strong>💡 الشرح والدلالة:</strong> <span id="modalDesc"></span></p>
-                    <p class="border-t border-slate-200/60 pt-2"><strong>🔗 المتلازمة اللفظية:</strong> <span id="modalColloc" class="text-indigo-600 font-bold"></span></p>
-                    <p class="border-t border-slate-200/60 pt-2"><strong>📖 المثال في سياق:</strong> «<span id="modalContext" class="italic text-slate-700 font-medium"></span>»</p>
-                </div>
-
-                <div id="augmentedVerbsBox" class="hidden bg-amber-50/70 p-4 rounded-2xl border border-amber-200 space-y-3">
-                    <div class="flex items-center justify-between">
-                        <h4 class="text-xs font-black text-amber-900 flex items-center gap-1.5">
-                            <i class="fa-solid fa-layer-group text-amber-600"></i> عائلة الأفعال المزيدة (درس كتاب مرشدي ص 14)
-                        </h4>
-                        <span class="text-[10px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full font-bold">الحروف الحمراء أصلية</span>
-                    </div>
-                    <div id="augmentedVerbsList" class="grid grid-cols-1 gap-2 text-xs"></div>
-                </div>
-
-                <button onclick="speakCurrentModal()" class="clay-btn w-full py-3 mt-2 text-xs md:text-sm font-bold flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-headphones-simple text-base"></i> استمع للشرح والنطق الكامل
-                </button>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <script>
-        const database = {
-            "صنع": {
-                icon: "🏭",
-                concept: "العمل والإتقان",
-                rootLetters: "[ص-ن-ع]",
-                isCustomAudio: true,
-                branches: [
-                    { 
-                        key: "verb", 
-                        titleHtml: '<span class="text-red-600 font-black">صَـنَـعَ</span>', 
-                        weight: "فَعَلَ (فعل ماض ثلاثي مجرد)", 
-                        icon: "🔨", 
-                        desc: "فعل ماض ثلاثي مجرد حروفه كلها أصلية، يدل على إيجاد الشيء وتكوينه بالعمل.", 
-                        col: "صَنَعَ بِيَدَيْهِ", 
-                        context: "صَنَعَ الحِرَفِيُّ خِزَانَةً جَمِيلَةً", 
-                        color: "amber",
-                        augmented: [
-                            { type: "مزيد بحرف (التضعيف)", wordHtml: '<span class="text-red-600 font-black">صَـ</span><span class="text-amber-600 font-black">نَّـ</span><span class="text-red-600 font-black">عَ</span>', weight: "فَعَّلَ", meaning: "جعله صناعياً أو حوّله لمنتج" },
-                            { type: "مزيد بحرفين (الهمزة والتاء)", wordHtml: '<span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">صْـ</span><span class="text-blue-600 font-bold">طَـ</span><span class="text-red-600 font-black">نَـعَ</span>', weight: "افْتَعَلَ", meaning: "تكلّف الصنع أو اتخذه لنفسه" },
-                            { type: "مزيد بـ 3 أحرف (استـ)", wordHtml: '<span class="text-purple-600 font-bold">اِسْـتَـ</span><span class="text-red-600 font-black">صْـنَـعَ</span>', weight: "اسْتَفْعَلَ", meaning: "طلب أن يُصنع له الشيء" }
-                        ]
-                    },
-                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">صَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">نِـعٌ</span>', weight: "فَاعِل (اسم فاعل)", icon: "👨‍🔧", desc: "اسم فاعل يدل على الذات التي قامت بالصنع والإنتاج.", col: "صَانِعٌ مَاهِرٌ", context: "كَرَّمَ المُدِيرُ الصَّانِعَ المَاهِرَ", color: "blue" },
-                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـنُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">عٌ</span>', weight: "مَفْعُول (اسم مفعول)", icon: "🏺", desc: "اسم مفعول يدل على ما وقع عليه فعل الصنع والإتقان.", col: "مَصْنُوعٌ بِإِتْقَانٍ", context: "الخَزَفُ مَصْنُوعٌ بِجَمَالِيَّةٍ", color: "orange" },
-                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـنَـعٌ</span>', weight: "مَفْعَل (اسم مكان)", icon: "🏭", desc: "اسم مكان يدل على موضع الإنتاج وتجمع الآلات.", col: "مَصْنَعٌ حَدِيثٌ", context: "يَشْتَغِلُ أَبِي فِي مَصْنَعِ السَّمَكِ", color: "emerald" },
-                    { key: "source", titleHtml: '<span class="text-red-600 font-black">صِـنَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">عَـ</span><span class="text-purple-500 font-bold">ةٌ</span>', weight: "فِعَالَة (مصدر صريح)", icon: "⚙️", desc: "مصدر صريح يدل على حرفة العمل والنشاط الإنتاجي.", col: "صِنَاعَةٌ وَطَنِيَّةٌ", context: "تَزْدَهِرُ صِنَاعَةُ الفَخَّارِ فِي بِلَادِنَا", color: "purple" }
-                ],
-                quizFill: {
-                    chips: [
-                        { id: "sanaa", text: "صَنَّعَ (فعل مزيد)", word: "صنع_مزيد", color: "amber" },
-                        { id: "masnaa", text: "مَصْنَعٍ (اسم مكان)", word: "مصنع", color: "emerald" },
-                        { id: "masnoo", text: "مَصْنُوعٌ (اسم مفعول)", word: "مصنوع", color: "orange" }
-                    ],
-                    sentences: [
-                        { prefix: "1.", target: "صنع_مزيد", suffix: "المُسْتَثْمِرُ المَوَادَّ الفِلاحِيَّةَ لِتَصْدِيرِهَا." },
-                        { prefix: "2. يَشْتَغِلُ العُمَّالُ فِي", target: "مصنع", suffix: "كَبِيرٍ لِلتَّعْلِيبِ." },
-                        { prefix: "3. هَذَا الإِبْرِيقُ الفِضِّيُّ", target: "مصنوع", suffix: "بِدِقَّةٍ وَعِنَايَةٍ فَائِقَةٍ." }
-                    ]
-                },
-                quizMatch: [
-                    { wordHtml: "صَنَّعَ", matchId: "1", colloc: "🔗 فِعْلٌ مَزِيدٌ بِالتَّضْعِيفِ (فَعَّلَ)", color: "amber" },
-                    { wordHtml: "صَانِعٌ", matchId: "2", colloc: "🔗 اسْمُ فَاعِلٍ ثُلاثِيّ (فَاعِل)", color: "blue" },
-                    { wordHtml: "مَصْنُوعٌ", matchId: "3", colloc: "🔗 اسْمُ مَفْعُولٍ ثُلاثِيّ (مَفْعُول)", color: "orange" },
-                    { wordHtml: "صِنَاعَةٌ", matchId: "4", colloc: "🔗 مَصْدَرٌ صَرِيحٌ (فِعَالَة)", color: "purple" }
-                ]
-            },
-            "كتب": {
-                icon: "✍️",
-                concept: "التدوين والمعرفة",
-                rootLetters: "[ك-ت-ب]",
-                isCustomAudio: false,
-                branches: [
-                    { 
-                        key: "verb", 
-                        titleHtml: '<span class="text-red-600 font-black">كَـتَـبَ</span>', 
-                        weight: "فَعَلَ (فعل ماض ثلاثي مجرد)", 
-                        icon: "📝", 
-                        desc: "فعل ماض ثلاثي مجرد حروفه كلها أصلية، يدل على خط المعاني بالقلم.", 
-                        col: "كَتَبَ بِالقَلَمِ", 
-                        context: "كَتَبَ التِّلْمِيذُ رِسَالَةً مُعَبِّرَةً", 
-                        color: "amber",
-                        augmented: [
-                            { type: "مزيد بحرف (الهمزة)", wordHtml: '<span class="text-amber-600 font-bold">أَ</span><span class="text-red-600 font-black">كْـتَـبَ</span>', weight: "أَفْعَلَ", meaning: "أملى عليه أو جعله يكتب" },
-                            { type: "مزيد بحرفين (الهمزة والتاء)", wordHtml: '<span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">كْـ</span><span class="text-blue-600 font-bold">تَـ</span><span class="text-red-600 font-black">تَـبَ</span>', weight: "افْتَعَلَ", meaning: "سجّل اسمه أو استنسخ كتاباً" },
-                            { type: "مزيد بـ 3 أحرف (استـ)", wordHtml: '<span class="text-purple-600 font-bold">اِسْـتَـ</span><span class="text-red-600 font-black">كْـتَـبَ</span>', weight: "اسْتَفْعَلَ", meaning: "طلب منه أن يكتب له رسالة" }
-                        ]
-                    },
-                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">كَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">تِـبٌ</span>', weight: "فَاعِل (اسم فاعل)", icon: "🧑‍💼", desc: "اسم فاعل يدل على من باشر التدوين والتأليف.", col: "كَاتِبٌ مُبْدِعٌ", context: "حَصَلَ الكَاتِبُ المُبْدِعُ عَلَى جَائِزَةٍ", color: "blue" },
-                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">كْـتُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">بٌ</span>', weight: "مَفْعُول (اسم مفعول)", icon: "📜", desc: "اسم مفعول يدل على ما وقع عليه التدوين والتسطير.", col: "مَكْتُوبٌ بِعِنَايَةٍ", context: "المَقَالُ مَكْتُوبٌ بِأُسْلُوبٍ رَاقٍ", color: "orange" },
-                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">كْـتَـبٌ</span>', weight: "مَفْعَل (اسم مكان)", icon: "🏢", desc: "اسم مكان يدل على موضع القراءة ومطالعة الكتب والإدارة.", col: "مَكْتَبٌ مُنَظَّمٌ", context: "جَلَسَ الأُسْتَاذُ إِلَى مَكْتَبِهِ", color: "emerald" },
-                    { key: "source", titleHtml: '<span class="text-red-600 font-black">كِـتَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">بَـ</span><span class="text-purple-500 font-bold">ةٌ</span>', weight: "فِعَالَة (مصدر صريح)", icon: "✒️", desc: "مصدر صريح يدل على مهارة التدوين والرسم اللغوي.", col: "كِتَابَةٌ سَلِيمَةٌ", context: "تَتَطَلَّبُ القِصَّةُ كِتَابَةً مُتْقَنَةً", color: "purple" }
-                ],
-                quizFill: {
-                    chips: [
-                        { id: "iktataba", text: "اكْتَتَبَ (فعل مزيد)", word: "اكتتب_مزيد", color: "amber" },
-                        { id: "maktab", text: "مَكْتَبٍ (اسم مكان)", word: "مكتب", color: "emerald" },
-                        { id: "maktoob", text: "مَكْتُوبٌ (اسم مفعول)", word: "مكتوب", color: "orange" }
-                    ],
-                    sentences: [
-                        { prefix: "1.", target: "اكتتب_مزيد", suffix: "المُواطِنُ فِي سِجِلِّ التَّطَوُّعِ الوَطَنِيِّ." },
-                        { prefix: "2. وَضَعَ المُعَلِّمُ الأَوْرَاقَ عَلَى", target: "مكتب", suffix: "الإِدَارَةِ بِنِظَامٍ." },
-                        { prefix: "3. هَذَا الخِطَابُ الرَّسْمِيُّ", target: "مكتوب", suffix: "بِخَطٍّ وَاضِحٍ وَسَلِيمٍ." }
-                    ]
-                },
-                quizMatch: [
-                    { wordHtml: "اكْتَتَبَ", matchId: "1", colloc: "🔗 فِعْلٌ مَزِيدٌ بِحَرْفَيْنِ (افْتَعَلَ)", color: "amber" },
-                    { wordHtml: "كَاتِبٌ", matchId: "2", colloc: "🔗 اسْمُ فَاعِلٍ ثُلاثِيّ (فَاعِل)", color: "blue" },
-                    { wordHtml: "مَكْتُوبٌ", matchId: "3", colloc: "🔗 اسْمُ مَفْعُولٍ ثُلاثِيّ (مَفْعُول)", color: "orange" },
-                    { wordHtml: "كِتَابَةٌ", matchId: "4", colloc: "🔗 مَصْدَرٌ صَرِيحٌ (فِعَالَة)", color: "purple" }
-                ]
-            },
-            "علم": {
-                icon: "🔬",
-                concept: "المعرفة والاستكشاف",
-                rootLetters: "[ع-ل-م]",
-                isCustomAudio: false,
-                branches: [
-                    { 
-                        key: "verb", 
-                        titleHtml: '<span class="text-red-600 font-black">عَـلِـمَ</span>', 
-                        weight: "فَعِلَ (فعل ماض ثلاثي مجرد)", 
-                        icon: "💡", 
-                        desc: "فعل ماض ثلاثي مجرد حروفه كلها أصلية، يدل على إدراك حقيقة الشيء واليقين به.", 
-                        col: "عَلِمَ بِالأَمْرِ", 
-                        context: "عَلِمَ البَاحِثُ سِرَّ الظَّاهِرَةِ", 
-                        color: "amber",
-                        augmented: [
-                            { type: "مزيد بحرف (التضعيف)", wordHtml: '<span class="text-red-600 font-black">عَـ</span><span class="text-amber-600 font-black">لَّـ</span><span class="text-red-600 font-black">مَ</span>', weight: "فَعَّلَ", meaning: "لقّنه المعرفة وجعله يعلم" },
-                            { type: "مزيد بحرفين (التاء والتضعيف)", wordHtml: '<span class="text-blue-600 font-bold">تَـ</span><span class="text-red-600 font-black">عَـ</span><span class="text-blue-600 font-black">لَّـ</span><span class="text-red-600 font-black">مَ</span>', weight: "تَفَعَّلَ", meaning: "اكتسب المعرفة بنفسه واجتهد فيها" },
-                            { type: "مزيد بـ 3 أحرف (استـ)", wordHtml: '<span class="text-purple-600 font-bold">اِسْـتَـ</span><span class="text-red-600 font-black">عْـلَـمَ</span>', weight: "اسْتَفْعَلَ", meaning: "طلب المعرفة واستفسر عن الخبر" }
-                        ]
-                    },
-                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">عَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">لِـمٌ</span>', weight: "فَاعِل (اسم فاعل)", icon: "👨‍🔬", desc: "اسم فاعل يدل على من اتصف بالمعرفة والرسوخ العلمي.", col: "عَالِمٌ جَلِيلٌ", context: "يُفِيدُ العَالِمُ البَشَرِيَّةَ بِعِلْمِهِ", color: "blue" },
-                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">عْـلُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">مٌ</span>', weight: "مَفْعُول (اسم مفعول)", icon: "📊", desc: "اسم مفعول يدل على الحقيقة المعروفة الثابتة.", col: "مَعْلُومٌ لَدَى الجَمِيعِ", context: "الحَقُّ مَعْلُومٌ وَوَاضِحٌ", color: "orange" },
-                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">عْـلَـمٌ</span>', weight: "مَفْعَل (اسم مكان)", icon: "🏛️", desc: "اسم مكان يدل على الموضع أو البناء التاريخي البارز.", col: "مَعْلَمٌ تَارِيخِيٌّ", context: "صَوْمَعَةُ حَسَّانَ مَعْلَمٌ بَارِزٌ", color: "emerald" },
-                    { key: "source", titleHtml: '<span class="text-red-600 font-black">عِـلْـمٌ</span>', weight: "فِعْل (مصدر صريح)", icon: "📚", desc: "مصدر صريح يدل على مجموع المعارف المنظمة.", col: "عِلْمٌ نَافِعٌ", context: "يَسْعَى الطَّالِبُ إِلَى عِلْمٍ نَافِعٍ", color: "purple" }
-                ],
-                quizFill: {
-                    chips: [
-                        { id: "taalama", text: "تَعَلَّمَ (فعل مزيد)", word: "تعلم_مزيد", color: "amber" },
-                        { id: "maalam", text: "مَعْلَمٍ (اسم مكان)", word: "معلم", color: "emerald" },
-                        { id: "maaloom", text: "مَعْلُومٌ (اسم مفعول)", word: "معلوم", color: "orange" }
-                    ],
-                    sentences: [
-                        { prefix: "1.", target: "تعلم_مزيد", suffix: "التِّلْمِيذُ النَّشِيطُ قَوَاعِدَ اللُّغَةِ بِاجْتِهَادٍ." },
-                        { prefix: "2. تَمَّ تَصْنِيفُ القَصْرِ كَـ", target: "معلم", suffix: "تَارِيخِيٍّ عَظِيمٍ بِالمَدِينَةِ." },
-                        { prefix: "3. مَوْعِدُ انْطِلاقِ الرِّحْلَةِ", target: "معلوم", suffix: "عِنْدَ كُلِّ المُشَارِكِينَ." }
-                    ]
-                },
-                quizMatch: [
-                    { wordHtml: "تَعَلَّمَ", matchId: "1", colloc: "🔗 فِعْلٌ مَزِيدٌ بِالتَّاءِ وَالتَّضْعِيفِ (تَفَعَّلَ)", color: "amber" },
-                    { wordHtml: "عَالِمٌ", matchId: "2", colloc: "🔗 اسْمُ فَاعِلٍ ثُلاثِيّ (فَاعِل)", color: "blue" },
-                    { wordHtml: "مَعْلُومٌ", matchId: "3", colloc: "🔗 اسْمُ مَفْعُولٍ ثُلاثِيّ (مَفْعُول)", color: "orange" },
-                    { wordHtml: "عِلْمٌ", matchId: "4", colloc: "🔗 مَصْدَرٌ صَرِيحٌ ثُلاثِيّ (فِعْل)", color: "purple" }
-                ]
-            },
-            "سمع": {
-                icon: "👂",
-                concept: "التواصل والتلقي",
-                rootLetters: "[س-م-ع]",
-                isCustomAudio: false,
-                branches: [
-                    { 
-                        key: "verb", 
-                        titleHtml: '<span class="text-red-600 font-black">سَـمِـعَ</span>', 
-                        weight: "فَعِلَ (فعل ماض ثلاثي مجرد)", 
-                        icon: "🧏", 
-                        desc: "فعل ماض ثلاثي مجرد، يدل على إدراك الأصوات والكلام بحاسة الأذن.", 
-                        col: "سَمِعَ النَّصِيحَةَ", 
-                        context: "سَمِعَ الطِّفْلُ نِدَاءَ وَالِدَتِهِ بِاهْتِمَامٍ", 
-                        color: "amber",
-                        augmented: [
-                            { type: "مزيد بحرف (الهمزة)", wordHtml: '<span class="text-amber-600 font-bold">أَ</span><span class="text-red-600 font-black">سْـمَـعَ</span>', weight: "أَفْعَلَ", meaning: "جعل غيره يسمع صوته" },
-                            { type: "مزيد بحرفين (الهمزة والتاء)", wordHtml: '<span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">سْـ</span><span class="text-blue-600 font-bold">تَـ</span><span class="text-red-600 font-black">مَـعَ</span>', weight: "افْتَعَلَ", meaning: "أصغى بوعي وانتباه" },
-                            { type: "مزيد بحرفين (التاء والتضعيف)", wordHtml: '<span class="text-purple-600 font-bold">تَـ</span><span class="text-red-600 font-black">سَـ</span><span class="text-purple-600 font-bold">مَّـ</span><span class="text-red-600 font-black">عَ</span>', weight: "تَفَعَّلَ", meaning: "تعمّد الاستماع والإنصات" }
-                        ]
-                    },
-                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">سَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">مِـعٌ</span>', weight: "فَاعِل (اسم فاعل)", icon: "🎧", desc: "اسم فاعل يدل على من أصغى وتلقى الصوت.", col: "سَامِعٌ مُنْصِتٌ", context: "أَعْجَبَ الحِوَارُ كُلَّ سَامِعٍ مُنْصِتٍ", color: "blue" },
-                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">سْـمُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">عٌ</span>', weight: "مَفْعُول (اسم مفعول)", icon: "📢", desc: "اسم مفعول يدل على الصوت الواضح الذي يُدرَك بالسمع.", col: "صَوْتٌ مَسْمُوعٌ", context: "كَانَ صَوْتُ الأَذَانِ مَسْمُوعاً مِن بَعِيدٍ", color: "orange" },
-                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">سْـمَـعٌ</span>', weight: "مَفْعَل (اسم مكان)", icon: "🏟️", desc: "اسم مكان يدل على موضع الإصغاء أو مدى وصول الصوت.", col: "عَلَى مَسْمَعٍ مِنَ النَّاسِ", context: "تَحَدَّثَ الخَطِيبُ عَلَى مَسْمَعٍ مِنَ الحُضُورِ", color: "emerald" },
-                    { key: "source", titleHtml: '<span class="text-red-600 font-black">سَـمْـعٌ</span>', weight: "فَعْل (مصدر صريح)", icon: "🔊", desc: "مصدر صريح يدل على حاسة الإصغاء وتلقي الأصوات.", col: "سَمْعٌ وَطَاعَةٌ", context: "نِعْمَةُ السَّمْعِ مِنْ أَعْظَمِ الحَوَاسِّ", color: "purple" }
-                ],
-                quizFill: {
-                    chips: [
-                        { id: "istamaa", text: "اسْتَمَعَ (فعل مزيد)", word: "استمع_مزيد", color: "amber" },
-                        { id: "masmaa", text: "مَسْمَعِ (اسم مكان)", word: "مسمع", color: "emerald" },
-                        { id: "masmoo", text: "مَسْمُوعٌ (اسم مفعول)", word: "مسموع", color: "orange" }
-                    ],
-                    sentences: [
-                        { prefix: "1.", target: "استمع_مزيد", suffix: "التِّلْمِيذُ إِلَى شَرْحِ الأُسْتَاذِ بِاهْتِمَامٍ." },
-                        { prefix: "2. أَلْقَى كَلِمَتَهُ عَلَى", target: "مسمع", suffix: "مِنَ الحَاضِرِينَ فِي القَاعَةِ." },
-                        { prefix: "3. كَانَ كَلَامُ المُدِيرِ", target: "مسموع", suffix: "وَوَاضِحاً لِلْجَمِيعِ." }
-                    ]
-                },
-                quizMatch: [
-                    { wordHtml: "اسْتَمَعَ", matchId: "1", colloc: "🔗 فِعْلٌ مَزِيدٌ بِحَرْفَيْنِ (افْتَعَلَ)", color: "amber" },
-                    { wordHtml: "سَامِعٌ", matchId: "2", colloc: "🔗 اسْمُ فَاعِلٍ ثُلاثِيّ (فَاعِل)", color: "blue" },
-                    { wordHtml: "مَسْمُوعٌ", matchId: "3", colloc: "🔗 اسْمُ مَفْعُولٍ ثُلاثِيّ (مَفْعُول)", color: "orange" },
-                    { wordHtml: "سَمْعٌ", matchId: "4", colloc: "🔗 مَصْدَرٌ صَرِيحٌ ثُلاثِيّ (فَعْل)", color: "purple" }
-                ]
-            },
-            "خرج": {
-                icon: "🚪",
-                concept: "الحركة والارتقاء",
-                rootLetters: "[خ-ر-ج]",
-                isCustomAudio: false,
-                branches: [
-                    { 
-                        key: "verb", 
-                        titleHtml: '<span class="text-red-600 font-black">خَـرَجَ</span>', 
-                        weight: "فَعَلَ (فعل ماض ثلاثي مجرد)", 
-                        icon: "🚶", 
-                        desc: "فعل ماض ثلاثي مجرد، يدل على البروز والانتقال من الداخل إلى الخارج.", 
-                        col: "خَرَجَ إِلَى السَّاحَةِ", 
-                        context: "خَرَجَ التَّلَامِيذُ فِي وَقْتِ الاسْتِرَاحَةِ", 
-                        color: "amber",
-                        augmented: [
-                            { type: "مزيد بحرف (الهمزة)", wordHtml: '<span class="text-amber-600 font-bold">أَ</span><span class="text-red-600 font-black">خْـرَجَ</span>', weight: "أَفْعَلَ", meaning: "أبرزه وأظهره للعيان" },
-                            { type: "مزيد بحرفين (التاء والتضعيف)", wordHtml: '<span class="text-blue-600 font-bold">تَـ</span><span class="text-red-600 font-black">خَـ</span><span class="text-blue-600 font-bold">رَّ</span><span class="text-red-600 font-black">جَ</span>', weight: "تَفَعَّلَ", meaning: "أنهى دراسته ونال شهادته" },
-                            { type: "مزيد بـ 3 أحرف (استـ)", wordHtml: '<span class="text-purple-600 font-bold">اِسْـتَـ</span><span class="text-red-600 font-black">خْـرَجَ</span>', weight: "اسْتَفْعَلَ", meaning: "استنبط الشيء ونزعه من موضعه" }
-                        ]
-                    },
-                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">خَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">رِجٌ</span>', weight: "فَاعِل (اسم فاعل)", icon: "🚶‍♂️", desc: "اسم فاعل يدل على من فارق الموضع وانتقل عنه.", col: "خَارِجٌ مِنَ الفَصْلِ", context: "رَأَيْتُ الطَّالِبَ خَارِجاً مِنَ المَكْتَبَةِ", color: "blue" },
-                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مُـ</span><span class="text-red-600 font-black">خْـرَ</span><span class="text-orange-500 font-bold">جٌ</span>', weight: "مُفْعَل (اسم مفعول غير ثلاثي)", icon: "🎬", desc: "اسم مفعول من الفعل المزيد (أَخْرَجَ)، يدل على العمل الفني المنجز.", col: "فِلْمٌ مُخْرَجٌ بِإِبْدَاعٍ", context: "الشَّرِيطُ الوَثَائِقِيُّ مُخْرَجٌ بِعِنَايَةٍ", color: "orange" },
-                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">خْـرَجٌ</span>', weight: "مَفْعَل (اسم مكان)", icon: "🚪", desc: "اسم مكان يدل على موضع النفاذ والخروج من المكان.", col: "مَخْرَجُ الطَّوَارِئِ", context: "اتَّجَهَ الجَمِيعُ نَحْوَ مَخْرَجِ النَّجَاةِ", color: "emerald" },
-                    { key: "source", titleHtml: '<span class="text-red-600 font-black">خُـرُ</span><span class="text-purple-500 font-bold">و</span><span class="text-red-600 font-black">جٌ</span>', weight: "فُعُول (مصدر صريح)", icon: "🏃", desc: "مصدر صريح يدل على عملية الانتقال والبروز.", col: "خُرُوجٌ هَادِئٌ", context: "تَمَّ خُرُوجُ الرُّكَّابِ بِنِظَامٍ تَامٍّ", color: "purple" }
-                ],
-                quizFill: {
-                    chips: [
-                        { id: "takharraja", text: "تَخَرَّجَ (فعل مزيد)", word: "تخرج_مزيد", color: "amber" },
-                        { id: "makhraj", text: "مَخْرَجِ (اسم مكان)", word: "مخرج", color: "emerald" },
-                        { id: "mokhraaj", text: "مُخْرَجٌ (اسم مفعول)", word: "مخرج_اسم_مفعول", color: "orange" }
-                    ],
-                    sentences: [
-                        { prefix: "1.", target: "تخرج_مزيد", suffix: "المُهَنْدِسُ الشَّابُّ مِنَ المَعْهَدِ بِامْتِيَازٍ." },
-                        { prefix: "2. تَوَجَّهَ الزَّائِرُ نَحْوَ", target: "مخرج", suffix: "القَاعَةِ الكُبْرَى بِسُرْعَةٍ." },
-                        { prefix: "3. هَذَا العَمَلُ المَسْرَحِيُّ", target: "مخرج_اسم_مفعول", suffix: "بِطَرِيقَةٍ احْتِرَافِيَّةٍ رَائِعَةٍ." }
-                    ]
-                },
-                quizMatch: [
-                    { wordHtml: "تَخَرَّجَ", matchId: "1", colloc: "🔗 فِعْلٌ مَزِيدٌ بِالتَّاءِ وَالتَّضْعِيفِ (تَفَعَّلَ)", color: "amber" },
-                    { wordHtml: "خَارِجٌ", matchId: "2", colloc: "🔗 اسْمُ فَاعِلٍ ثُلاثِيّ (فَاعِل)", color: "blue" },
-                    { wordHtml: "مُخْرَجٌ", matchId: "3", colloc: "🔗 اسْمُ مَفْعُولٍ غَيْرِ ثُلاثِيّ (مُفْعَل)", color: "orange" },
-                    { wordHtml: "خُرُوجٌ", matchId: "4", colloc: "🔗 مَصْدَرٌ صَرِيحٌ ثُلاثِيّ (فُعُول)", color: "purple" }
-                ]
-            },
-            "لعب": {
-                icon: "⚽",
-                concept: "الرياضة والنشاط",
-                rootLetters: "[ل-ع-ب]",
-                isCustomAudio: false,
-                branches: [
-                    { 
-                        key: "verb", 
-                        titleHtml: '<span class="text-red-600 font-black">لَـعِـبَ</span>', 
-                        weight: "فَعِلَ (فعل ماض ثلاثي مجرد)", 
-                        icon: "🏃‍♂️", 
-                        desc: "فعل ماض ثلاثي مجرد، يدل على ممارسة النشاط البدني أو الترفيهي.", 
-                        col: "لَعِبَ بِالكُرَةِ", 
-                        context: "لَعِبَ الفَرِيقُ مُبَارَاةً حَمَاسِيَّةً", 
-                        color: "amber",
-                        augmented: [
-                            { type: "مزيد بحرف (الألف)", wordHtml: '<span class="text-red-600 font-black">لَـ</span><span class="text-amber-600 font-bold">ا</span><span class="text-red-600 font-black">عَـبَ</span>', weight: "فَاعَلَ", meaning: "شاركه اللعب ومازحه" },
-                            { type: "مزيد بحرفين (التاء والألف)", wordHtml: '<span class="text-blue-600 font-bold">تَـ</span><span class="text-red-600 font-black">لَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">عَـبَ</span>', weight: "تَفَاعَلَ", meaning: "تحايل أو شارك في اللهو المشترك" },
-                            { type: "مزيد بـ 3 أحرف (استـ)", wordHtml: '<span class="text-purple-600 font-bold">اِسْـتَـ</span><span class="text-red-600 font-black">لْـعَـبَ</span>', weight: "اسْتَفْعَلَ", meaning: "طلب اللعب واشتهاه" }
-                        ]
-                    },
-                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">لَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">عِـبٌ</span>', weight: "فَاعِل (اسم فاعل)", icon: "⛹️", desc: "اسم فاعل يدل على من يمارس الرياضة أو النشاط.", col: "لَاعِبٌ مُمْتَازٌ", context: "مَرَّرَ اللَّاعِبُ الكُرَةَ بِذَكَاءٍ", color: "blue" },
-                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">لْـعُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">بٌ</span>', weight: "مَفْعُول (اسم مفعول)", icon: "🎯", desc: "اسم مفعول يدل على ما وقع عليه اللعب أو الخطة المنفذة.", col: "فَوْزٌ مَلْعُوبٌ بِجَدَارَةٍ", context: "كَانَتِ الخُطَّةُ المَلْعُوبَةُ نَاجِحَةً", color: "orange" },
-                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">لْـعَـبٌ</span>', weight: "مَفْعَل (اسم مكان)", icon: "🏟️", desc: "اسم مكان يدل على موضع ممارسة الرياضة والتنافس.", col: "مَلْعَبٌ فَسِيحٌ", context: "امْتَلَأَتْ مَدَرَّجَاتُ المَلْعَبِ بِالجَمَاهِيرِ", color: "emerald" },
-                    { key: "source", titleHtml: '<span class="text-red-600 font-black">لَـعِـ</span><span class="text-purple-500 font-bold">بٌ</span>', weight: "فَعِل (مصدر صريح)", icon: "🤾", desc: "مصدر صريح يدل على النشاط الترفيهي أو الرياضي ذاته.", col: "لَعِبٌ نَظِيفٌ", context: "يَتَمَيَّزُ دَوْرِيُّ المَدَارِسِ بِاللَّعِبِ النَّظِيفِ", color: "purple" }
-                ],
-                quizFill: {
-                    chips: [
-                        { id: "laaaba", text: "لَاعَبَ (فعل مزيد)", word: "لاعب_مزيد", color: "amber" },
-                        { id: "malab", text: "مَلْعَبِ (اسم مكان)", word: "ملعب", color: "emerald" },
-                        { id: "laaib", text: "لَاعِبٌ (اسم فاعل)", word: "لاعب_اسم_فاعل", color: "blue" }
-                    ],
-                    sentences: [
-                        { prefix: "1.", target: "لاعب_مزيد", suffix: "الأَبُ طِفْلَهُ الصَّغِيرَ بِمَرَحٍ وَلُطْفٍ." },
-                        { prefix: "2. اجْتَمَعَ الفَرِيقَانِ فِي", target: "ملعب", suffix: "الحَيِّ لِخَوْضِ المُبَارَاةِ." },
-                        { prefix: "3. سَجَّلَ الهَدَفَ", target: "لاعب_اسم_فاعل", suffix: "مَاهِرٌ يَرْتَدِي القَمِيصَ رَقْمَ عَشْرَةٍ." }
-                    ]
-                },
-                quizMatch: [
-                    { wordHtml: "لَاعَبَ", matchId: "1", colloc: "🔗 فِعْلٌ مَزِيدٌ بِحَرْفٍ وَاحِدٍ (فَاعَلَ)", color: "amber" },
-                    { wordHtml: "لَاعِبٌ", matchId: "2", colloc: "🔗 اسْمُ فَاعِلٍ ثُلاثِيّ (فَاعِل)", color: "blue" },
-                    { wordHtml: "مَلْعُوبٌ", matchId: "3", colloc: "🔗 اسْمُ مَفْعُولٍ ثُلاثِيّ (مَفْعُول)", color: "orange" },
-                    { wordHtml: "لَعِبٌ", matchId: "4", colloc: "🔗 مَصْدَرٌ صَرِيحٌ ثُلاثِيّ (فَعِل)", color: "purple" }
-                ]
-            }
+    <!-- 2. مسرح القصة السردية -->
+    <div id="story" class="tab-content">
+      <div class="story-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 1rem;">
+          <h3 style="color: var(--primary); font-size: 1.4rem;">المشهد القرائي الموظف للجذر 🎭</h3>
+          <button class="speaker-btn" style="padding: 0.6rem 1.4rem; font-size: 1.05rem;" onclick="speakCurrentStory()">🔊 استمع للمشهد كاملاً</button>
+        </div>
+        <div class="story-text" id="storyText"></div>
+      </div>
+    </div>
+
+    <!-- 3. مختبر التركيب بالسحب والإفلات / النقر -->
+    <div id="lab" class="tab-content">
+      <div class="lab-card">
+        <h3 style="color: var(--primary); font-size: 1.4rem;">رَكِّبِ الكَلِمَةَ بِإِضَافَةِ حَرْفِ الزِّيَادَةِ المُنَاسِبِ</h3>
+        <p id="labPrompt" style="color: #475569; font-size: 1.2rem; margin-top: 0.5rem;"></p>
+
+        <div class="slots-row" id="labSlots"></div>
+
+        <p style="font-weight: 800; color: #64748b; font-size: 1.1rem;">انقر على الحرف الزائد المناسب لإكمال الميزان الصرفي:</p>
+        <div class="pool-row" id="labPool"></div>
+
+        <div id="labFeedback" class="fb-panel" style="margin-top: 2rem;"></div>
+      </div>
+    </div>
+
+    <!-- 4. ميدان التحدي والتمارين -->
+    <div id="quiz" class="tab-content">
+      <div class="quiz-box">
+        <h4 style="color: var(--primary); font-size: 1.25rem;">التحدي الأول: التعرف على الصيغة الاشتقاقية</h4>
+        <p id="q1_text" style="font-size: 1.3rem; margin-top: 0.8rem;"></p>
+        <div class="opts-wrap" id="q1_opts"></div>
+        <div id="q1_fb" class="fb-panel"></div>
+      </div>
+
+      <div class="quiz-box">
+        <h4 style="color: var(--primary); font-size: 1.25rem;">التحدي الثاني: التوظيف المعجمي وإكمال المتلازمة</h4>
+        <p id="q2_text" style="font-size: 1.3rem; margin-top: 0.8rem;"></p>
+        <div class="opts-wrap" id="q2_opts"></div>
+        <div id="q2_fb" class="fb-panel"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // ----------------------------------------------------
+    // 1. محرك المؤثرات الصوتية الشامل (نغمات + نطق عربي)
+    // ----------------------------------------------------
+    const AudioEngine = {
+      ctx: null,
+      init() {
+        if (!this.ctx) {
+          this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+      },
+      // نغمة صوتية مبهجة عند الإجابة الصحيحة
+      playSuccess() {
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.frequency.setValueAtTime(523.25, now);       // C5
+        osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+        osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+        osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
+
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
+
+        osc.start(now);
+        osc.stop(now + 0.6);
+      },
+      // نغمة تنبيه عند الخطأ
+      playError() {
+        this.init();
+        if (!this.ctx) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.frequency.setValueAtTime(220, now);
+        osc.frequency.setValueAtTime(160, now + 0.15);
+
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+
+        osc.start(now);
+        osc.stop(now + 0.4);
+      },
+      // نطق فصيح للكلمات
+      speak(text) {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const utter = new SpeechSynthesisUtterance(text);
+          utter.lang = 'ar-SA';
+          utter.rate = 0.82;
+
+          // البحث عن أفضل صوت عربي متاح في جهاز المتعلم
+          const voices = window.speechSynthesis.getVoices();
+          const arVoice = voices.find(v => v.lang.startsWith('ar'));
+          if (arVoice) utter.voice = arVoice;
+
+          window.speechSynthesis.speak(utter);
+        }
+      }
+    };
+
+    // ----------------------------------------------------
+    // 2. بنك البيانات المعجمية والديداكتيكية
+    // ----------------------------------------------------
+    const dataHub = {
+      "صنع": {
+        letters: ['ص', 'ن', 'ع'],
+        derivatives: [
+          { type: "الفعل المجرد", pattern: "فَعَلَ", word: "صَنَعَ", rIdx: [0, 1, 2], meaning: "أَوْجَدَ الشَّيْءَ وَرَكَّبَهُ بِإِتْقَانٍ", tags: ["صَنَعَ مَعْرُوفاً", "صَنَعَ بِيَدَيْهِ"] },
+          { type: "اسم الفاعل", pattern: "فَاعِلٌ", word: "صَانِعٌ", rIdx: [0, 2, 3], meaning: "مَنْ قَامَ بِفِعْلِ الصِّنَاعَةِ وَالْعَمَلِ", tags: ["صَانِعٌ مَاهِرٌ", "صَانِعُ الْخَيْرِ"] },
+          { type: "اسم المفعول", pattern: "مَفْعُولٌ", word: "مَصْنُوعٌ", rIdx: [1, 2, 4], meaning: "الشَّيْءُ الَّذِي تَمَّتْ صِنَاعَتُهُ", tags: ["مَصْنُوعٌ مِنَ الْخَشَبِ", "أَثَاثٌ مَصْنُوعٌ"] },
+          { type: "اسم المكان", pattern: "مَفْعَلٌ", word: "مَصْنَعٌ", rIdx: [1, 2, 3], meaning: "الْمَكَانُ الَّذِي تُصْنَعُ فِيهِ الْمَوَادُّ وَالْبَضَائِعُ", tags: ["مَصْنَعُ السَّيَّارَاتِ", "مَصْنَعٌ حَدِيثٌ"] },
+          { type: "المصدر", pattern: "فِعَالَةٌ", word: "صِنَاعَةٌ", rIdx: [0, 1, 3], meaning: "حِرْفَةُ الصَّانِعِ وَالْعَمَلُ الْإِنْتَاجِيُّ", tags: ["صِنَاعَةٌ تَقْلِيدِيَّةٌ", "صِنَاعَةٌ وَطَنِيَّةٌ"] }
+        ],
+        story: "فِي قَرْيَتِنَا، يَعْمَلُ عَمِّي <span class='story-tag' onclick=\"sayWord('صَانِعاً')\">صَانِعاً</span> مَاهِراً فِي <span class='story-tag' onclick=\"sayWord('مَصْنَعٍ')\">مَصْنَعٍ</span> كَبِيرٍ. لَقَدْ <span class='story-tag' onclick=\"sayWord('صَنَعَ')\">صَنَعَ</span> طَاوِلَةً جَمِيلَةً هِيَ أَفْخَرُ أَثَاثٍ <span class='story-tag' onclick=\"sayWord('مَصْنُوعٍ')\">مَصْنُوعٍ</span>، وَهَكَذَا تَزْدَهِرُ <span class='story-tag' onclick=\"sayWord('صِنَاعَةُ')\">صِنَاعَةُ</span> الْخَشَبِ فِي وَطَنِنَا.",
+        lab: {
+          prompt: "رَكِّبْ (اسْمَ المَكَانِ: مَصْنَع) بِإِضَافَةِ حَرْفِ المِيمِ فِي البِدَايَةِ:",
+          target: "مَصْنَع",
+          slots: [
+            { ch: "", correct: "مَـ" },
+            { ch: "صْ" },
+            { ch: "نَ" },
+            { ch: "عُ" }
+          ],
+          pool: ["مَـ", "يَـ", "تَـ"]
+        },
+        quiz: {
+          q1: { q: "مَا هُوَ اسْمُ الْمَكَانِ الْمُشْتَقُّ مِنَ الْجَذْرِ (ص - ن - ع)؟", ans: "مَصْنَعٌ", opts: ["صَانِعٌ", "مَصْنَعٌ", "مَصْنُوعٌ"], tip: "اسْمُ الْمَكَانِ يَأْتِي عَلَى وَزْنِ (مَفْعَل) لِلدَّلَالَةِ عَلَى مَوْضِعِ الصُّنْعِ." },
+          q2: { q: "أَتْقَنَ الصَّانِعُ ............... الأَوَانِي الخَزَفِيَّةِ.", ans: "صِنَاعَةَ", opts: ["صِنَاعَةَ", "مَصْنَعَ", "صَانِعَ"], tip: "السِّيَاقُ يَتَطَلَّبُ مَصْدَراً يَدُلُّ عَلَى حَدَثِ الْعَمَلِ." }
+        }
+      },
+      "علم": {
+        letters: ['ع', 'ل', 'م'],
+        derivatives: [
+          { type: "الفعل المجرد", pattern: "فَعِلَ", word: "عَلِمَ", rIdx: [0, 1, 2], meaning: "أَدْرَكَ الشَّيْءَ وَتَيَقَّنَ مِنْهُ", tags: ["عَلِمَ الخَبَرَ", "عَلِمَ الحَقِيقَةَ"] },
+          { type: "اسم الفاعل", pattern: "فَاعِلٌ", word: "عَالِمٌ", rIdx: [0, 2, 3], meaning: "صَاحِبُ العِلْمِ وَالمَعْرِفَةِ الوَاسِعَةِ", tags: ["عَالِمٌ جَلِيلٌ", "عَالِمُ فَلَكٍ"] },
+          { type: "اسم المفعول", pattern: "مَفْعُولٌ", word: "مَعْلُومٌ", rIdx: [1, 2, 4], meaning: "مَا هُوَ وَاضِحٌ وَمَعْرُوفٌ لَا شَكَّ فِيهِ", tags: ["أَمْرٌ مَعْلُومٌ", "وَقْتٌ مَعْلُومٌ"] },
+          { type: "اسم المكان/المعلم", pattern: "مَفْعَلٌ", word: "مَعْلَمٌ", rIdx: [1, 2, 3], meaning: "مَوْضِعٌ أَوْ أَثَرٌ بَارِزٌ يُسْتَدَلُّ بِهِ", tags: ["مَعْلَمٌ تَارِيخِيٌّ", "مَعْلَمٌ بَارِزٌ"] },
+          { type: "المصدر", pattern: "فِعْلٌ", word: "عِلْمٌ", rIdx: [0, 1, 2], meaning: "إِدْرَاكُ حَقِيقَةِ الأَشْيَاءِ", tags: ["عِلْمٌ نَافِعٌ", "طَلَبُ العِلْمِ"] }
+        ],
+        story: "زَارَ الـ <span class='story-tag' onclick=\"sayWord('عَالِمُ')\">عَالِمُ</span> الكَبِيرُ مَدِينَتَنَا، وَشَاهَدَ أَعْظَمَ <span class='story-tag' onclick=\"sayWord('مَعْلَمٍ')\">مَعْلَمٍ</span> تَارِيخِيٍّ فِيهَا، ثُمَّ قَالَ: إِنَّ حُبَّ <span class='story-tag' onclick=\"sayWord('العِلْمِ')\">العِلْمِ</span> أَمْرٌ <span class='story-tag' onclick=\"sayWord('مَعْلُومٌ')\">مَعْلُومٌ</span> لَدَى أَبْنَاءِ هَذَا الوَطَنِ مُنْذُ أَنْ <span class='story-tag' onclick=\"sayWord('عَلِمُوا')\">عَلِمُوا</span> قِيمَتَهُ.",
+        lab: {
+          prompt: "رَكِّبْ (اسْمَ المَفْعُولِ: مَعْلُوم) بِإِضَافَةِ مِيمِ المَفْعُولِ فِي البِدَايَةِ:",
+          target: "مَعْلُوم",
+          slots: [
+            { ch: "", correct: "مَـ" },
+            { ch: "عْ" },
+            { ch: "لُـ" },
+            { ch: "و" },
+            { ch: "مٌ" }
+          ],
+          pool: ["مَـ", "سَـ", "تَـ"]
+        },
+        quiz: {
+          q1: { q: "مَا هُوَ اسْمُ الْمَفْعُولِ الْمُشْتَقُّ مِنْ (عَلِمَ)؟", ans: "مَعْلُومٌ", opts: ["عَالِمٌ", "مَعْلُومٌ", "مَعْلَمٌ"], tip: "اسْمُ الْمَفْعُولِ مِنَ الثُّلَاثِيِّ يُصَاغُ عَلَى وَزْنِ (مَفْعُول)." },
+          q2: { q: "جَامِعُ القَرَوِيِّينَ ............... حَضَارِيٌّ خَالِدٌ فِي الْمَغْرِبِ.", ans: "مَعْلَمٌ", opts: ["مَعْلَمٌ", "عَالِمٌ", "مَعْلُومٌ"], tip: "اخْتَرِ اللَّفْظَ الَّذِي يَدُلُّ عَلَى المَوْقِعِ أَوْ المَكَانِ الأَثَرِيِّ." }
+        }
+      },
+      "كتب": {
+        letters: ['ك', 'ت', 'ب'],
+        derivatives: [
+          { type: "الفعل المجرد", pattern: "فَعَلَ", word: "كَتَبَ", rIdx: [0, 1, 2], meaning: "دَلَّ عَلَى حَدَثِ الْكِتَابَةِ فِي الْمَاضِي", tags: ["كَتَبَ رِسَالَةً", "كَتَبَ بِإِتْقَانٍ"] },
+          { type: "اسم الفاعل", pattern: "فَاعِلٌ", word: "كَاتِبٌ", rIdx: [0, 2, 3], meaning: "مَنْ قَامَ بِفِعْلِ الْكِتَابَةِ", tags: ["كَاتِبٌ مَشْهُورٌ", "كَاتِبُ القِصَّةِ"] },
+          { type: "اسم المفعول", pattern: "مَفْعُولٌ", word: "مَكْتُوبٌ", rIdx: [1, 2, 4], meaning: "مَا وَقَعَ عَلَيْهِ فِعْلُ الْكِتَابَةِ", tags: ["كَلَامٌ مَكْتُوبٌ", "سِرٌّ مَكْتُوبٌ"] },
+          { type: "اسم المكان", pattern: "مَفْعَلٌ", word: "مَكْتَبٌ", rIdx: [1, 2, 3], meaning: "مَكَانُ الْعَمَلِ أَوْ طَاوِلَةُ الْكِتَابَةِ", tags: ["مَكْتَبُ الْمُدِيرِ", "مَكْتَبٌ مُرَتَّبٌ"] },
+          { type: "المصدر", pattern: "فِعَالَةٌ", word: "كِتَابَةٌ", rIdx: [0, 1, 3], meaning: "حَدَثُ الْكِتَابَةِ دُونَ ارْتِبَاطٍ بِزَمَنٍ", tags: ["حُسْنُ الْكِتَابَةِ", "كِتَابَةٌ وَاضِحَةٌ"] }
+        ],
+        story: "جَلَسَ الـ <span class='story-tag' onclick=\"sayWord('كَاتِبُ')\">كَاتِبُ</span> المَاهِرُ أَمَامَ <span class='story-tag' onclick=\"sayWord('مَكْتَبِهِ')\">مَكْتَبِهِ</span>، ثُمَّ <span class='story-tag' onclick=\"sayWord('كَتَبَ')\">كَتَبَ</span> أَرْوَعَ نَصٍّ <span class='story-tag' onclick=\"sayWord('مَكْتُوبٍ')\">مَكْتُوبٍ</span> يُشَجِّعُ عَلَى حُبِّ <span class='story-tag' onclick=\"sayWord('الكِتَابَةِ')\">الكِتَابَةِ</span> وَالقِرَاءَةِ.",
+        lab: {
+          prompt: "رَكِّبْ (اسْمَ الفَاعِلِ: كَاتِب) بِإِضَافَةِ أَلِفِ المَدِّ بَعْدَ الحَرْفِ الأَوَّلِ:",
+          target: "كَاتِب",
+          slots: [
+            { ch: "كَـ" },
+            { ch: "", correct: "ا" },
+            { ch: "تِـ" },
+            { ch: "بٌ" }
+          ],
+          pool: ["ا", "و", "ي"]
+        },
+        quiz: {
+          q1: { q: "مَا هُوَ اسْمُ الْفَاعِلِ مِنَ الفِعْلِ (كَتَبَ)؟", ans: "كَاتِبٌ", opts: ["مَكْتُوبٌ", "كَاتِبٌ", "مَكْتَبٌ"], tip: "اسْمُ الفَاعِلِ يَأْتِي عَلَى وَزْنِ (فَاعِل) لِلدَّلَالَةِ عَلَى مَنْ قَامَ بِالفِعْلِ." },
+          q2: { q: "وَضَعَ التِّلْمِيذُ كِتَابَهُ فَوْقَ ............... الخَشَبِيِّ.", ans: "المَكْتَبِ", opts: ["المَكْتَبِ", "الكَاتِبِ", "المَكْتُوبِ"], tip: "اخْتَرِ اسْمَ الْمَكَانِ المُلَائِمِ لِوَضْعِ الأَدَوَاتِ." }
+        }
+      }
+    };
+
+    let totalPoints = 0;
+
+    // تشغيل نطق كلمة
+    function sayWord(word) {
+      AudioEngine.speak(word);
+    }
+
+    // تشغيل القصة كاملة
+    function speakCurrentStory() {
+      const activeRoot = document.getElementById('rootSelect').value;
+      const cleanText = dataHub[activeRoot].story.replace(/<[^>]*>?/gm, '');
+      AudioEngine.speak(cleanText);
+    }
+
+    // تلوين الكلمة مورفولوجياً (أحمر للجذر وأزرق للزيادة)
+    function colorizeMorphology(word, rootIndices) {
+      return Array.from(word).map((ch, idx) => 
+        rootIndices.includes(idx) ? `<span class="c-root">${ch}</span>` : `<span class="c-affix">${ch}</span>`
+      ).join('');
+    }
+
+    // التنقل بين التبويبات
+    function showTab(tabId, el) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // تبديل الجذر وتحديث كافة الشاشات
+    function changeRoot(rootKey) {
+      const data = dataHub[rootKey];
+
+      // 1. تحديث النواة المركزية
+      const cubesBox = document.getElementById('rootCubes');
+      cubesBox.innerHTML = '';
+      data.letters.forEach(l => {
+        const cube = document.createElement('div');
+        cube.className = 'root-cube';
+        cube.textContent = l;
+        cubesBox.appendChild(cube);
+      });
+
+      // 2. تحديث شبكة المشتقات
+      const grid = document.getElementById('derGrid');
+      grid.innerHTML = '';
+      data.derivatives.forEach((d, i) => {
+        const card = document.createElement('div');
+        card.className = 'der-card' + (i === 0 ? ' active' : '');
+        card.innerHTML = `
+          <div class="der-pattern">${d.type} (${d.pattern})</div>
+          <div class="der-word">${colorizeMorphology(d.word, d.rIdx)}</div>
+          <button class="speaker-btn" onclick="event.stopPropagation(); sayWord('${d.word}')">🔊 استمع</button>
+        `;
+        card.onclick = () => {
+          document.querySelectorAll('.der-card').forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          renderDetail(d);
+          sayWord(d.word);
         };
+        grid.appendChild(card);
+      });
 
-        let currentRoot = "صنع";
-        let activeModalData = null;
-        let earnedStars = 0;
-        let checkedFill = false;
-        let checkedMatch = false;
-        let selectedChip = null;
-        let currentPlayingAudio = null;
-        let currentTtsAudio = null;
+      renderDetail(data.derivatives[0]);
 
-        function speakArabic(text) {
-            if (currentPlayingAudio) {
-                currentPlayingAudio.pause();
-                currentPlayingAudio.currentTime = 0;
-            }
-            if (currentTtsAudio) {
-                currentTtsAudio.pause();
-                currentTtsAudio.currentTime = 0;
-            }
+      // 3. تحديث مسرح القصة
+      document.getElementById('storyText').innerHTML = data.story;
 
-            const cleanText = encodeURIComponent(text.replace(/[«»\[\]\(\)\-\_🔗💡📖🎯]/g, ' ').trim());
-            const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=ar&client=tw-ob&q=${cleanText}`;
-            
-            currentTtsAudio = new Audio(audioUrl);
-            currentTtsAudio.play().catch(() => {
-                if ('speechSynthesis' in window) {
-                    window.speechSynthesis.cancel();
-                    const u = new SpeechSynthesisUtterance(text);
-                    u.lang = 'ar-SA';
-                    window.speechSynthesis.speak(u);
-                }
-            });
-        }
+      // 4. تحديث مختبر التركيب
+      setupLab(data.lab);
 
-        function playRootAudio() {
-            const data = database[currentRoot];
-            if (data.isCustomAudio) {
-                playMp3('root');
-            } else {
-                const rootSpelled = data.rootLetters.replace(/[\-\[\]]/g, ' ');
-                speakArabic(`النواة المجردة: ${rootSpelled}، عائلة: ${data.concept}`);
-            }
-        }
+      // 5. تحديث التمارين
+      setupQuiz('q1', data.quiz.q1);
+      setupQuiz('q2', data.quiz.q2);
+    }
 
-        function playInstruction(type) {
-            if (currentRoot === "صنع") {
-                playMp3(type === 'fill' ? 'quiz-fill' : 'quiz-match');
-            } else {
-                if (type === 'fill') speakArabic("القسم الأول: ميز بين الفعل المزيد والمشتقات في سياقها الصحيح.");
-                else speakArabic("القسم الثاني: صل كل كلمة بوزنها ونوعها الصرفي ومتلازمتها.");
-            }
-        }
+    function renderDetail(item) {
+      document.getElementById('detTitle').textContent = `${item.type} [${item.pattern}] — ${item.word}`;
+      document.getElementById('detMeaning').textContent = `الوظيفة والدلالة الإدراكية: ${item.meaning}`;
+      
+      const tagsBox = document.getElementById('detTags');
+      tagsBox.innerHTML = '';
+      item.tags.forEach(t => {
+        const pill = document.createElement('span');
+        pill.className = 'colloc-pill';
+        pill.textContent = t;
+        pill.onclick = () => sayWord(t);
+        tagsBox.appendChild(pill);
+      });
+    }
 
-        function playFeedbackAudio(isCorrect) {
-            if (currentRoot === "صنع") {
-                playMp3(isCorrect ? 'correct' : 'retry');
-            } else {
-                if (isCorrect) speakArabic("أحسنت صنعاً! إجابة صحيحة ومتقنة.");
-                else speakArabic("حاول مرة أخرى، فكر جيداً في المعنى والوزن الصرفي.");
-            }
-        }
+    // بناء مختبر التركيب
+    function setupLab(labData) {
+      document.getElementById('labPrompt').textContent = labData.prompt;
+      const slotsBox = document.getElementById('labSlots');
+      const poolBox = document.getElementById('labPool');
+      const fb = document.getElementById('labFeedback');
 
-        function playCelebrationAudio() {
-            if (currentRoot === "صنع") {
-                playMp3('celebration');
-            } else {
-                speakArabic(`رائع جداً ومبارك! لقد حققت العلامة الكاملة وأتقنت عائلة الجذر ${currentRoot}!`);
-            }
-        }
+      slotsBox.innerHTML = '';
+      poolBox.innerHTML = '';
+      fb.style.display = 'none';
 
-        function playMp3(key) {
-            if (currentPlayingAudio) {
-                currentPlayingAudio.pause();
-                currentPlayingAudio.currentTime = 0;
-            }
-            if (currentTtsAudio) {
-                currentTtsAudio.pause();
-                currentTtsAudio.currentTime = 0;
-            }
+      labData.slots.forEach(s => {
+        const slot = document.createElement('div');
+        slot.className = 'lab-slot' + (s.ch ? ' filled' : '');
+        slot.textContent = s.ch;
+        slotsBox.appendChild(slot);
+      });
 
-            const audio = document.getElementById('audio-' + key);
-            if (audio) {
-                currentPlayingAudio = audio;
-                audio.play().catch(e => console.warn(e));
-            }
-        }
-
-        function playSound(type) {
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                if (ctx.state === 'suspended') ctx.resume();
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-
-                if (type === 'click') {
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(440, ctx.currentTime);
-                    gain.gain.setValueAtTime(0.08, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.08);
-                } else if (type === 'success') {
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(523.25, ctx.currentTime);
-                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
-                    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2);
-                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.35);
-                } else if (type === 'error') {
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(220, ctx.currentTime);
-                    osc.frequency.setValueAtTime(180, ctx.currentTime + 0.1);
-                    gain.gain.setValueAtTime(0.15, ctx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
-                    osc.start();
-                    osc.stop(ctx.currentTime + 0.25);
-                }
-            } catch (e) {}
-        }
-
-        function switchRoot(rootKey) {
-            playSound('click');
-            currentRoot = rootKey;
-            const data = database[rootKey];
-
-            document.getElementById('headerTitle').innerText = `بذرة الكلمات: ${data.rootLetters}`;
-            document.getElementById('headerSubtitle').innerText = `عائلة ${data.concept} ➔ هندسة إدراكية للمجرد والمزيد والمشتقات`;
-            document.getElementById('headerIcon').innerText = data.icon;
-            document.getElementById('centerLetters').innerText = data.rootLetters;
-            document.getElementById('centerConcept').innerText = `الجذر المجرد: ${data.concept}`;
-
-            earnedStars = 0;
-            checkedFill = false;
-            checkedMatch = false;
-            updateStars();
-
-            renderBranches();
-            renderQuizzes();
-            setTimeout(drawRadialLines, 100);
-        }
-
-        function renderBranches() {
-            const container = document.getElementById('branchesContainer');
-            const data = database[currentRoot];
-            const positions = [
-                "md:top-0 md:left-1/2 md:-translate-x-1/2",
-                "md:top-12 md:right-4",
-                "md:bottom-4 md:right-8",
-                "md:top-12 md:left-4",
-                "md:bottom-4 md:left-8"
-            ];
-            const branchLabels = [
-                "الفرع 1: الحدث / الفعل المجرد والمزيد",
-                "الفرع 2: الفاعل / اسم الفاعل",
-                "الفرع 3: المفعول / اسم المفعول",
-                "الفرع 4: الحيز / اسم المكان",
-                "الفرع 5: النشاط / المصدر الصريح"
-            ];
-
-            let html = '';
-            data.branches.forEach((b, i) => {
-                html += `
-                <div id="branch${i+1}" class="pointer-events-auto md:absolute ${positions[i]} w-full md:w-72">
-                    <div onclick="openBranchModal(${i})" class="clay-card p-5 border-t-4 border-${b.color}-500 cursor-pointer group">
-                        <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
-                            <span class="text-xs font-bold text-${b.color}-600 bg-${b.color}-50 px-2.5 py-1 rounded-lg">${branchLabels[i]}</span>
-                            <span class="text-2xl group-hover:scale-125 transition-transform">${b.icon}</span>
-                        </div>
-                        <h3 class="text-2xl font-black my-1">
-                            ${b.titleHtml}
-                            <span class="text-xs font-normal text-slate-500">(${b.weight})</span>
-                        </h3>
-                        <div class="bg-${b.color}-50/60 p-2.5 rounded-xl border border-${b.color}-100 text-xs space-y-1 mt-2">
-                            <p class="font-bold text-${b.color}-900">🔗 المتلازمة: <span class="text-${b.color}-700">${b.col}</span></p>
-                            <p class="text-slate-600 italic">«${b.context}»</p>
-                        </div>
-                    </div>
-                </div>`;
-            });
-
-            container.innerHTML = html;
-        }
-
-        function renderQuizzes() {
-            const data = database[currentRoot];
-
-            const bank1 = document.getElementById('wordBankSection1');
-            bank1.innerHTML = '';
-            data.quizFill.chips.forEach(c => {
-                bank1.innerHTML += `
-                <div draggable="true" id="chip-${c.id}" data-word="${c.word}" onclick="handleChipSelect(this)" 
-                     class="drag-chip bg-white border-2 border-${c.color}-400 px-4 py-2 rounded-xl text-sm font-black text-slate-800 shadow-sm hover:shadow-md flex items-center gap-1">
-                    ${c.text}
-                </div>`;
-            });
-
-            const qList = document.getElementById('fillQuestionsList');
-            qList.innerHTML = '';
-            data.quizFill.sentences.forEach((s, idx) => {
-                qList.innerHTML += `
-                <div class="p-3 bg-white rounded-xl shadow-sm border border-slate-100 flex flex-wrap items-center gap-2">
-                    <span>${s.prefix}</span>
-                    <div id="dropQ${idx+1}" data-target="${s.target}" onclick="handleDropZoneClick(this)" class="drop-zone inline-flex">
-                        <span class="text-xs text-slate-400 font-bold pointer-events-none">ضع الكلمة هنا</span>
-                    </div>
-                    <span>${s.suffix}</span>
-                    <p id="feedback${idx+1}" class="w-full text-xs font-bold hidden mt-1"></p>
-                </div>`;
-            });
-
-            const collocBank = document.getElementById('collocBank');
-            collocBank.innerHTML = '';
-            data.quizMatch.forEach((m, idx) => {
-                collocBank.innerHTML += `
-                <div draggable="true" id="chip-col${idx+1}" data-match="${m.matchId}" onclick="handleChipSelect(this)" 
-                     class="drag-chip bg-white border border-${m.color}-300 px-3 py-1.5 rounded-xl text-xs font-bold text-${m.color}-900 shadow-sm hover:shadow-md">
-                    ${m.colloc}
-                </div>`;
-            });
-
-            const mList = document.getElementById('matchQuestionsList');
-            mList.innerHTML = '';
-            data.quizMatch.forEach((m, idx) => {
-                mList.innerHTML += `
-                <div class="flex items-center justify-between bg-white p-3 rounded-xl border border-slate-100 text-sm">
-                    <span class="font-black text-${m.color}-600 bg-${m.color}-50 px-3 py-1 rounded-lg">
-                        ${m.wordHtml} ➔
-                    </span>
-                    <div id="dropCol${idx+1}" data-target="${m.matchId}" onclick="handleDropZoneClick(this)" class="drop-zone min-w-[200px]">
-                        <span class="text-xs text-slate-400 font-bold pointer-events-none">إفلات الوزن والنوع هنا</span>
-                    </div>
-                </div>`;
-            });
-
-            document.getElementById('matchFeedback').classList.add('hidden');
-            initDragAndDrop();
-        }
-
-        function openBranchModal(index) {
-            const data = database[currentRoot];
-            const info = data.branches[index];
-            activeModalData = info;
-
-            document.getElementById('modalTitle').innerHTML = info.titleHtml;
-            document.getElementById('modalWeight').innerText = `الوزن والموقع: (${info.weight})`;
-            document.getElementById('modalIcon').innerText = info.icon;
-            document.getElementById('modalDesc').innerText = info.desc;
-            document.getElementById('modalColloc').innerText = info.col;
-            document.getElementById('modalContext').innerText = info.context;
-
-            const augBox = document.getElementById('augmentedVerbsBox');
-            const augList = document.getElementById('augmentedVerbsList');
-            if (info.augmented && info.augmented.length > 0) {
-                augBox.classList.remove('hidden');
-                let augHtml = '';
-                info.augmented.forEach(aug => {
-                    augHtml += `
-                    <div class="bg-white/90 p-2.5 rounded-xl border border-amber-200/80 flex items-center justify-between">
-                        <div>
-                            <span class="font-black text-slate-800 text-sm">${aug.wordHtml}</span>
-                            <span class="text-indigo-600 font-bold text-[11px] mr-2">(${aug.weight})</span>
-                            <p class="text-slate-500 text-[10px] mt-0.5">${aug.type} : ${aug.meaning}</p>
-                        </div>
-                        <button onclick="speakVerbAugmented('${aug.type}', '${aug.weight}')" class="text-amber-600 hover:text-amber-800 p-1.5 rounded-lg bg-amber-50">
-                            <i class="fa-solid fa-volume-high text-xs"></i>
-                        </button>
-                    </div>`;
-                });
-                augList.innerHTML = augHtml;
-            } else {
-                augBox.classList.add('hidden');
-            }
-
-            document.getElementById('infoModal').classList.remove('hidden');
-            speakCurrentModal();
-        }
-
-        function speakVerbAugmented(type, weight) {
-            speakArabic(`صيغة ${type}، على وزن ${weight}`);
-        }
-
-        function speakCurrentModal() {
-            if (!activeModalData) return;
-            const data = database[currentRoot];
-            if (data.isCustomAudio && activeModalData.key !== 'verb') {
-                playMp3(activeModalData.key);
-            } else {
-                const tempDiv = document.createElement("div");
-                tempDiv.innerHTML = activeModalData.titleHtml;
-                const cleanWord = tempDiv.textContent || tempDiv.innerText || "";
-                
-                let textToSay = `${cleanWord}. الوزن: ${activeModalData.weight}. الشرح: ${activeModalData.desc}. المتلازمة اللفظية: ${activeModalData.col}.`;
-                if (activeModalData.augmented) {
-                    textToSay += " من أفعالها المزيدة المقررة: مزيد بحرف، ومزيد بحرفين، ومزيد بثلاثة أحرف.";
-                }
-                speakArabic(textToSay);
-            }
-        }
-
-        function closeModal() {
-            playSound('click');
-            if (currentPlayingAudio) {
-                currentPlayingAudio.pause();
-                currentPlayingAudio.currentTime = 0;
-            }
-            if (currentTtsAudio) {
-                currentTtsAudio.pause();
-                currentTtsAudio.currentTime = 0;
-            }
-            document.getElementById('infoModal').classList.add('hidden');
-        }
-
-        let draggedElement = null;
-        function initDragAndDrop() {
-            const draggables = document.querySelectorAll('.drag-chip');
-            const dropZones = document.querySelectorAll('.drop-zone');
-
-            draggables.forEach(chip => {
-                chip.addEventListener('dragstart', (e) => {
-                    draggedElement = chip;
-                    e.dataTransfer.setData('text/plain', chip.id);
-                    chip.classList.add('opacity-50');
-                });
-                chip.addEventListener('dragend', () => {
-                    chip.classList.remove('opacity-50');
-                    draggedElement = null;
-                });
-            });
-
-            dropZones.forEach(zone => {
-                zone.addEventListener('dragover', (e) => {
-                    e.preventDefault();
-                    zone.classList.add('drag-over');
-                });
-                zone.addEventListener('dragleave', () => {
-                    zone.classList.remove('drag-over');
-                });
-                zone.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    zone.classList.remove('drag-over');
-                    if (draggedElement) placeChipInZone(draggedElement, zone);
-                });
-            });
-        }
-
-        function handleChipSelect(chip) {
-            playSound('click');
-            if (selectedChip === chip) {
-                chip.classList.remove('selected', 'ring-4', 'ring-indigo-500');
-                selectedChip = null;
-            } else {
-                if (selectedChip) selectedChip.classList.remove('selected', 'ring-4', 'ring-indigo-500');
-                selectedChip = chip;
-                chip.classList.add('selected', 'ring-4', 'ring-indigo-500');
-            }
-        }
-
-        function handleDropZoneClick(zone) {
-            if (selectedChip) {
-                placeChipInZone(selectedChip, zone);
-                selectedChip.classList.remove('selected', 'ring-4', 'ring-indigo-500');
-                selectedChip = null;
-            }
-        }
-
-        function placeChipInZone(chip, zone) {
-            playSound('click');
-            const existingChip = zone.querySelector('.drag-chip');
-            if (existingChip) {
-                if (existingChip.dataset.word) {
-                    document.getElementById('wordBankSection1').appendChild(existingChip);
-                } else {
-                    document.getElementById('collocBank').appendChild(existingChip);
-                }
-            }
-            const placeholder = zone.querySelector('.pointer-events-none');
-            if (placeholder) placeholder.classList.add('hidden');
-            zone.appendChild(chip);
-        }
-
-        function checkFillBlanks() {
-            const data = database[currentRoot];
-            let correctCount = 0;
-
-            data.quizFill.sentences.forEach((s, idx) => {
-                const drop = document.getElementById(`dropQ${idx+1}`).querySelector('.drag-chip');
-                const fb = document.getElementById(`feedback${idx+1}`);
-                if (drop && drop.dataset.word === s.target) {
-                    fb.innerText = '✅ إجابة صحيحة ومتقنة!';
-                    fb.className = 'w-full text-xs font-bold text-emerald-600 block mt-1';
-                    correctCount++;
-                } else {
-                    fb.innerText = '❌ حاول مرة أخرى مع التركيز على المعنى والوزن.';
-                    fb.className = 'w-full text-xs font-bold text-rose-600 block mt-1';
-                }
-            });
-
-            if (correctCount === 3) {
-                playSound('success');
-                playFeedbackAudio(true);
-                if (!checkedFill) {
-                    earnedStars += 3;
-                    checkedFill = true;
-                    updateStars();
-                }
-            } else {
-                playSound('error');
-                playFeedbackAudio(false);
-            }
-        }
-
-        function checkMatching() {
-            const data = database[currentRoot];
-            let allCorrect = true;
-
-            data.quizMatch.forEach((m, idx) => {
-                const drop = document.getElementById(`dropCol${idx+1}`).querySelector('.drag-chip');
-                if (!drop || drop.dataset.match !== m.matchId) {
-                    allCorrect = false;
-                }
-            });
-
-            const fb = document.getElementById('matchFeedback');
-            if (allCorrect) {
-                fb.innerText = '🎉 أحسنت صنعاً! جميع الأوزان والأنواع موصولة بصورة صحيحة 100%';
-                fb.className = 'text-xs font-bold text-emerald-600 block mt-2';
-                playSound('success');
-                playFeedbackAudio(true);
-                if (!checkedMatch) {
-                    earnedStars += 4;
-                    checkedMatch = true;
-                    updateStars();
-                }
-            } else {
-                fb.innerText = '⚠️ هناك وصل غير دقيق، راجع دلالة كل وزن ونوعه وحاول مجدداً!';
-                fb.className = 'text-xs font-bold text-rose-600 block mt-2';
-                playSound('error');
-                playFeedbackAudio(false);
-            }
-        }
-
-        function updateStars() {
-            document.getElementById('starCounter').innerText = `⭐ ${earnedStars} / 7 نجوم`;
-            if (earnedStars >= 7) {
-                setTimeout(playCelebrationAudio, 1000);
-            }
-        }
-
-        function drawRadialLines() {
-            const svg = document.getElementById('svgCanvas');
-            const center = document.getElementById('centerNode');
-            if (!svg || !center) return;
-
-            const centerRect = center.getBoundingClientRect();
-            const svgRect = svg.getBoundingClientRect();
-            const startX = centerRect.left + centerRect.width / 2 - svgRect.left;
-            const startY = centerRect.top + centerRect.height / 2 - svgRect.top;
-
-            let linesHTML = '';
-            const colors = ['#f59e0b', '#3b82f6', '#f97316', '#10b981', '#a855f7'];
-
-            for (let i = 1; i <= 5; i++) {
-                const branch = document.getElementById(`branch${i}`);
-                if (branch) {
-                    const bRect = branch.getBoundingClientRect();
-                    const endX = bRect.left + bRect.width / 2 - svgRect.left;
-                    const endY = bRect.top + bRect.height / 2 - svgRect.top;
-                    linesHTML += `
-                        <line x1="${startX}" y1="${startY}" x2="${endX}" y2="${endY}" 
-                              stroke="${colors[i-1]}" stroke-width="4" stroke-dasharray="8,8" 
-                              opacity="0.8" class="animate-pulse" />
-                    `;
-                }
-            }
-            svg.innerHTML = linesHTML;
-        }
-
-        window.onload = function() {
-            switchRoot("صنع");
-            window.addEventListener('resize', drawRadialLines);
+      labData.pool.forEach(letter => {
+        const tile = document.createElement('div');
+        tile.className = 'pool-tile';
+        tile.textContent = letter;
+        tile.onclick = () => {
+          const emptySlot = labData.slots.find(s => !s.ch);
+          const emptySlotEl = document.querySelector('.lab-slot:not(.filled)');
+          
+          if (letter === emptySlot.correct) {
+            emptySlotEl.textContent = letter;
+            emptySlotEl.classList.add('filled');
+            fb.className = 'fb-panel fb-success';
+            fb.innerHTML = '🎉 مُمْتَاز! رَكَّبْتَ الكَلِمَةَ بِصُورَةٍ دَقِيقَةٍ.';
+            AudioEngine.playSuccess();
+            addPoints(15);
+            launchConfetti();
+            sayWord("أحسنت، تركيب صحيح");
+          } else {
+            fb.className = 'fb-panel fb-error';
+            fb.innerHTML = '⚠️ تَنَبَّهْ، هَذَا الحَرْفُ لَا يُطَابِقُ الوَزْنَ المَطْلُوبَ. حَاوِلْ مَرَّةً أُخْرَى!';
+            AudioEngine.playError();
+            sayWord("انتبه، حاول ثانية");
+          }
         };
-    </script>
+        poolBox.appendChild(tile);
+      });
+    }
+
+    // إعداد التمارين
+    function setupQuiz(prefix, qData) {
+      document.getElementById(`${prefix}_text`).textContent = qData.q;
+      const optsBox = document.getElementById(`${prefix}_opts`);
+      const fb = document.getElementById(`${prefix}_fb`);
+      optsBox.innerHTML = '';
+      fb.style.display = 'none';
+
+      qData.opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-btn';
+        btn.textContent = opt;
+        btn.onclick = () => {
+          if (opt === qData.ans) {
+            fb.className = 'fb-panel fb-success';
+            fb.innerHTML = `🌟 رَائِعٌ جِدّاً! إِجَابَةٌ صَحِيحَةٌ (${opt}).`;
+            AudioEngine.playSuccess();
+            addPoints(10);
+            launchConfetti();
+            sayWord("إجابة صحيحة، أحسنت");
+          } else {
+            fb.className = 'fb-panel fb-error';
+            fb.innerHTML = `💡 تَوْجِيهٌ مَهَارِيٌّ: ${qData.tip}`;
+            AudioEngine.playError();
+            sayWord("راجع القاعدة وحاول مجدداً");
+          }
+        };
+        optsBox.appendChild(btn);
+      });
+    }
+
+    // نظام النقاط والرتب
+    function addPoints(pts) {
+      totalPoints += pts;
+      document.getElementById('scoreVal').textContent = totalPoints;
+
+      const badge = document.getElementById('rankBadge');
+      if (totalPoints >= 60) {
+        badge.textContent = "👑 الرتبة: عَبْقَرِيُّ المُعْجَمِ";
+      } else if (totalPoints >= 30) {
+        badge.textContent = "⚔️ الرتبة: فَارِسُ الصَّرْفِ";
+      }
+    }
+
+    // محرك القصاصات الورقية (Confetti)
+    function launchConfetti() {
+      const canvas = document.getElementById('confetti');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      let pieces = Array.from({ length: 60 }, () => ({
+        x: Math.random() * canvas.width,
+        y: -20,
+        size: Math.random() * 8 + 4,
+        speed: Math.random() * 5 + 3,
+        color: ['#f59e0b', '#0ea5e9', '#10b981', '#ec4899', '#6366f1'][Math.floor(Math.random() * 5)]
+      }));
+
+      let count = 0;
+      function loop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+          p.y += p.speed;
+          ctx.fillStyle = p.color;
+          ctx.fillRect(p.x, p.y, p.size, p.size);
+        });
+        count++;
+        if (count < 60) requestAnimationFrame(loop);
+        else ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      loop();
+    }
+
+    // التحميل التلقائي
+    window.onload = () => {
+      // تفعيل الصوت بعد أول نقرة تفادياً لحظر المتصفحات
+      window.addEventListener('click', () => AudioEngine.init(), { once: true });
+      changeRoot('صنع');
+    };
+  </script>
 </body>
 </html>
