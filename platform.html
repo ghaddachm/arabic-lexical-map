@@ -3,19 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ الحُرُوفِ الذَّكِيُّ</title>
+  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ الأَشْكَالِ المَرِحَةِ</title>
   <style>
     :root {
       --primary: #4338ca;
-      --primary-dark: #312e81;
       --accent-yellow: #fde047;
       --accent-orange: #f97316;
-      --c-green: #10b981;
+      --c-green: #22c55e;
       --c-sky: #0284c7;
       --c-pink: #ec4899;
-      --c-purple: #8b5cf6;
-      --c-root: #dc2626;   /* أحمر صريح للجذر */
-      --c-affix: #2563eb;  /* أزرق صريح للزيادة */
+      --c-purple: #a855f7;
+      --c-root: #dc2626;  /* أحمر صريح لأحرف الجذر */
+      --c-affix: #2563eb; /* أزرق صريح للزيادة */
     }
 
     * {
@@ -26,7 +25,7 @@
     }
 
     body {
-      background: #7dd3fc url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.25' fill-rule='evenodd'/%3E%3C/svg%3E");
+      background: #38bdf8 url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.25'%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3Ccircle cx='10' cy='10' r='3'/%3E%3Ccircle cx='70' cy='20' r='4'/%3E%3Ccircle cx='20' cy='70' r='5'/%3E%3Ccircle cx='65' cy='65' r='3'/%3E%3C/g%3E%3C/svg%3E");
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -34,14 +33,17 @@
       overflow-x: hidden;
     }
 
+    /* رأس الصفحة الدائري والناعم */
     header {
       background: #ffffff;
+      margin: 0.8rem 1.5rem;
       padding: 0.6rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      border-bottom: 5px solid #38bdf8;
+      border-radius: 40px;
+      box-shadow: 0 10px 25px rgba(2, 132, 199, 0.25);
+      border: 4px solid #bae6fd;
     }
 
     .brand-box {
@@ -51,17 +53,14 @@
     }
 
     .brand-texts h1 {
-      font-size: 1.5rem;
+      font-size: 1.45rem;
       font-weight: 900;
       color: #0369a1;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
     }
 
     .brand-texts p {
       font-size: 0.85rem;
-      color: #0284c7;
+      color: #0ea5e9;
       font-weight: 800;
     }
 
@@ -69,7 +68,7 @@
       background: #fef08a;
       border: 3px solid #eab308;
       padding: 0.35rem 1.2rem;
-      border-radius: 25px;
+      border-radius: 30px;
       box-shadow: 0 4px 0 #ca8a04;
       display: flex;
       align-items: center;
@@ -91,7 +90,7 @@
       border: 3px solid #be185d;
       color: white;
       padding: 0.4rem 1.4rem;
-      border-radius: 25px;
+      border-radius: 30px;
       font-weight: 900;
       font-size: 1.15rem;
       box-shadow: 0 4px 0 #9d174d;
@@ -100,68 +99,67 @@
       gap: 0.5rem;
     }
 
+    /* أزرار التبويبات بنمط وسائد بيضاوية طافية */
     .nav-tabs-container {
       display: flex;
       justify-content: center;
-      padding: 0.8rem 1rem 0;
-      gap: 0.8rem;
+      padding: 0.4rem 1rem 0;
+      gap: 1rem;
     }
 
     .tab-pill {
       padding: 0.75rem 1.8rem;
-      border: 3px solid #0284c7;
-      background: #ffffff;
+      border: 3px solid #ffffff;
+      background: rgba(255, 255, 255, 0.85);
       font-size: 1.15rem;
       font-weight: 900;
       color: #0369a1;
       cursor: pointer;
-      border-radius: 25px;
-      box-shadow: 0 5px 0 #0284c7;
-      transition: all 0.15s ease;
+      border-radius: 35px;
+      box-shadow: 0 6px 15px rgba(2, 132, 199, 0.2);
+      transition: all 0.2s ease;
       display: flex;
       align-items: center;
       gap: 0.4rem;
     }
 
     .tab-pill:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 7px 0 #0284c7;
-    }
-
-    .tab-pill:active {
-      transform: translateY(3px);
-      box-shadow: 0 2px 0 #0284c7;
+      transform: translateY(-3px) scale(1.03);
+      background: #ffffff;
     }
 
     .tab-pill.active {
       background: #facc15;
       color: #713f12;
-      border-color: #ca8a04;
-      box-shadow: 0 5px 0 #a16207;
+      border-color: #fef08a;
+      box-shadow: 0 6px 0 #ca8a04;
+      transform: translateY(-2px);
     }
 
     main {
       flex: 1;
       max-width: 1350px;
-      margin: 1rem auto 2rem;
+      margin: 1.2rem auto 2.5rem;
       width: 95%;
     }
 
     .tab-view {
       display: none;
-      animation: bounceTab 0.3s ease;
+      animation: popTab 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .tab-view.active {
       display: block;
     }
 
-    @keyframes bounceTab {
-      0% { transform: scale(0.96); opacity: 0; }
+    @keyframes popTab {
+      0% { transform: scale(0.92); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
 
+    /* ================================================= */
     /* 1. مصفوفة شمس الجذر الإشعاعية */
+    /* ================================================= */
     .radial-playground {
       position: relative;
       width: 100%;
@@ -169,12 +167,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(8px);
-      border-radius: 40px;
-      border: 6px solid #bae6fd;
-      box-shadow: 0 15px 35px rgba(2, 132, 199, 0.15);
-      margin-top: 0.5rem;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 60px;
+      border: 8px solid #ffffff;
+      box-shadow: 0 20px 45px rgba(2, 132, 199, 0.2);
     }
 
     .radial-center {
@@ -184,7 +180,7 @@
       height: 215px;
       border-radius: 50%;
       background: radial-gradient(circle, #fef08a 0%, #eab308 100%);
-      border: 7px solid #ffffff;
+      border: 8px solid #ffffff;
       box-shadow: 0 0 50px rgba(234, 179, 8, 0.6), 0 10px 25px rgba(0,0,0,0.15);
       display: flex;
       flex-direction: column;
@@ -205,7 +201,6 @@
       padding: 0.2rem 0.8rem;
       border-radius: 12px;
       margin-bottom: 0.2rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
     .nucleus-letters {
@@ -235,9 +230,9 @@
       position: absolute;
       width: 265px;
       background: white;
-      border-radius: 28px;
+      border-radius: 35px;
       padding: 1.2rem 1.4rem;
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       border: 4px solid transparent;
@@ -261,7 +256,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.2rem;
     }
 
     .branch-title { font-size: 0.9rem; font-weight: 900; color: #64748b; }
@@ -274,7 +268,7 @@
       background: #f8fafc;
       border: 2px dashed #cbd5e1;
       padding: 0.4rem 0.6rem;
-      border-radius: 14px;
+      border-radius: 18px;
       font-size: 0.85rem;
       font-weight: 900;
       color: #475569;
@@ -291,271 +285,275 @@
       z-index: 1;
     }
 
-    /* 2. مسرح الحكاية */
-    .story-hero-wrapper {
+    /* ================================================= */
+    /* 2. مسرح الحكاية: سحابة الحكايات الكرتونية */
+    /* ================================================= */
+    .story-cloud-realm {
+      position: relative;
       background: #ffffff;
-      border-radius: 40px;
-      padding: 2.5rem;
-      border: 6px solid #4ade80;
-      box-shadow: 0 15px 40px rgba(74, 222, 128, 0.25);
+      border-radius: 80px 80px 70px 70px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+      border: 8px solid #ffffff;
     }
 
-    .story-character-banner {
-      background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
-      border-radius: 30px;
-      padding: 1.6rem 2rem;
+    /* شخصية الطفلة القارئة في الأعلى (مستوحاة من صورتك المرفقة) */
+    .story-top-art-bar {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 2rem;
       margin-bottom: 2rem;
-      border: 4px solid #eab308;
+      flex-wrap: wrap;
     }
 
-    .mascot-large-art {
-      width: 130px;
-      height: 130px;
-      flex-shrink: 0;
-      animation: floatBird 3s ease-in-out infinite;
+    .reading-girl-svg {
+      width: 140px;
+      height: 140px;
+      animation: gentleSway 3s ease-in-out infinite;
     }
 
-    @keyframes floatBird {
-      0%, 100% { transform: translateY(0) rotate(-2deg); }
-      50% { transform: translateY(-8px) rotate(2deg); }
+    @keyframes gentleSway {
+      0%, 100% { transform: rotate(-2deg); }
+      50% { transform: rotate(2deg) translateY(-5px); }
     }
 
-    .bubble-talk {
-      background: #ffffff;
-      border: 3px solid #ca8a04;
-      border-radius: 25px;
-      padding: 1.2rem 1.8rem;
-      color: #854d0e;
-      position: relative;
-      flex: 1;
+    .cloud-speech-pill {
+      background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
+      border: 4px solid #ca8a04;
+      border-radius: 40px;
+      padding: 1.4rem 2.2rem;
+      max-width: 650px;
+      box-shadow: 0 8px 20px rgba(202, 138, 4, 0.2);
     }
 
-    .task-instruction-badge {
-      background: #3b82f6;
-      color: white;
+    .cloud-speech-pill h3 {
+      font-size: 1.5rem;
       font-weight: 900;
-      padding: 0.4rem 1.2rem;
-      border-radius: 20px;
+      color: #713f12;
+      margin-bottom: 0.3rem;
+    }
+
+    .cloud-speech-pill p {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #854d0e;
+    }
+
+    .cloud-mission-tag {
+      background: #ec4899;
+      color: white;
+      padding: 0.3rem 1.2rem;
+      border-radius: 25px;
+      font-weight: 900;
       display: inline-block;
       margin-top: 0.6rem;
-      font-size: 1rem;
-      box-shadow: 0 3px 0 #1d4ed8;
+      font-size: 0.95rem;
+      box-shadow: 0 3px 0 #be185d;
     }
 
-    .interactive-paragraph {
+    .cloud-text-canvas {
       background: #f0fdf4;
-      border: 3px solid #86efac;
-      border-radius: 28px;
-      padding: 2.2rem;
-      font-size: 1.75rem;
-      line-height: 2.7;
+      border: 4px dashed #86efac;
+      border-radius: 50px;
+      padding: 2.5rem;
+      font-size: 1.8rem;
+      line-height: 2.8;
       color: #1e293b;
+      box-shadow: inset 0 4px 12px rgba(0,0,0,0.03);
     }
 
     .story-click-word {
       background: #ffffff;
       border: 3px solid #cbd5e1;
-      padding: 0.15rem 0.8rem;
-      border-radius: 18px;
+      padding: 0.2rem 0.9rem;
+      border-radius: 25px;
       font-weight: 900;
-      color: #1e1b4b;
       cursor: pointer;
       display: inline-block;
-      box-shadow: 0 4px 0 #94a3b8;
+      box-shadow: 0 4px 0 #cbd5e1;
       transition: all 0.15s;
     }
 
+    .story-click-word:hover {
+      transform: scale(1.08) translateY(-2px);
+      border-color: #0284c7;
+    }
+
     .story-click-word.found {
-      background: #4ade80 !important;
-      color: #064e3b !important;
-      border-color: #16a34a !important;
-      box-shadow: 0 4px 0 #15803d !important;
-      transform: scale(1.08);
+      background: #22c55e !important;
+      color: white !important;
+      border-color: #15803d !important;
+      box-shadow: 0 5px 0 #166534 !important;
+      transform: scale(1.1);
+      animation: popFound 0.3s ease;
+    }
+
+    @keyframes popFound {
+      0% { transform: scale(0.85); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1.1); }
     }
 
     /* ================================================= */
-    /* 3. ورشة التركيب الحركية الخيالية (تصميم جديد كلياً) */
+    /* 3. ورشة التركيب: أقراص طافية وشخصيات الوحوش اللطيفة */
     /* ================================================= */
-    .workshop-magic-realm {
+    .workshop-galaxy {
       position: relative;
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #1e1b4b 100%);
-      border-radius: 45px;
-      padding: 2.5rem 2rem;
-      border: 8px solid #bae6fd;
-      box-shadow: 0 20px 50px rgba(2, 132, 199, 0.35);
-      overflow: hidden;
+      background: #ffffff;
+      border-radius: 70px;
+      padding: 2.8rem 2rem;
+      border: 8px solid #ffffff;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.12);
     }
 
-    /* العنوان الكرتوني الفانتاسي */
-    .workshop-header {
+    .workshop-title-banner {
       text-align: center;
       margin-bottom: 2rem;
-      position: relative;
-      z-index: 5;
     }
 
-    .workshop-header h3 {
+    .workshop-title-banner h3 {
       font-size: 2.2rem;
       font-weight: 900;
-      color: #fef08a;
-      text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      color: #0284c7;
       display: inline-flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0.6rem;
     }
 
-    .workshop-header p {
-      font-size: 1.2rem;
+    .workshop-title-banner p {
+      font-size: 1.15rem;
       font-weight: 800;
-      color: #e0f2fe;
-      margin-top: 0.4rem;
+      color: #64748b;
+      margin-top: 0.3rem;
     }
 
-    /* الحاوية التي تجمع الشخصيات والبطاقات في الوسط */
-    .workshop-content-layout {
+    .discs-stage-wrapper {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      position: relative;
-      z-index: 5;
+      justify-content: center;
+      gap: 1.8rem;
+      flex-wrap: wrap;
     }
 
-    /* الشخصية على اليمين: سنقر الصانع بالخوذة والمطرقة */
-    .side-mascot-right {
-      width: 160px;
-      flex-shrink: 0;
+    /* الوحش اللطيف الأزرق (مستوحى 100% من صورتك لمنصة عصافير/المناهج) */
+    .monster-mascot-box {
+      width: 140px;
       text-align: center;
-      animation: floatWorker 3s ease-in-out infinite;
+      animation: monsterFloat 3s ease-in-out infinite;
     }
 
-    @keyframes floatWorker {
-      0%, 100% { transform: translateY(0) rotate(2deg); }
-      50% { transform: translateY(-10px) rotate(-2deg); }
+    @keyframes monsterFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px) rotate(3deg); }
     }
 
-    /* الشخصية على اليسار: الروبوت الفضائي الذكي بيبو */
-    .side-mascot-left {
-      width: 160px;
-      flex-shrink: 0;
-      text-align: center;
-      animation: floatBot 3.5s ease-in-out infinite;
-    }
-
-    @keyframes floatBot {
-      0%, 100% { transform: translateY(0) rotate(-3deg); }
-      50% { transform: translateY(-12px) rotate(3deg); }
-    }
-
-    .mascot-speech {
-      background: #fef08a;
-      border: 3px solid #ca8a04;
+    .monster-speech {
+      background: #eff6ff;
+      border: 3px solid #60a5fa;
+      color: #1e40af;
+      padding: 0.5rem 0.8rem;
       border-radius: 20px;
-      padding: 0.4rem 0.8rem;
       font-size: 0.85rem;
       font-weight: 900;
-      color: #854d0e;
       margin-top: 0.5rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
     }
 
-    /* منصات التحدي الثلاث (تشبه محطات التصنيع أو كبسولات الطاقة) */
-    .workshop-stages-grid {
-      flex: 1;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.4rem;
-    }
-
-    .magic-cauldron-card {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
-      border-radius: 32px;
-      padding: 1.6rem 1.2rem;
+    /* الأقراص البيضاوية الدائرية (بدون أي مستطيلات) */
+    .oval-cauldron-disc {
+      width: 290px;
+      min-height: 290px;
+      border-radius: 60px;
+      padding: 1.8rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      border: 4px solid #ffffff;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.2), inset 0 0 15px rgba(254, 240, 138, 0.4);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+      border: 5px solid #ffffff;
+      transition: all 0.25s ease;
       position: relative;
-      transition: all 0.25s;
     }
 
-    .magic-cauldron-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    .disc-1 { background: radial-gradient(circle at top, #fef08a 0%, #fed7aa 100%); border-bottom: 8px solid #f59e0b; }
+    .disc-2 { background: radial-gradient(circle at top, #bae6fd 0%, #c7d2fe 100%); border-bottom: 8px solid #3b82f6; }
+    .disc-3 { background: radial-gradient(circle at top, #fbcfe8 0%, #f5d0fe 100%); border-bottom: 8px solid #ec4899; }
+
+    .oval-cauldron-disc:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.14);
     }
 
-    .cauldron-badge {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      color: white;
+    .disc-badge {
+      background: #ffffff;
+      color: #1e293b;
       font-size: 0.95rem;
       font-weight: 900;
-      padding: 0.35rem 1rem;
-      border-radius: 20px;
-      display: inline-block;
-      box-shadow: 0 3px 0 #92400e;
-      margin-bottom: 0.8rem;
+      padding: 0.35rem 1.2rem;
+      border-radius: 25px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      margin-bottom: 0.6rem;
     }
 
-    .cauldron-title {
+    .disc-title {
       font-size: 1.15rem;
       font-weight: 900;
-      color: #0c4a6e;
+      color: #0f172a;
       margin-bottom: 1rem;
     }
 
-    .magical-slots-row {
+    .disc-slots-circle {
       display: flex;
       justify-content: center;
       gap: 0.5rem;
-      margin: 1.2rem 0;
+      margin: 1rem 0;
     }
 
-    .magic-slot {
-      width: 54px;
-      height: 54px;
-      border: 3px dashed #38bdf8;
-      border-radius: 16px;
+    .circle-slot {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 3px dashed #64748b;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.8rem;
       font-weight: 900;
-      background: #f0f9ff;
+      background: #ffffff;
       color: #0369a1;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.06);
     }
 
-    .magic-slot.filled {
+    .circle-slot.filled {
       border: 3px solid #2563eb;
-      background: #eff6ff;
+      background: #dbeafe;
       color: #2563eb;
-      transform: scale(1.05);
+      transform: scale(1.08);
       animation: popSlot 0.25s ease;
     }
 
     @keyframes popSlot {
       0% { transform: scale(0.8); }
-      50% { transform: scale(1.15); }
-      100% { transform: scale(1.05); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1.08); }
     }
 
-    .crystal-tiles-row {
+    .candy-tiles-cluster {
       display: flex;
       justify-content: center;
       gap: 0.6rem;
-      margin-top: 1rem;
+      margin-top: 0.8rem;
     }
 
-    .crystal-tile {
+    .candy-btn {
       width: 52px;
       height: 52px;
-      background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
-      border: 3px solid #eab308;
+      background: #ffffff;
+      border: 3px solid #ca8a04;
       color: #854d0e;
-      border-radius: 16px;
+      border-radius: 50%;
       font-size: 1.8rem;
       font-weight: 900;
       cursor: pointer;
@@ -563,62 +561,80 @@
       transition: all 0.1s;
     }
 
-    .crystal-tile:hover {
+    .candy-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 7px 0 #ca8a04;
     }
 
-    .crystal-tile:active {
+    .candy-btn:active {
       transform: translateY(4px);
       box-shadow: 0 1px 0 #ca8a04;
     }
 
-    .magic-feedback {
-      margin-top: 1rem;
-      padding: 0.5rem 0.8rem;
-      border-radius: 14px;
+    .disc-feedback {
+      margin-top: 0.8rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
       font-weight: 900;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       display: none;
     }
 
-    /* 4. حلبة التحدي */
-    .arena-box {
+    /* ================================================= */
+    /* 4. حلبة الأبطال: فقاعات الأسئلة الدائرية */
+    /* ================================================= */
+    .arena-bubble-world {
       background: #ffffff;
-      border-radius: 40px;
-      padding: 2.2rem;
-      border: 6px solid #c084fc;
-      box-shadow: 0 15px 40px rgba(192, 132, 252, 0.25);
+      border-radius: 70px;
+      padding: 2.8rem 2rem;
+      border: 8px solid #ffffff;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+    }
+
+    .arena-title-box {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .arena-title-box h3 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #9333ea;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
     }
 
     .arena-cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.6rem;
+      gap: 1.8rem;
     }
 
-    .challenge-card {
-      background: #faf5ff;
-      border-radius: 30px;
-      padding: 1.8rem;
-      border: 3px solid #e9d5ff;
+    .bubble-question-card {
+      background: radial-gradient(circle at top, #faf5ff 0%, #f3e8ff 100%);
+      border-radius: 50px;
+      padding: 2rem;
+      border: 4px solid #d8b4fe;
       border-bottom: 8px solid #a855f7;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.06);
     }
 
-    .challenge-card h4 {
-      font-size: 1.25rem;
-      color: #6b21a8;
+    .bubble-question-card h4 {
+      font-size: 1.3rem;
+      color: #581c87;
       font-weight: 900;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.6;
     }
 
-    .opt-pill-btn {
+    .bubble-opt-pill {
       background: #ffffff;
-      border: 3px solid #cbd5e1;
+      border: 3px solid #c084fc;
       padding: 0.9rem 1.4rem;
       font-size: 1.25rem;
       font-weight: 900;
-      border-radius: 22px;
+      border-radius: 35px;
       cursor: pointer;
       width: 100%;
       text-align: right;
@@ -626,16 +642,22 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 0 #cbd5e1;
+      box-shadow: 0 5px 0 #c084fc;
       transition: all 0.15s;
     }
 
-    .opt-pill-btn:hover {
-      background: #eff6ff;
-      border-color: #3b82f6;
+    .bubble-opt-pill:hover {
+      background: #fdf4ff;
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 #a855f7;
     }
 
-    /* Modal */
+    .bubble-opt-pill:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #c084fc;
+    }
+
+    /* النافذة المنبثقة التفصيلية (Modal) */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -656,7 +678,7 @@
       background: white;
       width: 90%;
       max-width: 630px;
-      border-radius: 35px;
+      border-radius: 45px;
       padding: 2.2rem;
       border: 6px solid #e0e7ff;
       box-shadow: 0 25px 60px rgba(0,0,0,0.3);
@@ -696,9 +718,25 @@
     .modal-word { font-size: 3.4rem; font-weight: 900; letter-spacing: 1px; }
     .modal-weight { color: var(--primary); font-weight: 900; font-size: 1.25rem; margin-top: 0.3rem; }
 
+    .modal-audio-btn {
+      background: #fef08a;
+      border: 3px solid #eab308;
+      color: #854d0e;
+      font-weight: 900;
+      padding: 0.6rem 1.6rem;
+      border-radius: 30px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.7rem;
+      font-size: 1.05rem;
+      box-shadow: 0 4px 0 #ca8a04;
+    }
+
     .detail-card {
       background: #f8fafc;
-      border-radius: 22px;
+      border-radius: 30px;
       padding: 1.3rem;
       border: 2px solid #e2e8f0;
       margin-bottom: 1.2rem;
@@ -711,15 +749,15 @@
     .affix-box {
       background: #fffbeb;
       border: 3px solid #fde68a;
-      border-radius: 24px;
+      border-radius: 30px;
       padding: 1.3rem;
       display: none;
     }
 
     .affix-box-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
     .affix-box-title { color: #92400e; font-weight: 900; font-size: 1.15rem; }
-    .affix-rule-badge { background: #fef08a; color: #854d0e; padding: 0.3rem 0.8rem; border-radius: 12px; font-size: 0.85rem; font-weight: 900; }
-    .affix-item { background: white; border-radius: 18px; padding: 0.8rem 1.2rem; margin-bottom: 0.7rem; display: flex; justify-content: space-between; align-items: center; border: 2px solid #fef3c7; }
+    .affix-rule-badge { background: #fef08a; color: #854d0e; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 900; }
+    .affix-item { background: white; border-radius: 25px; padding: 0.8rem 1.2rem; margin-bottom: 0.7rem; display: flex; justify-content: space-between; align-items: center; border: 2px solid #fef3c7; }
 
     .c-r { color: var(--c-root) !important; }
     .c-a { color: var(--c-affix) !important; }
@@ -729,22 +767,7 @@
 
   <header>
     <div class="brand-box">
-      <div class="mascot-avatar" onclick="Sound.speak('مَرْحَباً بِكَ يَا بَطَلَ اللُّغَةِ العَرَبِيَّةِ! أَنَا صَدِيقُكَ سُنْقُر')">
-        <svg viewBox="0 0 100 100" width="45" height="45">
-          <circle cx="50" cy="50" r="45" fill="#38bdf8"/>
-          <ellipse cx="50" cy="20" rx="30" ry="12" fill="#ef4444"/>
-          <circle cx="50" cy="11" r="6" fill="#dc2626"/>
-          <circle cx="36" cy="48" r="15" fill="white" stroke="#1e293b" stroke-width="4"/>
-          <circle cx="64" cy="48" r="15" fill="white" stroke="#1e293b" stroke-width="4"/>
-          <line x1="48" y1="48" x2="52" y2="48" stroke="#1e293b" stroke-width="4"/>
-          <circle cx="38" cy="48" r="6" fill="#0284c7"/>
-          <circle cx="66" cy="48" r="6" fill="#0284c7"/>
-          <circle cx="40" cy="45" r="2.5" fill="white"/>
-          <circle cx="68" cy="45" r="2.5" fill="white"/>
-          <polygon points="44,56 56,56 50,70" fill="#f97316"/>
-        </svg>
-      </div>
-
+      <div style="font-size: 2.2rem; animation: gentleSway 3s infinite;">🎈</div>
       <div class="brand-texts">
         <h1>بَذْرَةُ الكَلِمَاتِ 🎨</h1>
         <p>الخَرِيطَةُ المُعْجَمِيَّةُ الإِشْعَاعِيَّةُ الذَّكِيَّةُ</p>
@@ -768,13 +791,13 @@
 
   <nav class="nav-tabs-container">
     <button class="tab-pill active" onclick="switchMainTab('radialMap', this)">☀️ شَمْسُ الجَذْرِ</button>
-    <button class="tab-pill" onclick="switchMainTab('storyTab', this)">📖 مَسْرَحُ الحِكَايَةِ</button>
-    <button class="tab-pill" onclick="switchMainTab('labTab', this)">⚙️ وَرْشَةُ التَّرْكِيبِ</button>
+    <button class="tab-pill" onclick="switchMainTab('storyTab', this)">📖 سَحَابَةُ الحِكَايَةِ</button>
+    <button class="tab-pill" onclick="switchMainTab('labTab', this)">⚙️ أَقْرَاصُ التَّرْكِيبِ</button>
     <button class="tab-pill" onclick="switchMainTab('quizTab', this)">🏆 حَلَبَةُ الأَبْطَالِ</button>
   </nav>
 
   <main>
-    <!-- 1. شمس الجذر الإشعاعية -->
+    <!-- 1. شمس الجذر الإشعاعية التفاعلية -->
     <div id="radialMap" class="tab-view active">
       <div class="radial-playground">
         <svg class="radial-svg-layer" id="svgRays"></svg>
@@ -843,114 +866,130 @@
       </div>
     </div>
 
-    <!-- 2. مسرح الحكاية (نمط استخرج من الفقرة - ألف باء تاء) -->
+    <!-- 2. مسرح الحكاية: سحابة الحكايات الكرتونية -->
     <div id="storyTab" class="tab-view">
-      <div class="story-hero-wrapper">
-        <div class="story-character-banner">
-          <div class="mascot-large-art">
-            <svg viewBox="0 0 100 100" width="130" height="130">
-              <circle cx="50" cy="50" r="45" fill="#38bdf8"/>
-              <ellipse cx="50" cy="20" rx="30" ry="12" fill="#ef4444"/>
-              <circle cx="50" cy="11" r="6" fill="#dc2626"/>
-              <circle cx="36" cy="46" r="14" fill="white" stroke="#1e293b" stroke-width="4"/>
-              <circle cx="64" cy="46" r="14" fill="white" stroke="#1e293b" stroke-width="4"/>
-              <circle cx="38" cy="46" r="6" fill="#0284c7"/>
-              <circle cx="66" cy="46" r="6" fill="#0284c7"/>
-              <polygon points="45,56 55,56 50,68" fill="#f97316"/>
-              <rect x="75" y="45" width="8" height="40" rx="4" transform="rotate(30 75 45)" fill="#eab308"/>
-              <polygon points="90,85 100,95 85,95" fill="#dc2626"/>
+      <div class="story-cloud-realm">
+        <div class="story-top-art-bar">
+          <!-- رسم الطفلة اللطيفة رافعة الكتاب المفتوح (مستوحاة من صورتك المرفقة) -->
+          <div class="reading-girl-svg">
+            <svg viewBox="0 0 120 120" width="130" height="130">
+              <!-- شعر الطفلة ووجهها الباسم -->
+              <circle cx="60" cy="70" r="28" fill="#fed7aa"/>
+              <path d="M30 65 Q60 30 90 65 Q90 90 75 90 Q60 92 45 90 Q30 90 30 65 Z" fill="#78350f"/>
+              <!-- قذلة الشعر -->
+              <path d="M40 55 Q60 65 80 55 Q60 50 40 55 Z" fill="#92400e"/>
+              <!-- خدود وردية وعيون باسمة -->
+              <circle cx="48" cy="72" r="3" fill="#1e293b"/>
+              <circle cx="72" cy="72" r="3" fill="#1e293b"/>
+              <circle cx="42" cy="76" r="4.5" fill="#f43f5e" opacity="0.6"/>
+              <circle cx="78" cy="76" r="4.5" fill="#f43f5e" opacity="0.6"/>
+              <path d="M54 78 Q60 84 66 78" stroke="#1e293b" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <!-- فستان بنفسجي منقط بزهور -->
+              <path d="M40 95 Q60 85 80 95 L88 120 L32 120 Z" fill="#a855f7"/>
+              <circle cx="50" cy="105" r="2" fill="#fde047"/>
+              <circle cx="70" cy="105" r="2" fill="#fde047"/>
+              <circle cx="60" cy="112" r="2" fill="#fde047"/>
+              <!-- الكتاب المفتوح المرفوع عالياً -->
+              <path d="M60 40 Q40 25 15 32 L15 50 Q40 42 60 55 Z" fill="#f59e0b"/>
+              <path d="M60 40 Q80 25 105 32 L105 50 Q80 42 60 55 Z" fill="#fbbf24"/>
+              <path d="M60 40 L60 55" stroke="#78350f" stroke-width="2"/>
+              <!-- يدين الطفلة تمسكان بالكتاب -->
+              <circle cx="28" cy="48" r="5" fill="#fed7aa"/>
+              <circle cx="92" cy="48" r="5" fill="#fed7aa"/>
+              <!-- نجوم سحرية فوق الكتاب -->
+              <polygon points="60,15 62,20 67,20 63,24 65,29 60,26 55,29 57,24 53,20 58,20" fill="#facc15"/>
+              <circle cx="35" cy="20" r="3" fill="#38bdf8"/>
+              <circle cx="85" cy="18" r="3" fill="#ec4899"/>
             </svg>
           </div>
 
-          <div class="bubble-talk">
-            <h3 style="font-size: 1.4rem; font-weight: 900;">مُغَامَرَةُ الاِسْتِكْشَافِ دَاخِلَ الفِقْرَةِ 🎯</h3>
-            <p style="font-size: 1.15rem; font-weight: 800; margin-top: 0.3rem;">
-              ابْحَثْ عَنِ الكَلِمَةِ المَطْلُوبَةِ وَانْقُرْ عَلَيْهَا مُبَاشَرَةً دَاخِلَ النَّصِّ!
-            </p>
-            <div class="task-instruction-badge" id="storyMissionBadge">المَهَمَّةُ: ابْحَثْ عَنِ اسْمِ الفَاعِلِ</div>
+          <div class="cloud-speech-pill">
+            <h3>سَحَابَةُ الاِسْتِكْشَافِ القِرَائِيِّ 📖</h3>
+            <p>اقْرَأِ النَّصَّ يَا بَطَلُ، وَانْقُرْ مُبَاشَرَةً عَلَى الكَلِمَةِ المَطْلُوبَةِ لِتَتَلَوَّنَ بِالأَخْضَرِ!</p>
+            <div class="cloud-mission-tag" id="storyMissionBadge">المَهَمَّةُ: ابْحَثْ عَنِ اسْمِ الفَاعِلِ</div>
+            <button class="modal-audio-btn" style="margin-right: 0.8rem; padding: 0.4rem 1rem; font-size: 0.95rem;" onclick="speakCurrentStory()">🔊 اسْتَمِعْ لِلنَّصِّ</button>
           </div>
         </div>
 
-        <div class="interactive-paragraph" id="storyWordsContainer"></div>
+        <div class="cloud-text-canvas" id="storyWordsContainer"></div>
       </div>
     </div>
 
     <!-- ========================================================= -->
-    <!-- 3. ورشة التركيب بنمط عالم الصانع الكرتوني والشخصيات في الجوانب -->
+    <!-- 3. ورشة التركيب: أقراص دائرية ملونة مع الوحوش اللطيفة -->
     <!-- ========================================================= -->
     <div id="labTab" class="tab-view">
-      <div class="workshop-magic-realm">
-        <div class="workshop-header">
-          <h3><span>🛠️</span> مَصْنَعُ الكَلِمَاتِ وَالأَوْزَانِ الخَارِقَةِ <span>⚙️</span></h3>
-          <p>اخْتَرِ الجَوْهَرَةَ اللَّامِعَةَ لِإِكْمَالِ الوَزْنِ فِي مِرْجَلِ الصَّرْفِ!</p>
+      <div class="workshop-galaxy">
+        <div class="workshop-title-banner">
+          <h3><span>🪐</span> أَقْرَاصُ التَّرْكِيبِ الصَّرْفِيِّ <span>⚙️</span></h3>
+          <p>اخْتَرِ الحَرْفَ المُنَاسِبَ لِتَكْتَمِلَ دَائِرَةُ الوَزْنِ الصَّحِيحِ!</p>
         </div>
 
-        <div class="workshop-content-layout">
-          <!-- الشخصية الكرتونية الأولى (على اليمين): سنقر الصانع بالخوذة والمطرقة -->
-          <div class="side-mascot-right">
-            <svg viewBox="0 0 120 120" width="130" height="130">
-              <!-- سحابة خلفية مصغرة -->
-              <ellipse cx="60" cy="105" rx="40" ry="10" fill="rgba(0,0,0,0.2)"/>
-              <!-- جسم الطائر الأزرق -->
-              <circle cx="60" cy="65" r="42" fill="#38bdf8"/>
-              <!-- بطن أصفر لطيف -->
-              <ellipse cx="60" cy="75" rx="26" ry="24" fill="#fef08a"/>
-              <!-- خوذة العمل الصفراء للحرفي -->
-              <path d="M25 50 Q60 15 95 50 Z" fill="#facc15" stroke="#ca8a04" stroke-width="3"/>
-              <ellipse cx="60" cy="50" rx="42" ry="7" fill="#eab308"/>
-              <circle cx="60" cy="30" r="5" fill="#ef4444"/>
-              <!-- عيون كبيرة نظيفة مع نظارة واقية بيضاء -->
-              <circle cx="48" cy="58" r="13" fill="white" stroke="#1e293b" stroke-width="3"/>
-              <circle cx="72" cy="58" r="13" fill="white" stroke="#1e293b" stroke-width="3"/>
-              <circle cx="50" cy="58" r="6" fill="#0284c7"/>
-              <circle cx="74" cy="58" r="6" fill="#0284c7"/>
-              <circle cx="52" cy="55" r="2" fill="white"/>
-              <circle cx="76" cy="55" r="2" fill="white"/>
-              <!-- منقار مبتسم -->
-              <polygon points="55,68 65,68 60,78" fill="#f97316"/>
-              <!-- مطرقة النجار في اليد -->
-              <rect x="92" y="55" width="7" height="35" rx="3" transform="rotate(-25 92 55)" fill="#92400e"/>
-              <rect x="80" y="45" width="22" height="14" rx="4" transform="rotate(-25 80 45)" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+        <div class="discs-stage-wrapper">
+          <!-- الوحش اللطيف الأزرق على اليمين (مثل صورة عصافير) -->
+          <div class="monster-mascot-box">
+            <svg viewBox="0 0 100 100" width="115" height="115">
+              <!-- جسم الوحش الفروي اللطيف -->
+              <path d="M25 40 Q20 85 50 85 Q80 85 75 40 Q75 15 50 15 Q25 15 25 40 Z" fill="#06b6d4"/>
+              <!-- قرون صغيرة صفراء -->
+              <polygon points="32,20 28,10 38,16" fill="#facc15"/>
+              <polygon points="68,20 72,10 62,16" fill="#facc15"/>
+              <!-- عيون كبيرة بيضاء مع نظارات حمراء -->
+              <circle cx="38" cy="40" r="14" fill="white" stroke="#ef4444" stroke-width="4"/>
+              <circle cx="62" cy="40" r="14" fill="white" stroke="#ef4444" stroke-width="4"/>
+              <line x1="50" y1="40" x2="54" y2="40" stroke="#ef4444" stroke-width="4"/>
+              <circle cx="38" cy="40" r="6" fill="#0f172a"/>
+              <circle cx="62" cy="40" r="6" fill="#0f172a"/>
+              <circle cx="40" cy="38" r="2" fill="white"/>
+              <circle cx="64" cy="38" r="2" fill="white"/>
+              <!-- فم باسم وأسنان لطيفة -->
+              <path d="M42 58 Q50 66 58 58" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <!-- يدين وقدمين الوحش -->
+              <ellipse cx="20" cy="55" rx="6" ry="12" fill="#0891b2"/>
+              <ellipse cx="80" cy="55" rx="6" ry="12" fill="#0891b2"/>
+              <ellipse cx="38" cy="85" rx="8" ry="5" fill="#0891b2"/>
+              <ellipse cx="62" cy="85" rx="8" ry="5" fill="#0891b2"/>
+              <!-- قلم تلوين في اليد -->
+              <rect x="76" y="35" width="6" height="28" rx="2" transform="rotate(25 76 35)" fill="#f59e0b"/>
+              <polygon points="85,60 91,67 80,67" fill="#dc2626"/>
             </svg>
-            <div class="mascot-speech" onclick="Sound.speak('هَيَّا يَا بَطَلُ، رَكِّبْ مَعِي الكَلِمَةَ بِالمِطْرَقَةِ!')">🔨 سُنْقُرُ الصَّانِعُ: «أَنْتَ بَطَلٌ!»</div>
+            <div class="monster-speech" onclick="Sound.speak('أَنْتَ عَبْقَرِيٌّ، هَيَّا رَكِّبِ الكَلِمَةَ مَعِي!')">🐾 نَمُّوش: «هَيَّا نَرْكَبْ!»</div>
           </div>
 
-          <!-- بطاقات ومحطات التحدي الثلاث -->
-          <div class="workshop-stages-grid" id="magicStationsContainer"></div>
+          <!-- الأقراص الدائرية الثلاثة -->
+          <div id="discsContainer" style="display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;"></div>
 
-          <!-- الشخصية الكرتونية الثانية (على اليسار): الروبوت بيبو الذكي -->
-          <div class="side-mascot-left">
-            <svg viewBox="0 0 120 120" width="130" height="130">
-              <ellipse cx="60" cy="105" rx="35" ry="8" fill="rgba(0,0,0,0.2)"/>
-              <!-- هوائي الروبوت -->
-              <line x1="60" y1="20" x2="60" y2="35" stroke="#cbd5e1" stroke-width="4"/>
-              <circle cx="60" cy="16" r="7" fill="#ef4444"/>
-              <!-- رأس الروبوت المربع المستدير -->
-              <rect x="30" y="32" width="60" height="48" rx="16" fill="#e2e8f0" stroke="#94a3b8" stroke-width="3"/>
-              <!-- شاشة العيون الرقمية -->
-              <rect x="38" y="42" width="44" height="24" rx="10" fill="#0f172a"/>
-              <circle cx="48" cy="54" r="6" fill="#22c55e"/>
-              <circle cx="72" cy="54" r="6" fill="#22c55e"/>
-              <line x1="50" y1="62" x2="70" y2="62" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
-              <!-- أذن الروبوت كمكبرات صوت -->
-              <rect x="23" y="46" width="7" height="16" rx="3" fill="#38bdf8"/>
-              <rect x="90" y="46" width="7" height="16" rx="3" fill="#38bdf8"/>
-              <!-- جسم الروبوت اللطيف -->
-              <rect x="38" y="82" width="44" height="25" rx="10" fill="#cbd5e1" stroke="#94a3b8" stroke-width="3"/>
-              <circle cx="60" cy="94" r="5" fill="#38bdf8"/>
+          <!-- الوحش اللطيف الأخضر مع سماعات (الصورة الأولى من مرفقاتك) -->
+          <div class="monster-mascot-box">
+            <svg viewBox="0 0 100 100" width="115" height="115">
+              <!-- جسم الوحش الأخضر -->
+              <path d="M25 40 Q20 85 50 85 Q80 85 75 40 Q75 15 50 15 Q25 15 25 40 Z" fill="#10b981"/>
+              <!-- سماعات الرأس الوردية -->
+              <path d="M22 45 Q20 12 50 12 Q80 12 78 45" stroke="#f43f5e" stroke-width="5" fill="none"/>
+              <rect x="15" y="35" width="10" height="20" rx="5" fill="#ec4899"/>
+              <rect x="75" y="35" width="10" height="20" rx="5" fill="#ec4899"/>
+              <!-- عيون كبيرة نظاراتية -->
+              <circle cx="38" cy="42" r="13" fill="white" stroke="#1e293b" stroke-width="3"/>
+              <circle cx="62" cy="42" r="13" fill="white" stroke="#1e293b" stroke-width="3"/>
+              <circle cx="38" cy="42" r="5" fill="#0f172a"/>
+              <circle cx="62" cy="42" r="5" fill="#0f172a"/>
+              <path d="M44 60 Q50 66 56 60" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <!-- أقدام -->
+              <ellipse cx="38" cy="85" rx="8" ry="5" fill="#059669"/>
+              <ellipse cx="62" cy="85" rx="8" ry="5" fill="#059669"/>
             </svg>
-            <div class="mascot-speech" style="background:#bae6fd; border-color:#0284c7; color:#0369a1;" onclick="Sound.speak('بِيبْ بُوبْ! لَدَيْنَا طَاقَةٌ هَائِلَةٌ لِحَلِّ الصَّرْفِ!')">⚡ بِّيبُو الرُّوبُوتُ: «حِسَابَاتِي مُطَابِقَةٌ!»</div>
+            <div class="monster-speech" style="background:#f0fdf4; border-color:#86efac; color:#15803d;" onclick="Sound.speak('اسْتَمِعْ جَيِّداً يَا بَطَلُ، أَنْتَ ذَكِيٌّ جِدّاً!')">🎧 فَرْفُور: «أَسْمَعُكَ!»</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 4. حلبة الأبطال -->
+    <!-- 4. حلبة الأبطال: فقاعات التحدي الدائرية -->
     <div id="quizTab" class="tab-view">
-      <div class="arena-box">
-        <div style="text-align: center; margin-bottom: 1.5rem;">
-          <h3 style="font-size: 1.8rem; font-weight: 900; color: #7c3aed;">🏆 حَلَبَةُ الأَبْطَالِ الصَّرْفِيَّةِ</h3>
-          <p style="font-size: 1.15rem; font-weight: 800; color: #64748b;">انْقُرْ عَلَى الإِجَابَةِ الصَّحِيحَةِ وَاسْتَمِعْ لِلتَّوْجِيهِ الذَّكِيِّ:</p>
+      <div class="arena-bubble-world">
+        <div class="arena-title-box">
+          <h3><span>🏆</span> حَلَبَةُ الفُقَّاعَاتِ الصَّرْفِيَّةِ <span>🎈</span></h3>
+          <p>اخْتَرِ الفُقَّاعَةَ الصَّحِيحَةَ لِتَكْسِبَ نُجُومَ التَّفَوُّقِ:</p>
         </div>
 
         <div class="arena-cards-grid" id="quizzesGrid"></div>
@@ -958,7 +997,7 @@
     </div>
   </main>
 
-  <!-- النافذة المنبثقة التفصيلية (Modal) -->
+  <!-- النافذة المنبثقة التفصيلية (Modal) المتوافقة مع مرشدي ص 14 -->
   <div class="modal-overlay" id="morphModal" onclick="closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -984,6 +1023,7 @@
         </div>
       </div>
 
+      <!-- تظهر حصراً للفعل المجرد (الفرع 1) -->
       <div class="affix-box" id="mAffixCard">
         <div class="affix-box-head">
           <span class="affix-box-title">📚 عَائِلَةُ الأَفْعَالِ المَزِيدَةِ (كِتَابُ مُرْشِدِي ص 14)</span>
@@ -1126,9 +1166,9 @@
           { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" }
         ],
         labs: [
-          { title: "التحدي 1: رَكِّبْ (اسْمَ الفَاعِلِ: صَانِع)", slots: [{ch:"صَـ"}, {ch:"", correct:"ا"}, {ch:"نِـ"}, {ch:"عٌ"}], pool: ["ا", "مَـ", "يَـ"] },
-          { title: "التحدي 2: رَكِّبْ (اسْمَ المَكَانِ: مَصْنَع)", slots: [{ch:"", correct:"مَـ"}, {ch:"صْ"}, {ch:"نَ"}, {ch:"عٌ"}], pool: ["مَـ", "تَـ", "سَـ"] },
-          { title: "التحدي 3: رَكِّبْ (اسْمَ المَفْعُولِ: مَصْنُوع)", slots: [{ch:"مَـ"}, {ch:"صْ"}, {ch:"نُـ"}, {ch:"", correct:"و"}, {ch:"عٌ"}], pool: ["و", "ي", "ا"] }
+          { title: "قُرْصُ (اسْمِ الفَاعِلِ: صَانِع)", slots: [{ch:"صَـ"}, {ch:"", correct:"ا"}, {ch:"نِـ"}, {ch:"عٌ"}], pool: ["ا", "مَـ", "يَـ"] },
+          { title: "قُرْصُ (اسْمِ المَكَانِ: مَصْنَع)", slots: [{ch:"", correct:"مَـ"}, {ch:"صْ"}, {ch:"نَ"}, {ch:"عٌ"}], pool: ["مَـ", "تَـ", "سَـ"] },
+          { title: "قُرْصُ (اسْمِ المَفْعُولِ: مَصْنُوع)", slots: [{ch:"مَـ"}, {ch:"صْ"}, {ch:"نُـ"}, {ch:"", correct:"و"}, {ch:"عٌ"}], pool: ["و", "ي", "ا"] }
         ],
         quizzes: [
           { q: "مَا هُوَ الفِعْلُ المَزِيدُ بِحَرْفٍ وَاحِدٍ مِنَ الجَذْرِ (ص - ن - ع)؟", ans: "صَنَّعَ", opts: ["صَنَعَ", "صَنَّعَ", "اسْتَصْنَعَ"], tip: "المزيد بحرف يكون بالتضعيف (فَعَّلَ)." },
@@ -1164,9 +1204,9 @@
           { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسم المكان)", targetType: "اسم المكان" }
         ],
         labs: [
-          { title: "التحدي 1: رَكِّبْ (اسْمَ الفَاعِلِ: كَاتِب)", slots: [{ch:"كَـ"}, {ch:"", correct:"ا"}, {ch:"تِـ"}, {ch:"بٌ"}], pool: ["ا", "و", "ي"] },
-          { title: "التحدي 2: رَكِّبْ (اسْمَ المَكَانِ: مَكْتَب)", slots: [{ch:"", correct:"مَـ"}, {ch:"كْ"}, {ch:"تَ"}, {ch:"بٌ"}], pool: ["مَـ", "أَ", "نَـ"] },
-          { title: "التحدي 3: رَكِّبْ (اسْمَ المَفْعُولِ: مَكْتُوب)", slots: [{ch:"مَـ"}, {ch:"كْ"}, {ch:"تُـ"}, {ch:"", correct:"و"}, {ch:"بٌ"}], pool: ["و", "ا", "ي"] }
+          { title: "قُرْصُ (اسْمِ الفَاعِلِ: كَاتِب)", slots: [{ch:"كَـ"}, {ch:"", correct:"ا"}, {ch:"تِـ"}, {ch:"بٌ"}], pool: ["ا", "و", "ي"] },
+          { title: "قُرْصُ (اسْمِ المَكَانِ: مَكْتَب)", slots: [{ch:"", correct:"مَـ"}, {ch:"كْ"}, {ch:"تَ"}, {ch:"بٌ"}], pool: ["مَـ", "أَ", "نَـ"] },
+          { title: "قُرْصُ (اسْمِ المَفْعُولِ: مَكْتُوب)", slots: [{ch:"مَـ"}, {ch:"كْ"}, {ch:"تُـ"}, {ch:"", correct:"و"}, {ch:"بٌ"}], pool: ["و", "ا", "ي"] }
         ],
         quizzes: [
           { q: "الفِعْلُ المَزِيدُ بِحَرْفٍ الَّذِي يَدُلُّ عَلَى المُشَارَكَةِ هُوَ:", ans: "كَاتَبَ", opts: ["كَتَبَ", "كَاتَبَ", "اسْتَكْتَبَ"], tip: "صيغة فاعَلَ تدل على المشاركة." }
@@ -1201,8 +1241,8 @@
           { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسم المكان)", targetType: "اسم المكان" }
         ],
         labs: [
-          { title: "التحدي 1: رَكِّبْ (اسْمَ الفَاعِلِ: عَالِم)", slots: [{ch:"عَـ"}, {ch:"", correct:"ا"}, {ch:"لِـ"}, {ch:"مٌ"}], pool: ["ا", "و", "ي"] },
-          { title: "التحدي 2: رَكِّبْ (اسْمَ المَفْعُولِ: مَعْلُوم)", slots: [{ch:"مَـ"}, {ch:"عْ"}, {ch:"لُـ"}, {ch:"", correct:"و"}, {ch:"مٌ"}], pool: ["و", "ا", "ي"] }
+          { title: "قُرْصُ (اسْمِ الفَاعِلِ: عَالِم)", slots: [{ch:"عَـ"}, {ch:"", correct:"ا"}, {ch:"لِـ"}, {ch:"مٌ"}], pool: ["ا", "و", "ي"] },
+          { title: "قُرْصُ (اسْمِ المَفْعُولِ: مَعْلُوم)", slots: [{ch:"مَـ"}, {ch:"عْ"}, {ch:"لُـ"}, {ch:"", correct:"و"}, {ch:"مٌ"}], pool: ["و", "ا", "ي"] }
         ],
         quizzes: [
           { q: "الفِعْلُ (عَلَّمَ) هُوَ فِعْلٌ:", ans: "مَزِيدٌ بِحَرْفٍ", opts: ["مُجَرَّدٌ", "مَزِيدٌ بِحَرْفٍ", "مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ"], tip: "عَلَّمَ مزيد بالتضعيف." }
@@ -1229,7 +1269,7 @@
       currentMissionIdx = 0;
       loadInteractiveStory(data);
 
-      renderMagicWorkshop(data.labs);
+      renderDiscsWorkshop(data.labs);
       renderArenaQuizzes(data.quizzes);
     }
 
@@ -1294,7 +1334,7 @@
               </div>
               <div style="font-size: 0.95rem; color: #64748b;">${aff.desc}</div>
             </div>
-            <button style="border:none; background:#fef08a; padding:0.4rem 0.8rem; border-radius:12px; cursor:pointer; font-weight:bold; color:#854d0e;" onclick="Sound.speak('${aff.plain}')">🔊</button>
+            <button style="border:none; background:#fef08a; padding:0.4rem 0.8rem; border-radius:20px; cursor:pointer; font-weight:bold; color:#854d0e;" onclick="Sound.speak('${aff.plain}')">🔊</button>
           `;
           affixList.appendChild(div);
         });
@@ -1363,37 +1403,45 @@
       }
     }
 
+    function speakCurrentStory() {
+      const rootKey = document.getElementById('rootSelect').value;
+      const text = db[rootKey].storyParagraph.map(p => p.word).join(' ');
+      Sound.speak(text);
+    }
+
     // ----------------------------------------------------
-    // ورشة التركيب الخارقة الجديدة كلياً
+    // ورشة التركيب: الأقراص البيضاوية الدائرية
     // ----------------------------------------------------
-    function renderMagicWorkshop(labs) {
-      const container = document.getElementById('magicStationsContainer');
+    function renderDiscsWorkshop(labs) {
+      const container = document.getElementById('discsContainer');
       container.innerHTML = '';
 
+      const discClasses = ['disc-1', 'disc-2', 'disc-3'];
+
       labs.forEach((lab, lIdx) => {
-        const card = document.createElement('div');
-        card.className = 'magic-cauldron-card';
-        card.innerHTML = `
-          <div class="cauldron-badge">مَرْحَلَةُ التَّرْكِيبِ ${lIdx + 1}</div>
-          <div class="cauldron-title">${lab.title}</div>
-          <div class="magical-slots-row" id="magic_slots_${lIdx}">
-            ${lab.slots.map(s => `<div class="magic-slot ${s.ch ? 'filled' : ''}">${s.ch}</div>`).join('')}
+        const disc = document.createElement('div');
+        disc.className = `oval-cauldron-disc ${discClasses[lIdx % 3]}`;
+        disc.innerHTML = `
+          <div class="disc-badge">قُرْصُ التَّحَدِّي ${lIdx + 1}</div>
+          <div class="disc-title">${lab.title}</div>
+          <div class="disc-slots-circle" id="slots_disc_${lIdx}">
+            ${lab.slots.map(s => `<div class="circle-slot ${s.ch ? 'filled' : ''}">${s.ch}</div>`).join('')}
           </div>
-          <div class="crystal-tiles-row">
-            ${lab.pool.map(p => `<button class="crystal-tile" onclick="checkMagicTile(this, ${lIdx}, '${p}')">${p}</button>`).join('')}
+          <div class="candy-tiles-cluster">
+            ${lab.pool.map(p => `<button class="candy-btn" onclick="checkDiscAnswer(this, ${lIdx}, '${p}')">${p}</button>`).join('')}
           </div>
-          <div class="magic-feedback" id="magic_fb_${lIdx}"></div>
+          <div class="disc-feedback" id="fb_disc_${lIdx}"></div>
         `;
-        container.appendChild(card);
+        container.appendChild(disc);
       });
     }
 
-    function checkMagicTile(btn, lIdx, char) {
+    function checkDiscAnswer(btn, lIdx, char) {
       const rootKey = document.getElementById('rootSelect').value;
       const lab = db[rootKey].labs[lIdx];
       const target = lab.slots.find(s => !s.ch);
-      const fb = document.getElementById(`magic_fb_${lIdx}`);
-      const emptySlot = document.querySelectorAll(`#magic_slots_${lIdx} .magic-slot:not(.filled)`)[0];
+      const fb = document.getElementById(`fb_disc_${lIdx}`);
+      const emptySlot = document.querySelectorAll(`#slots_disc_${lIdx} .circle-slot:not(.filled)`)[0];
 
       if (char === target.correct) {
         emptySlot.textContent = char;
@@ -1401,49 +1449,52 @@
         fb.style.display = 'block';
         fb.style.background = '#dcfce7';
         fb.style.color = '#15803d';
-        fb.innerHTML = '🎉 صَهْرٌ صَحِيحٌ! رَكَّبْتَ الوَزْنَ الخَارِقَ.';
+        fb.innerHTML = '🎉 مُمْتَاز! رَكَّبْتَ الوَزْنَ فِي القُرْصِ.';
         Sound.correct();
         addStars(15);
       } else {
         fb.style.display = 'block';
         fb.style.background = '#fee2e2';
         fb.style.color = '#b91c1c';
-        fb.innerHTML = `⚠️ تَحْذِير: الجَوْهَرَةُ [ ${char} ] لَا تُنَاسِبُ هَذَا الوَزْنَ!`;
+        fb.innerHTML = `⚠️ انْتَبِهْ! الحَرْفُ [ ${char} ] لَا يُطَابِقُ الوَزْنَ.`;
         Sound.wrong();
       }
     }
 
+    // ----------------------------------------------------
+    // حلبة الأبطال: فقاعات الأسئلة الدائرية
+    // ----------------------------------------------------
     function renderArenaQuizzes(quizzes) {
       const container = document.getElementById('quizzesGrid');
       container.innerHTML = '';
 
       quizzes.forEach((q, idx) => {
         const box = document.createElement('div');
-        box.className = 'challenge-card';
+        box.className = 'bubble-question-card';
         box.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
-            <span style="font-weight:900; color:#7c3aed;">⭐ التَّحَدِّي ${idx + 1}</span>
-            <button style="background:#f3e8ff; border:none; border-radius:12px; padding:0.3rem 0.8rem; cursor:pointer; font-weight:bold; color:#7c3aed;" onclick="Sound.speak('${q.q}')">🔊 اسْتَمِعْ</button>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
+            <span style="font-weight:900; color:#9333ea; font-size:1.1rem;">🎈 فُقَّاعَةُ التَّحَدِّي ${idx + 1}</span>
+            <button style="background:#ffffff; border:2px solid #d8b4fe; border-radius:20px; padding:0.3rem 0.9rem; cursor:pointer; font-weight:bold; color:#7c3aed;" onclick="Sound.speak('${q.q}')">🔊 اسْتَمِعْ</button>
           </div>
           <h4>${q.q}</h4>
           <div>
             ${q.opts.map(opt => `
-              <button class="opt-pill-btn" onclick="checkArenaAnswer(this, '${opt}', '${q.ans}', '${q.tip}')">
+              <button class="bubble-opt-pill" onclick="checkArenaAnswer(this, '${opt}', '${q.ans}', '${q.tip}')">
                 <span>${opt}</span>
                 <span onclick="event.stopPropagation(); Sound.speak('${opt}')">🔊</span>
               </button>
             `).join('')}
           </div>
-          <div class="fb-tag" style="padding:0.8rem; border-radius:12px; font-weight:bold; margin-top:1rem; display:none;"></div>
+          <div class="disc-feedback" style="margin-top:1rem;"></div>
         `;
         container.appendChild(box);
       });
     }
 
     function checkArenaAnswer(btn, selected, correct, tip) {
-      const parent = btn.closest('.challenge-card');
-      const fb = parent.querySelector('.fb-tag');
-      const btns = parent.querySelectorAll('.opt-pill-btn');
+      const parent = btn.closest('.bubble-question-card');
+      const fb = parent.querySelector('.disc-feedback');
+      const btns = parent.querySelectorAll('.bubble-opt-pill');
 
       if (selected === correct) {
         fb.style.display = 'block';
