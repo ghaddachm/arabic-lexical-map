@@ -92,9 +92,9 @@
                 🏭
             </div>
             <div>
-                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">المستوى السادس ابتدائي</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">المستوى الخامس والسادس ابتدائي</span>
                 <h1 class="text-2xl md:text-3xl font-black text-slate-800 mt-1" id="headerTitle">بذرة الكلمات: [ص-ن-ع]</h1>
-                <p class="text-xs text-slate-500 font-medium" id="headerSubtitle">عائلة الإتقان والعمل ➔ خريطة ذهنية إشعاعية تفاعلية</p>
+                <p class="text-xs text-slate-500 font-medium" id="headerSubtitle">عائلة العمل والإتقان ➔ هندسة إدراكية للمجرد والمزيد والمشتقات</p>
             </div>
         </div>
 
@@ -119,18 +119,18 @@
 
     <main class="w-full max-w-6xl relative min-h-[680px] flex flex-col items-center justify-center my-4">
         
-        <!-- القرص الشمسي المركزي -->
+        <!-- القرص الشمسي المركزي (النواة المجردة) -->
         <div id="centerNode" onclick="playRootAudio()" 
              class="clay-sun pulse-sun w-56 h-56 rounded-full flex flex-col items-center justify-center text-center cursor-pointer z-20 relative transition-transform hover:scale-110 group">
             <span class="bg-red-500 text-white text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md animate-pulse mb-1">
-                👈 ابدأ هنا!
+                👈 النواة الأصلية
             </span>
             <div id="centerLetters" class="flex gap-1 text-4xl md:text-5xl font-black text-red-600 tracking-wider my-1 drop-shadow-md">
                 [ص-ن-ع]
             </div>
-            <p id="centerConcept" class="text-xs font-bold text-amber-950 px-2 bg-white/40 rounded-full">الجذر: العمل والإتقان</p>
+            <p id="centerConcept" class="text-xs font-bold text-amber-950 px-2 bg-white/40 rounded-full">الجذر المجرد: العمل والإتقان</p>
             <div class="text-[10px] font-semibold text-amber-900 mt-2 flex items-center gap-1 group-hover:scale-105 transition-transform">
-                <i class="fa-solid fa-volume-high"></i> اضغط للاستماع للجذر
+                <i class="fa-solid fa-volume-high"></i> اضغط للاستماع للنواة
             </div>
         </div>
 
@@ -206,11 +206,11 @@
         </div>
     </section>
 
-    <!-- النافذة المنبثقة للفرع -->
+    <!-- النافذة المنبثقة للفرع (مدعمة بتفصيل المجرد والمزيد) -->
     <div id="infoModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border border-white transform transition-all">
+        <div class="bg-white rounded-3xl p-6 max-w-lg w-full shadow-2xl border border-white transform transition-all max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-3">
                     <span id="modalIcon" class="text-3xl">🔨</span>
                     <div>
                         <h3 id="modalTitle" class="text-xl font-black text-slate-800">صَنَعَ</h3>
@@ -227,15 +227,26 @@
                 </div>
             </div>
 
-            <div class="py-4 space-y-3">
-                <div class="bg-slate-50 p-4 rounded-xl text-right space-y-3 border border-slate-200 text-sm">
-                    <p><strong>💡 الشرح:</strong> <span id="modalDesc"></span></p>
+            <div class="py-4 space-y-4">
+                <div class="bg-slate-50 p-4 rounded-xl text-right space-y-2 border border-slate-200 text-sm">
+                    <p><strong>💡 الشرح والدلالة:</strong> <span id="modalDesc"></span></p>
                     <p class="border-t border-slate-200/60 pt-2"><strong>🔗 المتلازمة اللفظية:</strong> <span id="modalColloc" class="text-indigo-600 font-bold"></span></p>
-                    <p class="border-t border-slate-200/60 pt-2"><strong>📖 المثال في جملة:</strong> «<span id="modalContext" class="italic text-slate-700 font-medium"></span>»</p>
+                    <p class="border-t border-slate-200/60 pt-2"><strong>📖 المثال في سياق:</strong> «<span id="modalContext" class="italic text-slate-700 font-medium"></span>»</p>
                 </div>
 
-                <button onclick="speakCurrentModal()" class="clay-btn w-full py-3 mt-4 text-xs md:text-sm font-bold flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-headphones-simple text-base"></i> اضغط للاستماع للشرح والنطق الكامل
+                <!-- قسم الأفعال المزيدة الحصري لفرع الفعل (المجرد والمزيد ص 14) -->
+                <div id="augmentedVerbsBox" class="hidden bg-amber-50/70 p-4 rounded-2xl border border-amber-200 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-xs font-black text-amber-900 flex items-center gap-1.5">
+                            <i class="fa-solid fa-layer-group text-amber-600"></i> عائلة الأفعال المزيدة (درس كتاب مرشدي ص 14)
+                        </h4>
+                        <span class="text-[10px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full font-bold">الحروف الحمراء أصلية</span>
+                    </div>
+                    <div id="augmentedVerbsList" class="grid grid-cols-1 gap-2 text-xs"></div>
+                </div>
+
+                <button onclick="speakCurrentModal()" class="clay-btn w-full py-3 mt-2 text-xs md:text-sm font-bold flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-headphones-simple text-base"></i> استمع للشرح والنطق الكامل
                 </button>
             </div>
         </div>
@@ -249,11 +260,26 @@
                 rootLetters: "[ص-ن-ع]",
                 isCustomAudio: true,
                 branches: [
-                    { key: "verb", titleHtml: '<span class="text-red-600 font-black">صَـنَـعَ</span>', weight: "فَعَلَ", icon: "🔨", desc: "فعل ماض يدل على إيجاد الشيء وتكوينه بالعمل والجهد.", col: "صَنَعَ بِيَدَيْهِ", context: "صَنَعَ الحِرَفِيُّ خِزَانَةً جَمِيلَةً", color: "amber" },
-                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">صَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">نِـ</span><span class="text-red-600 font-black">عٌ</span>', weight: "فَاعِل", icon: "👨‍🔧", desc: "اسم فاعل يدل على الشخص الماهر الذي يقوم بعملية الصنع والإنتاج.", col: "صَانِعٌ مَاهِرٌ", context: "كَرَّمَ المُدِيرُ الصَّانِعَ المَاهِرَ", color: "blue" },
-                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـ</span><span class="text-red-600 font-black">نُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">عٌ</span>', weight: "مَفْعُول", icon: "🏺", desc: "اسم مفعول يدل على الشيء أو الأثر الذي تم إنتاجه وإتقانه.", col: "مَصْنُوعٌ بِإِتْقَانٍ", context: "الخَزَفُ مَصْنُوعٌ بِجَمَالِيَّةٍ", color: "orange" },
-                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـ</span><span class="text-red-600 font-black">نَـ</span><span class="text-red-600 font-black">عٌ</span>', weight: "مَفْعَل", icon: "🏭", desc: "اسم مكان يدل على المنشأة أو المكان المجهز للإنتاج والعمل.", col: "مَصْنَعٌ حَدِيثٌ", context: "يَشْتَغِلُ أَبِي فِي مَصْنَعِ السَّمَكِ", color: "emerald" },
-                    { key: "source", titleHtml: '<span class="text-red-600 font-black">صِـ</span><span class="text-red-600 font-black">نَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">عَـ</span><span class="text-purple-500 font-bold">ةٌ</span>', weight: "فِعَالَة", icon: "⚙️", desc: "مصدر يدل على المهنة والنشاط الإنتاجي أو القطاع الاقتصادي.", col: "صِنَاعَةٌ وَطَنِيَّةٌ", context: "تَزْدَهِرُ صِنَاعَةُ الفَخَّارِ فِي بِلَادِنَا", color: "purple" }
+                    { 
+                        key: "verb", 
+                        titleHtml: '<span class="text-red-600 font-black">صَـنَـعَ</span>', 
+                        weight: "فَعَلَ (فعل ماض مجرد)", 
+                        icon: "🔨", 
+                        desc: "فعل ماض ثلاثي مجرد يدل على إيجاد الشيء وتكوينه بالعمل والجهد.", 
+                        col: "صَنَعَ بِيَدَيْهِ", 
+                        context: "صَنَعَ الحِرَفِيُّ خِزَانَةً جَمِيلَةً", 
+                        color: "amber",
+                        // بيانات الأفعال المزيدة
+                        augmented: [
+                            { type: "مزيد بحرف (التضعيف)", wordHtml: '<span class="text-red-600 font-black">صَـ</span><span class="text-amber-600 font-black">نَّـ</span><span class="text-red-600 font-black">عَ</span>', weight: "فَعَّلَ", meaning: "جعله صناعياً أو حوّله لمنتج" },
+                            { type: "مزيد بحرفين (الهمزة والتاء)", wordHtml: '<span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">صْـ</span><span class="text-blue-600 font-bold">طَـ</span><span class="text-red-600 font-black">نَـعَ</span>', weight: "افْتَعَلَ", meaning: "تكلّف الصنع أو اتخذه لنفسه" },
+                            { type: "مزيد بـ 3 أحرف (استـ)", wordHtml: '<span class="text-purple-600 font-bold">اِسْـتَـ</span><span class="text-red-600 font-black">صْـنَـعَ</span>', weight: "اسْتَفْعَلَ", meaning: "طلب أن يُصنع له الشيء" }
+                        ]
+                    },
+                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">صَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">نِـعٌ</span>', weight: "فَاعِل", icon: "👨‍🔧", desc: "اسم فاعل يدل على الذات التي قامت بالصنع والإنتاج.", col: "صَانِعٌ مَاهِرٌ", context: "كَرَّمَ المُدِيرُ الصَّانِعَ المَاهِرَ", color: "blue" },
+                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـنُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">عٌ</span>', weight: "مَفْعُول", icon: "🏺", desc: "اسم مفعول يدل على ما وقع عليه فعل الصنع والإتقان.", col: "مَصْنُوعٌ بِإِتْقَانٍ", context: "الخَزَفُ مَصْنُوعٌ بِجَمَالِيَّةٍ", color: "orange" },
+                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـنَـعٌ</span>', weight: "مَفْعَل", icon: "🏭", desc: "اسم مكان يدل على موضع الإنتاج وتجمع الآلات.", col: "مَصْنَعٌ حَدِيثٌ", context: "يَشْتَغِلُ أَبِي فِي مَصْنَعِ السَّمَكِ", color: "emerald" },
+                    { key: "source", titleHtml: '<span class="text-red-600 font-black">صِـنَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">عَـ</span><span class="text-purple-500 font-bold">ةٌ</span>', weight: "فِعَالَة", icon: "⚙️", desc: "مصدر صريح يدل على حرفة العمل والنشاط الإنتاجي.", col: "صِنَاعَةٌ وَطَنِيَّةٌ", context: "تَزْدَهِرُ صِنَاعَةُ الفَخَّارِ فِي بِلَادِنَا", color: "purple" }
                 ],
                 quizFill: {
                     chips: [{ id: "masnaa", text: "مَصْنَعٍ", word: "مصنع", color: "emerald" }, { id: "sinaa", text: "صِنَاعَةِ", word: "صناعة", color: "purple" }, { id: "masnoo", text: "مَصْنُوعٌ", word: "مصنوع", color: "orange" }],
@@ -276,11 +302,25 @@
                 rootLetters: "[ك-ت-ب]",
                 isCustomAudio: false,
                 branches: [
-                    { key: "verb", titleHtml: '<span class="text-red-600 font-black">كَـتَـبَ</span>', weight: "فَعَلَ", icon: "📝", desc: "فعل ماض يدل على خط الحروف وتدوين المعاني بالقلم.", col: "كَتَبَ بِالقَلَمِ", context: "كَتَبَ التِّلْمِيذُ رِسَالَةً مُعَبِّرَةً", color: "amber" },
-                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">كَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">تِـ</span><span class="text-red-600 font-black">بٌ</span>', weight: "فَاعِل", icon: "🧑‍💼", desc: "اسم فاعل يدل على من يمارس التدوين والتأليف والإنشاء.", col: "كَاتِبٌ مُبْدِعٌ", context: "حَصَلَ الكَاتِبُ المُبْدِعُ عَلَى جَائِزَةٍ", color: "blue" },
-                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">كْـ</span><span class="text-red-600 font-black">تُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">بٌ</span>', weight: "مَفْعُول", icon: "📜", desc: "اسم مفعول يدل على الكلام المسطور أو الرسالة المدونة.", col: "مَكْتُوبٌ بِعِنَايَةٍ", context: "المَقَالُ مَكْتُوبٌ بِأُسْلُوبٍ رَاقٍ", color: "orange" },
-                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">كْـ</span><span class="text-red-600 font-black">تَـ</span><span class="text-red-600 font-black">بٌ</span>', weight: "مَفْعَل", icon: "🏢", desc: "اسم مكان يدل على موضع الكتابة أو إدارة الأعمال ومطالعة الكتب.", col: "مَكْتَبٌ مُنَظَّمٌ", context: "جَلَسَ الأُسْتَاذُ إِلَى مَكْتَبِهِ", color: "emerald" },
-                    { key: "source", titleHtml: '<span class="text-red-600 font-black">كِـ</span><span class="text-red-600 font-black">تَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">بَـ</span><span class="text-purple-500 font-bold">ةٌ</span>', weight: "فِعَالَة", icon: "✒️", desc: "مصدر يدل على مهارة التدوين والخط والرسم اللغوي.", col: "كِتَابَةٌ سَلِيمَةٌ", context: "تَتَطَلَّبُ القِصَّةُ كِتَابَةً مُتْقَنَةً", color: "purple" }
+                    { 
+                        key: "verb", 
+                        titleHtml: '<span class="text-red-600 font-black">كَـتَـبَ</span>', 
+                        weight: "فَعَلَ (فعل ماض مجرد)", 
+                        icon: "📝", 
+                        desc: "فعل ماض ثلاثي مجرد يدل على خط الحروف وتدوين المعاني بالقلم.", 
+                        col: "كَتَبَ بِالقَلَمِ", 
+                        context: "كَتَبَ التِّلْمِيذُ رِسَالَةً مُعَبِّرَةً", 
+                        color: "amber",
+                        augmented: [
+                            { type: "مزيد بحرف (الهمزة)", wordHtml: '<span class="text-amber-600 font-bold">أَ</span><span class="text-red-600 font-black">كْـتَـبَ</span>', weight: "أَفْعَلَ", meaning: "أملى عليه أو جعله يكتب" },
+                            { type: "مزيد بحرفين (الهمزة والتاء)", wordHtml: '<span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">كْـ</span><span class="text-blue-600 font-bold">تَـ</span><span class="text-red-600 font-black">تَـبَ</span>', weight: "افْتَعَلَ", meaning: "سجّل اسمه أو استنسخ كتاباً" },
+                            { type: "مزيد بـ 3 أحرف (استـ)", wordHtml: '<span class="text-purple-600 font-bold">اِسْـتَـ</span><span class="text-red-600 font-black">كْـتَـبَ</span>', weight: "اسْتَفْعَلَ", meaning: "طلب منه أن يكتب له رسالة" }
+                        ]
+                    },
+                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">كَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">تِـبٌ</span>', weight: "فَاعِل", icon: "🧑‍💼", desc: "اسم فاعل يدل على من باشر التدوين والتأليف.", col: "كَاتِبٌ مُبْدِعٌ", context: "حَصَلَ الكَاتِبُ المُبْدِعُ عَلَى جَائِزَةٍ", color: "blue" },
+                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">كْـتُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">بٌ</span>', weight: "مَفْعُول", icon: "📜", desc: "اسم مفعول يدل على ما وقع عليه التدوين والتسطير.", col: "مَكْتُوبٌ بِعِنَايَةٍ", context: "المَقَالُ مَكْتُوبٌ بِأُسْلُوبٍ رَاقٍ", color: "orange" },
+                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">كْـتَـبٌ</span>', weight: "مَفْعَل", icon: "🏢", desc: "اسم مكان يدل على موضع القراءة ومطالعة الكتب والإدارة.", col: "مَكْتَبٌ مُنَظَّمٌ", context: "جَلَسَ الأُسْتَاذُ إِلَى مَكْتَبِهِ", color: "emerald" },
+                    { key: "source", titleHtml: '<span class="text-red-600 font-black">كِـتَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">بَـ</span><span class="text-purple-500 font-bold">ةٌ</span>', weight: "فِعَالَة", icon: "✒️", desc: "مصدر صريح يدل على مهارة التدوين والرسم اللغوي.", col: "كِتَابَةٌ سَلِيمَةٌ", context: "تَتَطَلَّبُ القِصَّةُ كِتَابَةً مُتْقَنَةً", color: "purple" }
                 ],
                 quizFill: {
                     chips: [{ id: "maktab", text: "مَكْتَبٍ", word: "مكتب", color: "emerald" }, { id: "kitaba", text: "كِتَابَةِ", word: "كتابة", color: "purple" }, { id: "maktoob", text: "مَكْتُوبٌ", word: "مكتوب", color: "orange" }],
@@ -303,11 +343,25 @@
                 rootLetters: "[ع-ل-م]",
                 isCustomAudio: false,
                 branches: [
-                    { key: "verb", titleHtml: '<span class="text-red-600 font-black">عَـلِـمَ</span>', weight: "فَعِلَ", icon: "💡", desc: "فعل ماض يدل على إدراك حقيقة الشيء واليقين به.", col: "عَلِمَ بِالأَمْرِ", context: "عَلِمَ البَاحِثُ سِرَّ الظَّاهِرَةِ", color: "amber" },
-                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">عَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">لِـ</span><span class="text-red-600 font-black">مٌ</span>', weight: "فَاعِل", icon: "👨‍🔬", desc: "اسم فاعل يدل على من اتصف بالمعرفة الواسعة والاختصاص العلمي.", col: "عَالِمٌ جَلِيلٌ", context: "يُفِيدُ العَالِمُ البَشَرِيَّةَ بِعِلْمِهِ", color: "blue" },
-                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">عْـ</span><span class="text-red-600 font-black">لُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">مٌ</span>', weight: "مَفْعُول", icon: "📊", desc: "اسم مفعول يدل على ما هو معروف ومتحقق لا شك فيه.", col: "مَعْلُومٌ لَدَى الجَمِيعِ", context: "الحَقُّ مَعْلُومٌ وَوَاضِحٌ", color: "orange" },
-                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">عْـ</span><span class="text-red-600 font-black">لَـ</span><span class="text-red-600 font-black">مٌ</span>', weight: "مَفْعَل", icon: "🏛️", desc: "اسم مكان يدل على البناء أو الموضع البارز الدال على غيره.", col: "مَعْلَمٌ تَارِيخِيٌّ", context: "صَوْمَعَةُ حَسَّانَ مَعْلَمٌ بَارِزٌ", color: "emerald" },
-                    { key: "source", titleHtml: '<span class="text-red-600 font-black">عِـ</span><span class="text-red-600 font-black">لْـ</span><span class="text-red-600 font-black">مٌ</span>', weight: "فِعْل", icon: "📚", desc: "مصدر يدل على مجموع المعارف والحقائق المنظمة.", col: "عِلْمٌ نَافِعٌ", context: "يَسْعَى الطَّالِبُ إِلَى عِلْمٍ نَافِعٍ", color: "purple" }
+                    { 
+                        key: "verb", 
+                        titleHtml: '<span class="text-red-600 font-black">عَـلِـمَ</span>', 
+                        weight: "فَعِلَ (فعل ماض مجرد)", 
+                        icon: "💡", 
+                        desc: "فعل ماض ثلاثي مجرد يدل على إدراك حقيقة الشيء واليقين به.", 
+                        col: "عَلِمَ بِالأَمْرِ", 
+                        context: "عَلِمَ البَاحِثُ سِرَّ الظَّاهِرَةِ", 
+                        color: "amber",
+                        augmented: [
+                            { type: "مزيد بحرف (التضعيف)", wordHtml: '<span class="text-red-600 font-black">عَـ</span><span class="text-amber-600 font-black">لَّـ</span><span class="text-red-600 font-black">مَ</span>', weight: "فَعَّلَ", meaning: "لقّنه المعرفة وجعله يعلم" },
+                            { type: "مزيد بحرفين (التاء والتضعيف)", wordHtml: '<span class="text-blue-600 font-bold">تَـ</span><span class="text-red-600 font-black">عَـ</span><span class="text-blue-600 font-black">لَّـ</span><span class="text-red-600 font-black">مَ</span>', weight: "تَفَعَّلَ", meaning: "اكتسب المعرفة بنفسه واجتهد فيها" },
+                            { type: "مزيد بـ 3 أحرف (استـ)", wordHtml: '<span class="text-purple-600 font-bold">اِسْـتَـ</span><span class="text-red-600 font-black">عْـلَـمَ</span>', weight: "اسْتَفْعَلَ", meaning: "طلب المعرفة واستفسر عن الخبر" }
+                        ]
+                    },
+                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">عَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">لِـمٌ</span>', weight: "فَاعِل", icon: "👨‍🔬", desc: "اسم فاعل يدل على من اتصف بالمعرفة والرسوخ العلمي.", col: "عَالِمٌ جَلِيلٌ", context: "يُفِيدُ العَالِمُ البَشَرِيَّةَ بِعِلْمِهِ", color: "blue" },
+                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">عْـلُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">مٌ</span>', weight: "مَفْعُول", icon: "📊", desc: "اسم مفعول يدل على الحقيقة المعروفة الثابتة.", col: "مَعْلُومٌ لَدَى الجَمِيعِ", context: "الحَقُّ مَعْلُومٌ وَوَاضِحٌ", color: "orange" },
+                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">عْـلَـمٌ</span>', weight: "مَفْعَل", icon: "🏛️", desc: "اسم مكان يدل على الموضع أو البناء التاريخي البارز.", col: "مَعْلَمٌ تَارِيخِيٌّ", context: "صَوْمَعَةُ حَسَّانَ مَعْلَمٌ بَارِزٌ", color: "emerald" },
+                    { key: "source", titleHtml: '<span class="text-red-600 font-black">عِـلْـمٌ</span>', weight: "فِعْل", icon: "📚", desc: "مصدر صريح يدل على مجموع المعارف المنظمة.", col: "عِلْمٌ نَافِعٌ", context: "يَسْعَى الطَّالِبُ إِلَى عِلْمٍ نَافِعٍ", color: "purple" }
                 ],
                 quizFill: {
                     chips: [{ id: "maalam", text: "مَعْلَمٍ", word: "معلم", color: "emerald" }, { id: "ilm", text: "عِلْمِ", word: "علم", color: "purple" }, { id: "maaloom", text: "مَعْلُومٌ", word: "معلوم", color: "orange" }],
@@ -333,40 +387,30 @@
         let checkedMatch = false;
         let selectedChip = null;
         let currentPlayingAudio = null;
-        let arabicVoice = null;
+        let currentTtsAudio = null;
 
-        // تهيئة محرك الصوت العربي للمتصفح وضمان عدم حظره
-        function setupArabicVoices() {
-            if ('speechSynthesis' in window) {
-                const voices = window.speechSynthesis.getVoices();
-                arabicVoice = voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ar')) || null;
-            }
-        }
-
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.onvoiceschanged = setupArabicVoices;
-            setupArabicVoices();
-        }
-
-        // دالة نطق فصيحة مدعمة بمعالجة التعليق التلقائي
         function speakArabic(text) {
-            if (!('speechSynthesis' in window)) return;
-
-            window.speechSynthesis.cancel();
-            if (window.speechSynthesis.paused) {
-                window.speechSynthesis.resume();
+            if (currentPlayingAudio) {
+                currentPlayingAudio.pause();
+                currentPlayingAudio.currentTime = 0;
+            }
+            if (currentTtsAudio) {
+                currentTtsAudio.pause();
+                currentTtsAudio.currentTime = 0;
             }
 
-            const cleanText = text.replace(/[«»\[\]\(\)\-\_🔗💡📖🎯]/g, ' ');
-            const utterance = new SpeechSynthesisUtterance(cleanText);
-            utterance.lang = 'ar-SA';
-            if (arabicVoice) {
-                utterance.voice = arabicVoice;
-            }
-            utterance.rate = 0.85;
-            utterance.pitch = 1.0;
-
-            window.speechSynthesis.speak(utterance);
+            const cleanText = encodeURIComponent(text.replace(/[«»\[\]\(\)\-\_🔗💡📖🎯]/g, ' ').trim());
+            const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=ar&client=tw-ob&q=${cleanText}`;
+            
+            currentTtsAudio = new Audio(audioUrl);
+            currentTtsAudio.play().catch(() => {
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    const u = new SpeechSynthesisUtterance(text);
+                    u.lang = 'ar-SA';
+                    window.speechSynthesis.speak(u);
+                }
+            });
         }
 
         function playRootAudio() {
@@ -375,7 +419,7 @@
                 playMp3('root');
             } else {
                 const rootSpelled = data.rootLetters.replace(/[\-\[\]]/g, ' ');
-                speakArabic(`الجذر: ${rootSpelled}، عائلة: ${data.concept}`);
+                speakArabic(`النواة المجردة: ${rootSpelled}، عائلة: ${data.concept}`);
             }
         }
 
@@ -383,11 +427,8 @@
             if (currentRoot === "صنع") {
                 playMp3(type === 'fill' ? 'quiz-fill' : 'quiz-match');
             } else {
-                if (type === 'fill') {
-                    speakArabic("القسم الأول: ضع الكلمة المناسبة في مكانها الصحيح لتركيب جمل مفيدة.");
-                } else {
-                    speakArabic("القسم الثاني: صل كل كلمة برفيقتها المتلازمة لفظياً.");
-                }
+                if (type === 'fill') speakArabic("القسم الأول: ضع الكلمة المناسبة في مكانها الصحيح لتركيب جمل مفيدة.");
+                else speakArabic("القسم الثاني: صل كل كلمة برفيقتها المتلازمة لفظياً.");
             }
         }
 
@@ -395,11 +436,8 @@
             if (currentRoot === "صنع") {
                 playMp3(isCorrect ? 'correct' : 'retry');
             } else {
-                if (isCorrect) {
-                    speakArabic("أحسنت صنعاً! إجابة صحيحة ومتقنة.");
-                } else {
-                    speakArabic("حاول مرة أخرى، فكر جيداً في المعنى والوزن الصرفي.");
-                }
+                if (isCorrect) speakArabic("أحسنت صنعاً! إجابة صحيحة ومتقنة.");
+                else speakArabic("حاول مرة أخرى، فكر جيداً في المعنى والوزن الصرفي.");
             }
         }
 
@@ -416,7 +454,10 @@
                 currentPlayingAudio.pause();
                 currentPlayingAudio.currentTime = 0;
             }
-            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            if (currentTtsAudio) {
+                currentTtsAudio.pause();
+                currentTtsAudio.currentTime = 0;
+            }
 
             const audio = document.getElementById('audio-' + key);
             if (audio) {
@@ -468,10 +509,10 @@
             const data = database[rootKey];
 
             document.getElementById('headerTitle').innerText = `بذرة الكلمات: ${data.rootLetters}`;
-            document.getElementById('headerSubtitle').innerText = `عائلة ${data.concept} ➔ خريطة ذهنية إشعاعية تفاعلية`;
+            document.getElementById('headerSubtitle').innerText = `عائلة ${data.concept} ➔ هندسة إدراكية للمجرد والمزيد والمشتقات`;
             document.getElementById('headerIcon').innerText = data.icon;
             document.getElementById('centerLetters').innerText = data.rootLetters;
-            document.getElementById('centerConcept').innerText = `الجذر: ${data.concept}`;
+            document.getElementById('centerConcept').innerText = `الجذر المجرد: ${data.concept}`;
 
             earnedStars = 0;
             checkedFill = false;
@@ -494,11 +535,11 @@
                 "md:bottom-4 md:left-8"
             ];
             const branchLabels = [
-                "الفرع 1: الحدث / الفعل",
-                "الفرع 2: الفاعل",
-                "الفرع 3: المفعول",
-                "الفرع 4: المكان",
-                "الفرع 5: النشاط / المصدر"
+                "الفرع 1: الحدث / الفعل المجرد والمزيد",
+                "الفرع 2: الفاعل / اسم الفاعل",
+                "الفرع 3: المفعول / اسم المفعول",
+                "الفرع 4: الحيز / اسم المكان",
+                "الفرع 5: النشاط / المصدر الصريح"
             ];
 
             let html = '';
@@ -588,28 +629,59 @@
             activeModalData = info;
 
             document.getElementById('modalTitle').innerHTML = info.titleHtml;
-            document.getElementById('modalWeight').innerText = `الوزن الصرفي: (${info.weight})`;
+            document.getElementById('modalWeight').innerText = `الوزن والموقع: (${info.weight})`;
             document.getElementById('modalIcon').innerText = info.icon;
             document.getElementById('modalDesc').innerText = info.desc;
             document.getElementById('modalColloc').innerText = info.col;
             document.getElementById('modalContext').innerText = info.context;
 
+            // معالجة قسم الأفعال المزيدة الحصري لفرع الفعل
+            const augBox = document.getElementById('augmentedVerbsBox');
+            const augList = document.getElementById('augmentedVerbsList');
+            if (info.augmented && info.augmented.length > 0) {
+                augBox.classList.remove('hidden');
+                let augHtml = '';
+                info.augmented.forEach(aug => {
+                    augHtml += `
+                    <div class="bg-white/90 p-2.5 rounded-xl border border-amber-200/80 flex items-center justify-between">
+                        <div>
+                            <span class="font-black text-slate-800 text-sm">${aug.wordHtml}</span>
+                            <span class="text-indigo-600 font-bold text-[11px] mr-2">(${aug.weight})</span>
+                            <p class="text-slate-500 text-[10px] mt-0.5">${aug.type} : ${aug.meaning}</p>
+                        </div>
+                        <button onclick="speakVerbAugmented('${aug.type}', '${aug.weight}')" class="text-amber-600 hover:text-amber-800 p-1.5 rounded-lg bg-amber-50">
+                            <i class="fa-solid fa-volume-high text-xs"></i>
+                        </button>
+                    </div>`;
+                });
+                augList.innerHTML = augHtml;
+            } else {
+                augBox.classList.add('hidden');
+            }
+
             document.getElementById('infoModal').classList.remove('hidden');
             speakCurrentModal();
+        }
+
+        function speakVerbAugmented(type, weight) {
+            speakArabic(`صيغة ${type}، على وزن ${weight}`);
         }
 
         function speakCurrentModal() {
             if (!activeModalData) return;
             const data = database[currentRoot];
-            if (data.isCustomAudio) {
+            if (data.isCustomAudio && activeModalData.key !== 'verb') {
                 playMp3(activeModalData.key);
             } else {
-                // استخراج الكلمة مجردة من وسوم HTML لنطقها بوضوح
                 const tempDiv = document.createElement("div");
                 tempDiv.innerHTML = activeModalData.titleHtml;
                 const cleanWord = tempDiv.textContent || tempDiv.innerText || "";
                 
-                speakArabic(`${cleanWord}. الوزن الصرفي: ${activeModalData.weight}. الشرح: ${activeModalData.desc}. المتلازمة اللفظية: ${activeModalData.col}. المثال في جملة: ${activeModalData.context}`);
+                let textToSay = `${cleanWord}. الوزن: ${activeModalData.weight}. الشرح: ${activeModalData.desc}. المتلازمة اللفظية: ${activeModalData.col}.`;
+                if (activeModalData.augmented) {
+                    textToSay += " من أفعالها المزيدة: مزيد بحرف، ومزيد بحرفين، ومزيد بثلاثة أحرف.";
+                }
+                speakArabic(textToSay);
             }
         }
 
@@ -619,7 +691,10 @@
                 currentPlayingAudio.pause();
                 currentPlayingAudio.currentTime = 0;
             }
-            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            if (currentTtsAudio) {
+                currentTtsAudio.pause();
+                currentTtsAudio.currentTime = 0;
+            }
             document.getElementById('infoModal').classList.add('hidden');
         }
 
@@ -703,7 +778,7 @@
                     fb.className = 'w-full text-xs font-bold text-emerald-600 block mt-1';
                     correctCount++;
                 } else {
-                    fb.innerText = '❌ حاول مرة أخرى مع التركيز على المعنى.';
+                    fb.innerText = '❌ حاول مرة أخرى مع التركيز على المعنى والوزن.';
                     fb.className = 'w-full text-xs font-bold text-rose-600 block mt-1';
                 }
             });
@@ -745,7 +820,7 @@
                     updateStars();
                 }
             } else {
-                fb.innerText = '⚠️ هناك وصل غير صحيح، راجع دلالة كل متلازمة وحاول مجدداً!';
+                fb.innerText = '⚠️ هناك وصل غير دقيق، راجع دلالة كل متلازمة وحاول مجدداً!';
                 fb.className = 'text-xs font-bold text-rose-600 block mt-2';
                 playSound('error');
                 playFeedbackAudio(false);
@@ -791,8 +866,6 @@
         window.onload = function() {
             switchRoot("صنع");
             window.addEventListener('resize', drawRadialLines);
-            // تحفيز تحميل حزم الأصوات فور تحميل النافذة
-            setupArabicVoices();
         };
     </script>
 </body>
