@@ -34,7 +34,6 @@
       overflow-x: hidden;
     }
 
-    /* شريط علوي كرتوني شبيه بعصافير */
     header {
       background: #ffffff;
       padding: 0.6rem 2rem;
@@ -101,7 +100,6 @@
       gap: 0.5rem;
     }
 
-    /* أزرار التبويبات بنمط ألعاب الأطفال 3D */
     .nav-tabs-container {
       display: flex;
       justify-content: center;
@@ -163,9 +161,7 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    /* ================================================= */
-    /* 1. مصفوفة شمس الجذر الإشعاعية (مطابقة للصورة 6) */
-    /* ================================================= */
+    /* 1. مصفوفة شمس الجذر الإشعاعية */
     .radial-playground {
       position: relative;
       width: 100%;
@@ -295,16 +291,13 @@
       z-index: 1;
     }
 
-    /* ================================================= */
-    /* 2. مسرح الحكاية التفاعلي الملون (نمط عصافير + ألف باء تاء) */
-    /* ================================================= */
+    /* 2. مسرح الحكاية */
     .story-hero-wrapper {
       background: #ffffff;
       border-radius: 40px;
       padding: 2.5rem;
       border: 6px solid #4ade80;
       box-shadow: 0 15px 40px rgba(74, 222, 128, 0.25);
-      position: relative;
     }
 
     .story-character-banner {
@@ -316,12 +309,11 @@
       gap: 2rem;
       margin-bottom: 2rem;
       border: 4px solid #eab308;
-      box-shadow: 0 6px 15px rgba(234, 179, 8, 0.2);
     }
 
     .mascot-large-art {
-      width: 150px;
-      height: 150px;
+      width: 130px;
+      height: 130px;
       flex-shrink: 0;
       animation: floatBird 3s ease-in-out infinite;
     }
@@ -339,17 +331,6 @@
       color: #854d0e;
       position: relative;
       flex: 1;
-    }
-
-    .bubble-talk::after {
-      content: '';
-      position: absolute;
-      right: -15px;
-      top: 50%;
-      transform: translateY(-50%);
-      border-width: 12px 0 12px 16px;
-      border-style: solid;
-      border-color: transparent transparent transparent #ca8a04;
     }
 
     .task-instruction-badge {
@@ -372,10 +353,8 @@
       font-size: 1.75rem;
       line-height: 2.7;
       color: #1e293b;
-      box-shadow: inset 0 4px 10px rgba(0,0,0,0.03);
     }
 
-    /* الكلمات التفاعلية القابلة للنقر داخل الفقرة */
     .story-click-word {
       background: #ffffff;
       border: 3px solid #cbd5e1;
@@ -389,124 +368,221 @@
       transition: all 0.15s;
     }
 
-    .story-click-word:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 0 #94a3b8;
-    }
-
     .story-click-word.found {
       background: #4ade80 !important;
       color: #064e3b !important;
       border-color: #16a34a !important;
       box-shadow: 0 4px 0 #15803d !important;
       transform: scale(1.08);
-      animation: popFound 0.3s ease;
-    }
-
-    @keyframes popFound {
-      0% { transform: scale(0.9); }
-      50% { transform: scale(1.15); }
-      100% { transform: scale(1.08); }
     }
 
     /* ================================================= */
-    /* 3. مختبر التركيب الحركي (ورشة الألعاب) */
+    /* 3. ورشة التركيب الحركية الخيالية (تصميم جديد كلياً) */
     /* ================================================= */
-    .lab-playground-box {
-      background: #ffffff;
-      border-radius: 40px;
-      padding: 2.2rem;
-      border: 6px solid #38bdf8;
-      box-shadow: 0 15px 40px rgba(56, 189, 248, 0.2);
+    .workshop-magic-realm {
+      position: relative;
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #1e1b4b 100%);
+      border-radius: 45px;
+      padding: 2.5rem 2rem;
+      border: 8px solid #bae6fd;
+      box-shadow: 0 20px 50px rgba(2, 132, 199, 0.35);
+      overflow: hidden;
     }
 
-    .lab-grid-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 1.8rem;
-      margin-top: 1rem;
-    }
-
-    .lab-station {
-      background: radial-gradient(circle at top, #f0fdf4 0%, #e0f2fe 100%);
-      border: 3px solid #7dd3fc;
-      border-radius: 30px;
-      padding: 1.8rem;
+    /* العنوان الكرتوني الفانتاسي */
+    .workshop-header {
       text-align: center;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
-      border-bottom: 7px solid #0284c7;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 5;
     }
 
-    .station-title {
-      font-size: 1.3rem;
+    .workshop-header h3 {
+      font-size: 2.2rem;
       font-weight: 900;
-      color: #0369a1;
-      margin-bottom: 0.5rem;
+      color: #fef08a;
+      text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
     }
 
-    .slots-container {
+    .workshop-header p {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #e0f2fe;
+      margin-top: 0.4rem;
+    }
+
+    /* الحاوية التي تجمع الشخصيات والبطاقات في الوسط */
+    .workshop-content-layout {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* الشخصية على اليمين: سنقر الصانع بالخوذة والمطرقة */
+    .side-mascot-right {
+      width: 160px;
+      flex-shrink: 0;
+      text-align: center;
+      animation: floatWorker 3s ease-in-out infinite;
+    }
+
+    @keyframes floatWorker {
+      0%, 100% { transform: translateY(0) rotate(2deg); }
+      50% { transform: translateY(-10px) rotate(-2deg); }
+    }
+
+    /* الشخصية على اليسار: الروبوت الفضائي الذكي بيبو */
+    .side-mascot-left {
+      width: 160px;
+      flex-shrink: 0;
+      text-align: center;
+      animation: floatBot 3.5s ease-in-out infinite;
+    }
+
+    @keyframes floatBot {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50% { transform: translateY(-12px) rotate(3deg); }
+    }
+
+    .mascot-speech {
+      background: #fef08a;
+      border: 3px solid #ca8a04;
+      border-radius: 20px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+      font-weight: 900;
+      color: #854d0e;
+      margin-top: 0.5rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* منصات التحدي الثلاث (تشبه محطات التصنيع أو كبسولات الطاقة) */
+    .workshop-stages-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .magic-cauldron-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-radius: 32px;
+      padding: 1.6rem 1.2rem;
+      text-align: center;
+      border: 4px solid #ffffff;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2), inset 0 0 15px rgba(254, 240, 138, 0.4);
+      position: relative;
+      transition: all 0.25s;
+    }
+
+    .magic-cauldron-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+
+    .cauldron-badge {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      font-size: 0.95rem;
+      font-weight: 900;
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      display: inline-block;
+      box-shadow: 0 3px 0 #92400e;
+      margin-bottom: 0.8rem;
+    }
+
+    .cauldron-title {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #0c4a6e;
+      margin-bottom: 1rem;
+    }
+
+    .magical-slots-row {
       display: flex;
       justify-content: center;
-      gap: 0.8rem;
-      margin: 1.5rem 0;
+      gap: 0.5rem;
+      margin: 1.2rem 0;
     }
 
-    .station-slot {
-      width: 68px;
-      height: 68px;
-      border: 4px dashed #94a3b8;
-      border-radius: 20px;
+    .magic-slot {
+      width: 54px;
+      height: 54px;
+      border: 3px dashed #38bdf8;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.2rem;
+      font-size: 1.8rem;
       font-weight: 900;
-      background: white;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+      background: #f0f9ff;
+      color: #0369a1;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
     }
 
-    .station-slot.filled {
-      border: 4px solid var(--c-affix);
+    .magic-slot.filled {
+      border: 3px solid #2563eb;
       background: #eff6ff;
-      color: var(--c-affix);
+      color: #2563eb;
+      transform: scale(1.05);
+      animation: popSlot 0.25s ease;
     }
 
-    .tiles-rack {
+    @keyframes popSlot {
+      0% { transform: scale(0.8); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1.05); }
+    }
+
+    .crystal-tiles-row {
       display: flex;
       justify-content: center;
-      gap: 0.8rem;
+      gap: 0.6rem;
+      margin-top: 1rem;
     }
 
-    .game-tile-btn {
-      width: 65px;
-      height: 65px;
-      background: #fef08a;
+    .crystal-tile {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
       border: 3px solid #eab308;
       color: #854d0e;
-      border-radius: 20px;
-      font-size: 2rem;
+      border-radius: 16px;
+      font-size: 1.8rem;
       font-weight: 900;
       cursor: pointer;
       box-shadow: 0 5px 0 #ca8a04;
       transition: all 0.1s;
     }
 
-    .game-tile-btn:active {
+    .crystal-tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 #ca8a04;
+    }
+
+    .crystal-tile:active {
       transform: translateY(4px);
       box-shadow: 0 1px 0 #ca8a04;
     }
 
-    .station-fb {
+    .magic-feedback {
       margin-top: 1rem;
-      padding: 0.7rem;
+      padding: 0.5rem 0.8rem;
       border-radius: 14px;
       font-weight: 900;
+      font-size: 0.95rem;
       display: none;
     }
 
-    /* ================================================= */
-    /* 4. حلبة التحدي الناطقة */
-    /* ================================================= */
+    /* 4. حلبة التحدي */
     .arena-box {
       background: #ffffff;
       border-radius: 40px;
@@ -527,7 +603,6 @@
       padding: 1.8rem;
       border: 3px solid #e9d5ff;
       border-bottom: 8px solid #a855f7;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
     }
 
     .challenge-card h4 {
@@ -535,7 +610,6 @@
       color: #6b21a8;
       font-weight: 900;
       margin-bottom: 1rem;
-      line-height: 1.6;
     }
 
     .opt-pill-btn {
@@ -559,17 +633,9 @@
     .opt-pill-btn:hover {
       background: #eff6ff;
       border-color: #3b82f6;
-      box-shadow: 0 4px 0 #2563eb;
     }
 
-    .opt-pill-btn:active {
-      transform: translateY(3px);
-      box-shadow: none;
-    }
-
-    /* ================================================= */
-    /* النافذة المنبثقة للتحليل الصرفي (Modal) */
-    /* ================================================= */
+    /* Modal */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -664,22 +730,17 @@
   <header>
     <div class="brand-box">
       <div class="mascot-avatar" onclick="Sound.speak('مَرْحَباً بِكَ يَا بَطَلَ اللُّغَةِ العَرَبِيَّةِ! أَنَا صَدِيقُكَ سُنْقُر')">
-        <!-- شخصية العصفور الرسام المبتسم (SVG مدمج 100%) -->
         <svg viewBox="0 0 100 100" width="45" height="45">
           <circle cx="50" cy="50" r="45" fill="#38bdf8"/>
-          <!-- القبعة الحمراء للرسام -->
           <ellipse cx="50" cy="20" rx="30" ry="12" fill="#ef4444"/>
           <circle cx="50" cy="11" r="6" fill="#dc2626"/>
-          <!-- النظارات الكبيرة الكرتونية -->
           <circle cx="36" cy="48" r="15" fill="white" stroke="#1e293b" stroke-width="4"/>
           <circle cx="64" cy="48" r="15" fill="white" stroke="#1e293b" stroke-width="4"/>
           <line x1="48" y1="48" x2="52" y2="48" stroke="#1e293b" stroke-width="4"/>
-          <!-- بؤبؤ العين اللامع -->
           <circle cx="38" cy="48" r="6" fill="#0284c7"/>
           <circle cx="66" cy="48" r="6" fill="#0284c7"/>
           <circle cx="40" cy="45" r="2.5" fill="white"/>
           <circle cx="68" cy="45" r="2.5" fill="white"/>
-          <!-- المنقار الباسم -->
           <polygon points="44,56 56,56 50,70" fill="#f97316"/>
         </svg>
       </div>
@@ -713,12 +774,11 @@
   </nav>
 
   <main>
-    <!-- 1. شمس الجذر الإشعاعية التفاعلية -->
+    <!-- 1. شمس الجذر الإشعاعية -->
     <div id="radialMap" class="tab-view active">
       <div class="radial-playground">
         <svg class="radial-svg-layer" id="svgRays"></svg>
 
-        <!-- النواة المركزية الصفراء المشعة -->
         <div class="radial-center" onclick="openRootModal()">
           <span class="nucleus-tag">👈 ابْدَأْ هُنَا</span>
           <div class="nucleus-letters" id="coreLetters">[ ص - ن - ع ]</div>
@@ -726,7 +786,6 @@
           <span class="sound-badge">🔊 انقر للاستماع</span>
         </div>
 
-        <!-- الفروع الخمسة -->
         <div class="radial-card branch-1" onclick="openMorphModal(0)">
           <div class="branch-header">
             <span class="branch-title">الفرع 1: الحدث / الفعل</span>
@@ -784,13 +843,12 @@
       </div>
     </div>
 
-    <!-- 2. مسرح الحكاية (نمط استخرج من الفقرة كمنصة ألف باء تاء) -->
+    <!-- 2. مسرح الحكاية (نمط استخرج من الفقرة - ألف باء تاء) -->
     <div id="storyTab" class="tab-view">
       <div class="story-hero-wrapper">
         <div class="story-character-banner">
-          <!-- رسم العصفور الحكواتي -->
           <div class="mascot-large-art">
-            <svg viewBox="0 0 100 100" width="140" height="140">
+            <svg viewBox="0 0 100 100" width="130" height="130">
               <circle cx="50" cy="50" r="45" fill="#38bdf8"/>
               <ellipse cx="50" cy="20" rx="30" ry="12" fill="#ef4444"/>
               <circle cx="50" cy="11" r="6" fill="#dc2626"/>
@@ -799,7 +857,6 @@
               <circle cx="38" cy="46" r="6" fill="#0284c7"/>
               <circle cx="66" cy="46" r="6" fill="#0284c7"/>
               <polygon points="45,56 55,56 50,68" fill="#f97316"/>
-              <!-- ريشة الرسم في اليد -->
               <rect x="75" y="45" width="8" height="40" rx="4" transform="rotate(30 75 45)" fill="#eab308"/>
               <polygon points="90,85 100,95 85,95" fill="#dc2626"/>
             </svg>
@@ -818,19 +875,77 @@
       </div>
     </div>
 
-    <!-- 3. ورشة التركيب (3 تحديات ملونة حركية) -->
+    <!-- ========================================================= -->
+    <!-- 3. ورشة التركيب بنمط عالم الصانع الكرتوني والشخصيات في الجوانب -->
+    <!-- ========================================================= -->
     <div id="labTab" class="tab-view">
-      <div class="lab-playground-box">
-        <div style="text-align: center; margin-bottom: 1.5rem;">
-          <h3 style="font-size: 1.8rem; font-weight: 900; color: #0284c7;">🛠️ وَرْشَةُ التَّرْكِيبِ الصَّرْفِيِّ</h3>
-          <p style="font-size: 1.15rem; font-weight: 800; color: #64748b;">اخْتَرِ الحَرْفَ الزَّائِدَ الصَّحِيحَ لِتَرْكِيبِ الوَزْنِ فِي كُلِّ صُنْدُوقٍ:</p>
+      <div class="workshop-magic-realm">
+        <div class="workshop-header">
+          <h3><span>🛠️</span> مَصْنَعُ الكَلِمَاتِ وَالأَوْزَانِ الخَارِقَةِ <span>⚙️</span></h3>
+          <p>اخْتَرِ الجَوْهَرَةَ اللَّامِعَةَ لِإِكْمَالِ الوَزْنِ فِي مِرْجَلِ الصَّرْفِ!</p>
         </div>
 
-        <div class="lab-grid-cards" id="labStationsGrid"></div>
+        <div class="workshop-content-layout">
+          <!-- الشخصية الكرتونية الأولى (على اليمين): سنقر الصانع بالخوذة والمطرقة -->
+          <div class="side-mascot-right">
+            <svg viewBox="0 0 120 120" width="130" height="130">
+              <!-- سحابة خلفية مصغرة -->
+              <ellipse cx="60" cy="105" rx="40" ry="10" fill="rgba(0,0,0,0.2)"/>
+              <!-- جسم الطائر الأزرق -->
+              <circle cx="60" cy="65" r="42" fill="#38bdf8"/>
+              <!-- بطن أصفر لطيف -->
+              <ellipse cx="60" cy="75" rx="26" ry="24" fill="#fef08a"/>
+              <!-- خوذة العمل الصفراء للحرفي -->
+              <path d="M25 50 Q60 15 95 50 Z" fill="#facc15" stroke="#ca8a04" stroke-width="3"/>
+              <ellipse cx="60" cy="50" rx="42" ry="7" fill="#eab308"/>
+              <circle cx="60" cy="30" r="5" fill="#ef4444"/>
+              <!-- عيون كبيرة نظيفة مع نظارة واقية بيضاء -->
+              <circle cx="48" cy="58" r="13" fill="white" stroke="#1e293b" stroke-width="3"/>
+              <circle cx="72" cy="58" r="13" fill="white" stroke="#1e293b" stroke-width="3"/>
+              <circle cx="50" cy="58" r="6" fill="#0284c7"/>
+              <circle cx="74" cy="58" r="6" fill="#0284c7"/>
+              <circle cx="52" cy="55" r="2" fill="white"/>
+              <circle cx="76" cy="55" r="2" fill="white"/>
+              <!-- منقار مبتسم -->
+              <polygon points="55,68 65,68 60,78" fill="#f97316"/>
+              <!-- مطرقة النجار في اليد -->
+              <rect x="92" y="55" width="7" height="35" rx="3" transform="rotate(-25 92 55)" fill="#92400e"/>
+              <rect x="80" y="45" width="22" height="14" rx="4" transform="rotate(-25 80 45)" fill="#94a3b8" stroke="#475569" stroke-width="2"/>
+            </svg>
+            <div class="mascot-speech" onclick="Sound.speak('هَيَّا يَا بَطَلُ، رَكِّبْ مَعِي الكَلِمَةَ بِالمِطْرَقَةِ!')">🔨 سُنْقُرُ الصَّانِعُ: «أَنْتَ بَطَلٌ!»</div>
+          </div>
+
+          <!-- بطاقات ومحطات التحدي الثلاث -->
+          <div class="workshop-stages-grid" id="magicStationsContainer"></div>
+
+          <!-- الشخصية الكرتونية الثانية (على اليسار): الروبوت بيبو الذكي -->
+          <div class="side-mascot-left">
+            <svg viewBox="0 0 120 120" width="130" height="130">
+              <ellipse cx="60" cy="105" rx="35" ry="8" fill="rgba(0,0,0,0.2)"/>
+              <!-- هوائي الروبوت -->
+              <line x1="60" y1="20" x2="60" y2="35" stroke="#cbd5e1" stroke-width="4"/>
+              <circle cx="60" cy="16" r="7" fill="#ef4444"/>
+              <!-- رأس الروبوت المربع المستدير -->
+              <rect x="30" y="32" width="60" height="48" rx="16" fill="#e2e8f0" stroke="#94a3b8" stroke-width="3"/>
+              <!-- شاشة العيون الرقمية -->
+              <rect x="38" y="42" width="44" height="24" rx="10" fill="#0f172a"/>
+              <circle cx="48" cy="54" r="6" fill="#22c55e"/>
+              <circle cx="72" cy="54" r="6" fill="#22c55e"/>
+              <line x1="50" y1="62" x2="70" y2="62" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
+              <!-- أذن الروبوت كمكبرات صوت -->
+              <rect x="23" y="46" width="7" height="16" rx="3" fill="#38bdf8"/>
+              <rect x="90" y="46" width="7" height="16" rx="3" fill="#38bdf8"/>
+              <!-- جسم الروبوت اللطيف -->
+              <rect x="38" y="82" width="44" height="25" rx="10" fill="#cbd5e1" stroke="#94a3b8" stroke-width="3"/>
+              <circle cx="60" cy="94" r="5" fill="#38bdf8"/>
+            </svg>
+            <div class="mascot-speech" style="background:#bae6fd; border-color:#0284c7; color:#0369a1;" onclick="Sound.speak('بِيبْ بُوبْ! لَدَيْنَا طَاقَةٌ هَائِلَةٌ لِحَلِّ الصَّرْفِ!')">⚡ بِّيبُو الرُّوبُوتُ: «حِسَابَاتِي مُطَابِقَةٌ!»</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- 4. حلبة الأبطال (التحديات الناطقة والملونة) -->
+    <!-- 4. حلبة الأبطال -->
     <div id="quizTab" class="tab-view">
       <div class="arena-box">
         <div style="text-align: center; margin-bottom: 1.5rem;">
@@ -843,7 +958,7 @@
     </div>
   </main>
 
-  <!-- النافذة المنبثقة التفصيلية (Modal) المتوافقة مع مرشدي ص 14 -->
+  <!-- النافذة المنبثقة التفصيلية (Modal) -->
   <div class="modal-overlay" id="morphModal" onclick="closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -869,7 +984,6 @@
         </div>
       </div>
 
-      <!-- تظهر حصراً للفعل المجرد (الفرع 1) -->
       <div class="affix-box" id="mAffixCard">
         <div class="affix-box-head">
           <span class="affix-box-title">📚 عَائِلَةُ الأَفْعَالِ المَزِيدَةِ (كِتَابُ مُرْشِدِي ص 14)</span>
@@ -881,9 +995,6 @@
   </div>
 
   <script>
-    // ----------------------------------------------------
-    // محرك الصوت والنغمات التفاعلية
-    // ----------------------------------------------------
     const Sound = {
       ctx: null,
       init() {
@@ -926,9 +1037,6 @@
       }
     };
 
-    // ----------------------------------------------------
-    // قاعدة البيانات الصرفية الدقيقة وتلوين الجذر 100%
-    // ----------------------------------------------------
     const db = {
       "صنع": {
         letters: ['ص', 'ن', 'ع'],
@@ -1000,7 +1108,6 @@
           { word: "<span class='c-a'>ا</span><span class='c-r'>صْ</span><span class='c-a'>طَ</span><span class='c-r'>نَ</span><span class='c-r'>عَ</span>", plain: "اصْطَنَعَ", weight: "افْتَعَلَ", desc: "مزيد بحرفين (الهمزة والتاء المبدلة طاء): تكلّف الصنع أو اتخذه لنفسه" },
           { word: "<span class='c-a'>اسْتَ</span><span class='c-r'>صْ</span><span class='c-r'>نَ</span><span class='c-r'>عَ</span>", plain: "اسْتَصْنَعَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف (اسْتـ): طلب أن يُصنع له الشيء" }
         ],
-        // فقرة تفاعلية بنمط استخرج من النص (ألف باء تاء)
         storyParagraph: [
           { word: "فِي", target: false }, { word: "قَرْيَتِنَا", target: false }, { word: "النَّشِيطَةِ،", target: false },
           { word: "يَعْمَلُ", target: false }, { word: "عَمِّي", target: false }, { word: "المَهْدِيُّ", target: false },
@@ -1058,7 +1165,8 @@
         ],
         labs: [
           { title: "التحدي 1: رَكِّبْ (اسْمَ الفَاعِلِ: كَاتِب)", slots: [{ch:"كَـ"}, {ch:"", correct:"ا"}, {ch:"تِـ"}, {ch:"بٌ"}], pool: ["ا", "و", "ي"] },
-          { title: "التحدي 2: رَكِّبْ (اسْمَ المَكَانِ: مَكْتَب)", slots: [{ch:"", correct:"مَـ"}, {ch:"كْ"}, {ch:"تَ"}, {ch:"بٌ"}], pool: ["مَـ", "أَ", "نَـ"] }
+          { title: "التحدي 2: رَكِّبْ (اسْمَ المَكَانِ: مَكْتَب)", slots: [{ch:"", correct:"مَـ"}, {ch:"كْ"}, {ch:"تَ"}, {ch:"بٌ"}], pool: ["مَـ", "أَ", "نَـ"] },
+          { title: "التحدي 3: رَكِّبْ (اسْمَ المَفْعُولِ: مَكْتُوب)", slots: [{ch:"مَـ"}, {ch:"كْ"}, {ch:"تُـ"}, {ch:"", correct:"و"}, {ch:"بٌ"}], pool: ["و", "ا", "ي"] }
         ],
         quizzes: [
           { q: "الفِعْلُ المَزِيدُ بِحَرْفٍ الَّذِي يَدُلُّ عَلَى المُشَارَكَةِ هُوَ:", ans: "كَاتَبَ", opts: ["كَتَبَ", "كَاتَبَ", "اسْتَكْتَبَ"], tip: "صيغة فاعَلَ تدل على المشاركة." }
@@ -1105,9 +1213,6 @@
     let starsCount = 0;
     let currentMissionIdx = 0;
 
-    // ----------------------------------------------------
-    // تحميل وعرض شمس الجذر الإشعاعية
-    // ----------------------------------------------------
     function loadRadialWorld(rootKey) {
       const data = db[rootKey];
 
@@ -1121,14 +1226,10 @@
 
       drawRays();
 
-      // مسرح القصة بنمط (ألف باء تاء)
       currentMissionIdx = 0;
       loadInteractiveStory(data);
 
-      // مختبر التركيب
-      renderLabStations(data.labs);
-
-      // ميدان التحدي
+      renderMagicWorkshop(data.labs);
       renderArenaQuizzes(data.quizzes);
     }
 
@@ -1163,7 +1264,6 @@
       });
     }
 
-    // النافذة المنبثقة التفصيلية (Modal)
     function openMorphModal(branchIdx) {
       const rootKey = document.getElementById('rootSelect').value;
       const rootObj = db[rootKey];
@@ -1177,7 +1277,6 @@
 
       document.getElementById('mAudioBtn').onclick = () => Sound.speak(branch.plain);
 
-      // عائلة المزيد: تظهر فقط للفرع 1 (الفعل المجرد)
       const affixCard = document.getElementById('mAffixCard');
       const affixList = document.getElementById('mAffixList');
       
@@ -1219,9 +1318,6 @@
       }
     }
 
-    // ----------------------------------------------------
-    // مسرح الحكاية التفاعلي (Find in Paragraph) كمنصة ألف باء تاء
-    // ----------------------------------------------------
     function loadInteractiveStory(data) {
       const container = document.getElementById('storyWordsContainer');
       container.innerHTML = '';
@@ -1248,7 +1344,6 @@
         Sound.correct();
         addStars(10);
         
-        // الانتقال للمهمة التالية
         currentMissionIdx++;
         if (currentMissionIdx < data.missions.length) {
           setTimeout(() => {
@@ -1268,42 +1363,37 @@
       }
     }
 
-    function speakCurrentStory() {
-      const rootKey = document.getElementById('rootSelect').value;
-      const text = db[rootKey].storyParagraph.map(p => p.word).join(' ');
-      Sound.speak(text);
-    }
-
     // ----------------------------------------------------
-    // ورشة التركيب (3 تحديات ملونة حركية)
+    // ورشة التركيب الخارقة الجديدة كلياً
     // ----------------------------------------------------
-    function renderLabStations(labs) {
-      const container = document.getElementById('labStationsGrid');
+    function renderMagicWorkshop(labs) {
+      const container = document.getElementById('magicStationsContainer');
       container.innerHTML = '';
 
       labs.forEach((lab, lIdx) => {
-        const box = document.createElement('div');
-        box.className = 'lab-station';
-        box.innerHTML = `
-          <div class="station-title">${lab.title}</div>
-          <div class="slots-container" id="slots_row_${lIdx}">
-            ${lab.slots.map(s => `<div class="station-slot ${s.ch ? 'filled' : ''}">${s.ch}</div>`).join('')}
+        const card = document.createElement('div');
+        card.className = 'magic-cauldron-card';
+        card.innerHTML = `
+          <div class="cauldron-badge">مَرْحَلَةُ التَّرْكِيبِ ${lIdx + 1}</div>
+          <div class="cauldron-title">${lab.title}</div>
+          <div class="magical-slots-row" id="magic_slots_${lIdx}">
+            ${lab.slots.map(s => `<div class="magic-slot ${s.ch ? 'filled' : ''}">${s.ch}</div>`).join('')}
           </div>
-          <div class="tiles-rack">
-            ${lab.pool.map(p => `<button class="game-tile-btn" onclick="checkLabAnswer(this, ${lIdx}, '${p}')">${p}</button>`).join('')}
+          <div class="crystal-tiles-row">
+            ${lab.pool.map(p => `<button class="crystal-tile" onclick="checkMagicTile(this, ${lIdx}, '${p}')">${p}</button>`).join('')}
           </div>
-          <div class="station-fb" id="fb_lab_${lIdx}"></div>
+          <div class="magic-feedback" id="magic_fb_${lIdx}"></div>
         `;
-        container.appendChild(box);
+        container.appendChild(card);
       });
     }
 
-    function checkLabAnswer(btn, lIdx, char) {
+    function checkMagicTile(btn, lIdx, char) {
       const rootKey = document.getElementById('rootSelect').value;
       const lab = db[rootKey].labs[lIdx];
       const target = lab.slots.find(s => !s.ch);
-      const fb = document.getElementById(`fb_lab_${lIdx}`);
-      const emptySlot = document.querySelectorAll(`#slots_row_${lIdx} .station-slot:not(.filled)`)[0];
+      const fb = document.getElementById(`magic_fb_${lIdx}`);
+      const emptySlot = document.querySelectorAll(`#magic_slots_${lIdx} .magic-slot:not(.filled)`)[0];
 
       if (char === target.correct) {
         emptySlot.textContent = char;
@@ -1311,21 +1401,18 @@
         fb.style.display = 'block';
         fb.style.background = '#dcfce7';
         fb.style.color = '#15803d';
-        fb.innerHTML = '🎉 مُمْتَاز! رَكَّبْتَ الوَزْنَ الصَّحِيحَ.';
+        fb.innerHTML = '🎉 صَهْرٌ صَحِيحٌ! رَكَّبْتَ الوَزْنَ الخَارِقَ.';
         Sound.correct();
         addStars(15);
       } else {
         fb.style.display = 'block';
         fb.style.background = '#fee2e2';
         fb.style.color = '#b91c1c';
-        fb.innerHTML = `⚠️ انْتَبِهْ! الحَرْفُ [ ${char} ] لَا يُطَابِقُ صِيغَةَ الوَزْنِ.`;
+        fb.innerHTML = `⚠️ تَحْذِير: الجَوْهَرَةُ [ ${char} ] لَا تُنَاسِبُ هَذَا الوَزْنَ!`;
         Sound.wrong();
       }
     }
 
-    // ----------------------------------------------------
-    // حلبة الأبطال الناطقة
-    // ----------------------------------------------------
     function renderArenaQuizzes(quizzes) {
       const container = document.getElementById('quizzesGrid');
       container.innerHTML = '';
