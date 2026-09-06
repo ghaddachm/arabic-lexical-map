@@ -3,17 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بَذْرَةُ الكَلِمَاتِ - الخَرِيطَةُ الإِشْعَاعِيَّةُ الذَّكِيَّةُ</title>
+  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ الحُرُوفِ الذَّكِيُّ</title>
   <style>
     :root {
       --primary: #4338ca;
-      --accent: #f59e0b;
+      --primary-dark: #312e81;
+      --accent-yellow: #fde047;
+      --accent-orange: #f97316;
       --c-green: #10b981;
-      --c-pink: #ec4899;
       --c-sky: #0284c7;
+      --c-pink: #ec4899;
       --c-purple: #8b5cf6;
-      --c-root: #dc2626;  /* أحمر فاقع للجذر */
-      --c-affix: #2563eb; /* أزرق فاقع للزيادة */
+      --c-root: #dc2626;   /* أحمر صريح للجذر */
+      --c-affix: #2563eb;  /* أزرق صريح للزيادة */
     }
 
     * {
@@ -24,7 +26,7 @@
     }
 
     body {
-      background: #f0fdf4 url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2322c55e' fill-opacity='0.08' fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+      background: #7dd3fc url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.25' fill-rule='evenodd'/%3E%3C/svg%3E");
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -32,162 +34,151 @@
       overflow-x: hidden;
     }
 
-    /* رأس الصفحة الكرتوني */
+    /* شريط علوي كرتوني شبيه بعصافير */
     header {
       background: #ffffff;
-      padding: 0.8rem 2.5rem;
+      padding: 0.6rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.15);
-      border-bottom: 4px solid #86efac;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      border-bottom: 5px solid #38bdf8;
     }
 
-    .brand-group {
+    .brand-box {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.8rem;
     }
 
-    .mascot-avatar {
-      width: 52px;
-      height: 52px;
-      background: #fef08a;
-      border: 3px solid #eab308;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(234, 179, 8, 0.3);
-      cursor: pointer;
-      animation: mascotBounce 2s infinite ease-in-out;
-    }
-
-    @keyframes mascotBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px) rotate(4deg); }
-    }
-
-    .brand-texts h2 {
-      font-size: 1.4rem;
+    .brand-texts h1 {
+      font-size: 1.5rem;
       font-weight: 900;
-      color: #15803d;
+      color: #0369a1;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
     }
 
     .brand-texts p {
       font-size: 0.85rem;
-      color: #65a30d;
+      color: #0284c7;
       font-weight: 800;
     }
 
-    .root-select-box {
-      background: #ecfdf5;
-      border: 3px solid #10b981;
-      padding: 0.4rem 1.4rem;
-      border-radius: 30px;
+    .root-dropdown-wrapper {
+      background: #fef08a;
+      border: 3px solid #eab308;
+      padding: 0.35rem 1.2rem;
+      border-radius: 25px;
+      box-shadow: 0 4px 0 #ca8a04;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      box-shadow: 0 4px 0 #059669;
+      gap: 0.5rem;
     }
 
-    .root-select-box select {
+    .root-dropdown-wrapper select {
       border: none;
       background: transparent;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 900;
-      color: #047857;
+      color: #854d0e;
       outline: none;
       cursor: pointer;
     }
 
     .score-badge {
-      background: #fef3c7;
-      border: 3px solid #f59e0b;
-      padding: 0.45rem 1.5rem;
-      border-radius: 30px;
+      background: #ec4899;
+      border: 3px solid #be185d;
+      color: white;
+      padding: 0.4rem 1.4rem;
+      border-radius: 25px;
       font-weight: 900;
-      color: #92400e;
+      font-size: 1.15rem;
+      box-shadow: 0 4px 0 #9d174d;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 1.15rem;
-      box-shadow: 0 4px 0 #d97706;
     }
 
-    /* أزرار التبويبات بنمط أزرار الألعاب 3D */
-    .tab-bar {
+    /* أزرار التبويبات بنمط ألعاب الأطفال 3D */
+    .nav-tabs-container {
       display: flex;
       justify-content: center;
-      padding: 1rem 1rem 0;
-      gap: 1rem;
+      padding: 0.8rem 1rem 0;
+      gap: 0.8rem;
     }
 
-    .tab-btn {
-      padding: 0.8rem 1.8rem;
-      border: 3px solid #cbd5e1;
-      background: white;
+    .tab-pill {
+      padding: 0.75rem 1.8rem;
+      border: 3px solid #0284c7;
+      background: #ffffff;
       font-size: 1.15rem;
       font-weight: 900;
-      color: #64748b;
+      color: #0369a1;
       cursor: pointer;
-      border-radius: 24px;
-      box-shadow: 0 5px 0 #94a3b8;
-      transition: all 0.15s;
+      border-radius: 25px;
+      box-shadow: 0 5px 0 #0284c7;
+      transition: all 0.15s ease;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
     }
 
-    .tab-btn:hover {
+    .tab-pill:hover {
       transform: translateY(-2px);
-      box-shadow: 0 7px 0 #94a3b8;
+      box-shadow: 0 7px 0 #0284c7;
     }
 
-    .tab-btn:active {
+    .tab-pill:active {
       transform: translateY(3px);
-      box-shadow: 0 2px 0 #94a3b8;
+      box-shadow: 0 2px 0 #0284c7;
     }
 
-    .tab-btn.active {
-      color: white;
-      background: #10b981;
-      border-color: #059669;
-      box-shadow: 0 5px 0 #047857;
+    .tab-pill.active {
+      background: #facc15;
+      color: #713f12;
+      border-color: #ca8a04;
+      box-shadow: 0 5px 0 #a16207;
     }
 
     main {
       flex: 1;
       max-width: 1350px;
-      margin: 1.2rem auto;
+      margin: 1rem auto 2rem;
       width: 95%;
     }
 
     .tab-view {
       display: none;
-      animation: popView 0.3s ease;
+      animation: bounceTab 0.3s ease;
     }
 
     .tab-view.active {
       display: block;
     }
 
-    @keyframes popView {
-      from { opacity: 0; transform: scale(0.98); }
-      to { opacity: 1; transform: scale(1); }
+    @keyframes bounceTab {
+      0% { transform: scale(0.96); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     /* ================================================= */
-    /* 1. الخريطة الإشعاعية التفاعلية */
+    /* 1. مصفوفة شمس الجذر الإشعاعية (مطابقة للصورة 6) */
     /* ================================================= */
-    .radial-map-stage {
+    .radial-playground {
       position: relative;
       width: 100%;
       min-height: 680px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 1rem 0;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(8px);
+      border-radius: 40px;
+      border: 6px solid #bae6fd;
+      box-shadow: 0 15px 35px rgba(2, 132, 199, 0.15);
+      margin-top: 0.5rem;
     }
 
     .radial-center {
@@ -196,9 +187,9 @@
       width: 215px;
       height: 215px;
       border-radius: 50%;
-      background: radial-gradient(circle, #fde047 0%, #eab308 100%);
+      background: radial-gradient(circle, #fef08a 0%, #eab308 100%);
       border: 7px solid #ffffff;
-      box-shadow: 0 0 55px rgba(234, 179, 8, 0.5), 0 12px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 0 50px rgba(234, 179, 8, 0.6), 0 10px 25px rgba(0,0,0,0.15);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -217,7 +208,7 @@
       font-weight: 900;
       padding: 0.2rem 0.8rem;
       border-radius: 12px;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.2rem;
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
@@ -226,7 +217,6 @@
       font-weight: 900;
       color: #7f1d1d;
       letter-spacing: 2px;
-      margin: 0.1rem 0;
     }
 
     .nucleus-sub {
@@ -235,12 +225,12 @@
       color: #854d0e;
     }
 
-    .sound-trigger-badge {
+    .sound-badge {
       font-size: 0.8rem;
       color: #78350f;
-      margin-top: 0.4rem;
+      margin-top: 0.3rem;
       background: rgba(255,255,255,0.7);
-      padding: 0.2rem 0.7rem;
+      padding: 0.2rem 0.6rem;
       border-radius: 12px;
       font-weight: 900;
     }
@@ -251,38 +241,38 @@
       background: white;
       border-radius: 28px;
       padding: 1.2rem 1.4rem;
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
       cursor: pointer;
-      transition: all 0.25s;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       border: 4px solid transparent;
       z-index: 5;
     }
 
     .radial-card:hover {
-      transform: scale(1.07) translateY(-5px);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+      transform: scale(1.07) translateY(-6px);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
     }
 
-    .branch-1 { top: 10px; left: 50%; transform: translateX(-50%); border-color: #f59e0b; }
-    .branch-2 { top: 65px; left: 8%; border-color: #3b82f6; }
-    .branch-3 { bottom: 40px; left: 12%; border-color: #ec4899; }
-    .branch-4 { top: 65px; right: 8%; border-color: #10b981; }
-    .branch-5 { bottom: 40px; right: 12%; border-color: #8b5cf6; }
+    .branch-1 { top: 15px; left: 50%; transform: translateX(-50%); border-color: #f59e0b; }
+    .branch-2 { top: 65px; left: 6%; border-color: #3b82f6; }
+    .branch-3 { bottom: 35px; left: 10%; border-color: #ec4899; }
+    .branch-4 { top: 65px; right: 6%; border-color: #10b981; }
+    .branch-5 { bottom: 35px; right: 10%; border-color: #8b5cf6; }
 
-    .radial-card:hover.branch-1 { transform: translateX(-50%) scale(1.07) translateY(-5px); }
+    .radial-card:hover.branch-1 { transform: translateX(-50%) scale(1.07) translateY(-6px); }
 
     .branch-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.2rem;
     }
 
     .branch-title { font-size: 0.9rem; font-weight: 900; color: #64748b; }
     .branch-icon { font-size: 1.6rem; }
-    .branch-question { font-size: 0.95rem; color: #94a3b8; font-weight: 800; margin-bottom: 0.2rem; }
-    .branch-word { font-size: 2.2rem; font-weight: 900; margin-bottom: 0.2rem; }
-    .branch-pattern { font-size: 0.95rem; color: #64748b; font-weight: bold; }
+    .branch-question { font-size: 0.95rem; color: #94a3b8; font-weight: 800; }
+    .branch-word { font-size: 2.2rem; font-weight: 900; margin: 0.2rem 0; }
+    .branch-pattern { font-size: 0.9rem; color: #64748b; font-weight: bold; }
     
     .branch-colloc {
       background: #f8fafc;
@@ -292,7 +282,7 @@
       font-size: 0.85rem;
       font-weight: 900;
       color: #475569;
-      margin-top: 0.5rem;
+      margin-top: 0.4rem;
     }
 
     .radial-svg-layer {
@@ -306,7 +296,279 @@
     }
 
     /* ================================================= */
-    /* النافذة المنبثقة التفصيلية (Modal) */
+    /* 2. مسرح الحكاية التفاعلي الملون (نمط عصافير + ألف باء تاء) */
+    /* ================================================= */
+    .story-hero-wrapper {
+      background: #ffffff;
+      border-radius: 40px;
+      padding: 2.5rem;
+      border: 6px solid #4ade80;
+      box-shadow: 0 15px 40px rgba(74, 222, 128, 0.25);
+      position: relative;
+    }
+
+    .story-character-banner {
+      background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
+      border-radius: 30px;
+      padding: 1.6rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      border: 4px solid #eab308;
+      box-shadow: 0 6px 15px rgba(234, 179, 8, 0.2);
+    }
+
+    .mascot-large-art {
+      width: 150px;
+      height: 150px;
+      flex-shrink: 0;
+      animation: floatBird 3s ease-in-out infinite;
+    }
+
+    @keyframes floatBird {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-8px) rotate(2deg); }
+    }
+
+    .bubble-talk {
+      background: #ffffff;
+      border: 3px solid #ca8a04;
+      border-radius: 25px;
+      padding: 1.2rem 1.8rem;
+      color: #854d0e;
+      position: relative;
+      flex: 1;
+    }
+
+    .bubble-talk::after {
+      content: '';
+      position: absolute;
+      right: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-width: 12px 0 12px 16px;
+      border-style: solid;
+      border-color: transparent transparent transparent #ca8a04;
+    }
+
+    .task-instruction-badge {
+      background: #3b82f6;
+      color: white;
+      font-weight: 900;
+      padding: 0.4rem 1.2rem;
+      border-radius: 20px;
+      display: inline-block;
+      margin-top: 0.6rem;
+      font-size: 1rem;
+      box-shadow: 0 3px 0 #1d4ed8;
+    }
+
+    .interactive-paragraph {
+      background: #f0fdf4;
+      border: 3px solid #86efac;
+      border-radius: 28px;
+      padding: 2.2rem;
+      font-size: 1.75rem;
+      line-height: 2.7;
+      color: #1e293b;
+      box-shadow: inset 0 4px 10px rgba(0,0,0,0.03);
+    }
+
+    /* الكلمات التفاعلية القابلة للنقر داخل الفقرة */
+    .story-click-word {
+      background: #ffffff;
+      border: 3px solid #cbd5e1;
+      padding: 0.15rem 0.8rem;
+      border-radius: 18px;
+      font-weight: 900;
+      color: #1e1b4b;
+      cursor: pointer;
+      display: inline-block;
+      box-shadow: 0 4px 0 #94a3b8;
+      transition: all 0.15s;
+    }
+
+    .story-click-word:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 0 #94a3b8;
+    }
+
+    .story-click-word.found {
+      background: #4ade80 !important;
+      color: #064e3b !important;
+      border-color: #16a34a !important;
+      box-shadow: 0 4px 0 #15803d !important;
+      transform: scale(1.08);
+      animation: popFound 0.3s ease;
+    }
+
+    @keyframes popFound {
+      0% { transform: scale(0.9); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1.08); }
+    }
+
+    /* ================================================= */
+    /* 3. مختبر التركيب الحركي (ورشة الألعاب) */
+    /* ================================================= */
+    .lab-playground-box {
+      background: #ffffff;
+      border-radius: 40px;
+      padding: 2.2rem;
+      border: 6px solid #38bdf8;
+      box-shadow: 0 15px 40px rgba(56, 189, 248, 0.2);
+    }
+
+    .lab-grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.8rem;
+      margin-top: 1rem;
+    }
+
+    .lab-station {
+      background: radial-gradient(circle at top, #f0fdf4 0%, #e0f2fe 100%);
+      border: 3px solid #7dd3fc;
+      border-radius: 30px;
+      padding: 1.8rem;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+      border-bottom: 7px solid #0284c7;
+    }
+
+    .station-title {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #0369a1;
+      margin-bottom: 0.5rem;
+    }
+
+    .slots-container {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      margin: 1.5rem 0;
+    }
+
+    .station-slot {
+      width: 68px;
+      height: 68px;
+      border: 4px dashed #94a3b8;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      font-weight: 900;
+      background: white;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+    }
+
+    .station-slot.filled {
+      border: 4px solid var(--c-affix);
+      background: #eff6ff;
+      color: var(--c-affix);
+    }
+
+    .tiles-rack {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .game-tile-btn {
+      width: 65px;
+      height: 65px;
+      background: #fef08a;
+      border: 3px solid #eab308;
+      color: #854d0e;
+      border-radius: 20px;
+      font-size: 2rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 5px 0 #ca8a04;
+      transition: all 0.1s;
+    }
+
+    .game-tile-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #ca8a04;
+    }
+
+    .station-fb {
+      margin-top: 1rem;
+      padding: 0.7rem;
+      border-radius: 14px;
+      font-weight: 900;
+      display: none;
+    }
+
+    /* ================================================= */
+    /* 4. حلبة التحدي الناطقة */
+    /* ================================================= */
+    .arena-box {
+      background: #ffffff;
+      border-radius: 40px;
+      padding: 2.2rem;
+      border: 6px solid #c084fc;
+      box-shadow: 0 15px 40px rgba(192, 132, 252, 0.25);
+    }
+
+    .arena-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.6rem;
+    }
+
+    .challenge-card {
+      background: #faf5ff;
+      border-radius: 30px;
+      padding: 1.8rem;
+      border: 3px solid #e9d5ff;
+      border-bottom: 8px solid #a855f7;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+    }
+
+    .challenge-card h4 {
+      font-size: 1.25rem;
+      color: #6b21a8;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .opt-pill-btn {
+      background: #ffffff;
+      border: 3px solid #cbd5e1;
+      padding: 0.9rem 1.4rem;
+      font-size: 1.25rem;
+      font-weight: 900;
+      border-radius: 22px;
+      cursor: pointer;
+      width: 100%;
+      text-align: right;
+      margin-top: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 0 #cbd5e1;
+      transition: all 0.15s;
+    }
+
+    .opt-pill-btn:hover {
+      background: #eff6ff;
+      border-color: #3b82f6;
+      box-shadow: 0 4px 0 #2563eb;
+    }
+
+    .opt-pill-btn:active {
+      transform: translateY(3px);
+      box-shadow: none;
+    }
+
+    /* ================================================= */
+    /* النافذة المنبثقة للتحليل الصرفي (Modal) */
     /* ================================================= */
     .modal-overlay {
       position: fixed;
@@ -327,7 +589,7 @@
     .modal-box {
       background: white;
       width: 90%;
-      max-width: 640px;
+      max-width: 630px;
       border-radius: 35px;
       padding: 2.2rem;
       border: 6px solid #e0e7ff;
@@ -368,22 +630,6 @@
     .modal-word { font-size: 3.4rem; font-weight: 900; letter-spacing: 1px; }
     .modal-weight { color: var(--primary); font-weight: 900; font-size: 1.25rem; margin-top: 0.3rem; }
 
-    .modal-audio-btn {
-      background: #fef08a;
-      border: 3px solid #eab308;
-      color: #854d0e;
-      font-weight: 900;
-      padding: 0.6rem 1.6rem;
-      border-radius: 30px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 0.7rem;
-      font-size: 1.05rem;
-      box-shadow: 0 4px 0 #ca8a04;
-    }
-
     .detail-card {
       background: #f8fafc;
       border-radius: 22px;
@@ -411,276 +657,42 @@
 
     .c-r { color: var(--c-root) !important; }
     .c-a { color: var(--c-affix) !important; }
-
-    /* ================================================= */
-    /* 2. مسرح الحكاية الكرتوني المبهج (مثل عصافير) */
-    /* ================================================= */
-    .story-hero-stage {
-      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-      border-radius: 35px;
-      padding: 2.5rem;
-      color: white;
-      box-shadow: 0 15px 40px rgba(22, 163, 74, 0.3);
-      border: 6px solid #bbf7d0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .story-header-flex {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      margin-bottom: 1.8rem;
-    }
-
-    .story-mascot-box {
-      width: 140px;
-      height: 140px;
-      background: white;
-      border: 6px solid #fde047;
-      border-radius: 35px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      animation: floatArt 3s ease-in-out infinite;
-    }
-
-    @keyframes floatArt {
-      0%, 100% { transform: translateY(0) rotate(-2deg); }
-      50% { transform: translateY(-8px) rotate(2deg); }
-    }
-
-    .story-speech-bubble {
-      background: #ffffff;
-      color: #166534;
-      border-radius: 28px;
-      padding: 1.2rem 1.8rem;
-      position: relative;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      flex: 1;
-    }
-
-    .story-speech-bubble::after {
-      content: '';
-      position: absolute;
-      right: -15px;
-      top: 50%;
-      transform: translateY(-50%);
-      border-width: 12px 0 12px 16px;
-      border-style: solid;
-      border-color: transparent transparent transparent #ffffff;
-    }
-
-    .story-text-card {
-      background: #ffffff;
-      border-radius: 30px;
-      padding: 2.2rem;
-      color: #1e293b;
-      font-size: 1.75rem;
-      line-height: 2.6;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-      border: 4px solid #fef08a;
-    }
-
-    .story-tag {
-      background: #fef08a;
-      padding: 0.2rem 0.9rem;
-      border-radius: 16px;
-      font-weight: 900;
-      color: #854d0e;
-      border-bottom: 5px solid #eab308;
-      cursor: pointer;
-      display: inline-block;
-      transition: transform 0.15s;
-    }
-
-    .story-tag:hover { transform: scale(1.1); }
-
-    /* ================================================= */
-    /* 3. مختبر التركيب بنمط "ورشة الألعاب الحركية" */
-    /* ================================================= */
-    .lab-stage-box {
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-      border-radius: 35px;
-      padding: 2.2rem;
-      color: white;
-      border: 6px solid #bae6fd;
-      box-shadow: 0 15px 40px rgba(2, 132, 199, 0.3);
-    }
-
-    .lab-grid-3d {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .lab-card-item {
-      background: #ffffff;
-      border-radius: 28px;
-      padding: 1.8rem;
-      color: #0f172a;
-      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-      border-bottom: 8px solid #38bdf8;
-      text-align: center;
-    }
-
-    .lab-card-item h4 {
-      font-size: 1.3rem;
-      color: #0284c7;
-      font-weight: 900;
-    }
-
-    .slots-row {
-      display: flex;
-      justify-content: center;
-      gap: 0.8rem;
-      margin: 1.5rem 0;
-    }
-
-    .lab-slot {
-      width: 65px;
-      height: 65px;
-      border: 4px dashed #94a3b8;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.2rem;
-      font-weight: 900;
-      background: #f8fafc;
-    }
-
-    .lab-slot.filled {
-      border: 4px solid var(--c-affix);
-      background: #eff6ff;
-      color: var(--c-affix);
-    }
-
-    .tiles-row {
-      display: flex;
-      justify-content: center;
-      gap: 0.8rem;
-    }
-
-    .tile-btn {
-      width: 62px;
-      height: 62px;
-      background: #fef08a;
-      border: 3px solid #eab308;
-      color: #854d0e;
-      border-radius: 18px;
-      font-size: 2rem;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 5px 0 #ca8a04;
-      transition: all 0.1s;
-    }
-
-    .tile-btn:active {
-      transform: translateY(4px);
-      box-shadow: 0 1px 0 #ca8a04;
-    }
-
-    /* ================================================= */
-    /* 4. ميدان التحدي بنمط "حلبة الأبطال" */
-    /* ================================================= */
-    .arena-stage {
-      background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-      border-radius: 35px;
-      padding: 2.2rem;
-      border: 6px solid #ddd6fe;
-      box-shadow: 0 15px 40px rgba(124, 58, 237, 0.3);
-    }
-
-    .arena-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .arena-card {
-      background: #ffffff;
-      border-radius: 28px;
-      padding: 1.8rem;
-      border-bottom: 8px solid #c084fc;
-      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-    }
-
-    .arena-opt-btn {
-      background: #fdf4ff;
-      border: 3px solid #f0abfc;
-      padding: 0.9rem 1.4rem;
-      font-size: 1.25rem;
-      font-weight: 900;
-      border-radius: 20px;
-      cursor: pointer;
-      width: 100%;
-      text-align: right;
-      margin-top: 0.8rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 4px 0 #e879f9;
-      transition: all 0.15s;
-    }
-
-    .arena-opt-btn:hover {
-      background: #fae8ff;
-      transform: translateY(-2px);
-    }
-
-    .arena-opt-btn:active {
-      transform: translateY(3px);
-      box-shadow: 0 1px 0 #e879f9;
-    }
-
-    .fb-bubble {
-      padding: 0.8rem 1.2rem;
-      border-radius: 16px;
-      font-weight: 900;
-      margin-top: 1rem;
-      display: none;
-      font-size: 1.1rem;
-    }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="brand-group">
-      <!-- شخصية الطائر الكرتوني الرسام (SVG متكامل) -->
+    <div class="brand-box">
       <div class="mascot-avatar" onclick="Sound.speak('مَرْحَباً بِكَ يَا بَطَلَ اللُّغَةِ العَرَبِيَّةِ! أَنَا صَدِيقُكَ سُنْقُر')">
-        <svg viewBox="0 0 100 100" width="40" height="40">
+        <!-- شخصية العصفور الرسام المبتسم (SVG مدمج 100%) -->
+        <svg viewBox="0 0 100 100" width="45" height="45">
           <circle cx="50" cy="50" r="45" fill="#38bdf8"/>
-          <!-- القبعة الحمراء -->
+          <!-- القبعة الحمراء للرسام -->
           <ellipse cx="50" cy="20" rx="30" ry="12" fill="#ef4444"/>
-          <circle cx="50" cy="12" r="6" fill="#dc2626"/>
-          <!-- النظارات الكبيرة -->
-          <circle cx="38" cy="45" r="16" fill="white" stroke="#1e293b" stroke-width="4"/>
-          <circle cx="62" cy="45" r="16" fill="white" stroke="#1e293b" stroke-width="4"/>
-          <line x1="50" y1="45" x2="54" y2="45" stroke="#1e293b" stroke-width="4"/>
-          <!-- العيون -->
-          <circle cx="38" cy="45" r="7" fill="#0284c7"/>
-          <circle cx="62" cy="45" r="7" fill="#0284c7"/>
-          <circle cx="40" cy="42" r="3" fill="white"/>
-          <circle cx="64" cy="42" r="3" fill="white"/>
-          <!-- المنقار البرتقالي المبتسم -->
-          <polygon points="45,55 55,55 50,70" fill="#f97316"/>
+          <circle cx="50" cy="11" r="6" fill="#dc2626"/>
+          <!-- النظارات الكبيرة الكرتونية -->
+          <circle cx="36" cy="48" r="15" fill="white" stroke="#1e293b" stroke-width="4"/>
+          <circle cx="64" cy="48" r="15" fill="white" stroke="#1e293b" stroke-width="4"/>
+          <line x1="48" y1="48" x2="52" y2="48" stroke="#1e293b" stroke-width="4"/>
+          <!-- بؤبؤ العين اللامع -->
+          <circle cx="38" cy="48" r="6" fill="#0284c7"/>
+          <circle cx="66" cy="48" r="6" fill="#0284c7"/>
+          <circle cx="40" cy="45" r="2.5" fill="white"/>
+          <circle cx="68" cy="45" r="2.5" fill="white"/>
+          <!-- المنقار الباسم -->
+          <polygon points="44,56 56,56 50,70" fill="#f97316"/>
         </svg>
       </div>
 
       <div class="brand-texts">
-        <h2>بَذْرَةُ الكَلِمَاتِ 🎨</h2>
-        <p>مُغَامَرَةُ الصَّرْفِ وَالمُعْجَمِ الشَّيِّقَةِ</p>
+        <h1>بَذْرَةُ الكَلِمَاتِ 🎨</h1>
+        <p>الخَرِيطَةُ المُعْجَمِيَّةُ الإِشْعَاعِيَّةُ الذَّكِيَّةُ</p>
       </div>
     </div>
 
-    <div class="root-select-box">
-      <label style="font-weight: 900; color: #047857;">اخْتَرِ الجَذْرَ:</label>
-      <select id="rootSelect" onchange="renderRadialRoot(this.value)">
+    <div class="root-dropdown-wrapper">
+      <label style="font-weight: 900;">الجَذْرُ:</label>
+      <select id="rootSelect" onchange="loadRadialWorld(this.value)">
         <option value="صنع">✨ [ ص - ن - ع ]</option>
         <option value="كتب">📚 [ ك - ت - ب ]</option>
         <option value="علم">🔬 [ ع - ل - م ]</option>
@@ -689,30 +701,32 @@
 
     <div class="score-badge">
       <span>⭐ النُّجُومُ:</span>
-      <span id="scoreVal">0</span>
+      <span id="starsScore">0</span>
     </div>
   </header>
 
-  <nav class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('radialMap', this)">☀️ شَمْسُ الجَذْرِ</button>
-    <button class="tab-btn" onclick="switchTab('storyTab', this)">📖 مَسْرَحُ الحِكَايَةِ</button>
-    <button class="tab-btn" onclick="switchTab('labTab', this)">⚙️ وَرْشَةُ التَّرْكِيبِ</button>
-    <button class="tab-btn" onclick="switchTab('quizTab', this)">🏆 حَلَبَةُ الأَبْطَالِ</button>
+  <nav class="nav-tabs-container">
+    <button class="tab-pill active" onclick="switchMainTab('radialMap', this)">☀️ شَمْسُ الجَذْرِ</button>
+    <button class="tab-pill" onclick="switchMainTab('storyTab', this)">📖 مَسْرَحُ الحِكَايَةِ</button>
+    <button class="tab-pill" onclick="switchMainTab('labTab', this)">⚙️ وَرْشَةُ التَّرْكِيبِ</button>
+    <button class="tab-pill" onclick="switchMainTab('quizTab', this)">🏆 حَلَبَةُ الأَبْطَالِ</button>
   </nav>
 
   <main>
-    <!-- 1. مصفوفة الجذر الإشعاعي (شمس الجذر) -->
+    <!-- 1. شمس الجذر الإشعاعية التفاعلية -->
     <div id="radialMap" class="tab-view active">
-      <div class="radial-map-stage">
-        <svg class="radial-svg-layer" id="svgLayer"></svg>
+      <div class="radial-playground">
+        <svg class="radial-svg-layer" id="svgRays"></svg>
 
+        <!-- النواة المركزية الصفراء المشعة -->
         <div class="radial-center" onclick="openRootModal()">
           <span class="nucleus-tag">👈 ابْدَأْ هُنَا</span>
           <div class="nucleus-letters" id="coreLetters">[ ص - ن - ع ]</div>
           <div class="nucleus-sub" id="coreConcept">الجَذْرُ: العَمَلُ وَالإِتْقَانُ</div>
-          <span class="sound-trigger-badge">🔊 انقر للشرح الصوتي</span>
+          <span class="sound-badge">🔊 انقر للاستماع</span>
         </div>
 
+        <!-- الفروع الخمسة -->
         <div class="radial-card branch-1" onclick="openMorphModal(0)">
           <div class="branch-header">
             <span class="branch-title">الفرع 1: الحدث / الفعل</span>
@@ -770,64 +784,66 @@
       </div>
     </div>
 
-    <!-- 2. مسرح الحكاية الملون (على طريقة عصافير) -->
+    <!-- 2. مسرح الحكاية (نمط استخرج من الفقرة كمنصة ألف باء تاء) -->
     <div id="storyTab" class="tab-view">
-      <div class="story-hero-stage">
-        <div class="story-header-flex">
-          <div class="story-mascot-box">
-            <!-- كاريكاتير الحكواتي / الرسام الصغير -->
-            <svg viewBox="0 0 100 100" width="100" height="100">
+      <div class="story-hero-wrapper">
+        <div class="story-character-banner">
+          <!-- رسم العصفور الحكواتي -->
+          <div class="mascot-large-art">
+            <svg viewBox="0 0 100 100" width="140" height="140">
               <circle cx="50" cy="50" r="45" fill="#38bdf8"/>
-              <ellipse cx="50" cy="22" rx="28" ry="12" fill="#ef4444"/>
-              <circle cx="36" cy="46" r="14" fill="white" stroke="#1e293b" stroke-width="3"/>
-              <circle cx="64" cy="46" r="14" fill="white" stroke="#1e293b" stroke-width="3"/>
-              <circle cx="36" cy="46" r="6" fill="#0369a1"/>
-              <circle cx="64" cy="46" r="6" fill="#0369a1"/>
-              <polygon points="46,55 54,55 50,68" fill="#f97316"/>
-              <!-- لوحة ألوان الرسام -->
-              <ellipse cx="25" cy="75" rx="14" ry="10" fill="#fde047" stroke="#b45309" stroke-width="2"/>
-              <circle cx="20" cy="72" r="2.5" fill="#ef4444"/>
-              <circle cx="28" cy="72" r="2.5" fill="#3b82f6"/>
-              <circle cx="24" cy="78" r="2.5" fill="#10b981"/>
+              <ellipse cx="50" cy="20" rx="30" ry="12" fill="#ef4444"/>
+              <circle cx="50" cy="11" r="6" fill="#dc2626"/>
+              <circle cx="36" cy="46" r="14" fill="white" stroke="#1e293b" stroke-width="4"/>
+              <circle cx="64" cy="46" r="14" fill="white" stroke="#1e293b" stroke-width="4"/>
+              <circle cx="38" cy="46" r="6" fill="#0284c7"/>
+              <circle cx="66" cy="46" r="6" fill="#0284c7"/>
+              <polygon points="45,56 55,56 50,68" fill="#f97316"/>
+              <!-- ريشة الرسم في اليد -->
+              <rect x="75" y="45" width="8" height="40" rx="4" transform="rotate(30 75 45)" fill="#eab308"/>
+              <polygon points="90,85 100,95 85,95" fill="#dc2626"/>
             </svg>
           </div>
-          <div class="story-speech-bubble">
-            <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.3rem;">حِكَايَةُ الجَذْرِ المُصَوَّرَةِ 🎨</h3>
-            <p style="font-size: 1.15rem; font-weight: 800;">اقْرَأْ مَعِي الحِكَايَةَ يَا بَطَلُ، وَانْقُرْ عَلَى الكَلِمَاتِ الصَّفْرَاءِ لِتَسْمَعَهَا بِصَوْتٍ فَصِيحٍ!</p>
-            <button class="modal-audio-btn" style="margin-top: 0.8rem;" onclick="speakCurrentStory()">🔊 اسْتَمِعْ لِلحِكَايَةِ كَامِلَةً</button>
+
+          <div class="bubble-talk">
+            <h3 style="font-size: 1.4rem; font-weight: 900;">مُغَامَرَةُ الاِسْتِكْشَافِ دَاخِلَ الفِقْرَةِ 🎯</h3>
+            <p style="font-size: 1.15rem; font-weight: 800; margin-top: 0.3rem;">
+              ابْحَثْ عَنِ الكَلِمَةِ المَطْلُوبَةِ وَانْقُرْ عَلَيْهَا مُبَاشَرَةً دَاخِلَ النَّصِّ!
+            </p>
+            <div class="task-instruction-badge" id="storyMissionBadge">المَهَمَّةُ: ابْحَثْ عَنِ اسْمِ الفَاعِلِ</div>
           </div>
         </div>
 
-        <div class="story-text-card" id="storyContent"></div>
+        <div class="interactive-paragraph" id="storyWordsContainer"></div>
       </div>
     </div>
 
-    <!-- 3. ورشة التركيب الحركية (3 تمارين ملونة بلا بياض) -->
+    <!-- 3. ورشة التركيب (3 تحديات ملونة حركية) -->
     <div id="labTab" class="tab-view">
-      <div class="lab-stage-box">
-        <div style="text-align: center; margin-bottom: 1rem;">
-          <h3 style="font-size: 1.8rem; font-weight: 900;">🛠️ وَرْشَةُ الأَبْطَالِ: رَكِّبِ الكَلِمَاتِ وَاكْسِبِ النُّجُومَ!</h3>
-          <p style="font-size: 1.15rem; font-weight: 800; color: #e0f2fe;">اسحب أو انقر على الحرف الناقص لإكمال الميزان الصرفي الصحيح:</p>
+      <div class="lab-playground-box">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <h3 style="font-size: 1.8rem; font-weight: 900; color: #0284c7;">🛠️ وَرْشَةُ التَّرْكِيبِ الصَّرْفِيِّ</h3>
+          <p style="font-size: 1.15rem; font-weight: 800; color: #64748b;">اخْتَرِ الحَرْفَ الزَّائِدَ الصَّحِيحَ لِتَرْكِيبِ الوَزْنِ فِي كُلِّ صُنْدُوقٍ:</p>
         </div>
 
-        <div class="lab-grid-3d" id="labChallengesGrid"></div>
+        <div class="lab-grid-cards" id="labStationsGrid"></div>
       </div>
     </div>
 
-    <!-- 4. حلبة الأبطال (ميدان التحدي الملون والناطق) -->
+    <!-- 4. حلبة الأبطال (التحديات الناطقة والملونة) -->
     <div id="quizTab" class="tab-view">
-      <div class="arena-stage">
-        <div style="text-align: center; color: white; margin-bottom: 1.5rem;">
-          <h3 style="font-size: 1.8rem; font-weight: 900;">🏆 حَلَبَةُ التَّحَدِّي الصَّرْفِيِّ</h3>
-          <p style="font-size: 1.15rem; font-weight: 800; color: #ede9fe;">أَجِبْ عَنِ الأَسْئِلَةِ، وَاسْتَمِعْ لِلتَّوْجِيهِ الذَّكِيِّ عِنْدَ كُلِّ خُطْوَةٍ:</p>
+      <div class="arena-box">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <h3 style="font-size: 1.8rem; font-weight: 900; color: #7c3aed;">🏆 حَلَبَةُ الأَبْطَالِ الصَّرْفِيَّةِ</h3>
+          <p style="font-size: 1.15rem; font-weight: 800; color: #64748b;">انْقُرْ عَلَى الإِجَابَةِ الصَّحِيحَةِ وَاسْتَمِعْ لِلتَّوْجِيهِ الذَّكِيِّ:</p>
         </div>
 
-        <div class="arena-grid" id="quizzesContainer"></div>
+        <div class="arena-cards-grid" id="quizzesGrid"></div>
       </div>
     </div>
   </main>
 
-  <!-- النافذة المنبثقة التفصيلية (Modal) -->
+  <!-- النافذة المنبثقة التفصيلية (Modal) المتوافقة مع مرشدي ص 14 -->
   <div class="modal-overlay" id="morphModal" onclick="closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -835,7 +851,7 @@
       <div class="modal-hero">
         <div class="modal-word" id="mHeroWord"></div>
         <div class="modal-weight" id="mHeroWeight"></div>
-        <button class="modal-audio-btn" id="mAudioBtn">🔊 اسْتَمِعْ لِلنُّطْقِ الصَّوْتِيِّ</button>
+        <button class="modal-audio-btn" id="mAudioBtn">🔊 اسْتَمِعْ لِلنُّطْقِ</button>
       </div>
 
       <div class="detail-card">
@@ -865,7 +881,9 @@
   </div>
 
   <script>
-    // محرك الصوت والنطق
+    // ----------------------------------------------------
+    // محرك الصوت والنغمات التفاعلية
+    // ----------------------------------------------------
     const Sound = {
       ctx: null,
       init() {
@@ -908,7 +926,9 @@
       }
     };
 
-    // بنك البيانات المنظم لسانياً وتشفير أحرف الجذر 100% بالأحمر
+    // ----------------------------------------------------
+    // قاعدة البيانات الصرفية الدقيقة وتلوين الجذر 100%
+    // ----------------------------------------------------
     const db = {
       "صنع": {
         letters: ['ص', 'ن', 'ع'],
@@ -980,7 +1000,24 @@
           { word: "<span class='c-a'>ا</span><span class='c-r'>صْ</span><span class='c-a'>طَ</span><span class='c-r'>نَ</span><span class='c-r'>عَ</span>", plain: "اصْطَنَعَ", weight: "افْتَعَلَ", desc: "مزيد بحرفين (الهمزة والتاء المبدلة طاء): تكلّف الصنع أو اتخذه لنفسه" },
           { word: "<span class='c-a'>اسْتَ</span><span class='c-r'>صْ</span><span class='c-r'>نَ</span><span class='c-r'>عَ</span>", plain: "اسْتَصْنَعَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف (اسْتـ): طلب أن يُصنع له الشيء" }
         ],
-        story: "فِي قَرْيَتِنَا النَّشِيطَةِ، يَعْمَلُ عَمِّي المَهْدِيُّ <span class='story-tag' onclick=\"Sound.speak('صَانِعاً')\">صَانِعاً</span> مَاهِراً فِي وَرْشَتِهِ، وَيَزُورُ كُلَّ صَبَاحٍ <span class='story-tag' onclick=\"Sound.speak('مَصْنَعٍ')\">مَصْنَعاً</span> قَرِيباً. لَقَدْ <span class='story-tag' onclick=\"Sound.speak('صَنَعَ')\">صَنَعَ</span> بِيَدَيْهِ خِزَانَةً خَشَبِيَّةً رَائِعَةً، هِيَ أَفْخَرُ أَثَاثٍ <span class='story-tag' onclick=\"Sound.speak('مَصْنُوعٍ')\">مَصْنُوعٍ</span> رَأَيْتُهُ، وَهَكَذَا تَزْدَهِرُ <span class='story-tag' onclick=\"Sound.speak('صِنَاعَةُ')\">صِنَاعَةُ</span> الخَشَبِ فِي المَغْرِبِ الحَبِيبِ!",
+        // فقرة تفاعلية بنمط استخرج من النص (ألف باء تاء)
+        storyParagraph: [
+          { word: "فِي", target: false }, { word: "قَرْيَتِنَا", target: false }, { word: "النَّشِيطَةِ،", target: false },
+          { word: "يَعْمَلُ", target: false }, { word: "عَمِّي", target: false }, { word: "المَهْدِيُّ", target: false },
+          { word: "صَانِعاً", target: "اسم الفاعل" }, { word: "مَاهِراً،", target: false }, { word: "حَيْثُ", target: false },
+          { word: "يَقْضِي", target: false }, { word: "صَبَاحَهُ", target: false }, { word: "فِي", target: false },
+          { word: "مَصْنَعٍ", target: "اسم المكان" }, { word: "قَرِيبٍ.", target: false }, { word: "لَقَدْ", target: false },
+          { word: "صَنَعَ", target: "الفعل المجرد" }, { word: "طَاوِلَةً", target: false }, { word: "خَشَبِيَّةً", target: false },
+          { word: "هِيَ", target: false }, { word: "أَفْخَرُ", target: false }, { word: "أَثَاثٍ", target: false },
+          { word: "مَصْنُوعٍ", target: "اسم المفعول" }, { word: "رَأَيْتُهُ،", target: false }, { word: "وَبِفَضْلِهِ", target: false },
+          { word: "تَزْدَهِرُ", target: false }, { word: "صِنَاعَةُ", target: "المصدر" }, { word: "الخَشَبِ", target: false },
+          { word: "فِي", target: false }, { word: "المَغْرِبِ.", target: false }
+        ],
+        missions: [
+          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" }
+        ],
         labs: [
           { title: "التحدي 1: رَكِّبْ (اسْمَ الفَاعِلِ: صَانِع)", slots: [{ch:"صَـ"}, {ch:"", correct:"ا"}, {ch:"نِـ"}, {ch:"عٌ"}], pool: ["ا", "مَـ", "يَـ"] },
           { title: "التحدي 2: رَكِّبْ (اسْمَ المَكَانِ: مَصْنَع)", slots: [{ch:"", correct:"مَـ"}, {ch:"صْ"}, {ch:"نَ"}, {ch:"عٌ"}], pool: ["مَـ", "تَـ", "سَـ"] },
@@ -988,7 +1025,7 @@
         ],
         quizzes: [
           { q: "مَا هُوَ الفِعْلُ المَزِيدُ بِحَرْفٍ وَاحِدٍ مِنَ الجَذْرِ (ص - ن - ع)؟", ans: "صَنَّعَ", opts: ["صَنَعَ", "صَنَّعَ", "اسْتَصْنَعَ"], tip: "المزيد بحرف يكون بالتضعيف (فَعَّلَ)." },
-          { q: "«يَعْمَلُ أَبِي فِي ............... حَدِيثٍ لِلسَّيَّارَاتِ». الكَلِمَةُ المُنَاسِبَةُ:", ans: "مَصْنَعٍ", opts: ["مَصْنَعٍ", "صَانِعٍ", "صِنَاعَةٍ"], tip: "السياق يطلب اسم مكان على وزن مَفْعَل." },
+          { q: "«يَعْمَلُ أَبِي فِي ............... حَدِيثٍ لِلسَّيَّارَاتِ». الكَلِمَةُ المُنَاسِبَةُ:", ans: "مَصْنَعٍ", opts: ["مَصْنَعٍ", "صَانِعٍ", "صِنَاعَةٍ"], tip: "اسم المكان يصاغ على وزن مَفْعَل." },
           { q: "الفِعْلُ (اصْطَنَعَ) عَلَى وَزْنِ (افْتَعَلَ) هُوَ فِعْلٌ:", ans: "مَزِيدٌ بِحَرْفَيْنِ", opts: ["مُجَرَّدٌ", "مَزِيدٌ بِحَرْفٍ", "مَزِيدٌ بِحَرْفَيْنِ"], tip: "مزيد بالهمزة والتاء المبدلة طاء." }
         ]
       },
@@ -1007,11 +1044,21 @@
           { word: "<span class='c-a'>ا</span><span class='c-r'>كْ</span><span class='c-a'>تَ</span><span class='c-r'>تَ</span><span class='c-r'>بَ</span>", plain: "اكْتَتَبَ", weight: "افْتَعَلَ", desc: "مزيد بحرفين (الهمزة والتاء): سَجّل اسمه" },
           { word: "<span class='c-a'>اسْتَ</span><span class='c-r'>كْ</span><span class='c-r'>تَ</span><span class='c-r'>بَ</span>", plain: "اسْتَكْتَبَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف (اسْتـ): طلب من غيره أن يكتب له" }
         ],
-        story: "فِي صَبَاحِ يَومِ الأَحَدِ، جَلَسَ <span class='story-tag' onclick=\"Sound.speak('الكَاتِبُ')\">الكَاتِبُ</span> أَمَامَ <span class='story-tag' onclick=\"Sound.speak('مَكْتَبِهِ')\">مَكْتَبِهِ</span> المُرَتَّبِ، ثُمَّ <span class='story-tag' onclick=\"Sound.speak('كَتَبَ')\">كَتَبَ</span> أَرْوَعَ نَصٍّ <span class='story-tag' onclick=\"Sound.speak('مَكْتُوبٍ')\">مَكْتُوبٍ</span> يُعَلِّمُ الأَطْفَالَ فَوَائِدَ <span class='story-tag' onclick=\"Sound.speak('الكِتَابَةِ')\">الكِتَابَةِ</span> وَالقِرَاءَةِ.",
+        storyParagraph: [
+          { word: "فِي", target: false }, { word: "صَبَاحِ", target: false }, { word: "يَوْمِ", target: false }, { word: "الأَحَدِ،", target: false },
+          { word: "جَلَسَ", target: false }, { word: "الكَاتِبُ", target: "اسم الفاعل" }, { word: "أَمَامَ", target: false },
+          { word: "مَكْتَبِهِ", target: "اسم المكان" }, { word: "المُرَتَّبِ،", target: false }, { word: "ثُمَّ", target: false },
+          { word: "كَتَبَ", target: "الفعل المجرد" }, { word: "أَرْوَعَ", target: false }, { word: "نَصٍّ", target: false },
+          { word: "مَكْتُوبٍ", target: "اسم المفعول" }, { word: "يُعَلِّمُ", target: false }, { word: "الأَطْفَالَ", target: false },
+          { word: "فَوَائِدَ", target: false }, { word: "الكِتَابَةِ", target: "المصدر" }, { word: "وَالقِرَاءَةِ.", target: false }
+        ],
+        missions: [
+          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (اسم الفاعل)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسم المكان)", targetType: "اسم المكان" }
+        ],
         labs: [
           { title: "التحدي 1: رَكِّبْ (اسْمَ الفَاعِلِ: كَاتِب)", slots: [{ch:"كَـ"}, {ch:"", correct:"ا"}, {ch:"تِـ"}, {ch:"بٌ"}], pool: ["ا", "و", "ي"] },
-          { title: "التحدي 2: رَكِّبْ (اسْمَ المَكَانِ: مَكْتَب)", slots: [{ch:"", correct:"مَـ"}, {ch:"كْ"}, {ch:"تَ"}, {ch:"بٌ"}], pool: ["مَـ", "أَ", "نَـ"] },
-          { title: "التحدي 3: رَكِّبْ (اسْمَ المَفْعُولِ: مَكْتُوب)", slots: [{ch:"مَـ"}, {ch:"كْ"}, {ch:"تُـ"}, {ch:"", correct:"و"}, {ch:"بٌ"}], pool: ["و", "ا", "ي"] }
+          { title: "التحدي 2: رَكِّبْ (اسْمَ المَكَانِ: مَكْتَب)", slots: [{ch:"", correct:"مَـ"}, {ch:"كْ"}, {ch:"تَ"}, {ch:"بٌ"}], pool: ["مَـ", "أَ", "نَـ"] }
         ],
         quizzes: [
           { q: "الفِعْلُ المَزِيدُ بِحَرْفٍ الَّذِي يَدُلُّ عَلَى المُشَارَكَةِ هُوَ:", ans: "كَاتَبَ", opts: ["كَتَبَ", "كَاتَبَ", "اسْتَكْتَبَ"], tip: "صيغة فاعَلَ تدل على المشاركة." }
@@ -1032,7 +1079,19 @@
           { word: "<span class='c-a'>تَ</span><span class='c-r'>عَ</span><span class='c-r'>لَّ</span><span class='c-r'>مَ</span>", plain: "تَعَلَّمَ", weight: "تَفَعَّلَ", desc: "مزيد بحرفين (التاء والتضعيف): اكتسب العلم بنفسه" },
           { word: "<span class='c-a'>اسْتَ</span><span class='c-r'>عْ</span><span class='c-r'>لَ</span><span class='c-r'>مَ</span>", plain: "اسْتَعْلَمَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف (اسْتـ): استفسر وطلب المعرفة" }
         ],
-        story: "فِي مَدِينَةِ فَاسَ العَرِيقَةِ، رَأَيْنَا أَعْظَمَ <span class='story-tag' onclick=\"Sound.speak('مَعْلَمٍ')\">مَعْلَمٍ</span> تَارِيخِيٍّ، حَيْثُ جَلَسَ <span class='story-tag' onclick=\"Sound.speak('العَالِمُ')\">العَالِمُ</span> يُلْقِي دَرْساً فِي <span class='story-tag' onclick=\"Sound.speak('العِلْمِ')\">العِلْمِ</span> النَّافِعِ، وَهُوَ أَمْرٌ <span class='story-tag' onclick=\"Sound.speak('مَعْلُومٌ')\">مَعْلُومٌ</span> مُنْذُ أَنْ <span class='story-tag' onclick=\"Sound.speak('عَلِمُوا')\">عَلِمُوا</span> قِيمَةَ المَعْرِفَةِ.",
+        storyParagraph: [
+          { word: "فِي", target: false }, { word: "مَدِينَةِ", target: false }, { word: "فَاسَ،", target: false },
+          { word: "رَأَيْنَا", target: false }, { word: "أَعْظَمَ", target: false }, { word: "مَعْلَمٍ", target: "اسم المكان" },
+          { word: "حَيْثُ", target: false }, { word: "جَلَسَ", target: false }, { word: "العَالِمُ", target: "اسم الفاعل" },
+          { word: "يُلْقِي", target: false }, { word: "دَرْساً", target: false }, { word: "فِي", target: false },
+          { word: "العِلْمِ", target: "المصدر" }, { word: "وَهُوَ", target: false }, { word: "أَمْرٌ", target: false },
+          { word: "مَعْلُومٌ", target: "اسم المفعول" }, { word: "مُنْذُ", target: false }, { word: "أَنْ", target: false },
+          { word: "عَلِمُوا", target: "الفعل المجرد" }, { word: "قِيمَتَهُ.", target: false }
+        ],
+        missions: [
+          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (اسم الفاعل)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسم المكان)", targetType: "اسم المكان" }
+        ],
         labs: [
           { title: "التحدي 1: رَكِّبْ (اسْمَ الفَاعِلِ: عَالِم)", slots: [{ch:"عَـ"}, {ch:"", correct:"ا"}, {ch:"لِـ"}, {ch:"مٌ"}], pool: ["ا", "و", "ي"] },
           { title: "التحدي 2: رَكِّبْ (اسْمَ المَفْعُولِ: مَعْلُوم)", slots: [{ch:"مَـ"}, {ch:"عْ"}, {ch:"لُـ"}, {ch:"", correct:"و"}, {ch:"مٌ"}], pool: ["و", "ا", "ي"] }
@@ -1043,10 +1102,13 @@
       }
     };
 
-    let userScore = 0;
+    let starsCount = 0;
+    let currentMissionIdx = 0;
 
-    // بناء الخريطة الإشعاعية التفاعلية
-    function renderRadialRoot(rootKey) {
+    // ----------------------------------------------------
+    // تحميل وعرض شمس الجذر الإشعاعية
+    // ----------------------------------------------------
+    function loadRadialWorld(rootKey) {
       const data = db[rootKey];
 
       document.getElementById('coreLetters').textContent = `[ ${data.letters.join(' - ')} ]`;
@@ -1058,20 +1120,27 @@
       });
 
       drawRays();
-      document.getElementById('storyContent').innerHTML = data.story;
-      renderLabChallenges(data.labs);
-      renderQuizzes(data.quizzes);
+
+      // مسرح القصة بنمط (ألف باء تاء)
+      currentMissionIdx = 0;
+      loadInteractiveStory(data);
+
+      // مختبر التركيب
+      renderLabStations(data.labs);
+
+      // ميدان التحدي
+      renderArenaQuizzes(data.quizzes);
     }
 
     function drawRays() {
-      const svg = document.getElementById('svgLayer');
+      const svg = document.getElementById('svgRays');
       svg.innerHTML = '';
       
       const center = document.querySelector('.radial-center');
       const cards = document.querySelectorAll('.radial-card');
       if (!center || cards.length === 0) return;
 
-      const stageRect = document.querySelector('.radial-map-stage').getBoundingClientRect();
+      const stageRect = document.querySelector('.radial-playground').getBoundingClientRect();
       const cRect = center.getBoundingClientRect();
 
       const cx = cRect.left + cRect.width / 2 - stageRect.left;
@@ -1087,26 +1156,28 @@
         line.setAttribute('y1', cy);
         line.setAttribute('x2', tx);
         line.setAttribute('y2', ty);
-        line.setAttribute('stroke', '#cbd5e1');
+        line.setAttribute('stroke', '#38bdf8');
         line.setAttribute('stroke-width', '4');
         line.setAttribute('stroke-dasharray', '8,8');
         svg.appendChild(line);
       });
     }
 
+    // النافذة المنبثقة التفصيلية (Modal)
     function openMorphModal(branchIdx) {
       const rootKey = document.getElementById('rootSelect').value;
       const rootObj = db[rootKey];
       const branch = rootObj.branches[branchIdx];
 
       document.getElementById('mHeroWord').innerHTML = branch.colored;
-      document.getElementById('mHeroWeight').textContent = `الوزن والموقع: ${branch.weight}`;
+      document.getElementById('mHeroWeight').textContent = branch.weight;
       document.getElementById('mDesc').textContent = branch.desc;
       document.getElementById('mColloc').textContent = branch.colloc;
       document.getElementById('mExample').textContent = branch.ex;
 
       document.getElementById('mAudioBtn').onclick = () => Sound.speak(branch.plain);
 
+      // عائلة المزيد: تظهر فقط للفرع 1 (الفعل المجرد)
       const affixCard = document.getElementById('mAffixCard');
       const affixList = document.getElementById('mAffixList');
       
@@ -1148,39 +1219,91 @@
       }
     }
 
-    function speakCurrentStory() {
-      const rootKey = document.getElementById('rootSelect').value;
-      const clean = db[rootKey].story.replace(/<[^>]*>?/gm, '');
-      Sound.speak(clean);
+    // ----------------------------------------------------
+    // مسرح الحكاية التفاعلي (Find in Paragraph) كمنصة ألف باء تاء
+    // ----------------------------------------------------
+    function loadInteractiveStory(data) {
+      const container = document.getElementById('storyWordsContainer');
+      container.innerHTML = '';
+      
+      const missionBadge = document.getElementById('storyMissionBadge');
+      missionBadge.textContent = data.missions[currentMissionIdx].label;
+
+      data.storyParagraph.forEach(item => {
+        const span = document.createElement('span');
+        span.className = 'story-click-word';
+        span.textContent = item.word;
+        span.onclick = () => handleStoryWordClick(span, item, data);
+        container.appendChild(span);
+        container.appendChild(document.createTextNode(' '));
+      });
     }
 
-    function renderLabChallenges(labs) {
-      const container = document.getElementById('labChallengesGrid');
+    function handleStoryWordClick(el, item, data) {
+      Sound.speak(item.word);
+      const currentTargetType = data.missions[currentMissionIdx].targetType;
+
+      if (item.target === currentTargetType) {
+        el.classList.add('found');
+        Sound.correct();
+        addStars(10);
+        
+        // الانتقال للمهمة التالية
+        currentMissionIdx++;
+        if (currentMissionIdx < data.missions.length) {
+          setTimeout(() => {
+            document.getElementById('storyMissionBadge').textContent = data.missions[currentMissionIdx].label;
+            Sound.speak("أحسنت! الآن: " + data.missions[currentMissionIdx].label);
+          }, 800);
+        } else {
+          setTimeout(() => {
+            document.getElementById('storyMissionBadge').textContent = "🎉 رَائِع! اسْتَخْرَجْتَ كَافَّةَ مَشَاهِدِ الجَذْرِ بِنَجَاحٍ!";
+            Sound.speak("ممتاز يا بطل، لقد أكملت كل المهام داخل الفقرة بنجاح!");
+          }, 800);
+        }
+      } else {
+        Sound.wrong();
+        el.style.borderColor = '#ef4444';
+        setTimeout(() => el.style.borderColor = '#cbd5e1', 500);
+      }
+    }
+
+    function speakCurrentStory() {
+      const rootKey = document.getElementById('rootSelect').value;
+      const text = db[rootKey].storyParagraph.map(p => p.word).join(' ');
+      Sound.speak(text);
+    }
+
+    // ----------------------------------------------------
+    // ورشة التركيب (3 تحديات ملونة حركية)
+    // ----------------------------------------------------
+    function renderLabStations(labs) {
+      const container = document.getElementById('labStationsGrid');
       container.innerHTML = '';
 
       labs.forEach((lab, lIdx) => {
         const box = document.createElement('div');
-        box.className = 'lab-card-item';
+        box.className = 'lab-station';
         box.innerHTML = `
-          <h4>${lab.title}</h4>
-          <div class="slots-row" id="slots_row_${lIdx}">
-            ${lab.slots.map(s => `<div class="lab-slot ${s.ch ? 'filled' : ''}">${s.ch}</div>`).join('')}
+          <div class="station-title">${lab.title}</div>
+          <div class="slots-container" id="slots_row_${lIdx}">
+            ${lab.slots.map(s => `<div class="station-slot ${s.ch ? 'filled' : ''}">${s.ch}</div>`).join('')}
           </div>
-          <div class="tiles-row">
-            ${lab.pool.map(p => `<button class="tile-btn" onclick="checkLabTile(this, ${lIdx}, '${p}')">${p}</button>`).join('')}
+          <div class="tiles-rack">
+            ${lab.pool.map(p => `<button class="game-tile-btn" onclick="checkLabAnswer(this, ${lIdx}, '${p}')">${p}</button>`).join('')}
           </div>
-          <div class="fb-bubble" id="fb_lab_${lIdx}"></div>
+          <div class="station-fb" id="fb_lab_${lIdx}"></div>
         `;
         container.appendChild(box);
       });
     }
 
-    function checkLabTile(btn, lIdx, char) {
+    function checkLabAnswer(btn, lIdx, char) {
       const rootKey = document.getElementById('rootSelect').value;
       const lab = db[rootKey].labs[lIdx];
       const target = lab.slots.find(s => !s.ch);
       const fb = document.getElementById(`fb_lab_${lIdx}`);
-      const emptySlot = document.querySelectorAll(`#slots_row_${lIdx} .lab-slot:not(.filled)`)[0];
+      const emptySlot = document.querySelectorAll(`#slots_row_${lIdx} .station-slot:not(.filled)`)[0];
 
       if (char === target.correct) {
         emptySlot.textContent = char;
@@ -1188,9 +1311,9 @@
         fb.style.display = 'block';
         fb.style.background = '#dcfce7';
         fb.style.color = '#15803d';
-        fb.innerHTML = '🎉 رَائِعٌ جِدّاً! رَكَّبْتَ الكَلِمَةَ بِصُورَةٍ دَقِيقَةٍ.';
+        fb.innerHTML = '🎉 مُمْتَاز! رَكَّبْتَ الوَزْنَ الصَّحِيحَ.';
         Sound.correct();
-        addPoints(15);
+        addStars(15);
       } else {
         fb.style.display = 'block';
         fb.style.background = '#fee2e2';
@@ -1200,37 +1323,40 @@
       }
     }
 
-    function renderQuizzes(quizList) {
-      const container = document.getElementById('quizzesContainer');
+    // ----------------------------------------------------
+    // حلبة الأبطال الناطقة
+    // ----------------------------------------------------
+    function renderArenaQuizzes(quizzes) {
+      const container = document.getElementById('quizzesGrid');
       container.innerHTML = '';
 
-      quizList.forEach((q, idx) => {
+      quizzes.forEach((q, idx) => {
         const box = document.createElement('div');
-        box.className = 'arena-card';
+        box.className = 'challenge-card';
         box.innerHTML = `
-          <div style="display:flex; justify-content:space-between; color:var(--primary); font-weight:900; margin-bottom:0.6rem;">
-            <span style="font-size: 1.1rem; color: #7c3aed;">⭐ التَّحَدِّي ${idx + 1}</span>
-            <button style="background:#ede9fe; border:none; border-radius:12px; padding:0.3rem 0.8rem; cursor:pointer; font-weight:bold; color:#6d28d9;" onclick="Sound.speak('${q.q}')">🔊 اسْتَمِعْ</button>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+            <span style="font-weight:900; color:#7c3aed;">⭐ التَّحَدِّي ${idx + 1}</span>
+            <button style="background:#f3e8ff; border:none; border-radius:12px; padding:0.3rem 0.8rem; cursor:pointer; font-weight:bold; color:#7c3aed;" onclick="Sound.speak('${q.q}')">🔊 اسْتَمِعْ</button>
           </div>
-          <div style="font-size: 1.3rem; font-weight: 900; margin-bottom: 1rem; color: #1e1b4b;">${q.q}</div>
+          <h4>${q.q}</h4>
           <div>
             ${q.opts.map(opt => `
-              <button class="arena-opt-btn" onclick="checkQuizAnswer(this, '${opt}', '${q.ans}', '${q.tip}')">
+              <button class="opt-pill-btn" onclick="checkArenaAnswer(this, '${opt}', '${q.ans}', '${q.tip}')">
                 <span>${opt}</span>
                 <span onclick="event.stopPropagation(); Sound.speak('${opt}')">🔊</span>
               </button>
             `).join('')}
           </div>
-          <div class="fb-bubble"></div>
+          <div class="fb-tag" style="padding:0.8rem; border-radius:12px; font-weight:bold; margin-top:1rem; display:none;"></div>
         `;
         container.appendChild(box);
       });
     }
 
-    function checkQuizAnswer(btn, selected, correct, tip) {
-      const parent = btn.closest('.arena-card');
-      const fb = parent.querySelector('.fb-bubble');
-      const btns = parent.querySelectorAll('.arena-opt-btn');
+    function checkArenaAnswer(btn, selected, correct, tip) {
+      const parent = btn.closest('.challenge-card');
+      const fb = parent.querySelector('.fb-tag');
+      const btns = parent.querySelectorAll('.opt-pill-btn');
 
       if (selected === correct) {
         fb.style.display = 'block';
@@ -1240,28 +1366,26 @@
         btn.style.background = '#bbf7d0';
         btn.style.borderColor = '#22c55e';
         Sound.correct();
-        Sound.speak("أحسنت إجابة صحيحة");
-        addPoints(10);
+        addStars(10);
         btns.forEach(b => b.disabled = true);
       } else {
         fb.style.display = 'block';
         fb.style.background = '#fee2e2';
         fb.style.color = '#b91c1c';
-        fb.innerHTML = `✕ مُحَاوَلَةٌ قَرِيبَةٌ! 💡 ${tip}`;
-        btn.style.background = '#fecaca';
-        btn.style.borderColor = '#ef4444';
+        fb.innerHTML = `✕ حَاوِلْ ثَانِيَةً! 💡 ${tip}`;
+        btn.style.background = '#fee2e2';
+        btn.style.borderColor = '#fca5a5';
         Sound.wrong();
-        Sound.speak("انتبه يا بطل، حاول ثانية");
       }
     }
 
-    function addPoints(p) {
-      userScore += p;
-      document.getElementById('scoreVal').textContent = userScore;
+    function addStars(p) {
+      starsCount += p;
+      document.getElementById('starsScore').textContent = starsCount;
     }
 
-    function switchTab(tabId, el) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    function switchMainTab(tabId, el) {
+      document.querySelectorAll('.tab-pill').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.tab-view').forEach(v => v.classList.remove('active'));
       el.classList.add('active');
       document.getElementById(tabId).classList.add('active');
@@ -1273,7 +1397,7 @@
 
     window.onload = () => {
       window.addEventListener('click', () => Sound.init(), { once: true });
-      renderRadialRoot('صنع');
+      loadRadialWorld('صنع');
       window.addEventListener('resize', drawRays);
     };
   </script>
