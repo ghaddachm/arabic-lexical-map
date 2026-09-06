@@ -7,26 +7,24 @@
   <style>
     :root {
       --primary: #4338ca;
-      --primary-dark: #312e81;
       --accent: #f59e0b;
-      --bg: #f8fafc;
-      --text: #0f172a;
-      
-      /* التشفير المورفولوجي الصارم */
+      --c-green: #10b981;
+      --c-pink: #ec4899;
+      --c-sky: #0284c7;
+      --c-purple: #8b5cf6;
       --c-root: #dc2626;  /* أحمر فاقع للجذر */
-      --c-affix: #2563eb; /* أزرق فاقع لأحرف الزيادة */
+      --c-affix: #2563eb; /* أزرق فاقع للزيادة */
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', 'Comic Sans MS', Tahoma, sans-serif;
     }
 
     body {
-      background: radial-gradient(circle at center, #ffffff 0%, #f1f5f9 100%);
-      color: var(--text);
+      background: #f0fdf4 url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2322c55e' fill-opacity='0.08' fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -34,15 +32,15 @@
       overflow-x: hidden;
     }
 
-    /* رأس الصفحة المتطابق مع النسخة الأولى */
+    /* رأس الصفحة الكرتوني */
     header {
-      background: white;
+      background: #ffffff;
       padding: 0.8rem 2.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-      border-bottom: 2px solid #e2e8f0;
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.15);
+      border-bottom: 4px solid #86efac;
     }
 
     .brand-group {
@@ -51,90 +49,111 @@
       gap: 1rem;
     }
 
-    .platform-logo {
-      width: 46px;
-      height: 46px;
+    .mascot-avatar {
+      width: 52px;
+      height: 52px;
       background: #fef08a;
-      border-radius: 12px;
+      border: 3px solid #eab308;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      box-shadow: 0 3px 6px rgba(234, 179, 8, 0.2);
+      box-shadow: 0 4px 10px rgba(234, 179, 8, 0.3);
+      cursor: pointer;
+      animation: mascotBounce 2s infinite ease-in-out;
+    }
+
+    @keyframes mascotBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px) rotate(4deg); }
     }
 
     .brand-texts h2 {
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       font-weight: 900;
-      color: #1e1b4b;
+      color: #15803d;
     }
 
     .brand-texts p {
-      font-size: 0.82rem;
-      color: #64748b;
-      font-weight: 700;
+      font-size: 0.85rem;
+      color: #65a30d;
+      font-weight: 800;
     }
 
     .root-select-box {
-      background: #eff6ff;
-      border: 2px solid #bfdbfe;
-      padding: 0.4rem 1.2rem;
-      border-radius: 25px;
+      background: #ecfdf5;
+      border: 3px solid #10b981;
+      padding: 0.4rem 1.4rem;
+      border-radius: 30px;
       display: flex;
       align-items: center;
       gap: 0.6rem;
+      box-shadow: 0 4px 0 #059669;
     }
 
     .root-select-box select {
       border: none;
       background: transparent;
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       font-weight: 900;
-      color: var(--primary);
+      color: #047857;
       outline: none;
       cursor: pointer;
     }
 
     .score-badge {
       background: #fef3c7;
-      border: 1px solid #fde68a;
-      padding: 0.45rem 1.4rem;
-      border-radius: 20px;
+      border: 3px solid #f59e0b;
+      padding: 0.45rem 1.5rem;
+      border-radius: 30px;
       font-weight: 900;
       color: #92400e;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 1rem;
+      font-size: 1.15rem;
+      box-shadow: 0 4px 0 #d97706;
     }
 
-    /* شريط التبويبات */
+    /* أزرار التبويبات بنمط أزرار الألعاب 3D */
     .tab-bar {
       display: flex;
       justify-content: center;
-      background: #f8fafc;
-      padding: 0.5rem 1rem 0;
-      gap: 0.8rem;
-      border-bottom: 2px solid #e2e8f0;
+      padding: 1rem 1rem 0;
+      gap: 1rem;
     }
 
     .tab-btn {
       padding: 0.8rem 1.8rem;
-      border: none;
-      background: transparent;
-      font-size: 1.1rem;
-      font-weight: 800;
+      border: 3px solid #cbd5e1;
+      background: white;
+      font-size: 1.15rem;
+      font-weight: 900;
       color: #64748b;
       cursor: pointer;
-      border-radius: 12px 12px 0 0;
-      transition: 0.2s;
+      border-radius: 24px;
+      box-shadow: 0 5px 0 #94a3b8;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tab-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 #94a3b8;
+    }
+
+    .tab-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #94a3b8;
     }
 
     .tab-btn.active {
-      color: var(--primary);
-      background: white;
-      box-shadow: 0 -3px 10px rgba(0,0,0,0.04);
-      border-top: 4px solid var(--primary);
+      color: white;
+      background: #10b981;
+      border-color: #059669;
+      box-shadow: 0 5px 0 #047857;
     }
 
     main {
@@ -142,26 +161,24 @@
       max-width: 1350px;
       margin: 1.2rem auto;
       width: 95%;
-      display: flex;
-      flex-direction: column;
     }
 
     .tab-view {
       display: none;
-      animation: tabAnim 0.3s ease;
+      animation: popView 0.3s ease;
     }
 
     .tab-view.active {
       display: block;
     }
 
-    @keyframes tabAnim {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes popView {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
     }
 
     /* ================================================= */
-    /* 1. الخريطة الإشعاعية المتوهجة (مطابقة للصورة 6) */
+    /* 1. الخريطة الإشعاعية التفاعلية */
     /* ================================================= */
     .radial-map-stage {
       position: relative;
@@ -173,16 +190,15 @@
       margin: 1rem 0;
     }
 
-    /* النواة المركزية المتوهجة */
     .radial-center {
       position: absolute;
       z-index: 10;
-      width: 210px;
-      height: 210px;
+      width: 215px;
+      height: 215px;
       border-radius: 50%;
       background: radial-gradient(circle, #fde047 0%, #eab308 100%);
-      border: 6px solid #ffffff;
-      box-shadow: 0 0 50px rgba(234, 179, 8, 0.45), 0 10px 25px rgba(0,0,0,0.1);
+      border: 7px solid #ffffff;
+      box-shadow: 0 0 55px rgba(234, 179, 8, 0.5), 0 12px 30px rgba(0,0,0,0.15);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -192,9 +208,7 @@
       transition: transform 0.2s;
     }
 
-    .radial-center:hover {
-      transform: scale(1.05);
-    }
+    .radial-center:hover { transform: scale(1.06); }
 
     .nucleus-tag {
       background: #ef4444;
@@ -204,11 +218,11 @@
       padding: 0.2rem 0.8rem;
       border-radius: 12px;
       margin-bottom: 0.3rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
     .nucleus-letters {
-      font-size: 2.7rem;
+      font-size: 2.8rem;
       font-weight: 900;
       color: #7f1d1d;
       letter-spacing: 2px;
@@ -216,8 +230,8 @@
     }
 
     .nucleus-sub {
-      font-size: 0.9rem;
-      font-weight: 800;
+      font-size: 0.95rem;
+      font-weight: 900;
       color: #854d0e;
     }
 
@@ -225,82 +239,58 @@
       font-size: 0.8rem;
       color: #78350f;
       margin-top: 0.4rem;
-      background: rgba(255,255,255,0.6);
-      padding: 0.2rem 0.6rem;
-      border-radius: 10px;
-      font-weight: 800;
+      background: rgba(255,255,255,0.7);
+      padding: 0.2rem 0.7rem;
+      border-radius: 12px;
+      font-weight: 900;
     }
 
-    /* كروت الفروع الإشعاعية الخمسة بألوان وظلال أصلية */
     .radial-card {
       position: absolute;
-      width: 260px;
+      width: 265px;
       background: white;
-      border-radius: 20px;
+      border-radius: 28px;
       padding: 1.2rem 1.4rem;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
       cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      border-top: 6px solid transparent;
+      transition: all 0.25s;
+      border: 4px solid transparent;
       z-index: 5;
     }
 
     .radial-card:hover {
-      transform: scale(1.06);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
+      transform: scale(1.07) translateY(-5px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
     }
 
-    .branch-1 { top: 10px; left: 50%; transform: translateX(-50%); border-top-color: #f59e0b; }
-    .branch-2 { top: 65px; left: 8%; border-top-color: #3b82f6; }
-    .branch-3 { bottom: 40px; left: 12%; border-top-color: #ec4899; }
-    .branch-4 { top: 65px; right: 8%; border-top-color: #10b981; }
-    .branch-5 { bottom: 40px; right: 12%; border-top-color: #8b5cf6; }
+    .branch-1 { top: 10px; left: 50%; transform: translateX(-50%); border-color: #f59e0b; }
+    .branch-2 { top: 65px; left: 8%; border-color: #3b82f6; }
+    .branch-3 { bottom: 40px; left: 12%; border-color: #ec4899; }
+    .branch-4 { top: 65px; right: 8%; border-color: #10b981; }
+    .branch-5 { bottom: 40px; right: 12%; border-color: #8b5cf6; }
 
-    .radial-card:hover.branch-1 { transform: translateX(-50%) scale(1.06); }
+    .radial-card:hover.branch-1 { transform: translateX(-50%) scale(1.07) translateY(-5px); }
 
     .branch-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.4rem;
-    }
-
-    .branch-title {
-      font-size: 0.9rem;
-      font-weight: 800;
-      color: #64748b;
-    }
-
-    .branch-icon {
-      font-size: 1.5rem;
-    }
-
-    .branch-question {
-      font-size: 0.95rem;
-      color: #94a3b8;
-      font-weight: 800;
-      margin-bottom: 0.2rem;
-    }
-
-    .branch-word {
-      font-size: 2.1rem;
-      font-weight: 900;
       margin-bottom: 0.3rem;
     }
 
-    .branch-pattern {
-      font-size: 0.9rem;
-      color: #64748b;
-      font-weight: bold;
-    }
-
+    .branch-title { font-size: 0.9rem; font-weight: 900; color: #64748b; }
+    .branch-icon { font-size: 1.6rem; }
+    .branch-question { font-size: 0.95rem; color: #94a3b8; font-weight: 800; margin-bottom: 0.2rem; }
+    .branch-word { font-size: 2.2rem; font-weight: 900; margin-bottom: 0.2rem; }
+    .branch-pattern { font-size: 0.95rem; color: #64748b; font-weight: bold; }
+    
     .branch-colloc {
       background: #f8fafc;
-      border: 1px dashed #cbd5e1;
+      border: 2px dashed #cbd5e1;
       padding: 0.4rem 0.6rem;
-      border-radius: 10px;
+      border-radius: 14px;
       font-size: 0.85rem;
-      font-weight: 800;
+      font-weight: 900;
       color: #475569;
       margin-top: 0.5rem;
     }
@@ -316,7 +306,7 @@
     }
 
     /* ================================================= */
-    /* النافذة المنبثقة للتحليل الصرفي (Modal) */
+    /* النافذة المنبثقة التفصيلية (Modal) */
     /* ================================================= */
     .modal-overlay {
       position: fixed;
@@ -325,7 +315,7 @@
       width: 100vw;
       height: 100vh;
       background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(6px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -338,9 +328,10 @@
       background: white;
       width: 90%;
       max-width: 640px;
-      border-radius: 24px;
+      border-radius: 35px;
       padding: 2.2rem;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+      border: 6px solid #e0e7ff;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3);
       position: relative;
       max-height: 90vh;
       overflow-y: auto;
@@ -348,7 +339,7 @@
     }
 
     @keyframes popModal {
-      from { transform: scale(0.92); opacity: 0; }
+      from { transform: scale(0.9); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
 
@@ -356,210 +347,189 @@
       position: absolute;
       top: 1.2rem;
       left: 1.2rem;
-      background: #f1f5f9;
-      border: none;
-      width: 38px;
-      height: 38px;
+      background: #fee2e2;
+      border: 2px solid #ef4444;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: 900;
       cursor: pointer;
-      color: #475569;
+      color: #b91c1c;
     }
 
     .modal-hero {
       text-align: center;
-      border-bottom: 2px solid #f1f5f9;
+      border-bottom: 3px dashed #e2e8f0;
       padding-bottom: 1.2rem;
       margin-bottom: 1.2rem;
     }
 
-    .modal-word {
-      font-size: 3.2rem;
-      font-weight: 900;
-      letter-spacing: 1px;
-    }
-
-    .modal-weight {
-      color: var(--primary);
-      font-weight: 800;
-      font-size: 1.15rem;
-      margin-top: 0.3rem;
-    }
-
-    .detail-card {
-      background: #f8fafc;
-      border-radius: 16px;
-      padding: 1.3rem;
-      border: 1px solid #e2e8f0;
-      margin-bottom: 1.2rem;
-    }
-
-    .detail-row {
-      display: flex;
-      gap: 0.6rem;
-      margin-bottom: 0.8rem;
-      font-size: 1.1rem;
-    }
-
-    .detail-row:last-child { margin-bottom: 0; }
-    .detail-label { font-weight: 900; color: #334155; white-space: nowrap; }
+    .modal-word { font-size: 3.4rem; font-weight: 900; letter-spacing: 1px; }
+    .modal-weight { color: var(--primary); font-weight: 900; font-size: 1.25rem; margin-top: 0.3rem; }
 
     .modal-audio-btn {
-      background: #e0e7ff;
-      border: none;
-      color: var(--primary);
-      font-weight: 800;
-      padding: 0.6rem 1.4rem;
-      border-radius: 20px;
+      background: #fef08a;
+      border: 3px solid #eab308;
+      color: #854d0e;
+      font-weight: 900;
+      padding: 0.6rem 1.6rem;
+      border-radius: 30px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 0.5rem;
-      font-size: 1rem;
+      margin-top: 0.7rem;
+      font-size: 1.05rem;
+      box-shadow: 0 4px 0 #ca8a04;
     }
 
-    .modal-audio-btn:hover {
-      background: var(--primary);
-      color: white;
+    .detail-card {
+      background: #f8fafc;
+      border-radius: 22px;
+      padding: 1.3rem;
+      border: 2px solid #e2e8f0;
+      margin-bottom: 1.2rem;
     }
 
-    /* عائلة المزيد (خاصة بالفعل المجرد فقط) */
+    .detail-row { display: flex; gap: 0.6rem; margin-bottom: 0.8rem; font-size: 1.15rem; }
+    .detail-row:last-child { margin-bottom: 0; }
+    .detail-label { font-weight: 900; color: #334155; white-space: nowrap; }
+
     .affix-box {
       background: #fffbeb;
-      border: 2px solid #fef3c7;
-      border-radius: 18px;
-      padding: 1.2rem;
-      display: none; /* تظهر فقط للفعل المجرد */
+      border: 3px solid #fde68a;
+      border-radius: 24px;
+      padding: 1.3rem;
+      display: none;
     }
 
-    .affix-box-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.8rem;
-    }
+    .affix-box-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
+    .affix-box-title { color: #92400e; font-weight: 900; font-size: 1.15rem; }
+    .affix-rule-badge { background: #fef08a; color: #854d0e; padding: 0.3rem 0.8rem; border-radius: 12px; font-size: 0.85rem; font-weight: 900; }
+    .affix-item { background: white; border-radius: 18px; padding: 0.8rem 1.2rem; margin-bottom: 0.7rem; display: flex; justify-content: space-between; align-items: center; border: 2px solid #fef3c7; }
 
-    .affix-box-title {
-      color: #92400e;
-      font-weight: 900;
-      font-size: 1.1rem;
-    }
-
-    .affix-rule-badge {
-      background: #fef08a;
-      color: #854d0e;
-      padding: 0.2rem 0.6rem;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 800;
-    }
-
-    .affix-item {
-      background: white;
-      border-radius: 12px;
-      padding: 0.8rem 1rem;
-      margin-bottom: 0.6rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-    }
-
-    /* التشفير اللوني الصارم */
     .c-r { color: var(--c-root) !important; }
     .c-a { color: var(--c-affix) !important; }
 
     /* ================================================= */
-    /* 2. مسرح الحكاية الملون المبهج للأطفال */
+    /* 2. مسرح الحكاية الكرتوني المبهج (مثل عصافير) */
     /* ================================================= */
-    .story-card-wrapper {
-      background: white;
-      border-radius: 24px;
-      padding: 2.2rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      border: 2px solid #ede9fe;
+    .story-hero-stage {
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      border-radius: 35px;
+      padding: 2.5rem;
+      color: white;
+      box-shadow: 0 15px 40px rgba(22, 163, 74, 0.3);
+      border: 6px solid #bbf7d0;
+      position: relative;
+      overflow: hidden;
     }
 
-    .story-hero-banner {
-      background: linear-gradient(135deg, #ede9fe 0%, #fae8ff 100%);
-      border-radius: 20px;
-      padding: 1.8rem;
+    .story-header-flex {
       display: flex;
       align-items: center;
       gap: 2rem;
       margin-bottom: 1.8rem;
-      border: 2px dashed #c084fc;
     }
 
-    .story-character {
-      font-size: 5rem;
-      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.1));
+    .story-mascot-box {
+      width: 140px;
+      height: 140px;
+      background: white;
+      border: 6px solid #fde047;
+      border-radius: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      animation: floatArt 3s ease-in-out infinite;
     }
 
-    .story-hero-text h3 {
-      color: #5b21b6;
-      font-size: 1.5rem;
-      margin-bottom: 0.4rem;
+    @keyframes floatArt {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-8px) rotate(2deg); }
     }
 
-    .story-hero-text p {
-      color: #6b21a8;
-      font-size: 1.05rem;
+    .story-speech-bubble {
+      background: #ffffff;
+      color: #166534;
+      border-radius: 28px;
+      padding: 1.2rem 1.8rem;
+      position: relative;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      flex: 1;
     }
 
-    .story-body {
-      font-size: 1.65rem;
-      line-height: 2.6;
-      color: #1e1b4b;
-      background: #faf5ff;
+    .story-speech-bubble::after {
+      content: '';
+      position: absolute;
+      right: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-width: 12px 0 12px 16px;
+      border-style: solid;
+      border-color: transparent transparent transparent #ffffff;
+    }
+
+    .story-text-card {
+      background: #ffffff;
+      border-radius: 30px;
       padding: 2.2rem;
-      border-radius: 20px;
-      border: 2px solid #f3e8ff;
+      color: #1e293b;
+      font-size: 1.75rem;
+      line-height: 2.6;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+      border: 4px solid #fef08a;
     }
 
     .story-tag {
       background: #fef08a;
-      padding: 0.2rem 0.8rem;
-      border-radius: 10px;
+      padding: 0.2rem 0.9rem;
+      border-radius: 16px;
       font-weight: 900;
       color: #854d0e;
-      border-bottom: 4px solid #eab308;
+      border-bottom: 5px solid #eab308;
       cursor: pointer;
       display: inline-block;
+      transition: transform 0.15s;
     }
 
+    .story-tag:hover { transform: scale(1.1); }
+
     /* ================================================= */
-    /* 3. مختبر التركيب الحركي الغني (3 تحديات) */
+    /* 3. مختبر التركيب بنمط "ورشة الألعاب الحركية" */
     /* ================================================= */
-    .lab-card-wrapper {
-      background: white;
-      border-radius: 24px;
-      padding: 2rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    .lab-stage-box {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      border-radius: 35px;
+      padding: 2.2rem;
+      color: white;
+      border: 6px solid #bae6fd;
+      box-shadow: 0 15px 40px rgba(2, 132, 199, 0.3);
     }
 
-    .lab-grid-challenges {
+    .lab-grid-3d {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1.5rem;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
     }
 
-    .lab-single-box {
-      background: linear-gradient(145deg, #f0fdf4 0%, #e0f2fe 100%);
-      border: 2px solid #bae6fd;
-      border-radius: 20px;
+    .lab-card-item {
+      background: #ffffff;
+      border-radius: 28px;
       padding: 1.8rem;
+      color: #0f172a;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+      border-bottom: 8px solid #38bdf8;
       text-align: center;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.04);
     }
 
-    .lab-single-box h4 {
-      color: var(--primary);
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
+    .lab-card-item h4 {
+      font-size: 1.3rem;
+      color: #0284c7;
+      font-weight: 900;
     }
 
     .slots-row {
@@ -572,18 +542,18 @@
     .lab-slot {
       width: 65px;
       height: 65px;
-      border: 3px dashed #64748b;
-      border-radius: 16px;
+      border: 4px dashed #94a3b8;
+      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 900;
-      background: white;
+      background: #f8fafc;
     }
 
     .lab-slot.filled {
-      border: 3px solid var(--c-affix);
+      border: 4px solid var(--c-affix);
       background: #eff6ff;
       color: var(--c-affix);
     }
@@ -595,48 +565,57 @@
     }
 
     .tile-btn {
-      width: 60px;
-      height: 60px;
-      background: white;
-      border: 3px solid var(--c-affix);
-      color: var(--c-affix);
-      border-radius: 14px;
-      font-size: 1.8rem;
+      width: 62px;
+      height: 62px;
+      background: #fef08a;
+      border: 3px solid #eab308;
+      color: #854d0e;
+      border-radius: 18px;
+      font-size: 2rem;
       font-weight: 900;
       cursor: pointer;
-      box-shadow: 0 4px 0 var(--c-affix);
-      transition: 0.1s;
+      box-shadow: 0 5px 0 #ca8a04;
+      transition: all 0.1s;
     }
 
     .tile-btn:active {
-      transform: translateY(3px);
-      box-shadow: none;
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #ca8a04;
     }
 
     /* ================================================= */
-    /* 4. ميدان التحدي الناطق */
+    /* 4. ميدان التحدي بنمط "حلبة الأبطال" */
     /* ================================================= */
-    .quiz-grid {
+    .arena-stage {
+      background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+      border-radius: 35px;
+      padding: 2.2rem;
+      border: 6px solid #ddd6fe;
+      box-shadow: 0 15px 40px rgba(124, 58, 237, 0.3);
+    }
+
+    .arena-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1.5rem;
+      margin-top: 1.5rem;
     }
 
-    .quiz-box {
-      background: white;
-      border-radius: 20px;
+    .arena-card {
+      background: #ffffff;
+      border-radius: 28px;
       padding: 1.8rem;
-      border: 2px solid #e2e8f0;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.03);
+      border-bottom: 8px solid #c084fc;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
     }
 
-    .quiz-opt {
-      background: #f8fafc;
-      border: 2px solid #cbd5e1;
-      padding: 0.9rem 1.2rem;
-      font-size: 1.2rem;
-      font-weight: 800;
-      border-radius: 14px;
+    .arena-opt-btn {
+      background: #fdf4ff;
+      border: 3px solid #f0abfc;
+      padding: 0.9rem 1.4rem;
+      font-size: 1.25rem;
+      font-weight: 900;
+      border-radius: 20px;
       cursor: pointer;
       width: 100%;
       text-align: right;
@@ -644,20 +623,27 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: 0.15s;
+      box-shadow: 0 4px 0 #e879f9;
+      transition: all 0.15s;
     }
 
-    .quiz-opt:hover {
-      background: #eff6ff;
-      border-color: var(--primary);
+    .arena-opt-btn:hover {
+      background: #fae8ff;
+      transform: translateY(-2px);
     }
 
-    .fb-tag {
-      padding: 0.8rem 1rem;
-      border-radius: 10px;
-      font-weight: bold;
+    .arena-opt-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #e879f9;
+    }
+
+    .fb-bubble {
+      padding: 0.8rem 1.2rem;
+      border-radius: 16px;
+      font-weight: 900;
       margin-top: 1rem;
       display: none;
+      font-size: 1.1rem;
     }
   </style>
 </head>
@@ -665,50 +651,68 @@
 
   <header>
     <div class="brand-group">
-      <div class="platform-logo">🌱</div>
+      <!-- شخصية الطائر الكرتوني الرسام (SVG متكامل) -->
+      <div class="mascot-avatar" onclick="Sound.speak('مَرْحَباً بِكَ يَا بَطَلَ اللُّغَةِ العَرَبِيَّةِ! أَنَا صَدِيقُكَ سُنْقُر')">
+        <svg viewBox="0 0 100 100" width="40" height="40">
+          <circle cx="50" cy="50" r="45" fill="#38bdf8"/>
+          <!-- القبعة الحمراء -->
+          <ellipse cx="50" cy="20" rx="30" ry="12" fill="#ef4444"/>
+          <circle cx="50" cy="12" r="6" fill="#dc2626"/>
+          <!-- النظارات الكبيرة -->
+          <circle cx="38" cy="45" r="16" fill="white" stroke="#1e293b" stroke-width="4"/>
+          <circle cx="62" cy="45" r="16" fill="white" stroke="#1e293b" stroke-width="4"/>
+          <line x1="50" y1="45" x2="54" y2="45" stroke="#1e293b" stroke-width="4"/>
+          <!-- العيون -->
+          <circle cx="38" cy="45" r="7" fill="#0284c7"/>
+          <circle cx="62" cy="45" r="7" fill="#0284c7"/>
+          <circle cx="40" cy="42" r="3" fill="white"/>
+          <circle cx="64" cy="42" r="3" fill="white"/>
+          <!-- المنقار البرتقالي المبتسم -->
+          <polygon points="45,55 55,55 50,70" fill="#f97316"/>
+        </svg>
+      </div>
+
       <div class="brand-texts">
-        <h2>بَذْرَةُ الكَلِمَاتِ: خَرِيطَةُ الجَذْرِ الإِشْعَاعِيَّةُ</h2>
-        <p>عَائِلَةُ الإِتْقَانِ وَالعَمَلِ ➔ خَرِيطَةٌ ذِهْنِيَّةٌ إِشْعَاعِيَّةٌ تَفَاعُلِيَّةٌ</p>
+        <h2>بَذْرَةُ الكَلِمَاتِ 🎨</h2>
+        <p>مُغَامَرَةُ الصَّرْفِ وَالمُعْجَمِ الشَّيِّقَةِ</p>
       </div>
     </div>
 
     <div class="root-select-box">
-      <label style="font-weight: 900; color: #1e3a8a;">الجَذْرُ:</label>
+      <label style="font-weight: 900; color: #047857;">اخْتَرِ الجَذْرَ:</label>
       <select id="rootSelect" onchange="renderRadialRoot(this.value)">
-        <option value="صنع">[ ص - ن - ع ]</option>
-        <option value="كتب">[ ك - ت - ب ]</option>
-        <option value="علم">[ ع - ل - م ]</option>
+        <option value="صنع">✨ [ ص - ن - ع ]</option>
+        <option value="كتب">📚 [ ك - ت - ب ]</option>
+        <option value="علم">🔬 [ ع - ل - م ]</option>
       </select>
     </div>
 
     <div class="score-badge">
-      <span>🏆 النُّقَاطُ:</span>
+      <span>⭐ النُّجُومُ:</span>
       <span id="scoreVal">0</span>
     </div>
   </header>
 
   <nav class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('radialMap', this)">1. مصفوفة الجذر الإشعاعي ☀️</button>
-    <button class="tab-btn" onclick="switchTab('storyTab', this)">2. مَسْرَحُ الحِكَايَةِ 📖</button>
-    <button class="tab-btn" onclick="switchTab('labTab', this)">3. مُخْتَبَرُ التَّرْكِيبِ ⚙️</button>
-    <button class="tab-btn" onclick="switchTab('quizTab', this)">4. مَيْدَانُ التَّحَدِّي 🏆</button>
+    <button class="tab-btn active" onclick="switchTab('radialMap', this)">☀️ شَمْسُ الجَذْرِ</button>
+    <button class="tab-btn" onclick="switchTab('storyTab', this)">📖 مَسْرَحُ الحِكَايَةِ</button>
+    <button class="tab-btn" onclick="switchTab('labTab', this)">⚙️ وَرْشَةُ التَّرْكِيبِ</button>
+    <button class="tab-btn" onclick="switchTab('quizTab', this)">🏆 حَلَبَةُ الأَبْطَالِ</button>
   </nav>
 
   <main>
-    <!-- تبويب 1: الخريطة الإشعاعية التفاعلية -->
+    <!-- 1. مصفوفة الجذر الإشعاعي (شمس الجذر) -->
     <div id="radialMap" class="tab-view active">
       <div class="radial-map-stage">
         <svg class="radial-svg-layer" id="svgLayer"></svg>
 
-        <!-- النواة المركزية -->
         <div class="radial-center" onclick="openRootModal()">
           <span class="nucleus-tag">👈 ابْدَأْ هُنَا</span>
           <div class="nucleus-letters" id="coreLetters">[ ص - ن - ع ]</div>
           <div class="nucleus-sub" id="coreConcept">الجَذْرُ: العَمَلُ وَالإِتْقَانُ</div>
-          <span class="sound-trigger-badge">🔊 انقر للاستماع والشرح</span>
+          <span class="sound-trigger-badge">🔊 انقر للشرح الصوتي</span>
         </div>
 
-        <!-- الفرع 1: الحدث / الفعل -->
         <div class="radial-card branch-1" onclick="openMorphModal(0)">
           <div class="branch-header">
             <span class="branch-title">الفرع 1: الحدث / الفعل</span>
@@ -720,7 +724,6 @@
           <div class="branch-colloc" id="b1_colloc"></div>
         </div>
 
-        <!-- الفرع 2: الفاعل -->
         <div class="radial-card branch-2" onclick="openMorphModal(1)">
           <div class="branch-header">
             <span class="branch-title">الفرع 2: الفاعل</span>
@@ -732,7 +735,6 @@
           <div class="branch-colloc" id="b2_colloc"></div>
         </div>
 
-        <!-- الفرع 3: المفعول -->
         <div class="radial-card branch-3" onclick="openMorphModal(2)">
           <div class="branch-header">
             <span class="branch-title">الفرع 3: المفعول</span>
@@ -744,7 +746,6 @@
           <div class="branch-colloc" id="b3_colloc"></div>
         </div>
 
-        <!-- الفرع 4: المكان -->
         <div class="radial-card branch-4" onclick="openMorphModal(3)">
           <div class="branch-header">
             <span class="branch-title">الفرع 4: المكان</span>
@@ -756,7 +757,6 @@
           <div class="branch-colloc" id="b4_colloc"></div>
         </div>
 
-        <!-- الفرع 5: النشاط / المصدر -->
         <div class="radial-card branch-5" onclick="openMorphModal(4)">
           <div class="branch-header">
             <span class="branch-title">الفرع 5: النشاط / المصدر</span>
@@ -770,34 +770,60 @@
       </div>
     </div>
 
-    <!-- تبويب 2: مسرح الحكاية -->
+    <!-- 2. مسرح الحكاية الملون (على طريقة عصافير) -->
     <div id="storyTab" class="tab-view">
-      <div class="story-card-wrapper">
-        <div class="story-hero-banner">
-          <div class="story-character" id="storyChar">👨‍🏭</div>
-          <div class="story-hero-text">
-            <h3 id="storyHeading">مشهد الحكاية المعجمية المصورة</h3>
-            <p>استمع للنص بتمعن، وانقر على الكلمات المميزة بالأصفر لسماع نطقها الفصيح:</p>
-            <button class="modal-audio-btn" style="margin-top: 0.8rem;" onclick="speakCurrentStory()">🔊 استمع للمشهد كاملاً</button>
+      <div class="story-hero-stage">
+        <div class="story-header-flex">
+          <div class="story-mascot-box">
+            <!-- كاريكاتير الحكواتي / الرسام الصغير -->
+            <svg viewBox="0 0 100 100" width="100" height="100">
+              <circle cx="50" cy="50" r="45" fill="#38bdf8"/>
+              <ellipse cx="50" cy="22" rx="28" ry="12" fill="#ef4444"/>
+              <circle cx="36" cy="46" r="14" fill="white" stroke="#1e293b" stroke-width="3"/>
+              <circle cx="64" cy="46" r="14" fill="white" stroke="#1e293b" stroke-width="3"/>
+              <circle cx="36" cy="46" r="6" fill="#0369a1"/>
+              <circle cx="64" cy="46" r="6" fill="#0369a1"/>
+              <polygon points="46,55 54,55 50,68" fill="#f97316"/>
+              <!-- لوحة ألوان الرسام -->
+              <ellipse cx="25" cy="75" rx="14" ry="10" fill="#fde047" stroke="#b45309" stroke-width="2"/>
+              <circle cx="20" cy="72" r="2.5" fill="#ef4444"/>
+              <circle cx="28" cy="72" r="2.5" fill="#3b82f6"/>
+              <circle cx="24" cy="78" r="2.5" fill="#10b981"/>
+            </svg>
+          </div>
+          <div class="story-speech-bubble">
+            <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.3rem;">حِكَايَةُ الجَذْرِ المُصَوَّرَةِ 🎨</h3>
+            <p style="font-size: 1.15rem; font-weight: 800;">اقْرَأْ مَعِي الحِكَايَةَ يَا بَطَلُ، وَانْقُرْ عَلَى الكَلِمَاتِ الصَّفْرَاءِ لِتَسْمَعَهَا بِصَوْتٍ فَصِيحٍ!</p>
+            <button class="modal-audio-btn" style="margin-top: 0.8rem;" onclick="speakCurrentStory()">🔊 اسْتَمِعْ لِلحِكَايَةِ كَامِلَةً</button>
           </div>
         </div>
-        <div class="story-body" id="storyContent"></div>
+
+        <div class="story-text-card" id="storyContent"></div>
       </div>
     </div>
 
-    <!-- تبويب 3: مختبر التركيب الحركي (3 تمارين غنية) -->
+    <!-- 3. ورشة التركيب الحركية (3 تمارين ملونة بلا بياض) -->
     <div id="labTab" class="tab-view">
-      <div class="lab-card-wrapper">
-        <h3 style="color: var(--primary); text-align: center; font-size: 1.4rem;">مُخْتَبَرُ التَّرْكِيبِ الصَّرْفِيِّ: رَكِّبْ كَلِمَاتِ الجَذْرِ</h3>
-        <p style="text-align: center; color: #64748b; margin-top: 0.3rem;">اختر حرف الزيادة المناسب لإكمال الصيغ الاشتقاقية المطلوبة:</p>
-        
-        <div class="lab-grid-challenges" id="labChallengesGrid"></div>
+      <div class="lab-stage-box">
+        <div style="text-align: center; margin-bottom: 1rem;">
+          <h3 style="font-size: 1.8rem; font-weight: 900;">🛠️ وَرْشَةُ الأَبْطَالِ: رَكِّبِ الكَلِمَاتِ وَاكْسِبِ النُّجُومَ!</h3>
+          <p style="font-size: 1.15rem; font-weight: 800; color: #e0f2fe;">اسحب أو انقر على الحرف الناقص لإكمال الميزان الصرفي الصحيح:</p>
+        </div>
+
+        <div class="lab-grid-3d" id="labChallengesGrid"></div>
       </div>
     </div>
 
-    <!-- تبويب 4: ميدان التحدي الناطق -->
+    <!-- 4. حلبة الأبطال (ميدان التحدي الملون والناطق) -->
     <div id="quizTab" class="tab-view">
-      <div class="quiz-grid" id="quizzesContainer"></div>
+      <div class="arena-stage">
+        <div style="text-align: center; color: white; margin-bottom: 1.5rem;">
+          <h3 style="font-size: 1.8rem; font-weight: 900;">🏆 حَلَبَةُ التَّحَدِّي الصَّرْفِيِّ</h3>
+          <p style="font-size: 1.15rem; font-weight: 800; color: #ede9fe;">أَجِبْ عَنِ الأَسْئِلَةِ، وَاسْتَمِعْ لِلتَّوْجِيهِ الذَّكِيِّ عِنْدَ كُلِّ خُطْوَةٍ:</p>
+        </div>
+
+        <div class="arena-grid" id="quizzesContainer"></div>
+      </div>
     </div>
   </main>
 
@@ -809,29 +835,29 @@
       <div class="modal-hero">
         <div class="modal-word" id="mHeroWord"></div>
         <div class="modal-weight" id="mHeroWeight"></div>
-        <button class="modal-audio-btn" id="mAudioBtn">🔊 استمع للنطق الصوتي</button>
+        <button class="modal-audio-btn" id="mAudioBtn">🔊 اسْتَمِعْ لِلنُّطْقِ الصَّوْتِيِّ</button>
       </div>
 
       <div class="detail-card">
         <div class="detail-row">
-          <span class="detail-label">💡 الشرح والدلالة:</span>
+          <span class="detail-label">💡 الشَّرْحُ وَالدَّلَالَةُ:</span>
           <span id="mDesc"></span>
         </div>
         <div class="detail-row">
-          <span class="detail-label">🔗 المتلازمة اللفظية:</span>
+          <span class="detail-label">🔗 المُتَلَازِمَةُ اللَّفْظِيَّةُ:</span>
           <span id="mColloc" style="color: var(--primary); font-weight: 900;"></span>
         </div>
         <div class="detail-row">
-          <span class="detail-label">📖 المثال في سياق:</span>
+          <span class="detail-label">📖 المِثَالُ فِي سِيَاقٍ:</span>
           <span id="mExample" style="color: #1e293b; font-style: italic;"></span>
         </div>
       </div>
 
-      <!-- تظهر هذه الحاوية حصراً للفعل المجرد (الفرع 1) -->
+      <!-- تظهر حصراً للفعل المجرد (الفرع 1) -->
       <div class="affix-box" id="mAffixCard">
         <div class="affix-box-head">
-          <span class="affix-box-title">📚 عائلة الأفعال المزيدة (درس كتاب مرشدي ص 14)</span>
-          <span class="affix-rule-badge">أحرف الجذر بالأحمر</span>
+          <span class="affix-box-title">📚 عَائِلَةُ الأَفْعَالِ المَزِيدَةِ (كِتَابُ مُرْشِدِي ص 14)</span>
+          <span class="affix-rule-badge">أَحْرُفُ الجَذْرِ بِالأَحْمَرِ</span>
         </div>
         <div id="mAffixList"></div>
       </div>
@@ -839,9 +865,7 @@
   </div>
 
   <script>
-    // ----------------------------------------------------
-    // محرك الصوت المطور والنطق الفصيح
-    // ----------------------------------------------------
+    // محرك الصوت والنطق
     const Sound = {
       ctx: null,
       init() {
@@ -884,14 +908,11 @@
       }
     };
 
-    // ----------------------------------------------------
-    // قاعدة البيانات الصرفية الدقيقة (تلوين أحرف الجذر 100% بالأحمر)
-    // ----------------------------------------------------
+    // بنك البيانات المنظم لسانياً وتشفير أحرف الجذر 100% بالأحمر
     const db = {
       "صنع": {
         letters: ['ص', 'ن', 'ع'],
         concept: "الجَذْرُ: العَمَلُ وَالإِتْقَانُ",
-        charIcon: "👨‍🏭",
         branches: [
           {
             isVerb: true,
@@ -959,7 +980,7 @@
           { word: "<span class='c-a'>ا</span><span class='c-r'>صْ</span><span class='c-a'>طَ</span><span class='c-r'>نَ</span><span class='c-r'>عَ</span>", plain: "اصْطَنَعَ", weight: "افْتَعَلَ", desc: "مزيد بحرفين (الهمزة والتاء المبدلة طاء): تكلّف الصنع أو اتخذه لنفسه" },
           { word: "<span class='c-a'>اسْتَ</span><span class='c-r'>صْ</span><span class='c-r'>نَ</span><span class='c-r'>عَ</span>", plain: "اسْتَصْنَعَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف (اسْتـ): طلب أن يُصنع له الشيء" }
         ],
-        story: "فِي قَرْيَتِنَا الهَادِئَةِ، يَشْتَغِلُ عَمِّي المَهْدِيُّ <span class='story-tag' onclick=\"Sound.speak('صَانِعاً')\">صَانِعاً</span> مَاهِراً فِي وَرْشَتِهِ، كَمَا يَقْضِي بَعْضَ أَيَّامِهِ فِي <span class='story-tag' onclick=\"Sound.speak('مَصْنَعٍ')\">مَصْنَعٍ</span> قَرِيبٍ. لَقَدْ <span class='story-tag' onclick=\"Sound.speak('صَنَعَ')\">صَنَعَ</span> بِيَدَيْهِ خِزَانَةً خَشَبِيَّةً هِيَ أَفْخَرُ أَثَاثٍ <span class='story-tag' onclick=\"Sound.speak('مَصْنُوعٍ')\">مَصْنُوعٍ</span>، وَبِفَضْلِ هَذَا الإِتْقَانِ تَرْتَقِي <span class='story-tag' onclick=\"Sound.speak('صِنَاعَةُ')\">صِنَاعَةُ</span> الوَطَنِ.",
+        story: "فِي قَرْيَتِنَا النَّشِيطَةِ، يَعْمَلُ عَمِّي المَهْدِيُّ <span class='story-tag' onclick=\"Sound.speak('صَانِعاً')\">صَانِعاً</span> مَاهِراً فِي وَرْشَتِهِ، وَيَزُورُ كُلَّ صَبَاحٍ <span class='story-tag' onclick=\"Sound.speak('مَصْنَعٍ')\">مَصْنَعاً</span> قَرِيباً. لَقَدْ <span class='story-tag' onclick=\"Sound.speak('صَنَعَ')\">صَنَعَ</span> بِيَدَيْهِ خِزَانَةً خَشَبِيَّةً رَائِعَةً، هِيَ أَفْخَرُ أَثَاثٍ <span class='story-tag' onclick=\"Sound.speak('مَصْنُوعٍ')\">مَصْنُوعٍ</span> رَأَيْتُهُ، وَهَكَذَا تَزْدَهِرُ <span class='story-tag' onclick=\"Sound.speak('صِنَاعَةُ')\">صِنَاعَةُ</span> الخَشَبِ فِي المَغْرِبِ الحَبِيبِ!",
         labs: [
           { title: "التحدي 1: رَكِّبْ (اسْمَ الفَاعِلِ: صَانِع)", slots: [{ch:"صَـ"}, {ch:"", correct:"ا"}, {ch:"نِـ"}, {ch:"عٌ"}], pool: ["ا", "مَـ", "يَـ"] },
           { title: "التحدي 2: رَكِّبْ (اسْمَ المَكَانِ: مَصْنَع)", slots: [{ch:"", correct:"مَـ"}, {ch:"صْ"}, {ch:"نَ"}, {ch:"عٌ"}], pool: ["مَـ", "تَـ", "سَـ"] },
@@ -974,7 +995,6 @@
       "كتب": {
         letters: ['ك', 'ت', 'ب'],
         concept: "الجَذْرُ: التَّدْوِينُ وَالكِتَابَةُ",
-        charIcon: "✍️",
         branches: [
           { isVerb: true, title: "الفرع 1: الحدث / الفعل", q: "مَاذَا حَدَثَ؟", colored: "<span class='c-r'>كَ</span><span class='c-r'>تَ</span><span class='c-r'>بَ</span>", plain: "كَتَبَ", weight: "فَعَلَ (ثلاثي مجرد)", desc: "فعل ماضٍ ثلاثي مجرد حروفه أصلية، يدل على خط الكلمات.", colloc: "كَتَبَ رِسَالَةً", ex: "«كَتَبَ التِّلْمِيذُ النَّصَّ»", icon: "✏️" },
           { isVerb: false, title: "الفرع 2: الفاعل", q: "مَنْ يَفْعَلُ؟", colored: "<span class='c-r'>كَ</span><span class='c-a'>ا</span><span class='c-r'>تِ</span><span class='c-r'>بٌ</span>", plain: "كَاتِبٌ", weight: "فَاعِلٌ (اسم فاعل)", desc: "اسم مشتق يدل على من قام بفعل الكتابة.", colloc: "كَاتِبٌ مَشْهُورٌ", ex: "«أَلَّفَ الكَاتِبُ قِصَّةً»", icon: "✍️" },
@@ -1000,7 +1020,6 @@
       "علم": {
         letters: ['ع', 'ل', 'م'],
         concept: "الجَذْرُ: المَعْرِفَةُ وَاليَقِينُ",
-        charIcon: "👨‍🏫",
         branches: [
           { isVerb: true, title: "الفرع 1: الحدث / الفعل", q: "مَاذَا حَدَثَ؟", colored: "<span class='c-r'>عَ</span><span class='c-r'>لِ</span><span class='c-r'>مَ</span>", plain: "عَلِمَ", weight: "فَعِلَ (مجرد ثلاثي)", desc: "فعل ماضٍ مجرد يدل على إدراك حقيقة الشيء.", colloc: "عَلِمَ الخَبَرَ", ex: "«عَلِمَ التِّلْمِيذُ الحَقِيقَةَ»", icon: "💡" },
           { isVerb: false, title: "الفرع 2: الفاعل", q: "مَنْ يَفْعَلُ؟", colored: "<span class='c-r'>عَ</span><span class='c-a'>ا</span><span class='c-r'>لِ</span><span class='c-r'>مٌ</span>", plain: "عَالِمٌ", weight: "فَاعِلٌ (اسم فاعل)", desc: "اسم مشتق يدل على من اتصف بغزارة المعرفة.", colloc: "عَالِمٌ جَلِيلٌ", ex: "«تَحَدَّثَ العَالِمُ فِي النَّدْوَةِ»", icon: "👨‍🏫" },
@@ -1026,37 +1045,24 @@
 
     let userScore = 0;
 
-    // ----------------------------------------------------
     // بناء الخريطة الإشعاعية التفاعلية
-    // ----------------------------------------------------
     function renderRadialRoot(rootKey) {
       const data = db[rootKey];
 
-      // النواة المركزية
       document.getElementById('coreLetters').textContent = `[ ${data.letters.join(' - ')} ]`;
       document.getElementById('coreConcept').textContent = data.concept;
 
-      // الفروع الخمسة بالألوان الصرفية الدقيقة
       data.branches.forEach((b, i) => {
         document.getElementById(`b${i+1}_word`).innerHTML = b.colored;
         document.getElementById(`b${i+1}_colloc`).textContent = `🔗 المتلازمة: ${b.colloc}`;
       });
 
-      // رسم الأشعة
       drawRays();
-
-      // مسرح الحكاية
-      document.getElementById('storyChar').textContent = data.charIcon;
       document.getElementById('storyContent').innerHTML = data.story;
-
-      // مختبر التركيب
       renderLabChallenges(data.labs);
-
-      // ميدان التحدي
       renderQuizzes(data.quizzes);
     }
 
-    // رسم خطوط الأشعة المتقطعة بين النواة والبطاقات الخمس
     function drawRays() {
       const svg = document.getElementById('svgLayer');
       svg.innerHTML = '';
@@ -1082,31 +1088,25 @@
         line.setAttribute('x2', tx);
         line.setAttribute('y2', ty);
         line.setAttribute('stroke', '#cbd5e1');
-        line.setAttribute('stroke-width', '3.5');
+        line.setAttribute('stroke-width', '4');
         line.setAttribute('stroke-dasharray', '8,8');
         svg.appendChild(line);
       });
     }
 
-    // ----------------------------------------------------
-    // النافذة المنبثقة للتحليل الصرفي (Modal)
-    // ----------------------------------------------------
     function openMorphModal(branchIdx) {
       const rootKey = document.getElementById('rootSelect').value;
       const rootObj = db[rootKey];
       const branch = rootObj.branches[branchIdx];
 
-      // الكلمة بالرأس بتلوين دقيق
       document.getElementById('mHeroWord').innerHTML = branch.colored;
       document.getElementById('mHeroWeight').textContent = `الوزن والموقع: ${branch.weight}`;
       document.getElementById('mDesc').textContent = branch.desc;
       document.getElementById('mColloc').textContent = branch.colloc;
       document.getElementById('mExample').textContent = branch.ex;
 
-      // زر الصوت في النافذة
       document.getElementById('mAudioBtn').onclick = () => Sound.speak(branch.plain);
 
-      // عائلة المزيد: تظهر فقط للفرع 1 (الفعل المجرد) وتختفي من البقية تماماً
       const affixCard = document.getElementById('mAffixCard');
       const affixList = document.getElementById('mAffixList');
       
@@ -1124,7 +1124,7 @@
               </div>
               <div style="font-size: 0.95rem; color: #64748b;">${aff.desc}</div>
             </div>
-            <button style="border:none; background:#e0f2fe; padding:0.4rem 0.8rem; border-radius:12px; cursor:pointer; font-weight:bold; color:#0369a1;" onclick="Sound.speak('${aff.plain}')">🔊</button>
+            <button style="border:none; background:#fef08a; padding:0.4rem 0.8rem; border-radius:12px; cursor:pointer; font-weight:bold; color:#854d0e;" onclick="Sound.speak('${aff.plain}')">🔊</button>
           `;
           affixList.appendChild(div);
         });
@@ -1154,16 +1154,13 @@
       Sound.speak(clean);
     }
 
-    // ----------------------------------------------------
-    // مختبر التركيب الحركي (3 تمارين غنية تكسر البياض)
-    // ----------------------------------------------------
     function renderLabChallenges(labs) {
       const container = document.getElementById('labChallengesGrid');
       container.innerHTML = '';
 
       labs.forEach((lab, lIdx) => {
         const box = document.createElement('div');
-        box.className = 'lab-single-box';
+        box.className = 'lab-card-item';
         box.innerHTML = `
           <h4>${lab.title}</h4>
           <div class="slots-row" id="slots_row_${lIdx}">
@@ -1172,7 +1169,7 @@
           <div class="tiles-row">
             ${lab.pool.map(p => `<button class="tile-btn" onclick="checkLabTile(this, ${lIdx}, '${p}')">${p}</button>`).join('')}
           </div>
-          <div class="fb-tag" id="fb_lab_${lIdx}"></div>
+          <div class="fb-bubble" id="fb_lab_${lIdx}"></div>
         `;
         container.appendChild(box);
       });
@@ -1191,60 +1188,57 @@
         fb.style.display = 'block';
         fb.style.background = '#dcfce7';
         fb.style.color = '#15803d';
-        fb.innerHTML = '🎉 مُمْتَاز! رَكَّبْتَ الكَلِمَةَ بِصُورَةٍ دَقِيقَةٍ.';
+        fb.innerHTML = '🎉 رَائِعٌ جِدّاً! رَكَّبْتَ الكَلِمَةَ بِصُورَةٍ دَقِيقَةٍ.';
         Sound.correct();
         addPoints(15);
       } else {
         fb.style.display = 'block';
         fb.style.background = '#fee2e2';
         fb.style.color = '#b91c1c';
-        fb.innerHTML = `⚠️ الحَرْفُ [ ${char} ] لَا يُطَابِقُ صِيغَةَ الوَزْنِ.`;
+        fb.innerHTML = `⚠️ انْتَبِهْ! الحَرْفُ [ ${char} ] لَا يُطَابِقُ صِيغَةَ الوَزْنِ.`;
         Sound.wrong();
       }
     }
 
-    // ----------------------------------------------------
-    // ميدان التحدي الناطق
-    // ----------------------------------------------------
     function renderQuizzes(quizList) {
       const container = document.getElementById('quizzesContainer');
       container.innerHTML = '';
 
       quizList.forEach((q, idx) => {
         const box = document.createElement('div');
-        box.className = 'quiz-box';
+        box.className = 'arena-card';
         box.innerHTML = `
           <div style="display:flex; justify-content:space-between; color:var(--primary); font-weight:900; margin-bottom:0.6rem;">
-            <span>التَّحَدِّي ${idx + 1}</span>
-            <button style="background:none; border:none; cursor:pointer; font-size:1.1rem;" onclick="Sound.speak('${q.q}')">🔊 استمع</button>
+            <span style="font-size: 1.1rem; color: #7c3aed;">⭐ التَّحَدِّي ${idx + 1}</span>
+            <button style="background:#ede9fe; border:none; border-radius:12px; padding:0.3rem 0.8rem; cursor:pointer; font-weight:bold; color:#6d28d9;" onclick="Sound.speak('${q.q}')">🔊 اسْتَمِعْ</button>
           </div>
-          <div style="font-size: 1.25rem; font-weight: 800; margin-bottom: 1rem;">${q.q}</div>
+          <div style="font-size: 1.3rem; font-weight: 900; margin-bottom: 1rem; color: #1e1b4b;">${q.q}</div>
           <div>
             ${q.opts.map(opt => `
-              <button class="quiz-opt" onclick="checkQuizAnswer(this, '${opt}', '${q.ans}', '${q.tip}')">
+              <button class="arena-opt-btn" onclick="checkQuizAnswer(this, '${opt}', '${q.ans}', '${q.tip}')">
                 <span>${opt}</span>
                 <span onclick="event.stopPropagation(); Sound.speak('${opt}')">🔊</span>
               </button>
             `).join('')}
           </div>
-          <div class="fb-tag"></div>
+          <div class="fb-bubble"></div>
         `;
         container.appendChild(box);
       });
     }
 
     function checkQuizAnswer(btn, selected, correct, tip) {
-      const parent = btn.closest('.quiz-box');
-      const fb = parent.querySelector('.fb-tag');
-      const btns = parent.querySelectorAll('.quiz-opt');
+      const parent = btn.closest('.arena-card');
+      const fb = parent.querySelector('.fb-bubble');
+      const btns = parent.querySelectorAll('.arena-opt-btn');
 
       if (selected === correct) {
         fb.style.display = 'block';
         fb.style.background = '#dcfce7';
         fb.style.color = '#15803d';
-        fb.innerHTML = `✓ أَحْسَنْتَ! إِجَابَةٌ صَحِيحَةٌ (${selected}).`;
-        btn.style.background = '#dcfce7';
-        btn.style.borderColor = '#86efac';
+        fb.innerHTML = `✓ أَحْسَنْتَ يَا بَطَلُ! إِجَابَةٌ صَحِيحَةٌ (${selected}).`;
+        btn.style.background = '#bbf7d0';
+        btn.style.borderColor = '#22c55e';
         Sound.correct();
         Sound.speak("أحسنت إجابة صحيحة");
         addPoints(10);
@@ -1253,11 +1247,11 @@
         fb.style.display = 'block';
         fb.style.background = '#fee2e2';
         fb.style.color = '#b91c1c';
-        fb.innerHTML = `✕ مُحَاوَلَةٌ خَاطِئَةٌ! 💡 ${tip}`;
-        btn.style.background = '#fee2e2';
-        btn.style.borderColor = '#fca5a5';
+        fb.innerHTML = `✕ مُحَاوَلَةٌ قَرِيبَةٌ! 💡 ${tip}`;
+        btn.style.background = '#fecaca';
+        btn.style.borderColor = '#ef4444';
         Sound.wrong();
-        Sound.speak("انتبه حاول ثانية");
+        Sound.speak("انتبه يا بطل، حاول ثانية");
       }
     }
 
@@ -1266,9 +1260,6 @@
       document.getElementById('scoreVal').textContent = userScore;
     }
 
-    // ----------------------------------------------------
-    // إدارة التبويبات
-    // ----------------------------------------------------
     function switchTab(tabId, el) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.tab-view').forEach(v => v.classList.remove('active'));
