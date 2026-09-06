@@ -140,23 +140,23 @@
         <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 md:mt-0 md:absolute md:inset-0 pointer-events-none z-10" id="branchesContainer"></div>
     </main>
 
-    <!-- محطة التحدي والوصل التفاعلية -->
+    <!-- محطة التحدي والوصل التفاعلية (المحدثة بتمارين المجرد والمزيد) -->
     <section class="w-full max-w-6xl mt-12 bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 border border-white shadow-xl">
         <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
             <span class="w-10 h-10 bg-indigo-600 text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-md">🎯</span>
             <div>
-                <h2 class="text-xl font-black text-slate-800">محطة التوظيف والوصل التفاعلية (السحب والإفلات)</h2>
-                <p class="text-xs text-slate-500 font-medium">اسحب البطاقة أو انقر عليها ثم انقر على موضعها الصحيح واكسب النجوم!</p>
+                <h2 class="text-xl font-black text-slate-800">محطة التوظيف والوصل التفاعلية (تحدي الصرف والتحويل)</h2>
+                <p class="text-xs text-slate-500 font-medium">طبّق قواعد المجرد والمزيد والمشتقات واسحب البطاقات إلى مواضعها الصحيحة واكسب النجوم!</p>
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- القسم 1: الفراغات -->
+            <!-- القسم 1: الفراغات وتحدي المجرد والمزيد والمشتقات -->
             <div class="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 flex flex-col justify-between space-y-4">
                 <div>
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-sm font-extrabold text-indigo-900 flex items-center gap-2">
-                            <i class="fa-solid fa-pen-to-square text-indigo-600"></i> القسم 1: ضع الكلمة المناسبة في مكانها الصحيح
+                            <i class="fa-solid fa-pen-to-square text-indigo-600"></i> القسم 1: ميز بين الفعل المزيد والمشتقات في سياقها
                         </h3>
                         <button onclick="playInstruction('fill')" class="bg-indigo-100 hover:bg-indigo-200 text-indigo-800 text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition">
                             <i class="fa-solid fa-volume-high text-indigo-600 animate-pulse"></i> 
@@ -165,7 +165,7 @@
                     </div>
 
                     <div class="mb-4 p-3 bg-indigo-50/50 rounded-xl border border-indigo-100">
-                        <p class="text-xs font-bold text-indigo-700 mb-2">اسحب البطاقات من هنا أو انقر لاختيارها:</p>
+                        <p class="text-xs font-bold text-indigo-700 mb-2">اسحب البطاقة أو انقر عليها ثم اختر موضعها:</p>
                         <div id="wordBankSection1" class="flex flex-wrap gap-2 min-h-[48px] items-center"></div>
                     </div>
                     
@@ -177,12 +177,12 @@
                 </button>
             </div>
 
-            <!-- القسم 2: الوصل والمطابقة -->
+            <!-- القسم 2: الوصل والمطابقة مع الميزان والوظيفة الصرفية -->
             <div class="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 flex flex-col justify-between space-y-4">
                 <div>
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="text-sm font-extrabold text-indigo-900 flex items-center gap-2">
-                            <i class="fa-solid fa-link text-indigo-600"></i> القسم 2: صل كل كلمة برفيقتها المتلازمة
+                            <i class="fa-solid fa-link text-indigo-600"></i> القسم 2: صل كل كلمة بوزنها ونوعها الصرفي ومتلازمتها
                         </h3>
                         <button onclick="playInstruction('match')" class="bg-purple-100 hover:bg-purple-200 text-purple-800 text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition">
                             <i class="fa-solid fa-volume-high text-purple-600 animate-pulse"></i> 
@@ -191,7 +191,7 @@
                     </div>
 
                     <div class="mb-4 p-3 bg-purple-50/50 rounded-xl border border-purple-100">
-                        <p class="text-xs font-bold text-purple-700 mb-2">اسحب بطاقات المتلازمات من هنا:</p>
+                        <p class="text-xs font-bold text-purple-700 mb-2">اسحب بطاقات المطابقة من هنا:</p>
                         <div id="collocBank" class="flex flex-wrap gap-2 min-h-[48px] items-center"></div>
                     </div>
 
@@ -206,7 +206,7 @@
         </div>
     </section>
 
-    <!-- النافذة المنبثقة للفرع (مدعمة بتفصيل المجرد والمزيد) -->
+    <!-- النافذة المنبثقة للفرع -->
     <div id="infoModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl p-6 max-w-lg w-full shadow-2xl border border-white transform transition-all max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
@@ -214,7 +214,7 @@
                     <span id="modalIcon" class="text-3xl">🔨</span>
                     <div>
                         <h3 id="modalTitle" class="text-xl font-black text-slate-800">صَنَعَ</h3>
-                        <p id="modalWeight" class="text-xs font-bold text-indigo-600">الوزن الصرفي: فَعَلَ</p>
+                        <p id="modalWeight" class="text-xs font-bold text-indigo-600">الوزن والموقع: فَعَلَ</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-2">
@@ -263,37 +263,42 @@
                     { 
                         key: "verb", 
                         titleHtml: '<span class="text-red-600 font-black">صَـنَـعَ</span>', 
-                        weight: "فَعَلَ (فعل ماض مجرد)", 
+                        weight: "فَعَلَ (فعل ماض ثلاثي مجرد)", 
                         icon: "🔨", 
-                        desc: "فعل ماض ثلاثي مجرد يدل على إيجاد الشيء وتكوينه بالعمل والجهد.", 
+                        desc: "فعل ماض ثلاثي مجرد حروفه كلها أصلية، يدل على إيجاد الشيء وتكوينه بالعمل.", 
                         col: "صَنَعَ بِيَدَيْهِ", 
                         context: "صَنَعَ الحِرَفِيُّ خِزَانَةً جَمِيلَةً", 
                         color: "amber",
-                        // بيانات الأفعال المزيدة
                         augmented: [
                             { type: "مزيد بحرف (التضعيف)", wordHtml: '<span class="text-red-600 font-black">صَـ</span><span class="text-amber-600 font-black">نَّـ</span><span class="text-red-600 font-black">عَ</span>', weight: "فَعَّلَ", meaning: "جعله صناعياً أو حوّله لمنتج" },
                             { type: "مزيد بحرفين (الهمزة والتاء)", wordHtml: '<span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">صْـ</span><span class="text-blue-600 font-bold">طَـ</span><span class="text-red-600 font-black">نَـعَ</span>', weight: "افْتَعَلَ", meaning: "تكلّف الصنع أو اتخذه لنفسه" },
                             { type: "مزيد بـ 3 أحرف (استـ)", wordHtml: '<span class="text-purple-600 font-bold">اِسْـتَـ</span><span class="text-red-600 font-black">صْـنَـعَ</span>', weight: "اسْتَفْعَلَ", meaning: "طلب أن يُصنع له الشيء" }
                         ]
                     },
-                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">صَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">نِـعٌ</span>', weight: "فَاعِل", icon: "👨‍🔧", desc: "اسم فاعل يدل على الذات التي قامت بالصنع والإنتاج.", col: "صَانِعٌ مَاهِرٌ", context: "كَرَّمَ المُدِيرُ الصَّانِعَ المَاهِرَ", color: "blue" },
-                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـنُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">عٌ</span>', weight: "مَفْعُول", icon: "🏺", desc: "اسم مفعول يدل على ما وقع عليه فعل الصنع والإتقان.", col: "مَصْنُوعٌ بِإِتْقَانٍ", context: "الخَزَفُ مَصْنُوعٌ بِجَمَالِيَّةٍ", color: "orange" },
-                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـنَـعٌ</span>', weight: "مَفْعَل", icon: "🏭", desc: "اسم مكان يدل على موضع الإنتاج وتجمع الآلات.", col: "مَصْنَعٌ حَدِيثٌ", context: "يَشْتَغِلُ أَبِي فِي مَصْنَعِ السَّمَكِ", color: "emerald" },
-                    { key: "source", titleHtml: '<span class="text-red-600 font-black">صِـنَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">عَـ</span><span class="text-purple-500 font-bold">ةٌ</span>', weight: "فِعَالَة", icon: "⚙️", desc: "مصدر صريح يدل على حرفة العمل والنشاط الإنتاجي.", col: "صِنَاعَةٌ وَطَنِيَّةٌ", context: "تَزْدَهِرُ صِنَاعَةُ الفَخَّارِ فِي بِلَادِنَا", color: "purple" }
+                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">صَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">نِـعٌ</span>', weight: "فَاعِل (اسم فاعل)", icon: "👨‍🔧", desc: "اسم فاعل يدل على الذات التي قامت بالصنع والإنتاج.", col: "صَانِعٌ مَاهِرٌ", context: "كَرَّمَ المُدِيرُ الصَّانِعَ المَاهِرَ", color: "blue" },
+                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـنُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">عٌ</span>', weight: "مَفْعُول (اسم مفعول)", icon: "🏺", desc: "اسم مفعول يدل على ما وقع عليه فعل الصنع والإتقان.", col: "مَصْنُوعٌ بِإِتْقَانٍ", context: "الخَزَفُ مَصْنُوعٌ بِجَمَالِيَّةٍ", color: "orange" },
+                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـنَـعٌ</span>', weight: "مَفْعَل (اسم مكان)", icon: "🏭", desc: "اسم مكان يدل على موضع الإنتاج وتجمع الآلات.", col: "مَصْنَعٌ حَدِيثٌ", context: "يَشْتَغِلُ أَبِي فِي مَصْنَعِ السَّمَكِ", color: "emerald" },
+                    { key: "source", titleHtml: '<span class="text-red-600 font-black">صِـنَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">عَـ</span><span class="text-purple-500 font-bold">ةٌ</span>', weight: "فِعَالَة (مصدر صريح)", icon: "⚙️", desc: "مصدر صريح يدل على حرفة العمل والنشاط الإنتاجي.", col: "صِنَاعَةٌ وَطَنِيَّةٌ", context: "تَزْدَهِرُ صِنَاعَةُ الفَخَّارِ فِي بِلَادِنَا", color: "purple" }
                 ],
+                // التمارين المعدلة لتشمل الفعل المزيد (صَنَّعَ) بجانب المشتقات
                 quizFill: {
-                    chips: [{ id: "masnaa", text: "مَصْنَعٍ", word: "مصنع", color: "emerald" }, { id: "sinaa", text: "صِنَاعَةِ", word: "صناعة", color: "purple" }, { id: "masnoo", text: "مَصْنُوعٌ", word: "مصنوع", color: "orange" }],
+                    chips: [
+                        { id: "sanaa", text: "صَنَّعَ (فعل مزيد)", word: "صنع_مزيد", color: "amber" },
+                        { id: "masnaa", text: "مَصْنَعٍ (اسم مكان)", word: "مصنع", color: "emerald" },
+                        { id: "masnoo", text: "مَصْنُوعٌ (اسم مفعول)", word: "مصنوع", color: "orange" }
+                    ],
                     sentences: [
-                        { prefix: "1. يَشْتَغِلُ العُمَّالُ فِي", target: "مصنع", suffix: "كَبِيرٍ." },
-                        { prefix: "2. يَفْتَخِرُ المَغْرِبُ بِـ", target: "صناعة", suffix: "الجِلْدِ وَالخَزَفِ." },
-                        { prefix: "3. هَذَا الخَاتَمُ الفِضِّيُّ", target: "مصنوع", suffix: "بِدِقَّةٍ وَعِنَايَةٍ." }
+                        { prefix: "1.", target: "صنع_مزيد", suffix: "المُسْتَثْمِرُ المَوَادَّ الفِلاحِيَّةَ لِتَصْدِيرِهَا." },
+                        { prefix: "2. يَشْتَغِلُ العُمَّالُ فِي", target: "مصنع", suffix: "كَبِيرٍ لِلتَّعْلِيبِ." },
+                        { prefix: "3. هَذَا الإِبْرِيقُ الفِضِّيُّ", target: "مصنوع", suffix: "بِدِقَّةٍ وَعِنَايَةٍ فَائِقَةٍ." }
                     ]
                 },
+                // الوصل المعدل ليربط بين اللفظ ونوعه الصرفي من واقع دروس كتاب مرشدي
                 quizMatch: [
-                    { wordHtml: "صَانِعٌ", matchId: "1", colloc: "🔗 مَاهِرٌ فِي عَمَلِهِ", color: "blue" },
-                    { wordHtml: "مَصْنُوعٌ", matchId: "2", colloc: "🔗 مِنَ الفَخَّارِ المَصْقُولِ", color: "orange" },
-                    { wordHtml: "مَصْنَعٌ", matchId: "3", colloc: "🔗 حَدِيثٌ وَنَظِيفٌ", color: "emerald" },
-                    { wordHtml: "صِنَاعَةٌ", matchId: "4", colloc: "🔗 تَقْلِيدِيَّةٌ وَطَنِيَّةٌ", color: "purple" }
+                    { wordHtml: "صَنَّعَ", matchId: "1", colloc: "🔗 فِعْلٌ مَزِيدٌ بِالتَّضْعِيفِ (فَعَّلَ)", color: "amber" },
+                    { wordHtml: "صَانِعٌ", matchId: "2", colloc: "🔗 اسْمُ فَاعِلٍ ثُلاثِيّ (فَاعِل)", color: "blue" },
+                    { wordHtml: "مَصْنُوعٌ", matchId: "3", colloc: "🔗 اسْمُ مَفْعُولٍ ثُلاثِيّ (مَفْعُول)", color: "orange" },
+                    { wordHtml: "صِنَاعَةٌ", matchId: "4", colloc: "🔗 مَصْدَرٌ صَرِيحٌ (فِعَالَة)", color: "purple" }
                 ]
             },
             "كتب": {
@@ -305,9 +310,9 @@
                     { 
                         key: "verb", 
                         titleHtml: '<span class="text-red-600 font-black">كَـتَـبَ</span>', 
-                        weight: "فَعَلَ (فعل ماض مجرد)", 
+                        weight: "فَعَلَ (فعل ماض ثلاثي مجرد)", 
                         icon: "📝", 
-                        desc: "فعل ماض ثلاثي مجرد يدل على خط الحروف وتدوين المعاني بالقلم.", 
+                        desc: "فعل ماض ثلاثي مجرد حروفه كلها أصلية، يدل على خط المعاني بالقلم.", 
                         col: "كَتَبَ بِالقَلَمِ", 
                         context: "كَتَبَ التِّلْمِيذُ رِسَالَةً مُعَبِّرَةً", 
                         color: "amber",
@@ -317,24 +322,28 @@
                             { type: "مزيد بـ 3 أحرف (استـ)", wordHtml: '<span class="text-purple-600 font-bold">اِسْـتَـ</span><span class="text-red-600 font-black">كْـتَـبَ</span>', weight: "اسْتَفْعَلَ", meaning: "طلب منه أن يكتب له رسالة" }
                         ]
                     },
-                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">كَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">تِـبٌ</span>', weight: "فَاعِل", icon: "🧑‍💼", desc: "اسم فاعل يدل على من باشر التدوين والتأليف.", col: "كَاتِبٌ مُبْدِعٌ", context: "حَصَلَ الكَاتِبُ المُبْدِعُ عَلَى جَائِزَةٍ", color: "blue" },
-                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">كْـتُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">بٌ</span>', weight: "مَفْعُول", icon: "📜", desc: "اسم مفعول يدل على ما وقع عليه التدوين والتسطير.", col: "مَكْتُوبٌ بِعِنَايَةٍ", context: "المَقَالُ مَكْتُوبٌ بِأُسْلُوبٍ رَاقٍ", color: "orange" },
-                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">كْـتَـبٌ</span>', weight: "مَفْعَل", icon: "🏢", desc: "اسم مكان يدل على موضع القراءة ومطالعة الكتب والإدارة.", col: "مَكْتَبٌ مُنَظَّمٌ", context: "جَلَسَ الأُسْتَاذُ إِلَى مَكْتَبِهِ", color: "emerald" },
-                    { key: "source", titleHtml: '<span class="text-red-600 font-black">كِـتَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">بَـ</span><span class="text-purple-500 font-bold">ةٌ</span>', weight: "فِعَالَة", icon: "✒️", desc: "مصدر صريح يدل على مهارة التدوين والرسم اللغوي.", col: "كِتَابَةٌ سَلِيمَةٌ", context: "تَتَطَلَّبُ القِصَّةُ كِتَابَةً مُتْقَنَةً", color: "purple" }
+                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">كَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">تِـبٌ</span>', weight: "فَاعِل (اسم فاعل)", icon: "🧑‍💼", desc: "اسم فاعل يدل على من باشر التدوين والتأليف.", col: "كَاتِبٌ مُبْدِعٌ", context: "حَصَلَ الكَاتِبُ المُبْدِعُ عَلَى جَائِزَةٍ", color: "blue" },
+                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">كْـتُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">بٌ</span>', weight: "مَفْعُول (اسم مفعول)", icon: "📜", desc: "اسم مفعول يدل على ما وقع عليه التدوين والتسطير.", col: "مَكْتُوبٌ بِعِنَايَةٍ", context: "المَقَالُ مَكْتُوبٌ بِأُسْلُوبٍ رَاقٍ", color: "orange" },
+                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">كْـتَـبٌ</span>', weight: "مَفْعَل (اسم مكان)", icon: "🏢", desc: "اسم مكان يدل على موضع القراءة ومطالعة الكتب والإدارة.", col: "مَكْتَبٌ مُنَظَّمٌ", context: "جَلَسَ الأُسْتَاذُ إِلَى مَكْتَبِهِ", color: "emerald" },
+                    { key: "source", titleHtml: '<span class="text-red-600 font-black">كِـتَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">بَـ</span><span class="text-purple-500 font-bold">ةٌ</span>', weight: "فِعَالَة (مصدر صريح)", icon: "✒️", desc: "مصدر صريح يدل على مهارة التدوين والرسم اللغوي.", col: "كِتَابَةٌ سَلِيمَةٌ", context: "تَتَطَلَّبُ القِصَّةُ كِتَابَةً مُتْقَنَةً", color: "purple" }
                 ],
                 quizFill: {
-                    chips: [{ id: "maktab", text: "مَكْتَبٍ", word: "مكتب", color: "emerald" }, { id: "kitaba", text: "كِتَابَةِ", word: "كتابة", color: "purple" }, { id: "maktoob", text: "مَكْتُوبٌ", word: "مكتوب", color: "orange" }],
+                    chips: [
+                        { id: "iktataba", text: "اكْتَتَبَ (فعل مزيد)", word: "اكتتب_مزيد", color: "amber" },
+                        { id: "maktab", text: "مَكْتَبٍ (اسم مكان)", word: "مكتب", color: "emerald" },
+                        { id: "maktoob", text: "مَكْتُوبٌ (اسم مفعول)", word: "مكتوب", color: "orange" }
+                    ],
                     sentences: [
-                        { prefix: "1. وَضَعَ المُعَلِّمُ الأَوْرَاقَ عَلَى", target: "مكتب", suffix: "الإِدَارَةِ." },
-                        { prefix: "2. يَتَمَيَّزُ عَلِيٌّ بِـ", target: "كتابة", suffix: "الخَطِّ المَغْرِبِيِّ." },
-                        { prefix: "3. هَذَا الخِطَابُ", target: "مكتوب", suffix: "بِخَطٍّ وَاضِحٍ." }
+                        { prefix: "1.", target: "اكتتب_مزيد", suffix: "المُواطِنُ فِي سِجِلِّ التَّطَوُّعِ الوَطَنِيِّ." },
+                        { prefix: "2. وَضَعَ المُعَلِّمُ الأَوْرَاقَ عَلَى", target: "مكتب", suffix: "الإِدَارَةِ بِنِظَامٍ." },
+                        { prefix: "3. هَذَا الخِطَابُ الرَّسْمِيُّ", target: "مكتوب", suffix: "بِخَطٍّ وَاضِحٍ وَسَلِيمٍ." }
                     ]
                 },
                 quizMatch: [
-                    { wordHtml: "كَاتِبٌ", matchId: "1", colloc: "🔗 مُؤَلِّفٌ مُبْدِعٌ", color: "blue" },
-                    { wordHtml: "مَكْتُوبٌ", matchId: "2", colloc: "🔗 فِي سِجِلِّ الشَّرَفِ", color: "orange" },
-                    { wordHtml: "مَكْتَبٌ", matchId: "3", colloc: "🔗 وَاسِعٌ وَمُضِيءٌ", color: "emerald" },
-                    { wordHtml: "كِتَابَةٌ", matchId: "4", colloc: "🔗 فِصَاحَةٌ وَبَيَانٌ", color: "purple" }
+                    { wordHtml: "اكْتَتَبَ", matchId: "1", colloc: "🔗 فِعْلٌ مَزِيدٌ بِحَرْفَيْنِ (افْتَعَلَ)", color: "amber" },
+                    { wordHtml: "كَاتِبٌ", matchId: "2", colloc: "🔗 اسْمُ فَاعِلٍ ثُلاثِيّ (فَاعِل)", color: "blue" },
+                    { wordHtml: "مَكْتُوبٌ", matchId: "3", colloc: "🔗 اسْمُ مَفْعُولٍ ثُلاثِيّ (مَفْعُول)", color: "orange" },
+                    { wordHtml: "كِتَابَةٌ", matchId: "4", colloc: "🔗 مَصْدَرٌ صَرِيحٌ (فِعَالَة)", color: "purple" }
                 ]
             },
             "علم": {
@@ -346,9 +355,9 @@
                     { 
                         key: "verb", 
                         titleHtml: '<span class="text-red-600 font-black">عَـلِـمَ</span>', 
-                        weight: "فَعِلَ (فعل ماض مجرد)", 
+                        weight: "فَعِلَ (فعل ماض ثلاثي مجرد)", 
                         icon: "💡", 
-                        desc: "فعل ماض ثلاثي مجرد يدل على إدراك حقيقة الشيء واليقين به.", 
+                        desc: "فعل ماض ثلاثي مجرد حروفه كلها أصلية، يدل على إدراك حقيقة الشيء واليقين به.", 
                         col: "عَلِمَ بِالأَمْرِ", 
                         context: "عَلِمَ البَاحِثُ سِرَّ الظَّاهِرَةِ", 
                         color: "amber",
@@ -358,24 +367,28 @@
                             { type: "مزيد بـ 3 أحرف (استـ)", wordHtml: '<span class="text-purple-600 font-bold">اِسْـتَـ</span><span class="text-red-600 font-black">عْـلَـمَ</span>', weight: "اسْتَفْعَلَ", meaning: "طلب المعرفة واستفسر عن الخبر" }
                         ]
                     },
-                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">عَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">لِـمٌ</span>', weight: "فَاعِل", icon: "👨‍🔬", desc: "اسم فاعل يدل على من اتصف بالمعرفة والرسوخ العلمي.", col: "عَالِمٌ جَلِيلٌ", context: "يُفِيدُ العَالِمُ البَشَرِيَّةَ بِعِلْمِهِ", color: "blue" },
-                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">عْـلُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">مٌ</span>', weight: "مَفْعُول", icon: "📊", desc: "اسم مفعول يدل على الحقيقة المعروفة الثابتة.", col: "مَعْلُومٌ لَدَى الجَمِيعِ", context: "الحَقُّ مَعْلُومٌ وَوَاضِحٌ", color: "orange" },
-                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">عْـلَـمٌ</span>', weight: "مَفْعَل", icon: "🏛️", desc: "اسم مكان يدل على الموضع أو البناء التاريخي البارز.", col: "مَعْلَمٌ تَارِيخِيٌّ", context: "صَوْمَعَةُ حَسَّانَ مَعْلَمٌ بَارِزٌ", color: "emerald" },
-                    { key: "source", titleHtml: '<span class="text-red-600 font-black">عِـلْـمٌ</span>', weight: "فِعْل", icon: "📚", desc: "مصدر صريح يدل على مجموع المعارف المنظمة.", col: "عِلْمٌ نَافِعٌ", context: "يَسْعَى الطَّالِبُ إِلَى عِلْمٍ نَافِعٍ", color: "purple" }
+                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">عَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">لِـمٌ</span>', weight: "فَاعِل (اسم فاعل)", icon: "👨‍🔬", desc: "اسم فاعل يدل على من اتصف بالمعرفة والرسوخ العلمي.", col: "عَالِمٌ جَلِيلٌ", context: "يُفِيدُ العَالِمُ البَشَرِيَّةَ بِعِلْمِهِ", color: "blue" },
+                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">عْـلُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">مٌ</span>', weight: "مَفْعُول (اسم مفعول)", icon: "📊", desc: "اسم مفعول يدل على الحقيقة المعروفة الثابتة.", col: "مَعْلُومٌ لَدَى الجَمِيعِ", context: "الحَقُّ مَعْلُومٌ وَوَاضِحٌ", color: "orange" },
+                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">عْـلَـمٌ</span>', weight: "مَفْعَل (اسم مكان)", icon: "🏛️", desc: "اسم مكان يدل على الموضع أو البناء التاريخي البارز.", col: "مَعْلَمٌ تَارِيخِيٌّ", context: "صَوْمَعَةُ حَسَّانَ مَعْلَمٌ بَارِزٌ", color: "emerald" },
+                    { key: "source", titleHtml: '<span class="text-red-600 font-black">عِـلْـمٌ</span>', weight: "فِعْل (مصدر صريح)", icon: "📚", desc: "مصدر صريح يدل على مجموع المعارف المنظمة.", col: "عِلْمٌ نَافِعٌ", context: "يَسْعَى الطَّالِبُ إِلَى عِلْمٍ نَافِعٍ", color: "purple" }
                 ],
                 quizFill: {
-                    chips: [{ id: "maalam", text: "مَعْلَمٍ", word: "معلم", color: "emerald" }, { id: "ilm", text: "عِلْمِ", word: "علم", color: "purple" }, { id: "maaloom", text: "مَعْلُومٌ", word: "معلوم", color: "orange" }],
+                    chips: [
+                        { id: "taalama", text: "تَعَلَّمَ (فعل مزيد)", word: "تعلم_مزيد", color: "amber" },
+                        { id: "maalam", text: "مَعْلَمٍ (اسم مكان)", word: "معلم", color: "emerald" },
+                        { id: "maaloom", text: "مَعْلُومٌ (اسم مفعول)", word: "معلوم", color: "orange" }
+                    ],
                     sentences: [
-                        { prefix: "1. تَمَّ تَصْنِيفُ القَصْرِ كَـ", target: "معلم", suffix: "تَارِيخِيٍّ عَظِيمٍ." },
-                        { prefix: "2. اجْتَهَدَ فِي طَلَبِ", target: "علم", suffix: "الفَلَكِ وَالهَنْدَسَةِ." },
-                        { prefix: "3. مَوْعِدُ اللِّقَاءِ", target: "معلوم", suffix: "عِنْدَ كُلِّ الحَاضِرِينَ." }
+                        { prefix: "1.", target: "تعلم_مزيد", suffix: "التِّلْمِيذُ النَّشِيطُ قَوَاعِدَ اللُّغَةِ بِاجْتِهَادٍ." },
+                        { prefix: "2. تَمَّ تَصْنِيفُ القَصْرِ كَـ", target: "معلم", suffix: "تَارِيخِيٍّ عَظِيمٍ بِالمَدِينَةِ." },
+                        { prefix: "3. مَوْعِدُ انْطِلاقِ الرِّحْلَةِ", target: "معلوم", suffix: "عِنْدَ كُلِّ المُشَارِكِينَ." }
                     ]
                 },
                 quizMatch: [
-                    { wordHtml: "عَالِمٌ", matchId: "1", colloc: "🔗 مُخْتَرِعٌ عَبْقَرِيٌّ", color: "blue" },
-                    { wordHtml: "مَعْلُومٌ", matchId: "2", colloc: "🔗 حَقِيقَةٌ ثَابِتَةٌ", color: "orange" },
-                    { wordHtml: "مَعْلَمٌ", matchId: "3", colloc: "🔗 حَضَارِيٌّ أَثَرِيٌّ", color: "emerald" },
-                    { wordHtml: "عِلْمٌ", matchId: "4", colloc: "🔗 نُورٌ يُضِيءُ العُقُولَ", color: "purple" }
+                    { wordHtml: "تَعَلَّمَ", matchId: "1", colloc: "🔗 فِعْلٌ مَزِيدٌ بِالتَّاءِ وَالتَّضْعِيفِ (تَفَعَّلَ)", color: "amber" },
+                    { wordHtml: "عَالِمٌ", matchId: "2", colloc: "🔗 اسْمُ فَاعِلٍ ثُلاثِيّ (فَاعِل)", color: "blue" },
+                    { wordHtml: "مَعْلُومٌ", matchId: "3", colloc: "🔗 اسْمُ مَفْعُولٍ ثُلاثِيّ (مَفْعُول)", color: "orange" },
+                    { wordHtml: "عِلْمٌ", matchId: "4", colloc: "🔗 مَصْدَرٌ صَرِيحٌ ثُلاثِيّ (فِعْل)", color: "purple" }
                 ]
             }
         };
@@ -427,8 +440,8 @@
             if (currentRoot === "صنع") {
                 playMp3(type === 'fill' ? 'quiz-fill' : 'quiz-match');
             } else {
-                if (type === 'fill') speakArabic("القسم الأول: ضع الكلمة المناسبة في مكانها الصحيح لتركيب جمل مفيدة.");
-                else speakArabic("القسم الثاني: صل كل كلمة برفيقتها المتلازمة لفظياً.");
+                if (type === 'fill') speakArabic("القسم الأول: ميز بين الفعل المزيد والمشتقات في سياقها الصحيح.");
+                else speakArabic("القسم الثاني: صل كل كلمة بوزنها ونوعها الصرفي ومتلازمتها.");
             }
         }
 
@@ -613,8 +626,8 @@
                     <span class="font-black text-${m.color}-600 bg-${m.color}-50 px-3 py-1 rounded-lg">
                         ${m.wordHtml} ➔
                     </span>
-                    <div id="dropCol${idx+1}" data-target="${m.matchId}" onclick="handleDropZoneClick(this)" class="drop-zone min-w-[160px]">
-                        <span class="text-xs text-slate-400 font-bold pointer-events-none">إفلات المتلازمة هنا</span>
+                    <div id="dropCol${idx+1}" data-target="${m.matchId}" onclick="handleDropZoneClick(this)" class="drop-zone min-w-[200px]">
+                        <span class="text-xs text-slate-400 font-bold pointer-events-none">إفلات الوزن والنوع هنا</span>
                     </div>
                 </div>`;
             });
@@ -635,7 +648,6 @@
             document.getElementById('modalColloc').innerText = info.col;
             document.getElementById('modalContext').innerText = info.context;
 
-            // معالجة قسم الأفعال المزيدة الحصري لفرع الفعل
             const augBox = document.getElementById('augmentedVerbsBox');
             const augList = document.getElementById('augmentedVerbsList');
             if (info.augmented && info.augmented.length > 0) {
@@ -679,7 +691,7 @@
                 
                 let textToSay = `${cleanWord}. الوزن: ${activeModalData.weight}. الشرح: ${activeModalData.desc}. المتلازمة اللفظية: ${activeModalData.col}.`;
                 if (activeModalData.augmented) {
-                    textToSay += " من أفعالها المزيدة: مزيد بحرف، ومزيد بحرفين، ومزيد بثلاثة أحرف.";
+                    textToSay += " من أفعالها المزيدة المقررة: مزيد بحرف، ومزيد بحرفين، ومزيد بثلاثة أحرف.";
                 }
                 speakArabic(textToSay);
             }
@@ -810,7 +822,7 @@
 
             const fb = document.getElementById('matchFeedback');
             if (allCorrect) {
-                fb.innerText = '🎉 أحسنت صنعاً! جميع المتلازمات موصولة بصورة صحيحة 100%';
+                fb.innerText = '🎉 أحسنت صنعاً! جميع الأوزان والأنواع موصولة بصورة صحيحة 100%';
                 fb.className = 'text-xs font-bold text-emerald-600 block mt-2';
                 playSound('success');
                 playFeedbackAudio(true);
@@ -820,7 +832,7 @@
                     updateStars();
                 }
             } else {
-                fb.innerText = '⚠️ هناك وصل غير دقيق، راجع دلالة كل متلازمة وحاول مجدداً!';
+                fb.innerText = '⚠️ هناك وصل غير دقيق، راجع دلالة كل وزن ونوعه وحاول مجدداً!';
                 fb.className = 'text-xs font-bold text-rose-600 block mt-2';
                 playSound('error');
                 playFeedbackAudio(false);
