@@ -73,7 +73,6 @@
 </head>
 <body class="p-4 md:p-8 flex flex-col items-center">
 
-    <!-- وسوم الصوت المرفوعة لجذر صنع -->
     <audio id="audio-root" src="root.mp3.mp3" preload="auto"></audio>
     <audio id="audio-verb" src="verb.mp3" preload="auto"></audio>
     <audio id="audio-actor" src="actor.mp3" preload="auto"></audio>
@@ -98,7 +97,6 @@
             </div>
         </div>
 
-        <!-- أداة الانتقال بين الجذور -->
         <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
             <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-2xl border-2 border-indigo-300 shadow-sm w-full sm:w-auto">
                 <i class="fa-solid fa-seedling text-emerald-600 text-lg"></i>
@@ -107,6 +105,9 @@
                     <option value="صنع">🏭 جذر [ص - ن - ع] (العمل والإتقان)</option>
                     <option value="كتب">✍️ جذر [ك - ت - ب] (التدوين والمعرفة)</option>
                     <option value="علم">🔬 جذر [ع - ل - م] (المعرفة والاستكشاف)</option>
+                    <option value="سمع">👂 جذر [س - م - ع] (التواصل والتلقي)</option>
+                    <option value="خرج">🚪 جذر [خ - ر - ج] (الحركة والارتقاء)</option>
+                    <option value="لعب">⚽ جذر [ل - ع - ب] (الرياضة والنشاط)</option>
                 </select>
             </div>
 
@@ -118,8 +119,6 @@
     </header>
 
     <main class="w-full max-w-6xl relative min-h-[680px] flex flex-col items-center justify-center my-4">
-        
-        <!-- القرص الشمسي المركزي (النواة المجردة) -->
         <div id="centerNode" onclick="playRootAudio()" 
              class="clay-sun pulse-sun w-56 h-56 rounded-full flex flex-col items-center justify-center text-center cursor-pointer z-20 relative transition-transform hover:scale-110 group">
             <span class="bg-red-500 text-white text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md animate-pulse mb-1">
@@ -135,12 +134,9 @@
         </div>
 
         <svg id="svgCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0 hidden md:block"></svg>
-
-        <!-- الفروع الخمسة -->
         <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 md:mt-0 md:absolute md:inset-0 pointer-events-none z-10" id="branchesContainer"></div>
     </main>
 
-    <!-- محطة التحدي والوصل التفاعلية (المحدثة بتمارين المجرد والمزيد) -->
     <section class="w-full max-w-6xl mt-12 bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 border border-white shadow-xl">
         <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
             <span class="w-10 h-10 bg-indigo-600 text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-md">🎯</span>
@@ -151,7 +147,6 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- القسم 1: الفراغات وتحدي المجرد والمزيد والمشتقات -->
             <div class="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 flex flex-col justify-between space-y-4">
                 <div>
                     <div class="flex items-center justify-between mb-3">
@@ -177,7 +172,6 @@
                 </button>
             </div>
 
-            <!-- القسم 2: الوصل والمطابقة مع الميزان والوظيفة الصرفية -->
             <div class="bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80 flex flex-col justify-between space-y-4">
                 <div>
                     <div class="flex items-center justify-between mb-3">
@@ -206,7 +200,6 @@
         </div>
     </section>
 
-    <!-- النافذة المنبثقة للفرع -->
     <div id="infoModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl p-6 max-w-lg w-full shadow-2xl border border-white transform transition-all max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between border-b border-slate-100 pb-3">
@@ -234,7 +227,6 @@
                     <p class="border-t border-slate-200/60 pt-2"><strong>📖 المثال في سياق:</strong> «<span id="modalContext" class="italic text-slate-700 font-medium"></span>»</p>
                 </div>
 
-                <!-- قسم الأفعال المزيدة الحصري لفرع الفعل (المجرد والمزيد ص 14) -->
                 <div id="augmentedVerbsBox" class="hidden bg-amber-50/70 p-4 rounded-2xl border border-amber-200 space-y-3">
                     <div class="flex items-center justify-between">
                         <h4 class="text-xs font-black text-amber-900 flex items-center gap-1.5">
@@ -280,7 +272,6 @@
                     { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">صْـنَـعٌ</span>', weight: "مَفْعَل (اسم مكان)", icon: "🏭", desc: "اسم مكان يدل على موضع الإنتاج وتجمع الآلات.", col: "مَصْنَعٌ حَدِيثٌ", context: "يَشْتَغِلُ أَبِي فِي مَصْنَعِ السَّمَكِ", color: "emerald" },
                     { key: "source", titleHtml: '<span class="text-red-600 font-black">صِـنَـ</span><span class="text-purple-500 font-bold">ا</span><span class="text-red-600 font-black">عَـ</span><span class="text-purple-500 font-bold">ةٌ</span>', weight: "فِعَالَة (مصدر صريح)", icon: "⚙️", desc: "مصدر صريح يدل على حرفة العمل والنشاط الإنتاجي.", col: "صِنَاعَةٌ وَطَنِيَّةٌ", context: "تَزْدَهِرُ صِنَاعَةُ الفَخَّارِ فِي بِلَادِنَا", color: "purple" }
                 ],
-                // التمارين المعدلة لتشمل الفعل المزيد (صَنَّعَ) بجانب المشتقات
                 quizFill: {
                     chips: [
                         { id: "sanaa", text: "صَنَّعَ (فعل مزيد)", word: "صنع_مزيد", color: "amber" },
@@ -293,7 +284,6 @@
                         { prefix: "3. هَذَا الإِبْرِيقُ الفِضِّيُّ", target: "مصنوع", suffix: "بِدِقَّةٍ وَعِنَايَةٍ فَائِقَةٍ." }
                     ]
                 },
-                // الوصل المعدل ليربط بين اللفظ ونوعه الصرفي من واقع دروس كتاب مرشدي
                 quizMatch: [
                     { wordHtml: "صَنَّعَ", matchId: "1", colloc: "🔗 فِعْلٌ مَزِيدٌ بِالتَّضْعِيفِ (فَعَّلَ)", color: "amber" },
                     { wordHtml: "صَانِعٌ", matchId: "2", colloc: "🔗 اسْمُ فَاعِلٍ ثُلاثِيّ (فَاعِل)", color: "blue" },
@@ -389,6 +379,141 @@
                     { wordHtml: "عَالِمٌ", matchId: "2", colloc: "🔗 اسْمُ فَاعِلٍ ثُلاثِيّ (فَاعِل)", color: "blue" },
                     { wordHtml: "مَعْلُومٌ", matchId: "3", colloc: "🔗 اسْمُ مَفْعُولٍ ثُلاثِيّ (مَفْعُول)", color: "orange" },
                     { wordHtml: "عِلْمٌ", matchId: "4", colloc: "🔗 مَصْدَرٌ صَرِيحٌ ثُلاثِيّ (فِعْل)", color: "purple" }
+                ]
+            },
+            "سمع": {
+                icon: "👂",
+                concept: "التواصل والتلقي",
+                rootLetters: "[س-م-ع]",
+                isCustomAudio: false,
+                branches: [
+                    { 
+                        key: "verb", 
+                        titleHtml: '<span class="text-red-600 font-black">سَـمِـعَ</span>', 
+                        weight: "فَعِلَ (فعل ماض ثلاثي مجرد)", 
+                        icon: "🧏", 
+                        desc: "فعل ماض ثلاثي مجرد، يدل على إدراك الأصوات والكلام بحاسة الأذن.", 
+                        col: "سَمِعَ النَّصِيحَةَ", 
+                        context: "سَمِعَ الطِّفْلُ نِدَاءَ وَالِدَتِهِ بِاهْتِمَامٍ", 
+                        color: "amber",
+                        augmented: [
+                            { type: "مزيد بحرف (الهمزة)", wordHtml: '<span class="text-amber-600 font-bold">أَ</span><span class="text-red-600 font-black">سْـمَـعَ</span>', weight: "أَفْعَلَ", meaning: "جعل غيره يسمع صوته" },
+                            { type: "مزيد بحرفين (الهمزة والتاء)", wordHtml: '<span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">سْـ</span><span class="text-blue-600 font-bold">تَـ</span><span class="text-red-600 font-black">مَـعَ</span>', weight: "افْتَعَلَ", meaning: "أصغى بوعي وانتباه" },
+                            { type: "مزيد بحرفين (التاء والتضعيف)", wordHtml: '<span class="text-purple-600 font-bold">تَـ</span><span class="text-red-600 font-black">سَـ</span><span class="text-purple-600 font-bold">مَّـ</span><span class="text-red-600 font-black">عَ</span>', weight: "تَفَعَّلَ", meaning: "تعمّد الاستماع والإنصات" }
+                        ]
+                    },
+                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">سَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">مِـعٌ</span>', weight: "فَاعِل (اسم فاعل)", icon: "🎧", desc: "اسم فاعل يدل على من أصغى وتلقى الصوت.", col: "سَامِعٌ مُنْصِتٌ", context: "أَعْجَبَ الحِوَارُ كُلَّ سَامِعٍ مُنْصِتٍ", color: "blue" },
+                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">سْـمُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">عٌ</span>', weight: "مَفْعُول (اسم مفعول)", icon: "📢", desc: "اسم مفعول يدل على الصوت الواضح الذي يُدرَك بالسمع.", col: "صَوْتٌ مَسْمُوعٌ", context: "كَانَ صَوْتُ الأَذَانِ مَسْمُوعاً مِن بَعِيدٍ", color: "orange" },
+                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">سْـمَـعٌ</span>', weight: "مَفْعَل (اسم مكان)", icon: "🏟️", desc: "اسم مكان يدل على موضع الإصغاء أو مدى وصول الصوت.", col: "عَلَى مَسْمَعٍ مِنَ النَّاسِ", context: "تَحَدَّثَ الخَطِيبُ عَلَى مَسْمَعٍ مِنَ الحُضُورِ", color: "emerald" },
+                    { key: "source", titleHtml: '<span class="text-red-600 font-black">سَـمْـعٌ</span>', weight: "فَعْل (مصدر صريح)", icon: "🔊", desc: "مصدر صريح يدل على حاسة الإصغاء وتلقي الأصوات.", col: "سَمْعٌ وَطَاعَةٌ", context: "نِعْمَةُ السَّمْعِ مِنْ أَعْظَمِ الحَوَاسِّ", color: "purple" }
+                ],
+                quizFill: {
+                    chips: [
+                        { id: "istamaa", text: "اسْتَمَعَ (فعل مزيد)", word: "استمع_مزيد", color: "amber" },
+                        { id: "masmaa", text: "مَسْمَعِ (اسم مكان)", word: "مسمع", color: "emerald" },
+                        { id: "masmoo", text: "مَسْمُوعٌ (اسم مفعول)", word: "مسموع", color: "orange" }
+                    ],
+                    sentences: [
+                        { prefix: "1.", target: "استمع_مزيد", suffix: "التِّلْمِيذُ إِلَى شَرْحِ الأُسْتَاذِ بِاهْتِمَامٍ." },
+                        { prefix: "2. أَلْقَى كَلِمَتَهُ عَلَى", target: "مسمع", suffix: "مِنَ الحَاضِرِينَ فِي القَاعَةِ." },
+                        { prefix: "3. كَانَ كَلَامُ المُدِيرِ", target: "مسموع", suffix: "وَوَاضِحاً لِلْجَمِيعِ." }
+                    ]
+                },
+                quizMatch: [
+                    { wordHtml: "اسْتَمَعَ", matchId: "1", colloc: "🔗 فِعْلٌ مَزِيدٌ بِحَرْفَيْنِ (افْتَعَلَ)", color: "amber" },
+                    { wordHtml: "سَامِعٌ", matchId: "2", colloc: "🔗 اسْمُ فَاعِلٍ ثُلاثِيّ (فَاعِل)", color: "blue" },
+                    { wordHtml: "مَسْمُوعٌ", matchId: "3", colloc: "🔗 اسْمُ مَفْعُولٍ ثُلاثِيّ (مَفْعُول)", color: "orange" },
+                    { wordHtml: "سَمْعٌ", matchId: "4", colloc: "🔗 مَصْدَرٌ صَرِيحٌ ثُلاثِيّ (فَعْل)", color: "purple" }
+                ]
+            },
+            "خرج": {
+                icon: "🚪",
+                concept: "الحركة والارتقاء",
+                rootLetters: "[خ-ر-ج]",
+                isCustomAudio: false,
+                branches: [
+                    { 
+                        key: "verb", 
+                        titleHtml: '<span class="text-red-600 font-black">خَـرَجَ</span>', 
+                        weight: "فَعَلَ (فعل ماض ثلاثي مجرد)", 
+                        icon: "🚶", 
+                        desc: "فعل ماض ثلاثي مجرد، يدل على البروز والانتقال من الداخل إلى الخارج.", 
+                        col: "خَرَجَ إِلَى السَّاحَةِ", 
+                        context: "خَرَجَ التَّلَامِيذُ فِي وَقْتِ الاسْتِرَاحَةِ", 
+                        color: "amber",
+                        augmented: [
+                            { type: "مزيد بحرف (الهمزة)", wordHtml: '<span class="text-amber-600 font-bold">أَ</span><span class="text-red-600 font-black">خْـرَجَ</span>', weight: "أَفْعَلَ", meaning: "أبرزه وأظهره للعيان" },
+                            { type: "مزيد بحرفين (التاء والتضعيف)", wordHtml: '<span class="text-blue-600 font-bold">تَـ</span><span class="text-red-600 font-black">خَـ</span><span class="text-blue-600 font-bold">رَّ</span><span class="text-red-600 font-black">جَ</span>', weight: "تَفَعَّلَ", meaning: "أنهى دراسته ونال شهادته" },
+                            { type: "مزيد بـ 3 أحرف (استـ)", wordHtml: '<span class="text-purple-600 font-bold">اِسْـتَـ</span><span class="text-red-600 font-black">خْـرَجَ</span>', weight: "اسْتَفْعَلَ", meaning: "استنبط الشيء ونزعه من موضعه" }
+                        ]
+                    },
+                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">خَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">رِجٌ</span>', weight: "فَاعِل (اسم فاعل)", icon: "🚶‍♂️", desc: "اسم فاعل يدل على من فارق الموضع وانتقل عنه.", col: "خَارِجٌ مِنَ الفَصْلِ", context: "رَأَيْتُ الطَّالِبَ خَارِجاً مِنَ المَكْتَبَةِ", color: "blue" },
+                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مُـ</span><span class="text-red-600 font-black">خْـرَ</span><span class="text-orange-500 font-bold">جٌ</span>', weight: "مُفْعَل (اسم مفعول غير ثلاثي)", icon: "🎬", desc: "اسم مفعول من الفعل المزيد (أَخْرَجَ)، يدل على العمل الفني المنجز.", col: "فِلْمٌ مُخْرَجٌ بِإِبْدَاعٍ", context: "الشَّرِيطُ الوَثَائِقِيُّ مُخْرَجٌ بِعِنَايَةٍ", color: "orange" },
+                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">خْـرَجٌ</span>', weight: "مَفْعَل (اسم مكان)", icon: "🚪", desc: "اسم مكان يدل على موضع النفاذ والخروج من المكان.", col: "مَخْرَجُ الطَّوَارِئِ", context: "اتَّجَهَ الجَمِيعُ نَحْوَ مَخْرَجِ النَّجَاةِ", color: "emerald" },
+                    { key: "source", titleHtml: '<span class="text-red-600 font-black">خُـرُ</span><span class="text-purple-500 font-bold">و</span><span class="text-red-600 font-black">جٌ</span>', weight: "فُعُول (مصدر صريح)", icon: "🏃", desc: "مصدر صريح يدل على عملية الانتقال والبروز.", col: "خُرُوجٌ هَادِئٌ", context: "تَمَّ خُرُوجُ الرُّكَّابِ بِنِظَامٍ تَامٍّ", color: "purple" }
+                ],
+                quizFill: {
+                    chips: [
+                        { id: "takharraja", text: "تَخَرَّجَ (فعل مزيد)", word: "تخرج_مزيد", color: "amber" },
+                        { id: "makhraj", text: "مَخْرَجِ (اسم مكان)", word: "مخرج", color: "emerald" },
+                        { id: "mokhraaj", text: "مُخْرَجٌ (اسم مفعول)", word: "مخرج_اسم_مفعول", color: "orange" }
+                    ],
+                    sentences: [
+                        { prefix: "1.", target: "تخرج_مزيد", suffix: "المُهَنْدِسُ الشَّابُّ مِنَ المَعْهَدِ بِامْتِيَازٍ." },
+                        { prefix: "2. تَوَجَّهَ الزَّائِرُ نَحْوَ", target: "مخرج", suffix: "القَاعَةِ الكُبْرَى بِسُرْعَةٍ." },
+                        { prefix: "3. هَذَا العَمَلُ المَسْرَحِيُّ", target: "مخرج_اسم_مفعول", suffix: "بِطَرِيقَةٍ احْتِرَافِيَّةٍ رَائِعَةٍ." }
+                    ]
+                },
+                quizMatch: [
+                    { wordHtml: "تَخَرَّجَ", matchId: "1", colloc: "🔗 فِعْلٌ مَزِيدٌ بِالتَّاءِ وَالتَّضْعِيفِ (تَفَعَّلَ)", color: "amber" },
+                    { wordHtml: "خَارِجٌ", matchId: "2", colloc: "🔗 اسْمُ فَاعِلٍ ثُلاثِيّ (فَاعِل)", color: "blue" },
+                    { wordHtml: "مُخْرَجٌ", matchId: "3", colloc: "🔗 اسْمُ مَفْعُولٍ غَيْرِ ثُلاثِيّ (مُفْعَل)", color: "orange" },
+                    { wordHtml: "خُرُوجٌ", matchId: "4", colloc: "🔗 مَصْدَرٌ صَرِيحٌ ثُلاثِيّ (فُعُول)", color: "purple" }
+                ]
+            },
+            "لعب": {
+                icon: "⚽",
+                concept: "الرياضة والنشاط",
+                rootLetters: "[ل-ع-ب]",
+                isCustomAudio: false,
+                branches: [
+                    { 
+                        key: "verb", 
+                        titleHtml: '<span class="text-red-600 font-black">لَـعِـبَ</span>', 
+                        weight: "فَعِلَ (فعل ماض ثلاثي مجرد)", 
+                        icon: "🏃‍♂️", 
+                        desc: "فعل ماض ثلاثي مجرد، يدل على ممارسة النشاط البدني أو الترفيهي.", 
+                        col: "لَعِبَ بِالكُرَةِ", 
+                        context: "لَعِبَ الفَرِيقُ مُبَارَاةً حَمَاسِيَّةً", 
+                        color: "amber",
+                        augmented: [
+                            { type: "مزيد بحرف (الألف)", wordHtml: '<span class="text-red-600 font-black">لَـ</span><span class="text-amber-600 font-bold">ا</span><span class="text-red-600 font-black">عَـبَ</span>', weight: "فَاعَلَ", meaning: "شاركه اللعب ومازحه" },
+                            { type: "مزيد بحرفين (التاء والألف)", wordHtml: '<span class="text-blue-600 font-bold">تَـ</span><span class="text-red-600 font-black">لَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">عَـبَ</span>', weight: "تَفَاعَلَ", meaning: "تحايل أو شارك في اللهو المشترك" },
+                            { type: "مزيد بـ 3 أحرف (استـ)", wordHtml: '<span class="text-purple-600 font-bold">اِسْـتَـ</span><span class="text-red-600 font-black">لْـعَـبَ</span>', weight: "اسْتَفْعَلَ", meaning: "طلب اللعب واشتهاه" }
+                        ]
+                    },
+                    { key: "actor", titleHtml: '<span class="text-red-600 font-black">لَـ</span><span class="text-blue-600 font-bold">ا</span><span class="text-red-600 font-black">عِـبٌ</span>', weight: "فَاعِل (اسم فاعل)", icon: "⛹️", desc: "اسم فاعل يدل على من يمارس الرياضة أو النشاط.", col: "لَاعِبٌ مُمْتَازٌ", context: "مَرَّرَ اللَّاعِبُ الكُرَةَ بِذَكَاءٍ", color: "blue" },
+                    { key: "product", titleHtml: '<span class="text-orange-500 font-bold">مَـ</span><span class="text-red-600 font-black">لْـعُـ</span><span class="text-orange-500 font-bold">و</span><span class="text-red-600 font-black">بٌ</span>', weight: "مَفْعُول (اسم مفعول)", icon: "🎯", desc: "اسم مفعول يدل على ما وقع عليه اللعب أو الخطة المنفذة.", col: "فَوْزٌ مَلْعُوبٌ بِجَدَارَةٍ", context: "كَانَتِ الخُطَّةُ المَلْعُوبَةُ نَاجِحَةً", color: "orange" },
+                    { key: "place", titleHtml: '<span class="text-emerald-500 font-bold">مَـ</span><span class="text-red-600 font-black">لْـعَـبٌ</span>', weight: "مَفْعَل (اسم مكان)", icon: "🏟️", desc: "اسم مكان يدل على موضع ممارسة الرياضة والتنافس.", col: "مَلْعَبٌ فَسِيحٌ", context: "امْتَلَأَتْ مَدَرَّجَاتُ المَلْعَبِ بِالجَمَاهِيرِ", color: "emerald" },
+                    { key: "source", titleHtml: '<span class="text-red-600 font-black">لَـعِـ</span><span class="text-purple-500 font-bold">بٌ</span>', weight: "فَعِل (مصدر صريح)", icon: "🤾", desc: "مصدر صريح يدل على النشاط الترفيهي أو الرياضي ذاته.", col: "لَعِبٌ نَظِيفٌ", context: "يَتَمَيَّزُ دَوْرِيُّ المَدَارِسِ بِاللَّعِبِ النَّظِيفِ", color: "purple" }
+                ],
+                quizFill: {
+                    chips: [
+                        { id: "laaaba", text: "لَاعَبَ (فعل مزيد)", word: "لاعب_مزيد", color: "amber" },
+                        { id: "malab", text: "مَلْعَبِ (اسم مكان)", word: "ملعب", color: "emerald" },
+                        { id: "laaib", text: "لَاعِبٌ (اسم فاعل)", word: "لاعب_اسم_فاعل", color: "blue" }
+                    ],
+                    sentences: [
+                        { prefix: "1.", target: "لاعب_مزيد", suffix: "الأَبُ طِفْلَهُ الصَّغِيرَ بِمَرَحٍ وَلُطْفٍ." },
+                        { prefix: "2. اجْتَمَعَ الفَرِيقَانِ فِي", target: "ملعب", suffix: "الحَيِّ لِخَوْضِ المُبَارَاةِ." },
+                        { prefix: "3. سَجَّلَ الهَدَفَ", target: "لاعب_اسم_فاعل", suffix: "مَاهِرٌ يَرْتَدِي القَمِيصَ رَقْمَ عَشْرَةٍ." }
+                    ]
+                },
+                quizMatch: [
+                    { wordHtml: "لَاعَبَ", matchId: "1", colloc: "🔗 فِعْلٌ مَزِيدٌ بِحَرْفٍ وَاحِدٍ (فَاعَلَ)", color: "amber" },
+                    { wordHtml: "لَاعِبٌ", matchId: "2", colloc: "🔗 اسْمُ فَاعِلٍ ثُلاثِيّ (فَاعِل)", color: "blue" },
+                    { wordHtml: "مَلْعُوبٌ", matchId: "3", colloc: "🔗 اسْمُ مَفْعُولٍ ثُلاثِيّ (مَفْعُول)", color: "orange" },
+                    { wordHtml: "لَعِبٌ", matchId: "4", colloc: "🔗 مَصْدَرٌ صَرِيحٌ ثُلاثِيّ (فَعِل)", color: "purple" }
                 ]
             }
         };
@@ -582,7 +707,6 @@
         function renderQuizzes() {
             const data = database[currentRoot];
 
-            // 1. الفراغات
             const bank1 = document.getElementById('wordBankSection1');
             bank1.innerHTML = '';
             data.quizFill.chips.forEach(c => {
@@ -607,7 +731,6 @@
                 </div>`;
             });
 
-            // 2. الوصل
             const collocBank = document.getElementById('collocBank');
             collocBank.innerHTML = '';
             data.quizMatch.forEach((m, idx) => {
