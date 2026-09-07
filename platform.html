@@ -19,7 +19,7 @@
     }
 
     body {
-      background: #0f172a radial-gradient(circle at center, #1e1b4b 0%, #030712 100%);
+      background: #090d16 radial-gradient(circle at center, #1e1b4b 0%, #020617 100%);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -28,7 +28,7 @@
       color: #ffffff;
     }
 
-    /* رأس الصفحة الدائري المريح */
+    /* رأس الصفحة */
     header {
       background: #ffffff;
       margin: 0.8rem 1.5rem;
@@ -37,7 +37,7 @@
       justify-content: space-between;
       align-items: center;
       border-radius: 50px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       border: 4px solid #38bdf8;
     }
 
@@ -94,7 +94,7 @@
       gap: 0.5rem;
     }
 
-    /* التبويبات بنمط وسائد بيضاوية طافية */
+    /* أزرار التبويبات الفضائية */
     .nav-tabs-container {
       display: flex;
       justify-content: center;
@@ -105,7 +105,7 @@
     .tab-pill {
       padding: 0.8rem 2rem;
       border: 3px solid #38bdf8;
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.85);
       font-size: 1.2rem;
       font-weight: 900;
       color: #bae6fd;
@@ -134,7 +134,7 @@
 
     main {
       flex: 1;
-      max-width: 1380px;
+      max-width: 1400px;
       margin: 1.2rem auto 2.5rem;
       width: 95%;
     }
@@ -149,47 +149,45 @@
     }
 
     @keyframes popTab {
-      0% { transform: scale(0.93); opacity: 0; }
+      0% { transform: scale(0.94); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
 
     /* ========================================================= */
-    /* 1. شمس الجذر: مجرة كروية فسيحة بدون ازدحام علوي */
+    /* 1. شمس الجذر: مجرة فضائية دائرية حقيقية دون أي صناديق */
     /* ========================================================= */
     .space-system-arena {
       position: relative;
       width: 100%;
-      min-height: 700px;
-      background: radial-gradient(circle at center, #1e1b4b 0%, #030712 100%);
-      border-radius: 70px;
+      min-height: 720px;
+      background: #020617 radial-gradient(circle at center, #1e1b4b 0%, #020617 100%);
+      border-radius: 80px;
       border: 8px solid #38bdf8;
       box-shadow: 0 20px 60px rgba(56, 189, 248, 0.25);
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
 
-    /* مسارات المدارات البيضاوية الواسعة يميناً ويساراً */
     .orbit-ellipse-wide {
       position: absolute;
-      width: 82%;
-      height: 70%;
+      width: 820px;
+      height: 480px;
       border: 3px dashed rgba(56, 189, 248, 0.35);
       border-radius: 50%;
       pointer-events: none;
     }
 
-    /* قرص الشمس الكرتوني المبتسم في المركز */
     .cartoon-sun-core {
       position: absolute;
       z-index: 10;
-      width: 220px;
-      height: 220px;
+      width: 230px;
+      height: 230px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #fffbeb 0%, #fde047 40%, #eab308 100%);
       border: 8px solid #ffffff;
-      box-shadow: 0 0 70px rgba(250, 204, 21, 0.85);
+      box-shadow: 0 0 80px rgba(250, 204, 21, 0.9);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -201,7 +199,7 @@
 
     @keyframes sunBeat {
       0% { transform: scale(1); }
-      100% { transform: scale(1.06); }
+      100% { transform: scale(1.05); }
     }
 
     .sun-root-letters {
@@ -221,7 +219,6 @@
       margin-top: 0.2rem;
     }
 
-    /* الكواكب الكروية الموزعة بالتساوي في الجوانب (يمين ويسار) */
     .space-planet-sphere {
       position: absolute;
       border-radius: 50%;
@@ -237,13 +234,13 @@
     }
 
     .space-planet-sphere:hover {
-      transform: scale(1.18) translateY(-6px);
+      transform: scale(1.15) translateY(-8px);
       z-index: 25;
     }
 
-    /* توزيع الكواكب الخمسة بنظام متوازن يميناً ويساراً دون سد الجزء العلوي */
+    /* توزيع الكواكب يميناً ويساراً دون ازدحام علوي */
     .planet-1-verb {
-      width: 160px; height: 160px;
+      width: 165px; height: 165px;
       background: radial-gradient(circle at 30% 30%, #f472b6 0%, #db2777 50%, #831843 100%);
       box-shadow: 0 0 35px rgba(219, 39, 119, 0.65);
       top: 60px; right: 10%;
@@ -260,23 +257,23 @@
       width: 165px; height: 165px;
       background: radial-gradient(circle at 30% 30%, #f87171 0%, #dc2626 50%, #7f1d1d 100%);
       box-shadow: 0 0 35px rgba(220, 38, 38, 0.65);
-      bottom: 50px; left: 14%;
+      bottom: 50px; left: 12%;
     }
 
     .planet-4-place {
-      width: 160px; height: 160px;
+      width: 165px; height: 165px;
       background: radial-gradient(circle at 30% 30%, #4ade80 0%, #16a34a 50%, #14532d 100%);
       box-shadow: 0 0 35px rgba(22, 163, 74, 0.65);
-      bottom: 50px; right: 14%;
+      bottom: 50px; right: 12%;
     }
 
     .planet-5-source {
-      width: 155px; height: 155px;
+      width: 160px; height: 160px;
       background: radial-gradient(circle at 30% 30%, #fb923c 0%, #ea580c 50%, #7c2d12 100%);
       box-shadow: 0 0 35px rgba(234, 88, 12, 0.65);
       bottom: 25px; left: 50%; transform: translateX(-50%);
     }
-    .planet-5-source:hover { transform: translateX(-50%) scale(1.18) translateY(-6px); }
+    .planet-5-source:hover { transform: translateX(-50%) scale(1.15) translateY(-8px); }
 
     .planet-title-label {
       background: rgba(0, 0, 0, 0.6);
@@ -302,43 +299,43 @@
     }
 
     /* ========================================================= */
-    /* 2. سحابة الحكاية: سحابة قطنية حقيقية كرتونية مبهجة */
+    /* 2. سحابة الحكاية: سحابة قطنية حقيقية مرسومة بالـ SVG */
     /* ========================================================= */
-    .real-cloud-stage {
+    .cloud-wrapper-outer {
       position: relative;
-      background: radial-gradient(circle at top, #ffffff 0%, #e0f2fe 100%);
-      /* تشكيل حواف سحابة حقيقية بفقاعات متعددة */
-      border-radius: 100px 90px 85px 95px / 80px 100px 75px 90px;
-      padding: 3.5rem 3rem;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
-      border: 8px solid #ffffff;
-      color: #1e293b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
     }
 
-    .cloud-instruction-bubble {
+    .svg-cloud-background-container {
+      position: relative;
+      width: 100%;
+      max-width: 1050px;
+      margin: 0 auto;
+    }
+
+    /* طبقة المحتوى داخل السحابة */
+    .cloud-inner-content {
+      position: relative;
+      z-index: 5;
+      padding: 3rem 4rem 4rem;
+      color: #1e293b;
+      text-align: center;
+    }
+
+    .cloud-instruction-badge {
       background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
       border: 4px solid #ca8a04;
       border-radius: 40px;
-      padding: 1.4rem 2.2rem;
+      padding: 1.2rem 2.5rem;
+      display: inline-block;
+      box-shadow: 0 8px 20px rgba(202, 138, 4, 0.3);
       margin-bottom: 2rem;
-      text-align: center;
-      box-shadow: 0 8px 25px rgba(202, 138, 4, 0.25);
     }
 
-    .cloud-instruction-bubble h3 {
-      font-size: 1.6rem;
-      font-weight: 900;
-      color: #713f12;
-      margin-bottom: 0.3rem;
-    }
-
-    .cloud-instruction-bubble p {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: #854d0e;
-    }
-
-    .task-badge-target {
+    .task-mission-pill {
       background: #ec4899;
       color: white;
       padding: 0.4rem 1.6rem;
@@ -350,15 +347,12 @@
       box-shadow: 0 4px 0 #be185d;
     }
 
-    .cloud-words-cluster {
-      background: #f0fdf4;
-      border: 4px dashed #86efac;
-      border-radius: 50px;
-      padding: 2.5rem;
+    .story-words-cloud-box {
       font-size: 1.85rem;
       line-height: 2.8;
       color: #1e293b;
-      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     .story-click-pill {
@@ -371,7 +365,7 @@
       display: inline-block;
       box-shadow: 0 4px 0 #94a3b8;
       transition: all 0.15s;
-      margin: 0.2rem;
+      margin: 0.25rem;
     }
 
     .story-click-pill:hover {
@@ -395,7 +389,7 @@
       background: rgba(255, 255, 255, 0.95);
       border-radius: 70px;
       padding: 3rem 2rem;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
       color: #1e293b;
       text-align: center;
     }
@@ -408,9 +402,8 @@
       margin-top: 2rem;
     }
 
-    /* منصة القرص الدائرية المريحة الفسيحة */
     .round-game-sphere {
-      width: 380px;
+      width: 390px;
       min-height: 330px;
       border-radius: 65px;
       padding: 2rem 1.4rem;
@@ -427,7 +420,7 @@
     .sphere-theme-2 { background: radial-gradient(circle at top, #bae6fd 0%, #c7d2fe 100%); border-bottom: 10px solid #3b82f6; }
     .sphere-theme-3 { background: radial-gradient(circle at top, #fbcfe8 0%, #f5d0fe 100%); border-bottom: 10px solid #ec4899; }
 
-    .round-game-sphere:hover {
+    .sphere-theme-1:hover, .sphere-theme-2:hover, .sphere-theme-3:hover {
       transform: translateY(-8px) scale(1.02);
     }
 
@@ -442,7 +435,6 @@
       margin-bottom: 1.2rem;
     }
 
-    /* خانات الحروف المتباعدة بشكل فسيح يمنع خروجها إطلاقاً */
     .sphere-slots-wrapper {
       display: flex;
       justify-content: center;
@@ -515,90 +507,85 @@
     }
 
     /* ========================================================= */
-    /* 4. حلبة قطع البزل: تصميم بزل حقيقي ثلاثي الأبعاد بالألوان */
+    /* 4. حلبة قطع البزل الحقيقية (SVG Jigsaw Puzzle Paths) */
     /* ========================================================= */
-    .puzzle-arena-wrapper {
+    .real-puzzle-arena {
       background: rgba(255, 255, 255, 0.95);
       border-radius: 70px;
-      padding: 3rem 2.2rem;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+      padding: 3rem 2rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
       color: #1e293b;
+      text-align: center;
     }
 
-    .puzzle-pieces-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    .jigsaw-pieces-flex {
+      display: flex;
+      justify-content: center;
       gap: 2.5rem;
+      flex-wrap: wrap;
       margin-top: 2rem;
     }
 
-    /* قطعة البزل الكبرى الحقيقية المفرغة بمسار SVG ثلاثي الأبعاد */
-    .real-puzzle-box {
+    /* بطاقة البزل ذات الشكل الهندسي المقصوص كأحجية حقيقية */
+    .jigsaw-svg-card {
       position: relative;
-      background: #84cc16;
-      border-radius: 35px;
-      padding: 2.2rem 1.8rem;
-      box-shadow: 0 16px 0 #4d7c0f, 0 25px 35px rgba(0,0,0,0.25);
-      border: 4px solid #a3e635;
+      width: 320px;
+      height: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.8rem;
       color: white;
       transition: all 0.25s ease;
+      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.25));
     }
 
-    .puzzle-color-1 { background: #84cc16; border-color: #a3e635; box-shadow: 0 16px 0 #4d7c0f, 0 25px 35px rgba(0,0,0,0.25); }
-    .puzzle-color-2 { background: #06b6d4; border-color: #67e8f9; box-shadow: 0 16px 0 #0e7490, 0 25px 35px rgba(0,0,0,0.25); }
-    .puzzle-color-3 { background: #f97316; border-color: #fdba74; box-shadow: 0 16px 0 #c2410c, 0 25px 35px rgba(0,0,0,0.25); }
-    .puzzle-color-4 { background: #a855f7; border-color: #d8b4fe; box-shadow: 0 16px 0 #7e22ce, 0 25px 35px rgba(0,0,0,0.25); }
+    .jigsaw-svg-card:hover {
+      transform: translateY(-8px) scale(1.03);
+    }
 
-    /* نتوء البزل العلوي المجسم */
-    .real-puzzle-box::before {
-      content: '';
+    .jigsaw-bg-shape {
       position: absolute;
-      top: -26px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 52px;
-      height: 52px;
-      background: inherit;
-      border-radius: 50%;
-      border: inherit;
-      border-bottom: none;
-      box-shadow: inherit;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
     }
 
-    .puzzle-top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
+    .jigsaw-content-body {
       position: relative;
       z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
 
-    .puzzle-chip-badge {
-      background: rgba(0, 0, 0, 0.25);
-      padding: 0.3rem 1rem;
+    .puzzle-number-badge {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.3rem 1.1rem;
       border-radius: 20px;
       font-weight: 900;
       font-size: 0.95rem;
+      margin-bottom: 0.8rem;
     }
 
-    .puzzle-question-prompt {
+    .puzzle-question-text {
       font-size: 1.25rem;
       font-weight: 900;
-      line-height: 1.7;
+      line-height: 1.6;
       margin-bottom: 1.2rem;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
       min-height: 60px;
-      position: relative;
-      z-index: 5;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.25);
     }
 
-    /* فجوة البزل المفرغة التي تستقبل الإجابة */
-    .puzzle-drop-target {
+    .puzzle-target-slot {
       background: rgba(0, 0, 0, 0.25);
       border: 3px dashed #ffffff;
       border-radius: 25px;
-      padding: 0.8rem 1.2rem;
+      padding: 0.8rem 1.4rem;
       min-height: 55px;
       display: flex;
       align-items: center;
@@ -608,37 +595,33 @@
       color: #fef08a;
       margin-bottom: 1.2rem;
       transition: all 0.2s;
-      position: relative;
-      z-index: 5;
+      width: 85%;
     }
 
-    .puzzle-drop-target.drag-over {
+    .puzzle-target-slot.drag-over {
       background: rgba(255, 255, 255, 0.45);
       transform: scale(1.05);
     }
 
-    .puzzle-drop-target.solved {
+    .puzzle-target-slot.solved {
       background: #ffffff;
       color: #15803d;
       border: 3px solid #22c55e;
       box-shadow: 0 4px 0 #166534;
     }
 
-    /* قطع البزل الصغيرة القابلة للسحب والنقر */
-    .puzzle-options-tray {
+    .puzzle-options-rack {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.8rem;
+      gap: 0.6rem;
       justify-content: center;
-      position: relative;
-      z-index: 5;
     }
 
-    .draggable-puzzle-piece {
+    .drag-piece-token {
       background: #ffffff;
       border: 3px solid #fde047;
       color: #713f12;
-      padding: 0.6rem 1.4rem;
+      padding: 0.5rem 1.2rem;
       border-radius: 25px;
       font-size: 1.15rem;
       font-weight: 900;
@@ -647,27 +630,19 @@
       transition: all 0.15s;
     }
 
-    .draggable-puzzle-piece:hover {
-      transform: translateY(-3px) scale(1.06);
-      box-shadow: 0 8px 0 rgba(0,0,0,0.25);
-    }
-
-    .draggable-puzzle-piece:active {
-      cursor: grabbing;
-      transform: translateY(2px);
-      box-shadow: none;
+    .drag-piece-token:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 7px 0 rgba(0,0,0,0.25);
     }
 
     .puzzle-feedback-toast {
       margin-top: 0.8rem;
-      padding: 0.5rem;
+      padding: 0.4rem 0.8rem;
       border-radius: 18px;
       font-weight: 900;
       font-size: 0.95rem;
       display: none;
       text-align: center;
-      position: relative;
-      z-index: 5;
     }
 
     /* Modal */
@@ -818,9 +793,7 @@
   </nav>
 
   <main>
-    <!-- ========================================================= -->
     <!-- 1. شمس الجذر: كواكب تدور يميناً ويساراً بدون ازدحام علوي -->
-    <!-- ========================================================= -->
     <div id="radialMap" class="tab-view active">
       <div class="space-system-arena">
         <div class="orbit-ellipse-wide"></div>
@@ -869,27 +842,44 @@
       </div>
     </div>
 
-    <!-- ========================================================= -->
-    <!-- 2. سحابة الحكاية: سحابة قطنية حقيقية وبدون كشف الإجابات -->
-    <!-- ========================================================= -->
+    <!-- 2. سحابة الحكاية: سحابة قطنية حقيقية مرسومة بالمسارات -->
     <div id="storyTab" class="tab-view">
-      <div class="real-cloud-stage">
-        <div class="cloud-instruction-bubble">
-          <h3>سَحَابَةُ الاِسْتِكْشَافِ القِرَائِيِّ 📖</h3>
-          <p>اقْرَأِ النَّصَّ يَا بَطَلُ، وَانْقُرْ مُبَاشَرَةً عَلَى الكَلِمَةِ المَطْلُوبَةِ لِتَتَلَوَّنَ بِالأَخْضَرِ!</p>
-          <div class="task-badge-target" id="storyMissionBadge">المَهَمَّةُ: ...</div>
-          <div style="margin-top: 0.6rem;">
-            <button class="modal-audio-btn" onclick="speakCurrentStory()">🔊 اسْتَمِعْ لِلنَّصِّ كَامِلاً</button>
+      <div class="cloud-wrapper-outer">
+        <div class="svg-cloud-background-container">
+          <!-- مسار السحابة الحقيقي المنحني بالكامل -->
+          <svg class="jigsaw-bg-shape" viewBox="0 0 1000 600" preserveAspectRatio="none">
+            <path d="M 200,100 
+                     A 100,100 0 0,1 380,60 
+                     A 120,120 0 0,1 620,50 
+                     A 100,100 0 0,1 800,100 
+                     A 90,90 0 0,1 940,220 
+                     A 100,100 0 0,1 920,400 
+                     A 100,100 0 0,1 800,520 
+                     A 110,110 0 0,1 550,550 
+                     A 110,110 0 0,1 300,540 
+                     A 100,100 0 0,1 120,440 
+                     A 100,100 0 0,1 80,260 
+                     A 100,100 0 0,1 200,100 Z" 
+                  fill="#ffffff" stroke="#bae6fd" stroke-width="12"/>
+          </svg>
+
+          <div class="cloud-inner-content">
+            <div class="cloud-instruction-badge">
+              <h3 style="font-size: 1.6rem; font-weight: 900; color: #713f12;">سَحَابَةُ الاِسْتِكْشَافِ القِرَائِيِّ 📖</h3>
+              <p style="font-size: 1.15rem; font-weight: 800; color: #854d0e;">اقْرَأِ النَّصَّ يَا بَطَلُ، وَانْقُرْ مُبَاشَرَةً عَلَى الكَلِمَةِ المَطْلُوبَةِ لِتَتَلَوَّنَ بِالأَخْضَرِ!</p>
+              <div class="task-mission-pill" id="storyMissionBadge">المَهَمَّةُ: ...</div>
+              <div style="margin-top: 0.6rem;">
+                <button class="modal-audio-btn" onclick="speakCurrentStory()">🔊 اسْتَمِعْ لِلنَّصِّ كَامِلاً</button>
+              </div>
+            </div>
+
+            <div class="story-words-cloud-box" id="storyWordsContainer"></div>
           </div>
         </div>
-
-        <div class="cloud-words-cluster" id="storyWordsContainer"></div>
       </div>
     </div>
 
-    <!-- ========================================================= -->
     <!-- 3. ورشة أقراص التركيب: منصات كروية واسعة لا تخرج منها الحروف -->
-    <!-- ========================================================= -->
     <div id="labTab" class="tab-view">
       <div class="spherical-discs-arena">
         <h3 style="font-size: 2.2rem; font-weight: 900; color: #0284c7;">🪐 أَقْرَاصُ التَّرْكِيبِ الصَّرْفِيِّ</h3>
@@ -899,22 +889,20 @@
       </div>
     </div>
 
-    <!-- ========================================================= -->
-    <!-- 4. حلبة قطع البزل: قطع أحجية حقيقية ثلاثية الأبعاد -->
-    <!-- ========================================================= -->
+    <!-- 4. حلبة قطع البزل الحقيقية بمسارات الأحجية -->
     <div id="quizTab" class="tab-view">
-      <div class="puzzle-arena-wrapper">
+      <div class="real-puzzle-arena">
         <div style="text-align: center; margin-bottom: 2rem;">
           <h3 style="font-size: 2.3rem; font-weight: 900; color: #65a30d;">🧩 حَلَبَةُ قِطَعِ البَزْل الصَّرْفِيَّةِ</h3>
           <p style="font-size: 1.15rem; font-weight: 800; color: #64748b;">اسْحَبْ قِطْعَةَ البَزْل المُنَاسِبَةَ وَأَفْلِتْهَا فِي الفَجْوَةِ، أَوْ انْقُرْ عَلَيْهَا:</p>
         </div>
 
-        <div class="puzzle-pieces-grid" id="puzzleContainer"></div>
+        <div class="jigsaw-pieces-flex" id="puzzleContainer"></div>
       </div>
     </div>
   </main>
 
-  <!-- النافذة المنبثقة للتحليل الصرفي مع القاعدة -->
+  <!-- النافذة المنبثقة للتحليل الصرفي -->
   <div class="modal-overlay" id="morphModal" onclick="closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -1247,8 +1235,8 @@
       // أقراص التركيب
       renderDiscsWorkshop(data.labs);
 
-      // حلبة قطع البزل
-      renderPuzzleArena(data.quizzes);
+      // حلبة قطع البزل الحقيقية بمسارات SVG
+      renderRealPuzzleArena(data.quizzes);
     }
 
     function openMorphModal(branchIdx) {
@@ -1320,7 +1308,7 @@
       }
     }
 
-    // سحابة الحكاية: بدون كشف الإجابات في المهمة
+    // سحابة الحكاية
     function loadInteractiveStory(data) {
       const container = document.getElementById('storyWordsContainer');
       container.innerHTML = '';
@@ -1351,7 +1339,7 @@
         if (currentMissionIdx < data.missions.length) {
           setTimeout(() => {
             document.getElementById('storyMissionBadge').textContent = data.missions[currentMissionIdx].label;
-            Sound.speak("أَحْسَنْتَ! الآنَ ابْحَثْ عَنِ المَطْلُوبِ التَّالِي");
+            Sound.speak("أَحْسَنْتَ! الآنَ: " + data.missions[currentMissionIdx].label);
           }, 800);
         } else {
           setTimeout(() => {
@@ -1372,7 +1360,7 @@
       Sound.speak(text);
     }
 
-    // أقراص التركيب: منصات كروية واسعة لا تخرج منها الحروف
+    // أقراص التركيب
     function renderDiscsWorkshop(labs) {
       const container = document.getElementById('discsContainer');
       container.innerHTML = '';
@@ -1422,102 +1410,123 @@
     }
 
     // =========================================================
-    // حلبة قطع البزل: سحب وإفلات لقطع بزل حقيقية
+    // حلبة قطع البزل الحقيقية بمسارات الأحجية المنحنية
     // =========================================================
-    function renderPuzzleArena(quizzes) {
+    function renderRealPuzzleArena(quizzes) {
       const container = document.getElementById('puzzleContainer');
       container.innerHTML = '';
 
-      const colors = ['puzzle-color-1', 'puzzle-color-2', 'puzzle-color-3', 'puzzle-color-4'];
+      const puzzleFills = ['#84cc16', '#06b6d4', '#f97316', '#a855f7'];
+      const puzzleBorders = ['#65a30d', '#0891b2', '#ea580c', '#9333ea'];
 
       quizzes.forEach((q, idx) => {
-        const pieceBox = document.createElement('div');
-        pieceBox.className = `real-puzzle-box ${colors[idx % 4]}`;
-        pieceBox.innerHTML = `
-          <div class="puzzle-top-bar">
-            <span class="puzzle-chip-badge">🧩 بَزْلُ التَّحَدِّي ${idx + 1}</span>
-            <button style="background:white; border:none; border-radius:50%; width:36px; height:36px; cursor:pointer; font-size:1.1rem; box-shadow:0 3px 6px rgba(0,0,0,0.15);" onclick="Sound.speak('${q.q}')">🔊</button>
+        const card = document.createElement('div');
+        card.className = 'jigsaw-svg-card';
+        card.innerHTML = `
+          <!-- مسار قطعة البزل الهندسية الحقيقية مع النتوء والفجوة -->
+          <svg class="jigsaw-bg-shape" viewBox="0 0 320 420" preserveAspectRatio="none">
+            <path d="M 40,40 
+                     L 130,40 
+                     C 130,10 190,10 190,40 
+                     L 280,40 
+                     C 280,40 290,40 290,50 
+                     L 290,170 
+                     C 320,170 320,230 290,230 
+                     L 290,380 
+                     C 290,390 280,390 280,390 
+                     L 190,390 
+                     C 190,360 130,360 130,390 
+                     L 40,390 
+                     C 30,390 30,380 30,380 
+                     L 30,230 
+                     C 60,230 60,170 30,170 
+                     L 30,50 
+                     C 30,40 40,40 40,40 Z" 
+                  fill="${puzzleFills[idx % 4]}" 
+                  stroke="${puzzleBorders[idx % 4]}" 
+                  stroke-width="8"/>
+          </svg>
+
+          <div class="jigsaw-content-body">
+            <span class="puzzle-number-badge">🧩 قِطْعَةُ البَزْل ${idx + 1}</span>
+            <div class="puzzle-question-text">${q.q}</div>
+
+            <div class="puzzle-target-slot" id="jigsaw_drop_${idx}">
+              اسْحَبْ هُنَا ⬇️
+            </div>
+
+            <div class="puzzle-options-rack">
+              ${q.opts.map(opt => `
+                <div class="drag-piece-token" 
+                     draggable="true" 
+                     data-word="${opt}"
+                     data-j-idx="${idx}"
+                     onclick="handleJigsawClick('${opt}', '${q.ans}', ${idx}, '${q.tip}')">
+                  ${opt}
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="puzzle-feedback-toast" id="fb_jigsaw_${idx}"></div>
           </div>
-
-          <div class="puzzle-question-prompt">${q.q}</div>
-
-          <!-- فجوة البزل التي تنتظر القطعة -->
-          <div class="puzzle-drop-target" id="puzzle_drop_${idx}">
-            اسْحَبْ قِطْعَةَ البَزْل هُنَا ⬇️
-          </div>
-
-          <!-- قطع البزل الصغيرة القابلة للسحب والنقر -->
-          <div class="puzzle-options-tray">
-            ${q.opts.map(opt => `
-              <div class="draggable-puzzle-piece" 
-                   draggable="true" 
-                   data-word="${opt}"
-                   data-p-idx="${idx}"
-                   onclick="handlePuzzleClick('${opt}', '${q.ans}', ${idx}, '${q.tip}')">
-                ${opt}
-              </div>
-            `).join('')}
-          </div>
-
-          <div class="puzzle-feedback-toast" id="fb_puzzle_${idx}"></div>
         `;
-        container.appendChild(pieceBox);
+        container.appendChild(card);
       });
 
-      setupPuzzleDragDropEvents(quizzes);
+      setupJigsawDragDrop(quizzes);
     }
 
-    function setupPuzzleDragDropEvents(quizzes) {
-      document.querySelectorAll('.draggable-puzzle-piece').forEach(piece => {
-        piece.addEventListener('dragstart', (e) => {
+    function setupJigsawDragDrop(quizzes) {
+      document.querySelectorAll('.drag-piece-token').forEach(token => {
+        token.addEventListener('dragstart', (e) => {
           e.dataTransfer.setData('text/plain', JSON.stringify({
-            word: piece.dataset.word,
-            idx: piece.dataset.pIdx
+            word: token.dataset.word,
+            idx: token.dataset.jIdx
           }));
-          piece.style.opacity = '0.4';
+          token.style.opacity = '0.4';
         });
 
-        piece.addEventListener('dragend', () => {
-          piece.style.opacity = '1';
+        token.addEventListener('dragend', () => {
+          token.style.opacity = '1';
         });
       });
 
-      document.querySelectorAll('.puzzle-drop-target').forEach((targetSlot, sIdx) => {
-        targetSlot.addEventListener('dragover', (e) => {
+      document.querySelectorAll('.puzzle-target-slot').forEach((slot, sIdx) => {
+        slot.addEventListener('dragover', (e) => {
           e.preventDefault();
-          targetSlot.classList.add('drag-over');
+          slot.classList.add('drag-over');
         });
 
-        targetSlot.addEventListener('dragleave', () => {
-          targetSlot.classList.remove('drag-over');
+        slot.addEventListener('dragleave', () => {
+          slot.classList.remove('drag-over');
         });
 
-        targetSlot.addEventListener('drop', (e) => {
+        slot.addEventListener('drop', (e) => {
           e.preventDefault();
-          targetSlot.classList.remove('drag-over');
+          slot.classList.remove('drag-over');
           try {
             const data = JSON.parse(e.dataTransfer.getData('text/plain'));
             if (parseInt(data.idx) === sIdx) {
               const quiz = quizzes[sIdx];
-              evaluatePuzzleResult(data.word, quiz.ans, sIdx, targetSlot, quiz.tip);
+              evaluateJigsawSolve(data.word, quiz.ans, sIdx, slot, quiz.tip);
             }
           } catch(err){}
         });
       });
     }
 
-    function handlePuzzleClick(word, correct, sIdx, tip) {
-      const targetSlot = document.getElementById(`puzzle_drop_${sIdx}`);
-      evaluatePuzzleResult(word, correct, sIdx, targetSlot, tip);
+    function handleJigsawClick(word, correct, sIdx, tip) {
+      const slot = document.getElementById(`jigsaw_drop_${sIdx}`);
+      evaluateJigsawSolve(word, correct, sIdx, slot, tip);
     }
 
-    function evaluatePuzzleResult(selected, correct, sIdx, slotEl, tip) {
-      const fb = document.getElementById(`fb_puzzle_${sIdx}`);
+    function evaluateJigsawSolve(selected, correct, sIdx, slotEl, tip) {
+      const fb = document.getElementById(`fb_jigsaw_${sIdx}`);
       Sound.speak(selected);
 
       if (selected === correct) {
         slotEl.textContent = `✓ رُكِّبَتْ: (${selected})`;
-        slotEl.className = 'puzzle-drop-target solved';
+        slotEl.className = 'puzzle-target-slot solved';
         fb.style.display = 'block';
         fb.style.background = '#dcfce7';
         fb.style.color = '#15803d';
