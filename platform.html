@@ -13,7 +13,7 @@
       --c-sky: #0284c7;
       --c-pink: #ec4899;
       --c-purple: #a855f7;
-      --c-root: #dc2626;  /* أحمر صريح لأحرف الجذر */
+      --c-root: #dc2626;  /* أحمر صريح للجذر */
       --c-affix: #2563eb; /* أزرق صريح للزيادة */
     }
 
@@ -99,7 +99,7 @@
       gap: 0.5rem;
     }
 
-    /* أزرار التبويبات */
+    /* التبويبات */
     .nav-tabs-container {
       display: flex;
       justify-content: center;
@@ -571,59 +571,130 @@
       display: none;
     }
 
-    /* 4. حلبة الأبطال */
+    /* ================================================= */
+    /* 4. حلبة الأبطال: سُحُبٌ وَفُقَّاعَاتٌ غَيْرُ مُسْتَطِيلَةٍ */
+    /* ================================================= */
     .arena-bubble-world {
       background: #ffffff;
-      border-radius: 70px;
-      padding: 2.8rem 2rem;
+      border-radius: 80px 80px 70px 70px;
+      padding: 3rem 2.2rem;
       border: 8px solid #ffffff;
       box-shadow: 0 25px 60px rgba(0,0,0,0.12);
     }
 
     .arena-title-box {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 2.2rem;
     }
 
     .arena-title-box h3 {
-      font-size: 2.2rem;
+      font-size: 2.3rem;
       font-weight: 900;
       color: #9333ea;
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.8rem;
+    }
+
+    .arena-title-box p {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #64748b;
+      margin-top: 0.3rem;
     }
 
     .arena-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.8rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
     }
 
-    .bubble-question-card {
+    /* سحابة التحدي المنحنية والمتباينة الحواف */
+    .bubble-question-cloud {
+      border-radius: 65px 45px 75px 50px;
+      padding: 2.2rem 1.8rem;
+      border: 5px solid #ffffff;
+      box-shadow: 0 16px 35px rgba(0,0,0,0.08);
+      position: relative;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bubble-question-cloud:nth-child(1) {
       background: radial-gradient(circle at top, #faf5ff 0%, #f3e8ff 100%);
-      border-radius: 50px;
-      padding: 2rem;
-      border: 4px solid #d8b4fe;
-      border-bottom: 8px solid #a855f7;
-      box-shadow: 0 12px 25px rgba(0,0,0,0.06);
+      border-bottom: 8px solid #c084fc;
+    }
+    .bubble-question-cloud:nth-child(2) {
+      background: radial-gradient(circle at top, #eff6ff 0%, #dbeafe 100%);
+      border-bottom: 8px solid #60a5fa;
+      border-radius: 45px 75px 50px 65px;
+    }
+    .bubble-question-cloud:nth-child(3) {
+      background: radial-gradient(circle at top, #fffbeb 0%, #fef3c7 100%);
+      border-bottom: 8px solid #fbbf24;
+      border-radius: 70px 50px 60px 80px;
+    }
+    .bubble-question-cloud:nth-child(4) {
+      background: radial-gradient(circle at top, #f0fdf4 0%, #dcfce7 100%);
+      border-bottom: 8px solid #4ade80;
+      border-radius: 50px 70px 80px 55px;
     }
 
-    .bubble-question-card h4 {
-      font-size: 1.3rem;
-      color: #581c87;
+    .bubble-question-cloud:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 24px 45px rgba(0,0,0,0.14);
+    }
+
+    .cloud-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .cloud-card-tag {
+      background: #ffffff;
+      padding: 0.35rem 1.1rem;
+      border-radius: 25px;
       font-weight: 900;
-      margin-bottom: 1.2rem;
-      line-height: 1.6;
+      font-size: 0.95rem;
+      color: #6b21a8;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.06);
     }
 
+    .cloud-speaker-btn {
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 0 3px 0 #cbd5e1;
+    }
+
+    .cloud-question-text {
+      font-size: 1.25rem;
+      color: #1e1b4b;
+      font-weight: 900;
+      margin-bottom: 1.4rem;
+      line-height: 1.7;
+      min-height: 60px;
+    }
+
+    /* أزرار الخيارات البيضاوية المقوسة (Oval Candy Pills) */
     .bubble-opt-pill {
       background: #ffffff;
-      border: 3px solid #c084fc;
-      padding: 0.9rem 1.4rem;
+      border: 3px solid #cbd5e1;
+      padding: 0.75rem 1.4rem;
       font-size: 1.25rem;
       font-weight: 900;
-      border-radius: 35px;
+      border-radius: 40px;
       cursor: pointer;
       width: 100%;
       text-align: right;
@@ -631,22 +702,33 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 5px 0 #c084fc;
+      box-shadow: 0 4px 0 #cbd5e1;
       transition: all 0.15s;
     }
 
     .bubble-opt-pill:hover {
-      background: #fdf4ff;
+      background: #faf5ff;
+      border-color: #a855f7;
+      box-shadow: 0 6px 0 #9333ea;
       transform: translateY(-2px);
-      box-shadow: 0 7px 0 #a855f7;
     }
 
     .bubble-opt-pill:active {
-      transform: translateY(4px);
-      box-shadow: 0 1px 0 #c084fc;
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #a855f7;
     }
 
-    /* Modal */
+    .cloud-feedback-box {
+      margin-top: 1rem;
+      padding: 0.6rem 1rem;
+      border-radius: 25px;
+      font-weight: 900;
+      font-size: 0.95rem;
+      display: none;
+      text-align: center;
+    }
+
+    /* النافذة المنبثقة التفصيلية (Modal) */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -766,8 +848,8 @@
     <div class="root-dropdown-wrapper">
       <label style="font-weight: 900;">الجَذْرُ:</label>
       <select id="rootSelect" onchange="loadRadialWorld(this.value)">
-        <option value="صنع">✨ [ ص - ن - ع ]</option>
         <option value="كتب">📚 [ ك - ت - ب ]</option>
+        <option value="صنع">✨ [ ص - ن - ع ]</option>
         <option value="علم">🔬 [ ع - ل - م ]</option>
       </select>
     </div>
@@ -793,8 +875,8 @@
 
         <div class="radial-center" onclick="openRootModal()">
           <span class="nucleus-tag">👈 ابْدَأْ هُنَا</span>
-          <div class="nucleus-letters" id="coreLetters">[ ص - ن - ع ]</div>
-          <div class="nucleus-sub" id="coreConcept">الجَذْرُ: العَمَلُ وَالإِتْقَانُ</div>
+          <div class="nucleus-letters" id="coreLetters">[ ك - ت - ب ]</div>
+          <div class="nucleus-sub" id="coreConcept">الجَذْرُ: التَّدْوِينُ وَالكِتَابَةُ</div>
           <span class="sound-badge">🔊 انقر للاستماع</span>
         </div>
 
@@ -855,7 +937,7 @@
       </div>
     </div>
 
-    <!-- 2. سحابة الحكاية (مهام المشتقات الخمسة كاملة) -->
+    <!-- 2. سحابة الحكاية (بدون كتابة الحل في شريط المهمة الوردي) -->
     <div id="storyTab" class="tab-view">
       <div class="story-cloud-realm">
         <div class="story-top-art-bar">
@@ -896,7 +978,7 @@
       </div>
     </div>
 
-    <!-- 3. ورشة أقراص التركيب (بدون كشف الإجابات في الرأس) -->
+    <!-- 3. ورشة أقراص التركيب -->
     <div id="labTab" class="tab-view">
       <div class="workshop-galaxy">
         <div class="workshop-title-banner">
@@ -928,7 +1010,6 @@
             <div class="monster-speech" onclick="Sound.speak('هَيَّا نُفَكِّرْ مَعاً يَا بَطَلُ!')">🐾 نَمُّوش: «فَكِّرْ وَرَكِّبْ!»</div>
           </div>
 
-          <!-- الأقراص الثلاثة -->
           <div id="discsContainer" style="display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;"></div>
 
           <div class="monster-mascot-box">
@@ -951,12 +1032,12 @@
       </div>
     </div>
 
-    <!-- 4. حلبة الأبطال (4 تحديات ناطقة ومتنوعة) -->
+    <!-- 4. حلبة الأبطال (سُحُبٌ وَفُقَّاعَاتٌ غَيْرُ مُسْتَطِيلَةٍ) -->
     <div id="quizTab" class="tab-view">
       <div class="arena-bubble-world">
         <div class="arena-title-box">
-          <h3><span>🏆</span> حَلَبَةُ الفُقَّاعَاتِ الصَّرْفِيَّةِ <span>🎈</span></h3>
-          <p>أَجِبْ عَنِ التَّحَدِّيَاتِ الأَرْبَعَةِ لِتَكْسِبَ نُجُومَ التَّفَوُّقِ:</p>
+          <h3><span>🏆</span> حَلَبَةُ سُحُبِ التَّحَدِّي <span>☁️</span></h3>
+          <p>اخْتَرِ الإِجَابَةَ الصَّحِيحَةَ دَاخِلَ السُّحُبِ الصَّرْفِيَّةِ لِتَكْسِبَ نُجُومَ التَّفَوُّقِ:</p>
         </div>
 
         <div class="arena-cards-grid" id="quizzesGrid"></div>
@@ -990,7 +1071,6 @@
         </div>
       </div>
 
-      <!-- تظهر حصراً للفعل المجرد (الفرع 1) -->
       <div class="affix-box" id="mAffixCard">
         <div class="affix-box-head">
           <span class="affix-box-title">📚 عَائِلَةُ الأَفْعَالِ المَزِيدَةِ (كِتَابُ مُرْشِدِي ص 14)</span>
@@ -1060,7 +1140,6 @@
           { word: "<span class='c-a'>ا</span><span class='c-r'>كْ</span><span class='c-a'>تَ</span><span class='c-r'>تَ</span><span class='c-r'>بَ</span>", plain: "اكْتَتَبَ", weight: "افْتَعَلَ", desc: "مزيد بحرفين (الهمزة والتاء): سَجّل اسمه" },
           { word: "<span class='c-a'>اسْتَ</span><span class='c-r'>كْ</span><span class='c-r'>تَ</span><span class='c-r'>بَ</span>", plain: "اسْتَكْتَبَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف (اسْتـ): طلب من غيره أن يكتب له" }
         ],
-        // فقرة تضم المشتقات الخمسة
         storyParagraph: [
           { word: "فِي", target: false }, { word: "صَبَاحِ", target: false }, { word: "يَوْمِ", target: false }, { word: "الأَحَدِ،", target: false },
           { word: "جَلَسَ", target: false }, { word: "الكَاتِبُ", target: "اسم الفاعل" }, { word: "أَمَامَ", target: false },
@@ -1069,21 +1148,19 @@
           { word: "مَكْتُوبٍ", target: "اسم المفعول" }, { word: "يُعَلِّمُ", target: false }, { word: "الأَطْفَالَ", target: false },
           { word: "فَوَائِدَ", target: false }, { word: "الكِتَابَةِ", target: "المصدر" }, { word: "وَالقِرَاءَةِ.", target: false }
         ],
-        // المهام الخمس متسلسلة
+        // تم حذف اسم الكلمة من المهمة تماماً
         missions: [
-          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ المُجَرَّدِ: كَتَبَ)", targetType: "الفعل المجرد" },
-          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ: الكَاتِبُ)", targetType: "اسم الفاعل" },
-          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَكَانِ: مَكْتَبِهِ)", targetType: "اسم المكان" },
-          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَفْعُولِ: مَكْتُوبٍ)", targetType: "اسم المفعول" },
-          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ: الكِتَابَةِ)", targetType: "المصدر" }
+          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ الثُّلَاثِيِّ المُجَرَّدِ)", targetType: "الفعل المجرد" },
+          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
+          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
         ],
-        // أقراص التركيب: بدون كشف الإجابة في الرأس
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"كَـ"}, {ch:"", correct:"ا"}, {ch:"تِـ"}, {ch:"بٌ"}], pool: ["ا", "و", "ي"] },
           { title: "قُرْصُ: اسْمُ المَكَانِ", slots: [{ch:"", correct:"مَـ"}, {ch:"كْ"}, {ch:"تَ"}, {ch:"بٌ"}], pool: ["مَـ", "أَ", "نَـ"] },
           { title: "قُرْصُ: اسْمُ المَفْعُولِ", slots: [{ch:"مَـ"}, {ch:"كْ"}, {ch:"تُـ"}, {ch:"", correct:"و"}, {ch:"بٌ"}], pool: ["و", "ا", "ي"] }
         ],
-        // 4 تحديات كاملة
         quizzes: [
           { q: "الفِعْلُ المَزِيدُ بِحَرْفٍ الَّذِي يَدُلُّ عَلَى المُشَارَكَةِ هُوَ:", ans: "كَاتَبَ", opts: ["كَتَبَ", "كَاتَبَ", "اسْتَكْتَبَ"], tip: "صيغة فاعَلَ تدل على المشاركة بين طرفين." },
           { q: "مَا هُوَ اسْمُ المَكَانِ المُلَائِمِ لِوَضْعِ الكُتُبِ وَالدَّفَاتِرِ؟", ans: "مَكْتَبٌ", opts: ["مَكْتَبٌ", "كَاتِبٌ", "مَكْتُوبٌ"], tip: "اسم المكان يصاغ على وزن مَفْعَل." },
@@ -1119,11 +1196,11 @@
           { word: "فِي", target: false }, { word: "المَغْرِبِ.", target: false }
         ],
         missions: [
-          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ المُجَرَّدِ: صَنَعَ)", targetType: "الفعل المجرد" },
-          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ: صَانِعاً)", targetType: "اسم الفاعل" },
-          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَكَانِ: مَصْنَعٍ)", targetType: "اسم المكان" },
-          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَفْعُولِ: مَصْنُوعٍ)", targetType: "اسم المفعول" },
-          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ: صِنَاعَةُ)", targetType: "المصدر" }
+          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ الثُّلَاثِيِّ المُجَرَّدِ)", targetType: "الفعل المجرد" },
+          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
+          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
         ],
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"صَـ"}, {ch:"", correct:"ا"}, {ch:"نِـ"}, {ch:"عٌ"}], pool: ["ا", "مَـ", "يَـ"] },
@@ -1162,11 +1239,11 @@
           { word: "عَلِمُوا", target: "الفعل المجرد" }, { word: "قِيمَتَهُ.", target: false }
         ],
         missions: [
-          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ المُجَرَّدِ: عَلِمُوا)", targetType: "الفعل المجرد" },
-          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ: العَالِمُ)", targetType: "اسم الفاعل" },
-          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَكَانِ: مَعْلَمٍ)", targetType: "اسم المكان" },
-          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَفْعُولِ: مَعْلُومٌ)", targetType: "اسم المفعول" },
-          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ: العِلْمِ)", targetType: "المصدر" }
+          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ الثُّلَاثِيِّ المُجَرَّدِ)", targetType: "الفعل المجرد" },
+          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
+          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
         ],
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"عَـ"}, {ch:"", correct:"ا"}, {ch:"لِـ"}, {ch:"مٌ"}], pool: ["ا", "و", "ي"] },
@@ -1202,7 +1279,7 @@
       loadInteractiveStory(data);
 
       renderDiscsWorkshop(data.labs);
-      renderArenaQuizzes(data.quizzes);
+      renderCloudArenaQuizzes(data.quizzes);
     }
 
     function drawRays() {
@@ -1290,7 +1367,7 @@
       }
     }
 
-    // سحابة الحكاية: مهام المشتقات الخمسة كاملة
+    // سحابة الحكاية: بدون كشف الإجابات في المهمة
     function loadInteractiveStory(data) {
       const container = document.getElementById('storyWordsContainer');
       container.innerHTML = '';
@@ -1392,20 +1469,24 @@
       }
     }
 
-    // حلبة الأبطال: 4 تحديات كاملة
-    function renderArenaQuizzes(quizzes) {
+    // ----------------------------------------------------
+    // حلبة الأبطال: سُحُبٌ وَفُقَّاعَاتٌ مَنْحَنِيَّةٌ (4 تحديات كاملة)
+    // ----------------------------------------------------
+    function renderCloudArenaQuizzes(quizzes) {
       const container = document.getElementById('quizzesGrid');
       container.innerHTML = '';
 
       quizzes.forEach((q, idx) => {
-        const box = document.createElement('div');
-        box.className = 'bubble-question-card';
-        box.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
-            <span style="font-weight:900; color:#9333ea; font-size:1.1rem;">🎈 فُقَّاعَةُ التَّحَدِّي ${idx + 1}</span>
-            <button style="background:#ffffff; border:2px solid #d8b4fe; border-radius:20px; padding:0.3rem 0.9rem; cursor:pointer; font-weight:bold; color:#7c3aed;" onclick="Sound.speak('${q.q}')">🔊 اسْتَمِعْ</button>
+        const card = document.createElement('div');
+        card.className = 'bubble-question-cloud';
+        card.innerHTML = `
+          <div>
+            <div class="cloud-card-head">
+              <span class="cloud-card-tag">☁️ سَحَابَةُ التَّحَدِّي ${idx + 1}</span>
+              <button class="cloud-speaker-btn" onclick="Sound.speak('${q.q}')">🔊</button>
+            </div>
+            <div class="cloud-question-text">${q.q}</div>
           </div>
-          <h4>${q.q}</h4>
           <div>
             ${q.opts.map(opt => `
               <button class="bubble-opt-pill" onclick="checkArenaAnswer(this, '${opt}', '${q.ans}', '${q.tip}')">
@@ -1414,15 +1495,15 @@
               </button>
             `).join('')}
           </div>
-          <div class="disc-feedback" style="margin-top:1rem;"></div>
+          <div class="cloud-feedback-box" id="fb_cloud_${idx}"></div>
         `;
-        container.appendChild(box);
+        container.appendChild(card);
       });
     }
 
     function checkArenaAnswer(btn, selected, correct, tip) {
-      const parent = btn.closest('.bubble-question-card');
-      const fb = parent.querySelector('.disc-feedback');
+      const parent = btn.closest('.bubble-question-cloud');
+      const fb = parent.querySelector('.cloud-feedback-box');
       const btns = parent.querySelectorAll('.bubble-opt-pill');
 
       if (selected === correct) {
