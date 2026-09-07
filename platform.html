@@ -28,7 +28,7 @@
       color: #ffffff;
     }
 
-    /* رأس الصفحة */
+    /* شريط الرأس */
     header {
       background: #ffffff;
       margin: 0.8rem 1.5rem;
@@ -134,9 +134,9 @@
 
     main {
       flex: 1;
-      max-width: 1400px;
+      max-width: 1440px;
       margin: 1.2rem auto 2.5rem;
-      width: 95%;
+      width: 96%;
     }
 
     .tab-view {
@@ -154,7 +154,7 @@
     }
 
     /* ========================================================= */
-    /* 1. شمس الجذر: فضاء كوني وأشعة شمس متلألئة */
+    /* 1. شمس الجذر */
     /* ========================================================= */
     .space-system-arena {
       position: relative;
@@ -342,62 +342,62 @@
     }
 
     /* ========================================================= */
-    /* 2. سحابة الحكاية: سحابة قطنية حقيقية 100% مع الطيور والنجوم */
+    /* 2. سحابة الحكاية: سحابة بانورامية عريضة تملأ الشاشة بالعرض */
     /* ========================================================= */
     .kawaii-cloud-universe {
       position: relative;
       width: 100%;
-      min-height: 820px;
+      min-height: 720px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2rem 1rem;
+      padding: 1rem 0;
       overflow: hidden;
     }
 
+    /* طيور كرتونية طائرة في الفضاء */
     .flying-bird {
       position: absolute;
-      z-index: 8;
+      z-index: 12;
       animation: birdFlap 4s infinite ease-in-out alternate;
       pointer-events: none;
-      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.35));
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,0.45));
     }
-    .bird-top-left { top: 35px; left: 6%; }
-    .bird-top-right { top: 45px; right: 6%; animation-delay: 1.2s; }
-    .bird-mid-left { top: 280px; left: 3%; animation-delay: 2s; }
-    .bird-bottom-right { bottom: 40px; right: 5%; animation-delay: 0.8s; }
-    .bird-bottom-left { bottom: 40px; left: 8%; animation-delay: 2.5s; }
+    .bird-top-left { top: 20px; left: 3%; }
+    .bird-top-right { top: 30px; right: 3%; animation-delay: 1.2s; }
+    .bird-bottom-left { bottom: 25px; left: 4%; animation-delay: 2.2s; }
+    .bird-bottom-right { bottom: 25px; right: 4%; animation-delay: 0.7s; }
 
     @keyframes birdFlap {
-      0% { transform: translateY(0) rotate(-3deg); }
-      50% { transform: translateY(-15px) rotate(3deg); }
-      100% { transform: translateY(0) rotate(-3deg); }
+      0% { transform: translateY(0) rotate(-4deg); }
+      50% { transform: translateY(-16px) rotate(4deg); }
+      100% { transform: translateY(0) rotate(-4deg); }
     }
 
+    /* نجوم صفراء مبتسمة ومتحركة */
     .smiling-star {
       position: absolute;
-      z-index: 7;
+      z-index: 11;
       animation: starBounce 3s infinite ease-in-out alternate;
       pointer-events: none;
-      filter: drop-shadow(0 4px 10px rgba(250, 204, 21, 0.4));
+      filter: drop-shadow(0 4px 10px rgba(250, 204, 21, 0.5));
     }
-    .star-pos-1 { top: 20px; left: 32%; }
-    .star-pos-2 { top: 110px; right: 20%; animation-delay: 1s; }
-    .star-pos-3 { bottom: 80px; left: 24%; animation-delay: 1.8s; }
-    .star-pos-4 { bottom: 30px; left: 48%; animation-delay: 0.5s; }
-    .star-pos-5 { top: 320px; right: 4%; animation-delay: 2.2s; }
+    .star-pos-1 { top: 15px; left: 24%; }
+    .star-pos-2 { top: 20px; right: 24%; animation-delay: 1s; }
+    .star-pos-3 { bottom: 20px; left: 28%; animation-delay: 1.8s; }
+    .star-pos-4 { bottom: 20px; right: 28%; animation-delay: 0.5s; }
 
     @keyframes starBounce {
       0% { transform: scale(0.9) rotate(-6deg); }
-      100% { transform: scale(1.1) rotate(6deg); }
+      100% { transform: scale(1.15) rotate(6deg); }
     }
 
-    /* الحاوية الهندسية الشاملة للسحابة الكبرى */
+    /* السحابة الكبرى البانورامية العريضة (Landscape 1360px) */
     .fluffy-puffy-cloud-card {
       position: relative;
       width: 100%;
-      max-width: 1020px;
-      min-height: 800px;
+      max-width: 1360px;
+      min-height: 680px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -405,7 +405,7 @@
       z-index: 5;
     }
 
-    /* مسار السحابة الحقيقي بـ 14 انتفاخاً كروياً مقوساً */
+    /* مسار السحابة العريضة المتموجة بانتفاخات كروية على كامل المحيط */
     .cloud-svg-frame-art {
       position: absolute;
       top: 0;
@@ -414,16 +414,16 @@
       height: 100%;
       z-index: 1;
       pointer-events: none;
-      filter: drop-shadow(0 25px 40px rgba(56, 189, 248, 0.4));
+      filter: drop-shadow(0 25px 50px rgba(56, 189, 248, 0.45));
     }
 
-    /* المحتوى التفاعلي المستقر بدقة في بطن السحابة */
+    /* المحتوى التفاعلي العريض داخل بطن السحابة */
     .cloud-belly-interactive {
       position: relative;
       z-index: 10;
       width: 100%;
-      max-width: 800px;
-      padding: 230px 20px 90px 20px;
+      max-width: 1180px;
+      padding: 160px 40px 60px 40px; /* مساحة علوية للوجه الباسم ومساحة فسيحة للكلمات */
       text-align: center;
       color: #1e293b;
     }
@@ -432,42 +432,44 @@
       background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
       border: 4px solid #ca8a04;
       border-radius: 40px;
-      padding: 0.9rem 2.2rem;
+      padding: 0.8rem 2.5rem;
       display: inline-block;
       box-shadow: 0 8px 20px rgba(202, 138, 4, 0.3);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.4rem;
     }
 
     .task-mission-pill {
       background: #ec4899;
       color: white;
-      padding: 0.4rem 1.6rem;
+      padding: 0.35rem 1.6rem;
       border-radius: 30px;
       font-weight: 900;
       display: inline-block;
-      margin-top: 0.5rem;
+      margin-top: 0.4rem;
       font-size: 1.15rem;
       box-shadow: 0 4px 0 #be185d;
     }
 
+    /* تنسيق الكلمات العريض (انتشار أفقي مريح في سطرين إلى 3 أسطر) */
     .story-words-cloud-box {
-      font-size: 1.85rem;
-      line-height: 2.8;
+      font-size: 1.8rem;
+      line-height: 2.6;
       color: #1e293b;
       margin: 0 auto;
+      max-width: 1100px;
     }
 
     .story-click-pill {
       background: #f8fafc;
       border: 3px solid #94a3b8;
-      padding: 0.25rem 1rem;
+      padding: 0.25rem 1.05rem;
       border-radius: 30px;
       font-weight: 900;
       cursor: pointer;
       display: inline-block;
       box-shadow: 0 4px 0 #94a3b8;
       transition: all 0.15s;
-      margin: 0.25rem;
+      margin: 0.25rem 0.3rem;
     }
 
     .story-click-pill:hover {
@@ -906,6 +908,7 @@
       <div class="space-system-arena" id="starsSky">
         <div class="orbit-ellipse-wide"></div>
 
+        <!-- رائد فضاء 1 -->
         <div class="astro-kid astro-kid-1">
           <svg viewBox="0 0 120 120" width="110" height="110">
             <circle cx="60" cy="45" r="35" fill="rgba(255,255,255,0.25)" stroke="#38bdf8" stroke-width="4"/>
@@ -925,6 +928,7 @@
           </svg>
         </div>
 
+        <!-- رائد فضاء 2 -->
         <div class="astro-kid astro-kid-2">
           <svg viewBox="0 0 120 120" width="105" height="105">
             <circle cx="60" cy="45" r="34" fill="rgba(255,255,255,0.25)" stroke="#ec4899" stroke-width="4"/>
@@ -944,6 +948,7 @@
           </svg>
         </div>
 
+        <!-- هالة أشعة الشمس الدوارة الواضحة -->
         <svg class="sun-rays-halo" viewBox="0 0 100 100">
           <polygon points="50,0 55,14 45,14" fill="#fde047"/>
           <polygon points="50,100 55,86 45,86" fill="#fde047"/>
@@ -955,12 +960,14 @@
           <polygon points="15,85 28,79 21,72" fill="#fde047"/>
         </svg>
 
+        <!-- قرص الشمس المتسع -->
         <div class="cartoon-sun-core" onclick="openRootModal()">
           <div class="sun-root-letters" id="coreLetters">[ د - ح - ر - ج ]</div>
           <div class="sun-badge-desc" id="coreConcept">الجَذْرُ الرُّبَاعِيُّ</div>
           <span style="font-size: 0.8rem; color: #78350f; font-weight: 900; margin-top: 0.4rem;">🔊 انقر للاستكشاف</span>
         </div>
 
+        <!-- الكواكب الخمسة -->
         <div class="space-planet-sphere planet-1-verb" onclick="openMorphModal(0)">
           <span class="planet-title-label">الحدث / الفعل</span>
           <div class="planet-word-text" id="b1_word">دَحْرَجَ</div>
@@ -994,12 +1001,12 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- 2. سحابة الحكاية: سحابة قطنية نقية 100% مع الطيور والنجوم -->
+    <!-- 2. سحابة الحكاية: سحابة عريضة تملأ الشاشة بالعرض كلياً -->
     <!-- ========================================================= -->
     <div id="storyTab" class="tab-view">
       <div class="kawaii-cloud-universe">
 
-        <!-- طيور كرتونية طائرة حول السحابة -->
+        <!-- طيور كرتونية طائرة في الفضاء -->
         <div class="flying-bird bird-top-left">
           <svg viewBox="0 0 100 80" width="85" height="68">
             <ellipse cx="50" cy="50" rx="25" ry="18" fill="#f97316"/>
@@ -1009,7 +1016,6 @@
             <polygon points="82,45 96,48 82,53" fill="#facc15"/>
             <path d="M 40,45 Q 25,15 45,15 Q 55,25 45,45 Z" fill="#ea580c"/>
             <path d="M 30,55 Q 15,62 10,50 Q 25,50 30,55 Z" fill="#f97316"/>
-            <path d="M 45,65 Q 45,75 52,75 M 55,65 Q 55,75 62,75" stroke="#ca8a04" stroke-width="2.5" fill="none"/>
           </svg>
         </div>
 
@@ -1022,7 +1028,17 @@
             <polygon points="18,45 4,48 18,53" fill="#facc15"/>
             <path d="M 60,45 Q 75,15 55,15 Q 45,25 55,45 Z" fill="#16a34a"/>
             <path d="M 70,55 Q 85,62 90,50 Q 75,50 70,55 Z" fill="#22c55e"/>
-            <path d="M 45,65 Q 45,75 38,75 M 55,65 Q 55,75 48,75" stroke="#ca8a04" stroke-width="2.5" fill="none"/>
+          </svg>
+        </div>
+
+        <div class="flying-bird bird-bottom-left">
+          <svg viewBox="0 0 100 80" width="85" height="68">
+            <ellipse cx="50" cy="50" rx="25" ry="18" fill="#facc15"/>
+            <circle cx="70" cy="45" r="12" fill="#eab308"/>
+            <circle cx="74" cy="43" r="5" fill="white"/>
+            <circle cx="76" cy="43" r="2.5" fill="#1e293b"/>
+            <polygon points="82,45 96,48 82,53" fill="#f97316"/>
+            <path d="M 40,45 Q 25,15 45,15 Q 55,25 45,45 Z" fill="#eab308"/>
           </svg>
         </div>
 
@@ -1034,11 +1050,10 @@
             <circle cx="24" cy="43" r="2.5" fill="#1e293b"/>
             <polygon points="18,45 2,48 18,53" fill="#facc15"/>
             <path d="M 60,45 Q 80,10 55,12 Q 42,22 55,45 Z" fill="#b91c1c"/>
-            <path d="M 72,55 Q 90,62 95,48 Q 78,48 72,55 Z" fill="#ef4444"/>
           </svg>
         </div>
 
-        <!-- نجوم صفراء مبتسمة -->
+        <!-- نجوم صفراء مبتسمة ومتحركة -->
         <div class="smiling-star star-pos-1">
           <svg viewBox="0 0 60 60" width="55" height="55">
             <polygon points="30,2 38,19 58,19 42,31 48,50 30,38 12,50 18,31 2,19 22,19" fill="#facc15" stroke="#eab308" stroke-width="2"/>
@@ -1051,7 +1066,7 @@
         </div>
 
         <div class="smiling-star star-pos-2">
-          <svg viewBox="0 0 60 60" width="60" height="60">
+          <svg viewBox="0 0 60 60" width="58" height="58">
             <polygon points="30,2 38,19 58,19 42,31 48,50 30,38 12,50 18,31 2,19 22,19" fill="#fde047" stroke="#eab308" stroke-width="2"/>
             <circle cx="24" cy="24" r="2.2" fill="#713f12"/>
             <circle cx="36" cy="24" r="2.2" fill="#713f12"/>
@@ -1070,66 +1085,77 @@
           </svg>
         </div>
 
-        <!-- كارت السحابة الحقيقي المنحني بالكامل -->
+        <div class="smiling-star star-pos-4">
+          <svg viewBox="0 0 60 60" width="52" height="52">
+            <polygon points="30,2 38,19 58,19 42,31 48,50 30,38 12,50 18,31 2,19 22,19" fill="#fde047" stroke="#eab308" stroke-width="2"/>
+            <circle cx="24" cy="24" r="2" fill="#713f12"/>
+            <circle cx="36" cy="24" r="2" fill="#713f12"/>
+            <path d="M 26,30 Q 30,34 34,30" stroke="#713f12" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <!-- السحابة الكبرى البانورامية العريضة (Landscape 1360px) -->
         <div class="fluffy-puffy-cloud-card">
-          <!-- مسار السحابة والوجه والظلال بـ 14 انتفاخاً كروياً مقوساً -->
-          <svg class="cloud-svg-frame-art" viewBox="0 0 1000 750" preserveAspectRatio="none">
-            <!-- الظل السفلي للسحابة -->
-            <path d="M 500,60
-                     C 580,55 650,100 670,160
-                     C 740,145 815,185 835,255
-                     C 900,265 955,320 960,390
-                     C 965,465 925,530 860,560
-                     C 865,630 820,695 750,710
-                     C 685,725 615,700 575,660
-                     C 535,685 465,685 425,660
-                     C 385,700 315,725 250,710
-                     C 180,695 135,630 140,560
-                     C 75,530 35,465 40,390
-                     C 45,320 100,265 165,255
-                     C 185,185 260,145 330,160
-                     C 350,100 420,55 500,60 Z"
+          <!-- مسار السحابة العريضة المتموجة بالكامل بانتفاخات كروية محيطية -->
+          <svg class="cloud-svg-frame-art" viewBox="0 0 1400 700" preserveAspectRatio="none">
+            <!-- ظل السحابة السفلي -->
+            <path d="M 700,68
+                     C 780,63 860,88 900,138
+                     C 980,113 1070,138 1120,198
+                     C 1200,198 1280,248 1310,328
+                     C 1350,398 1340,478 1280,538
+                     C 1260,598 1190,648 1110,658
+                     C 1040,688 950,678 890,638
+                     C 830,678 740,688 670,658
+                     C 610,688 510,688 450,648
+                     C 380,678 290,668 230,618
+                     C 150,628 80,578 60,498
+                     C 40,418 60,338 110,278
+                     C 110,208 170,148 250,138
+                     C 310,88 400,68 480,108
+                     C 540,68 620,63 700,68 Z"
                   fill="#bae6fd" stroke="#7dd3fc" stroke-width="6"/>
 
-            <!-- جسم السحابة الأبيض الناصع بانتفاخات كروية على كامل المحيط -->
-            <path d="M 500,40
-                     C 580,35 650,80 670,140
-                     C 740,125 815,165 835,235
-                     C 900,245 955,300 960,370
-                     C 965,445 925,510 860,540
-                     C 865,610 820,675 750,690
-                     C 685,705 615,680 575,640
-                     C 535,665 465,665 425,640
-                     C 385,680 315,705 250,690
-                     C 180,675 135,610 140,540
-                     C 75,510 35,445 40,370
-                     C 45,300 100,245 165,235
-                     C 185,165 260,125 330,140
-                     C 350,80 420,35 500,40 Z"
+            <!-- جسم السحابة الأبيض الناصع العريض -->
+            <path d="M 700,50
+                     C 780,45 860,70 900,120
+                     C 980,95 1070,120 1120,180
+                     C 1200,180 1280,230 1310,310
+                     C 1350,380 1340,460 1280,520
+                     C 1260,580 1190,630 1110,640
+                     C 1040,670 950,660 890,620
+                     C 830,660 740,670 670,640
+                     C 610,670 510,670 450,630
+                     C 380,660 290,650 230,600
+                     C 150,610 80,560 60,480
+                     C 40,400 60,320 110,260
+                     C 110,190 170,130 250,120
+                     C 310,70 400,50 480,90
+                     C 540,50 620,45 700,50 Z"
                   fill="#ffffff" stroke="#38bdf8" stroke-width="7"/>
 
             <!-- الخدود الوردية الناعمة -->
-            <ellipse cx="330" cy="220" rx="40" ry="25" fill="#fca5a5" opacity="0.85"/>
-            <ellipse cx="670" cy="220" rx="40" ry="25" fill="#fca5a5" opacity="0.85"/>
+            <ellipse cx="480" cy="200" rx="40" ry="25" fill="#fca5a5" opacity="0.9"/>
+            <ellipse cx="920" cy="200" rx="40" ry="25" fill="#fca5a5" opacity="0.9"/>
 
-            <!-- العيون الكرتونية الواسعة اللامعة -->
-            <circle cx="420" cy="190" r="25" fill="#1e293b"/>
-            <circle cx="428" cy="180" r="9" fill="white"/>
-            <circle cx="413" cy="200" r="4" fill="white"/>
+            <!-- العيون الكرتونية الواسعة المتلألئة -->
+            <circle cx="590" cy="180" r="26" fill="#1e293b"/>
+            <circle cx="598" cy="172" r="9" fill="white"/>
+            <circle cx="582" cy="190" r="4" fill="white"/>
 
-            <circle cx="580" cy="190" r="25" fill="#1e293b"/>
-            <circle cx="588" cy="180" r="9" fill="white"/>
-            <circle cx="573" cy="200" r="4" fill="white"/>
+            <circle cx="810" cy="180" r="26" fill="#1e293b"/>
+            <circle cx="818" cy="172" r="9" fill="white"/>
+            <circle cx="802" cy="190" r="4" fill="white"/>
 
             <!-- الحواجب اللطيفة -->
-            <path d="M 395,145 Q 420,130 445,145" fill="none" stroke="#1e293b" stroke-width="5" stroke-linecap="round"/>
-            <path d="M 555,145 Q 580,130 605,145" fill="none" stroke="#1e293b" stroke-width="5" stroke-linecap="round"/>
+            <path d="M 565,140 Q 590,125 615,138" fill="none" stroke="#1e293b" stroke-width="5" stroke-linecap="round"/>
+            <path d="M 785,138 Q 810,125 835,140" fill="none" stroke="#1e293b" stroke-width="5" stroke-linecap="round"/>
 
-            <!-- الابتسامة الكرتونية -->
-            <path d="M 465,205 Q 500,245 535,205" fill="none" stroke="#1e293b" stroke-width="6" stroke-linecap="round"/>
+            <!-- الابتسامة اللطيفة -->
+            <path d="M 665,200 Q 700,235 735,200" fill="none" stroke="#1e293b" stroke-width="6" stroke-linecap="round"/>
           </svg>
 
-          <!-- المحتوى التفاعلي داخل بطن السحابة -->
+          <!-- المحتوى التفاعلي العريض داخل بطن السحابة -->
           <div class="cloud-belly-interactive">
             <div class="cloud-instruction-badge">
               <h3 style="font-size: 1.55rem; font-weight: 900; color: #713f12;">سَحَابَةُ الاِسْتِكْشَافِ القِرَائِيِّ 📖</h3>
@@ -1147,7 +1173,7 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- 3. ورشة أقراص التركيب: منصات طافية بحرية -->
+    <!-- 3. أقراص التركيب: منصات طافية بحرية -->
     <!-- ========================================================= -->
     <div id="labTab" class="tab-view">
       <div class="spheres-free-stage">
