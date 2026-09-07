@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ السَّحَابِ وَالفَضَاءِ</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ السَّحَابِ وَالفَضَاءِ V3</title>
   <style>
     :root {
       --primary: #4338ca;
@@ -94,7 +97,7 @@
       gap: 0.5rem;
     }
 
-    /* التبويبات */
+    /* التبويبات الفضائية */
     .nav-tabs-container {
       display: flex;
       justify-content: center;
@@ -502,12 +505,11 @@
       z-index: 5;
     }
 
-    /* قرص كوكبي منحني كروي 3D مائل دون أي مربع */
+    /* قرص كوكبي بيضاوي كروي 3D مائل دون أي مربع */
     .round-game-sphere {
       position: relative;
       width: 420px;
       min-height: 340px;
-      /* حواف دائرية منحنية تشبه صحناً طائراً أو كوكباً مستديراً */
       border-radius: 90px 90px 75px 75px / 75px 75px 85px 85px;
       padding: 2.6rem 1.8rem 2rem;
       display: flex;
@@ -519,7 +521,6 @@
       color: #1e293b;
     }
 
-    /* ألوان كوكبية نضرة مع ظلال ثلاثية الأبعاد عميقة */
     .sphere-theme-1 { 
       background: radial-gradient(circle at 50% 20%, #fffbeb 0%, #fde047 35%, #f59e0b 90%);
       box-shadow: 0 20px 0 #b45309, 0 30px 50px rgba(245, 158, 11, 0.45);
@@ -537,7 +538,6 @@
       transform: translateY(-10px) scale(1.03);
     }
 
-    /* رائد الفضاء / الكائن الفضائي الصغير الطافي فوق قمة القرص */
     .sphere-mascot-crown {
       position: absolute;
       top: -38px;
@@ -570,7 +570,6 @@
       margin-bottom: 1.2rem;
     }
 
-    /* المسار الكروي المداري لدوائر الحروف دون أي ضيق */
     .sphere-slots-wrapper {
       display: flex;
       justify-content: center;
@@ -942,7 +941,9 @@
   </nav>
 
   <main>
-    <!-- 1. شمس الجذر الفضائية -->
+    <!-- ========================================================= -->
+    <!-- 1. شمس الجذر: فضاء كرتوني سحري -->
+    <!-- ========================================================= -->
     <div id="radialMap" class="tab-view active">
       <div class="space-system-arena" id="starsSky">
         <div class="orbit-ellipse-wide"></div>
@@ -1087,7 +1088,7 @@
           </svg>
         </div>
 
-        <!-- نجوم صفراء مبتسمة -->
+        <!-- نجوم صفراء مبتسمة ومتحركة -->
         <div class="smiling-star star-pos-1">
           <svg viewBox="0 0 60 60" width="55" height="55">
             <polygon points="30,2 38,19 58,19 42,31 48,50 30,38 12,50 18,31 2,19 22,19" fill="#facc15" stroke="#eab308" stroke-width="2"/>
@@ -1830,13 +1831,13 @@
       container.innerHTML = '';
 
       const themes = ['sphere-theme-1', 'sphere-theme-2', 'sphere-theme-3'];
-      const crownIcons = ['👑', '⚡', '🌟'];
+      const mascots = ['🛸', '👨‍🚀', '👾'];
 
       labs.forEach((lab, lIdx) => {
         const sphere = document.createElement('div');
         sphere.className = `round-game-sphere ${themes[lIdx % 3]}`;
         sphere.innerHTML = `
-          <div class="sphere-mascot-crown">${crownIcons[lIdx % 3]}</div>
+          <div class="sphere-mascot-crown">${mascots[lIdx % 3]}</div>
           <div class="sphere-badge-label">${lab.title}</div>
           <div class="sphere-slots-wrapper" id="slots_wrap_${lIdx}">
             ${lab.slots.map(s => `<div class="circle-char-slot ${s.ch ? 'filled' : ''}">${s.ch}</div>`).join('')}
