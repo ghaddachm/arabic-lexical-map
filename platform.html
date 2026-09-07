@@ -3,10 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ السَّحَابِ وَالفَضَاءِ V3</title>
+  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ السَّحَابِ وَالفَضَاءِ</title>
   <style>
     :root {
       --primary: #4338ca;
@@ -345,7 +342,7 @@
     }
 
     /* ========================================================= */
-    /* 2. سحابة الحكاية البانورامية العريضة */
+    /* 2. سحابة الحكاية */
     /* ========================================================= */
     .kawaii-cloud-universe {
       position: relative;
@@ -484,7 +481,7 @@
     }
 
     /* ========================================================= */
-    /* 3. أقراص التركيب: تصميم المركبات الكوكبية الطافية الفسيحة */
+    /* 3. أقراص التركيب: أطباق طائرة فضائية حقيقية (بدون أي صناديق) */
     /* ========================================================= */
     .spheres-free-stage {
       display: flex;
@@ -495,112 +492,101 @@
       position: relative;
     }
 
-    .spheres-container-row {
+    .saucer-stations-row {
       display: flex;
       justify-content: center;
-      gap: 2.4rem;
+      gap: 2.5rem;
       flex-wrap: wrap;
-      margin-top: 2.5rem;
+      margin-top: 2rem;
       position: relative;
       z-index: 5;
     }
 
-    /* قرص كوكبي بيضاوي كروي 3D مائل دون أي مربع */
-    .round-game-sphere {
+    /* هيكل الصحن الفضائي المقوس الحقيقي */
+    .saucer-station-unit {
       position: relative;
-      width: 420px;
-      min-height: 340px;
-      border-radius: 90px 90px 75px 75px / 75px 75px 85px 85px;
-      padding: 2.6rem 1.8rem 2rem;
+      width: 440px;
+      min-height: 380px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border: 7px solid #ffffff;
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      color: #1e293b;
+      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.6));
+      transition: transform 0.25s ease;
     }
 
-    .sphere-theme-1 { 
-      background: radial-gradient(circle at 50% 20%, #fffbeb 0%, #fde047 35%, #f59e0b 90%);
-      box-shadow: 0 20px 0 #b45309, 0 30px 50px rgba(245, 158, 11, 0.45);
-    }
-    .sphere-theme-2 { 
-      background: radial-gradient(circle at 50% 20%, #f0fdfa 0%, #7dd3fc 35%, #0284c7 90%);
-      box-shadow: 0 20px 0 #0369a1, 0 30px 50px rgba(2, 132, 199, 0.45);
-    }
-    .sphere-theme-3 { 
-      background: radial-gradient(circle at 50% 20%, #fdf2f8 0%, #f472b6 35%, #db2777 90%);
-      box-shadow: 0 20px 0 #9d174d, 0 30px 50px rgba(219, 39, 119, 0.45);
+    .saucer-station-unit:hover {
+      transform: translateY(-8px) scale(1.03);
     }
 
-    .round-game-sphere:hover {
-      transform: translateY(-10px) scale(1.03);
-    }
-
-    .sphere-mascot-crown {
+    .saucer-svg-bg {
       position: absolute;
-      top: -38px;
-      width: 70px;
-      height: 70px;
-      background: #ffffff;
-      border: 5px solid #ffffff;
-      border-radius: 50%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .saucer-content-wrapper {
+      position: relative;
+      z-index: 5;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      font-size: 2.2rem;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
-      animation: crownBob 2.5s infinite ease-in-out alternate;
+      width: 100%;
+      padding: 55px 25px 25px;
     }
 
-    @keyframes crownBob {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-8px); }
+    .saucer-mascot-head {
+      font-size: 2.8rem;
+      margin-bottom: 0.2rem;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
     }
 
-    .sphere-badge-label {
+    .saucer-badge-tag {
       background: #ffffff;
       color: #0f172a;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 900;
-      padding: 0.45rem 1.8rem;
-      border-radius: 35px;
-      box-shadow: 0 5px 12px rgba(0,0,0,0.12);
+      padding: 0.35rem 1.8rem;
+      border-radius: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       margin-bottom: 1.2rem;
     }
 
-    .sphere-slots-wrapper {
+    .saucer-slots-stream {
       display: flex;
       justify-content: center;
-      gap: 0.65rem;
+      gap: 0.6rem;
       flex-wrap: nowrap;
-      margin: 0.6rem 0 1.6rem;
+      margin: 0.6rem 0 1.5rem;
       width: 100%;
     }
 
-    .circle-char-slot {
+    .saucer-char-bubble {
       width: 58px;
       height: 58px;
       border-radius: 50%;
-      border: 3.5px dashed rgba(30, 41, 59, 0.65);
+      border: 3.5px dashed rgba(255, 255, 255, 0.8);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.95rem;
       font-weight: 900;
-      background: rgba(255, 255, 255, 0.95);
-      color: #0369a1;
-      box-shadow: inset 0 3px 6px rgba(0,0,0,0.15), 0 4px 8px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      box-shadow: inset 0 3px 6px rgba(0,0,0,0.2);
       flex-shrink: 0;
     }
 
-    .circle-char-slot.filled {
-      border: 3.5px solid #2563eb;
-      background: #eff6ff;
-      color: #2563eb;
+    .saucer-char-bubble.filled {
+      border: 3.5px solid #ffffff;
+      background: #ffffff;
+      color: #1e1b4b;
       transform: scale(1.1);
-      box-shadow: 0 6px 14px rgba(37, 99, 235, 0.4);
+      box-shadow: 0 6px 16px rgba(255, 255, 255, 0.6);
       animation: popSlot 0.3s ease;
     }
 
@@ -610,39 +596,39 @@
       100% { transform: scale(1.1); }
     }
 
-    .sphere-choices-row {
+    .saucer-buttons-rack {
       display: flex;
       justify-content: center;
       gap: 0.9rem;
     }
 
-    .candy-char-btn {
+    .saucer-gem-btn {
       width: 60px;
       height: 60px;
       background: #ffffff;
-      border: 4px solid #ca8a04;
+      border: 3.5px solid #facc15;
       color: #854d0e;
       border-radius: 50%;
       font-size: 2rem;
       font-weight: 900;
       cursor: pointer;
-      box-shadow: 0 6px 0 #ca8a04;
+      box-shadow: 0 6px 0 #ca8a04, 0 10px 15px rgba(0,0,0,0.25);
       transition: all 0.12s;
     }
 
-    .candy-char-btn:hover {
+    .saucer-gem-btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 9px 0 #ca8a04;
     }
 
-    .candy-char-btn:active {
+    .saucer-gem-btn:active {
       transform: translateY(4px);
       box-shadow: 0 1px 0 #ca8a04;
     }
 
-    .sphere-feedback-alert {
+    .saucer-feedback-toast {
       margin-top: 1rem;
-      padding: 0.5rem 1.2rem;
+      padding: 0.5rem 1.4rem;
       border-radius: 25px;
       font-weight: 900;
       font-size: 1rem;
@@ -936,13 +922,13 @@
   <nav class="nav-tabs-container">
     <button class="tab-pill active" onclick="switchMainTab('radialMap', this)">☀️ شَمْسُ الجَذْرِ</button>
     <button class="tab-pill" onclick="switchMainTab('storyTab', this)">📖 سَحَابَةُ الحِكَايَةِ</button>
-    <button class="tab-pill" onclick="switchMainTab('labTab', this)">⚙️ أَقْرَاصُ التَّرْكِيبِ</button>
+    <button class="tab-pill" onclick="switchMainTab('labTab', this)">🛸 أَقْرَاصُ التَّرْكِيبِ</button>
     <button class="tab-pill" onclick="switchMainTab('quizTab', this)">🧩 حَلَبَةُ البَزْل</button>
   </nav>
 
   <main>
     <!-- ========================================================= -->
-    <!-- 1. شمس الجذر: فضاء كرتوني سحري -->
+    <!-- 1. شمس الجذر -->
     <!-- ========================================================= -->
     <div id="radialMap" class="tab-view active">
       <div class="space-system-arena" id="starsSky">
@@ -1207,14 +1193,14 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- 3. ورشة أقراص التركيب: تصميم المركبات الكوكبية الطافية الفسيحة -->
+    <!-- 3. ورشة أقراص التركيب: أطباق طائرة فضائية حقيقية -->
     <!-- ========================================================= -->
     <div id="labTab" class="tab-view">
       <div class="spheres-free-stage">
-        <h3 style="font-size: 2.3rem; font-weight: 900; color: #facc15; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">🪐 أَقْرَاصُ التَّرْكِيبِ الصَّرْفِيِّ</h3>
+        <h3 style="font-size: 2.3rem; font-weight: 900; color: #facc15; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">🛸 مَحَطَّاتُ التَّرْكِيبِ الفَضَائِيِّ 🪐</h3>
         <p style="font-size: 1.2rem; font-weight: 800; color: #bae6fd; margin-top: 0.4rem;">اخْتَرِ الحَرْفَ المُنَاسِبَ دُونَ إِعْطَاءِ الإِجَابَةِ مُسْبَقاً:</p>
 
-        <div class="spheres-container-row" id="discsContainer"></div>
+        <div class="saucer-stations-row" id="discsContainer"></div>
       </div>
     </div>
 
@@ -1826,28 +1812,75 @@
       Sound.speak(text);
     }
 
+    // ورشة محطات الأطباق الفضائية المقوسة (SVG Flying Saucers)
     function renderDiscsWorkshop(labs) {
       const container = document.getElementById('discsContainer');
       container.innerHTML = '';
 
-      const themes = ['sphere-theme-1', 'sphere-theme-2', 'sphere-theme-3'];
+      const saucerColors = [
+        { hull: 'url(#saucerGrad1)', rim: '#eab308', glow: '#fef08a' },
+        { hull: 'url(#saucerGrad2)', rim: '#0284c7', glow: '#38bdf8' },
+        { hull: 'url(#saucerGrad3)', rim: '#db2777', glow: '#f472b6' }
+      ];
       const mascots = ['🛸', '👨‍🚀', '👾'];
 
       labs.forEach((lab, lIdx) => {
-        const sphere = document.createElement('div');
-        sphere.className = `round-game-sphere ${themes[lIdx % 3]}`;
-        sphere.innerHTML = `
-          <div class="sphere-mascot-crown">${mascots[lIdx % 3]}</div>
-          <div class="sphere-badge-label">${lab.title}</div>
-          <div class="sphere-slots-wrapper" id="slots_wrap_${lIdx}">
-            ${lab.slots.map(s => `<div class="circle-char-slot ${s.ch ? 'filled' : ''}">${s.ch}</div>`).join('')}
+        const saucer = document.createElement('div');
+        saucer.className = 'saucer-station-unit';
+        saucer.innerHTML = `
+          <!-- مسار الصحن الطائر المقوس بالكامل -->
+          <svg class="saucer-svg-bg" viewBox="0 0 440 380" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="saucerGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#fef08a"/>
+                <stop offset="40%" stop-color="#fde047"/>
+                <stop offset="100%" stop-color="#f59e0b"/>
+              </linearGradient>
+              <linearGradient id="saucerGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#bae6fd"/>
+                <stop offset="40%" stop-color="#38bdf8"/>
+                <stop offset="100%" stop-color="#0284c7"/>
+              </linearGradient>
+              <linearGradient id="saucerGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#fbcfe8"/>
+                <stop offset="40%" stop-color="#f472b6"/>
+                <stop offset="100%" stop-color="#db2777"/>
+              </linearGradient>
+            </defs>
+
+            <!-- القبة الزجاجية العلوية المقوسة -->
+            <path d="M 160,85 C 160,25 280,25 280,85 Z" fill="rgba(255,255,255,0.4)" stroke="#ffffff" stroke-width="4"/>
+
+            <!-- قرص الصحن البيضاوي العريض المقوس من كل الأطراف -->
+            <path d="M 220,50 
+                     C 380,50 435,110 435,210 
+                     C 435,320 370,365 220,365 
+                     C 70,365 5,320 5,210 
+                     C 5,110 60,50 220,50 Z" 
+                  fill="${saucerColors[lIdx % 3].hull}" 
+                  stroke="#ffffff" 
+                  stroke-width="8"/>
+
+            <!-- حلقة نيون بيضاوية مقوسة حول الصحن -->
+            <ellipse cx="220" cy="210" rx="205" ry="140" fill="none" stroke="${saucerColors[lIdx % 3].glow}" stroke-width="4" opacity="0.75"/>
+          </svg>
+
+          <div class="saucer-content-wrapper">
+            <div class="saucer-mascot-head">${mascots[lIdx % 3]}</div>
+            <div class="saucer-badge-tag">${lab.title}</div>
+
+            <div class="saucer-slots-stream" id="slots_wrap_${lIdx}">
+              ${lab.slots.map(s => `<div class="saucer-char-bubble ${s.ch ? 'filled' : ''}">${s.ch}</div>`).join('')}
+            </div>
+
+            <div class="saucer-buttons-rack">
+              ${lab.pool.map(p => `<button class="saucer-gem-btn" onclick="checkSphereChar(this, ${lIdx}, '${p}')">${p}</button>`).join('')}
+            </div>
+
+            <div class="saucer-feedback-toast" id="fb_sphere_${lIdx}"></div>
           </div>
-          <div class="sphere-choices-row">
-            ${lab.pool.map(p => `<button class="candy-char-btn" onclick="checkSphereChar(this, ${lIdx}, '${p}')">${p}</button>`).join('')}
-          </div>
-          <div class="sphere-feedback-alert" id="fb_sphere_${lIdx}"></div>
         `;
-        container.appendChild(sphere);
+        container.appendChild(saucer);
       });
     }
 
@@ -1857,7 +1890,7 @@
       const lab = db[rootKey].labs[lIdx];
       const target = lab.slots.find(s => !s.ch);
       const fb = document.getElementById(`fb_sphere_${lIdx}`);
-      const emptySlot = document.querySelectorAll(`#slots_wrap_${lIdx} .circle-char-slot:not(.filled)`)[0];
+      const emptySlot = document.querySelectorAll(`#slots_wrap_${lIdx} .saucer-char-bubble:not(.filled)`)[0];
 
       if (char === target.correct) {
         emptySlot.textContent = char;
