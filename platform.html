@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ الفَضَاءِ وَالسَّحَابِ</title>
+  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ الأَلْعَابِ اللُّغَوِيَّةِ</title>
   <style>
     :root {
       --primary: #4338ca;
@@ -19,7 +19,7 @@
     }
 
     body {
-      background: #020617 radial-gradient(circle at center, #1e1b4b 0%, #030712 100%);
+      background: #070a13 radial-gradient(circle at center, #1e1b4b 0%, #030712 100%);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -94,6 +94,7 @@
       gap: 0.5rem;
     }
 
+    /* التبويبات الفضائية */
     .nav-tabs-container {
       display: flex;
       justify-content: center;
@@ -153,12 +154,12 @@
     }
 
     /* ========================================================= */
-    /* 1. شمس الجذر: فضاء كرتوني سحري بالنجوم ورواد الفضاء */
+    /* 1. شمس الجذر: فضاء كوني غني بالسدم والشهب والنجوم */
     /* ========================================================= */
     .space-system-arena {
       position: relative;
       width: 100%;
-      min-height: 740px;
+      min-height: 720px;
       background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #0c0a24 45%, #020617 100%);
       border-radius: 80px;
       border: 8px solid #38bdf8;
@@ -169,7 +170,38 @@
       overflow: hidden;
     }
 
-    /* خلفية النجوم اللامعة المتلألئة */
+    /* سديم كوني ناعم وملون */
+    .nebula-cloud {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .nebula-purple { width: 380px; height: 380px; background: #c084fc; top: -50px; left: -50px; }
+    .nebula-cyan { width: 340px; height: 340px; background: #06b6d4; bottom: -40px; right: -40px; }
+
+    /* شهاب متوهج يمر في السماء */
+    .shooting-star {
+      position: absolute;
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, #ffffff, transparent);
+      top: 15%;
+      left: 10%;
+      transform: rotate(-35deg);
+      opacity: 0.7;
+      animation: shoot 4s infinite linear;
+      pointer-events: none;
+    }
+
+    @keyframes shoot {
+      0% { transform: translateX(0) translateY(0) rotate(-35deg); opacity: 0; }
+      10% { opacity: 0.9; }
+      30% { transform: translateX(350px) translateY(240px) rotate(-35deg); opacity: 0; }
+      100% { opacity: 0; }
+    }
+
     .space-twinkle-star {
       position: absolute;
       border-radius: 50%;
@@ -192,7 +224,7 @@
       pointer-events: none;
     }
 
-    /* رواد الفضاء الصغار الطافون (SVG مستوحى من صورتك) */
+    /* رواد الفضاء الصغار */
     .astro-kid {
       position: absolute;
       z-index: 15;
@@ -200,24 +232,15 @@
       pointer-events: none;
       filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
     }
-
-    .astro-kid-1 {
-      top: 50px;
-      right: 5%;
-    }
-
-    .astro-kid-2 {
-      bottom: 60px;
-      left: 4%;
-      animation-delay: 1.5s;
-    }
+    .astro-kid-1 { top: 50px; right: 5%; }
+    .astro-kid-2 { bottom: 60px; left: 4%; animation-delay: 1.5s; }
 
     @keyframes astroFloat {
       0% { transform: translateY(0) rotate(-4deg); }
       100% { transform: translateY(-16px) rotate(4deg); }
     }
 
-    /* قرص الشمس الكرتوني المبتسم */
+    /* قرص الشمس في المركز */
     .cartoon-sun-core {
       position: absolute;
       z-index: 10;
@@ -337,7 +360,7 @@
     }
 
     /* ========================================================= */
-    /* 2. سحابة الحكاية اللطيفة (Kawaii Cloud مع قطرات المطر) */
+    /* 2. سحابة الحكاية: سحابة Kawaii بدون أي إطار خارجي أبيض */
     /* ========================================================= */
     .kawaii-cloud-realm {
       position: relative;
@@ -347,7 +370,6 @@
       padding: 1.5rem 1rem 4rem;
     }
 
-    /* سحابات صغيرة مرافقة تسبح في الجوانب */
     .mini-side-cloud {
       position: absolute;
       animation: sideCloudFloat 3.5s infinite ease-in-out alternate;
@@ -362,7 +384,6 @@
       100% { transform: translateY(-12px) scale(1.05); }
     }
 
-    /* السحابة الأم الكبرى اللطيفة */
     .kawaii-cloud-stage {
       position: relative;
       background: #ffffff;
@@ -376,7 +397,6 @@
       text-align: center;
     }
 
-    /* ملامح وجه السحابة اللطيف (عيون ناعمة وخدود وردية) */
     .cloud-face-features {
       display: flex;
       align-items: center;
@@ -408,7 +428,6 @@
       margin: -5px auto 1.5rem;
     }
 
-    /* قطرات المطر الملونة المتدلية أسفل السحابة */
     .rain-droplets-row {
       display: flex;
       justify-content: center;
@@ -487,14 +506,13 @@
     }
 
     /* ========================================================= */
-    /* 3. أقراص التركيب الكروية الفسيحة */
+    /* 3. أقراص التركيب: منصات طافية بحرية بدون إطار أبيض يحيطها */
     /* ========================================================= */
-    .spherical-discs-arena {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 70px;
-      padding: 3rem 2rem;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
-      color: #1e293b;
+    .spheres-free-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 0 3rem;
       text-align: center;
     }
 
@@ -515,9 +533,10 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4);
       border: 6px solid #ffffff;
       transition: all 0.25s ease;
+      color: #1e293b;
     }
 
     .sphere-theme-1 { background: radial-gradient(circle at top, #fef08a 0%, #fed7aa 100%); border-bottom: 10px solid #f59e0b; }
@@ -611,14 +630,13 @@
     }
 
     /* ========================================================= */
-    /* 4. حلبة قطع البزل الحقيقية بمسارات الأحجية */
+    /* 4. حلبة قطع البزل الحقيقية: طافية بحرية بدون إطار مستطيل */
     /* ========================================================= */
-    .real-puzzle-arena {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 70px;
-      padding: 3rem 2rem;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
-      color: #1e293b;
+    .puzzle-free-arena {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 0 3rem;
       text-align: center;
     }
 
@@ -641,7 +659,7 @@
       padding: 2.5rem 1.8rem;
       color: white;
       transition: all 0.25s ease;
-      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.25));
+      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
     }
 
     .jigsaw-svg-card:hover {
@@ -681,7 +699,7 @@
       line-height: 1.6;
       margin-bottom: 1.2rem;
       min-height: 60px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.25);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
 
     .puzzle-target-slot {
@@ -729,13 +747,13 @@
       font-size: 1.15rem;
       font-weight: 900;
       cursor: grab;
-      box-shadow: 0 5px 0 rgba(0,0,0,0.2);
+      box-shadow: 0 5px 0 rgba(0,0,0,0.25);
       transition: all 0.15s;
     }
 
     .drag-piece-token:hover {
       transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 7px 0 rgba(0,0,0,0.25);
+      box-shadow: 0 7px 0 rgba(0,0,0,0.3);
     }
 
     .puzzle-feedback-toast {
@@ -897,30 +915,28 @@
 
   <main>
     <!-- ========================================================= -->
-    <!-- 1. شمس الجذر: فضاء كرتوني سحري بالنجوم المتلألئة ورواد الفضاء -->
+    <!-- 1. شمس الجذر الفضائية -->
     <!-- ========================================================= -->
     <div id="radialMap" class="tab-view active">
       <div class="space-system-arena" id="starsSky">
+        <div class="nebula-cloud nebula-purple"></div>
+        <div class="nebula-cloud nebula-cyan"></div>
+        <div class="shooting-star"></div>
         <div class="orbit-ellipse-wide"></div>
 
-        <!-- رائد فضاء صغير 1 يسبح في الفضاء (SVG كرتوني لطيف) -->
+        <!-- رائد فضاء 1 -->
         <div class="astro-kid astro-kid-1">
           <svg viewBox="0 0 120 120" width="110" height="110">
-            <!-- خوذة زجاجية دائرية متوهجة -->
             <circle cx="60" cy="45" r="35" fill="rgba(255,255,255,0.25)" stroke="#38bdf8" stroke-width="4"/>
-            <!-- رأس الفتى الصغير المبتسم -->
             <circle cx="60" cy="45" r="24" fill="#fed7aa"/>
             <path d="M42 36 Q60 15 78 36 Z" fill="#f97316"/>
-            <!-- عيون ناعمة وخدود -->
             <circle cx="52" cy="44" r="3" fill="#1e293b"/>
             <circle cx="68" cy="44" r="3" fill="#1e293b"/>
             <circle cx="48" cy="49" r="3" fill="#f43f5e" opacity="0.6"/>
             <circle cx="72" cy="49" r="3" fill="#f43f5e" opacity="0.6"/>
             <path d="M56 50 Q60 55 64 50" stroke="#1e293b" stroke-width="2" fill="none"/>
-            <!-- بدلة الفضاء البيضاء ذات الخطوط التركوازية -->
             <rect x="42" y="75" width="36" height="30" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="3"/>
             <rect x="52" y="80" width="16" height="12" rx="3" fill="#0284c7"/>
-            <!-- أذرع وأرجل ملوحة -->
             <ellipse cx="30" cy="80" rx="8" ry="14" fill="#ffffff" transform="rotate(-30 30 80)"/>
             <ellipse cx="90" cy="80" rx="8" ry="14" fill="#ffffff" transform="rotate(30 90 80)"/>
             <ellipse cx="48" cy="110" rx="6" ry="9" fill="#0284c7"/>
@@ -928,7 +944,7 @@
           </svg>
         </div>
 
-        <!-- رائد فضاء صغير 2 يسبح في الجانب الآخر -->
+        <!-- رائد فضاء 2 -->
         <div class="astro-kid astro-kid-2">
           <svg viewBox="0 0 120 120" width="105" height="105">
             <circle cx="60" cy="45" r="34" fill="rgba(255,255,255,0.25)" stroke="#ec4899" stroke-width="4"/>
@@ -948,14 +964,14 @@
           </svg>
         </div>
 
-        <!-- قرص الشمس المبتسم في المركز -->
+        <!-- قرص الشمس -->
         <div class="cartoon-sun-core" onclick="openRootModal()">
           <div class="sun-root-letters" id="coreLetters">[ د - ح - ر - ج ]</div>
           <div class="sun-badge-desc" id="coreConcept">الجَذْرُ الرُّبَاعِيُّ</div>
           <span style="font-size: 0.75rem; color: #78350f; font-weight: 900; margin-top: 0.4rem;">🔊 انقر للاستكشاف</span>
         </div>
 
-        <!-- الكواكب الخمسة الموزعة يميناً ويساراً -->
+        <!-- الكواكب الخمسة -->
         <div class="space-planet-sphere planet-1-verb" onclick="openMorphModal(0)">
           <span class="planet-title-label">الحدث / الفعل</span>
           <div class="planet-word-text" id="b1_word">دَحْرَجَ</div>
@@ -989,11 +1005,10 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- 2. سحابة الحكاية: سحابة Kawaii لطيفة بملامح باسمة وقطرات مطر -->
+    <!-- 2. سحابة الحكاية: سحابة Kawaii بدون أي إطار خارجي أبيض -->
     <!-- ========================================================= -->
     <div id="storyTab" class="tab-view">
       <div class="kawaii-cloud-realm">
-        <!-- سحابة مرافقة صغيرة 1 على اليسار -->
         <div class="mini-side-cloud mini-cloud-left">
           <svg viewBox="0 0 100 65" width="100" height="65">
             <path d="M 20,40 A 15,15 0 0,1 35,20 A 20,20 0 0,1 70,18 A 15,15 0 0,1 85,35 A 15,15 0 0,1 75,55 L 20,55 A 15,15 0 0,1 20,40 Z" fill="#e0f2fe" stroke="#38bdf8" stroke-width="3"/>
@@ -1004,7 +1019,6 @@
           </svg>
         </div>
 
-        <!-- سحابة مرافقة صغيرة 2 على اليمين -->
         <div class="mini-side-cloud mini-cloud-right">
           <svg viewBox="0 0 100 65" width="95" height="60">
             <path d="M 20,40 A 15,15 0 0,1 35,20 A 20,20 0 0,1 70,18 A 15,15 0 0,1 85,35 A 15,15 0 0,1 75,55 L 20,55 A 15,15 0 0,1 20,40 Z" fill="#fef08a" stroke="#eab308" stroke-width="3"/>
@@ -1015,9 +1029,7 @@
           </svg>
         </div>
 
-        <!-- السحابة الأم الكبرى اللطيفة (Kawaii Cloud) -->
         <div class="kawaii-cloud-stage">
-          <!-- ملامح الوجه اللطيف (مطابقة 100% لصورتك) -->
           <div class="cloud-face-features">
             <div class="cloud-cheeks-pink"></div>
             <div class="cloud-kawaii-eye"></div>
@@ -1037,7 +1049,6 @@
 
           <div class="story-words-cloud-box" id="storyWordsContainer"></div>
 
-          <!-- قطرات المطر الملونة المتدلية أسفل السحابة -->
           <div class="rain-droplets-row">
             <svg class="droplet-svg" viewBox="0 0 20 30" width="20" height="30">
               <path d="M10 0 C10 0 0 15 0 22 C0 27 4.5 30 10 30 C15.5 30 20 27 20 22 C20 15 10 0 10 0 Z" fill="#38bdf8"/>
@@ -1060,26 +1071,24 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- 3. ورشة أقراص التركيب -->
+    <!-- 3. ورشة أقراص التركيب: منصات طافية بحرية بدون إطار أبيض -->
     <!-- ========================================================= -->
     <div id="labTab" class="tab-view">
-      <div class="spherical-discs-arena">
-        <h3 style="font-size: 2.2rem; font-weight: 900; color: #0284c7;">🪐 أَقْرَاصُ التَّرْكِيبِ الصَّرْفِيِّ</h3>
-        <p style="font-size: 1.15rem; font-weight: 800; color: #64748b; margin-top: 0.4rem;">اخْتَرِ الحَرْفَ المُنَاسِبَ دُونَ إِعْطَاءِ الإِجَابَةِ مُسْبَقاً:</p>
+      <div class="spheres-free-stage">
+        <h3 style="font-size: 2.3rem; font-weight: 900; color: #facc15; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">🪐 أَقْرَاصُ التَّرْكِيبِ الصَّرْفِيِّ</h3>
+        <p style="font-size: 1.2rem; font-weight: 800; color: #bae6fd; margin-top: 0.4rem;">اخْتَرِ الحَرْفَ المُنَاسِبَ دُونَ إِعْطَاءِ الإِجَابَةِ مُسْبَقاً:</p>
 
         <div class="spheres-container-row" id="discsContainer"></div>
       </div>
     </div>
 
     <!-- ========================================================= -->
-    <!-- 4. حلبة قطع البزل الحقيقية بمسارات الأحجية -->
+    <!-- 4. حلبة قطع البزل الحقيقية: طافية بحرية بدون إطار مستطيل -->
     <!-- ========================================================= -->
     <div id="quizTab" class="tab-view">
-      <div class="real-puzzle-arena">
-        <div style="text-align: center; margin-bottom: 2rem;">
-          <h3 style="font-size: 2.3rem; font-weight: 900; color: #65a30d;">🧩 حَلَبَةُ قِطَعِ البَزْل الصَّرْفِيَّةِ</h3>
-          <p style="font-size: 1.15rem; font-weight: 800; color: #64748b;">اسْحَبْ قِطْعَةَ البَزْل المُنَاسِبَةَ وَأَفْلِتْهَا فِي الفَجْوَةِ، أَوْ انْقُرْ عَلَيْهَا:</p>
-        </div>
+      <div class="puzzle-free-arena">
+        <h3 style="font-size: 2.3rem; font-weight: 900; color: #a3e635; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">🧩 حَلَبَةُ قِطَعِ البَزْل الصَّرْفِيَّةِ</h3>
+        <p style="font-size: 1.2rem; font-weight: 800; color: #bae6fd; margin-top: 0.4rem;">اسْحَبْ قِطْعَةَ البَزْل المُنَاسِبَةَ وَأَفْلِتْهَا فِي الفَجْوَةِ، أَوْ انْقُرْ عَلَيْهَا:</p>
 
         <div class="jigsaw-pieces-flex" id="puzzleContainer"></div>
       </div>
@@ -1401,10 +1410,8 @@
     let starsCount = 0;
     let currentMissionIdx = 0;
 
-    // توليد النجوم المتلألئة ديناميكياً لكسر زرقة الفضاء
     function generateTwinkleStars() {
       const sky = document.getElementById('starsSky');
-      // تنظيف النجوم القديمة مع الإبقاء على العناصر الأساسية
       document.querySelectorAll('.space-twinkle-star').forEach(s => s.remove());
 
       for (let i = 0; i < 45; i++) {
@@ -1433,15 +1440,9 @@
       });
 
       generateTwinkleStars();
-
-      // مسرح الحكاية
       currentMissionIdx = 0;
       loadInteractiveStory(data);
-
-      // أقراص التركيب
       renderDiscsWorkshop(data.labs);
-
-      // حلبة قطع البزل
       renderRealPuzzleArena(data.quizzes);
     }
 
@@ -1611,7 +1612,6 @@
       }
     }
 
-    // حلبة قطع البزل الحقيقية
     function renderRealPuzzleArena(quizzes) {
       const container = document.getElementById('puzzleContainer');
       container.innerHTML = '';
