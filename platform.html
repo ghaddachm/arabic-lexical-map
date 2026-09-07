@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ البَزْلِ وَالمَجَرَّاتِ</title>
+  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ الفَضَاءِ وَالسَّحَابِ</title>
   <style>
     :root {
       --primary: #4338ca;
@@ -19,7 +19,7 @@
     }
 
     body {
-      background: #090d16 radial-gradient(circle at center, #1e1b4b 0%, #020617 100%);
+      background: #020617 radial-gradient(circle at center, #1e1b4b 0%, #030712 100%);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -28,7 +28,7 @@
       color: #ffffff;
     }
 
-    /* رأس الصفحة */
+    /* شريط الرأس */
     header {
       background: #ffffff;
       margin: 0.8rem 1.5rem;
@@ -94,7 +94,6 @@
       gap: 0.5rem;
     }
 
-    /* أزرار التبويبات الفضائية */
     .nav-tabs-container {
       display: flex;
       justify-content: center;
@@ -154,36 +153,76 @@
     }
 
     /* ========================================================= */
-    /* 1. شمس الجذر: مجرة فضائية دائرية حقيقية دون أي صناديق */
+    /* 1. شمس الجذر: فضاء كرتوني سحري بالنجوم ورواد الفضاء */
     /* ========================================================= */
     .space-system-arena {
       position: relative;
       width: 100%;
-      min-height: 720px;
-      background: #020617 radial-gradient(circle at center, #1e1b4b 0%, #020617 100%);
+      min-height: 740px;
+      background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #0c0a24 45%, #020617 100%);
       border-radius: 80px;
       border: 8px solid #38bdf8;
-      box-shadow: 0 20px 60px rgba(56, 189, 248, 0.25);
+      box-shadow: 0 20px 60px rgba(56, 189, 248, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
     }
 
+    /* خلفية النجوم اللامعة المتلألئة */
+    .space-twinkle-star {
+      position: absolute;
+      border-radius: 50%;
+      background: #ffffff;
+      animation: starBlink 2s infinite alternate ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes starBlink {
+      0% { opacity: 0.2; transform: scale(0.7); }
+      100% { opacity: 1; transform: scale(1.3); filter: drop-shadow(0 0 6px #fde047); }
+    }
+
     .orbit-ellipse-wide {
       position: absolute;
-      width: 820px;
-      height: 480px;
+      width: 840px;
+      height: 500px;
       border: 3px dashed rgba(56, 189, 248, 0.35);
       border-radius: 50%;
       pointer-events: none;
     }
 
+    /* رواد الفضاء الصغار الطافون (SVG مستوحى من صورتك) */
+    .astro-kid {
+      position: absolute;
+      z-index: 15;
+      animation: astroFloat 4s infinite ease-in-out alternate;
+      pointer-events: none;
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+    }
+
+    .astro-kid-1 {
+      top: 50px;
+      right: 5%;
+    }
+
+    .astro-kid-2 {
+      bottom: 60px;
+      left: 4%;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes astroFloat {
+      0% { transform: translateY(0) rotate(-4deg); }
+      100% { transform: translateY(-16px) rotate(4deg); }
+    }
+
+    /* قرص الشمس الكرتوني المبتسم */
     .cartoon-sun-core {
       position: absolute;
       z-index: 10;
-      width: 230px;
-      height: 230px;
+      width: 225px;
+      height: 225px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #fffbeb 0%, #fde047 40%, #eab308 100%);
       border: 8px solid #ffffff;
@@ -238,33 +277,32 @@
       z-index: 25;
     }
 
-    /* توزيع الكواكب يميناً ويساراً دون ازدحام علوي */
     .planet-1-verb {
       width: 165px; height: 165px;
       background: radial-gradient(circle at 30% 30%, #f472b6 0%, #db2777 50%, #831843 100%);
       box-shadow: 0 0 35px rgba(219, 39, 119, 0.65);
-      top: 60px; right: 10%;
+      top: 60px; right: 18%;
     }
 
     .planet-2-agent {
       width: 175px; height: 175px;
       background: radial-gradient(circle at 30% 30%, #60a5fa 0%, #2563eb 50%, #1e3a8a 100%);
       box-shadow: 0 0 35px rgba(37, 99, 235, 0.65);
-      top: 60px; left: 10%;
+      top: 60px; left: 18%;
     }
 
     .planet-3-patient {
       width: 165px; height: 165px;
       background: radial-gradient(circle at 30% 30%, #f87171 0%, #dc2626 50%, #7f1d1d 100%);
       box-shadow: 0 0 35px rgba(220, 38, 38, 0.65);
-      bottom: 50px; left: 12%;
+      bottom: 50px; left: 16%;
     }
 
     .planet-4-place {
       width: 165px; height: 165px;
       background: radial-gradient(circle at 30% 30%, #4ade80 0%, #16a34a 50%, #14532d 100%);
       box-shadow: 0 0 35px rgba(22, 163, 74, 0.65);
-      bottom: 50px; right: 12%;
+      bottom: 50px; right: 16%;
     }
 
     .planet-5-source {
@@ -299,40 +337,106 @@
     }
 
     /* ========================================================= */
-    /* 2. سحابة الحكاية: سحابة قطنية حقيقية مرسومة بالـ SVG */
+    /* 2. سحابة الحكاية اللطيفة (Kawaii Cloud مع قطرات المطر) */
     /* ========================================================= */
-    .cloud-wrapper-outer {
+    .kawaii-cloud-realm {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 1rem;
+      padding: 1.5rem 1rem 4rem;
     }
 
-    .svg-cloud-background-container {
-      position: relative;
-      width: 100%;
-      max-width: 1050px;
-      margin: 0 auto;
+    /* سحابات صغيرة مرافقة تسبح في الجوانب */
+    .mini-side-cloud {
+      position: absolute;
+      animation: sideCloudFloat 3.5s infinite ease-in-out alternate;
+      pointer-events: none;
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+    }
+    .mini-cloud-left { top: 20px; left: 2%; }
+    .mini-cloud-right { top: 70px; right: 2%; animation-delay: 1.8s; }
+
+    @keyframes sideCloudFloat {
+      0% { transform: translateY(0) scale(0.95); }
+      100% { transform: translateY(-12px) scale(1.05); }
     }
 
-    /* طبقة المحتوى داخل السحابة */
-    .cloud-inner-content {
+    /* السحابة الأم الكبرى اللطيفة */
+    .kawaii-cloud-stage {
       position: relative;
-      z-index: 5;
+      background: #ffffff;
+      border: 8px solid #38bdf8;
+      border-radius: 90px 90px 70px 70px / 80px 80px 60px 60px;
       padding: 3rem 4rem 4rem;
+      max-width: 1050px;
+      width: 100%;
+      box-shadow: 0 25px 60px rgba(56, 189, 248, 0.4), inset 0 0 35px rgba(224, 242, 254, 0.6);
       color: #1e293b;
       text-align: center;
+    }
+
+    /* ملامح وجه السحابة اللطيف (عيون ناعمة وخدود وردية) */
+    .cloud-face-features {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .cloud-kawaii-eye {
+      width: 26px;
+      height: 14px;
+      border-top: 5px solid #1e293b;
+      border-radius: 26px 26px 0 0;
+    }
+
+    .cloud-cheeks-pink {
+      width: 32px;
+      height: 18px;
+      background: #f472b6;
+      border-radius: 50%;
+      opacity: 0.75;
+    }
+
+    .cloud-sweet-smile {
+      width: 30px;
+      height: 15px;
+      border-bottom: 4px solid #1e293b;
+      border-radius: 0 0 30px 30px;
+      margin: -5px auto 1.5rem;
+    }
+
+    /* قطرات المطر الملونة المتدلية أسفل السحابة */
+    .rain-droplets-row {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .droplet-svg {
+      animation: dropDrip 2s infinite ease-in-out alternate;
+    }
+    .droplet-svg:nth-child(2) { animation-delay: 0.4s; }
+    .droplet-svg:nth-child(3) { animation-delay: 0.8s; }
+    .droplet-svg:nth-child(4) { animation-delay: 1.2s; }
+    .droplet-svg:nth-child(5) { animation-delay: 1.6s; }
+
+    @keyframes dropDrip {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(15px); }
     }
 
     .cloud-instruction-badge {
       background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
       border: 4px solid #ca8a04;
       border-radius: 40px;
-      padding: 1.2rem 2.5rem;
+      padding: 1rem 2.2rem;
       display: inline-block;
       box-shadow: 0 8px 20px rgba(202, 138, 4, 0.3);
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .task-mission-pill {
@@ -342,7 +446,7 @@
       border-radius: 30px;
       font-weight: 900;
       display: inline-block;
-      margin-top: 0.6rem;
+      margin-top: 0.5rem;
       font-size: 1.15rem;
       box-shadow: 0 4px 0 #be185d;
     }
@@ -383,7 +487,7 @@
     }
 
     /* ========================================================= */
-    /* 3. أقراص التركيب: منصات كروية واسعة لا تخرج منها الحروف */
+    /* 3. أقراص التركيب الكروية الفسيحة */
     /* ========================================================= */
     .spherical-discs-arena {
       background: rgba(255, 255, 255, 0.95);
@@ -420,7 +524,7 @@
     .sphere-theme-2 { background: radial-gradient(circle at top, #bae6fd 0%, #c7d2fe 100%); border-bottom: 10px solid #3b82f6; }
     .sphere-theme-3 { background: radial-gradient(circle at top, #fbcfe8 0%, #f5d0fe 100%); border-bottom: 10px solid #ec4899; }
 
-    .sphere-theme-1:hover, .sphere-theme-2:hover, .sphere-theme-3:hover {
+    .round-game-sphere:hover {
       transform: translateY(-8px) scale(1.02);
     }
 
@@ -507,7 +611,7 @@
     }
 
     /* ========================================================= */
-    /* 4. حلبة قطع البزل الحقيقية (SVG Jigsaw Puzzle Paths) */
+    /* 4. حلبة قطع البزل الحقيقية بمسارات الأحجية */
     /* ========================================================= */
     .real-puzzle-arena {
       background: rgba(255, 255, 255, 0.95);
@@ -526,7 +630,6 @@
       margin-top: 2rem;
     }
 
-    /* بطاقة البزل ذات الشكل الهندسي المقصوص كأحجية حقيقية */
     .jigsaw-svg-card {
       position: relative;
       width: 320px;
@@ -793,10 +896,57 @@
   </nav>
 
   <main>
-    <!-- 1. شمس الجذر: كواكب تدور يميناً ويساراً بدون ازدحام علوي -->
+    <!-- ========================================================= -->
+    <!-- 1. شمس الجذر: فضاء كرتوني سحري بالنجوم المتلألئة ورواد الفضاء -->
+    <!-- ========================================================= -->
     <div id="radialMap" class="tab-view active">
-      <div class="space-system-arena">
+      <div class="space-system-arena" id="starsSky">
         <div class="orbit-ellipse-wide"></div>
+
+        <!-- رائد فضاء صغير 1 يسبح في الفضاء (SVG كرتوني لطيف) -->
+        <div class="astro-kid astro-kid-1">
+          <svg viewBox="0 0 120 120" width="110" height="110">
+            <!-- خوذة زجاجية دائرية متوهجة -->
+            <circle cx="60" cy="45" r="35" fill="rgba(255,255,255,0.25)" stroke="#38bdf8" stroke-width="4"/>
+            <!-- رأس الفتى الصغير المبتسم -->
+            <circle cx="60" cy="45" r="24" fill="#fed7aa"/>
+            <path d="M42 36 Q60 15 78 36 Z" fill="#f97316"/>
+            <!-- عيون ناعمة وخدود -->
+            <circle cx="52" cy="44" r="3" fill="#1e293b"/>
+            <circle cx="68" cy="44" r="3" fill="#1e293b"/>
+            <circle cx="48" cy="49" r="3" fill="#f43f5e" opacity="0.6"/>
+            <circle cx="72" cy="49" r="3" fill="#f43f5e" opacity="0.6"/>
+            <path d="M56 50 Q60 55 64 50" stroke="#1e293b" stroke-width="2" fill="none"/>
+            <!-- بدلة الفضاء البيضاء ذات الخطوط التركوازية -->
+            <rect x="42" y="75" width="36" height="30" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="3"/>
+            <rect x="52" y="80" width="16" height="12" rx="3" fill="#0284c7"/>
+            <!-- أذرع وأرجل ملوحة -->
+            <ellipse cx="30" cy="80" rx="8" ry="14" fill="#ffffff" transform="rotate(-30 30 80)"/>
+            <ellipse cx="90" cy="80" rx="8" ry="14" fill="#ffffff" transform="rotate(30 90 80)"/>
+            <ellipse cx="48" cy="110" rx="6" ry="9" fill="#0284c7"/>
+            <ellipse cx="72" cy="110" rx="6" ry="9" fill="#0284c7"/>
+          </svg>
+        </div>
+
+        <!-- رائد فضاء صغير 2 يسبح في الجانب الآخر -->
+        <div class="astro-kid astro-kid-2">
+          <svg viewBox="0 0 120 120" width="105" height="105">
+            <circle cx="60" cy="45" r="34" fill="rgba(255,255,255,0.25)" stroke="#ec4899" stroke-width="4"/>
+            <circle cx="60" cy="45" r="23" fill="#fed7aa"/>
+            <path d="M44 38 Q60 18 76 38 Z" fill="#78350f"/>
+            <circle cx="53" cy="44" r="3" fill="#1e293b"/>
+            <circle cx="67" cy="44" r="3" fill="#1e293b"/>
+            <circle cx="48" cy="49" r="3" fill="#f43f5e" opacity="0.6"/>
+            <circle cx="72" cy="49" r="3" fill="#f43f5e" opacity="0.6"/>
+            <path d="M57 50 Q60 54 63 50" stroke="#1e293b" stroke-width="2" fill="none"/>
+            <rect x="44" y="74" width="32" height="28" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="3"/>
+            <circle cx="60" cy="84" r="5" fill="#ec4899"/>
+            <ellipse cx="32" cy="85" rx="7" ry="12" fill="#ffffff" transform="rotate(25 32 85)"/>
+            <ellipse cx="88" cy="75" rx="7" ry="12" fill="#ffffff" transform="rotate(-40 88 75)"/>
+            <ellipse cx="50" cy="108" rx="6" ry="8" fill="#ec4899"/>
+            <ellipse cx="70" cy="108" rx="6" ry="8" fill="#ec4899"/>
+          </svg>
+        </div>
 
         <!-- قرص الشمس المبتسم في المركز -->
         <div class="cartoon-sun-core" onclick="openRootModal()">
@@ -805,35 +955,31 @@
           <span style="font-size: 0.75rem; color: #78350f; font-weight: 900; margin-top: 0.4rem;">🔊 انقر للاستكشاف</span>
         </div>
 
-        <!-- 1. كوكب الفعل (أعلى اليمين) -->
+        <!-- الكواكب الخمسة الموزعة يميناً ويساراً -->
         <div class="space-planet-sphere planet-1-verb" onclick="openMorphModal(0)">
           <span class="planet-title-label">الحدث / الفعل</span>
           <div class="planet-word-text" id="b1_word">دَحْرَجَ</div>
           <span class="planet-weight-sub" id="b1_pattern">(فَعْلَلَ)</span>
         </div>
 
-        <!-- 2. كوكب الفاعل (أعلى اليسار) -->
         <div class="space-planet-sphere planet-2-agent" onclick="openMorphModal(1)">
           <span class="planet-title-label">الفاعل</span>
           <div class="planet-word-text" id="b2_word">مُدَحْرِجٌ</div>
           <span class="planet-weight-sub" id="b2_pattern">(مُفَعْلِلٌ)</span>
         </div>
 
-        <!-- 3. كوكب المفعول (أسفل اليسار) -->
         <div class="space-planet-sphere planet-3-patient" onclick="openMorphModal(2)">
           <span class="planet-title-label">المفعول</span>
           <div class="planet-word-text" id="b3_word">مُدَحْرَجٌ</div>
           <span class="planet-weight-sub" id="b3_pattern">(مُفَعْلَلٌ)</span>
         </div>
 
-        <!-- 4. كوكب المكان (أسفل اليمين) -->
         <div class="space-planet-sphere planet-4-place" onclick="openMorphModal(3)">
           <span class="planet-title-label">المكان</span>
           <div class="planet-word-text" id="b4_word">مُدَحْرَجٌ</div>
           <span class="planet-weight-sub" id="b4_pattern">(مُفَعْلَلٌ)</span>
         </div>
 
-        <!-- 5. كوكب المصدر (أسفل المنتصف) -->
         <div class="space-planet-sphere planet-5-source" onclick="openMorphModal(4)">
           <span class="planet-title-label">المصدر</span>
           <div class="planet-word-text" id="b5_word">دَحْرَجَةٌ</div>
@@ -842,44 +988,80 @@
       </div>
     </div>
 
-    <!-- 2. سحابة الحكاية: سحابة قطنية حقيقية مرسومة بالمسارات -->
+    <!-- ========================================================= -->
+    <!-- 2. سحابة الحكاية: سحابة Kawaii لطيفة بملامح باسمة وقطرات مطر -->
+    <!-- ========================================================= -->
     <div id="storyTab" class="tab-view">
-      <div class="cloud-wrapper-outer">
-        <div class="svg-cloud-background-container">
-          <!-- مسار السحابة الحقيقي المنحني بالكامل -->
-          <svg class="jigsaw-bg-shape" viewBox="0 0 1000 600" preserveAspectRatio="none">
-            <path d="M 200,100 
-                     A 100,100 0 0,1 380,60 
-                     A 120,120 0 0,1 620,50 
-                     A 100,100 0 0,1 800,100 
-                     A 90,90 0 0,1 940,220 
-                     A 100,100 0 0,1 920,400 
-                     A 100,100 0 0,1 800,520 
-                     A 110,110 0 0,1 550,550 
-                     A 110,110 0 0,1 300,540 
-                     A 100,100 0 0,1 120,440 
-                     A 100,100 0 0,1 80,260 
-                     A 100,100 0 0,1 200,100 Z" 
-                  fill="#ffffff" stroke="#bae6fd" stroke-width="12"/>
+      <div class="kawaii-cloud-realm">
+        <!-- سحابة مرافقة صغيرة 1 على اليسار -->
+        <div class="mini-side-cloud mini-cloud-left">
+          <svg viewBox="0 0 100 65" width="100" height="65">
+            <path d="M 20,40 A 15,15 0 0,1 35,20 A 20,20 0 0,1 70,18 A 15,15 0 0,1 85,35 A 15,15 0 0,1 75,55 L 20,55 A 15,15 0 0,1 20,40 Z" fill="#e0f2fe" stroke="#38bdf8" stroke-width="3"/>
+            <circle cx="45" cy="38" r="2.5" fill="#0369a1"/>
+            <circle cx="60" cy="38" r="2.5" fill="#0369a1"/>
+            <circle cx="40" cy="42" r="3" fill="#f472b6" opacity="0.6"/>
+            <circle cx="65" cy="42" r="3" fill="#f472b6" opacity="0.6"/>
           </svg>
+        </div>
 
-          <div class="cloud-inner-content">
-            <div class="cloud-instruction-badge">
-              <h3 style="font-size: 1.6rem; font-weight: 900; color: #713f12;">سَحَابَةُ الاِسْتِكْشَافِ القِرَائِيِّ 📖</h3>
-              <p style="font-size: 1.15rem; font-weight: 800; color: #854d0e;">اقْرَأِ النَّصَّ يَا بَطَلُ، وَانْقُرْ مُبَاشَرَةً عَلَى الكَلِمَةِ المَطْلُوبَةِ لِتَتَلَوَّنَ بِالأَخْضَرِ!</p>
-              <div class="task-mission-pill" id="storyMissionBadge">المَهَمَّةُ: ...</div>
-              <div style="margin-top: 0.6rem;">
-                <button class="modal-audio-btn" onclick="speakCurrentStory()">🔊 اسْتَمِعْ لِلنَّصِّ كَامِلاً</button>
-              </div>
+        <!-- سحابة مرافقة صغيرة 2 على اليمين -->
+        <div class="mini-side-cloud mini-cloud-right">
+          <svg viewBox="0 0 100 65" width="95" height="60">
+            <path d="M 20,40 A 15,15 0 0,1 35,20 A 20,20 0 0,1 70,18 A 15,15 0 0,1 85,35 A 15,15 0 0,1 75,55 L 20,55 A 15,15 0 0,1 20,40 Z" fill="#fef08a" stroke="#eab308" stroke-width="3"/>
+            <circle cx="45" cy="38" r="2.5" fill="#854d0e"/>
+            <circle cx="60" cy="38" r="2.5" fill="#854d0e"/>
+            <circle cx="40" cy="42" r="3" fill="#f87171" opacity="0.6"/>
+            <circle cx="65" cy="42" r="3" fill="#f87171" opacity="0.6"/>
+          </svg>
+        </div>
+
+        <!-- السحابة الأم الكبرى اللطيفة (Kawaii Cloud) -->
+        <div class="kawaii-cloud-stage">
+          <!-- ملامح الوجه اللطيف (مطابقة 100% لصورتك) -->
+          <div class="cloud-face-features">
+            <div class="cloud-cheeks-pink"></div>
+            <div class="cloud-kawaii-eye"></div>
+            <div class="cloud-kawaii-eye"></div>
+            <div class="cloud-cheeks-pink"></div>
+          </div>
+          <div class="cloud-sweet-smile"></div>
+
+          <div class="cloud-instruction-badge">
+            <h3 style="font-size: 1.6rem; font-weight: 900; color: #713f12;">سَحَابَةُ الاِسْتِكْشَافِ القِرَائِيِّ 📖</h3>
+            <p style="font-size: 1.15rem; font-weight: 800; color: #854d0e;">اقْرَأِ النَّصَّ يَا بَطَلُ، وَانْقُرْ مُبَاشَرَةً عَلَى الكَلِمَةِ المَطْلُوبَةِ لِتَتَلَوَّنَ بِالأَخْضَرِ!</p>
+            <div class="task-mission-pill" id="storyMissionBadge">المَهَمَّةُ: ...</div>
+            <div style="margin-top: 0.6rem;">
+              <button class="modal-audio-btn" onclick="speakCurrentStory()">🔊 اسْتَمِعْ لِلنَّصِّ كَامِلاً</button>
             </div>
+          </div>
 
-            <div class="story-words-cloud-box" id="storyWordsContainer"></div>
+          <div class="story-words-cloud-box" id="storyWordsContainer"></div>
+
+          <!-- قطرات المطر الملونة المتدلية أسفل السحابة -->
+          <div class="rain-droplets-row">
+            <svg class="droplet-svg" viewBox="0 0 20 30" width="20" height="30">
+              <path d="M10 0 C10 0 0 15 0 22 C0 27 4.5 30 10 30 C15.5 30 20 27 20 22 C20 15 10 0 10 0 Z" fill="#38bdf8"/>
+            </svg>
+            <svg class="droplet-svg" viewBox="0 0 20 30" width="20" height="30">
+              <path d="M10 0 C10 0 0 15 0 22 C0 27 4.5 30 10 30 C15.5 30 20 27 20 22 C20 15 10 0 10 0 Z" fill="#60a5fa"/>
+            </svg>
+            <svg class="droplet-svg" viewBox="0 0 20 30" width="20" height="30">
+              <path d="M10 0 C10 0 0 15 0 22 C0 27 4.5 30 10 30 C15.5 30 20 27 20 22 C20 15 10 0 10 0 Z" fill="#38bdf8"/>
+            </svg>
+            <svg class="droplet-svg" viewBox="0 0 20 30" width="20" height="30">
+              <path d="M10 0 C10 0 0 15 0 22 C0 27 4.5 30 10 30 C15.5 30 20 27 20 22 C20 15 10 0 10 0 Z" fill="#60a5fa"/>
+            </svg>
+            <svg class="droplet-svg" viewBox="0 0 20 30" width="20" height="30">
+              <path d="M10 0 C10 0 0 15 0 22 C0 27 4.5 30 10 30 C15.5 30 20 27 20 22 C20 15 10 0 10 0 Z" fill="#38bdf8"/>
+            </svg>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 3. ورشة أقراص التركيب: منصات كروية واسعة لا تخرج منها الحروف -->
+    <!-- ========================================================= -->
+    <!-- 3. ورشة أقراص التركيب -->
+    <!-- ========================================================= -->
     <div id="labTab" class="tab-view">
       <div class="spherical-discs-arena">
         <h3 style="font-size: 2.2rem; font-weight: 900; color: #0284c7;">🪐 أَقْرَاصُ التَّرْكِيبِ الصَّرْفِيِّ</h3>
@@ -889,7 +1071,9 @@
       </div>
     </div>
 
+    <!-- ========================================================= -->
     <!-- 4. حلبة قطع البزل الحقيقية بمسارات الأحجية -->
+    <!-- ========================================================= -->
     <div id="quizTab" class="tab-view">
       <div class="real-puzzle-arena">
         <div style="text-align: center; margin-bottom: 2rem;">
@@ -902,7 +1086,7 @@
     </div>
   </main>
 
-  <!-- النافذة المنبثقة للتحليل الصرفي -->
+  <!-- النافذة المنبثقة للتحليل الصرفي وقواعد الصياغة -->
   <div class="modal-overlay" id="morphModal" onclick="closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -1217,6 +1401,26 @@
     let starsCount = 0;
     let currentMissionIdx = 0;
 
+    // توليد النجوم المتلألئة ديناميكياً لكسر زرقة الفضاء
+    function generateTwinkleStars() {
+      const sky = document.getElementById('starsSky');
+      // تنظيف النجوم القديمة مع الإبقاء على العناصر الأساسية
+      document.querySelectorAll('.space-twinkle-star').forEach(s => s.remove());
+
+      for (let i = 0; i < 45; i++) {
+        const star = document.createElement('div');
+        star.className = 'space-twinkle-star';
+        const size = Math.random() * 4 + 2;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.top = `${Math.random() * 95}%`;
+        star.style.left = `${Math.random() * 95}%`;
+        star.style.animationDelay = `${Math.random() * 3}s`;
+        star.style.animationDuration = `${Math.random() * 2 + 1.5}s`;
+        sky.appendChild(star);
+      }
+    }
+
     function loadRadialWorld(rootKey) {
       const data = db[rootKey];
 
@@ -1228,6 +1432,8 @@
         document.getElementById(`b${i+1}_pattern`).textContent = `(${b.weight.split(' ')[0]})`;
       });
 
+      generateTwinkleStars();
+
       // مسرح الحكاية
       currentMissionIdx = 0;
       loadInteractiveStory(data);
@@ -1235,7 +1441,7 @@
       // أقراص التركيب
       renderDiscsWorkshop(data.labs);
 
-      // حلبة قطع البزل الحقيقية بمسارات SVG
+      // حلبة قطع البزل
       renderRealPuzzleArena(data.quizzes);
     }
 
@@ -1250,7 +1456,6 @@
       document.getElementById('mColloc').textContent = branch.colloc;
       document.getElementById('mExample').textContent = branch.ex;
 
-      // لافتة القاعدة الذهبية
       const ruleBanner = document.getElementById('mRuleBanner');
       if (branch.rule) {
         ruleBanner.style.display = 'block';
@@ -1261,7 +1466,6 @@
 
       document.getElementById('mAudioBtn').onclick = () => Sound.speak(branch.plain);
 
-      // عائلة المزيد
       const affixCard = document.getElementById('mAffixCard');
       const affixList = document.getElementById('mAffixList');
       const affixTitle = document.getElementById('mAffixTitle');
@@ -1308,7 +1512,6 @@
       }
     }
 
-    // سحابة الحكاية
     function loadInteractiveStory(data) {
       const container = document.getElementById('storyWordsContainer');
       container.innerHTML = '';
@@ -1360,7 +1563,6 @@
       Sound.speak(text);
     }
 
-    // أقراص التركيب
     function renderDiscsWorkshop(labs) {
       const container = document.getElementById('discsContainer');
       container.innerHTML = '';
@@ -1409,9 +1611,7 @@
       }
     }
 
-    // =========================================================
-    // حلبة قطع البزل الحقيقية بمسارات الأحجية المنحنية
-    // =========================================================
+    // حلبة قطع البزل الحقيقية
     function renderRealPuzzleArena(quizzes) {
       const container = document.getElementById('puzzleContainer');
       container.innerHTML = '';
@@ -1423,7 +1623,6 @@
         const card = document.createElement('div');
         card.className = 'jigsaw-svg-card';
         card.innerHTML = `
-          <!-- مسار قطعة البزل الهندسية الحقيقية مع النتوء والفجوة -->
           <svg class="jigsaw-bg-shape" viewBox="0 0 320 420" preserveAspectRatio="none">
             <path d="M 40,40 
                      L 130,40 
