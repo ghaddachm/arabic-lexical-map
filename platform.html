@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ الأَلْعَابِ اللُّغَوِيَّةِ</title>
+  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ الفَضَاءِ وَالسَّحَابِ</title>
   <style>
     :root {
       --primary: #4338ca;
-      --c-root: #dc2626;  /* أحمر فاقع للجذر */
-      --c-affix: #2563eb; /* أزرق فاقع للزيادة */
+      --c-root: #dc2626;
+      --c-affix: #2563eb;
     }
 
     * {
@@ -19,7 +19,7 @@
     }
 
     body {
-      background: #070a13 radial-gradient(circle at center, #1e1b4b 0%, #030712 100%);
+      background: #060913 radial-gradient(circle at center, #1e1b4b 0%, #020617 100%);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -28,7 +28,6 @@
       color: #ffffff;
     }
 
-    /* شريط الرأس */
     header {
       background: #ffffff;
       margin: 0.8rem 1.5rem;
@@ -94,7 +93,6 @@
       gap: 0.5rem;
     }
 
-    /* التبويبات الفضائية */
     .nav-tabs-container {
       display: flex;
       justify-content: center;
@@ -154,7 +152,7 @@
     }
 
     /* ========================================================= */
-    /* 1. شمس الجذر: فضاء كوني وأشعة شمس متلألئة */
+    /* 1. شمس الجذر: فضاء كوني واسع وأشعة متوهجة */
     /* ========================================================= */
     .space-system-arena {
       position: relative;
@@ -168,36 +166,6 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-    }
-
-    .nebula-cloud {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.35;
-      pointer-events: none;
-    }
-    .nebula-purple { width: 380px; height: 380px; background: #c084fc; top: -50px; left: -50px; }
-    .nebula-cyan { width: 340px; height: 340px; background: #06b6d4; bottom: -40px; right: -40px; }
-
-    .shooting-star {
-      position: absolute;
-      width: 120px;
-      height: 2px;
-      background: linear-gradient(90deg, #ffffff, transparent);
-      top: 15%;
-      left: 10%;
-      transform: rotate(-35deg);
-      opacity: 0.7;
-      animation: shoot 4s infinite linear;
-      pointer-events: none;
-    }
-
-    @keyframes shoot {
-      0% { transform: translateX(0) translateY(0) rotate(-35deg); opacity: 0; }
-      10% { opacity: 0.9; }
-      30% { transform: translateX(350px) translateY(240px) rotate(-35deg); opacity: 0; }
-      100% { opacity: 0; }
     }
 
     .space-twinkle-star {
@@ -237,16 +205,16 @@
       100% { transform: translateY(-16px) rotate(4deg); }
     }
 
-    /* قرص الشمس الكرتوني مع أشعة متوهجة */
+    /* قرص الشمس الواسع مع أشعة مثلثة واضحة */
     .cartoon-sun-core {
       position: absolute;
       z-index: 10;
-      width: 260px;
-      height: 260px;
+      width: 270px;
+      height: 270px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #fffbeb 0%, #fde047 45%, #eab308 100%);
       border: 8px solid #ffffff;
-      box-shadow: 0 0 70px rgba(250, 204, 21, 0.85);
+      box-shadow: 0 0 75px rgba(250, 204, 21, 0.95);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -256,11 +224,10 @@
       animation: sunBeat 3s infinite alternate ease-in-out;
     }
 
-    /* أشعة الشمس المثلثة الدوارة حول القرص */
     .sun-rays-halo {
       position: absolute;
-      width: 320px;
-      height: 320px;
+      width: 350px;
+      height: 350px;
       pointer-events: none;
       animation: spinHalo 24s linear infinite;
     }
@@ -272,16 +239,15 @@
 
     @keyframes sunBeat {
       0% { transform: scale(1); }
-      100% { transform: scale(1.04); }
+      100% { transform: scale(1.03); }
     }
 
     .sun-root-letters {
-      font-size: 2.15rem;
+      font-size: 2.1rem;
       font-weight: 900;
       color: #7f1d1d;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       white-space: nowrap;
-      padding: 0 10px;
       line-height: 1.2;
     }
 
@@ -289,7 +255,7 @@
       font-size: 0.95rem;
       font-weight: 900;
       color: #854d0e;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.9);
       padding: 0.25rem 0.9rem;
       border-radius: 14px;
       margin-top: 0.3rem;
@@ -375,39 +341,28 @@
     }
 
     /* ========================================================= */
-    /* 2. سحابة الحكاية */
+    /* 2. سحابة الحكاية: سحابة قطنية نقية 100% دون أي إطار مستطيل */
     /* ========================================================= */
-    .kawaii-cloud-realm {
+    .pure-cloud-container {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 1.5rem 1rem 4rem;
+      justify-content: center;
+      padding: 2rem 1rem 4rem;
+      width: 100%;
     }
 
-    .mini-side-cloud {
-      position: absolute;
-      animation: sideCloudFloat 3.5s infinite ease-in-out alternate;
-      pointer-events: none;
-      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
-    }
-    .mini-cloud-left { top: 20px; left: 2%; }
-    .mini-cloud-right { top: 70px; right: 2%; animation-delay: 1.8s; }
-
-    @keyframes sideCloudFloat {
-      0% { transform: translateY(0) scale(0.95); }
-      100% { transform: translateY(-12px) scale(1.05); }
-    }
-
-    .kawaii-cloud-stage {
+    /* شكل السحابة البيضاء العضوية المقوسة المباشرة */
+    .organic-cotton-cloud {
       position: relative;
       background: #ffffff;
       border: 8px solid #38bdf8;
-      border-radius: 90px 90px 70px 70px / 80px 80px 60px 60px;
-      padding: 3rem 4rem 4rem;
-      max-width: 1050px;
-      width: 100%;
-      box-shadow: 0 25px 60px rgba(56, 189, 248, 0.4), inset 0 0 35px rgba(224, 242, 254, 0.6);
+      border-radius: 120px 140px 100px 110px / 90px 100px 80px 95px;
+      box-shadow: 0 30px 70px rgba(56, 189, 248, 0.45);
+      padding: 3.5rem 3rem 4rem;
+      max-width: 980px;
+      width: 95%;
       color: #1e293b;
       text-align: center;
     }
@@ -443,26 +398,6 @@
       margin: -5px auto 1.5rem;
     }
 
-    .rain-droplets-row {
-      display: flex;
-      justify-content: center;
-      gap: 2.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .droplet-svg {
-      animation: dropDrip 2s infinite ease-in-out alternate;
-    }
-    .droplet-svg:nth-child(2) { animation-delay: 0.4s; }
-    .droplet-svg:nth-child(3) { animation-delay: 0.8s; }
-    .droplet-svg:nth-child(4) { animation-delay: 1.2s; }
-    .droplet-svg:nth-child(5) { animation-delay: 1.6s; }
-
-    @keyframes dropDrip {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(15px); }
-    }
-
     .cloud-instruction-badge {
       background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
       border: 4px solid #ca8a04;
@@ -489,12 +424,12 @@
       font-size: 1.85rem;
       line-height: 2.8;
       color: #1e293b;
-      max-width: 900px;
+      max-width: 850px;
       margin: 0 auto;
     }
 
     .story-click-pill {
-      background: #ffffff;
+      background: #f8fafc;
       border: 3px solid #94a3b8;
       padding: 0.25rem 1rem;
       border-radius: 30px;
@@ -520,8 +455,28 @@
       transform: scale(1.12);
     }
 
+    .rain-droplets-row {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: 1.8rem;
+    }
+
+    .droplet-svg {
+      animation: dropDrip 2s infinite ease-in-out alternate;
+    }
+    .droplet-svg:nth-child(2) { animation-delay: 0.4s; }
+    .droplet-svg:nth-child(3) { animation-delay: 0.8s; }
+    .droplet-svg:nth-child(4) { animation-delay: 1.2s; }
+    .droplet-svg:nth-child(5) { animation-delay: 1.6s; }
+
+    @keyframes dropDrip {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(15px); }
+    }
+
     /* ========================================================= */
-    /* 3. أقراص التركيب: منصات طافية بحرية */
+    /* 3. أقراص التركيب */
     /* ========================================================= */
     .spheres-free-stage {
       display: flex;
@@ -557,10 +512,6 @@
     .sphere-theme-1 { background: radial-gradient(circle at top, #fef08a 0%, #fed7aa 100%); border-bottom: 10px solid #f59e0b; }
     .sphere-theme-2 { background: radial-gradient(circle at top, #bae6fd 0%, #c7d2fe 100%); border-bottom: 10px solid #3b82f6; }
     .sphere-theme-3 { background: radial-gradient(circle at top, #fbcfe8 0%, #f5d0fe 100%); border-bottom: 10px solid #ec4899; }
-
-    .round-game-sphere:hover {
-      transform: translateY(-8px) scale(1.02);
-    }
 
     .sphere-badge-label {
       background: #ffffff;
@@ -645,7 +596,7 @@
     }
 
     /* ========================================================= */
-    /* 4. حلبة قطع البزل الحقيقية */
+    /* 4. حلبة قطع البزل */
     /* ========================================================= */
     .puzzle-free-arena {
       display: flex;
@@ -936,16 +887,12 @@
 
   <main>
     <!-- ========================================================= -->
-    <!-- 1. شمس الجذر: فضاء كرتوني سحري بالنجوم المتلألئة ورواد الفضاء -->
+    <!-- 1. شمس الجذر: شمس واسعة وأشعة مشعة -->
     <!-- ========================================================= -->
     <div id="radialMap" class="tab-view active">
       <div class="space-system-arena" id="starsSky">
-        <div class="nebula-cloud nebula-purple"></div>
-        <div class="nebula-cloud nebula-cyan"></div>
-        <div class="shooting-star"></div>
         <div class="orbit-ellipse-wide"></div>
 
-        <!-- رائد فضاء 1 -->
         <div class="astro-kid astro-kid-1">
           <svg viewBox="0 0 120 120" width="110" height="110">
             <circle cx="60" cy="45" r="35" fill="rgba(255,255,255,0.25)" stroke="#38bdf8" stroke-width="4"/>
@@ -965,7 +912,6 @@
           </svg>
         </div>
 
-        <!-- رائد فضاء 2 -->
         <div class="astro-kid astro-kid-2">
           <svg viewBox="0 0 120 120" width="105" height="105">
             <circle cx="60" cy="45" r="34" fill="rgba(255,255,255,0.25)" stroke="#ec4899" stroke-width="4"/>
@@ -985,7 +931,6 @@
           </svg>
         </div>
 
-        <!-- هالة أشعة الشمس الدوارة -->
         <svg class="sun-rays-halo" viewBox="0 0 100 100">
           <polygon points="50,0 55,14 45,14" fill="#fde047"/>
           <polygon points="50,100 55,86 45,86" fill="#fde047"/>
@@ -997,14 +942,12 @@
           <polygon points="15,85 28,79 21,72" fill="#fde047"/>
         </svg>
 
-        <!-- قرص الشمس -->
         <div class="cartoon-sun-core" onclick="openRootModal()">
           <div class="sun-root-letters" id="coreLetters">[ د - ح - ر - ج ]</div>
           <div class="sun-badge-desc" id="coreConcept">الجَذْرُ الرُّبَاعِيُّ</div>
           <span style="font-size: 0.8rem; color: #78350f; font-weight: 900; margin-top: 0.4rem;">🔊 انقر للاستكشاف</span>
         </div>
 
-        <!-- الكواكب الخمسة -->
         <div class="space-planet-sphere planet-1-verb" onclick="openMorphModal(0)">
           <span class="planet-title-label">الحدث / الفعل</span>
           <div class="planet-word-text" id="b1_word">دَحْرَجَ</div>
@@ -1038,31 +981,11 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- 2. سحابة الحكاية: سحابة Kawaii بدون أي إطار خارجي أبيض -->
+    <!-- 2. سحابة الحكاية: سحابة قطنية حقيقية طافية بحرية -->
     <!-- ========================================================= -->
     <div id="storyTab" class="tab-view">
-      <div class="kawaii-cloud-realm">
-        <div class="mini-side-cloud mini-cloud-left">
-          <svg viewBox="0 0 100 65" width="100" height="65">
-            <path d="M 20,40 A 15,15 0 0,1 35,20 A 20,20 0 0,1 70,18 A 15,15 0 0,1 85,35 A 15,15 0 0,1 75,55 L 20,55 A 15,15 0 0,1 20,40 Z" fill="#e0f2fe" stroke="#38bdf8" stroke-width="3"/>
-            <circle cx="45" cy="38" r="2.5" fill="#0369a1"/>
-            <circle cx="60" cy="38" r="2.5" fill="#0369a1"/>
-            <circle cx="40" cy="42" r="3" fill="#f472b6" opacity="0.6"/>
-            <circle cx="65" cy="42" r="3" fill="#f472b6" opacity="0.6"/>
-          </svg>
-        </div>
-
-        <div class="mini-side-cloud mini-cloud-right">
-          <svg viewBox="0 0 100 65" width="95" height="60">
-            <path d="M 20,40 A 15,15 0 0,1 35,20 A 20,20 0 0,1 70,18 A 15,15 0 0,1 85,35 A 15,15 0 0,1 75,55 L 20,55 A 15,15 0 0,1 20,40 Z" fill="#fef08a" stroke="#eab308" stroke-width="3"/>
-            <circle cx="45" cy="38" r="2.5" fill="#854d0e"/>
-            <circle cx="60" cy="38" r="2.5" fill="#854d0e"/>
-            <circle cx="40" cy="42" r="3" fill="#f87171" opacity="0.6"/>
-            <circle cx="65" cy="42" r="3" fill="#f87171" opacity="0.6"/>
-          </svg>
-        </div>
-
-        <div class="kawaii-cloud-stage">
+      <div class="pure-cloud-container">
+        <div class="organic-cotton-cloud">
           <div class="cloud-face-features">
             <div class="cloud-cheeks-pink"></div>
             <div class="cloud-kawaii-eye"></div>
@@ -1104,7 +1027,7 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- 3. ورشة أقراص التركيب: منصات طافية بحرية بدون إطار أبيض -->
+    <!-- 3. ورشة أقراص التركيب -->
     <!-- ========================================================= -->
     <div id="labTab" class="tab-view">
       <div class="spheres-free-stage">
@@ -1116,7 +1039,7 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- 4. حلبة قطع البزل الحقيقية: طافية بحرية بدون إطار مستطيل -->
+    <!-- 4. حلبة قطع البزل الحقيقية -->
     <!-- ========================================================= -->
     <div id="quizTab" class="tab-view">
       <div class="puzzle-free-arena">
@@ -1128,7 +1051,6 @@
     </div>
   </main>
 
-  <!-- النافذة المنبثقة للتحليل الصرفي وقواعد الصياغة -->
   <div class="modal-overlay" id="morphModal" onclick="closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
