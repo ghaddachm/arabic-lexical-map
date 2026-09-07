@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بَذْرَةُ الكَلِمَاتِ - مَجَرَّةُ الحُرُوفِ الذَّكِيَّةِ</title>
+  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ البَزْلِ وَالمَجَرَّاتِ</title>
   <style>
     :root {
-      --primary: #312e81;
-      --space-bg: #0b132b;
-      --sun-core: #f59e0b;
+      --primary: #4338ca;
       --c-root: #dc2626;  /* أحمر فاقع للجذر */
       --c-affix: #2563eb; /* أزرق فاقع للزيادة */
     }
@@ -21,7 +19,7 @@
     }
 
     body {
-      background: #0f172a radial-gradient(circle at center, #1e1b4b 0%, #090d16 100%);
+      background: #0f172a radial-gradient(circle at center, #1e1b4b 0%, #030712 100%);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -30,16 +28,16 @@
       color: #ffffff;
     }
 
-    /* رأس الصفحة الفضائي */
+    /* رأس الصفحة الدائري المريح */
     header {
-      background: rgba(255, 255, 255, 0.95);
+      background: #ffffff;
       margin: 0.8rem 1.5rem;
       padding: 0.6rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-radius: 40px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      border-radius: 50px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
       border: 4px solid #38bdf8;
     }
 
@@ -64,18 +62,18 @@
     .root-dropdown-wrapper {
       background: #fef08a;
       border: 3px solid #eab308;
-      padding: 0.35rem 1.2rem;
-      border-radius: 30px;
+      padding: 0.4rem 1.4rem;
+      border-radius: 35px;
       box-shadow: 0 4px 0 #ca8a04;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
     }
 
     .root-dropdown-wrapper select {
       border: none;
       background: transparent;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 900;
       color: #854d0e;
       outline: none;
@@ -86,43 +84,44 @@
       background: #ec4899;
       border: 3px solid #be185d;
       color: white;
-      padding: 0.4rem 1.4rem;
-      border-radius: 30px;
+      padding: 0.45rem 1.5rem;
+      border-radius: 35px;
       font-weight: 900;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       box-shadow: 0 4px 0 #9d174d;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
 
-    /* التبويبات الفضائية */
+    /* التبويبات بنمط وسائد بيضاوية طافية */
     .nav-tabs-container {
       display: flex;
       justify-content: center;
       padding: 0.4rem 1rem 0;
-      gap: 1rem;
+      gap: 1.2rem;
     }
 
     .tab-pill {
-      padding: 0.75rem 1.8rem;
-      border: 3px solid #ffffff;
-      background: rgba(255, 255, 255, 0.85);
-      font-size: 1.15rem;
+      padding: 0.8rem 2rem;
+      border: 3px solid #38bdf8;
+      background: rgba(15, 23, 42, 0.8);
+      font-size: 1.2rem;
       font-weight: 900;
-      color: #0369a1;
+      color: #bae6fd;
       cursor: pointer;
-      border-radius: 35px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      border-radius: 40px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
     }
 
     .tab-pill:hover {
-      transform: translateY(-3px) scale(1.03);
-      background: #ffffff;
+      transform: translateY(-3px) scale(1.04);
+      background: rgba(30, 41, 59, 0.95);
+      color: #ffffff;
     }
 
     .tab-pill.active {
@@ -135,34 +134,34 @@
 
     main {
       flex: 1;
-      max-width: 1350px;
+      max-width: 1380px;
       margin: 1.2rem auto 2.5rem;
       width: 95%;
     }
 
     .tab-view {
       display: none;
-      animation: popView 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: popTab 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .tab-view.active {
       display: block;
     }
 
-    @keyframes popView {
-      0% { transform: scale(0.94); opacity: 0; }
+    @keyframes popTab {
+      0% { transform: scale(0.93); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
 
     /* ========================================================= */
-    /* 1. شمس الجذر: المجموعة الشمسية الفضائية (مطابقة للصورة 1) */
+    /* 1. شمس الجذر: مجرة كروية فسيحة بدون ازدحام علوي */
     /* ========================================================= */
     .space-system-arena {
       position: relative;
       width: 100%;
-      min-height: 720px;
-      background: #020617 radial-gradient(circle at center, #1e1b4b 0%, #030712 100%);
-      border-radius: 60px;
+      min-height: 700px;
+      background: radial-gradient(circle at center, #1e1b4b 0%, #030712 100%);
+      border-radius: 70px;
       border: 8px solid #38bdf8;
       box-shadow: 0 20px 60px rgba(56, 189, 248, 0.25);
       overflow: hidden;
@@ -171,119 +170,59 @@
       justify-content: center;
     }
 
-    /* نجوم متلألئة في الفضاء */
-    .space-star {
+    /* مسارات المدارات البيضاوية الواسعة يميناً ويساراً */
+    .orbit-ellipse-wide {
       position: absolute;
-      background: white;
-      border-radius: 50%;
-      animation: twinkle 2s infinite ease-in-out alternate;
-    }
-
-    @keyframes twinkle {
-      0% { opacity: 0.2; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1.2); }
-    }
-
-    /* المدارات البيضاوية المتقطعة */
-    .orbit-ring {
-      position: absolute;
-      border: 2px dashed rgba(255, 255, 255, 0.25);
+      width: 82%;
+      height: 70%;
+      border: 3px dashed rgba(56, 189, 248, 0.35);
       border-radius: 50%;
       pointer-events: none;
     }
-
-    .orbit-1 { width: 380px; height: 380px; }
-    .orbit-2 { width: 620px; height: 620px; }
 
     /* قرص الشمس الكرتوني المبتسم في المركز */
     .cartoon-sun-core {
       position: absolute;
       z-index: 10;
-      width: 210px;
-      height: 210px;
+      width: 220px;
+      height: 220px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #fffbeb 0%, #fde047 40%, #eab308 100%);
-      border: 8px solid #fef08a;
-      box-shadow: 0 0 70px rgba(250, 204, 21, 0.75), inset 0 0 20px rgba(234, 179, 8, 0.5);
+      border: 8px solid #ffffff;
+      box-shadow: 0 0 70px rgba(250, 204, 21, 0.85);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
       cursor: pointer;
-      animation: sunPulse 3s infinite alternate ease-in-out;
+      animation: sunBeat 3s infinite alternate ease-in-out;
     }
 
-    @keyframes sunPulse {
+    @keyframes sunBeat {
       0% { transform: scale(1); }
-      100% { transform: scale(1.05); }
+      100% { transform: scale(1.06); }
     }
 
-    /* أشعة الشمس المثلثة حول القرص */
-    .sun-ray-triangles {
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      animation: spinRays 25s linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes spinRays {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .sun-face-eyes {
-      display: flex;
-      gap: 1.5rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .sun-eye {
-      width: 14px;
-      height: 18px;
-      background: #451a03;
-      border-radius: 50%;
-      position: relative;
-    }
-
-    .sun-eye::after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      width: 5px;
-      height: 5px;
-      background: white;
-      border-radius: 50%;
-    }
-
-    .sun-smile {
-      width: 28px;
-      height: 14px;
-      border-bottom: 4px solid #451a03;
-      border-radius: 0 0 14px 14px;
-      margin-bottom: 0.3rem;
-    }
-
-    .sun-root-text {
+    .sun-root-letters {
       font-size: 2.3rem;
       font-weight: 900;
       color: #7f1d1d;
       letter-spacing: 2px;
     }
 
-    .sun-concept-label {
-      font-size: 0.85rem;
+    .sun-badge-desc {
+      font-size: 0.9rem;
       font-weight: 900;
       color: #854d0e;
-      background: rgba(255, 255, 255, 0.75);
-      padding: 0.15rem 0.6rem;
-      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 0.2rem 0.8rem;
+      border-radius: 14px;
+      margin-top: 0.2rem;
     }
 
-    /* الكواكب الكروية الدائرية (الفروع الخمسة ككواكب المجموعة الشمسية) */
-    .planet-branch-sphere {
+    /* الكواكب الكروية الموزعة بالتساوي في الجوانب (يمين ويسار) */
+    .space-planet-sphere {
       position: absolute;
       border-radius: 50%;
       display: flex;
@@ -292,370 +231,350 @@
       justify-content: center;
       text-align: center;
       cursor: pointer;
-      border: 5px solid rgba(255, 255, 255, 0.85);
+      border: 6px solid rgba(255, 255, 255, 0.9);
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       z-index: 5;
     }
 
-    .planet-branch-sphere:hover {
-      transform: scale(1.15) translateY(-8px);
-      z-index: 20;
+    .space-planet-sphere:hover {
+      transform: scale(1.18) translateY(-6px);
+      z-index: 25;
     }
 
-    /* أحجام وألوان الكواكب الحقيقية مع ظلال كروية 3D */
-    .planet-earth {
-      width: 165px;
-      height: 165px;
-      background: radial-gradient(circle at 30% 30%, #60a5fa 0%, #2563eb 40%, #1d4ed8 70%, #0f172a 100%);
-      box-shadow: 0 0 35px rgba(37, 99, 235, 0.6);
-      top: 30px;
-      left: 15%;
+    /* توزيع الكواكب الخمسة بنظام متوازن يميناً ويساراً دون سد الجزء العلوي */
+    .planet-1-verb {
+      width: 160px; height: 160px;
+      background: radial-gradient(circle at 30% 30%, #f472b6 0%, #db2777 50%, #831843 100%);
+      box-shadow: 0 0 35px rgba(219, 39, 119, 0.65);
+      top: 60px; right: 10%;
     }
 
-    .planet-mars {
-      width: 145px;
-      height: 145px;
+    .planet-2-agent {
+      width: 175px; height: 175px;
+      background: radial-gradient(circle at 30% 30%, #60a5fa 0%, #2563eb 50%, #1e3a8a 100%);
+      box-shadow: 0 0 35px rgba(37, 99, 235, 0.65);
+      top: 60px; left: 10%;
+    }
+
+    .planet-3-patient {
+      width: 165px; height: 165px;
       background: radial-gradient(circle at 30% 30%, #f87171 0%, #dc2626 50%, #7f1d1d 100%);
-      box-shadow: 0 0 30px rgba(220, 38, 38, 0.6);
-      top: 55px;
-      right: 15%;
+      box-shadow: 0 0 35px rgba(220, 38, 38, 0.65);
+      bottom: 50px; left: 14%;
     }
 
-    .planet-jupiter {
-      width: 180px;
-      height: 180px;
-      background: radial-gradient(circle at 30% 30%, #fde047 0%, #ea580c 45%, #9a3412 80%, #431407 100%);
-      box-shadow: 0 0 40px rgba(234, 88, 12, 0.6);
-      bottom: 45px;
-      right: 12%;
+    .planet-4-place {
+      width: 160px; height: 160px;
+      background: radial-gradient(circle at 30% 30%, #4ade80 0%, #16a34a 50%, #14532d 100%);
+      box-shadow: 0 0 35px rgba(22, 163, 74, 0.65);
+      bottom: 50px; right: 14%;
     }
 
-    .planet-saturn {
-      width: 155px;
-      height: 155px;
-      background: radial-gradient(circle at 30% 30%, #fed7aa 0%, #d97706 50%, #78350f 100%);
-      box-shadow: 0 0 35px rgba(217, 119, 6, 0.6);
-      bottom: 45px;
-      left: 12%;
+    .planet-5-source {
+      width: 155px; height: 155px;
+      background: radial-gradient(circle at 30% 30%, #fb923c 0%, #ea580c 50%, #7c2d12 100%);
+      box-shadow: 0 0 35px rgba(234, 88, 12, 0.65);
+      bottom: 25px; left: 50%; transform: translateX(-50%);
     }
+    .planet-5-source:hover { transform: translateX(-50%) scale(1.18) translateY(-6px); }
 
-    /* حلقة كوكب زحل */
-    .saturn-ring {
-      position: absolute;
-      width: 225px;
-      height: 55px;
-      border: 6px solid rgba(254, 215, 170, 0.85);
-      border-radius: 50%;
-      transform: rotate(-25deg);
-      pointer-events: none;
-    }
-
-    .planet-neptune {
-      width: 140px;
-      height: 140px;
-      background: radial-gradient(circle at 30% 30%, #38bdf8 0%, #0284c7 50%, #0f172a 100%);
-      box-shadow: 0 0 30px rgba(2, 132, 199, 0.6);
-      top: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .planet-neptune:hover { transform: translateX(-50%) scale(1.15) translateY(-8px); }
-
-    .planet-role-tag {
-      background: rgba(0, 0, 0, 0.55);
+    .planet-title-label {
+      background: rgba(0, 0, 0, 0.6);
       color: #fef08a;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 900;
-      padding: 0.15rem 0.6rem;
+      padding: 0.2rem 0.7rem;
       border-radius: 12px;
       margin-bottom: 0.2rem;
     }
 
-    .planet-word-glow {
-      font-size: 1.8rem;
+    .planet-word-text {
+      font-size: 1.85rem;
       font-weight: 900;
       color: #ffffff;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
     }
 
-    .planet-pattern-mini {
-      font-size: 0.8rem;
-      color: #cbd5e1;
+    .planet-weight-sub {
+      font-size: 0.85rem;
+      color: #e2e8f0;
       font-weight: bold;
     }
 
-    /* 2. سحابة الحكاية */
-    .story-cloud-realm {
-      background: #ffffff;
-      border-radius: 80px 80px 70px 70px;
-      padding: 3rem 2.5rem;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+    /* ========================================================= */
+    /* 2. سحابة الحكاية: سحابة قطنية حقيقية كرتونية مبهجة */
+    /* ========================================================= */
+    .real-cloud-stage {
+      position: relative;
+      background: radial-gradient(circle at top, #ffffff 0%, #e0f2fe 100%);
+      /* تشكيل حواف سحابة حقيقية بفقاعات متعددة */
+      border-radius: 100px 90px 85px 95px / 80px 100px 75px 90px;
+      padding: 3.5rem 3rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
       border: 8px solid #ffffff;
       color: #1e293b;
     }
 
-    .story-top-art-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .cloud-speech-pill {
+    .cloud-instruction-bubble {
       background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
       border: 4px solid #ca8a04;
       border-radius: 40px;
       padding: 1.4rem 2.2rem;
-      max-width: 650px;
-      box-shadow: 0 8px 20px rgba(202, 138, 4, 0.2);
-      color: #713f12;
+      margin-bottom: 2rem;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(202, 138, 4, 0.25);
     }
 
-    .cloud-mission-tag {
+    .cloud-instruction-bubble h3 {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #713f12;
+      margin-bottom: 0.3rem;
+    }
+
+    .cloud-instruction-bubble p {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #854d0e;
+    }
+
+    .task-badge-target {
       background: #ec4899;
       color: white;
-      padding: 0.4rem 1.4rem;
-      border-radius: 25px;
+      padding: 0.4rem 1.6rem;
+      border-radius: 30px;
       font-weight: 900;
       display: inline-block;
       margin-top: 0.6rem;
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       box-shadow: 0 4px 0 #be185d;
     }
 
-    .cloud-text-canvas {
+    .cloud-words-cluster {
       background: #f0fdf4;
       border: 4px dashed #86efac;
       border-radius: 50px;
       padding: 2.5rem;
-      font-size: 1.8rem;
+      font-size: 1.85rem;
       line-height: 2.8;
       color: #1e293b;
+      text-align: center;
     }
 
-    .story-click-word {
+    .story-click-pill {
       background: #ffffff;
-      border: 3px solid #cbd5e1;
-      padding: 0.2rem 0.9rem;
-      border-radius: 25px;
+      border: 3px solid #94a3b8;
+      padding: 0.25rem 1rem;
+      border-radius: 30px;
       font-weight: 900;
       cursor: pointer;
       display: inline-block;
-      box-shadow: 0 4px 0 #cbd5e1;
+      box-shadow: 0 4px 0 #94a3b8;
       transition: all 0.15s;
+      margin: 0.2rem;
     }
 
-    .story-click-word:hover {
+    .story-click-pill:hover {
       transform: scale(1.08) translateY(-2px);
       border-color: #0284c7;
+      box-shadow: 0 6px 0 #0284c7;
     }
 
-    .story-click-word.found {
+    .story-click-pill.found {
       background: #22c55e !important;
       color: white !important;
       border-color: #15803d !important;
       box-shadow: 0 5px 0 #166534 !important;
-      transform: scale(1.1);
+      transform: scale(1.12);
     }
 
-    /* 3. أقراص التركيب */
-    .workshop-galaxy {
-      background: #ffffff;
+    /* ========================================================= */
+    /* 3. أقراص التركيب: منصات كروية واسعة لا تخرج منها الحروف */
+    /* ========================================================= */
+    .spherical-discs-arena {
+      background: rgba(255, 255, 255, 0.95);
       border-radius: 70px;
-      padding: 2.8rem 2rem;
-      border: 8px solid #ffffff;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+      padding: 3rem 2rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
       color: #1e293b;
+      text-align: center;
     }
 
-    .discs-stage-wrapper {
+    .spheres-container-row {
       display: flex;
-      align-items: center;
       justify-content: center;
-      gap: 1.8rem;
+      gap: 2rem;
       flex-wrap: wrap;
+      margin-top: 2rem;
     }
 
-    .oval-cauldron-disc {
-      width: 290px;
-      min-height: 290px;
-      border-radius: 60px;
-      padding: 1.8rem 1.2rem;
+    /* منصة القرص الدائرية المريحة الفسيحة */
+    .round-game-sphere {
+      width: 380px;
+      min-height: 330px;
+      border-radius: 65px;
+      padding: 2rem 1.4rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-      border: 5px solid #ffffff;
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
+      border: 6px solid #ffffff;
       transition: all 0.25s ease;
     }
 
-    .disc-1 { background: radial-gradient(circle at top, #fef08a 0%, #fed7aa 100%); border-bottom: 8px solid #f59e0b; }
-    .disc-2 { background: radial-gradient(circle at top, #bae6fd 0%, #c7d2fe 100%); border-bottom: 8px solid #3b82f6; }
-    .disc-3 { background: radial-gradient(circle at top, #fbcfe8 0%, #f5d0fe 100%); border-bottom: 8px solid #ec4899; }
+    .sphere-theme-1 { background: radial-gradient(circle at top, #fef08a 0%, #fed7aa 100%); border-bottom: 10px solid #f59e0b; }
+    .sphere-theme-2 { background: radial-gradient(circle at top, #bae6fd 0%, #c7d2fe 100%); border-bottom: 10px solid #3b82f6; }
+    .sphere-theme-3 { background: radial-gradient(circle at top, #fbcfe8 0%, #f5d0fe 100%); border-bottom: 10px solid #ec4899; }
 
-    .disc-badge {
-      background: #ffffff;
-      color: #1e293b;
-      font-size: 0.95rem;
-      font-weight: 900;
-      padding: 0.35rem 1.2rem;
-      border-radius: 25px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      margin-bottom: 0.6rem;
+    .round-game-sphere:hover {
+      transform: translateY(-8px) scale(1.02);
     }
 
-    .disc-title {
+    .sphere-badge-label {
+      background: #ffffff;
+      color: #0f172a;
       font-size: 1.25rem;
       font-weight: 900;
-      color: #0f172a;
-      margin-bottom: 1rem;
+      padding: 0.4rem 1.6rem;
+      border-radius: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      margin-bottom: 1.2rem;
     }
 
-    .disc-slots-circle {
+    /* خانات الحروف المتباعدة بشكل فسيح يمنع خروجها إطلاقاً */
+    .sphere-slots-wrapper {
       display: flex;
       justify-content: center;
-      gap: 0.5rem;
-      margin: 1rem 0;
+      gap: 0.6rem;
+      flex-wrap: nowrap;
+      margin: 1rem 0 1.5rem;
+      width: 100%;
     }
 
-    .circle-slot {
-      width: 52px;
-      height: 52px;
+    .circle-char-slot {
+      width: 55px;
+      height: 55px;
       border-radius: 50%;
       border: 3px dashed #64748b;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
+      font-size: 1.85rem;
       font-weight: 900;
       background: #ffffff;
       color: #0369a1;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+      flex-shrink: 0;
     }
 
-    .circle-slot.filled {
+    .circle-char-slot.filled {
       border: 3px solid #2563eb;
       background: #dbeafe;
       color: #2563eb;
       transform: scale(1.08);
     }
 
-    .candy-tiles-cluster {
+    .sphere-choices-row {
       display: flex;
       justify-content: center;
-      gap: 0.6rem;
-      margin-top: 0.8rem;
+      gap: 0.8rem;
     }
 
-    .candy-btn {
-      width: 52px;
-      height: 52px;
+    .candy-char-btn {
+      width: 56px;
+      height: 56px;
       background: #ffffff;
       border: 3px solid #ca8a04;
       color: #854d0e;
       border-radius: 50%;
-      font-size: 1.8rem;
+      font-size: 1.85rem;
       font-weight: 900;
       cursor: pointer;
       box-shadow: 0 5px 0 #ca8a04;
       transition: all 0.1s;
     }
 
-    .candy-btn:hover {
+    .candy-char-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 7px 0 #ca8a04;
     }
 
-    .candy-btn:active {
+    .candy-char-btn:active {
       transform: translateY(4px);
       box-shadow: 0 1px 0 #ca8a04;
     }
 
-    .disc-feedback {
-      margin-top: 0.8rem;
-      padding: 0.4rem 0.8rem;
+    .sphere-feedback-alert {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
       border-radius: 20px;
       font-weight: 900;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       display: none;
     }
 
     /* ========================================================= */
-    /* 4. حلبة الأبطال: قطع البزل الحقيقية (مطابقة للصورة 2) */
+    /* 4. حلبة قطع البزل: تصميم بزل حقيقي ثلاثي الأبعاد بالألوان */
     /* ========================================================= */
-    .arena-puzzle-world {
-      background: #ffffff;
+    .puzzle-arena-wrapper {
+      background: rgba(255, 255, 255, 0.95);
       border-radius: 70px;
-      padding: 2.8rem 2rem;
-      border: 8px solid #ffffff;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+      padding: 3rem 2.2rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
       color: #1e293b;
     }
 
-    .puzzle-grid-layout {
+    .puzzle-pieces-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 2.5rem;
+      margin-top: 2rem;
     }
 
-    /* قطعة البزل الكبرى الحقيقية المفرغة مع نتوء وفجوة (Puzzle Container) */
-    .puzzle-card-piece {
+    /* قطعة البزل الكبرى الحقيقية المفرغة بمسار SVG ثلاثي الأبعاد */
+    .real-puzzle-box {
       position: relative;
       background: #84cc16;
-      border-radius: 28px;
-      padding: 2rem;
-      box-shadow: 0 16px 0 #4d7c0f, 0 25px 35px rgba(77, 124, 15, 0.35);
+      border-radius: 35px;
+      padding: 2.2rem 1.8rem;
+      box-shadow: 0 16px 0 #4d7c0f, 0 25px 35px rgba(0,0,0,0.25);
       border: 4px solid #a3e635;
       color: white;
       transition: all 0.25s ease;
     }
 
-    .puzzle-card-piece:nth-child(2) {
-      background: #06b6d4;
-      box-shadow: 0 16px 0 #0e7490, 0 25px 35px rgba(14, 116, 144, 0.35);
-      border-color: #67e8f9;
-    }
+    .puzzle-color-1 { background: #84cc16; border-color: #a3e635; box-shadow: 0 16px 0 #4d7c0f, 0 25px 35px rgba(0,0,0,0.25); }
+    .puzzle-color-2 { background: #06b6d4; border-color: #67e8f9; box-shadow: 0 16px 0 #0e7490, 0 25px 35px rgba(0,0,0,0.25); }
+    .puzzle-color-3 { background: #f97316; border-color: #fdba74; box-shadow: 0 16px 0 #c2410c, 0 25px 35px rgba(0,0,0,0.25); }
+    .puzzle-color-4 { background: #a855f7; border-color: #d8b4fe; box-shadow: 0 16px 0 #7e22ce, 0 25px 35px rgba(0,0,0,0.25); }
 
-    .puzzle-card-piece:nth-child(3) {
-      background: #f97316;
-      box-shadow: 0 16px 0 #c2410c, 0 25px 35px rgba(194, 65, 12, 0.35);
-      border-color: #fdba74;
-    }
-
-    .puzzle-card-piece:nth-child(4) {
-      background: #a855f7;
-      box-shadow: 0 16px 0 #7e22ce, 0 25px 35px rgba(126, 34, 206, 0.35);
-      border-color: #d8b4fe;
-    }
-
-    /* النتوء العلوي لقطعة البزل الدائرية */
-    .puzzle-card-piece::before {
+    /* نتوء البزل العلوي المجسم */
+    .real-puzzle-box::before {
       content: '';
       position: absolute;
-      top: -24px;
+      top: -26px;
       left: 50%;
       transform: translateX(-50%);
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       background: inherit;
       border-radius: 50%;
-      box-shadow: inherit;
       border: inherit;
       border-bottom: none;
+      box-shadow: inherit;
     }
 
-    .puzzle-header {
+    .puzzle-top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.8rem;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 5;
     }
 
-    .puzzle-badge {
+    .puzzle-chip-badge {
       background: rgba(0, 0, 0, 0.25);
       padding: 0.3rem 1rem;
       border-radius: 20px;
@@ -663,86 +582,95 @@
       font-size: 0.95rem;
     }
 
-    .puzzle-question-text {
+    .puzzle-question-prompt {
       font-size: 1.25rem;
       font-weight: 900;
-      line-height: 1.6;
+      line-height: 1.7;
       margin-bottom: 1.2rem;
       text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      min-height: 60px;
+      position: relative;
+      z-index: 5;
     }
 
-    /* منطقة الإفلات لقطعة البزل الناقصة */
-    .puzzle-slot-target {
-      background: rgba(0, 0, 0, 0.2);
+    /* فجوة البزل المفرغة التي تستقبل الإجابة */
+    .puzzle-drop-target {
+      background: rgba(0, 0, 0, 0.25);
       border: 3px dashed #ffffff;
-      border-radius: 20px;
-      padding: 1rem;
-      min-height: 60px;
+      border-radius: 25px;
+      padding: 0.8rem 1.2rem;
+      min-height: 55px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: #fef08a;
       margin-bottom: 1.2rem;
       transition: all 0.2s;
+      position: relative;
+      z-index: 5;
     }
 
-    .puzzle-slot-target.drag-over {
-      background: rgba(255, 255, 255, 0.4);
+    .puzzle-drop-target.drag-over {
+      background: rgba(255, 255, 255, 0.45);
       transform: scale(1.05);
     }
 
-    .puzzle-slot-target.solved {
+    .puzzle-drop-target.solved {
       background: #ffffff;
       color: #15803d;
       border: 3px solid #22c55e;
       box-shadow: 0 4px 0 #166534;
     }
 
-    /* قطع البزل القابلة للسحب والنقر */
-    .puzzle-pieces-tray {
+    /* قطع البزل الصغيرة القابلة للسحب والنقر */
+    .puzzle-options-tray {
       display: flex;
       flex-wrap: wrap;
       gap: 0.8rem;
       justify-content: center;
+      position: relative;
+      z-index: 5;
     }
 
-    .puzzle-piece-btn {
+    .draggable-puzzle-piece {
       background: #ffffff;
       border: 3px solid #fde047;
       color: #713f12;
       padding: 0.6rem 1.4rem;
-      border-radius: 22px;
+      border-radius: 25px;
       font-size: 1.15rem;
       font-weight: 900;
       cursor: grab;
-      box-shadow: 0 4px 0 rgba(0,0,0,0.15);
+      box-shadow: 0 5px 0 rgba(0,0,0,0.2);
       transition: all 0.15s;
     }
 
-    .puzzle-piece-btn:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 6px 0 rgba(0,0,0,0.2);
+    .draggable-puzzle-piece:hover {
+      transform: translateY(-3px) scale(1.06);
+      box-shadow: 0 8px 0 rgba(0,0,0,0.25);
     }
 
-    .puzzle-piece-btn:active {
+    .draggable-puzzle-piece:active {
       cursor: grabbing;
       transform: translateY(2px);
       box-shadow: none;
     }
 
-    .puzzle-feedback {
+    .puzzle-feedback-toast {
       margin-top: 0.8rem;
       padding: 0.5rem;
-      border-radius: 15px;
+      border-radius: 18px;
       font-weight: 900;
       font-size: 0.95rem;
       display: none;
       text-align: center;
+      position: relative;
+      z-index: 5;
     }
 
-    /* النافذة المنبثقة للتحليل الصرفي (Modal) */
+    /* Modal */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -826,7 +754,6 @@
     .detail-row:last-child { margin-bottom: 0; }
     .detail-label { font-weight: 900; color: #334155; white-space: nowrap; }
 
-    /* بطاقة القاعدة الذهبية لصياغة الرباعي */
     .rule-gold-banner {
       background: #fefce8;
       border: 3px dashed #facc15;
@@ -860,9 +787,9 @@
 
   <header>
     <div class="brand-box">
-      <div style="font-size: 2.2rem; animation: sunPulse 3s infinite;">☀️</div>
+      <div style="font-size: 2.2rem;">🪐</div>
       <div class="brand-texts">
-        <h1>بَذْرَةُ الكَلِمَاتِ 🪐</h1>
+        <h1>بَذْرَةُ الكَلِمَاتِ ☀️</h1>
         <p>مَجَرَّةُ الحُرُوفِ وَالمُعْجَمِ الفَضَائِيِّ</p>
       </div>
     </div>
@@ -892,129 +819,102 @@
 
   <main>
     <!-- ========================================================= -->
-    <!-- 1. شمس الجذر: المجموعة الشمسية الفضائية (كواكب وأشعة) -->
+    <!-- 1. شمس الجذر: كواكب تدور يميناً ويساراً بدون ازدحام علوي -->
     <!-- ========================================================= -->
     <div id="radialMap" class="tab-view active">
       <div class="space-system-arena">
-        <!-- نجوم الفضاء -->
-        <div class="space-star" style="top:40px; left:60px; width:4px; height:4px;"></div>
-        <div class="space-star" style="top:120px; right:80px; width:6px; height:6px;"></div>
-        <div class="space-star" style="bottom:60px; left:200px; width:5px; height:5px;"></div>
-        <div class="space-star" style="bottom:150px; right:120px; width:4px; height:4px;"></div>
+        <div class="orbit-ellipse-wide"></div>
 
-        <!-- المدارات البيضاوية -->
-        <div class="orbit-ring orbit-1"></div>
-        <div class="orbit-ring orbit-2"></div>
-
-        <!-- قرص الشمس الكرتوني المبتسم في المركز -->
+        <!-- قرص الشمس المبتسم في المركز -->
         <div class="cartoon-sun-core" onclick="openRootModal()">
-          <!-- أشعة الشمس المثلثة الدوارة -->
-          <svg class="sun-ray-triangles" viewBox="0 0 100 100">
-            <polygon points="50,0 54,12 46,12" fill="#facc15"/>
-            <polygon points="50,100 54,88 46,88" fill="#facc15"/>
-            <polygon points="0,50 12,54 12,46" fill="#facc15"/>
-            <polygon points="100,50 88,54 88,46" fill="#facc15"/>
-            <polygon points="15,15 26,20 20,26" fill="#facc15"/>
-            <polygon points="85,85 74,80 80,74" fill="#facc15"/>
-            <polygon points="85,15 74,20 80,26" fill="#facc15"/>
-            <polygon points="15,85 26,80 20,74" fill="#facc15"/>
-          </svg>
-
-          <!-- وجه الشمس الباسم -->
-          <div class="sun-face-eyes">
-            <div class="sun-eye"></div>
-            <div class="sun-eye"></div>
-          </div>
-          <div class="sun-smile"></div>
-
-          <div class="sun-root-text" id="coreLetters">[ د - ح - ر - ج ]</div>
-          <div class="sun-concept-label" id="coreConcept">الجَذْرُ الرُّبَاعِيُّ</div>
-          <span style="font-size: 0.75rem; color: #78350f; font-weight: 900; margin-top: 0.3rem;">🔊 انقر للاستكشاف</span>
+          <div class="sun-root-letters" id="coreLetters">[ د - ح - ر - ج ]</div>
+          <div class="sun-badge-desc" id="coreConcept">الجَذْرُ الرُّبَاعِيُّ</div>
+          <span style="font-size: 0.75rem; color: #78350f; font-weight: 900; margin-top: 0.4rem;">🔊 انقر للاستكشاف</span>
         </div>
 
-        <!-- الكواكب الكروية الخمسة -->
-        <!-- 1. كوكب نبتون في الأعلى: الفعل -->
-        <div class="planet-branch-sphere planet-neptune" onclick="openMorphModal(0)">
-          <span class="planet-role-tag">الحدث / الفعل</span>
-          <div class="planet-word-glow" id="b1_word">دَحْرَجَ</div>
-          <span class="planet-pattern-mini" id="b1_pattern">(فَعْلَلَ)</span>
+        <!-- 1. كوكب الفعل (أعلى اليمين) -->
+        <div class="space-planet-sphere planet-1-verb" onclick="openMorphModal(0)">
+          <span class="planet-title-label">الحدث / الفعل</span>
+          <div class="planet-word-text" id="b1_word">دَحْرَجَ</div>
+          <span class="planet-weight-sub" id="b1_pattern">(فَعْلَلَ)</span>
         </div>
 
-        <!-- 2. كوكب الأرض الأزرق: الفاعل -->
-        <div class="planet-branch-sphere planet-earth" onclick="openMorphModal(1)">
-          <span class="planet-role-tag">الفاعل</span>
-          <div class="planet-word-glow" id="b2_word">مُدَحْرِجٌ</div>
-          <span class="planet-pattern-mini" id="b2_pattern">(مُفَعْلِلٌ)</span>
+        <!-- 2. كوكب الفاعل (أعلى اليسار) -->
+        <div class="space-planet-sphere planet-2-agent" onclick="openMorphModal(1)">
+          <span class="planet-title-label">الفاعل</span>
+          <div class="planet-word-text" id="b2_word">مُدَحْرِجٌ</div>
+          <span class="planet-weight-sub" id="b2_pattern">(مُفَعْلِلٌ)</span>
         </div>
 
-        <!-- 3. كوكب المريخ الأحمر: المفعول -->
-        <div class="planet-branch-sphere planet-mars" onclick="openMorphModal(2)">
-          <span class="planet-role-tag">المفعول</span>
-          <div class="planet-word-glow" id="b3_word">مُدَحْرَجٌ</div>
-          <span class="planet-pattern-mini" id="b3_pattern">(مُفَعْلَلٌ)</span>
+        <!-- 3. كوكب المفعول (أسفل اليسار) -->
+        <div class="space-planet-sphere planet-3-patient" onclick="openMorphModal(2)">
+          <span class="planet-title-label">المفعول</span>
+          <div class="planet-word-text" id="b3_word">مُدَحْرَجٌ</div>
+          <span class="planet-weight-sub" id="b3_pattern">(مُفَعْلَلٌ)</span>
         </div>
 
-        <!-- 4. كوكب زحل بحلقته المائلة: المكان -->
-        <div class="planet-branch-sphere planet-saturn" onclick="openMorphModal(3)">
-          <div class="saturn-ring"></div>
-          <span class="planet-role-tag">المكان</span>
-          <div class="planet-word-glow" id="b4_word">مُدَحْرَجٌ</div>
-          <span class="planet-pattern-mini" id="b4_pattern">(مُفَعْلَلٌ)</span>
+        <!-- 4. كوكب المكان (أسفل اليمين) -->
+        <div class="space-planet-sphere planet-4-place" onclick="openMorphModal(3)">
+          <span class="planet-title-label">المكان</span>
+          <div class="planet-word-text" id="b4_word">مُدَحْرَجٌ</div>
+          <span class="planet-weight-sub" id="b4_pattern">(مُفَعْلَلٌ)</span>
         </div>
 
-        <!-- 5. كوكب المشتري العملاق: المصدر -->
-        <div class="planet-branch-sphere planet-jupiter" onclick="openMorphModal(4)">
-          <span class="planet-role-tag">المصدر / النشاط</span>
-          <div class="planet-word-glow" id="b5_word">دَحْرَجَةٌ</div>
-          <span class="planet-pattern-mini" id="b5_pattern">(فَعْلَلَةٌ)</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2. سحابة الحكاية -->
-    <div id="storyTab" class="tab-view">
-      <div class="story-cloud-realm">
-        <div class="story-top-art-bar">
-          <div class="cloud-speech-pill">
-            <h3>سَحَابَةُ الاِسْتِكْشَافِ القِرَائِيِّ 📖</h3>
-            <p>اقْرَأِ النَّصَّ يَا بَطَلُ، وَانْقُرْ مُبَاشَرَةً عَلَى الكَلِمَةِ المَطْلُوبَةِ لِتَتَلَوَّنَ بِالأَخْضَرِ!</p>
-            <div class="cloud-mission-tag" id="storyMissionBadge">المَهَمَّةُ: ...</div>
-            <button class="modal-audio-btn" style="margin-right: 0.8rem; padding: 0.4rem 1rem; font-size: 0.95rem;" onclick="speakCurrentStory()">🔊 اسْتَمِعْ لِلنَّصِّ</button>
-          </div>
-        </div>
-        <div class="cloud-text-canvas" id="storyWordsContainer"></div>
-      </div>
-    </div>
-
-    <!-- 3. ورشة أقراص التركيب -->
-    <div id="labTab" class="tab-view">
-      <div class="workshop-galaxy">
-        <div style="text-align: center; margin-bottom: 2rem;">
-          <h3 style="font-size: 2.2rem; font-weight: 900; color: #0284c7;">🪐 أَقْرَاصُ التَّرْكِيبِ الصَّرْفِيِّ</h3>
-          <p style="font-size: 1.15rem; font-weight: 800; color: #64748b;">اخْتَرِ الحَرْفَ المُنَاسِبَ دُونَ إِعْطَاءِ الإِجَابَةِ مُسْبَقاً:</p>
-        </div>
-        <div class="discs-stage-wrapper">
-          <div id="discsContainer" style="display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;"></div>
+        <!-- 5. كوكب المصدر (أسفل المنتصف) -->
+        <div class="space-planet-sphere planet-5-source" onclick="openMorphModal(4)">
+          <span class="planet-title-label">المصدر</span>
+          <div class="planet-word-text" id="b5_word">دَحْرَجَةٌ</div>
+          <span class="planet-weight-sub" id="b5_pattern">(فَعْلَلَةٌ)</span>
         </div>
       </div>
     </div>
 
     <!-- ========================================================= -->
-    <!-- 4. حلبة الأبطال: قطع البزل الحقيقية (مطابقة للصورة 2) -->
+    <!-- 2. سحابة الحكاية: سحابة قطنية حقيقية وبدون كشف الإجابات -->
+    <!-- ========================================================= -->
+    <div id="storyTab" class="tab-view">
+      <div class="real-cloud-stage">
+        <div class="cloud-instruction-bubble">
+          <h3>سَحَابَةُ الاِسْتِكْشَافِ القِرَائِيِّ 📖</h3>
+          <p>اقْرَأِ النَّصَّ يَا بَطَلُ، وَانْقُرْ مُبَاشَرَةً عَلَى الكَلِمَةِ المَطْلُوبَةِ لِتَتَلَوَّنَ بِالأَخْضَرِ!</p>
+          <div class="task-badge-target" id="storyMissionBadge">المَهَمَّةُ: ...</div>
+          <div style="margin-top: 0.6rem;">
+            <button class="modal-audio-btn" onclick="speakCurrentStory()">🔊 اسْتَمِعْ لِلنَّصِّ كَامِلاً</button>
+          </div>
+        </div>
+
+        <div class="cloud-words-cluster" id="storyWordsContainer"></div>
+      </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- 3. ورشة أقراص التركيب: منصات كروية واسعة لا تخرج منها الحروف -->
+    <!-- ========================================================= -->
+    <div id="labTab" class="tab-view">
+      <div class="spherical-discs-arena">
+        <h3 style="font-size: 2.2rem; font-weight: 900; color: #0284c7;">🪐 أَقْرَاصُ التَّرْكِيبِ الصَّرْفِيِّ</h3>
+        <p style="font-size: 1.15rem; font-weight: 800; color: #64748b; margin-top: 0.4rem;">اخْتَرِ الحَرْفَ المُنَاسِبَ دُونَ إِعْطَاءِ الإِجَابَةِ مُسْبَقاً:</p>
+
+        <div class="spheres-container-row" id="discsContainer"></div>
+      </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- 4. حلبة قطع البزل: قطع أحجية حقيقية ثلاثية الأبعاد -->
     <!-- ========================================================= -->
     <div id="quizTab" class="tab-view">
-      <div class="arena-puzzle-world">
-        <div style="text-align: center; margin-bottom: 2.5rem;">
+      <div class="puzzle-arena-wrapper">
+        <div style="text-align: center; margin-bottom: 2rem;">
           <h3 style="font-size: 2.3rem; font-weight: 900; color: #65a30d;">🧩 حَلَبَةُ قِطَعِ البَزْل الصَّرْفِيَّةِ</h3>
-          <p style="font-size: 1.15rem; font-weight: 800; color: #64748b;">اسْحَبْ قِطْعَةَ البَزْل المُنَاسِبَةَ أَوْ انْقُرْ عَلَيْهَا لِإِكْمَالِ الفَرَاغِ:</p>
+          <p style="font-size: 1.15rem; font-weight: 800; color: #64748b;">اسْحَبْ قِطْعَةَ البَزْل المُنَاسِبَةَ وَأَفْلِتْهَا فِي الفَجْوَةِ، أَوْ انْقُرْ عَلَيْهَا:</p>
         </div>
 
-        <div class="puzzle-grid-layout" id="puzzleContainer"></div>
+        <div class="puzzle-pieces-grid" id="puzzleContainer"></div>
       </div>
     </div>
   </main>
 
-  <!-- النافذة المنبثقة للتحليل الصرفي وقواعد الصياغة -->
+  <!-- النافذة المنبثقة للتحليل الصرفي مع القاعدة -->
   <div class="modal-overlay" id="morphModal" onclick="closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -1039,7 +939,6 @@
           <span id="mExample" style="color: #1e293b; font-style: italic;"></span>
         </div>
 
-        <!-- لافتة القاعدة الذهبية لصياغة الرباعي وغير الثلاثي -->
         <div class="rule-gold-banner" id="mRuleBanner" style="display: none;"></div>
       </div>
 
@@ -1096,11 +995,10 @@
       }
     };
 
-    // قاعدة البيانات الشاملة (ثلاثي ورباعي مع قواعد الصياغة الدقيقة)
     const db = {
       "دحرج": {
         letters: ['د', 'ح', 'ر', 'ج'],
-        concept: "الجَذْرُ الرُّبَاعِيُّ: التَّدْوِيرُ وَالحَرَكَةُ",
+        concept: "الجَذْرُ الرُّبَاعِيُّ المُجَرَّدُ",
         branches: [
           {
             isVerb: true,
@@ -1152,7 +1050,7 @@
           },
           {
             isVerb: false,
-            role: "المصدر / النشاط",
+            role: "المصدر",
             word: "دَحْرَجَةٌ",
             colored: "<span class='c-r'>دَ</span><span class='c-r'>حْ</span><span class='c-r'>رَ</span><span class='c-r'>جَ</span><span class='c-a'>ةٌ</span>",
             plain: "دَحْرَجَةٌ",
@@ -1191,7 +1089,7 @@
         quizzes: [
           { q: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ الفِعْلِ الرُّبَاعِيِّ (دَحْرَجَ) عَلَى وَزْنِ مُضَارِعِهِ بِـ:", ans: "ضَمِّ أَوَّلِهِ وَكَسْرِ مَا قَبْلَ آخِرِهِ", opts: ["فَتْحِ أَوَّلِهِ", "ضَمِّ أَوَّلِهِ وَكَسْرِ مَا قَبْلَ آخِرِهِ", "عَلَى وَزْنِ فَاعِلٍ"], tip: "مثل: يُدَحْرِجُ -> مُدَحْرِجٌ بميم مضمومة وكسر الراء." },
           { q: "يُصَاغُ اسْمُ المَفْعُولِ مِنَ الرُّبَاعِيِّ (دَحْرَجَ) بِإِبْدَالِ حَرْفِ المُضَارَعَةِ مِيماً مَضْمُومَةً وَ:", ans: "فَتْحِ مَا قَبْلَ الآخِرِ", opts: ["كَسْرِ مَا قَبْلَ الآخِرِ", "فَتْحِ مَا قَبْلَ الآخِرِ", "سُكُونِ الآخِرِ"], tip: "مثل: مُدَحْرَجٌ بفتح الراء." },
-          { q: "اسْحَبِ الفِعْلَ الرُّبَاعِيَّ المَزِيدَ بِحَرْفِ التَّاءِ:", ans: "تَدَحْرَجَ", opts: ["دَحْرَجَ", "تَدَحْرَجَ", "مُدَحْرَجٌ"], tip: "تَفَعْلَلَ مزيد بحرف التاء في أوله." },
+          { q: "اسْحَبْ قِطْعَةَ الفِعْلِ الرُّبَاعِيِّ المَزِيدِ بِحَرْفِ التَّاءِ:", ans: "تَدَحْرَجَ", opts: ["دَحْرَجَ", "تَدَحْرَجَ", "مُدَحْرَجٌ"], tip: "تَفَعْلَلَ مزيد بحرف التاء في أوله." },
           { q: "مَا هُوَ مَصْدَرُ الفِعْلِ الرُّبَاعِيِّ (دَحْرَجَ)؟", ans: "دَحْرَجَةٌ", opts: ["دَحْرَجَةٌ", "مُدَحْرِجٌ", "تَدَحْرُجٌ"], tip: "مصدر فَعْلَلَ القياسي هو فَعْلَلَة." }
         ]
       },
@@ -1202,7 +1100,7 @@
           { isVerb: true, role: "الحدث / الفعل", word: "كَتَبَ", colored: "<span class='c-r'>كَ</span><span class='c-r'>تَ</span><span class='c-r'>بَ</span>", plain: "كَتَبَ", weight: "فَعَلَ (ثلاثي مجرد)", desc: "فعل ماضٍ ثلاثي مجرد حروفه أصلية.", colloc: "كَتَبَ رِسَالَةً", ex: "«كَتَبَ التِّلْمِيذُ النَّصَّ»", rule: "" },
           { isVerb: false, role: "الفاعل", word: "كَاتِبٌ", colored: "<span class='c-r'>كَ</span><span class='c-a'>ا</span><span class='c-r'>تِ</span><span class='c-r'>بٌ</span>", plain: "كَاتِبٌ", weight: "فَاعِلٌ (اسم فاعل)", desc: "اسم مشتق يدل على من قام بفعل الكتابة.", colloc: "كَاتِبٌ مَشْهُورٌ", ex: "«أَلَّفَ الكَاتِبُ قِصَّةً»", rule: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ الثُّلَاثِيِّ المُجَرَّدِ عَلَى وَزْنِ (فَاعِل) بِزِيَادَةِ أَلِفٍ بَعْدَ الحَرْفِ الأَوَّلِ." },
           { isVerb: false, role: "المفعول", word: "مَكْتُوبٌ", colored: "<span class='c-a'>مَ</span><span class='c-r'>كْ</span><span class='c-r'>تُ</span><span class='c-a'>و</span><span class='c-r'>بٌ</span>", plain: "مَكْتُوبٌ", weight: "مَفْعُولٌ (اسم مفعول)", desc: "اسم مشتق يدل على ما وقع عليه فعل التدوين.", colloc: "كَلَامٌ مَكْتُوبٌ", ex: "«السِّرُّ مَكْتُوبٌ بِوُضُوحٍ»", rule: "يُصَاغُ اسْمُ المَفْعُولِ مِنَ الثُّلَاثِيِّ المُجَرَّدِ دَائِماً عَلَى وَزْنِ (مَفْعُول)." },
-          { isVerb: false, role: "المكان", word: "مَكْتَبٌ", colored: "<span class='c-a'>مَ</span><span class='c-r'>كْ</span><span class='c-r'>تَ</span><span class='c-r'>بٌ</span>", plain: "مَكْتَبٌ", weight: "مَفْعَلٌ (اسم مكان)", desc: "اسم مشتق يدل على مقر العمل أو طاولة الكتابة.", colloc: "مَكْتَبُ المُدِيرِ", ex: "«جَلَسَ إِلَى مَكْتَبِهِ»", rule: "يُصَاغُ اسْمُ المَكَانِ مِنَ الثُّلَاثِيِّ مَفْتُوحِ العَيْنِ فِي المُضَارِعِ (يَكْتُبُ) عَلَى وَزْنِ مَفْعَل." },
+          { isVerb: false, role: "المكان", word: "مَكْتَبٌ", colored: "<span class='c-a'>مَ</span><span class='c-r'>كْ</span><span class='c-r'>تَ</span><span class='c-r'>بٌ</span>", plain: "مَكْتَبٌ", weight: "مَفْعَلٌ (اسم مكان)", desc: "اسم مشتق يدل على مقر العمل أو طاولة الكتابة.", colloc: "مَكْتَبُ المُدِيرِ", ex: "«جَلَسَ إِلَى مَكْتَبِهِ»", rule: "يُصَاغُ اسْمُ المَكَانِ مِنَ الثُّلَاثِيِّ عَلَى وَزْنِ مَفْعَل." },
           { isVerb: false, role: "المصدر", word: "كِتَابَةٌ", colored: "<span class='c-r'>كِ</span><span class='c-r'>تَ</span><span class='c-a'>ا</span><span class='c-r'>بَ</span><span class='c-a'>ةٌ</span>", plain: "كِتَابَةٌ", weight: "فِعَالَةٌ (مصدر)", desc: "مصدر يدل على حدث خط الحروف مجرداً من الزمان.", colloc: "كِتَابَةٌ وَاضِحَةٌ", ex: "«حُسْنُ الكِتَابَةِ جَمَالٌ»", rule: "المَصَادِرُ الثُّلَاثِيَّةُ الَّتِي تَدُلُّ عَلَى حِرْفَةٍ تَأْتِي غَالِباً عَلَى وَزْنِ (فِعَالَة)." }
         ],
         affixes: [
@@ -1331,7 +1229,6 @@
     let starsCount = 0;
     let currentMissionIdx = 0;
 
-    // تحميل شمس الجذر وعالم الكواكب
     function loadRadialWorld(rootKey) {
       const data = db[rootKey];
 
@@ -1354,7 +1251,6 @@
       renderPuzzleArena(data.quizzes);
     }
 
-    // النافذة المنبثقة للتحليل الصرفي مع القاعدة
     function openMorphModal(branchIdx) {
       const rootKey = document.getElementById('rootSelect').value;
       const rootObj = db[rootKey];
@@ -1424,7 +1320,7 @@
       }
     }
 
-    // سحابة الحكاية
+    // سحابة الحكاية: بدون كشف الإجابات في المهمة
     function loadInteractiveStory(data) {
       const container = document.getElementById('storyWordsContainer');
       container.innerHTML = '';
@@ -1434,7 +1330,7 @@
 
       data.storyParagraph.forEach(item => {
         const span = document.createElement('span');
-        span.className = 'story-click-word';
+        span.className = 'story-click-pill';
         span.textContent = item.word;
         span.onclick = () => handleStoryWordClick(span, item, data);
         container.appendChild(span);
@@ -1455,7 +1351,7 @@
         if (currentMissionIdx < data.missions.length) {
           setTimeout(() => {
             document.getElementById('storyMissionBadge').textContent = data.missions[currentMissionIdx].label;
-            Sound.speak("أَحْسَنْتَ! الآنَ: " + data.missions[currentMissionIdx].label);
+            Sound.speak("أَحْسَنْتَ! الآنَ ابْحَثْ عَنِ المَطْلُوبِ التَّالِي");
           }, 800);
         } else {
           setTimeout(() => {
@@ -1466,7 +1362,7 @@
       } else {
         Sound.wrong();
         el.style.borderColor = '#ef4444';
-        setTimeout(() => el.style.borderColor = '#cbd5e1', 500);
+        setTimeout(() => el.style.borderColor = '#94a3b8', 500);
       }
     }
 
@@ -1476,37 +1372,36 @@
       Sound.speak(text);
     }
 
-    // أقراص التركيب
+    // أقراص التركيب: منصات كروية واسعة لا تخرج منها الحروف
     function renderDiscsWorkshop(labs) {
       const container = document.getElementById('discsContainer');
       container.innerHTML = '';
 
-      const discClasses = ['disc-1', 'disc-2', 'disc-3'];
+      const themes = ['sphere-theme-1', 'sphere-theme-2', 'sphere-theme-3'];
 
       labs.forEach((lab, lIdx) => {
-        const disc = document.createElement('div');
-        disc.className = `oval-cauldron-disc ${discClasses[lIdx % 3]}`;
-        disc.innerHTML = `
-          <div class="disc-badge">قُرْصُ التَّحَدِّي ${lIdx + 1}</div>
-          <div class="disc-title">${lab.title}</div>
-          <div class="disc-slots-circle" id="slots_disc_${lIdx}">
-            ${lab.slots.map(s => `<div class="circle-slot ${s.ch ? 'filled' : ''}">${s.ch}</div>`).join('')}
+        const sphere = document.createElement('div');
+        sphere.className = `round-game-sphere ${themes[lIdx % 3]}`;
+        sphere.innerHTML = `
+          <div class="sphere-badge-label">${lab.title}</div>
+          <div class="sphere-slots-wrapper" id="slots_wrap_${lIdx}">
+            ${lab.slots.map(s => `<div class="circle-char-slot ${s.ch ? 'filled' : ''}">${s.ch}</div>`).join('')}
           </div>
-          <div class="candy-tiles-cluster">
-            ${lab.pool.map(p => `<button class="candy-btn" onclick="checkDiscAnswer(this, ${lIdx}, '${p}')">${p}</button>`).join('')}
+          <div class="sphere-choices-row">
+            ${lab.pool.map(p => `<button class="candy-char-btn" onclick="checkSphereChar(this, ${lIdx}, '${p}')">${p}</button>`).join('')}
           </div>
-          <div class="disc-feedback" id="fb_disc_${lIdx}"></div>
+          <div class="sphere-feedback-alert" id="fb_sphere_${lIdx}"></div>
         `;
-        container.appendChild(disc);
+        container.appendChild(sphere);
       });
     }
 
-    function checkDiscAnswer(btn, lIdx, char) {
+    function checkSphereChar(btn, lIdx, char) {
       const rootKey = document.getElementById('rootSelect').value;
       const lab = db[rootKey].labs[lIdx];
       const target = lab.slots.find(s => !s.ch);
-      const fb = document.getElementById(`fb_disc_${lIdx}`);
-      const emptySlot = document.querySelectorAll(`#slots_disc_${lIdx} .circle-slot:not(.filled)`)[0];
+      const fb = document.getElementById(`fb_sphere_${lIdx}`);
+      const emptySlot = document.querySelectorAll(`#slots_wrap_${lIdx} .circle-char-slot:not(.filled)`)[0];
 
       if (char === target.correct) {
         emptySlot.textContent = char;
@@ -1514,7 +1409,7 @@
         fb.style.display = 'block';
         fb.style.background = '#dcfce7';
         fb.style.color = '#15803d';
-        fb.innerHTML = '🎉 مُمْتَاز! رَكَّبْتَ الوَزْنَ فِي القُرْصِ.';
+        fb.innerHTML = '🎉 مُمْتَاز! رَكَّبْتَ الوَزْنَ بِدِقَّةٍ.';
         Sound.correct();
         addStars(15);
       } else {
@@ -1527,98 +1422,102 @@
     }
 
     // =========================================================
-    // حلبة قطع البزل الحقيقية (سحب وإفلات واختيار حركي)
+    // حلبة قطع البزل: سحب وإفلات لقطع بزل حقيقية
     // =========================================================
     function renderPuzzleArena(quizzes) {
       const container = document.getElementById('puzzleContainer');
       container.innerHTML = '';
 
+      const colors = ['puzzle-color-1', 'puzzle-color-2', 'puzzle-color-3', 'puzzle-color-4'];
+
       quizzes.forEach((q, idx) => {
-        const piece = document.createElement('div');
-        piece.className = 'puzzle-card-piece';
-        piece.innerHTML = `
-          <div class="puzzle-header">
-            <span class="puzzle-badge">🧩 قِطْعَةُ البَزْل ${idx + 1}</span>
-            <button style="background:white; border:none; border-radius:50%; width:34px; height:34px; cursor:pointer; font-size:1rem;" onclick="Sound.speak('${q.q}')">🔊</button>
+        const pieceBox = document.createElement('div');
+        pieceBox.className = `real-puzzle-box ${colors[idx % 4]}`;
+        pieceBox.innerHTML = `
+          <div class="puzzle-top-bar">
+            <span class="puzzle-chip-badge">🧩 بَزْلُ التَّحَدِّي ${idx + 1}</span>
+            <button style="background:white; border:none; border-radius:50%; width:36px; height:36px; cursor:pointer; font-size:1.1rem; box-shadow:0 3px 6px rgba(0,0,0,0.15);" onclick="Sound.speak('${q.q}')">🔊</button>
           </div>
 
-          <div class="puzzle-question-text">${q.q}</div>
+          <div class="puzzle-question-prompt">${q.q}</div>
 
-          <!-- فجوة البزل التي تسحب إليها الإجابة -->
-          <div class="puzzle-slot-target" id="puzzle_slot_${idx}">اسْحَبِ القِطْعَةَ هُنَا ⬇️</div>
+          <!-- فجوة البزل التي تنتظر القطعة -->
+          <div class="puzzle-drop-target" id="puzzle_drop_${idx}">
+            اسْحَبْ قِطْعَةَ البَزْل هُنَا ⬇️
+          </div>
 
           <!-- قطع البزل الصغيرة القابلة للسحب والنقر -->
-          <div class="puzzle-pieces-tray">
+          <div class="puzzle-options-tray">
             ${q.opts.map(opt => `
-              <div class="puzzle-piece-btn" 
+              <div class="draggable-puzzle-piece" 
                    draggable="true" 
                    data-word="${opt}"
-                   data-quiz-idx="${idx}"
-                   onclick="handlePuzzlePieceClick(this, '${opt}', '${q.ans}', ${idx}, '${q.tip}')">
+                   data-p-idx="${idx}"
+                   onclick="handlePuzzleClick('${opt}', '${q.ans}', ${idx}, '${q.tip}')">
                 ${opt}
               </div>
             `).join('')}
           </div>
 
-          <div class="puzzle-feedback" id="puzzle_fb_${idx}"></div>
+          <div class="puzzle-feedback-toast" id="fb_puzzle_${idx}"></div>
         `;
-        container.appendChild(piece);
+        container.appendChild(pieceBox);
       });
 
-      setupPuzzleDragDrop(quizzes);
+      setupPuzzleDragDropEvents(quizzes);
     }
 
-    function setupPuzzleDragDrop(quizzes) {
-      document.querySelectorAll('.puzzle-piece-btn').forEach(btn => {
-        btn.addEventListener('dragstart', (e) => {
+    function setupPuzzleDragDropEvents(quizzes) {
+      document.querySelectorAll('.draggable-puzzle-piece').forEach(piece => {
+        piece.addEventListener('dragstart', (e) => {
           e.dataTransfer.setData('text/plain', JSON.stringify({
-            word: btn.dataset.word,
-            idx: btn.dataset.quizIdx
+            word: piece.dataset.word,
+            idx: piece.dataset.pIdx
           }));
-          btn.style.opacity = '0.4';
+          piece.style.opacity = '0.4';
         });
 
-        btn.addEventListener('dragend', () => {
-          btn.style.opacity = '1';
+        piece.addEventListener('dragend', () => {
+          piece.style.opacity = '1';
         });
       });
 
-      document.querySelectorAll('.puzzle-slot-target').forEach((slot, sIdx) => {
-        slot.addEventListener('dragover', (e) => {
+      document.querySelectorAll('.puzzle-drop-target').forEach((targetSlot, sIdx) => {
+        targetSlot.addEventListener('dragover', (e) => {
           e.preventDefault();
-          slot.classList.add('drag-over');
+          targetSlot.classList.add('drag-over');
         });
 
-        slot.addEventListener('dragleave', () => {
-          slot.classList.remove('drag-over');
+        targetSlot.addEventListener('dragleave', () => {
+          targetSlot.classList.remove('drag-over');
         });
 
-        slot.addEventListener('drop', (e) => {
+        targetSlot.addEventListener('drop', (e) => {
           e.preventDefault();
-          slot.classList.remove('drag-over');
+          targetSlot.classList.remove('drag-over');
           try {
             const data = JSON.parse(e.dataTransfer.getData('text/plain'));
             if (parseInt(data.idx) === sIdx) {
               const quiz = quizzes[sIdx];
-              checkPuzzleSolution(data.word, quiz.ans, sIdx, slot, quiz.tip);
+              evaluatePuzzleResult(data.word, quiz.ans, sIdx, targetSlot, quiz.tip);
             }
           } catch(err){}
         });
       });
     }
 
-    function handlePuzzlePieceClick(pieceEl, word, correct, sIdx, tip) {
-      const slot = document.getElementById(`puzzle_slot_${sIdx}`);
-      checkPuzzleSolution(word, correct, sIdx, slot, tip);
+    function handlePuzzleClick(word, correct, sIdx, tip) {
+      const targetSlot = document.getElementById(`puzzle_drop_${sIdx}`);
+      evaluatePuzzleResult(word, correct, sIdx, targetSlot, tip);
     }
 
-    function checkPuzzleSolution(selected, correct, sIdx, slotEl, tip) {
-      const fb = document.getElementById(`puzzle_fb_${sIdx}`);
+    function evaluatePuzzleResult(selected, correct, sIdx, slotEl, tip) {
+      const fb = document.getElementById(`fb_puzzle_${sIdx}`);
       Sound.speak(selected);
 
       if (selected === correct) {
-        slotEl.textContent = `✓ رُكِّبَتِ القِطْعَةُ: (${selected})`;
-        slotEl.className = 'puzzle-slot-target solved';
+        slotEl.textContent = `✓ رُكِّبَتْ: (${selected})`;
+        slotEl.className = 'puzzle-drop-target solved';
         fb.style.display = 'block';
         fb.style.background = '#dcfce7';
         fb.style.color = '#15803d';
@@ -1629,7 +1528,7 @@
         fb.style.display = 'block';
         fb.style.background = '#fee2e2';
         fb.style.color = '#b91c1c';
-        fb.innerHTML = `✕ القِطْعَةُ لَا تُطَابِقُ المَكَانَ! 💡 ${tip}`;
+        fb.innerHTML = `✕ قِطْعَةٌ غَيْرُ مُطَابِقَةٍ! 💡 ${tip}`;
         Sound.wrong();
       }
     }
