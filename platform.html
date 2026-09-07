@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ الأَلْعَابِ اللُّغَوِيَّةِ</title>
+  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ السَّحَابِ وَالفَضَاءِ</title>
   <style>
     :root {
       --primary: #4338ca;
-      --c-root: #dc2626;  /* أحمر فاقع للجذر */
-      --c-affix: #2563eb; /* أزرق فاقع للزيادة */
+      --c-root: #dc2626;
+      --c-affix: #2563eb;
     }
 
     * {
@@ -94,7 +94,7 @@
       gap: 0.5rem;
     }
 
-    /* التبويبات الفضائية */
+    /* التبويبات */
     .nav-tabs-container {
       display: flex;
       justify-content: center;
@@ -481,7 +481,7 @@
     }
 
     /* ========================================================= */
-    /* 3. ورشة أقراص التركيب: محطات كوكبية كرتونية حماسية */
+    /* 3. أقراص التركيب: تصميم المركبات الكوكبية الطافية الفسيحة */
     /* ========================================================= */
     .spheres-free-stage {
       display: flex;
@@ -495,83 +495,88 @@
     .spheres-container-row {
       display: flex;
       justify-content: center;
-      gap: 2.2rem;
+      gap: 2.4rem;
       flex-wrap: wrap;
-      margin-top: 2rem;
+      margin-top: 2.5rem;
       position: relative;
       z-index: 5;
     }
 
-    /* كبسولة كوكبية كرتونية مجسمة ثلاثية الأبعاد */
+    /* قرص كوكبي منحني كروي 3D مائل دون أي مربع */
     .round-game-sphere {
       position: relative;
-      width: 410px;
-      min-height: 360px;
-      border-radius: 65px;
-      padding: 2.2rem 1.5rem;
+      width: 420px;
+      min-height: 340px;
+      /* حواف دائرية منحنية تشبه صحناً طائراً أو كوكباً مستديراً */
+      border-radius: 90px 90px 75px 75px / 75px 75px 85px 85px;
+      padding: 2.6rem 1.8rem 2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), inset 0 0 25px rgba(255, 255, 255, 0.3);
-      border: 6px solid #ffffff;
+      border: 7px solid #ffffff;
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       color: #1e293b;
     }
 
+    /* ألوان كوكبية نضرة مع ظلال ثلاثية الأبعاد عميقة */
     .sphere-theme-1 { 
-      background: radial-gradient(circle at 35% 25%, #fef08a 0%, #fde047 40%, #f59e0b 100%);
-      border-color: #fef08a;
-      box-shadow: 0 16px 0 #b45309, 0 25px 40px rgba(245, 158, 11, 0.4);
+      background: radial-gradient(circle at 50% 20%, #fffbeb 0%, #fde047 35%, #f59e0b 90%);
+      box-shadow: 0 20px 0 #b45309, 0 30px 50px rgba(245, 158, 11, 0.45);
     }
     .sphere-theme-2 { 
-      background: radial-gradient(circle at 35% 25%, #e0f2fe 0%, #7dd3fc 45%, #0284c7 100%);
-      border-color: #bae6fd;
-      box-shadow: 0 16px 0 #0369a1, 0 25px 40px rgba(2, 132, 199, 0.4);
+      background: radial-gradient(circle at 50% 20%, #f0fdfa 0%, #7dd3fc 35%, #0284c7 90%);
+      box-shadow: 0 20px 0 #0369a1, 0 30px 50px rgba(2, 132, 199, 0.45);
     }
     .sphere-theme-3 { 
-      background: radial-gradient(circle at 35% 25%, #fce7f3 0%, #f472b6 45%, #db2777 100%);
-      border-color: #fbcfe8;
-      box-shadow: 0 16px 0 #9d174d, 0 25px 40px rgba(219, 39, 119, 0.4);
+      background: radial-gradient(circle at 50% 20%, #fdf2f8 0%, #f472b6 35%, #db2777 90%);
+      box-shadow: 0 20px 0 #9d174d, 0 30px 50px rgba(219, 39, 119, 0.45);
     }
 
     .round-game-sphere:hover {
       transform: translateY(-10px) scale(1.03);
     }
 
-    /* أيقونة كرتونية طافية في أعلى القرص */
-    .sphere-crown-icon {
+    /* رائد الفضاء / الكائن الفضائي الصغير الطافي فوق قمة القرص */
+    .sphere-mascot-crown {
       position: absolute;
-      top: -30px;
-      width: 60px;
-      height: 60px;
+      top: -38px;
+      width: 70px;
+      height: 70px;
       background: #ffffff;
-      border: 4px solid #ffffff;
+      border: 5px solid #ffffff;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+      font-size: 2.2rem;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+      animation: crownBob 2.5s infinite ease-in-out alternate;
+    }
+
+    @keyframes crownBob {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
     }
 
     .sphere-badge-label {
       background: #ffffff;
       color: #0f172a;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 900;
-      padding: 0.4rem 1.6rem;
-      border-radius: 30px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      padding: 0.45rem 1.8rem;
+      border-radius: 35px;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.12);
       margin-bottom: 1.2rem;
     }
 
+    /* المسار الكروي المداري لدوائر الحروف دون أي ضيق */
     .sphere-slots-wrapper {
       display: flex;
       justify-content: center;
       gap: 0.65rem;
       flex-wrap: nowrap;
-      margin: 0.8rem 0 1.5rem;
+      margin: 0.6rem 0 1.6rem;
       width: 100%;
     }
 
@@ -579,15 +584,15 @@
       width: 58px;
       height: 58px;
       border-radius: 50%;
-      border: 3.5px dashed rgba(30, 41, 59, 0.6);
+      border: 3.5px dashed rgba(30, 41, 59, 0.65);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.95rem;
       font-weight: 900;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       color: #0369a1;
-      box-shadow: inset 0 3px 6px rgba(0,0,0,0.12);
+      box-shadow: inset 0 3px 6px rgba(0,0,0,0.15), 0 4px 8px rgba(0,0,0,0.1);
       flex-shrink: 0;
     }
 
@@ -596,7 +601,7 @@
       background: #eff6ff;
       color: #2563eb;
       transform: scale(1.1);
-      box-shadow: 0 6px 12px rgba(37, 99, 235, 0.35);
+      box-shadow: 0 6px 14px rgba(37, 99, 235, 0.4);
       animation: popSlot 0.3s ease;
     }
 
@@ -609,17 +614,17 @@
     .sphere-choices-row {
       display: flex;
       justify-content: center;
-      gap: 0.85rem;
+      gap: 0.9rem;
     }
 
     .candy-char-btn {
-      width: 58px;
-      height: 58px;
+      width: 60px;
+      height: 60px;
       background: #ffffff;
-      border: 3.5px solid #ca8a04;
+      border: 4px solid #ca8a04;
       color: #854d0e;
       border-radius: 50%;
-      font-size: 1.95rem;
+      font-size: 2rem;
       font-weight: 900;
       cursor: pointer;
       box-shadow: 0 6px 0 #ca8a04;
@@ -638,8 +643,8 @@
 
     .sphere-feedback-alert {
       margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
+      padding: 0.5rem 1.2rem;
+      border-radius: 25px;
       font-weight: 900;
       font-size: 1rem;
       display: none;
@@ -937,14 +942,11 @@
   </nav>
 
   <main>
-    <!-- ========================================================= -->
-    <!-- 1. شمس الجذر: فضاء كرتوني سحري -->
-    <!-- ========================================================= -->
+    <!-- 1. شمس الجذر الفضائية -->
     <div id="radialMap" class="tab-view active">
       <div class="space-system-arena" id="starsSky">
         <div class="orbit-ellipse-wide"></div>
 
-        <!-- رائد فضاء 1 -->
         <div class="astro-kid astro-kid-1">
           <svg viewBox="0 0 120 120" width="110" height="110">
             <circle cx="60" cy="45" r="35" fill="rgba(255,255,255,0.25)" stroke="#38bdf8" stroke-width="4"/>
@@ -964,7 +966,6 @@
           </svg>
         </div>
 
-        <!-- رائد فضاء 2 -->
         <div class="astro-kid astro-kid-2">
           <svg viewBox="0 0 120 120" width="105" height="105">
             <circle cx="60" cy="45" r="34" fill="rgba(255,255,255,0.25)" stroke="#ec4899" stroke-width="4"/>
@@ -984,7 +985,6 @@
           </svg>
         </div>
 
-        <!-- هالة أشعة الشمس الدوارة -->
         <svg class="sun-rays-halo" viewBox="0 0 100 100">
           <polygon points="50,0 55,14 45,14" fill="#fde047"/>
           <polygon points="50,100 55,86 45,86" fill="#fde047"/>
@@ -996,14 +996,12 @@
           <polygon points="15,85 28,79 21,72" fill="#fde047"/>
         </svg>
 
-        <!-- قرص الشمس -->
         <div class="cartoon-sun-core" onclick="openRootModal()">
           <div class="sun-root-letters" id="coreLetters">[ د - ح - ر - ج ]</div>
           <div class="sun-badge-desc" id="coreConcept">الجَذْرُ الرُّبَاعِيُّ</div>
           <span style="font-size: 0.8rem; color: #78350f; font-weight: 900; margin-top: 0.4rem;">🔊 انقر للاستكشاف</span>
         </div>
 
-        <!-- الكواكب الخمسة -->
         <div class="space-planet-sphere planet-1-verb" onclick="openMorphModal(0)">
           <span class="planet-title-label">الحدث / الفعل</span>
           <div class="planet-word-text" id="b1_word">دَحْرَجَ</div>
@@ -1037,7 +1035,7 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- 2. سحابة الحكاية: سحابة بانورامية عريضة تملأ الشاشة بالعرض -->
+    <!-- 2. سحابة الحكاية: سحابة عريضة تملأ الشاشة بالعرض كلياً -->
     <!-- ========================================================= -->
     <div id="storyTab" class="tab-view">
       <div class="kawaii-cloud-universe">
@@ -1089,7 +1087,7 @@
           </svg>
         </div>
 
-        <!-- نجوم صفراء مبتسمة ومتحركة -->
+        <!-- نجوم صفراء مبتسمة -->
         <div class="smiling-star star-pos-1">
           <svg viewBox="0 0 60 60" width="55" height="55">
             <polygon points="30,2 38,19 58,19 42,31 48,50 30,38 12,50 18,31 2,19 22,19" fill="#facc15" stroke="#eab308" stroke-width="2"/>
@@ -1208,7 +1206,7 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- 3. ورشة أقراص التركيب: محطات كوكبية مجسمة بحلقات وأيقونات حية -->
+    <!-- 3. ورشة أقراص التركيب: تصميم المركبات الكوكبية الطافية الفسيحة -->
     <!-- ========================================================= -->
     <div id="labTab" class="tab-view">
       <div class="spheres-free-stage">
@@ -1271,18 +1269,16 @@
   </div>
 
   <script>
-    // محرك صوتي حماسي متكامل (Arcade Sound Engine)
     const Sound = {
       ctx: null,
       init() {
         if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
       },
-      // نغمة الفوز الحماسية التصاعدية (Fanfare Arpeggio)
       correct() {
         this.init();
         if (!this.ctx) return;
         const now = this.ctx.currentTime;
-        const notes = [440, 554.37, 659.25, 880, 1108.73]; // نغمات موسيقية مبهجة A-C#-E-A-C#
+        const notes = [440, 554.37, 659.25, 880, 1108.73];
         notes.forEach((freq, idx) => {
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
@@ -1296,11 +1292,9 @@
           osc.stop(now + idx * 0.08 + 0.25);
         });
 
-        // تشجيع صوتي حماسي عشوائي
         const cheers = ["رَائِعٌ جِدّاً!", "أَحْسَنْتَ يَا بَطَلُ!", "عَبْقَرِيٌّ!", "مُمْتَازٌ!"];
         setTimeout(() => this.speak(cheers[Math.floor(Math.random() * cheers.length)]), 450);
       },
-      // نغمة كرتونية هزلية غير محبطة عند الخطأ (Cartoon Boing)
       wrong() {
         this.init();
         if (!this.ctx) return;
@@ -1317,7 +1311,6 @@
         osc.start(now);
         osc.stop(now + 0.35);
       },
-      // نغمة النقر المبهجة (Juicy Bubble Pop)
       pop() {
         this.init();
         if (!this.ctx) return;
@@ -1348,7 +1341,6 @@
       }
     };
 
-    // قاعدة البيانات الشاملة مع إضافة الجذر الرباعي الجديد [ز - ل - ز - ل]
     const db = {
       "زلزل": {
         letters: ['ز', 'ل', 'ز', 'ل'],
@@ -1833,7 +1825,6 @@
       Sound.speak(text);
     }
 
-    // ورشة أقراص التركيب الكوكبية
     function renderDiscsWorkshop(labs) {
       const container = document.getElementById('discsContainer');
       container.innerHTML = '';
@@ -1845,7 +1836,7 @@
         const sphere = document.createElement('div');
         sphere.className = `round-game-sphere ${themes[lIdx % 3]}`;
         sphere.innerHTML = `
-          <div class="sphere-crown-icon">${crownIcons[lIdx % 3]}</div>
+          <div class="sphere-mascot-crown">${crownIcons[lIdx % 3]}</div>
           <div class="sphere-badge-label">${lab.title}</div>
           <div class="sphere-slots-wrapper" id="slots_wrap_${lIdx}">
             ${lab.slots.map(s => `<div class="circle-char-slot ${s.ch ? 'filled' : ''}">${s.ch}</div>`).join('')}
