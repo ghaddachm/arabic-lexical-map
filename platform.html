@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ الأَشْكَالِ المَرِحَةِ</title>
+  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ الأَلْعَابِ التَّفَاعُلِيَّةِ</title>
   <style>
     :root {
       --primary: #4338ca;
@@ -25,7 +25,7 @@
     }
 
     body {
-      background: #38bdf8 url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.25'%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3Ccircle cx='10' cy='10' r='3'/%3E%3Ccircle cx='70' cy='20' r='4'/%3E%3Ccircle cx='20' cy='70' r='5'/%3E%3Ccircle cx='65' cy='65' r='3'/%3E%3C/g%3E%3C/svg%3E");
+      background: #7dd3fc url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.25'%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3Ccircle cx='10' cy='10' r='3'/%3E%3Ccircle cx='70' cy='20' r='4'/%3E%3Ccircle cx='20' cy='70' r='5'/%3E%3Ccircle cx='65' cy='65' r='3'/%3E%3C/g%3E%3C/svg%3E");
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -33,7 +33,7 @@
       overflow-x: hidden;
     }
 
-    /* رأس الصفحة */
+    /* رأس الصفحة الكرتوني */
     header {
       background: #ffffff;
       margin: 0.8rem 1.5rem;
@@ -99,7 +99,7 @@
       gap: 0.5rem;
     }
 
-    /* التبويبات */
+    /* أزرار التبويبات */
     .nav-tabs-container {
       display: flex;
       justify-content: center;
@@ -157,7 +157,9 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
+    /* ================================================= */
     /* 1. مصفوفة شمس الجذر الإشعاعية */
+    /* ================================================= */
     .radial-playground {
       position: relative;
       width: 100%;
@@ -283,7 +285,9 @@
       z-index: 1;
     }
 
+    /* ================================================= */
     /* 2. سحابة الحكاية */
+    /* ================================================= */
     .story-cloud-realm {
       position: relative;
       background: #ffffff;
@@ -390,7 +394,9 @@
       100% { transform: scale(1.1); }
     }
 
-    /* 3. أقراص التركيب الدائرية */
+    /* ================================================= */
+    /* 3. ورشة أقراص التركيب */
+    /* ================================================= */
     .workshop-galaxy {
       position: relative;
       background: #ffffff;
@@ -572,28 +578,28 @@
     }
 
     /* ================================================= */
-    /* 4. حلبة الأبطال: سُحُبٌ وَفُقَّاعَاتٌ غَيْرُ مُسْتَطِيلَةٍ */
+    /* 4. حلبة الأبطال: شاشات التابليت اللوحية الكرتونية (مثل الصورة المرفقة) */
     /* ================================================= */
-    .arena-bubble-world {
+    .arena-tablet-world {
       background: #ffffff;
-      border-radius: 80px 80px 70px 70px;
-      padding: 3rem 2.2rem;
+      border-radius: 70px;
+      padding: 2.8rem 2rem;
       border: 8px solid #ffffff;
       box-shadow: 0 25px 60px rgba(0,0,0,0.12);
     }
 
     .arena-title-box {
       text-align: center;
-      margin-bottom: 2.2rem;
+      margin-bottom: 2rem;
     }
 
     .arena-title-box h3 {
       font-size: 2.3rem;
       font-weight: 900;
-      color: #9333ea;
+      color: #ea580c;
       display: inline-flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0.6rem;
     }
 
     .arena-title-box p {
@@ -603,132 +609,208 @@
       margin-top: 0.3rem;
     }
 
-    .arena-cards-grid {
+    .tablets-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
       gap: 2rem;
     }
 
-    /* سحابة التحدي المنحنية والمتباينة الحواف */
-    .bubble-question-cloud {
-      border-radius: 65px 45px 75px 50px;
-      padding: 2.2rem 1.8rem;
-      border: 5px solid #ffffff;
-      box-shadow: 0 16px 35px rgba(0,0,0,0.08);
+    /* تصميم شاشة التابليت بإطار كرتوني سميك ومجسم (Chunky Arcade Tablet) */
+    .arcade-tablet-card {
+      border-radius: 45px;
+      padding: 18px;
+      box-shadow: 0 16px 35px rgba(0,0,0,0.15);
       position: relative;
       transition: all 0.25s ease;
+    }
+
+    .tablet-purple {
+      background: #a855f7;
+      border: 6px solid #9333ea;
+      box-shadow: 0 12px 0 #7e22ce, 0 20px 30px rgba(147, 51, 234, 0.3);
+    }
+
+    .tablet-orange {
+      background: #f97316;
+      border: 6px solid #ea580c;
+      box-shadow: 0 12px 0 #c2410c, 0 20px 30px rgba(234, 88, 12, 0.3);
+    }
+
+    .tablet-red {
+      background: #ef4444;
+      border: 6px solid #dc2626;
+      box-shadow: 0 12px 0 #b91c1c, 0 20px 30px rgba(220, 38, 38, 0.3);
+    }
+
+    .tablet-green {
+      background: #22c55e;
+      border: 6px solid #16a34a;
+      box-shadow: 0 12px 0 #15803d, 0 20px 30px rgba(22, 163, 74, 0.3);
+    }
+
+    /* المشهد الطبيعي داخل شاشة التابليت (سماء وتلال وجسر خشبي) */
+    .tablet-screen {
+      background: linear-gradient(180deg, #38bdf8 0%, #bae6fd 60%, #86efac 60%, #4ade80 100%);
+      border-radius: 32px;
+      padding: 1.5rem;
+      border: 4px solid #ffffff;
+      min-height: 280px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      position: relative;
+      overflow: hidden;
     }
 
-    .bubble-question-cloud:nth-child(1) {
-      background: radial-gradient(circle at top, #faf5ff 0%, #f3e8ff 100%);
-      border-bottom: 8px solid #c084fc;
-    }
-    .bubble-question-cloud:nth-child(2) {
-      background: radial-gradient(circle at top, #eff6ff 0%, #dbeafe 100%);
-      border-bottom: 8px solid #60a5fa;
-      border-radius: 45px 75px 50px 65px;
-    }
-    .bubble-question-cloud:nth-child(3) {
-      background: radial-gradient(circle at top, #fffbeb 0%, #fef3c7 100%);
-      border-bottom: 8px solid #fbbf24;
-      border-radius: 70px 50px 60px 80px;
-    }
-    .bubble-question-cloud:nth-child(4) {
-      background: radial-gradient(circle at top, #f0fdf4 0%, #dcfce7 100%);
-      border-bottom: 8px solid #4ade80;
-      border-radius: 50px 70px 80px 55px;
-    }
-
-    .bubble-question-cloud:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 24px 45px rgba(0,0,0,0.14);
-    }
-
-    .cloud-card-head {
+    .tablet-header-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1rem;
+      position: relative;
+      z-index: 5;
     }
 
-    .cloud-card-tag {
+    .home-arcade-icon {
       background: #ffffff;
-      padding: 0.35rem 1.1rem;
-      border-radius: 25px;
-      font-weight: 900;
-      font-size: 0.95rem;
-      color: #6b21a8;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.06);
-    }
-
-    .cloud-speaker-btn {
-      background: #ffffff;
-      border: 2px solid #cbd5e1;
-      border-radius: 50%;
       width: 38px;
       height: 38px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
       font-size: 1.1rem;
-      box-shadow: 0 3px 0 #cbd5e1;
-    }
-
-    .cloud-question-text {
-      font-size: 1.25rem;
-      color: #1e1b4b;
-      font-weight: 900;
-      margin-bottom: 1.4rem;
-      line-height: 1.7;
-      min-height: 60px;
-    }
-
-    /* أزرار الخيارات البيضاوية المقوسة (Oval Candy Pills) */
-    .bubble-opt-pill {
-      background: #ffffff;
-      border: 3px solid #cbd5e1;
-      padding: 0.75rem 1.4rem;
-      font-size: 1.25rem;
-      font-weight: 900;
-      border-radius: 40px;
+      box-shadow: 0 3px 0 rgba(0,0,0,0.15);
       cursor: pointer;
-      width: 100%;
-      text-align: right;
-      margin-top: 0.8rem;
+    }
+
+    .tablet-badge-title {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-weight: 900;
+      color: #1e1b4b;
+      font-size: 0.95rem;
+    }
+
+    /* شخصية السلحوف اللطيف على لوح التزلج (SVG مثل صورتك تماماً) */
+    .turtle-skater-art {
+      width: 85px;
+      height: 85px;
+      margin: 0 auto;
+      animation: skaterMove 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes skaterMove {
+      0% { transform: translateX(-15px) rotate(-3deg); }
+      100% { transform: translateX(15px) rotate(3deg); }
+    }
+
+    .tablet-question-text {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 0.8rem 1.2rem;
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #0f172a;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      margin: 0.6rem 0;
+      border: 2px solid #e2e8f0;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* الجسر الخشبي لصناديق الإجابة السحرية */
+    .wooden-bridge-board {
+      background: #b45309;
+      border-radius: 20px;
+      padding: 0.8rem;
+      border: 3px solid #78350f;
+      box-shadow: inset 0 3px 6px rgba(0,0,0,0.2), 0 5px 0 #451a03;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      box-shadow: 0 4px 0 #cbd5e1;
+      gap: 0.6rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* منطقة الإفلات (Drop Target Slot) */
+    .drop-wood-slot {
+      width: 140px;
+      height: 48px;
+      border: 3px dashed #fde047;
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fef08a;
+      font-weight: 900;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+    }
+
+    .drop-wood-slot.drag-over {
+      background: rgba(254, 240, 138, 0.4);
+      border-color: #ffffff;
+      transform: scale(1.05);
+    }
+
+    .drop-wood-slot.correct-dropped {
+      background: #22c55e;
+      border: 3px solid #166534;
+      color: white;
+      box-shadow: 0 4px 0 #14532d;
+    }
+
+    /* قطع الخيارات القابلة للسحب (Draggable Candy Blocks) */
+    .draggable-tray {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: 0.8rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    .drag-word-block {
+      background: #ffffff;
+      border: 3px solid #f59e0b;
+      color: #b45309;
+      padding: 0.5rem 1rem;
+      border-radius: 16px;
+      font-size: 1.15rem;
+      font-weight: 900;
+      cursor: grab;
+      box-shadow: 0 5px 0 #d97706;
       transition: all 0.15s;
     }
 
-    .bubble-opt-pill:hover {
-      background: #faf5ff;
-      border-color: #a855f7;
-      box-shadow: 0 6px 0 #9333ea;
-      transform: translateY(-2px);
+    .drag-word-block:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 7px 0 #d97706;
     }
 
-    .bubble-opt-pill:active {
+    .drag-word-block:active {
+      cursor: grabbing;
       transform: translateY(3px);
-      box-shadow: 0 1px 0 #a855f7;
+      box-shadow: 0 1px 0 #d97706;
     }
 
-    .cloud-feedback-box {
-      margin-top: 1rem;
-      padding: 0.6rem 1rem;
-      border-radius: 25px;
+    .arcade-feedback {
+      margin-top: 0.6rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 15px;
       font-weight: 900;
       font-size: 0.95rem;
-      display: none;
       text-align: center;
+      display: none;
+      position: relative;
+      z-index: 5;
     }
 
-    /* النافذة المنبثقة التفصيلية (Modal) */
+    /* Modal */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -864,7 +946,7 @@
     <button class="tab-pill active" onclick="switchMainTab('radialMap', this)">☀️ شَمْسُ الجَذْرِ</button>
     <button class="tab-pill" onclick="switchMainTab('storyTab', this)">📖 سَحَابَةُ الحِكَايَةِ</button>
     <button class="tab-pill" onclick="switchMainTab('labTab', this)">⚙️ أَقْرَاصُ التَّرْكِيبِ</button>
-    <button class="tab-pill" onclick="switchMainTab('quizTab', this)">🏆 حَلَبَةُ الأَبْطَالِ</button>
+    <button class="tab-pill" onclick="switchMainTab('quizTab', this)">🏆 شَاشَاتُ التَّحَدِّي</button>
   </nav>
 
   <main>
@@ -937,7 +1019,7 @@
       </div>
     </div>
 
-    <!-- 2. سحابة الحكاية (بدون كتابة الحل في شريط المهمة الوردي) -->
+    <!-- 2. سحابة الحكاية (بدون كتابة الحل) -->
     <div id="storyTab" class="tab-view">
       <div class="story-cloud-realm">
         <div class="story-top-art-bar">
@@ -1032,15 +1114,17 @@
       </div>
     </div>
 
-    <!-- 4. حلبة الأبطال (سُحُبٌ وَفُقَّاعَاتٌ غَيْرُ مُسْتَطِيلَةٍ) -->
+    <!-- ========================================================= -->
+    <!-- 4. حلبة الأبطال: شاشات التابليت اللوحية مع السحب والإفلات -->
+    <!-- ========================================================= -->
     <div id="quizTab" class="tab-view">
-      <div class="arena-bubble-world">
+      <div class="arena-tablet-world">
         <div class="arena-title-box">
-          <h3><span>🏆</span> حَلَبَةُ سُحُبِ التَّحَدِّي <span>☁️</span></h3>
-          <p>اخْتَرِ الإِجَابَةَ الصَّحِيحَةَ دَاخِلَ السُّحُبِ الصَّرْفِيَّةِ لِتَكْسِبَ نُجُومَ التَّفَوُّقِ:</p>
+          <h3><span>🎮</span> حَلَبَةُ شَاشَاتِ التَّحَدِّي الصَّرْفِيِّ <span>🛹</span></h3>
+          <p>اسْحَبِ الكَلِمَةَ المُنَاسِبَةَ وَأَفْلِتْهَا عَلَى الجِسْرِ الخَشَبِيِّ لِتُسَاعِدَ سُلَحْفُوفاً عَلَى العُبُورِ!</p>
         </div>
 
-        <div class="arena-cards-grid" id="quizzesGrid"></div>
+        <div class="tablets-grid" id="tabletsContainer"></div>
       </div>
     </div>
   </main>
@@ -1148,7 +1232,6 @@
           { word: "مَكْتُوبٍ", target: "اسم المفعول" }, { word: "يُعَلِّمُ", target: false }, { word: "الأَطْفَالَ", target: false },
           { word: "فَوَائِدَ", target: false }, { word: "الكِتَابَةِ", target: "المصدر" }, { word: "وَالقِرَاءَةِ.", target: false }
         ],
-        // تم حذف اسم الكلمة من المهمة تماماً
         missions: [
           { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ الثُّلَاثِيِّ المُجَرَّدِ)", targetType: "الفعل المجرد" },
           { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
@@ -1161,11 +1244,32 @@
           { title: "قُرْصُ: اسْمُ المَكَانِ", slots: [{ch:"", correct:"مَـ"}, {ch:"كْ"}, {ch:"تَ"}, {ch:"بٌ"}], pool: ["مَـ", "أَ", "نَـ"] },
           { title: "قُرْصُ: اسْمُ المَفْعُولِ", slots: [{ch:"مَـ"}, {ch:"كْ"}, {ch:"تُـ"}, {ch:"", correct:"و"}, {ch:"بٌ"}], pool: ["و", "ا", "ي"] }
         ],
+        // تحديات شاشات الآركيد مع السحب والإفلات
         quizzes: [
-          { q: "الفِعْلُ المَزِيدُ بِحَرْفٍ الَّذِي يَدُلُّ عَلَى المُشَارَكَةِ هُوَ:", ans: "كَاتَبَ", opts: ["كَتَبَ", "كَاتَبَ", "اسْتَكْتَبَ"], tip: "صيغة فاعَلَ تدل على المشاركة بين طرفين." },
-          { q: "مَا هُوَ اسْمُ المَكَانِ المُلَائِمِ لِوَضْعِ الكُتُبِ وَالدَّفَاتِرِ؟", ans: "مَكْتَبٌ", opts: ["مَكْتَبٌ", "كَاتِبٌ", "مَكْتُوبٌ"], tip: "اسم المكان يصاغ على وزن مَفْعَل." },
-          { q: "«هَذَا الخِطَابُ ............... بِخَطِّ اليَدِ». الكَلِمَةُ المُنَاسِبَةُ:", ans: "مَكْتُوبٌ", opts: ["مَكْتُوبٌ", "كَاتِبٌ", "مَكْتَبٌ"], tip: "السياق يتطلب اسم مفعول يقع عليه الفعل." },
-          { q: "الفِعْلُ (اسْتَكْتَبَ) مَزِيدٌ بِـ:", ans: "ثَلَاثَةِ أَحْرُفٍ", opts: ["حَرْفٍ وَاحِدٍ", "حَرْفَيْنِ", "ثَلَاثَةِ أَحْرُفٍ"], tip: "كل فعل ماضٍ يبدأ بـ (استـ) فهو مزيد بثلاثة أحرف." }
+          {
+            q: "اسْحَبِ الفِعْلَ المَزِيدَ بِحَرْفٍ الَّذِي يَدُلُّ عَلَى المُشَارَكَةِ:",
+            ans: "كَاتَبَ",
+            opts: ["كَتَبَ", "كَاتَبَ", "اسْتَكْتَبَ"],
+            tip: "صيغة فاعَلَ تدل على المشاركة بين طرفين."
+          },
+          {
+            q: "اسْحَبِ اسْمَ المَكَانِ المُلَائِمِ لِوَضْعِ الكُتُبِ وَالدَّفَاتِرِ:",
+            ans: "مَكْتَبٌ",
+            opts: ["مَكْتَبٌ", "كَاتِبٌ", "مَكْتُوبٌ"],
+            tip: "اسم المكان يصاغ على وزن مَفْعَل."
+          },
+          {
+            q: "«هَذَا الخِطَابُ ............... بِخَطِّ اليَدِ». اسْحَبِ الكَلِمَةَ:",
+            ans: "مَكْتُوبٌ",
+            opts: ["مَكْتُوبٌ", "كَاتِبٌ", "مَكْتَبٌ"],
+            tip: "السياق يتطلب اسم مفعول يقع عليه الفعل."
+          },
+          {
+            q: "الفِعْلُ (اسْتَكْتَبَ) مَزِيدٌ بِـ:",
+            ans: "ثَلَاثَةِ أَحْرُفٍ",
+            opts: ["حَرْفٍ وَاحِدٍ", "حَرْفَيْنِ", "ثَلَاثَةِ أَحْرُفٍ"],
+            tip: "كل فعل ماضٍ يبدأ بـ (استـ) فهو مزيد بثلاثة أحرف."
+          }
         ]
       },
       "صنع": {
@@ -1208,10 +1312,30 @@
           { title: "قُرْصُ: اسْمُ المَفْعُولِ", slots: [{ch:"مَـ"}, {ch:"صْ"}, {ch:"نُـ"}, {ch:"", correct:"و"}, {ch:"عٌ"}], pool: ["و", "ي", "ا"] }
         ],
         quizzes: [
-          { q: "مَا هُوَ الفِعْلُ المَزِيدُ بِحَرْفٍ وَاحِدٍ مِنَ الجَذْرِ (ص - ن - ع)؟", ans: "صَنَّعَ", opts: ["صَنَعَ", "صَنَّعَ", "اسْتَصْنَعَ"], tip: "المزيد بحرف يكون بالتضعيف (فَعَّلَ)." },
-          { q: "«يَعْمَلُ أَبِي فِي ............... حَدِيثٍ لِلسَّيَّارَاتِ». الكَلِمَةُ المُنَاسِبَةُ:", ans: "مَصْنَعٍ", opts: ["مَصْنَعٍ", "صَانِعٍ", "صِنَاعَةٍ"], tip: "اسم المكان يصاغ على وزن مَفْعَل." },
-          { q: "«الخَزَفُ المَغْرِبِيُّ ............... بِإِتْقَانٍ». الكَلِمَةُ المُنَاسِبَةُ:", ans: "مَصْنُوعٌ", opts: ["مَصْنُوعٌ", "صَانِعٌ", "مَصْنَعٌ"], tip: "السياق يتطلب اسم مفعول." },
-          { q: "الفِعْلُ (اصْطَنَعَ) عَلَى وَزْنِ (افْتَعَلَ) هُوَ فِعْلٌ:", ans: "مَزِيدٌ بِحَرْفَيْنِ", opts: ["مُجَرَّدٌ", "مَزِيدٌ بِحَرْفٍ", "مَزِيدٌ بِحَرْفَيْنِ"], tip: "مزيد بالهمزة والتاء المبدلة طاء." }
+          {
+            q: "اسْحَبِ الفِعْلَ المَزِيدَ بِحَرْفٍ وَاحِدٍ مِنَ الجَذْرِ (ص - ن - ع):",
+            ans: "صَنَّعَ",
+            opts: ["صَنَعَ", "صَنَّعَ", "اسْتَصْنَعَ"],
+            tip: "المزيد بحرف يكون بالتضعيف (فَعَّلَ)."
+          },
+          {
+            q: "«يَعْمَلُ أَبِي فِي ............... حَدِيثٍ لِلسَّيَّارَاتِ». اسْحَبِ الكَلِمَةَ:",
+            ans: "مَصْنَعٍ",
+            opts: ["مَصْنَعٍ", "صَانِعٍ", "صِنَاعَةٍ"],
+            tip: "اسم المكان يصاغ على وزن مَفْعَل."
+          },
+          {
+            q: "«الخَزَفُ المَغْرِبِيُّ ............... بِإِتْقَانٍ». اسْحَبِ الكَلِمَةَ:",
+            ans: "مَصْنُوعٌ",
+            opts: ["مَصْنُوعٌ", "صَانِعٌ", "مَصْنَعٌ"],
+            tip: "السياق يتطلب اسم مفعول."
+          },
+          {
+            q: "الفِعْلُ (اصْطَنَعَ) عَلَى وَزْنِ (افْتَعَلَ) هُوَ فِعْلٌ:",
+            ans: "مَزِيدٌ بِحَرْفَيْنِ",
+            opts: ["مُجَرَّدٌ", "مَزِيدٌ بِحَرْفٍ", "مَزِيدٌ بِحَرْفَيْنِ"],
+            tip: "مزيد بالهمزة والتاء المبدلة طاء."
+          }
         ]
       },
       "علم": {
@@ -1251,10 +1375,30 @@
           { title: "قُرْصُ: اسْمُ المَفْعُولِ", slots: [{ch:"مَـ"}, {ch:"عْ"}, {ch:"لُـ"}, {ch:"", correct:"و"}, {ch:"مٌ"}], pool: ["و", "ا", "ي"] }
         ],
         quizzes: [
-          { q: "الفِعْلُ (عَلَّمَ) هُوَ فِعْلٌ:", ans: "مَزِيدٌ بِحَرْفٍ", opts: ["مُجَرَّدٌ", "مَزِيدٌ بِحَرْفٍ", "مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ"], tip: "عَلَّمَ مزيد بالتضعيف." },
-          { q: "صَوْمَعَةُ الكُتُبِيَّةِ هِيَ ............... تَارِيخِيٌّ خَالِدٌ:", ans: "مَعْلَمٌ", opts: ["مَعْلَمٌ", "عَالِمٌ", "مَعْلُومٌ"], tip: "المعلم هو الأثر البارز." },
-          { q: "«الحَقُّ وَاضِحٌ وَ............... لَا شَكَّ فِيهِ». الكَلِمَةُ المُنَاسِبَةُ:", ans: "مَعْلُومٌ", opts: ["مَعْلُومٌ", "عَالِمٌ", "مَعْلَمٌ"], tip: "السياق يتطلب اسم مفعول." },
-          { q: "«تَعَلَّمَ التِّلْمِيذُ القِرَاءَةَ». الفِعْلُ (تَعَلَّمَ) مَزِيدٌ بِـ:", ans: "حَرْفَيْنِ", opts: ["حَرْفٍ وَاحِدٍ", "حَرْفَيْنِ", "ثَلَاثَةِ أَحْرُفٍ"], tip: "تَفَعَّلَ مزيد بالتاء والتضعيف." }
+          {
+            q: "اسْحَبِ الفِعْلَ المَزِيدَ بِحَرْفٍ وَاحِدٍ مِنَ الفِعْلِ (عَلِمَ):",
+            ans: "عَلَّمَ",
+            opts: ["عَلِمَ", "عَلَّمَ", "اسْتَعْلَمَ"],
+            tip: "عَلَّمَ مزيد بالتضعيف."
+          },
+          {
+            q: "«صَوْمَعَةُ الكُتُبِيَّةِ هِيَ ............... تَارِيخِيٌّ». اسْحَبِ الكَلِمَةَ:",
+            ans: "مَعْلَمٌ",
+            opts: ["مَعْلَمٌ", "عَالِمٌ", "مَعْلُومٌ"],
+            tip: "المعلم هو الأثر البارز."
+          },
+          {
+            q: "«الحَقُّ وَاضِحٌ وَ............... لَا شَكَّ فِيهِ». اسْحَبِ الكَلِمَةَ:",
+            ans: "مَعْلُومٌ",
+            opts: ["مَعْلُومٌ", "عَالِمٌ", "مَعْلَمٌ"],
+            tip: "السياق يتطلب اسم مفعول."
+          },
+          {
+            q: "«تَعَلَّمَ التِّلْمِيذُ القِرَاءَةَ». الفِعْلُ (تَعَلَّمَ) مَزِيدٌ بِـ:",
+            ans: "حَرْفَيْنِ",
+            opts: ["حَرْفٍ وَاحِدٍ", "حَرْفَيْنِ", "ثَلَاثَةِ أَحْرُفٍ"],
+            tip: "تَفَعَّلَ مزيد بالتاء والتضعيف."
+          }
         ]
       }
     };
@@ -1279,7 +1423,7 @@
       loadInteractiveStory(data);
 
       renderDiscsWorkshop(data.labs);
-      renderCloudArenaQuizzes(data.quizzes);
+      renderArcadeTablets(data.quizzes);
     }
 
     function drawRays() {
@@ -1367,7 +1511,6 @@
       }
     }
 
-    // سحابة الحكاية: بدون كشف الإجابات في المهمة
     function loadInteractiveStory(data) {
       const container = document.getElementById('storyWordsContainer');
       container.innerHTML = '';
@@ -1419,7 +1562,6 @@
       Sound.speak(text);
     }
 
-    // ورشة التركيب: الأقراص الدائرية
     function renderDiscsWorkshop(labs) {
       const container = document.getElementById('discsContainer');
       container.innerHTML = '';
@@ -1470,59 +1612,149 @@
     }
 
     // ----------------------------------------------------
-    // حلبة الأبطال: سُحُبٌ وَفُقَّاعَاتٌ مَنْحَنِيَّةٌ (4 تحديات كاملة)
+    // شاشات التابليت اللوحية الكرتونية مع السحب والإفلات المباشر
     // ----------------------------------------------------
-    function renderCloudArenaQuizzes(quizzes) {
-      const container = document.getElementById('quizzesGrid');
+    function renderArcadeTablets(quizzes) {
+      const container = document.getElementById('tabletsContainer');
       container.innerHTML = '';
+
+      const tabletColors = ['tablet-purple', 'tablet-orange', 'tablet-red', 'tablet-green'];
 
       quizzes.forEach((q, idx) => {
         const card = document.createElement('div');
-        card.className = 'bubble-question-cloud';
+        card.className = `arcade-tablet-card ${tabletColors[idx % 4]}`;
         card.innerHTML = `
-          <div>
-            <div class="cloud-card-head">
-              <span class="cloud-card-tag">☁️ سَحَابَةُ التَّحَدِّي ${idx + 1}</span>
-              <button class="cloud-speaker-btn" onclick="Sound.speak('${q.q}')">🔊</button>
+          <div class="tablet-screen">
+            <div class="tablet-header-bar">
+              <div class="home-arcade-icon" onclick="Sound.speak('${q.q}')">🔊</div>
+              <span class="tablet-badge-title">🎮 شَاشَةُ التَّحَدِّي ${idx + 1}</span>
+              <div class="home-arcade-icon">⭐</div>
             </div>
-            <div class="cloud-question-text">${q.q}</div>
+
+            <!-- شخصية السلحوف المتزلج اللطيف (SVG مستوحى من صورتك) -->
+            <div class="turtle-skater-art">
+              <svg viewBox="0 0 100 100" width="85" height="85">
+                <!-- لوح التزلج البرتقالي مع عجلات -->
+                <rect x="25" y="82" width="50" height="7" rx="3.5" fill="#f97316"/>
+                <circle cx="34" cy="91" r="3.5" fill="#334155"/>
+                <circle cx="66" cy="91" r="3.5" fill="#334155"/>
+                <!-- درع السلحفاة البني والأخضر -->
+                <ellipse cx="50" cy="55" rx="22" ry="26" fill="#854d0e"/>
+                <ellipse cx="50" cy="55" rx="18" ry="22" fill="#a16207"/>
+                <path d="M42 42 L58 42 L64 54 L58 66 L42 66 L36 54 Z" fill="#ca8a04"/>
+                <!-- جسم ورأس السلحفاة الأخضر اللطيف -->
+                <circle cx="50" cy="28" r="14" fill="#86efac" stroke="#16a34a" stroke-width="2"/>
+                <!-- قبعة رياضية برتقالية -->
+                <path d="M38 24 Q50 12 62 24 Z" fill="#f97316"/>
+                <rect x="42" y="24" width="22" height="4" rx="2" fill="#ea580c"/>
+                <!-- عيون كرتونية باسمة -->
+                <circle cx="45" cy="28" r="4" fill="white"/>
+                <circle cx="55" cy="28" r="4" fill="white"/>
+                <circle cx="45" cy="28" r="2" fill="#0f172a"/>
+                <circle cx="55" cy="28" r="2" fill="#0f172a"/>
+                <!-- ابتسامة -->
+                <path d="M46 34 Q50 38 54 34" stroke="#166534" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <!-- أرجل وأيدي -->
+                <ellipse cx="32" cy="74" rx="6" ry="10" fill="#86efac"/>
+                <ellipse cx="68" cy="74" rx="6" ry="10" fill="#86efac"/>
+              </svg>
+            </div>
+
+            <div class="tablet-question-text">${q.q}</div>
+
+            <!-- الجسر الخشبي كمنطقة إفلات للسحب -->
+            <div class="wooden-bridge-board">
+              <span style="color:white; font-size:1.2rem;">🪵</span>
+              <div class="drop-wood-slot" id="drop_slot_${idx}">اسْحَبْ هُنَا ⬇️</div>
+              <span style="color:white; font-size:1.2rem;">🛹</span>
+            </div>
+
+            <!-- قطع الكلمات الملونة القابلة للسحب -->
+            <div class="draggable-tray">
+              ${q.opts.map(opt => `
+                <div class="drag-word-block" 
+                     draggable="true" 
+                     data-word="${opt}"
+                     data-quiz-idx="${idx}"
+                     onclick="handleBlockClick(this, '${opt}', '${q.ans}', ${idx}, '${q.tip}')">
+                  ${opt}
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="arcade-feedback" id="fb_tablet_${idx}"></div>
           </div>
-          <div>
-            ${q.opts.map(opt => `
-              <button class="bubble-opt-pill" onclick="checkArenaAnswer(this, '${opt}', '${q.ans}', '${q.tip}')">
-                <span>${opt}</span>
-                <span onclick="event.stopPropagation(); Sound.speak('${opt}')">🔊</span>
-              </button>
-            `).join('')}
-          </div>
-          <div class="cloud-feedback-box" id="fb_cloud_${idx}"></div>
         `;
         container.appendChild(card);
       });
+
+      setupDragAndDropEvents(quizzes);
     }
 
-    function checkArenaAnswer(btn, selected, correct, tip) {
-      const parent = btn.closest('.bubble-question-cloud');
-      const fb = parent.querySelector('.cloud-feedback-box');
-      const btns = parent.querySelectorAll('.bubble-opt-pill');
+    // إعداد أحداث السحب والإفلات (HTML5 Drag & Drop)
+    function setupDragAndDropEvents(quizzes) {
+      document.querySelectorAll('.drag-word-block').forEach(block => {
+        block.addEventListener('dragstart', (e) => {
+          e.dataTransfer.setData('text/plain', JSON.stringify({
+            word: block.dataset.word,
+            idx: block.dataset.quizIdx
+          }));
+          block.style.opacity = '0.5';
+        });
+
+        block.addEventListener('dragend', () => {
+          block.style.opacity = '1';
+        });
+      });
+
+      document.querySelectorAll('.drop-wood-slot').forEach((slot, sIdx) => {
+        slot.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          slot.classList.add('drag-over');
+        });
+
+        slot.addEventListener('dragleave', () => {
+          slot.classList.remove('drag-over');
+        });
+
+        slot.addEventListener('drop', (e) => {
+          e.preventDefault();
+          slot.classList.remove('drag-over');
+          try {
+            const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+            if (parseInt(data.idx) === sIdx) {
+              const quiz = quizzes[sIdx];
+              evaluateQuizAnswer(data.word, quiz.ans, sIdx, slot, quiz.tip);
+            }
+          } catch(err){}
+        });
+      });
+    }
+
+    // إمكانية الإجابة بالنقر المباشر أيضاً للتيسير على شاشات اللمس
+    function handleBlockClick(block, word, correct, sIdx, tip) {
+      const slot = document.getElementById(`drop_slot_${sIdx}`);
+      evaluateQuizAnswer(word, correct, sIdx, slot, tip);
+    }
+
+    function evaluateQuizAnswer(selected, correct, sIdx, slotEl, tip) {
+      const fb = document.getElementById(`fb_tablet_${sIdx}`);
+      Sound.speak(selected);
 
       if (selected === correct) {
+        slotEl.textContent = `✓ ${selected}`;
+        slotEl.className = 'drop-wood-slot correct-dropped';
         fb.style.display = 'block';
         fb.style.background = '#dcfce7';
         fb.style.color = '#15803d';
-        fb.innerHTML = `✓ أَحْسَنْتَ يَا بَطَلُ! إِجَابَةٌ صَحِيحَةٌ (${selected}).`;
-        btn.style.background = '#bbf7d0';
-        btn.style.borderColor = '#22c55e';
+        fb.innerHTML = `🎉 عَبَقَرِيٌّ! الإِجَابَةُ (${selected}) صَحِيحَةٌ.`;
         Sound.correct();
-        addStars(10);
-        btns.forEach(b => b.disabled = true);
+        addStars(15);
       } else {
         fb.style.display = 'block';
         fb.style.background = '#fee2e2';
         fb.style.color = '#b91c1c';
         fb.innerHTML = `✕ حَاوِلْ ثَانِيَةً! 💡 ${tip}`;
-        btn.style.background = '#fee2e2';
-        btn.style.borderColor = '#fca5a5';
         Sound.wrong();
       }
     }
