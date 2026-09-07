@@ -7,8 +7,8 @@
   <style>
     :root {
       --primary: #4338ca;
-      --c-root: #dc2626;  /* أحمر فاقع للجذر */
-      --c-affix: #2563eb; /* أزرق فاقع للزيادة */
+      --c-root: #dc2626;
+      --c-affix: #2563eb;
     }
 
     * {
@@ -28,7 +28,7 @@
       color: #ffffff;
     }
 
-    /* شريط الرأس */
+    /* رأس الصفحة */
     header {
       background: #ffffff;
       margin: 0.8rem 1.5rem;
@@ -94,7 +94,7 @@
       gap: 0.5rem;
     }
 
-    /* التبويبات */
+    /* التبويبات الفضائية */
     .nav-tabs-container {
       display: flex;
       justify-content: center;
@@ -342,12 +342,12 @@
     }
 
     /* ========================================================= */
-    /* 2. سحابة الحكاية: سحابة قطنية حقيقية 100% مع الطيور والنجوم (مطابقة للصورة 2) */
+    /* 2. سحابة الحكاية: سحابة قطنية حقيقية 100% مع الطيور والنجوم */
     /* ========================================================= */
     .kawaii-cloud-universe {
       position: relative;
       width: 100%;
-      min-height: 750px;
+      min-height: 820px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -355,7 +355,6 @@
       overflow: hidden;
     }
 
-    /* الطيور الكرتونية الملونة الطائرة في سماء السحابة */
     .flying-bird {
       position: absolute;
       z-index: 8;
@@ -375,7 +374,6 @@
       100% { transform: translateY(0) rotate(-3deg); }
     }
 
-    /* النجوم الصفراء المبتسمة المتناثرة حول السحابة */
     .smiling-star {
       position: absolute;
       z-index: 7;
@@ -394,12 +392,12 @@
       100% { transform: scale(1.1) rotate(6deg); }
     }
 
-    /* الحاوية الهندسية للسحابة الكبرى */
+    /* الحاوية الهندسية الشاملة للسحابة الكبرى */
     .fluffy-puffy-cloud-card {
       position: relative;
       width: 100%;
-      max-width: 1040px;
-      min-height: 740px;
+      max-width: 1020px;
+      min-height: 800px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -407,7 +405,7 @@
       z-index: 5;
     }
 
-    /* مسار السحابة الحقيقي المنحني (SVG) كخلفية مطلقة مطابقة للصورة 2 */
+    /* مسار السحابة الحقيقي بـ 14 انتفاخاً كروياً مقوساً */
     .cloud-svg-frame-art {
       position: absolute;
       top: 0;
@@ -419,13 +417,13 @@
       filter: drop-shadow(0 25px 40px rgba(56, 189, 248, 0.4));
     }
 
-    /* المحتوى التفاعلي المستقر في بطن السحابة الناصعة */
+    /* المحتوى التفاعلي المستقر بدقة في بطن السحابة */
     .cloud-belly-interactive {
       position: relative;
       z-index: 10;
       width: 100%;
-      max-width: 820px;
-      padding: 190px 20px 70px 20px; /* مساحة علوية للوجه ومساحة جانبية للانتفاخات */
+      max-width: 800px;
+      padding: 230px 20px 90px 20px;
       text-align: center;
       color: #1e293b;
     }
@@ -908,7 +906,6 @@
       <div class="space-system-arena" id="starsSky">
         <div class="orbit-ellipse-wide"></div>
 
-        <!-- رائد فضاء 1 -->
         <div class="astro-kid astro-kid-1">
           <svg viewBox="0 0 120 120" width="110" height="110">
             <circle cx="60" cy="45" r="35" fill="rgba(255,255,255,0.25)" stroke="#38bdf8" stroke-width="4"/>
@@ -928,7 +925,6 @@
           </svg>
         </div>
 
-        <!-- رائد فضاء 2 -->
         <div class="astro-kid astro-kid-2">
           <svg viewBox="0 0 120 120" width="105" height="105">
             <circle cx="60" cy="45" r="34" fill="rgba(255,255,255,0.25)" stroke="#ec4899" stroke-width="4"/>
@@ -948,7 +944,6 @@
           </svg>
         </div>
 
-        <!-- هالة أشعة الشمس الدوارة الواضحة -->
         <svg class="sun-rays-halo" viewBox="0 0 100 100">
           <polygon points="50,0 55,14 45,14" fill="#fde047"/>
           <polygon points="50,100 55,86 45,86" fill="#fde047"/>
@@ -960,14 +955,12 @@
           <polygon points="15,85 28,79 21,72" fill="#fde047"/>
         </svg>
 
-        <!-- قرص الشمس المتسع -->
         <div class="cartoon-sun-core" onclick="openRootModal()">
           <div class="sun-root-letters" id="coreLetters">[ د - ح - ر - ج ]</div>
           <div class="sun-badge-desc" id="coreConcept">الجَذْرُ الرُّبَاعِيُّ</div>
           <span style="font-size: 0.8rem; color: #78350f; font-weight: 900; margin-top: 0.4rem;">🔊 انقر للاستكشاف</span>
         </div>
 
-        <!-- الكواكب الخمسة -->
         <div class="space-planet-sphere planet-1-verb" onclick="openMorphModal(0)">
           <span class="planet-title-label">الحدث / الفعل</span>
           <div class="planet-word-text" id="b1_word">دَحْرَجَ</div>
@@ -1001,13 +994,12 @@
     </div>
 
     <!-- ========================================================= -->
-    <!-- 2. سحابة الحكاية: سحابة قطنية نقية 100% مطابقة للصورة 2 -->
+    <!-- 2. سحابة الحكاية: سحابة قطنية نقية 100% مع الطيور والنجوم -->
     <!-- ========================================================= -->
     <div id="storyTab" class="tab-view">
       <div class="kawaii-cloud-universe">
 
-        <!-- طيور كرتونية طائرة حول السحابة (SVG مطابق للصورة 2) -->
-        <!-- طائر 1: برتقالي أعلى اليسار -->
+        <!-- طيور كرتونية طائرة حول السحابة -->
         <div class="flying-bird bird-top-left">
           <svg viewBox="0 0 100 80" width="85" height="68">
             <ellipse cx="50" cy="50" rx="25" ry="18" fill="#f97316"/>
@@ -1015,14 +1007,12 @@
             <circle cx="74" cy="43" r="5" fill="white"/>
             <circle cx="76" cy="43" r="2.5" fill="#1e293b"/>
             <polygon points="82,45 96,48 82,53" fill="#facc15"/>
-            <!-- جناح علوي مرفرف -->
             <path d="M 40,45 Q 25,15 45,15 Q 55,25 45,45 Z" fill="#ea580c"/>
             <path d="M 30,55 Q 15,62 10,50 Q 25,50 30,55 Z" fill="#f97316"/>
             <path d="M 45,65 Q 45,75 52,75 M 55,65 Q 55,75 62,75" stroke="#ca8a04" stroke-width="2.5" fill="none"/>
           </svg>
         </div>
 
-        <!-- طائر 2: أخضر أعلى اليمين -->
         <div class="flying-bird bird-top-right">
           <svg viewBox="0 0 100 80" width="85" height="68">
             <ellipse cx="50" cy="50" rx="25" ry="18" fill="#22c55e"/>
@@ -1036,7 +1026,6 @@
           </svg>
         </div>
 
-        <!-- طائر 3: أحمر ياقوتي في الأسفل -->
         <div class="flying-bird bird-bottom-right">
           <svg viewBox="0 0 100 80" width="90" height="72">
             <ellipse cx="50" cy="50" rx="26" ry="19" fill="#ef4444"/>
@@ -1049,7 +1038,7 @@
           </svg>
         </div>
 
-        <!-- نجوم صفراء مبتسمة (SVG مطابق للصورة 2) -->
+        <!-- نجوم صفراء مبتسمة -->
         <div class="smiling-star star-pos-1">
           <svg viewBox="0 0 60 60" width="55" height="55">
             <polygon points="30,2 38,19 58,19 42,31 48,50 30,38 12,50 18,31 2,19 22,19" fill="#facc15" stroke="#eab308" stroke-width="2"/>
@@ -1083,7 +1072,7 @@
 
         <!-- كارت السحابة الحقيقي المنحني بالكامل -->
         <div class="fluffy-puffy-cloud-card">
-          <!-- مسار السحابة والوجه والظلال (SVG حقيقي 100%) -->
+          <!-- مسار السحابة والوجه والظلال بـ 14 انتفاخاً كروياً مقوساً -->
           <svg class="cloud-svg-frame-art" viewBox="0 0 1000 750" preserveAspectRatio="none">
             <!-- الظل السفلي للسحابة -->
             <path d="M 500,60
@@ -1123,7 +1112,7 @@
             <ellipse cx="330" cy="220" rx="40" ry="25" fill="#fca5a5" opacity="0.85"/>
             <ellipse cx="670" cy="220" rx="40" ry="25" fill="#fca5a5" opacity="0.85"/>
 
-            <!-- العيون الكرتونية الواسعة اللامعة (مطابقة للصورة 2) -->
+            <!-- العيون الكرتونية الواسعة اللامعة -->
             <circle cx="420" cy="190" r="25" fill="#1e293b"/>
             <circle cx="428" cy="180" r="9" fill="white"/>
             <circle cx="413" cy="200" r="4" fill="white"/>
@@ -1136,7 +1125,7 @@
             <path d="M 395,145 Q 420,130 445,145" fill="none" stroke="#1e293b" stroke-width="5" stroke-linecap="round"/>
             <path d="M 555,145 Q 580,130 605,145" fill="none" stroke="#1e293b" stroke-width="5" stroke-linecap="round"/>
 
-            <!-- الابتسامة الكرتونية الرائعة -->
+            <!-- الابتسامة الكرتونية -->
             <path d="M 465,205 Q 500,245 535,205" fill="none" stroke="#1e293b" stroke-width="6" stroke-linecap="round"/>
           </svg>
 
@@ -1440,7 +1429,7 @@
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"صَـ"}, {ch:"", correct:"ا"}, {ch:"نِـ"}, {ch:"عٌ"}], pool: ["ا", "مَـ", "يَـ"] },
           { title: "قُرْصُ: اسْمُ المَكَانِ", slots: [{ch:"", correct:"مَـ"}, {ch:"صْ"}, {ch:"نَ"}, {ch:"عٌ"}], pool: ["مَـ", "تَـ", "سَـ"] },
-          { title: "قُرْصُ: اسْمُ المَفْعُولِ", slots: [{ch:"مَـ"}, {ch:"صْ"}, {ch:"نُـ"}, {ch:"", correct:"و"}, {ch:"عٌ"}], pool: ["و", "ا", "ي"] }
+          { title: "قُرْصُ: اسْمُ المَفْعُولِ", slots: [{ch:"مَـ"}, {ch:"صْ"}, {ch:"نُـ"}, {ch:"", correct:"و"}, {ch:"عٌ"}], pool: ["و", "ي", "ا"] }
         ],
         quizzes: [
           { q: "مَا هُوَ الفِعْلُ المَزِيدُ بِحَرْفٍ وَاحِدٍ مِنَ الجَذْرِ (ص - ن - ع)؟", ans: "صَنَّعَ", opts: ["صَنَعَ", "صَنَّعَ", "اسْتَصْنَعَ"], tip: "المزيد بحرف يكون بالتضعيف (فَعَّلَ)." },
