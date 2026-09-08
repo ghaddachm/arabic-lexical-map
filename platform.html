@@ -1246,9 +1246,36 @@
   <script>
     const Sound = {
       ctx: null,
+      audioPlayer: new Audio(),
+      
       init() {
         if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
       },
+
+      rootFolderMap: {
+        "كتب": "ktb",
+        "قرأ": "qra",
+        "مدد": "mdd",
+        "دحرج": "dhrj",
+        "زلزل": "zlzl",
+        "وقف": "wqf",
+        "قول": "qwl",
+        "رمي": "rmy",
+        "درس": "drs",
+        "كسر": "ksr",
+        "كشف": "kshf",
+        "خرج": "khrj"
+      },
+
+      playAsset(folder, fileName, fallbackText) {
+        const audioPath = `audio/${folder}/${fileName}.mp3`;
+        this.audioPlayer.src = audioPath;
+        
+        this.audioPlayer.play().catch(() => {
+          if (fallbackText) this.speak(fallbackText);
+        });
+      },
+
       correct() {
         this.init();
         if (!this.ctx) return;
@@ -1270,6 +1297,7 @@
         const cheers = ["رَائِعٌ جِدّاً!", "أَحْسَنْتَ يَا بَطَلُ!", "عَبْقَرِيٌّ!", "مُمْتَازٌ!"];
         setTimeout(() => this.speak(cheers[Math.floor(Math.random() * cheers.length)]), 450);
       },
+
       wrong() {
         this.init();
         if (!this.ctx) return;
@@ -1286,6 +1314,7 @@
         osc.start(now);
         osc.stop(now + 0.35);
       },
+
       pop() {
         this.init();
         if (!this.ctx) return;
@@ -1302,6 +1331,7 @@
         osc.start(now);
         osc.stop(now + 0.08);
       },
+
       speak(txt) {
         if ('speechSynthesis' in window) {
           window.speechSynthesis.cancel();
@@ -1954,7 +1984,13 @@
         ruleBanner.style.display = 'none';
       }
 
-      document.getElementById('mAudioBtn').onclick = () => Sound.speak(branch.plain);
+      const fileNames = ['verb', 'actor', 'product', 'place', 'source'];
+      const folder = Sound.rootFolderMap[rootKey] || rootKey;
+      const currentAudioFile = fileNames[branchIdx];
+
+      document.getElementById('mAudioBtn').onclick = () => {
+        Sound.playAsset(folder, currentAudioFile, branch.plain);
+      };
 
       const affixCard = document.getElementById('mAffixCard');
       const affixList = document.getElementById('mAffixList');
@@ -1985,12 +2021,13 @@
       }
 
       document.getElementById('morphModal').classList.add('open');
-      Sound.speak(branch.plain);
+      Sound.playAsset(folder, currentAudioFile, branch.plain);
     }
 
     function openRootModal() {
       const rootKey = document.getElementById('rootSelect').value;
-      Sound.speak(`جذر ${db[rootKey].letters.join(' ')}`);
+      const folder = Sound.rootFolderMap[rootKey] || rootKey;
+      Sound.playAsset(folder, 'core', `جذر ${db[rootKey].letters.join(' ')}`);
       openMorphModal(0);
     }
 
@@ -2047,8 +2084,9 @@
 
     function speakCurrentStory() {
       const rootKey = document.getElementById('rootSelect').value;
-      const text = db[rootKey].storyParagraph.map(p => p.word).join(' ');
-      Sound.speak(text);
+      const folder = Sound.rootFolderMap[rootKey] || rootKey;
+      const fallbackText = db[rootKey].storyParagraph.map(p => p.word).join(' ');
+      Sound.playAsset(folder, 'story', fallbackText);
     }
 
     function renderDiscsWorkshop(labs) {
