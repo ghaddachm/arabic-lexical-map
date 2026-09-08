@@ -284,62 +284,73 @@
     }
 
     .planet-1-verb {
-      width: 165px; height: 165px;
+      width: 175px; height: 175px;
       background: radial-gradient(circle at 30% 30%, #f472b6 0%, #db2777 50%, #831843 100%);
       box-shadow: 0 0 35px rgba(219, 39, 119, 0.65);
-      top: 60px; right: 18%;
+      top: 50px; right: 17%;
     }
 
     .planet-2-agent {
-      width: 175px; height: 175px;
+      width: 180px; height: 180px;
       background: radial-gradient(circle at 30% 30%, #60a5fa 0%, #2563eb 50%, #1e3a8a 100%);
       box-shadow: 0 0 35px rgba(37, 99, 235, 0.65);
-      top: 60px; left: 18%;
+      top: 50px; left: 17%;
     }
 
     .planet-3-patient {
-      width: 165px; height: 165px;
+      width: 175px; height: 175px;
       background: radial-gradient(circle at 30% 30%, #f87171 0%, #dc2626 50%, #7f1d1d 100%);
       box-shadow: 0 0 35px rgba(220, 38, 38, 0.65);
-      bottom: 50px; left: 16%;
+      bottom: 45px; left: 15%;
     }
 
     .planet-4-place {
-      width: 165px; height: 165px;
+      width: 175px; height: 175px;
       background: radial-gradient(circle at 30% 30%, #4ade80 0%, #16a34a 50%, #14532d 100%);
       box-shadow: 0 0 35px rgba(22, 163, 74, 0.65);
-      bottom: 50px; right: 16%;
+      bottom: 45px; right: 15%;
     }
 
     .planet-5-source {
-      width: 160px; height: 160px;
+      width: 170px; height: 170px;
       background: radial-gradient(circle at 30% 30%, #fb923c 0%, #ea580c 50%, #7c2d12 100%);
       box-shadow: 0 0 35px rgba(234, 88, 12, 0.65);
-      bottom: 25px; left: 50%; transform: translateX(-50%);
+      bottom: 20px; left: 50%; transform: translateX(-50%);
     }
     .planet-5-source:hover { transform: translateX(-50%) scale(1.15) translateY(-8px); }
 
     .planet-title-label {
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.65);
       color: #fef08a;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 900;
-      padding: 0.2rem 0.7rem;
+      padding: 0.15rem 0.65rem;
       border-radius: 12px;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .planet-question-hint {
+      font-size: 0.8rem;
+      font-weight: 900;
+      color: #ffffff;
+      opacity: 0.9;
+      margin-bottom: 0.1rem;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     }
 
     .planet-word-text {
-      font-size: 1.85rem;
+      font-size: 1.8rem;
       font-weight: 900;
       color: #ffffff;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+      line-height: 1.1;
     }
 
     .planet-weight-sub {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #e2e8f0;
       font-weight: bold;
+      margin-top: 0.1rem;
     }
 
     /* 2. سحابة الحكاية */
@@ -1025,32 +1036,42 @@
           <span style="font-size: 0.8rem; color: #78350f; font-weight: 900; margin-top: 0.4rem;">🔊 انقر للاستكشاف</span>
         </div>
 
+        <!-- 1. كوكب الحدث / الفعل -->
         <div class="space-planet-sphere planet-1-verb" onclick="openMorphModal(0)">
           <span class="planet-title-label">الحدث / الفعل</span>
+          <span class="planet-question-hint">مَاذَا حَدَثَ؟</span>
           <div class="planet-word-text" id="b1_word">كَتَبَ</div>
           <span class="planet-weight-sub" id="b1_pattern">(فَعَلَ)</span>
         </div>
 
+        <!-- 2. كوكب اسم الفاعل -->
         <div class="space-planet-sphere planet-2-agent" onclick="openMorphModal(1)">
           <span class="planet-title-label">اسْمُ الفَاعِلِ</span>
+          <span class="planet-question-hint">مَنْ يَفْعَلُ؟</span>
           <div class="planet-word-text" id="b2_word">كَاتِبٌ</div>
           <span class="planet-weight-sub" id="b2_pattern">(فَاعِلٌ)</span>
         </div>
 
+        <!-- 3. كوكب اسم المفعول -->
         <div class="space-planet-sphere planet-3-patient" onclick="openMorphModal(2)">
           <span class="planet-title-label">اسْمُ المَفْعُولِ</span>
+          <span class="planet-question-hint">مَا الَّذِي فُعِلَ؟</span>
           <div class="planet-word-text" id="b3_word">مَكْتُوبٌ</div>
           <span class="planet-weight-sub" id="b3_pattern">(مَفْعُولٌ)</span>
         </div>
 
+        <!-- 4. كوكب اسم المكان -->
         <div class="space-planet-sphere planet-4-place" onclick="openMorphModal(3)">
           <span class="planet-title-label">اسْمُ المَكَانِ</span>
+          <span class="planet-question-hint">أَيْنَ يَقَعُ؟</span>
           <div class="planet-word-text" id="b4_word">مَكْتَبٌ</div>
           <span class="planet-weight-sub" id="b4_pattern">(مَفْعَلٌ)</span>
         </div>
 
+        <!-- 5. كوكب المصدر -->
         <div class="space-planet-sphere planet-5-source" onclick="openMorphModal(4)">
           <span class="planet-title-label">المَصْدَرُ</span>
+          <span class="planet-question-hint">مَا اسْمُ النَّشَاطِ؟</span>
           <div class="planet-word-text" id="b5_word">كِتَابَةٌ</div>
           <span class="planet-weight-sub" id="b5_pattern">(فِعَالَةٌ)</span>
         </div>
@@ -1924,7 +1945,7 @@
           { isVerb: true, role: "الحدث / الفعل", word: "اسْتَخْرَجَ", colored: "<span class='c-a'>اسْتَ</span><span class='c-r'>خْ</span><span class='c-r'>رَ</span><span class='c-r'>جَ</span>", plain: "اسْتَخْرَجَ", weight: "اسْتَفْعَلَ (سداسي مزيد)", desc: "فعل ثلاثي مزيد بثلاثة أحرف (الهمزة والسين والتاء) يفيد السعي والطلب وبذل الجهد لاستخراج الشيء.", colloc: "اسْتَخْرَجَ النِّفْطَ", ex: "«اسْتَخْرَجَ العُمَّالُ مَعْدِنَ الفُوسْفَاطِ»", rule: "الفِعْلُ الثُّلَاثِيُّ المَزِيدُ بِثَلَاثَةِ أَحْرُفٍ عَلَى وَزْنِ (اسْتَفْعَلَ) تَكُونُ فِيهِ هَمْزَةُ الوَصْلِ وَالسِّينُ وَالتَّاءُ زَائِدَةً عَلَى الأُصُولِ الثَّلَاثَةِ." },
           { isVerb: false, role: "اسْمُ الفَاعِلِ", word: "مُسْتَخْرِجٌ", colored: "<span class='c-a'>مُسْتَ</span><span class='c-r'>خْ</span><span class='c-r'>رِ</span><span class='c-r'>جٌ</span>", plain: "مُسْتَخْرِجٌ", weight: "مُسْتَفْعِلٌ (اسم فاعل)", desc: "اسم مشتق يدل على العامل أو الفريق الهندسي القائم باستخراج المعادن.", colloc: "مُسْتَخْرِجُ المَعَادِنِ", ex: "«انْطَلَقَ الفَرِيقُ المُسْتَخْرِجُ لِلخَيْرَاتِ»", rule: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ الفِعْلِ المَزِيدِ بِثَلَاثَةِ أَحْرُفٍ عَلَى وَزْنِ (مُسْتَفْعِلٌ) بِمِيمٍ مَضْمُومَةٍ فِي أَوَّلِهِ وَكَسْرِ مَا قَبْلَ الآخِرِ: مُسْتَخْرِجٌ." },
           { isVerb: false, role: "اسْمُ المَفْعُولِ", word: "مُسْتَخْرَجٌ", colored: "<span class='c-a'>مُسْتَ</span><span class='c-r'>خْ</span><span class='c-r'>رَ</span><span class='c-r'>جٌ</span>", plain: "مُسْتَخْرَجٌ", weight: "مُسْتَفْعَلٌ (اسم مفعول)", desc: "اسم مشتق يدل على المادة الخام التي تم انتشالها وإخراجها من باطن الأرض.", colloc: "فُوسْفَاطٌ مُسْتَخْرَجٌ", ex: "«صَارَ المُنْتَجُ مُسْتَخْرَجاً بِجَوْدَةٍ»", rule: "يُصَاغُ اسْمُ المَفْعُولِ مِنَ الفِعْلِ المَزِيدِ بِثَلَاثَةِ أَحْرُفٍ عَلَى وَزْنِ (مُسْتَفْعَلٌ) بِمِيمٍ مَضْمُومَةٍ فِي أَوَّلِهِ وَفَتْحِ مَا قَبْلَ الآخِرِ: مُسْتَخْرَجٌ." },
-          { isVerb: false, role: "اسْمُ المَكَانِ", word: "مُسْتَخْرَجٌ", colored: "<span class='c-a'>مُسْتَ</span><span class='c-r'>خْ</span><span class='c-r'>رَ</span><span class='c-r'>جٌ</span>", plain: "مُسْتَخْرَجٌ", weight: "مُفْتَعَلٌ (اسم مكان)", desc: "موضع وميدان استخراج المواد الخام والمنجم.", colloc: "مُسْتَخْرَجُ الطَّاقَةِ", ex: "«المَنْجَمُ هُوَ مُسْتَخْرَجُ الفُوسْفَاطِ»", rule: "يُصَاغُ اسْمُ المَكَانِ مِنَ الفِعْلِ المَزِيدِ بِثَلَاثَةِ أَحْرُفٍ عَلَى صِيغَةِ اسْمِ المَفْعُولِ عَلَى وَزْنِ (مُسْتَفْعَلٌ): مُسْتَخْرَجٌ." },
+          { isVerb: false, role: "اسْمُ المَكَانِ", word: "مُسْتَخْرَجٌ", colored: "<span class='c-a'>مُسْتَ</span><span class='c-r'>خْ</span><span class='c-r'>رَ</span><span class='c-r'>جٌ</span>", plain: "مُسْتَخْرَجٌ", weight: "مُسْتَفْعَلٌ (اسم مكان)", desc: "موضع وميدان استخراج المواد الخام والمنجم.", colloc: "مُسْتَخْرَجُ الطَّاقَةِ", ex: "«المَنْجَمُ هُوَ مُسْتَخْرَجُ الفُوسْفَاطِ»", rule: "يُصَاغُ اسْمُ المَكَانِ مِنَ الفِعْلِ المَزِيدِ بِثَلَاثَةِ أَحْرُفٍ عَلَى صِيغَةِ اسْمِ المَفْعُولِ عَلَى وَزْنِ (مُسْتَفْعَلٌ): مُسْتَخْرَجٌ." },
           { isVerb: false, role: "المَصْدَرُ", word: "اسْتِخْرَاجٌ", colored: "<span class='c-a'>اسْتِ</span><span class='c-r'>خْ</span><span class='c-r'>رَ</span><span class='c-a'>ا</span><span class='c-r'>جٌ</span>", plain: "اسْتِخْرَاجٌ", weight: "اسْتِفْعَالٌ (مصدر)", desc: "اسم يدل على عمليات التنقيب والانتشال مجرداً من الزمان.", colloc: "اسْتِخْرَاجُ الخَيْرَاتِ", ex: "«يُسَاهِمُ اسْتِخْرَاجُهُ فِي الصِّنَاعَةِ»", rule: "مَصْدَرُ الفِعْلِ المَزِيدِ بِثَلَاثَةِ أَحْرُفٍ (اسْتَفْعَلَ) يَكُونُ قِيَاساً عَلَى وَزْنِ (اسْتِفْعَالٌ) بِكَسْرِ ثَالِثِهِ وَزِيَادَةِ أَلِفٍ قَبْلَ آخِرِهِ: اسْتِخْرَاجٌ." }
         ],
         affixes: [
@@ -2014,7 +2035,6 @@
       document.getElementById('mHeroWeight').textContent = branch.weight;
       document.getElementById('mHeroWeight').style.display = 'block';
 
-      // إظهار بطاقات التفاصيل العادية
       document.getElementById('mDetailCard').style.display = 'block';
       document.getElementById('rowColloc').style.display = 'flex';
       document.getElementById('rowExample').style.display = 'flex';
