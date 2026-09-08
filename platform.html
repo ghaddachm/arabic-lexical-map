@@ -853,9 +853,37 @@
       margin-bottom: 1.2rem;
     }
 
-    .detail-row { display: flex; gap: 0.6rem; margin-bottom: 0.8rem; font-size: 1.15rem; }
+    .detail-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.9rem; font-size: 1.15rem; }
     .detail-row:last-child { margin-bottom: 0; }
+    .detail-row-text { display: flex; gap: 0.5rem; align-items: baseline; flex: 1; }
     .detail-label { font-weight: 900; color: #334155; white-space: nowrap; }
+
+    .mini-speaker-btn {
+      background: #fef08a;
+      border: 2px solid #eab308;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 0 #ca8a04;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+      margin-right: 0.6rem;
+    }
+
+    .mini-speaker-btn:hover {
+      transform: scale(1.12);
+      background: #fde047;
+    }
+
+    .mini-speaker-btn:active {
+      transform: translateY(2px);
+      box-shadow: none;
+    }
 
     .rule-gold-banner {
       background: #fefce8;
@@ -1062,7 +1090,7 @@
             <circle cx="70" cy="45" r="12" fill="#eab308"/>
             <circle cx="74" cy="43" r="5" fill="white"/>
             <circle cx="76" cy="43" r="2.5" fill="#1e293b"/>
-            <polygon points="82,45 96,48 82,53" fill="#f97316"/>
+            <polygon points="82,45 96,48 82,53" fill="#facc15"/>
             <path d="M 40,45 Q 25,15 45,15 Q 55,25 45,45 Z" fill="#eab308"/>
           </svg>
         </div>
@@ -1219,17 +1247,29 @@
 
       <div class="detail-card">
         <div class="detail-row">
-          <span class="detail-label">💡 الشَّرْحُ وَالدَّلَالَةُ:</span>
-          <span id="mDesc"></span>
+          <div class="detail-row-text">
+            <span class="detail-label">💡 الشَّرْحُ وَالدَّلَالَةُ:</span>
+            <span id="mDesc"></span>
+          </div>
+          <button class="mini-speaker-btn" id="btnPlayDesc" title="استمع للشرح">🔊</button>
         </div>
+
         <div class="detail-row">
-          <span class="detail-label">🔗 المُتَلَازِمَةُ اللَّفْظِيَّةُ:</span>
-          <span id="mColloc" style="color: var(--primary); font-weight: 900;"></span>
+          <div class="detail-row-text">
+            <span class="detail-label">🔗 المُتَلَازِمَةُ اللَّفْظِيَّةُ:</span>
+            <span id="mColloc" style="color: var(--primary); font-weight: 900;"></span>
+          </div>
+          <button class="mini-speaker-btn" id="btnPlayColloc" title="استمع للمتلازمة">🔊</button>
         </div>
+
         <div class="detail-row">
-          <span class="detail-label">📖 المِثَالُ فِي سِيَاقٍ:</span>
-          <span id="mExample" style="color: #1e293b; font-style: italic;"></span>
+          <div class="detail-row-text">
+            <span class="detail-label">📖 المِثَالُ فِي سِيَاقٍ:</span>
+            <span id="mExample" style="color: #1e293b; font-style: italic;"></span>
+          </div>
+          <button class="mini-speaker-btn" id="btnPlayExample" title="استمع للمثال">🔊</button>
         </div>
+
         <div class="rule-gold-banner" id="mRuleBanner" style="display: none;"></div>
       </div>
 
@@ -1339,7 +1379,7 @@
           utter.lang = 'ar-SA';
           utter.rate = 0.88;
           const voices = window.speechSynthesis.getVoices();
-          const ar = voices.find(v => v.lang.startsWith('ar'));
+          const ar = voices.find(v => v.lang.startsWith('ar') || v.lang.startsWith('ara'));
           if (ar) utter.voice = ar;
           window.speechSynthesis.speak(utter);
         }
@@ -1347,7 +1387,7 @@
     };
 
     /* ========================================================================= */
-    /* قاعدة البيانات الشاملة مع الضبط الصرفي الدقيق وتلوين الجذور وحذف التلميحات */
+    /* قاعدة البيانات الشاملة: تسمية المهام بالكلمات الفصيحة وتنقية الخيارات الصرفية */
     /* ========================================================================= */
     const db = {
       // 1. صحيح سالم (ثلاثي)
@@ -1379,11 +1419,11 @@
           { word: "سِحْرَ", target: false }, { word: "الكِتَابَةِ", target: "المصدر" }, { word: "وَجَمَالَهَا.", target: false }
         ],
         missions: [
-          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ الثُّلَاثِيِّ المُجَرَّدِ)", targetType: "الفعل المجرد" },
-          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
-          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
-          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
-          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
+          { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى (الفِعْلِ الثُّلَاثِيِّ المُجَرَّدِ)", targetType: "الفعل المجرد" },
+          { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
+          { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
         ],
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"كَـ"}, {ch:"", correct:"ا"}, {ch:"تِـ"}, {ch:"بٌ"}], pool: ["ا", "و", "ي"] },
@@ -1428,11 +1468,11 @@
           { word: "لَهَا.", target: false }
         ],
         missions: [
-          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ المَهْمُوزِ المُجَرَّدِ)", targetType: "الفعل المجرد" },
-          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
-          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
-          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
-          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
+          { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى (الفِعْلِ المَهْمُوزِ المُجَرَّدِ)", targetType: "الفعل المجرد" },
+          { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
+          { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
         ],
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"قَـ"}, {ch:"ا"}, {ch:"رِ"}, {ch:"", correct:"ئٌ"}], pool: ["ئٌ", "ءٌ", "ؤٌ"] },
@@ -1476,11 +1516,11 @@
           { word: "هُوَ", target: false }, { word: "جَوْهَرُ", target: false }, { word: "التَّعَاوُنِ.", target: false }
         ],
         missions: [
-          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ المُضَعَّفِ المُجَرَّدِ)", targetType: "الفعل المجرد" },
-          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
-          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
-          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
-          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
+          { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى (الفِعْلِ المُضَعَّفِ المُجَرَّدِ)", targetType: "الفعل المجرد" },
+          { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
+          { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
         ],
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"مَـ"}, {ch:"ا"}, {ch:"", correct:"دٌّ"}], pool: ["دٌّ", "دٌ", "تٌ"] },
@@ -1521,11 +1561,11 @@
           { word: "مَحَطَّ", target: false }, { word: "إِعْجَابِ", target: false }, { word: "أَصْدِقَائِهِ.", target: false }
         ],
         missions: [
-          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ الرُّبَاعِيِّ المُجَرَّدِ)", targetType: "الفعل المجرد" },
-          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
-          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
-          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
-          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
+          { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى (الفِعْلِ الرُّبَاعِيِّ المُجَرَّدِ)", targetType: "الفعل المجرد" },
+          { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
+          { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
         ],
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"", correct:"مُـ"}, {ch:"دَ"}, {ch:"حْ"}, {ch:"رِ"}, {ch:"جٌ"}], pool: ["مُـ", "يُـ", "تَـ"] },
@@ -1567,11 +1607,11 @@
           { word: "الزَّلْزَلَةَ", target: "المصدر" }, { word: "مَرَّتْ", target: false }, { word: "بِسَلَامٍ.", target: false }
         ],
         missions: [
-          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ الرُّبَاعِيِّ المُضَعَّفِ)", targetType: "الفعل المجرد" },
-          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
-          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
-          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
-          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
+          { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى (الفِعْلِ الرُّبَاعِيِّ المُضَعَّفِ)", targetType: "الفعل المجرد" },
+          { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
+          { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
         ],
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"مُـ"}, {ch:"زَ"}, {ch:"لْ"}, {ch:"", correct:"زِ"}, {ch:"لٌ"}], pool: ["زِ", "زَ", "زُ"] },
@@ -1616,11 +1656,11 @@
           { word: "النِّظَامِ.", target: false }
         ],
         missions: [
-          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ المِثَالِ المُجَرَّدِ)", targetType: "الفعل المجرد" },
-          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
-          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
-          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
-          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
+          { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى (الفِعْلِ المِثَالِ المُجَرَّدِ)", targetType: "الفعل المجرد" },
+          { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
+          { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
         ],
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"وَ"}, {ch:"", correct:"ا"}, {ch:"قِـ"}, {ch:"فٌ"}], pool: ["ا", "ي", "و"] },
@@ -1666,11 +1706,11 @@
           { word: "أَسَاسُ", target: false }, { word: "النَّجَاحِ.", target: false }
         ],
         missions: [
-          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ الأَجْوَفِ المُجَرَّدِ)", targetType: "الفعل المجرد" },
-          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
-          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
-          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
-          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
+          { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى (الفِعْلِ الأَجْوَفِ المُجَرَّدِ)", targetType: "الفعل المجرد" },
+          { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
+          { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
         ],
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"قَـ"}, {ch:"ا"}, {ch:"", correct:"ئِـ"}, {ch:"لٌ"}], pool: ["ئِـ", "يـ", "و"] },
@@ -1714,11 +1754,11 @@
           { word: "المُتْقَنِ.", target: false }
         ],
         missions: [
-          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ النَّاقِصِ المُجَرَّدِ)", targetType: "الفعل المجرد" },
-          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
-          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
-          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
-          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
+          { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى (الفِعْلِ النَّاقِصِ المُجَرَّدِ)", targetType: "الفعل المجرد" },
+          { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
+          { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
         ],
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"رَ"}, {ch:"ا"}, {ch:"", correct:"مٍ"}], pool: ["مٍ", "مِي", "مُ"] },
@@ -1764,11 +1804,11 @@
           { word: "يُشَارِكُونَ.", target: false }
         ],
         missions: [
-          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ المَزِيدِ بِالتَّضْعِيفِ)", targetType: "الفعل المجرد" },
-          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
-          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
-          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
-          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
+          { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى (الفِعْلِ المَزِيدِ بِالتَّضْعِيفِ)", targetType: "الفعل المجرد" },
+          { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
+          { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
         ],
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"", correct:"مُـ"}, {ch:"دَ"}, {ch:"رِّ"}, {ch:"سٌ"}], pool: ["مُـ", "مَـ", "تَـ"] },
@@ -1811,11 +1851,11 @@
           { word: "عَمَلٌ", target: false }, { word: "شَاقٌّ.", target: false }
         ],
         missions: [
-          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ المَزِيدِ بِالتَّضْعِيفِ)", targetType: "الفعل المجرد" },
-          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
-          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
-          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
-          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
+          { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى (الفِعْلِ المَزِيدِ بِالتَّضْعِيفِ)", targetType: "الفعل المجرد" },
+          { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
+          { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
         ],
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"مُـ"}, {ch:"كَـ"}, {ch:"", correct:"سِّـ"}, {ch:"رٌ"}], pool: ["سِّـ", "سَّـ", "سْـ"] },
@@ -1857,11 +1897,11 @@
           { word: "الطَّبِيعَةِ.", target: false }
         ],
         missions: [
-          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ الخُمَاسِيِّ المَزِيدِ)", targetType: "الفعل المجرد" },
-          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
-          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
-          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
-          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
+          { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى (الفِعْلِ الخُمَاسِيِّ المَزِيدِ)", targetType: "الفعل المجرد" },
+          { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
+          { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
         ],
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"مُـ"}, {ch:"كْـ"}, {ch:"تَـ"}, {ch:"", correct:"شِـ"}, {ch:"فٌ"}], pool: ["شِـ", "شَـ", "شُـ"] },
@@ -1903,11 +1943,11 @@
           { word: "الصِّنَاعَةِ.", target: false }
         ],
         missions: [
-          { label: "المَهَمَّةُ 1: انْقُرْ عَلَى (الفِعْلِ السُّدَاسِيِّ المَزِيدِ)", targetType: "الفعل المجرد" },
-          { label: "المَهَمَّةُ 2: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
-          { label: "المَهَمَّةُ 3: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
-          { label: "المَهَمَّةُ 4: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
-          { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
+          { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى (الفِعْلِ السُّدَاسِيِّ المَزِيدِ)", targetType: "الفعل المجرد" },
+          { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل" },
+          { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول" },
+          { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان" },
+          { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر" }
         ],
         labs: [
           { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"مُـ"}, {ch:"سْـ"}, {ch:"تَـ"}, {ch:"خْـ"}, {ch:"", correct:"رِ"}, {ch:"جٌ"}], pool: ["رِ", "رَ", "رُ"] },
@@ -1975,6 +2015,25 @@
       document.getElementById('mDesc').textContent = branch.desc;
       document.getElementById('mColloc').textContent = branch.colloc;
       document.getElementById('mExample').textContent = branch.ex;
+
+      // أزرار نطق الشرح والمتلازمة والمثال (تظهر في الحدث فقط)
+      const btnDesc = document.getElementById('btnPlayDesc');
+      const btnColloc = document.getElementById('btnPlayColloc');
+      const btnExample = document.getElementById('btnPlayExample');
+
+      if (branch.isVerb) {
+        btnDesc.style.display = 'inline-flex';
+        btnColloc.style.display = 'inline-flex';
+        btnExample.style.display = 'inline-flex';
+
+        btnDesc.onclick = () => Sound.speak(branch.desc);
+        btnColloc.onclick = () => Sound.speak(branch.colloc);
+        btnExample.onclick = () => Sound.speak(branch.ex.replace(/[«»]/g, ''));
+      } else {
+        btnDesc.style.display = 'none';
+        btnColloc.style.display = 'none';
+        btnExample.style.display = 'none';
+      }
 
       const ruleBanner = document.getElementById('mRuleBanner');
       if (branch.rule) {
@@ -2067,7 +2126,7 @@
         if (currentMissionIdx < data.missions.length) {
           setTimeout(() => {
             document.getElementById('storyMissionBadge').textContent = data.missions[currentMissionIdx].label;
-            Sound.speak("أَحْسَنْتَ! الآنَ: " + data.missions[currentMissionIdx].label);
+            Sound.speak("أَحْسَنْتَ! الآنَ ابْحَثْ عَنْ: " + data.missions[currentMissionIdx].targetType);
           }, 800);
         } else {
           setTimeout(() => {
