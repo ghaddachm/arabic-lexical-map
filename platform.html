@@ -718,6 +718,11 @@
       box-shadow: 0 8px 25px rgba(67, 56, 202, 0.55);
     }
 
+    .master-audio-btn:active {
+      transform: translateY(2px);
+      box-shadow: none;
+    }
+
     .rule-gold-banner {
       background: #fefce8; border: 3px dashed #facc15;
       padding: 0.9rem 1.2rem; border-radius: 20px;
@@ -786,7 +791,7 @@
   </nav>
 
   <main>
-    <!-- 1. شمس الجذر -->
+    <!-- 1. شمس الجذر الفضائية بكواكب ثلاثية الأبعاد -->
     <div id="radialMap" class="tab-view active">
       <div class="space-system-arena" id="starsSky">
         <div class="orbit-ellipse-wide"></div>
@@ -1058,12 +1063,14 @@
         });
       },
 
-      correct() {
+      // تشغيل أصوات التعزيز مع استدعاء دالة ما بعدها بدقة لمنع التداخل
+      correct(callback) {
         const cheerFiles = ['correct_1', 'correct_2', 'correct_3'];
         const randomCheer = cheerFiles[Math.floor(Math.random() * cheerFiles.length)];
         this.sfxPlayer.src = `audio/${randomCheer}.mp3`;
+        this.sfxPlayer.onended = () => { if (callback) callback(); };
         this.sfxPlayer.play().catch(() => {
-          this.speak("أَحْسَنْتَ يَا بَطَلُ! إِجَابَةٌ رَائِعَةٌ.");
+          this.speak("أَحْسَنْتَ يَا بَطَلُ! إِجَابَةٌ رَائِعَةٌ.", callback);
         });
       },
 
@@ -1071,6 +1078,7 @@
         const wrongFiles = ['wrong_1', 'wrong_2'];
         const randomWrong = wrongFiles[Math.floor(Math.random() * wrongFiles.length)];
         this.sfxPlayer.src = `audio/${randomWrong}.mp3`;
+        this.sfxPlayer.onended = null;
         this.sfxPlayer.play().catch(() => {
           this.speak("انْتَبِهْ يَا بَطَلُ، تَأَمَّلِ الوَزْنَ وَحَاوِلْ مَرَّةً أُخْرَى.");
         });
@@ -1078,6 +1086,7 @@
 
       pop() {
         this.sfxPlayer.src = `audio/pop.mp3`;
+        this.sfxPlayer.onended = null;
         this.sfxPlayer.play().catch(() => {});
       },
 
@@ -1103,11 +1112,11 @@
         letters: ['ك', 'ت', 'ب'],
         concept: "الكِتَابَةُ وَالتَّدْوِينُ (صَحِيحٌ سَالِمٌ)",
         branches: [
-          { isVerb: true, role: "الحدث / الفعل", word: "كَتَبَ", colored: "<span class='c-r'>كَ</span><span class='c-r'>تَ</span><span class='c-r'>بَ</span>", plain: "كَتَبَ", weight: "فَعَلَ (ثلاثي مجرد)", desc: "فعل ماضٍ ثلاثي صحيح سالم حروفه كلها أصلية، يدل على خط الحروف والتدوين.", colloc: "كَتَبَ نَصّاً", ex: "«كَتَبَ التِّلْمِيذُ قِصَّةً رَائِعَةً»", rule: "الفِعْلُ الثُّلَاثِيُّ المُجَرَّدُ يَأْتِي عَلَى وَزْنِ (فَعَلَ) بِفَتْحِ الفَاءِ وَاللَّامِ." },
-          { isVerb: false, role: "اسْمُ الفَاعِلِ", word: "كَاتِبٌ", colored: "<span class='c-r'>كَ</span><span class='c-a'>ا</span><span class='c-r'>تِ</span><span class='c-r'>بٌ</span>", plain: "كَاتِبٌ", weight: "فَاعِلٌ (اسم فاعل)", desc: "اسم مشتق يدل على الحدث والفاعل الذي قام بالتدوين وتأليف النص.", colloc: "كَاتِبٌ مَاهِرٌ", ex: "«جَلَسَ الكَاتِبُ أَمَامَ مَكْتَبِهِ»", rule: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ الفِعْلِ الثُّلَاثِيِّ المُجَرَّدِ عَلَى وَزْنِ (فَاعِلٌ) بِزِيَادَةِ أَلِفٍ بَعْدَ الحَرْفِ الأَوَّلِ مَعَ كَسْرِ مَا قَبْلَ الآخِرِ." },
-          { isVerb: false, role: "اسْمُ المَفْعُولِ", word: "مَكْتُوبٌ", colored: "<span class='c-a'>مَ</span><span class='c-r'>كْ</span><span class='c-r'>تُ</span><span class='c-a'>و</span><span class='c-r'>بٌ</span>", plain: "مَكْتُوبٌ", weight: "مَفْعُولٌ (اسم مفعول)", desc: "اسم مشتق يدل على الحدث والشيء الذي وقع عليه فعل الكتابة والتدوين.", colloc: "نَصٌّ مَكْتُوبٌ", ex: "«خَرَجَتِ القِصَّةُ فِي نَصٍّ مَكْتُوبٍ»", rule: "يُصَاغُ اسْمُ المَفْعُولِ مِنَ الفِعْلِ الثُّلَاثِيِّ المُجَرَّدِ عَلَى وَزْنِ (مَفْعُولٌ) بِزِيَادَةِ مِيمٍ مَفْتُوحَةٍ فِي أَوَّلِهِ وَوَاوٍ قَبْلَ آخِرِهِ." },
-          { isVerb: false, role: "اسْمُ المَكَانِ", word: "مَكْتَبٌ", colored: "<span class='c-a'>مَ</span><span class='c-r'>كْ</span><span class='c-r'>تَ</span><span class='c-r'>بٌ</span>", plain: "مَكْتَبٌ", weight: "مَفْعَلٌ (اسم مكان)", desc: "اسم مشتق يدل على الموضع أو المقر الذي تقع فيه الكتابة وممارسة العمل.", colloc: "مَكْتَبٌ مُرَتَّبٌ", ex: "«جَلَسَ إِلَى مَكْتَبِهِ المُرَتَّبِ»", rule: "يُصَاغُ اسْمُ المَكَانِ مِنَ الفِعْلِ الثُّلَاثِيِّ عَلَى وَزْنِ (مَفْعَلٌ) بِفَتْحِ العَيْنِ لِأَنَّ عَيْنَ مُضَارِعِهِ مَضْمُومَةٌ: يَكْتُبُ." },
-          { isVerb: false, role: "المَصْدَرُ", word: "كِتَابَةٌ", colored: "<span class='c-r'>كِ</span><span class='c-r'>تَ</span><span class='c-a'>ا</span><span class='c-r'>بَ</span><span class='c-a'>ةٌ</span>", plain: "كِتَابَةٌ", weight: "فِعَالَةٌ (مصدر)", desc: "اسم يدل على الحدث مجرداً من الزمان ونشاط خط الحروف بالقلم.", colloc: "سِحْرُ الكِتَابَةِ", ex: "«تُعَلِّمُ الأَطْفَالَ جَمَالَ الكِتَابَةِ»", rule: "المَصَادِرُ الثُّلَاثِيَّةُ كَثِيرَةٌ وَسَمَاعِيَّةٌ، مِثْلَ: كِتَابَةٌ." }
+          { isVerb: true, role: "الحدث / الفعل", word: "كَتَبَ", colored: "<span class='c-r'>كَ</span><span class='c-r'>تَ</span><span class='c-r'>بَ</span>", plain: "كَتَبَ", weight: "فَعَلَ (ثلاثي مجرد)", desc: "فِعْلٌ مَاضٍ ثُلَاثِيٌّ صَحِيحٌ سَالِمٌ، حُرُوفُهُ كُلُّهَا أَصْلِيَّةٌ، يَدُلُّ عَلَى خَطِّ الحُرُوفِ وَالتَّدْوِينِ.", colloc: "كَتَبَ نَصّاً", ex: "«كَتَبَ التِّلْمِيذُ قِصَّةً رَائِعَةً»", rule: "الفِعْلُ الثُّلَاثِيُّ المُجَرَّدُ يَأْتِي عَلَى وَزْنِ (فَعَلَ) بِفَتْحِ الفَاءِ وَاللَّامِ." },
+          { isVerb: false, role: "اسْمُ الفَاعِلِ", word: "كَاتِبٌ", colored: "<span class='c-r'>كَ</span><span class='c-a'>ا</span><span class='c-r'>تِ</span><span class='c-r'>بٌ</span>", plain: "كَاتِبٌ", weight: "فَاعِلٌ (اسم فاعل)", desc: "اسْمٌ مُشْتَقٌّ يَدُلُّ عَلَى الحَدَثِ وَالفَاعِلِ الَّذِي قَامَ بِالتَّدْوِينِ وَتَأْلِيفِ النَّصِّ.", colloc: "كَاتِبٌ مَاهِرٌ", ex: "«جَلَسَ الكَاتِبُ أَمَامَ مَكْتَبِهِ»", rule: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ الفِعْلِ الثُّلَاثِيِّ المُجَرَّدِ عَلَى وَزْنِ (فَاعِلٌ) بِزِيَادَةِ أَلِفٍ بَعْدَ الحَرْفِ الأَوَّلِ مَعَ كَسْرِ مَا قَبْلَ الآخِرِ." },
+          { isVerb: false, role: "اسْمُ المَفْعُولِ", word: "مَكْتُوبٌ", colored: "<span class='c-a'>مَ</span><span class='c-r'>كْ</span><span class='c-r'>تُ</span><span class='c-a'>و</span><span class='c-r'>بٌ</span>", plain: "مَكْتُوبٌ", weight: "مَفْعُولٌ (اسم مفعول)", desc: "اسْمٌ مُشْتَقٌّ يَدُلُّ عَلَى الحَدَثِ وَالشَّيْءِ الَّذِي وَقَعَ عَلَيْهِ فِعْلُ الكِتَابَةِ وَالتَّدْوِينِ.", colloc: "نَصٌّ مَكْتُوبٌ", ex: "«خَرَجَتِ القِصَّةُ فِي نَصٍّ مَكْتُوبٍ»", rule: "يُصَاغُ اسْمُ المَفْعُولِ مِنَ الفِعْلِ الثُّلَاثِيِّ المُجَرَّدِ عَلَى وَزْنِ (مَفْعُولٌ) بِزِيَادَةِ مِيمٍ مَفْتُوحَةٍ فِي أَوَّلِهِ وَوَاوٍ قَبْلَ آخِرِهِ." },
+          { isVerb: false, role: "اسْمُ المَكَانِ", word: "مَكْتَبٌ", colored: "<span class='c-a'>مَ</span><span class='c-r'>كْ</span><span class='c-r'>تَ</span><span class='c-r'>بٌ</span>", plain: "مَكْتَبٌ", weight: "مَفْعَلٌ (اسم مكان)", desc: "اسْمٌ مُشْتَقٌّ يَدُلُّ عَلَى المَوْضِعِ أَوِ المَقَرِّ الَّذِي تَقَعُ فِيهِ الكِتَابَةُ وَمُمَارَسَةُ العَمَلِ.", colloc: "مَكْتَبٌ مُرَتَّبٌ", ex: "«جَلَسَ إِلَى مَكْتَبِهِ المُرَتَّبِ»", rule: "يُصَاغُ اسْمُ المَكَانِ مِنَ الفِعْلِ الثُّلَاثِيِّ عَلَى وَزْنِ (مَفْعَلٌ) بِفَتْحِ العَيْنِ لِأَنَّ عَيْنَ مُضَارِعِهِ مَضْمُومَةٌ: يَكْتُبُ." },
+          { isVerb: false, role: "المَصْدَرُ", word: "كِتَابَةٌ", colored: "<span class='c-r'>كِ</span><span class='c-r'>تَ</span><span class='c-a'>ا</span><span class='c-r'>بَ</span><span class='c-a'>ةٌ</span>", plain: "كِتَابَةٌ", weight: "فِعَالَةٌ (مصدر)", desc: "اسْمٌ يَدُلُّ عَلَى الحَدَثِ مُجَرَّداً مِنَ الزَّمَانِ، وَنَشَاطِ خَطِّ الحُرُوفِ بِالقَلَمِ.", colloc: "سِحْرُ الكِتَابَةِ", ex: "«تُعَلِّمُ الأَطْفَالَ جَمَالَ الكِتَابَةِ»", rule: "المَصَادِرُ الثُّلَاثِيَّةُ كَثِيرَةٌ وَسَمَاعِيَّةٌ، مِثْلَ: كِتَابَةٌ." }
         ],
         affixes: [
           { word: "<span class='c-r'>كَ</span><span class='c-a'>ا</span><span class='c-r'>تَ</span><span class='c-r'>بَ</span>", plain: "كَاتَبَ", weight: "فَاعَلَ", desc: "مزيد بحرف الألف: راسله وشاركه التدوين" },
@@ -1154,15 +1163,71 @@
         ]
       },
 
+      // تم تعديل نصوص الشرح والمتلازمة والمثال لتطابق الصوت المسجل 100%
       "قرأ": {
         letters: ['ق', 'ر', 'أ'],
         concept: "القِرَاءَةُ وَالتِّلَاوَةُ (صَحِيحٌ مَهْمُوزٌ)",
         branches: [
-          { isVerb: true, role: "الحدث / الفعل", word: "قَرَأَ", colored: "<span class='c-r'>قَ</span><span class='c-r'>رَ</span><span class='c-r'>أَ</span>", plain: "قَرَأَ", weight: "فَعَلَ (ثلاثي مهموز)", desc: "فعل ثلاثي مجرد صحيح مهموز اللام يدل على النطق بالألفاظ المكتوبة.", colloc: "قَرَأَ حِكَايَةً", ex: "«قَرَأَ عَلِيٌّ حِكَايَةً مُشَوِّقَةً»", rule: "الفِعْلُ الثُّلَاثِيُّ المَهْمُوزُ اللَّامِ يَأْتِي عَلَى وَزْنِ (فَعَلَ) بِإِثْبَاتِ الهَمْزَةِ." },
-          { isVerb: false, role: "اسْمُ الفَاعِلِ", word: "قَارِئٌ", colored: "<span class='c-r'>قَ</span><span class='c-a'>ا</span><span class='c-r'>رِ</span><span class='c-r'>ئٌ</span>", plain: "قَارِئٌ", weight: "فَاعِلٌ (اسم فاعل)", desc: "اسم مشتق يدل على من باشر القراءة وتلاوة النص المكتوب.", colloc: "قَارِئٌ مُمَيَّزٌ", ex: "«وَقَفَ عَلِيٌّ القَارِئُ المُمَيَّزُ»", rule: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ المَهْمُوزِ عَلَى وَزْنِ (فَاعِلٌ)، وَتُكْتَبُ هَمْزَتُهُ المُتَطَرِّفَةُ عَلَى اليَاءِ (النَّبْرَةِ) لِأَنَّ مَا قَبْلَهَا مَكْسُورٌ: قَارِئٌ." },
-          { isVerb: false, role: "اسْمُ المَفْعُولِ", word: "مَقْرُوءٌ", colored: "<span class='c-a'>مَ</span><span class='c-r'>قْ</span><span class='c-r'>رُ</span><span class='c-a'>و</span><span class='c-r'>ءٌ</span>", plain: "مَقْرُوءٌ", weight: "مَفْعُولٌ (اسم مفعول)", desc: "اسم مشتق يدل على المكتوب الذي تلي وتناولته الأعين بالأفهام.", colloc: "خَطٌّ مَقْرُوءٌ", ex: "«كَانَ خَطُّهَا مَقْرُوءاً لِلجَمِيعِ»", rule: "يُصَاغُ اسْمُ المَفْعُولِ مِنَ الفِعْلِ المَهْمُوزِ عَلَى وَزْنِ (مَفْعُولٌ)، وَتُكْتَبُ هَمْزَتُهُ المُتَطَرِّفَةُ عَلَى السَّطْرِ لِمَجِيئِهَا بَعْدَ وَاوٍ سَاكِنَةٍ: مَقْرُوءٌ." },
-          { isVerb: false, role: "اسْمُ المَكَانِ", word: "مَقْرَأٌ", colored: "<span class='c-a'>مَ</span><span class='c-r'>قْ</span><span class='c-r'>رَ</span><span class='c-r'>أٌ</span>", plain: "مَقْرَأٌ", weight: "مَفْعَلٌ (اسم مكان)", desc: "اسم مشتق يدل على مجلس وموضع تلاوة الكتب ومدارستها.", colloc: "مَقْرَأُ المَدْرَسَةِ", ex: "«فِي مَقْرَإِ المَدْرَسَةِ أَمَامَ زُمَلَائِهِ»", rule: "يُصَاغُ اسْمُ المَكَانِ مِنَ المَهْمُوزِ عَلَى وَزْنِ (مَفْعَلٌ) بِفَتْحِ العَيْنِ: مَقْرَأٌ." },
-          { isVerb: false, role: "المَصْدَرُ", word: "قِرَاءَةٌ", colored: "<span class='c-r'>قِ</span><span class='c-r'>رَ</span><span class='c-a'>ا</span><span class='c-r'>ءَ</span><span class='c-a'>ةٌ</span>", plain: "قِرَاءَةٌ", weight: "فِعَالَةٌ (مصدر)", desc: "اسم يدل على الحدث والنشاط الفكري لتلاوة السطور وفهمها.", colloc: "حُبُّ القِرَاءَةِ", ex: "«تَقْدِيراً لِشَغَفِهِ بِالقِرَاءَةِ»", rule: "مَصْدَرُ الفِعْلِ المَهْمُوزِ الدَّالِّ عَلَى حِرْفَةٍ أَوْ مُلَازَمَةٍ يَأْتِي عَلَى وَزْنِ (فِعَالَةٌ) مِثْلَ: قِرَاءَةٌ." }
+          { 
+            isVerb: true, 
+            role: "الحدث / الفعل", 
+            word: "قَرَأَ", 
+            colored: "<span class='c-r'>قَ</span><span class='c-r'>رَ</span><span class='c-r'>أَ</span>", 
+            plain: "قَرَأَ", 
+            weight: "فَعَلَ (ثلاثي مهموز)", 
+            desc: "فِعْلٌ مَاضٍ ثُلَاثِيٌّ صَحِيحٌ مَهْمُوزُ اللَّامِ، حُرُوفُهُ كُلُّهَا أَصْلِيَّةٌ، يَدُلُّ عَلَى النُّطْقِ بِالأَلْفَاظِ المَكْتُوبَةِ وَفَهْمِهَا.", 
+            colloc: "قَرَأَ حِكَايَةً.", 
+            ex: "«قَرَأَ عَلِيٌّ حِكَايَةً مُشَوِّقَةً»", 
+            rule: "الفِعْلُ الثُّلَاثِيُّ المَهْمُوزُ اللَّامِ يَأْتِي عَلَى وَزْنِ (فَعَلَ) بِإِثْبَاتِ الهَمْزَةِ." 
+          },
+          { 
+            isVerb: false, 
+            role: "اسْمُ الفَاعِلِ", 
+            word: "قَارِئٌ", 
+            colored: "<span class='c-r'>قَ</span><span class='c-a'>ا</span><span class='c-r'>رِ</span><span class='c-r'>ئٌ</span>", 
+            plain: "قَارِئٌ", 
+            weight: "فَاعِلٌ (اسم فاعل)", 
+            desc: "اسْمٌ مُشْتَقٌّ يَدُلُّ عَلَى الحَدَثِ وَالفَاعِلِ الَّذِي بَاشَرَ القِرَاءَةَ وَتِلَاوَةَ النَّصِّ المَكْتُوبِ.", 
+            colloc: "قَارِئٌ مُمَيَّزٌ.", 
+            ex: "«وَقَفَ عَلِيٌّ القَارِئُ المُمَيَّزُ أَمَامَ زُمَلَائِهِ»", 
+            rule: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ المَهْمُوزِ عَلَى وَزْنِ (فَاعِلٌ)، وَتُكْتَبُ هَمْزَتُهُ المُتَطَرِّفَةُ عَلَى اليَاءِ (النَّبْرَةِ) لِأَنَّ مَا قَبْلَهَا مَكْسُورٌ: قَارِئٌ." 
+          },
+          { 
+            isVerb: false, 
+            role: "اسْمُ المَفْعُولِ", 
+            word: "مَقْرُوءٌ", 
+            colored: "<span class='c-a'>مَ</span><span class='c-r'>قْ</span><span class='c-r'>رُ</span><span class='c-a'>و</span><span class='c-r'>ءٌ</span>", 
+            plain: "مَقْرُوءٌ", 
+            weight: "مَفْعُولٌ (اسم مفعول)", 
+            desc: "اسْمٌ مُشْتَقٌّ يَدُلُّ عَلَى الكَلَامِ المَكْتُوبِ الَّذِي تُلِيَ وَتَنَاوَلَتْهُ الأَعْيُنُ بِالفَهْمِ.", 
+            colloc: "خَطٌّ مَقْرُوءٌ.", 
+            ex: "«كَانَ خَطُّ القِصَّةِ مَقْرُوءاً لِلجَمِيعِ»", 
+            rule: "يُصَاغُ اسْمُ المَفْعُولِ مِنَ الفِعْلِ المَهْمُوزِ عَلَى وَزْنِ (مَفْعُولٌ)، وَتُكْتَبُ هَمْزَتُهُ المُتَطَرِّفَةُ عَلَى السَّطْرِ لِمَجِيئِهَا بَعْدَ وَاوٍ سَاكِنَةٍ: مَقْرُوءٌ." 
+          },
+          { 
+            isVerb: false, 
+            role: "اسْمُ المَكَانِ", 
+            word: "مَقْرَأٌ", 
+            colored: "<span class='c-a'>مَ</span><span class='c-r'>قْ</span><span class='c-r'>رَ</span><span class='c-r'>أٌ</span>", 
+            plain: "مَقْرَأٌ", 
+            weight: "مَفْعَلٌ (اسم مكان)", 
+            desc: "اسْمٌ مُشْتَقٌّ يَدُلُّ عَلَى مَوْضِعِ وَمَجْلِسِ تِلَاوَةِ الكُتُبِ وَمُدَارَسَتِهَا.", 
+            colloc: "مَقْرَأُ المَدْرَسَةِ.", 
+            ex: "«جَلَسَ فِي مَقْرَإِ المَدْرَسَةِ يُطَالِعُ الكُتُبَ»", 
+            rule: "يُصَاغُ اسْمُ المَكَانِ مِنَ المَهْمُوزِ عَلَى وَزْنِ (مَفْعَلٌ) بِفَتْحِ العَيْنِ: مَقْرَأٌ." 
+          },
+          { 
+            isVerb: false, 
+            role: "المَصْدَرُ", 
+            word: "قِرَاءَةٌ", 
+            colored: "<span class='c-r'>قِ</span><span class='c-r'>رَ</span><span class='c-a'>ا</span><span class='c-r'>ءَ</span><span class='c-a'>ةٌ</span>", 
+            plain: "قِرَاءَةٌ", 
+            weight: "فِعَالَةٌ (مصدر)", 
+            desc: "اسْمٌ يَدُلُّ عَلَى الحَدَثِ مُجَرَّداً مِنَ الزَّمَانِ، وَالنَّشَاطِ الفِكْرِيِّ لِتِلَاوَةِ السُّطُورِ.", 
+            colloc: "حُبُّ القِرَاءَةِ.", 
+            ex: "«صَفَّقَ لَهُ الأُسْتَاذُ تَقْدِيراً لِشَغَفِهِ بِالقِرَاءَةِ»", 
+            rule: "مَصْدَرُ الفِعْلِ المَهْمُوزِ الدَّالِّ عَلَى حِرْفَةٍ أَوْ مُلَازَمَةٍ يَأْتِي عَلَى وَزْنِ (فِعَالَةٌ) مِثْلَ: قِرَاءَةٌ." 
+          }
         ],
         affixes: [
           { word: "<span class='c-r'>قَ</span><span class='c-a'>ا</span><span class='c-r'>رَ</span><span class='c-r'>أَ</span>", plain: "قَارَأَ", weight: "فَاعَلَ", desc: "مزيد بالألف: طالع معه وشاركه القراءة" },
@@ -1241,7 +1306,6 @@
       document.getElementById('coreLetters').textContent = `[ ${data.letters.join(' - ')} ]`;
       document.getElementById('coreConcept').textContent = data.concept;
 
-      // تحديث نصوص الـ SVG بدقة متوافقة دون أخطاء برمجية
       data.branches.forEach((b, i) => {
         const wordEl = document.getElementById(`b${i+1}_word`);
         const patternEl = document.getElementById(`b${i+1}_pattern`);
@@ -1357,33 +1421,31 @@
       Sound.playAsset(folder, mission.audio, mission.label);
     }
 
+    // تم حل التزامن والتداخل الصوتي في سحابة الحكاية
     function handleStoryWordClick(el, item, data) {
       Sound.pop();
       const currentTargetType = data.missions[currentMissionIdx].targetType;
 
       if (item.target === currentTargetType) {
         el.classList.add('found');
-        Sound.correct();
         addStars(10);
-        
         currentMissionIdx++;
         const rootKey = document.getElementById('rootSelect').value;
         const folder = Sound.rootFolderMap[rootKey] || rootKey;
 
-        if (currentMissionIdx < data.missions.length) {
-          setTimeout(() => {
+        // تشغيل صوت التشجيع، وبمجرد انتهائه تنطلق المهمة التالية دون أي تداخل
+        Sound.correct(() => {
+          if (currentMissionIdx < data.missions.length) {
             const nextMission = data.missions[currentMissionIdx];
             document.getElementById('storyMissionBadge').textContent = nextMission.label;
             Sound.playAsset(folder, nextMission.audio, nextMission.label);
-          }, 800);
-        } else {
-          setTimeout(() => {
+          } else {
             const victoryMsg = "🎉 بَطَلٌ خَارِقٌ! اسْتَخْرَجْتَ كَافَّةَ مَشَاهِدِ الجَذْرِ الخَمْسَةِ بِنَجَاحٍ!";
             document.getElementById('storyMissionBadge').textContent = victoryMsg;
             addStars(30);
             Sound.playAsset(folder, 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
-          }, 600);
-        }
+          }
+        });
       } else {
         Sound.wrong();
         el.style.borderColor = '#ef4444';
