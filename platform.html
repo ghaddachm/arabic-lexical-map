@@ -20,7 +20,7 @@
     }
 
     body {
-      background: #060919 radial-gradient(circle at center, #1e1b4b 0%, #030712 100%);
+      background: #050716 radial-gradient(circle at center, #1b1446 0%, #030511 100%);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -153,20 +153,7 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    .space-twinkle-star {
-      position: absolute;
-      border-radius: 50%;
-      background: #ffffff;
-      animation: starBlink 2s infinite alternate ease-in-out;
-      pointer-events: none;
-    }
-
-    @keyframes starBlink {
-      0% { opacity: 0.2; transform: scale(0.7); }
-      100% { opacity: 1; transform: scale(1.3); filter: drop-shadow(0 0 6px #fde047); }
-    }
-
-    /* 1. شمس الجذر الفضائية بتصميم كروي كرتوني مستوحى من الفضاء */
+    /* 1. شمس الجذر الفضائية بتصميم كروي كرتوني */
     .space-system-arena {
       position: relative;
       width: 100%;
@@ -183,38 +170,22 @@
 
     .orbit-ellipse-wide {
       position: absolute;
-      width: 980px;
+      width: 1020px;
       height: 560px;
       border: 3.5px dashed rgba(56, 189, 248, 0.45);
       border-radius: 50%;
       pointer-events: none;
-      box-shadow: 0 0 35px rgba(56, 189, 248, 0.2) inset;
-    }
-
-    .astro-kid {
-      position: absolute;
-      z-index: 15;
-      animation: astroFloat 4s infinite ease-in-out alternate;
-      pointer-events: none;
-      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-    }
-    .astro-kid-1 { top: 40px; right: 4%; }
-    .astro-kid-2 { bottom: 50px; left: 3%; animation-delay: 1.5s; }
-
-    @keyframes astroFloat {
-      0% { transform: translateY(0) rotate(-4deg); }
-      100% { transform: translateY(-16px) rotate(4deg); }
     }
 
     .cartoon-sun-core {
       position: absolute;
       z-index: 10;
-      width: 280px;
-      height: 280px;
+      width: 290px;
+      height: 290px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #fffbeb 0%, #fde047 45%, #eab308 100%);
       border: 8px solid #ffffff;
-      box-shadow: 0 0 85px rgba(250, 204, 21, 0.95);
+      box-shadow: 0 0 90px rgba(250, 204, 21, 0.95);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -226,8 +197,8 @@
 
     .sun-rays-halo {
       position: absolute;
-      width: 370px;
-      height: 370px;
+      width: 380px;
+      height: 380px;
       pointer-events: none;
       animation: spinHalo 24s linear infinite;
     }
@@ -247,7 +218,6 @@
       font-weight: 900;
       color: #7f1d1d;
       letter-spacing: 2px;
-      white-space: nowrap;
       line-height: 1.2;
     }
 
@@ -262,8 +232,8 @@
       box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     }
 
-    /* هندسة الكواكب الفضائية المجسمة ثلاثية الأبعاد */
-    .planet-satellite-station {
+    /* أجرام كروية ثلاثية الأبعاد مرسومة بـ SVG */
+    .planet-station {
       position: absolute;
       display: flex;
       flex-direction: column;
@@ -273,17 +243,17 @@
       transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .planet-satellite-station:hover {
+    .planet-station:hover {
       transform: scale(1.15) translateY(-8px);
       z-index: 25;
     }
 
-    .planet-orbit-badge {
+    .planet-pill-tag {
       background: rgba(15, 23, 42, 0.95);
       border: 2px solid #38bdf8;
       border-radius: 20px;
-      padding: 0.25rem 1rem;
-      margin-bottom: 0.45rem;
+      padding: 0.25rem 0.9rem;
+      margin-bottom: 0.4rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -291,84 +261,21 @@
       white-space: nowrap;
     }
 
-    .planet-badge-title {
-      font-size: 0.88rem;
-      font-weight: 900;
-      color: #fef08a;
+    .tag-title { font-size: 0.85rem; font-weight: 900; color: #fef08a; }
+    .tag-sub { font-size: 0.75rem; font-weight: 800; color: #bae6fd; }
+
+    .planet-globe-svg {
+      width: 175px;
+      height: 175px;
+      filter: drop-shadow(0 12px 25px rgba(0,0,0,0.7));
     }
 
-    .planet-badge-q {
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: #bae6fd;
-    }
-
-    .space-planet-sphere {
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      border: 6px solid #ffffff !important;
-      position: relative;
-    }
-
-    .station-1 { top: 35px; right: 13%; }
-    .station-2 { top: 35px; left: 13%; }
-    .station-3 { bottom: 35px; left: 12%; }
-    .station-4 { bottom: 35px; right: 12%; }
+    .station-1 { top: 30px; right: 11%; }
+    .station-2 { top: 30px; left: 11%; }
+    .station-3 { bottom: 35px; left: 10%; }
+    .station-4 { bottom: 35px; right: 10%; }
     .station-5 { bottom: 10px; left: 50%; transform: translateX(-50%); }
     .station-5:hover { transform: translateX(-50%) scale(1.15) translateY(-8px); }
-
-    .sphere-1 {
-      width: 170px; height: 170px;
-      background: radial-gradient(circle at 30% 25%, #fbcfe8 0%, #f472b6 35%, #db2777 70%, #701a75 100%) !important;
-      box-shadow: 0 0 50px rgba(219, 39, 119, 0.85), 0 10px 25px rgba(0,0,0,0.6) !important;
-    }
-
-    .sphere-2 {
-      width: 175px; height: 175px;
-      background: radial-gradient(circle at 30% 25%, #bfdbfe 0%, #60a5fa 35%, #2563eb 70%, #1e3a8a 100%) !important;
-      box-shadow: 0 0 50px rgba(37, 99, 235, 0.85), 0 10px 25px rgba(0,0,0,0.6) !important;
-    }
-
-    .sphere-3 {
-      width: 170px; height: 170px;
-      background: radial-gradient(circle at 30% 25%, #fecaca 0%, #f87171 35%, #dc2626 70%, #7f1d1d 100%) !important;
-      box-shadow: 0 0 50px rgba(220, 38, 38, 0.85), 0 10px 25px rgba(0,0,0,0.6) !important;
-    }
-
-    .sphere-4 {
-      width: 170px; height: 170px;
-      background: radial-gradient(circle at 30% 25%, #bbf7d0 0%, #4ade80 35%, #16a34a 70%, #14532d 100%) !important;
-      box-shadow: 0 0 50px rgba(22, 163, 74, 0.85), 0 10px 25px rgba(0,0,0,0.6) !important;
-    }
-
-    .sphere-5 {
-      width: 165px; height: 165px;
-      background: radial-gradient(circle at 30% 25%, #fed7aa 0%, #fb923c 35%, #ea580c 70%, #7c2d12 100%) !important;
-      box-shadow: 0 0 50px rgba(234, 88, 12, 0.85), 0 10px 25px rgba(0,0,0,0.6) !important;
-    }
-
-    .planet-word-text {
-      font-size: 2.3rem;
-      font-weight: 900;
-      color: #ffffff;
-      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.9);
-      line-height: 1.1;
-    }
-
-    .planet-weight-sub {
-      font-size: 0.9rem;
-      color: #fef08a;
-      font-weight: 900;
-      background: rgba(0, 0, 0, 0.45);
-      padding: 0.2rem 0.8rem;
-      border-radius: 14px;
-      margin-top: 0.3rem;
-      border: 1px solid rgba(255,255,255,0.3);
-    }
 
     /* 2. سحابة الحكاية */
     .kawaii-cloud-universe {
@@ -428,12 +335,10 @@
     .task-mission-pill {
       background: #ec4899;
       color: white;
-      padding: 0.35rem 1.6rem;
+      padding: 0.4rem 1.8rem;
       border-radius: 30px;
       font-weight: 900;
-      display: inline-block;
-      margin-top: 0.4rem;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       box-shadow: 0 4px 0 #be185d;
     }
 
@@ -479,7 +384,6 @@
       align-items: center;
       padding: 1rem 0 3rem;
       text-align: center;
-      position: relative;
     }
 
     .saucer-stations-row {
@@ -488,8 +392,6 @@
       gap: 2.6rem;
       flex-wrap: wrap;
       margin-top: 2.5rem;
-      position: relative;
-      z-index: 5;
     }
 
     .saucer-station-unit {
@@ -504,18 +406,12 @@
       transition: transform 0.25s ease;
     }
 
-    .saucer-station-unit:hover {
-      transform: translateY(-8px) scale(1.03);
-    }
+    .saucer-station-unit:hover { transform: translateY(-8px) scale(1.03); }
 
     .saucer-svg-bg {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1; pointer-events: none;
     }
 
     .saucer-content-wrapper {
@@ -526,12 +422,6 @@
       align-items: center;
       width: 100%;
       padding: 50px 25px 25px;
-    }
-
-    .saucer-mascot-head {
-      font-size: 2.8rem;
-      margin-bottom: 0.2rem;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
     }
 
     .saucer-badge-tag {
@@ -550,245 +440,110 @@
       flex-direction: row;
       justify-content: center;
       gap: 0.65rem;
-      flex-wrap: nowrap;
       margin: 0.6rem 0 1.5rem;
-      width: 100%;
     }
 
     .saucer-char-bubble {
-      width: 58px;
-      height: 58px;
+      width: 58px; height: 58px;
       border-radius: 50%;
       border: 3.5px dashed rgba(255, 255, 255, 0.85);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.95rem;
-      font-weight: 900;
-      background: rgba(255, 255, 255, 0.25);
-      color: #ffffff;
-      box-shadow: inset 0 3px 6px rgba(0,0,0,0.2);
-      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.95rem; font-weight: 900;
+      background: rgba(255, 255, 255, 0.25); color: #ffffff;
     }
 
     .saucer-char-bubble.filled {
-      border: 3.5px solid #ffffff;
-      background: #ffffff;
-      color: #1e1b4b;
-      transform: scale(1.1);
-      box-shadow: 0 6px 16px rgba(255, 255, 255, 0.6);
-      animation: popSlot 0.3s ease;
+      border: 3.5px solid #ffffff; background: #ffffff; color: #1e1b4b;
+      transform: scale(1.1); box-shadow: 0 6px 16px rgba(255, 255, 255, 0.6);
     }
 
-    @keyframes popSlot {
-      0% { transform: scale(0.8); }
-      60% { transform: scale(1.2); }
-      100% { transform: scale(1.1); }
-    }
-
-    .saucer-buttons-rack {
-      display: flex;
-      justify-content: center;
-      gap: 0.9rem;
-    }
+    .saucer-buttons-rack { display: flex; justify-content: center; gap: 0.9rem; }
 
     .saucer-gem-btn {
-      width: 60px;
-      height: 60px;
-      background: #ffffff;
-      border: 3.5px solid #facc15;
-      color: #854d0e;
-      border-radius: 50%;
-      font-size: 1.8rem;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 6px 0 #ca8a04, 0 10px 15px rgba(0,0,0,0.25);
-      transition: all 0.12s;
-    }
-
-    .saucer-gem-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 9px 0 #ca8a04;
-    }
-
-    .saucer-gem-btn:active {
-      transform: translateY(4px);
-      box-shadow: 0 1px 0 #ca8a04;
+      width: 60px; height: 60px;
+      background: #ffffff; border: 3.5px solid #facc15; color: #854d0e;
+      border-radius: 50%; font-size: 1.8rem; font-weight: 900; cursor: pointer;
+      box-shadow: 0 6px 0 #ca8a04;
     }
 
     .saucer-feedback-toast {
-      margin-top: 1rem;
-      padding: 0.5rem 1.4rem;
-      border-radius: 25px;
-      font-weight: 900;
-      font-size: 1rem;
-      display: none;
+      margin-top: 1rem; padding: 0.5rem 1.4rem; border-radius: 25px;
+      font-weight: 900; font-size: 1rem; display: none;
     }
 
     /* 4. حلبة قطع البزل */
     .puzzle-free-arena {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1rem 0 3rem;
-      text-align: center;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 1rem 0 3rem; text-align: center;
     }
 
-    .jigsaw-pieces-flex {
-      display: flex;
-      justify-content: center;
-      gap: 2.5rem;
-      flex-wrap: wrap;
-      margin-top: 2rem;
-    }
+    .jigsaw-pieces-flex { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-top: 2rem; }
 
     .jigsaw-svg-card {
-      position: relative;
-      width: 320px;
-      height: 420px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2.5rem 1.8rem;
-      color: white;
-      transition: all 0.25s ease;
+      position: relative; width: 320px; height: 420px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 2.5rem 1.8rem; color: white;
       filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
     }
 
-    .jigsaw-svg-card:hover {
-      transform: translateY(-8px) scale(1.03);
-    }
-
-    .jigsaw-bg-shape {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
+    .jigsaw-bg-shape { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
 
     .jigsaw-content-body {
-      position: relative;
-      z-index: 5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
+      position: relative; z-index: 5; display: flex; flex-direction: column; align-items: center; width: 100%;
     }
 
     .puzzle-number-badge {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 0.3rem 1.1rem;
-      border-radius: 20px;
-      font-weight: 900;
-      font-size: 0.95rem;
-      margin-bottom: 0.8rem;
+      background: rgba(0, 0, 0, 0.3); padding: 0.3rem 1.1rem; border-radius: 20px;
+      font-weight: 900; font-size: 0.95rem; margin-bottom: 0.8rem;
     }
 
     .puzzle-question-text {
-      font-size: 1.25rem;
-      font-weight: 900;
-      line-height: 1.6;
-      margin-bottom: 1.2rem;
-      min-height: 60px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      font-size: 1.25rem; font-weight: 900; line-height: 1.6; margin-bottom: 1.2rem; min-height: 60px;
     }
 
     .puzzle-target-slot {
-      background: rgba(0, 0, 0, 0.25);
-      border: 3px dashed #ffffff;
-      border-radius: 25px;
-      padding: 0.8rem 1.4rem;
-      min-height: 55px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 1.25rem;
-      color: #fef08a;
-      margin-bottom: 1.2rem;
-      transition: all 0.2s;
-      width: 85%;
+      background: rgba(0, 0, 0, 0.25); border: 3px dashed #ffffff; border-radius: 25px;
+      padding: 0.8rem 1.4rem; min-height: 55px; display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1.25rem; color: #fef08a; margin-bottom: 1.2rem; width: 85%;
     }
 
-    .puzzle-target-slot.drag-over {
-      background: rgba(255, 255, 255, 0.45);
-      transform: scale(1.05);
-    }
+    .puzzle-target-slot.solved { background: #ffffff; color: #15803d; border: 3px solid #22c55e; }
 
-    .puzzle-target-slot.solved {
-      background: #ffffff;
-      color: #15803d;
-      border: 3px solid #22c55e;
-      box-shadow: 0 4px 0 #166534;
-    }
-
-    .puzzle-options-rack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      justify-content: center;
-    }
+    .puzzle-options-rack { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
 
     .drag-piece-token {
-      background: #ffffff;
-      border: 3px solid #fde047;
-      color: #713f12;
-      padding: 0.5rem 1.2rem;
-      border-radius: 25px;
-      font-size: 1.15rem;
-      font-weight: 900;
-      cursor: grab;
-      box-shadow: 0 5px 0 rgba(0,0,0,0.25);
-      transition: all 0.15s;
-    }
-
-    .drag-piece-token:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 7px 0 rgba(0,0,0,0.3);
-    }
-
-    .drag-piece-token:active {
-      cursor: grabbing;
-      transform: translateY(2px);
-      box-shadow: none;
+      background: #ffffff; border: 3px solid #fde047; color: #713f12;
+      padding: 0.5rem 1.2rem; border-radius: 25px; font-size: 1.15rem; font-weight: 900;
+      cursor: grab; box-shadow: 0 5px 0 rgba(0,0,0,0.25);
     }
 
     .puzzle-feedback-toast {
-      margin-top: 0.8rem;
-      padding: 0.4rem 0.8rem;
-      border-radius: 18px;
-      font-weight: 900;
-      font-size: 0.95rem;
-      display: none;
-      text-align: center;
+      margin-top: 0.8rem; padding: 0.4rem 0.8rem; border-radius: 18px;
+      font-weight: 900; font-size: 0.95rem; display: none;
     }
 
-    /* 5. مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ (تحديات النظائر الستة) */
+    /* 5. مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ بتصميم كرتوني غير تقليدي */
     .spacecraft-challenge-deck {
-      background: radial-gradient(circle at 50% 30%, #2e1065 0%, #0f172a 100%);
+      background: radial-gradient(circle at 50% 30%, #2e1065 0%, #0c0824 100%);
       border: 8px solid #c084fc;
       border-radius: 70px;
-      padding: 2.8rem 2rem;
+      padding: 3rem 2rem;
       box-shadow: 0 25px 70px rgba(192, 132, 252, 0.45);
       text-align: center;
-      position: relative;
     }
 
     .spacecraft-header-title {
-      font-size: 2.4rem;
+      font-size: 2.5rem;
       font-weight: 900;
       color: #fde047;
       text-shadow: 0 4px 15px rgba(0,0,0,0.7);
     }
 
     .spacecraft-subtext {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 800;
       color: #e9d5ff;
-      margin-top: 0.5rem;
+      margin-top: 0.6rem;
     }
 
     .spacecraft-pods-row {
@@ -796,222 +551,165 @@
       justify-content: center;
       gap: 2.2rem;
       flex-wrap: wrap;
-      margin-top: 2.6rem;
+      margin-top: 2.8rem;
     }
 
+    /* كبسولات دائرية وبيضوية كرتونية مبهجة مستوحاة من ألعاب الصغار */
     .spacecraft-pod-unit {
-      background: rgba(255, 255, 255, 0.97);
+      background: radial-gradient(circle at 40% 30%, #ffffff 0%, #f1f5f9 100%);
       color: #0f172a;
-      border: 5px solid #38bdf8;
-      border-radius: 45px;
-      padding: 2rem 1.6rem;
-      width: 365px;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+      border: 6px solid #38bdf8;
+      border-radius: 60px;
+      padding: 2.4rem 1.8rem;
+      width: 380px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(56, 189, 248, 0.35);
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: all 0.25s ease;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .spacecraft-pod-unit:hover {
-      transform: translateY(-8px);
+      transform: translateY(-10px) scale(1.03);
       border-color: #facc15;
-      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 45px rgba(250, 204, 21, 0.5);
     }
 
-    .pod-icon-bubble {
-      font-size: 3rem;
-      margin-bottom: 0.3rem;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
-    }
-
-    .pod-badge-tag {
-      background: #ec4899;
+    .pod-bubble-header {
+      background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
       color: white;
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 900;
-      padding: 0.35rem 1.4rem;
-      border-radius: 25px;
-      box-shadow: 0 4px 0 #be185d;
-      margin-bottom: 1.1rem;
+      padding: 0.4rem 1.6rem;
+      border-radius: 30px;
+      box-shadow: 0 4px 0 #9d174d;
+      margin-bottom: 1.2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .pod-question-speech {
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       font-weight: 900;
-      line-height: 1.6;
+      line-height: 1.65;
       color: #1e1b4b;
-      min-height: 80px;
+      min-height: 85px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.6rem;
     }
 
     .pod-answers-dock {
       display: flex;
-      gap: 0.7rem;
+      gap: 0.8rem;
       flex-wrap: wrap;
       justify-content: center;
       width: 100%;
     }
 
     .pod-btn-choice {
-      background: #f8fafc;
-      border: 3.5px solid #cbd5e1;
-      color: #1e293b;
-      font-size: 1.25rem;
+      background: #ffffff;
+      border: 3.5px solid #facc15;
+      color: #713f12;
+      font-size: 1.3rem;
       font-weight: 900;
-      padding: 0.5rem 1.4rem;
+      padding: 0.6rem 1.6rem;
       border-radius: 30px;
       cursor: pointer;
-      box-shadow: 0 5px 0 #94a3b8;
+      box-shadow: 0 5px 0 #ca8a04;
       transition: all 0.15s;
     }
 
     .pod-btn-choice:hover {
       transform: translateY(-3px);
-      border-color: #0284c7;
-      box-shadow: 0 8px 0 #0284c7;
-      background: #e0f2fe;
-    }
-
-    .pod-btn-choice:active {
-      transform: translateY(3px);
-      box-shadow: none;
+      box-shadow: 0 8px 0 #ca8a04;
+      background: #fef08a;
     }
 
     .pod-feedback-toast {
       margin-top: 1.2rem;
       font-weight: 900;
-      font-size: 1rem;
+      font-size: 1.05rem;
       display: none;
-      padding: 0.5rem 1.2rem;
+      padding: 0.6rem 1.4rem;
       border-radius: 25px;
       width: 100%;
     }
 
-    /* Modal - تصميم نقي مطابق لنموذج صانع المعتمد */
+    /* Modal - تصميم نقي موحد */
     .modal-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0; width: 100vw; height: 100vh;
       background: rgba(15, 23, 42, 0.75);
       backdrop-filter: blur(8px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      color: #1e293b;
+      display: none; align-items: center; justify-content: center;
+      z-index: 1000; color: #1e293b;
     }
 
     .modal-overlay.open { display: flex; }
 
     .modal-box {
       background: white;
-      width: 90%;
-      max-width: 620px;
+      width: 90%; max-width: 620px;
       border-radius: 45px;
       padding: 2.2rem;
       border: 6px solid #38bdf8;
       box-shadow: 0 25px 60px rgba(0,0,0,0.4);
-      position: relative;
-      max-height: 90vh;
-      overflow-y: auto;
+      position: relative; max-height: 90vh; overflow-y: auto;
     }
 
     .modal-close {
-      position: absolute;
-      top: 1.2rem;
-      left: 1.2rem;
-      background: #fee2e2;
-      border: 2px solid #ef4444;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      font-size: 1.3rem;
-      font-weight: 900;
-      cursor: pointer;
-      color: #b91c1c;
+      position: absolute; top: 1.2rem; left: 1.2rem;
+      background: #fee2e2; border: 2px solid #ef4444;
+      width: 42px; height: 42px; border-radius: 50%;
+      font-size: 1.3rem; font-weight: 900; cursor: pointer; color: #b91c1c;
     }
 
     .modal-hero {
-      text-align: center;
-      border-bottom: 3px dashed #e2e8f0;
-      padding-bottom: 1.2rem;
-      margin-bottom: 1.2rem;
+      text-align: center; border-bottom: 3px dashed #e2e8f0;
+      padding-bottom: 1.2rem; margin-bottom: 1.2rem;
     }
 
     .modal-word { font-size: 3.6rem; font-weight: 900; letter-spacing: 1px; line-height: 1.1; }
     .modal-weight { color: var(--primary); font-weight: 900; font-size: 1.3rem; margin-top: 0.3rem; }
 
     .detail-card {
-      background: #f8fafc;
-      border-radius: 30px;
-      padding: 1.5rem;
-      border: 2px solid #e2e8f0;
-      margin-bottom: 1.2rem;
+      background: #f8fafc; border-radius: 30px;
+      padding: 1.5rem; border: 2px solid #e2e8f0; margin-bottom: 1.2rem;
     }
 
-    .detail-row {
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-      line-height: 1.6;
-    }
+    .detail-row { margin-bottom: 1rem; font-size: 1.2rem; line-height: 1.6; }
     .detail-row:last-child { margin-bottom: 0; }
     .detail-label { font-weight: 900; color: #334155; }
 
-    /* زر الاستماع الموحد الشامل */
     .master-audio-btn {
       width: 100%;
       background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
-      color: white;
-      border: none;
-      padding: 1rem 1.6rem;
-      border-radius: 30px;
-      font-size: 1.2rem;
-      font-weight: 900;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      box-shadow: 0 6px 20px rgba(67, 56, 202, 0.4);
-      transition: all 0.2s;
+      color: white; border: none; padding: 1rem 1.6rem;
+      border-radius: 30px; font-size: 1.2rem; font-weight: 900;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      gap: 0.6rem; box-shadow: 0 6px 20px rgba(67, 56, 202, 0.4);
       margin-top: 1.2rem;
     }
 
     .master-audio-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(67, 56, 202, 0.55);
-      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-    }
-
-    .master-audio-btn:active {
-      transform: translateY(2px);
-      box-shadow: none;
     }
 
     .rule-gold-banner {
-      background: #fefce8;
-      border: 3px dashed #facc15;
-      padding: 0.9rem 1.2rem;
-      border-radius: 20px;
-      color: #854d0e;
-      font-weight: 900;
-      font-size: 1.05rem;
-      margin-top: 1rem;
-      line-height: 1.6;
+      background: #fefce8; border: 3px dashed #facc15;
+      padding: 0.9rem 1.2rem; border-radius: 20px;
+      color: #854d0e; font-weight: 900; font-size: 1.05rem;
+      margin-top: 1rem; line-height: 1.6;
     }
 
     .affix-box {
-      background: #fffbeb;
-      border: 3px solid #fde68a;
-      border-radius: 30px;
-      padding: 1.3rem;
-      display: none;
+      background: #fffbeb; border: 3px solid #fde68a;
+      border-radius: 30px; padding: 1.3rem; display: none;
     }
 
     .affix-box-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
@@ -1075,7 +773,7 @@
   </nav>
 
   <main>
-    <!-- 1. شمس الجذر الفضائية بتوزيع انسيابي وكواكب ثلاثية الأبعاد متوهجة -->
+    <!-- 1. شمس الجذر الفضائية بكواكب ثلاثية الأبعاد مرسومة بـ SVG -->
     <div id="radialMap" class="tab-view active">
       <div class="space-system-arena" id="starsSky">
         <div class="orbit-ellipse-wide"></div>
@@ -1092,10 +790,6 @@
             <path d="M56 50 Q60 55 64 50" stroke="#1e293b" stroke-width="2" fill="none"/>
             <rect x="42" y="75" width="36" height="30" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="3"/>
             <rect x="52" y="80" width="16" height="12" rx="3" fill="#0284c7"/>
-            <ellipse cx="30" cy="80" rx="8" ry="14" fill="#ffffff" transform="rotate(-30 30 80)"/>
-            <ellipse cx="90" cy="80" rx="8" ry="14" fill="#ffffff" transform="rotate(30 90 80)"/>
-            <ellipse cx="48" cy="110" rx="6" ry="9" fill="#0284c7"/>
-            <ellipse cx="72" cy="110" rx="6" ry="9" fill="#0284c7"/>
           </svg>
         </div>
 
@@ -1108,13 +802,7 @@
             <circle cx="67" cy="44" r="3" fill="#1e293b"/>
             <circle cx="48" cy="49" r="3" fill="#f43f5e" opacity="0.6"/>
             <circle cx="72" cy="49" r="3" fill="#f43f5e" opacity="0.6"/>
-            <path d="M57 50 Q60 54 63 50" stroke="#1e293b" stroke-width="2" fill="none"/>
             <rect x="44" y="74" width="32" height="28" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="3"/>
-            <circle cx="60" cy="84" r="5" fill="#ec4899"/>
-            <ellipse cx="32" cy="85" rx="7" ry="12" fill="#ffffff" transform="rotate(25 32 85)"/>
-            <ellipse cx="88" cy="75" rx="7" ry="12" fill="#ffffff" transform="rotate(-40 88 75)"/>
-            <ellipse cx="50" cy="108" rx="6" ry="8" fill="#ec4899"/>
-            <ellipse cx="70" cy="108" rx="6" ry="8" fill="#ec4899"/>
           </svg>
         </div>
 
@@ -1137,83 +825,129 @@
         </div>
 
         <!-- 1. محطة الحدث / الفعل -->
-        <div class="planet-satellite-station station-1" onclick="openMorphModal(0)">
-          <div class="planet-orbit-badge">
-            <span class="planet-badge-title">الحدث / الفعل</span>
-            <span class="planet-badge-q">مَاذَا حَدَثَ؟</span>
+        <div class="planet-station station-1" onclick="openMorphModal(0)">
+          <div class="planet-pill-tag">
+            <span class="tag-title">الحدث / الفعل</span>
+            <span class="tag-sub">مَاذَا حَدَثَ؟</span>
           </div>
-          <div class="space-planet-sphere sphere-1">
-            <div class="planet-word-text" id="b1_word">كَتَبَ</div>
-            <span class="planet-weight-sub" id="b1_pattern">(فَعَلَ)</span>
-          </div>
+          <svg class="planet-globe-svg" viewBox="0 0 160 160">
+            <defs>
+              <radialGradient id="gradP1" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#fbcfe8"/>
+                <stop offset="40%" stop-color="#ec4899"/>
+                <stop offset="85%" stop-color="#9d174d"/>
+                <stop offset="100%" stop-color="#4c0519"/>
+              </radialGradient>
+            </defs>
+            <circle cx="80" cy="80" r="70" fill="url(#gradP1)" stroke="#ffffff" stroke-width="6"/>
+            <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4" transform="rotate(-25 80 80)"/>
+            <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b1_word">كَتَبَ</text>
+            <rect x="42" y="88" width="76" height="24" rx="12" fill="rgba(0,0,0,0.5)"/>
+            <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b1_pattern">(فَعَلَ)</text>
+          </svg>
         </div>
 
         <!-- 2. محطة اسم الفاعل -->
-        <div class="planet-satellite-station station-2" onclick="openMorphModal(1)">
-          <div class="planet-orbit-badge">
-            <span class="planet-badge-title">اسْمُ الفَاعِلِ</span>
-            <span class="planet-badge-q">مَنْ يَفْعَلُ؟</span>
+        <div class="planet-station station-2" onclick="openMorphModal(1)">
+          <div class="planet-pill-tag">
+            <span class="tag-title">اسْمُ الفَاعِلِ</span>
+            <span class="tag-sub">مَنْ يَفْعَلُ؟</span>
           </div>
-          <div class="space-planet-sphere sphere-2">
-            <div class="planet-word-text" id="b2_word">كَاتِبٌ</div>
-            <span class="planet-weight-sub" id="b2_pattern">(فَاعِلٌ)</span>
-          </div>
+          <svg class="planet-globe-svg" viewBox="0 0 160 160">
+            <defs>
+              <radialGradient id="gradP2" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#bae6fd"/>
+                <stop offset="40%" stop-color="#0284c7"/>
+                <stop offset="85%" stop-color="#1e40af"/>
+                <stop offset="100%" stop-color="#0f172a"/>
+              </radialGradient>
+            </defs>
+            <circle cx="80" cy="80" r="70" fill="url(#gradP2)" stroke="#ffffff" stroke-width="6"/>
+            <ellipse cx="80" cy="80" rx="65" ry="24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4" transform="rotate(25 80 80)"/>
+            <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b2_word">كَاتِبٌ</text>
+            <rect x="40" y="88" width="80" height="24" rx="12" fill="rgba(0,0,0,0.5)"/>
+            <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b2_pattern">(فَاعِلٌ)</text>
+          </svg>
         </div>
 
         <!-- 3. محطة اسم المفعول -->
-        <div class="planet-satellite-station station-3" onclick="openMorphModal(2)">
-          <div class="planet-orbit-badge">
-            <span class="planet-badge-title">اسْمُ المَفْعُولِ</span>
-            <span class="planet-badge-q">مَا الَّذِي فُعِلَ؟</span>
+        <div class="planet-station station-3" onclick="openMorphModal(2)">
+          <div class="planet-pill-tag">
+            <span class="tag-title">اسْمُ المَفْعُولِ</span>
+            <span class="tag-sub">مَا الَّذِي فُعِلَ؟</span>
           </div>
-          <div class="space-planet-sphere sphere-3">
-            <div class="planet-word-text" id="b3_word">مَكْتُوبٌ</div>
-            <span class="planet-weight-sub" id="b3_pattern">(مَفْعُولٌ)</span>
-          </div>
+          <svg class="planet-globe-svg" viewBox="0 0 160 160">
+            <defs>
+              <radialGradient id="gradP3" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#fecaca"/>
+                <stop offset="40%" stop-color="#ef4444"/>
+                <stop offset="85%" stop-color="#b91c1c"/>
+                <stop offset="100%" stop-color="#450a0a"/>
+              </radialGradient>
+            </defs>
+            <circle cx="80" cy="80" r="70" fill="url(#gradP3)" stroke="#ffffff" stroke-width="6"/>
+            <ellipse cx="80" cy="80" rx="65" ry="20" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4" transform="rotate(-15 80 80)"/>
+            <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="27" font-weight="900" id="b3_word">مَكْتُوبٌ</text>
+            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.5)"/>
+            <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b3_pattern">(مَفْعُولٌ)</text>
+          </svg>
         </div>
 
         <!-- 4. محطة اسم المكان -->
-        <div class="planet-satellite-station station-4" onclick="openMorphModal(3)">
-          <div class="planet-orbit-badge">
-            <span class="planet-badge-title">اسْمُ المَكَانِ</span>
-            <span class="planet-badge-q">أَيْنَ يَقَعُ؟</span>
+        <div class="planet-station station-4" onclick="openMorphModal(3)">
+          <div class="planet-pill-tag">
+            <span class="tag-title">اسْمُ المَكَانِ</span>
+            <span class="tag-sub">أَيْنَ يَقَعُ؟</span>
           </div>
-          <div class="space-planet-sphere sphere-4">
-            <div class="planet-word-text" id="b4_word">مَكْتَبٌ</div>
-            <span class="planet-weight-sub" id="b4_pattern">(مَفْعَلٌ)</span>
-          </div>
+          <svg class="planet-globe-svg" viewBox="0 0 160 160">
+            <defs>
+              <radialGradient id="gradP4" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#bbf7d0"/>
+                <stop offset="40%" stop-color="#22c55e"/>
+                <stop offset="85%" stop-color="#15803d"/>
+                <stop offset="100%" stop-color="#052e16"/>
+              </radialGradient>
+            </defs>
+            <circle cx="80" cy="80" r="70" fill="url(#gradP4)" stroke="#ffffff" stroke-width="6"/>
+            <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4" transform="rotate(35 80 80)"/>
+            <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b4_word">مَكْتَبٌ</text>
+            <rect x="40" y="88" width="80" height="24" rx="12" fill="rgba(0,0,0,0.5)"/>
+            <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b4_pattern">(مَفْعَلٌ)</text>
+          </svg>
         </div>
 
         <!-- 5. محطة المصدر -->
-        <div class="planet-satellite-station station-5" onclick="openMorphModal(4)">
-          <div class="planet-orbit-badge">
-            <span class="planet-badge-title">المَصْدَرُ</span>
-            <span class="planet-badge-q">مَا اسْمُ النَّشَاطِ؟</span>
+        <div class="planet-station station-5" onclick="openMorphModal(4)">
+          <div class="planet-pill-tag">
+            <span class="tag-title">المَصْدَرُ</span>
+            <span class="tag-sub">مَا اسْمُ النَّشَاطِ؟</span>
           </div>
-          <div class="space-planet-sphere sphere-5">
-            <div class="planet-word-text" id="b5_word">كِتَابَةٌ</div>
-            <span class="planet-weight-sub" id="b5_pattern">(فِعَالَةٌ)</span>
-          </div>
+          <svg class="planet-globe-svg" viewBox="0 0 160 160">
+            <defs>
+              <radialGradient id="gradP5" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#fed7aa"/>
+                <stop offset="40%" stop-color="#f97316"/>
+                <stop offset="85%" stop-color="#c2410c"/>
+                <stop offset="100%" stop-color="#431407"/>
+              </radialGradient>
+            </defs>
+            <circle cx="80" cy="80" r="70" fill="url(#gradP5)" stroke="#ffffff" stroke-width="6"/>
+            <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4" transform="rotate(-30 80 80)"/>
+            <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b5_word">كِتَابَةٌ</text>
+            <rect x="40" y="88" width="80" height="24" rx="12" fill="rgba(0,0,0,0.5)"/>
+            <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b5_pattern">(فِعَالَةٌ)</text>
+          </svg>
         </div>
       </div>
     </div>
 
-    <!-- 2. سحابة الحكاية مع أزرار استماع التوجيه والمهام -->
+    <!-- 2. سحابة الحكاية -->
     <div id="storyTab" class="tab-view">
       <div class="kawaii-cloud-universe">
         <div class="fluffy-puffy-cloud-card">
           <svg class="cloud-svg-frame-art" viewBox="0 0 1400 700" preserveAspectRatio="none">
             <path d="M 700,68 C 780,63 860,88 900,138 C 980,113 1070,138 1120,198 C 1200,198 1280,248 1310,328 C 1350,398 1340,478 1280,538 C 1260,598 1190,648 1110,658 C 1040,688 950,678 890,638 C 830,678 740,688 670,658 C 610,688 510,688 450,648 C 380,678 290,668 230,618 C 150,628 80,578 60,498 C 40,418 60,338 110,278 C 110,208 170,148 250,138 C 310,88 400,68 480,108 C 540,68 620,63 700,68 Z" fill="#bae6fd" stroke="#7dd3fc" stroke-width="6"/>
             <path d="M 700,50 C 780,45 860,70 900,120 C 980,95 1070,120 1120,180 C 1200,180 1280,230 1310,310 C 1350,380 1340,460 1280,520 C 1260,580 1190,630 1110,640 C 1040,670 950,660 890,620 C 830,660 740,670 670,640 C 610,670 510,670 450,630 C 380,660 290,650 230,600 C 150,610 80,560 60,480 C 40,400 60,320 110,260 C 110,190 170,130 250,120 C 310,70 400,50 480,90 C 540,50 620,45 700,50 Z" fill="#ffffff" stroke="#38bdf8" stroke-width="7"/>
-            <ellipse cx="480" cy="200" rx="40" ry="25" fill="#fca5a5" opacity="0.9"/>
-            <ellipse cx="920" cy="200" rx="40" ry="25" fill="#fca5a5" opacity="0.9"/>
-            <circle cx="590" cy="180" r="26" fill="#1e293b"/>
-            <circle cx="598" cy="172" r="9" fill="white"/>
-            <circle cx="810" cy="180" r="26" fill="#1e293b"/>
-            <circle cx="818" cy="172" r="9" fill="white"/>
-            <path d="M 565,140 Q 590,125 615,138" fill="none" stroke="#1e293b" stroke-width="5" stroke-linecap="round"/>
-            <path d="M 785,138 Q 810,125 835,140" fill="none" stroke="#1e293b" stroke-width="5" stroke-linecap="round"/>
-            <path d="M 665,200 Q 700,235 735,200" fill="none" stroke="#1e293b" stroke-width="6" stroke-linecap="round"/>
           </svg>
 
           <div class="cloud-belly-interactive">
@@ -1241,7 +975,7 @@
     <!-- 3. أقراص التركيب -->
     <div id="labTab" class="tab-view">
       <div class="spheres-free-stage" id="labSky">
-        <h3 style="font-size: 2.3rem; font-weight: 900; color: #facc15; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">🛸 مَحَطَّاتُ التَّرْكِيبِ الفَضَائِيِّ 🪐</h3>
+        <h3 style="font-size: 2.3rem; font-weight: 900; color: #facc15;">🛸 مَحَطَّاتُ التَّرْكِيبِ الفَضَائِيِّ 🪐</h3>
         <p style="font-size: 1.2rem; font-weight: 800; color: #bae6fd; margin-top: 0.4rem;">اخْتَرِ الحَرْفَ المُنَاسِبَ لِتَكْتَمِلَ دَائِرَةُ الوَزْنِ الصَّحِيحِ:</p>
         <div class="saucer-stations-row" id="discsContainer"></div>
       </div>
@@ -1250,25 +984,23 @@
     <!-- 4. حلبة قطع البزل -->
     <div id="quizTab" class="tab-view">
       <div class="puzzle-free-arena">
-        <h3 style="font-size: 2.3rem; font-weight: 900; color: #a3e635; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">🧩 حَلَبَةُ قِطَعِ البَزْل الصَّرْفِيَّةِ</h3>
+        <h3 style="font-size: 2.3rem; font-weight: 900; color: #a3e635;">🧩 حَلَبَةُ قِطَعِ البَزْل الصَّرْفِيَّةِ</h3>
         <p style="font-size: 1.2rem; font-weight: 800; color: #bae6fd; margin-top: 0.4rem;">اسْحَبْ قِطْعَةَ البَزْل المُنَاسِبَةَ وَأَفْلِتْهَا فِي الفَجْوَةِ، أَوْ انْقُرْ عَلَيْهَا:</p>
         <div class="jigsaw-pieces-flex" id="puzzleContainer"></div>
       </div>
     </div>
 
-    <!-- 5. مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ (تحدي النظائر بـ 6 أنماط مبتكرة) -->
+    <!-- 5. مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ -->
     <div id="challengeTab" class="tab-view">
       <div class="spacecraft-challenge-deck">
         <h3 class="spacecraft-header-title">🚀 مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ</h3>
-        <p class="spacecraft-subtext">
-          تَحَدَّ نَفْسَكَ يَا بَطَلُ، وَطَبِّقِ الأَوْزَانَ عَلَى كَلِمَاتٍ جَدِيدَةٍ مِنْ نَفْسِ المَجَرَّةِ:
-        </p>
+        <p class="spacecraft-subtext">تَحَدَّ نَفْسَكَ يَا بَطَلُ، وَطَبِّقِ الأَوْزَانَ عَلَى كَلِمَاتٍ جَدِيدَةٍ مِنْ نَفْسِ المَجَرَّةِ:</p>
         <div class="spacecraft-pods-row" id="challengeContainer"></div>
       </div>
     </div>
   </main>
 
-  <!-- النافذة المنبثقة للتحليل وقرص الشمس (زر استماع شامل موحد) -->
+  <!-- النافذة المنبثقة للتحليل وقرص الشمس (زر استماع شامل موحد متسلسل) -->
   <div class="modal-overlay" id="morphModal" onclick="closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -1337,12 +1069,25 @@
         "خرج": "khrj"
       },
 
-      playAsset(folder, fileName, fallbackText) {
+      playAsset(folder, fileName, fallbackText, onEndCallback) {
         const audioPath = `audio/${folder}/${fileName}.mp3`;
         this.audioPlayer.src = audioPath;
         
+        this.audioPlayer.onended = () => {
+          if (onEndCallback) onEndCallback();
+        };
+
         this.audioPlayer.play().catch(() => {
-          if (fallbackText) this.speak(fallbackText);
+          if (fallbackText) this.speak(fallbackText, onEndCallback);
+          else if (onEndCallback) onEndCallback();
+        });
+      },
+
+      // تشغيل متسلسل للملفات لتقرأ كل شيء دفعة واحدة دون توقف
+      playSequence(folder, playlist, fallbackTexts, index = 0) {
+        if (index >= playlist.length) return;
+        this.playAsset(folder, playlist[index], fallbackTexts[index], () => {
+          this.playSequence(folder, playlist, fallbackTexts, index + 1);
         });
       },
 
@@ -1402,7 +1147,7 @@
         osc.stop(now + 0.08);
       },
 
-      speak(txt) {
+      speak(txt, callback) {
         if ('speechSynthesis' in window) {
           window.speechSynthesis.cancel();
           const utter = new SpeechSynthesisUtterance(txt);
@@ -1411,16 +1156,17 @@
           const voices = window.speechSynthesis.getVoices();
           const ar = voices.find(v => v.lang.startsWith('ar') || v.lang.startsWith('ara'));
           if (ar) utter.voice = ar;
+          if (callback) {
+            utter.onend = () => callback();
+          }
           window.speechSynthesis.speak(utter);
+        } else if (callback) {
+          callback();
         }
       }
     };
 
-    /* ========================================================================= */
-    /* قاعدة البيانات الشاملة مع 6 تحديات قياسية في مركبة الصرف */
-    /* ========================================================================= */
     const db = {
-      // 1. صحيح سالم (ثلاثي)
       "كتب": {
         letters: ['ك', 'ت', 'ب'],
         concept: "الكِتَابَةُ وَالتَّدْوِينُ (صَحِيحٌ سَالِمٌ)",
@@ -1468,69 +1214,12 @@
         ],
         // تحديات مركبة الصرف الفضائية الستة المتنوعة
         challenges: [
-          { icon: "🎨", badge: "1. مَنْ يَقُومُ بِالعَمَلِ؟", prompt: "الَّذِي يَقُومُ بِفِعْلِ الكِتَابَةِ هُوَ (كَاتِبٌ)، فَمَاذَا نُطْلِقُ عَلَى مَنْ قَامَ بِـ (رَسَمَ)؟", ans: "رَاسِمٌ", opts: ["رَاسِمٌ", "مَرْسُومٌ", "مِرْسَمٌ"] },
-          { icon: "🍲", badge: "2. مَا الَّذِي وَقَعَ عَلَيْهِ الفِعْلُ؟", prompt: "النَّصُّ كَتَبْنَاهُ فَهُوَ (مَكْتُوبٌ)، فَكَيْفَ نَصِفُ الطَّعَامَ الَّذِي (طَبَخْنَاهُ)؟", ans: "مَطْبُوخٌ", opts: ["طَابِخٌ", "مَطْبُوخٌ", "مَطْبَخٌ"] },
-          { icon: "🏡", badge: "3. أَيْنَ يَقَعُ الحَدَثُ؟", prompt: "المَكَانُ الَّذِي نَكْتُبُ فِيهِ هُوَ (مَكْتَبٌ)، فَمَا اسْمُ المَكَانِ الَّذِي يُطْبَخُ فِيهِ الطَّعَامُ؟", ans: "مَطْبَخٌ", opts: ["مَطْبَخٌ", "طَابِخٌ", "مَطْبُوخٌ"] },
-          { icon: "🔨", badge: "4. مَا اسْمُ النَّشَاطِ؟", prompt: "النَّشَاطُ النَّاتِجُ عَنْ كَتَبَ هُوَ (كِتَابَةٌ)، فَمَا اسْمُ نَشَاطِ مَنْ يَعْمَلُ فِي (نَجَرَ)؟", ans: "نِجَارَةٌ", opts: ["نِجَارَةٌ", "نَاجِرٌ", "مَنْجُورٌ"] },
+          { icon: "🎨", badge: "1. تَحَدِّي الفَاعِلِ", prompt: "صَاحِبُ المِهْنَةِ الَّذِي يَكْتُبُ يُدْعَى (كَاتِباً)، فَمَاذَا نُطْلِقُ عَلَى مَنْ (يَرْسُمُ)؟", ans: "رَاسِمٌ", opts: ["رَاسِمٌ", "مَرْسُومٌ", "مِرْسَمٌ"] },
+          { icon: "🍲", badge: "2. تَحَدِّي المَفْعُولِ", prompt: "النَّصُّ كَتَبْنَاهُ فَهُوَ (مَكْتُوبٌ)، فَكَيْفَ نَصِفُ الطَّعَامَ الَّذِي (طَبَخْنَاهُ)؟", ans: "مَطْبُوخٌ", opts: ["طَابِخٌ", "مَطْبُوخٌ", "مَطْبَخٌ"] },
+          { icon: "🏡", badge: "3. تَحَدِّي المَكَانِ", prompt: "المَكَانُ الَّذِي نَكْتُبُ فِيهِ هُوَ (مَكْتَبٌ)، فَمَا اسْمُ المَكَانِ الَّذِي يُطْبَخُ فِيهِ الطَّعَامُ؟", ans: "مَطْبَخٌ", opts: ["مَطْبَخٌ", "طَابِخٌ", "مَطْبُوخٌ"] },
+          { icon: "🔨", badge: "4. تَحَدِّي المَصْدَرِ", prompt: "نَشَاطُ الكَاتِبِ هُوَ (كِتَابَةٌ)، فَمَا اسْمُ نَشَاطِ النَّجَّارِ الَّذِي يَصْنَعُ الخَشَبَ؟", ans: "نِجَارَةٌ", opts: ["نِجَارَةٌ", "نَاجِرٌ", "مَنْجُورٌ"] },
           { icon: "⚖️", badge: "5. مِيزَانُ التَّطَابُقِ", prompt: "أَيُّ هَذِهِ الكَلِمَاتِ تُطَابِقُ وَزْنَ (كَاتِبٌ) مِثْلَهَا تَمَاماً؟", ans: "صَانِعٌ", opts: ["صَانِعٌ", "مَصْنُوعٌ", "مَصْنَعٌ"] },
           { icon: "🛸", badge: "6. اكْتَشِفِ الكَلِمَةَ الدَّخِيلَةَ", prompt: "جَمِيعُ الكَلِمَاتِ عَلَى وَزْنِ (مَفْعُولٌ) مَا عَدَا كَلِمَةً وَاحِدَةً دَخِيلَةً:", ans: "عَالِمٌ", opts: ["مَفْهُومٌ", "مَعْلُومٌ", "عَالِمٌ"] }
-        ]
-      },
-
-      // 2. صحيح مهموز (ثلاثي)
-      "قرأ": {
-        letters: ['ق', 'ر', 'أ'],
-        concept: "القِرَاءَةُ وَالتِّلَاوَةُ (صَحِيحٌ مَهْمُوزٌ)",
-        branches: [
-          { isVerb: true, role: "الحدث / الفعل", word: "قَرَأَ", colored: "<span class='c-r'>قَ</span><span class='c-r'>رَ</span><span class='c-r'>أَ</span>", plain: "قَرَأَ", weight: "فَعَلَ (ثلاثي مهموز)", desc: "فعل ثلاثي مجرد صحيح مهموز اللام يدل على النطق بالألفاظ المكتوبة.", colloc: "قَرَأَ حِكَايَةً", ex: "«قَرَأَ عَلِيٌّ حِكَايَةً مُشَوِّقَةً»", rule: "الفِعْلُ الثُّلَاثِيُّ المَهْمُوزُ اللَّامِ يَأْتِي عَلَى وَزْنِ (فَعَلَ) بِإِثْبَاتِ الهَمْزَةِ." },
-          { isVerb: false, role: "اسْمُ الفَاعِلِ", word: "قَارِئٌ", colored: "<span class='c-r'>قَ</span><span class='c-a'>ا</span><span class='c-r'>رِ</span><span class='c-r'>ئٌ</span>", plain: "قَارِئٌ", weight: "فَاعِلٌ (اسم فاعل)", desc: "اسم مشتق يدل على من باشر القراءة وتلاوة النص المكتوب.", colloc: "قَارِئٌ مُمَيَّزٌ", ex: "«وَقَفَ عَلِيٌّ القَارِئُ المُمَيَّزُ»", rule: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ المَهْمُوزِ عَلَى وَزْنِ (فَاعِلٌ)، وَتُكْتَبُ هَمْزَتُهُ المُتَطَرِّفَةُ عَلَى اليَاءِ (النَّبْرَةِ) لِأَنَّ مَا قَبْلَهَا مَكْسُورٌ: قَارِئٌ." },
-          { isVerb: false, role: "اسْمُ المَفْعُولِ", word: "مَقْرُوءٌ", colored: "<span class='c-a'>مَ</span><span class='c-r'>قْ</span><span class='c-r'>رُ</span><span class='c-a'>و</span><span class='c-r'>ءٌ</span>", plain: "مَقْرُوءٌ", weight: "مَفْعُولٌ (اسم مفعول)", desc: "اسم مشتق يدل على المكتوب الذي تلي وتناولته الأعين بالأفهام.", colloc: "خَطٌّ مَقْرُوءٌ", ex: "«كَانَ خَطُّهَا مَقْرُوءاً لِلجَمِيعِ»", rule: "يُصَاغُ اسْمُ المَفْعُولِ مِنَ الفِعْلِ المَهْمُوزِ عَلَى وَزْنِ (مَفْعُولٌ)، وَتُكْتَبُ هَمْزَتُهُ المُتَطَرِّفَةُ عَلَى السَّطْرِ لِمَجِيئِهَا بَعْدَ وَاوٍ سَاكِنَةٍ: مَقْرُوءٌ." },
-          { isVerb: false, role: "اسْمُ المَكَانِ", word: "مَقْرَأٌ", colored: "<span class='c-a'>مَ</span><span class='c-r'>قْ</span><span class='c-r'>رَ</span><span class='c-r'>أٌ</span>", plain: "مَقْرَأٌ", weight: "مَفْعَلٌ (اسم مكان)", desc: "اسم مشتق يدل على مجلس وموضع تلاوة الكتب ومدارستها.", colloc: "مَقْرَأُ المَدْرَسَةِ", ex: "«فِي مَقْرَإِ المَدْرَسَةِ أَمَامَ زُمَلَائِهِ»", rule: "يُصَاغُ اسْمُ المَكَانِ مِنَ المَهْمُوزِ عَلَى وَزْنِ (مَفْعَلٌ) بِفَتْحِ العَيْنِ: مَقْرَأٌ." },
-          { isVerb: false, role: "المَصْدَرُ", word: "قِرَاءَةٌ", colored: "<span class='c-r'>قِ</span><span class='c-r'>رَ</span><span class='c-a'>ا</span><span class='c-r'>ءَ</span><span class='c-a'>ةٌ</span>", plain: "قِرَاءَةٌ", weight: "فِعَالَةٌ (مصدر)", desc: "اسم يدل على الحدث والنشاط الفكري لتلاوة السطور وفهمها.", colloc: "حُبُّ القِرَاءَةِ", ex: "«تَقْدِيراً لِشَغَفِهِ بِالقِرَاءَةِ»", rule: "مَصْدَرُ الفِعْلِ المَهْمُوزِ الدَّالِّ عَلَى حِرْفَةٍ أَوْ مُلَازَمَةٍ يَأْتِي عَلَى وَزْنِ (فِعَالَةٌ) مِثْلَ: قِرَاءَةٌ." }
-        ],
-        affixes: [
-          { word: "<span class='c-r'>قَ</span><span class='c-a'>ا</span><span class='c-r'>رَ</span><span class='c-r'>أَ</span>", plain: "قَارَأَ", weight: "فَاعَلَ", desc: "مزيد بالألف: طالع معه وشاركه القراءة" },
-          { word: "<span class='c-a'>أَ</span><span class='c-r'>قْ</span><span class='c-r'>رَ</span><span class='c-r'>أَ</span>", plain: "أَقْرَأَ", weight: "أَفْعَلَ", desc: "مزيد بالهمزة: جعله يقرأ وعلّمه" },
-          { word: "<span class='c-a'>اسْتَ</span><span class='c-r'>قْ</span><span class='c-r'>رَ</span><span class='c-r'>أَ</span>", plain: "اسْتَقْرَأَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف: تتبع وتفحص" }
-        ],
-        storyParagraph: [
-          { word: "وَقَفَ", target: false }, { word: "عَلِيٌّ", target: false }, { word: "القَارِئُ", target: "اسم الفاعل" },
-          { word: "المُمَيَّزُ", target: false }, { word: "فِي", target: false }, { word: "مَقْرَإِ", target: "اسم المكان" },
-          { word: "المَدْرَسَةِ", target: false }, { word: "أَمَامَ", target: false }, { word: "زُمَلَائِهِ،", target: false },
-          { word: "ثُمَّ", target: false }, { word: "قَرَأَ", target: "الفعل المجرد" }, { word: "حِكَايَةً", target: false },
-          { word: "مُشَوِّقَةً", target: false }, { word: "كَانَ", target: false }, { word: "قَدْ", target: false },
-          { word: "دَوَّنَهَا", target: false }, { word: "عَلَى", target: false }, { word: "السَّبُّورَةِ؛", target: false },
-          { word: "كَانَ", target: false }, { word: "خَطُّهَا", target: false }, { word: "مَقْرُوءاً", target: "اسم المفعول" },
-          { word: "لِلجَمِيعِ", target: false }, { word: "بِوُضُوحٍ،", target: false }, { word: "فَصَفَّقَ", target: false },
-          { word: "لَهُ", target: false }, { word: "الأُسْتَاذُ", target: false }, { word: "تَقْدِيراً", target: false },
-          { word: "لِشَغَفِهِ", target: false }, { word: "بِـالقِرَاءَةِ", target: "المصدر" }, { word: "وَإِتْقَانِهِ", target: false },
-          { word: "لَهَا.", target: false }
-        ],
-        missions: [
-          { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى (الفِعْلِ المَهْمُوزِ المُجَرَّدِ)", targetType: "الفعل المجرد", audio: "mission_1" },
-          { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل", audio: "mission_2" },
-          { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان", audio: "mission_3" },
-          { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول", audio: "mission_4" },
-          { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر", audio: "mission_5" }
-        ],
-        labs: [
-          { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"قَـ"}, {ch:"ا"}, {ch:"رِ"}, {ch:"", correct:"ئٌ"}], pool: ["ئٌ", "ءٌ", "ؤٌ"] },
-          { title: "قُرْصُ: اسْمُ المَفْعُولِ", slots: [{ch:"مَـ"}, {ch:"قْـ"}, {ch:"رُ"}, {ch:"و"}, {ch:"", correct:"ءٌ"}], pool: ["ءٌ", "ئٌ", "ؤٌ"] },
-          { title: "قُرْصُ: المَصْدَرُ", slots: [{ch:"قِـ"}, {ch:"رَ"}, {ch:"ا"}, {ch:"", correct:"ءَةٌ"}], pool: ["ءَةٌ", "ةٌ", "ي"] }
-        ],
-        quizzes: [
-          { q: "كُتِبَتْ هَمْزَةُ اسْمِ الفَاعِلِ (قَارِئٌ) عَلَى اليَاءِ لِأَنَّ:", ans: "مَا قَبْلَهَا مَكْسُورٌ", opts: ["مَا قَبْلَهَا مَكْسُورٌ", "مَا قَبْلَهَا سَاكِنٌ", "مَا قَبْلَهَا مَفْتُوحٌ"] },
-          { q: "يَأْتِي اسْمُ المَفْعُولِ مِنَ الفِعْلِ (قَرَأَ) عَلَى وَزْنِ مَفْعُول وَهُوَ:", ans: "مَقْرُوءٌ", opts: ["مَقْرُوءٌ", "قَارِئٌ", "مَقْرَأٌ"] },
-          { q: "الفِعْلُ (أَقْرَأَ) هُوَ فِعْلٌ مَزِيدٌ بِـ:", ans: "الهَمْزَةِ فِي أَوَّلِهِ", opts: ["الهَمْزَةِ فِي أَوَّلِهِ", "التَّضْعِيفِ", "الأَلِفِ"] },
-          { q: "مَصْدَرُ الفِعْلِ (قَرَأَ) الدَّالُّ عَلَى المُلَازَمَةِ هُوَ:", ans: "قِرَاءَةٌ", opts: ["قِرَاءَةٌ", "مَقْرَأٌ", "قَارِئٌ"] }
-        ],
-        challenges: [
-          { icon: "🏁", badge: "1. مَنْ بَدَأَ العَمَلَ؟", prompt: "الَّذِي يَقْرَأُ هُوَ (قَارِئٌ)، فَمَا اسْمُ الفَاعِلِ مِنْ فِعْلِ (بَدَأَ)؟", ans: "بَادِئٌ", opts: ["بَادِئٌ", "مَبْدُوءٌ", "مَبْدَأٌ"] },
-          { icon: "🚀", badge: "2. مَا الَّذِي انْطَلَقَ؟", prompt: "النَّصُّ قَرَأْنَاهُ فَهُوَ (مَقْرُوءٌ)، وَالدَّرْسُ بَدَأْنَاهُ فَهُوَ دَرْسٌ:", ans: "مَبْدُوءٌ", opts: ["بَادِئٌ", "مَبْدُوءٌ", "مَبْدَأٌ"] },
-          { icon: "📍", badge: "3. نُقْطَةُ الانْطِلَاقِ", prompt: "المَقْرَأُ مَكَانُ القِرَاءَةِ، فَمَا اسْمُ المَوْضِعِ الَّذِي نَبْدَأُ مِنْهُ؟", ans: "مَبْدَأٌ", opts: ["مَبْدَأٌ", "بَادِئٌ", "مَبْدُوءٌ"] },
-          { icon: "📖", badge: "4. اسْمُ الحَدَثِ", prompt: "قَرَأَ مَصْدَرُهَا (قِرَاءَةٌ)، فَمَا اسْمُ النَّشَاطِ النَّاتِجِ عَنْ (نَشَأَ)؟", ans: "نَشْأَةٌ", opts: ["نَشْأَةٌ", "نَاشِئٌ", "مَنْشُوءٌ"] },
-          { icon: "⚖️", badge: "5. مِيزَانُ الهَمْزَةِ", prompt: "أَيُّ هَذِهِ الكَلِمَاتِ تُشْبِهُ (قَارِئٌ) فِي كِتَابَةِ هَمْزَتِهَا عَلَى اليَاءِ؟", ans: "دَافِئٌ", opts: ["دَافِئٌ", "مَبْدُوءٌ", "قِرَاءَةٌ"] },
-          { icon: "🛸", badge: "6. اكْتَشِفِ الكَلِمَةَ الدَّخِيلَةَ", prompt: "جَمِيعُ الكَلِمَاتِ مَهْمُوزَةُ اللَّامِ مَا عَدَا كَلِمَةً وَاحِدَةً دَخِيلَةً:", ans: "كَتَبَ", opts: ["بَدَأَ", "نَشَأَ", "كَتَبَ"] }
         ]
       }
     };
@@ -1566,8 +1255,10 @@
       document.getElementById('coreConcept').textContent = data.concept;
 
       data.branches.forEach((b, i) => {
-        document.getElementById(`b${i+1}_word`).innerHTML = b.word;
-        document.getElementById(`b${i+1}_pattern`).textContent = `(${b.weight.split(' ')[0]})`;
+        const wordEl = document.getElementById(`b${i+1}_word`);
+        const patternEl = document.getElementById(`b${i+1}_pattern`);
+        if (wordEl) wordEl.textContent = b.plain;
+        if (patternEl) patternEl.textContent = `(${b.weight.split(' ')[0]})`;
       });
 
       generateTwinkleStars();
@@ -1599,12 +1290,18 @@
       const filePrefixes = ['verb', 'actor', 'product', 'place', 'source'];
       const prefix = filePrefixes[branchIdx];
 
-      // زر الاستماع الشامل الموحد المعتمد
+      // تشغيل السلسلة الكاملة دفعة واحدة عند الضغط على الزر (الكلمة + الشرح + المتلازمة + المثال)
       const masterBtn = document.getElementById('btnMasterAudio');
       masterBtn.style.display = 'flex';
       masterBtn.onclick = () => {
-        const fullLessonText = `${branch.plain}. ${branch.desc}. المُتَلَازِمَةُ اللَّفْظِيَّةُ: ${branch.colloc}. المِثَالُ فِي سِيَاقٍ: ${branch.ex.replace(/[«»]/g, '')}`;
-        Sound.playAsset(folder, `${prefix}_desc`, fullLessonText);
+        const playlist = [prefix, `${prefix}_desc`, `${prefix}_colloc`, `${prefix}_ex`];
+        const fallbacks = [
+          branch.plain,
+          branch.desc,
+          `المُتَلَازِمَةُ اللَّفْظِيَّةُ: ${branch.colloc}`,
+          `المِثَالُ فِي سِيَاقٍ: ${branch.ex.replace(/[«»]/g, '')}`
+        ];
+        Sound.playSequence(folder, playlist, fallbacks);
       };
 
       const ruleBanner = document.getElementById('mRuleBanner');
@@ -1615,6 +1312,7 @@
         ruleBanner.style.display = 'none';
       }
 
+      // حذف أزرار عائلة الأفعال المزيدة
       const affixCard = document.getElementById('mAffixCard');
       const affixList = document.getElementById('mAffixList');
       const affixTitle = document.getElementById('mAffixTitle');
@@ -1624,7 +1322,7 @@
         affixList.innerHTML = '';
         affixTitle.textContent = "📚 عَائِلَةُ الأَفْعَالِ المَزِيدَةِ";
 
-        rootObj.affixes.forEach((aff, aIdx) => {
+        rootObj.affixes.forEach((aff) => {
           const div = document.createElement('div');
           div.className = 'affix-item';
           div.innerHTML = `
@@ -1635,7 +1333,6 @@
               </div>
               <div style="font-size: 0.95rem; color: #64748b;">${aff.desc}</div>
             </div>
-            <button style="border:none; background:#fef08a; padding:0.4rem 0.8rem; border-radius:20px; cursor:pointer; font-weight:bold; color:#854d0e;" onclick="Sound.playAsset('${folder}', 'affix_${aIdx+1}', '${aff.plain}')">🔊</button>
           `;
           affixList.appendChild(div);
         });
@@ -1932,7 +1629,7 @@
       }
     }
 
-    /* دالة توليد مقصورات مركبة الصرف الفضائية (6 أنماط) */
+    /* دالة توليد كبسولات مركبة الصرف الفضائية (6 أنماط مبتكرة) */
     function renderSpacecraftChallenge(challenges) {
       const container = document.getElementById('challengeContainer');
       container.innerHTML = '';
@@ -1946,8 +1643,10 @@
         const card = document.createElement('div');
         card.className = 'spacecraft-pod-unit';
         card.innerHTML = `
-          <div class="pod-icon-bubble">${c.icon || '🚀'}</div>
-          <span class="pod-badge-tag">${c.badge}</span>
+          <div class="pod-bubble-header">
+            <span>${c.icon || '🚀'}</span>
+            <span>${c.badge}</span>
+          </div>
           <div class="pod-question-speech">${c.prompt}</div>
           <div class="pod-answers-dock">
             ${c.opts.map(opt => `
