@@ -166,7 +166,6 @@
       100% { opacity: 1; transform: scale(1.3); filter: drop-shadow(0 0 6px #fde047); }
     }
 
-    /* 1. شمس الجذر */
     .space-system-arena {
       position: relative;
       width: 100%;
@@ -289,7 +288,6 @@
     .station-5 { bottom: 10px; left: 50%; transform: translateX(-50%); }
     .station-5:hover { transform: translateX(-50%) scale(1.15) translateY(-8px); }
 
-    /* 2. سحابة الحكاية */
     .kawaii-cloud-universe {
       position: relative;
       width: 100%;
@@ -385,7 +383,6 @@
       transform: scale(1.12);
     }
 
-    /* 3. أقراص التركيب */
     .spheres-free-stage {
       display: flex;
       flex-direction: column;
@@ -479,7 +476,6 @@
       font-weight: 900; font-size: 1rem; display: none;
     }
 
-    /* 4. حلبة قطع البزل */
     .puzzle-free-arena {
       display: flex; flex-direction: column; align-items: center;
       padding: 1rem 0 3rem; text-align: center;
@@ -530,7 +526,6 @@
       font-weight: 900; font-size: 0.95rem; display: none;
     }
 
-    /* 5. مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ */
     .spacecraft-challenge-deck {
       background: radial-gradient(circle at 50% 30%, #2e1065 0%, #0c0824 100%);
       border: 8px solid #c084fc;
@@ -663,7 +658,6 @@
       text-align: center;
     }
 
-    /* Modal */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -722,11 +716,6 @@
     .master-audio-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(67, 56, 202, 0.55);
-    }
-
-    .master-audio-btn:active {
-      transform: translateY(2px);
-      box-shadow: none;
     }
 
     .rule-gold-banner {
@@ -797,7 +786,7 @@
   </nav>
 
   <main>
-    <!-- 1. شمس الجذر الفضائية بكواكب ثلاثية الأبعاد -->
+    <!-- 1. شمس الجذر -->
     <div id="radialMap" class="tab-view active">
       <div class="space-system-arena" id="starsSky">
         <div class="orbit-ellipse-wide"></div>
@@ -837,7 +826,7 @@
             <circle cx="80" cy="80" r="70" fill="url(#gradP1)" stroke="#ffffff" stroke-width="6"/>
             <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(-25 80 80)"/>
             <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b1_word">كَتَبَ</text>
-            <rect x="42" y="88" width="76" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
+            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
             <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b1_pattern">(فَعَلَ)</text>
           </svg>
         </div>
@@ -860,7 +849,7 @@
             <circle cx="80" cy="80" r="70" fill="url(#gradP2)" stroke="#ffffff" stroke-width="6"/>
             <ellipse cx="80" cy="80" rx="65" ry="24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(25 80 80)"/>
             <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b2_word">كَاتِبٌ</text>
-            <rect x="40" y="88" width="80" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
+            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
             <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b2_pattern">(فَاعِلٌ)</text>
           </svg>
         </div>
@@ -906,7 +895,7 @@
             <circle cx="80" cy="80" r="70" fill="url(#gradP4)" stroke="#ffffff" stroke-width="6"/>
             <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(35 80 80)"/>
             <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b4_word">مَكْتَبٌ</text>
-            <rect x="40" y="88" width="80" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
+            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
             <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b4_pattern">(مَفْعَلٌ)</text>
           </svg>
         </div>
@@ -929,7 +918,7 @@
             <circle cx="80" cy="80" r="70" fill="url(#gradP5)" stroke="#ffffff" stroke-width="6"/>
             <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(-30 80 80)"/>
             <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b5_word">كِتَابَةٌ</text>
-            <rect x="40" y="88" width="80" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
+            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
             <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b5_pattern">(فِعَالَةٌ)</text>
           </svg>
         </div>
@@ -995,7 +984,7 @@
     </div>
   </main>
 
-  <!-- النافذة المنبثقة -->
+  <!-- النافذة المنبثقة للتحليل وقرص الشمس -->
   <div class="modal-overlay" id="morphModal" onclick="closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -1069,7 +1058,6 @@
         });
       },
 
-      // تشغيل أصوات التعزيز عند الإجابة الصحيحة
       correct() {
         const cheerFiles = ['correct_1', 'correct_2', 'correct_3'];
         const randomCheer = cheerFiles[Math.floor(Math.random() * cheerFiles.length)];
@@ -1079,7 +1067,6 @@
         });
       },
 
-      // تشغيل أصوات التنبيه اللطيفة عند الخطأ
       wrong() {
         const wrongFiles = ['wrong_1', 'wrong_2'];
         const randomWrong = wrongFiles[Math.floor(Math.random() * wrongFiles.length)];
@@ -1089,7 +1076,6 @@
         });
       },
 
-      // صوت النقرة اللطيفة
       pop() {
         this.sfxPlayer.src = `audio/pop.mp3`;
         this.sfxPlayer.play().catch(() => {});
@@ -1166,6 +1152,62 @@
           { icon: "⚖️", badge: "5. مِيزَانُ التَّطَابُقِ", prompt: "أَيُّ هَذِهِ الكَلِمَاتِ تُطَابِقُ وَزْنَ (كَاتِبٌ) مِثْلَهَا تَمَاماً؟", ans: "صَانِعٌ", opts: ["صَانِعٌ", "مَصْنُوعٌ", "مَصْنَعٌ"] },
           { icon: "🛸", badge: "6. اكْتَشِفِ الكَلِمَةَ الدَّخِيلَةَ", prompt: "جَمِيعُ الكَلِمَاتِ عَلَى وَزْنِ (مَفْعُولٌ) مَا عَدَا كَلِمَةً وَاحِدَةً دَخِيلَةً:", ans: "عَالِمٌ", opts: ["مَفْهُومٌ", "مَعْلُومٌ", "عَالِمٌ"] }
         ]
+      },
+
+      "قرأ": {
+        letters: ['ق', 'ر', 'أ'],
+        concept: "القِرَاءَةُ وَالتِّلَاوَةُ (صَحِيحٌ مَهْمُوزٌ)",
+        branches: [
+          { isVerb: true, role: "الحدث / الفعل", word: "قَرَأَ", colored: "<span class='c-r'>قَ</span><span class='c-r'>رَ</span><span class='c-r'>أَ</span>", plain: "قَرَأَ", weight: "فَعَلَ (ثلاثي مهموز)", desc: "فعل ثلاثي مجرد صحيح مهموز اللام يدل على النطق بالألفاظ المكتوبة.", colloc: "قَرَأَ حِكَايَةً", ex: "«قَرَأَ عَلِيٌّ حِكَايَةً مُشَوِّقَةً»", rule: "الفِعْلُ الثُّلَاثِيُّ المَهْمُوزُ اللَّامِ يَأْتِي عَلَى وَزْنِ (فَعَلَ) بِإِثْبَاتِ الهَمْزَةِ." },
+          { isVerb: false, role: "اسْمُ الفَاعِلِ", word: "قَارِئٌ", colored: "<span class='c-r'>قَ</span><span class='c-a'>ا</span><span class='c-r'>رِ</span><span class='c-r'>ئٌ</span>", plain: "قَارِئٌ", weight: "فَاعِلٌ (اسم فاعل)", desc: "اسم مشتق يدل على من باشر القراءة وتلاوة النص المكتوب.", colloc: "قَارِئٌ مُمَيَّزٌ", ex: "«وَقَفَ عَلِيٌّ القَارِئُ المُمَيَّزُ»", rule: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ المَهْمُوزِ عَلَى وَزْنِ (فَاعِلٌ)، وَتُكْتَبُ هَمْزَتُهُ المُتَطَرِّفَةُ عَلَى اليَاءِ (النَّبْرَةِ) لِأَنَّ مَا قَبْلَهَا مَكْسُورٌ: قَارِئٌ." },
+          { isVerb: false, role: "اسْمُ المَفْعُولِ", word: "مَقْرُوءٌ", colored: "<span class='c-a'>مَ</span><span class='c-r'>قْ</span><span class='c-r'>رُ</span><span class='c-a'>و</span><span class='c-r'>ءٌ</span>", plain: "مَقْرُوءٌ", weight: "مَفْعُولٌ (اسم مفعول)", desc: "اسم مشتق يدل على المكتوب الذي تلي وتناولته الأعين بالأفهام.", colloc: "خَطٌّ مَقْرُوءٌ", ex: "«كَانَ خَطُّهَا مَقْرُوءاً لِلجَمِيعِ»", rule: "يُصَاغُ اسْمُ المَفْعُولِ مِنَ الفِعْلِ المَهْمُوزِ عَلَى وَزْنِ (مَفْعُولٌ)، وَتُكْتَبُ هَمْزَتُهُ المُتَطَرِّفَةُ عَلَى السَّطْرِ لِمَجِيئِهَا بَعْدَ وَاوٍ سَاكِنَةٍ: مَقْرُوءٌ." },
+          { isVerb: false, role: "اسْمُ المَكَانِ", word: "مَقْرَأٌ", colored: "<span class='c-a'>مَ</span><span class='c-r'>قْ</span><span class='c-r'>رَ</span><span class='c-r'>أٌ</span>", plain: "مَقْرَأٌ", weight: "مَفْعَلٌ (اسم مكان)", desc: "اسم مشتق يدل على مجلس وموضع تلاوة الكتب ومدارستها.", colloc: "مَقْرَأُ المَدْرَسَةِ", ex: "«فِي مَقْرَإِ المَدْرَسَةِ أَمَامَ زُمَلَائِهِ»", rule: "يُصَاغُ اسْمُ المَكَانِ مِنَ المَهْمُوزِ عَلَى وَزْنِ (مَفْعَلٌ) بِفَتْحِ العَيْنِ: مَقْرَأٌ." },
+          { isVerb: false, role: "المَصْدَرُ", word: "قِرَاءَةٌ", colored: "<span class='c-r'>قِ</span><span class='c-r'>رَ</span><span class='c-a'>ا</span><span class='c-r'>ءَ</span><span class='c-a'>ةٌ</span>", plain: "قِرَاءَةٌ", weight: "فِعَالَةٌ (مصدر)", desc: "اسم يدل على الحدث والنشاط الفكري لتلاوة السطور وفهمها.", colloc: "حُبُّ القِرَاءَةِ", ex: "«تَقْدِيراً لِشَغَفِهِ بِالقِرَاءَةِ»", rule: "مَصْدَرُ الفِعْلِ المَهْمُوزِ الدَّالِّ عَلَى حِرْفَةٍ أَوْ مُلَازَمَةٍ يَأْتِي عَلَى وَزْنِ (فِعَالَةٌ) مِثْلَ: قِرَاءَةٌ." }
+        ],
+        affixes: [
+          { word: "<span class='c-r'>قَ</span><span class='c-a'>ا</span><span class='c-r'>رَ</span><span class='c-r'>أَ</span>", plain: "قَارَأَ", weight: "فَاعَلَ", desc: "مزيد بالألف: طالع معه وشاركه القراءة" },
+          { word: "<span class='c-a'>أَ</span><span class='c-r'>قْ</span><span class='c-r'>رَ</span><span class='c-r'>أَ</span>", plain: "أَقْرَأَ", weight: "أَفْعَلَ", desc: "مزيد بالهمزة: جعله يقرأ وعلّمه" },
+          { word: "<span class='c-a'>اسْتَ</span><span class='c-r'>قْ</span><span class='c-r'>رَ</span><span class='c-r'>أَ</span>", plain: "اسْتَقْرَأَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف: تتبع وتفحص" }
+        ],
+        storyParagraph: [
+          { word: "وَقَفَ", target: false }, { word: "عَلِيٌّ", target: false }, { word: "القَارِئُ", target: "اسم الفاعل" },
+          { word: "المُمَيَّزُ", target: false }, { word: "فِي", target: false }, { word: "مَقْرَإِ", target: "اسم المكان" },
+          { word: "المَدْرَسَةِ", target: false }, { word: "أَمَامَ", target: false }, { word: "زُمَلَائِهِ،", target: false },
+          { word: "ثُمَّ", target: false }, { word: "قَرَأَ", target: "الفعل المجرد" }, { word: "حِكَايَةً", target: false },
+          { word: "مُشَوِّقَةً", target: false }, { word: "كَانَ", target: false }, { word: "قَدْ", target: false },
+          { word: "دَوَّنَهَا", target: false }, { word: "عَلَى", target: false }, { word: "السَّبُّورَةِ؛", target: false },
+          { word: "كَانَ", target: false }, { word: "خَطُّهَا", target: false }, { word: "مَقْرُوءاً", target: "اسم المفعول" },
+          { word: "لِلجَمِيعِ", target: false }, { word: "بِوُضُوحٍ،", target: false }, { word: "فَصَفَّقَ", target: false },
+          { word: "لَهُ", target: false }, { word: "الأُسْتَاذُ", target: false }, { word: "تَقْدِيراً", target: false },
+          { word: "لِشَغَفِهِ", target: false }, { word: "بِـالقِرَاءَةِ", target: "المصدر" }, { word: "وَإِتْقَانِهِ", target: false },
+          { word: "لَهَا.", target: false }
+        ],
+        missions: [
+          { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى (الفِعْلِ المَهْمُوزِ المُجَرَّدِ)", targetType: "الفعل المجرد", audio: "mission_1" },
+          { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل", audio: "mission_2" },
+          { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان", audio: "mission_3" },
+          { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول", audio: "mission_4" },
+          { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر", audio: "mission_5" }
+        ],
+        labs: [
+          { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"قَـ"}, {ch:"ا"}, {ch:"رِ"}, {ch:"", correct:"ئٌ"}], pool: ["ئٌ", "ءٌ", "ؤٌ"] },
+          { title: "قُرْصُ: اسْمُ المَفْعُولِ", slots: [{ch:"مَـ"}, {ch:"قْـ"}, {ch:"رُ"}, {ch:"و"}, {ch:"", correct:"ءٌ"}], pool: ["ءٌ", "ئٌ", "ؤٌ"] },
+          { title: "قُرْصُ: المَصْدَرُ", slots: [{ch:"قِـ"}, {ch:"رَ"}, {ch:"ا"}, {ch:"", correct:"ءَةٌ"}], pool: ["ءَةٌ", "ةٌ", "ي"] }
+        ],
+        quizzes: [
+          { q: "كُتِبَتْ هَمْزَةُ اسْمِ الفَاعِلِ (قَارِئٌ) عَلَى اليَاءِ لِأَنَّ:", ans: "مَا قَبْلَهَا مَكْسُورٌ", opts: ["مَا قَبْلَهَا مَكْسُورٌ", "مَا قَبْلَهَا سَاكِنٌ", "مَا قَبْلَهَا مَفْتُوحٌ"] },
+          { q: "يَأْتِي اسْمُ المَفْعُولِ مِنَ الفِعْلِ (قَرَأَ) عَلَى وَزْنِ مَفْعُول وَهُوَ:", ans: "مَقْرُوءٌ", opts: ["مَقْرُوءٌ", "قَارِئٌ", "مَقْرَأٌ"] },
+          { q: "الفِعْلُ (أَقْرَأَ) هُوَ فِعْلٌ مَزِيدٌ بِـ:", ans: "الهَمْزَةِ فِي أَوَّلِهِ", opts: ["الهَمْزَةِ فِي أَوَّلِهِ", "التَّضْعِيفِ", "الأَلِفِ"] },
+          { q: "مَصْدَرُ الفِعْلِ (قَرَأَ) الدَّالُّ عَلَى المُلَازَمَةِ هُوَ:", ans: "قِرَاءَةٌ", opts: ["قِرَاءَةٌ", "مَقْرَأٌ", "قَارِئٌ"] }
+        ],
+        challenges: [
+          { icon: "🏁", badge: "1. مَنْ بَدَأَ العَمَلَ؟", prompt: "الَّذِي يَقْرَأُ هُوَ (قَارِئٌ)، فَمَا اسْمُ الفَاعِلِ مِنْ فِعْلِ (بَدَأَ)؟", ans: "بَادِئٌ", opts: ["بَادِئٌ", "مَبْدُوءٌ", "مَبْدَأٌ"] },
+          { icon: "🚀", badge: "2. مَا الَّذِي انْطَلَقَ؟", prompt: "النَّصُّ قَرَأْنَاهُ فَهُوَ (مَقْرُوءٌ)، وَالدَّرْسُ بَدَأْنَاهُ فَهُوَ دَرْسٌ:", ans: "مَبْدُوءٌ", opts: ["بَادِئٌ", "مَبْدُوءٌ", "مَبْدَأٌ"] },
+          { icon: "📍", badge: "3. نُقْطَةُ الانْطِلَاقِ", prompt: "المَقْرَأُ مَكَانُ القِرَاءَةِ، فَمَا اسْمُ المَوْضِعِ الَّذِي نَبْدَأُ مِنْهُ؟", ans: "مَبْدَأٌ", opts: ["مَبْدَأٌ", "بَادِئٌ", "مَبْدُوءٌ"] },
+          { icon: "📖", badge: "4. اسْمُ الحَدَثِ", prompt: "قَرَأَ مَصْدَرُهَا (قِرَاءَةٌ)، فَمَا اسْمُ النَّشَاطِ النَّاتِجِ عَنْ (نَشَأَ)؟", ans: "نَشْأَةٌ", opts: ["نَشْأَةٌ", "نَاشِئٌ", "مَنْشُوءٌ"] },
+          { icon: "⚖️", badge: "5. مِيزَانُ الهَمْزَةِ", prompt: "أَيُّ هَذِهِ الكَلِمَاتِ تُشْبِهُ (قَارِئٌ) فِي كِتَابَةِ هَمْزَتِهَا عَلَى اليَاءِ؟", ans: "دَافِئٌ", opts: ["دَافِئٌ", "مَبْدُوءٌ", "قِرَاءَةٌ"] },
+          { icon: "🛸", badge: "6. اكْتَشِفِ الكَلِمَةَ الدَّخِيلَةَ", prompt: "جَمِيعُ الكَلِمَاتِ مَهْمُوزَةُ اللَّامِ مَا عَدَا كَلِمَةً وَاحِدَةً دَخِيلَةً:", ans: "كَتَبَ", opts: ["بَدَأَ", "نَشَأَ", "كَتَبَ"] }
+        ]
       }
     };
 
@@ -1199,6 +1241,7 @@
       document.getElementById('coreLetters').textContent = `[ ${data.letters.join(' - ')} ]`;
       document.getElementById('coreConcept').textContent = data.concept;
 
+      // تحديث نصوص الـ SVG بدقة متوافقة دون أخطاء برمجية
       data.branches.forEach((b, i) => {
         const wordEl = document.getElementById(`b${i+1}_word`);
         const patternEl = document.getElementById(`b${i+1}_pattern`);
@@ -1631,7 +1674,6 @@
     }
 
     window.onload = () => {
-      // فك قفل الصوت تلقائياً مع أول لمسة
       window.addEventListener('click', () => {
         Sound.sfxPlayer.load();
         Sound.audioPlayer.load();
