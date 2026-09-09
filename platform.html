@@ -946,12 +946,12 @@
               
               <div style="display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin-top: 0.4rem;">
                 <div class="task-mission-pill" id="storyMissionBadge">المَهَمَّةُ: ...</div>
-                <button class="modal-audio-btn" style="margin-top:0; padding:0.35rem 1rem;" onclick="speakCurrentMissionAudio()">🔊 اسْتَمِعْ لِلمَهَمَّةِ</button>
+                <button class="master-audio-btn" style="width:auto; margin-top:0; padding:0.35rem 1.2rem; font-size:1rem;" onclick="speakCurrentMissionAudio()">🔊 اسْتَمِعْ لِلمَهَمَّةِ</button>
               </div>
 
               <div style="margin-top: 0.8rem; display: flex; justify-content: center; gap: 0.6rem;">
-                <button class="modal-audio-btn" onclick="speakCurrentStoryIntro()">📢 اسْتَمِعْ لِلتَّوْجِيهِ</button>
-                <button class="modal-audio-btn" onclick="speakCurrentStory()">📖 اسْتَمِعْ لِلنَّصِّ كَامِلاً</button>
+                <button class="master-audio-btn" style="width:auto; margin-top:0; padding:0.4rem 1.3rem; font-size:1rem;" onclick="speakCurrentStoryIntro()">📢 اسْتَمِعْ لِلتَّوْجِيهِ</button>
+                <button class="master-audio-btn" style="width:auto; margin-top:0; padding:0.4rem 1.3rem; font-size:1rem;" onclick="speakCurrentStory()">📖 اسْتَمِعْ لِلنَّصِّ كَامِلاً</button>
               </div>
             </div>
 
@@ -1063,7 +1063,6 @@
         });
       },
 
-      // تشغيل أصوات التعزيز مع استدعاء دالة ما بعدها بدقة لمنع التداخل
       correct(callback) {
         const cheerFiles = ['correct_1', 'correct_2', 'correct_3'];
         const randomCheer = cheerFiles[Math.floor(Math.random() * cheerFiles.length)];
@@ -1163,7 +1162,6 @@
         ]
       },
 
-      // تم تعديل نصوص الشرح والمتلازمة والمثال لتطابق الصوت المسجل 100%
       "قرأ": {
         letters: ['ق', 'ر', 'أ'],
         concept: "القِرَاءَةُ وَالتِّلَاوَةُ (صَحِيحٌ مَهْمُوزٌ)",
@@ -1272,6 +1270,119 @@
           { icon: "📖", badge: "4. اسْمُ الحَدَثِ", prompt: "قَرَأَ مَصْدَرُهَا (قِرَاءَةٌ)، فَمَا اسْمُ النَّشَاطِ النَّاتِجِ عَنْ (نَشَأَ)؟", ans: "نَشْأَةٌ", opts: ["نَشْأَةٌ", "نَاشِئٌ", "مَنْشُوءٌ"] },
           { icon: "⚖️", badge: "5. مِيزَانُ الهَمْزَةِ", prompt: "أَيُّ هَذِهِ الكَلِمَاتِ تُشْبِهُ (قَارِئٌ) فِي كِتَابَةِ هَمْزَتِهَا عَلَى اليَاءِ؟", ans: "دَافِئٌ", opts: ["دَافِئٌ", "مَبْدُوءٌ", "قِرَاءَةٌ"] },
           { icon: "🛸", badge: "6. اكْتَشِفِ الكَلِمَةَ الدَّخِيلَةَ", prompt: "جَمِيعُ الكَلِمَاتِ مَهْمُوزَةُ اللَّامِ مَا عَدَا كَلِمَةً وَاحِدَةً دَخِيلَةً:", ans: "كَتَبَ", opts: ["بَدَأَ", "نَشَأَ", "كَتَبَ"] }
+        ]
+      },
+
+      // الجذر الثالث: [ م - د - د ] (صَحِيحٌ مُضَعَّفٌ) بكامل بياناته المطابقة
+      "مدد": {
+        letters: ['م', 'د', 'د'],
+        concept: "البَسْطُ وَالزِّيَادَةُ (صَحِيحٌ مُضَعَّفٌ)",
+        branches: [
+          {
+            isVerb: true,
+            role: "الحدث / الفعل",
+            word: "مَدَّ",
+            colored: "<span class='c-r'>مَ</span><span class='c-r'>دَّ</span>",
+            plain: "مَدَّ",
+            weight: "فَعَلَ (ثلاثي مضعف)",
+            desc: "فِعْلٌ مَاضٍ ثُلَاثِيٌّ صَحِيحٌ مُضَعَّفٌ، أَدْغَمَتْ عَيْنُهُ فِي لَامِهِ، يَدُلُّ عَلَى البَسْطِ وَالإِطَالَةِ.",
+            colloc: "مَدَّ يَدَهُ.",
+            ex: "«مَدَّ الوَلَدُ يَدَ العَوْنِ لِأَخِيهِ»",
+            rule: "الفِعْلُ الثُّلَاثِيُّ المُضَعَّفُ يُدْغَمُ فِيهِ الحَرْفَانِ المُتَمَاثِلَانِ لِتَيْسِيرِ النُّطْقِ: مَدَدَ تَصِيرُ مَدَّ."
+          },
+          {
+            isVerb: false,
+            role: "اسْمُ الفَاعِلِ",
+            word: "مَادٌّ",
+            colored: "<span class='c-r'>مَ</span><span class='c-a'>ا</span><span class='c-r'>دٌّ</span>",
+            plain: "مَادٌّ",
+            weight: "فَاعِلٌ (اسم فاعل)",
+            desc: "اسْمٌ مُشْتَقٌّ يَدُلُّ عَلَى الحَدَثِ وَالفَاعِلِ الَّذِي يَقُومُ بِبَسْطِ الشَّيْءِ وَإِطَالَتِهِ.",
+            colloc: "مَادٌّ لِجُسُورِ الخَيْرِ.",
+            ex: "«رَأَيْتُ مُحَمَّداً مَادّاً جُسُورَ المَحَبَّةِ»",
+            rule: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ الفِعْلِ المُضَعَّفِ عَلَى وَزْنِ (فَاعِلٌ) مَعَ بَقَاءِ الإِدْغَامِ: مَادٌّ (أَصْلُهَا مَادِدٌ)."
+          },
+          {
+            isVerb: false,
+            role: "اسْمُ المَفْعُولِ",
+            word: "مَمْدُودٌ",
+            colored: "<span class='c-a'>مَ</span><span class='c-r'>مْ</span><span class='c-r'>دُ</span><span class='c-a'>و</span><span class='c-r'>دٌ</span>",
+            plain: "مَمْدُودٌ",
+            weight: "مَفْعُولٌ (اسم مفعول)",
+            desc: "اسْمٌ مُشْتَقٌّ يَدُلُّ عَلَى الشَّيْءِ الَّذِي وَقَعَ عَلَيْهِ المَدُّ وَالبَسْطُ فَصَارَ طَوِيلاً.",
+            colloc: "حَبْلٌ مَمْدُودٌ.",
+            ex: "«تَسَلَّقَ الصَّغِيرُ حَبْلاً مَمْدُوداً بِإِحْكَامٍ»",
+            rule: "يُفَكُّ الإِدْغَامُ وُجُوباً عِنْدَ صِيَاغَةِ اسْمِ المَفْعُولِ مِنَ المُضَعَّفِ: مَمْدُودٌ عَلَى وَزْنِ مَفْعُولٌ."
+          },
+          {
+            isVerb: false,
+            role: "اسْمُ المَكَانِ",
+            word: "مَمَدٌّ",
+            colored: "<span class='c-a'>مَ</span><span class='c-r'>مَ</span><span class='c-r'>دٌّ</span>",
+            plain: "مَمَدٌّ",
+            weight: "مَفْعَلٌ (اسم مكان)",
+            desc: "اسْمٌ مُشْتَقٌّ يَدُلُّ عَلَى مَوْضِعِ الإِمْدَادِ وَمَجَالِ المَدِّ وَالاتِّسَاعِ.",
+            colloc: "مَمَدُّ البَصَرِ.",
+            ex: "«وَقَفَ يَتَأَمَّلُ السَّهْلَ عَلَى مَمَدِّ البَصَرِ»",
+            rule: "يُصَاغُ اسْمُ المَكَانِ مِنَ المُضَعَّفِ عَلَى وَزْنِ (مَفْعَلٌ) مَعَ الإِدْغَامِ: مَمَدٌّ."
+          },
+          {
+            isVerb: false,
+            role: "المَصْدَرُ",
+            word: "مَدٌّ",
+            colored: "<span class='c-r'>مَ</span><span class='c-r'>دٌّ</span>",
+            plain: "مَدٌّ",
+            weight: "فَعْلٌ (مصدر)",
+            desc: "اسْمٌ يَدُلُّ عَلَى الحَدَثِ مُجَرَّداً مِنَ الزَّمَانِ، وَهُوَ حَرَكَةُ الزِّيَادَةِ وَالإِطَالَةِ.",
+            colloc: "مَدٌّ وَجَزْرٌ.",
+            ex: "«شَاهَدَ حَرَكَةَ المَدِّ وَالجَزْرِ عَلَى شَاطِئِ البَحْرِ»",
+            rule: "مَصْدَرُ الفِعْلِ المُتَعَدِّي المُضَعَّفِ يَغْلِبُ عَلَيْهِ وَزْنُ (فَعْلٌ) بِسُكُونِ العَيْنِ وَإِدْغَامِهَا: مَدٌّ."
+          }
+        ],
+        affixes: [
+          { word: "<span class='c-a'>أَ</span><span class='c-r'>مَ</span><span class='c-r'>دَّ</span>", plain: "أَمَدَّ", weight: "أَفْعَلَ", desc: "مزيد بالهمزة للتعدية: زوّده وأعانه بالزاد" },
+          { word: "<span class='c-r'>مَ</span><span class='c-a'>ا</span><span class='c-r'>دَّ</span>", plain: "مَادَّ", weight: "فَاعَلَ", desc: "مزيد بالألف للمشاركة: باسطه وشاركه المد" },
+          { word: "<span class='c-a'>ا</span><span class='c-r'>مْ</span><span class='c-a'>تَ</span><span class='c-r'>دَّ</span>", plain: "امْتَدَّ", weight: "افْتَعَلَ", desc: "مزيد بالألف والتاء للمطاوعة: استطال واتسع" }
+        ],
+        storyParagraph: [
+          { word: "وَقَفَ", target: false }, { word: "عُمَرُ", target: false }, { word: "عَلَى", target: false },
+          { word: "تَلَّةٍ", target: false }, { word: "تُطِلُّ", target: false }, { word: "عَلَى", target: false },
+          { word: "مَمَدِّ", target: "اسم المكان" }, { word: "البَصَرِ", target: false }, { word: "نَحْوَ", target: false },
+          { word: "البَحْرِ،", target: false }, { word: "كَانَ", target: false }, { word: "مَادّاً", target: "اسم الفاعل" },
+          { word: "يَدَهُ", target: false }, { word: "يُسَاعِدُ", target: false }, { word: "صَدِيقَهُ", target: false },
+          { word: "لِيَصْعَدَ", target: false }, { word: "مَعَهُ؛", target: false }, { word: "وَحِينَ", target: false },
+          { word: "وَصَلَا،", target: false }, { word: "رَبَطَا", target: false }, { word: "خَيْمَتَهُمَا", target: false },
+          { word: "بِـحَبْلٍ", target: false }, { word: "مَمْدُودٍ", target: "اسم المفعول" }, { word: "بِإِحْكَامٍ،", target: false },
+          { word: "ثُمَّ", target: false }, { word: "مَدَّ", target: "الفعل المجرد" }, { word: "كُلٌّ", target: false },
+          { word: "مِنْهُمَا", target: false }, { word: "بَصَرَهُ", target: false }, { word: "يَتَأَمَّلَانِ", target: false },
+          { word: "حَرَكَةَ", target: false }, { word: "المَدِّ", target: "المصدر" }, { word: "وَالجَزْرِ", target: false },
+          { word: "فِي", target: false }, { word: "مَنْظَرٍ", target: false }, { word: "بَدِيعٍ.", target: false }
+        ],
+        missions: [
+          { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى (الفِعْلِ المُضَعَّفِ المُجَرَّدِ)", targetType: "الفعل المجرد", audio: "mission_1" },
+          { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ)", targetType: "اسم الفاعل", audio: "mission_2" },
+          { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ)", targetType: "اسم المكان", audio: "mission_3" },
+          { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ)", targetType: "اسم المفعول", audio: "mission_4" },
+          { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ)", targetType: "المصدر", audio: "mission_5" }
+        ],
+        labs: [
+          { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"مَـ"}, {ch:"ا"}, {ch:"", correct:"دٌّ"}], pool: ["دٌّ", "دِ", "دُ"] },
+          { title: "قُرْصُ: اسْمُ المَفْعُولِ (فَكُّ الإِدْغَامِ)", slots: [{ch:"مَـ"}, {ch:"مْـ"}, {ch:"دُ"}, {ch:"", correct:"و"}, {ch:"دٌ"}], pool: ["و", "ا", "ي"] },
+          { title: "قُرْصُ: المَصْدَرُ", slots: [{ch:"مَـ"}, {ch:"", correct:"دٌّ"}], pool: ["دٌّ", "تٌّ", "رٌّ"] }
+        ],
+        quizzes: [
+          { q: "عِنْدَ صِيَاغَةِ اسْمِ المَفْعُولِ مِنَ الفِعْلِ المُضَعَّفِ (مَدَّ) فَإِنَّنَا:", ans: "نَفُكُّ الإِدْغَامَ فَنَقُولُ مَمْدُودٌ", opts: ["نَفُكُّ الإِدْغَامَ فَنَقُولُ مَمْدُودٌ", "نُبْقِي الإِدْغَامَ", "نَحْذِفُ حَرْفَ الدَّالِ"] },
+          { q: "اسْمُ الفَاعِلِ مِنَ الفِعْلِ المُضَعَّفِ (مَدَّ) هُوَ:", ans: "مَادٌّ", opts: ["مَادٌّ", "مَمْدُودٌ", "مَمَدٌّ"] },
+          { q: "الفِعْلُ (امْتَدَّ) هُوَ فِعْلٌ خُمَاسِيٌّ مَزِيدٌ بِـ:", ans: "أَلِفِ الوَصْلِ وَالتَّاءِ", opts: ["أَلِفِ الوَصْلِ وَالتَّاءِ", "الهَمْزَةِ فَقَطْ", "التَّضْعِيفِ فَقَطْ"] },
+          { q: "مَصْدَرُ الفِعْلِ (مَدَّ) الدَّالُّ عَلَى حَرَكَةِ مِيَاهِ البَحْرِ هُوَ:", ans: "مَدٌّ", opts: ["مَدٌّ", "مِدَادٌ", "مَمْدُودٌ"] }
+        ],
+        challenges: [
+          { icon: "🚪", badge: "1. تَحَدِّي الفَاعِلِ المُضَعَّفِ", prompt: "الَّذِي يَمُدُّ هُوَ (مَادٌّ)، فَمَا اسْمُ الفَاعِلِ مِنْ فِعْلِ (رَدَّ)؟", ans: "رَادٌّ", opts: ["رَادٌّ", "مَرْدُودٌ", "مَرَدٌّ"] },
+          { icon: "📦", badge: "2. تَحَدِّي فَكِّ الإِدْغَامِ", prompt: "الحَبْلُ مَدَدْنَاهُ فَهُوَ (مَمْدُودٌ)، وَالبَابُ رَدَدْنَاهُ فَهُوَ:", ans: "مَرْدُودٌ", opts: ["رَادٌّ", "مَرْدُودٌ", "مَرَدٌّ"] },
+          { icon: "🚪", badge: "3. تَحَدِّي المَكَانِ", prompt: "مَمَدٌّ مَوْضِعُ المَدِّ، فَمَا اسْمُ المَكَانِ الَّذِي نَرُدُّ إِلَيْهِ الشَّيْءَ؟", ans: "مَرَدٌّ", opts: ["مَرَدٌّ", "رَادٌّ", "مَرْدُودٌ"] },
+          { icon: "🛑", badge: "4. تَحَدِّي المَصْدَرِ", prompt: "مَدَّ مَصْدَرُهَا (مَدٌّ)، فَمَا مَصْدَرُ الفِعْلِ المُضَعَّفِ (صَدَّ)؟", ans: "صَدٌّ", opts: ["صَدٌّ", "صَادٌّ", "مَصْدُودٌ"] },
+          { icon: "⚖️", badge: "5. مِيزَانُ الشَّدَّةِ", prompt: "أَيُّ هَذِهِ الكَلِمَاتِ تُطَابِقُ وَزْنَ (مَادٌّ) فِي إِدْغَامِهَا؟", ans: "شَادٌّ", opts: ["شَادٌّ", "مَشْدُودٌ", "شَدِيدٌ"] },
+          { icon: "🛸", badge: "6. اكْتَشِفِ الكَلِمَةَ الدَّخِيلَةَ", prompt: "جَمِيعُ الكَلِمَاتِ مَفْكُوكَةُ الإِدْغَامِ عَلَى وَزْنِ (مَفْعُولٌ) مَا عَدَا:", ans: "عَادٌّ", opts: ["مَعْدُودٌ", "مَمْدُودٌ", "عَادٌّ"] }
         ]
       }
     };
@@ -1421,7 +1532,6 @@
       Sound.playAsset(folder, mission.audio, mission.label);
     }
 
-    // تم حل التزامن والتداخل الصوتي في سحابة الحكاية
     function handleStoryWordClick(el, item, data) {
       Sound.pop();
       const currentTargetType = data.missions[currentMissionIdx].targetType;
@@ -1433,7 +1543,6 @@
         const rootKey = document.getElementById('rootSelect').value;
         const folder = Sound.rootFolderMap[rootKey] || rootKey;
 
-        // تشغيل صوت التشجيع، وبمجرد انتهائه تنطلق المهمة التالية دون أي تداخل
         Sound.correct(() => {
           if (currentMissionIdx < data.missions.length) {
             const nextMission = data.missions[currentMissionIdx];
