@@ -97,7 +97,7 @@
       gap: 0.5rem;
     }
 
-    /* التبويبات الفضائية الخمسة */
+    /* التبويبات الفضائية */
     .nav-tabs-container {
       display: flex;
       justify-content: center;
@@ -265,7 +265,7 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    /* هندسة الكواكب الفضائية الجديدة لمنع التكدس */
+    /* التوزيع الفضائي الانسيابي للكواكب */
     .planet-satellite-station {
       position: absolute;
       display: flex;
@@ -281,17 +281,17 @@
       z-index: 25;
     }
 
-    /* شارات الرأس التوجيهية الطافية خارج الكوكب */
     .planet-orbit-badge {
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.92);
       border: 2px solid #38bdf8;
       border-radius: 20px;
       padding: 0.25rem 0.9rem;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.45rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+      white-space: nowrap;
     }
 
     .planet-badge-title {
@@ -313,7 +313,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      border: 6px solid rgba(255, 255, 255, 0.95);
+      border: 6px solid #ffffff !important;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
 
@@ -324,34 +324,35 @@
     .station-5 { bottom: 20px; left: 50%; transform: translateX(-50%); }
     .station-5:hover { transform: translateX(-50%) scale(1.12) translateY(-6px); }
 
+    /* استعادة ألوان وتدرجات الكواكب المتوهجة */
     .sphere-1 {
       width: 155px; height: 155px;
-      background: radial-gradient(circle at 30% 30%, #f472b6 0%, #db2777 50%, #831843 100%);
-      box-shadow: 0 0 35px rgba(219, 39, 119, 0.65);
+      background: radial-gradient(circle at 35% 35%, #f472b6 0%, #db2777 55%, #831843 100%) !important;
+      box-shadow: 0 0 40px rgba(219, 39, 119, 0.8) !important;
     }
 
     .sphere-2 {
       width: 160px; height: 160px;
-      background: radial-gradient(circle at 30% 30%, #60a5fa 0%, #2563eb 50%, #1e3a8a 100%);
-      box-shadow: 0 0 35px rgba(37, 99, 235, 0.65);
+      background: radial-gradient(circle at 35% 35%, #60a5fa 0%, #2563eb 55%, #1e3a8a 100%) !important;
+      box-shadow: 0 0 40px rgba(37, 99, 235, 0.8) !important;
     }
 
     .sphere-3 {
       width: 155px; height: 155px;
-      background: radial-gradient(circle at 30% 30%, #f87171 0%, #dc2626 50%, #7f1d1d 100%);
-      box-shadow: 0 0 35px rgba(220, 38, 38, 0.65);
+      background: radial-gradient(circle at 35% 35%, #f87171 0%, #dc2626 55%, #7f1d1d 100%) !important;
+      box-shadow: 0 0 40px rgba(220, 38, 38, 0.8) !important;
     }
 
     .sphere-4 {
       width: 155px; height: 155px;
-      background: radial-gradient(circle at 30% 30%, #4ade80 0%, #16a34a 50%, #14532d 100%);
-      box-shadow: 0 0 35px rgba(22, 163, 74, 0.65);
+      background: radial-gradient(circle at 35% 35%, #4ade80 0%, #16a34a 55%, #14532d 100%) !important;
+      box-shadow: 0 0 40px rgba(22, 163, 74, 0.8) !important;
     }
 
     .sphere-5 {
       width: 150px; height: 150px;
-      background: radial-gradient(circle at 30% 30%, #fb923c 0%, #ea580c 50%, #7c2d12 100%);
-      box-shadow: 0 0 35px rgba(234, 88, 12, 0.65);
+      background: radial-gradient(circle at 35% 35%, #fb923c 0%, #ea580c 55%, #7c2d12 100%) !important;
+      box-shadow: 0 0 40px rgba(234, 88, 12, 0.8) !important;
     }
 
     .planet-word-text {
@@ -366,10 +367,10 @@
       font-size: 0.85rem;
       color: #fef08a;
       font-weight: bold;
-      background: rgba(0,0,0,0.35);
+      background: rgba(0, 0, 0, 0.4);
       padding: 0.15rem 0.6rem;
       border-radius: 12px;
-      margin-top: 0.2rem;
+      margin-top: 0.25rem;
     }
 
     /* 2. سحابة الحكاية */
@@ -803,9 +804,7 @@
       text-align: center;
     }
 
-    /* ========================================================= */
-    /* 5. ميدان التحدي الصرفي والقياس (الوحدة الجديدة) */
-    /* ========================================================= */
+    /* 5. ميدان التحدي الصرفي والقياس */
     .challenge-arena-box {
       background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #0c0a24 100%);
       border: 8px solid #a855f7;
@@ -895,7 +894,7 @@
       border-radius: 20px;
     }
 
-    /* Modal */
+    /* Modal - تصميم نقي بدون تكرار رموز الاستماع */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -916,7 +915,7 @@
     .modal-box {
       background: white;
       width: 90%;
-      max-width: 650px;
+      max-width: 620px;
       border-radius: 45px;
       padding: 2.2rem;
       border: 6px solid #38bdf8;
@@ -944,11 +943,11 @@
     .modal-hero {
       text-align: center;
       border-bottom: 3px dashed #e2e8f0;
-      padding-bottom: 1.2rem;
+      padding-bottom: 1rem;
       margin-bottom: 1.2rem;
     }
 
-    .modal-word { font-size: 3.4rem; font-weight: 900; letter-spacing: 1px; }
+    .modal-word { font-size: 3.4rem; font-weight: 900; letter-spacing: 1px; line-height: 1.1; }
     .modal-weight { color: var(--primary); font-weight: 900; font-size: 1.25rem; margin-top: 0.3rem; }
 
     .modal-audio-btn {
@@ -956,53 +955,60 @@
       border: 3px solid #eab308;
       color: #854d0e;
       font-weight: 900;
-      padding: 0.6rem 1.6rem;
+      padding: 0.45rem 1.4rem;
       border-radius: 30px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 0.7rem;
-      font-size: 1.05rem;
-      box-shadow: 0 4px 0 #ca8a04;
+      margin-top: 0.6rem;
+      font-size: 1rem;
+      box-shadow: 0 3px 0 #ca8a04;
     }
 
     .detail-card {
       background: #f8fafc;
       border-radius: 30px;
-      padding: 1.3rem;
+      padding: 1.4rem;
       border: 2px solid #e2e8f0;
       margin-bottom: 1.2rem;
     }
 
-    .detail-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.9rem; font-size: 1.15rem; }
+    .detail-row {
+      margin-bottom: 0.9rem;
+      font-size: 1.15rem;
+      line-height: 1.6;
+    }
     .detail-row:last-child { margin-bottom: 0; }
-    .detail-row-text { display: flex; gap: 0.5rem; align-items: baseline; flex: 1; }
-    .detail-label { font-weight: 900; color: #334155; white-space: nowrap; }
+    .detail-label { font-weight: 900; color: #334155; }
 
-    .mini-speaker-btn {
-      background: #fef08a;
-      border: 2px solid #eab308;
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      display: inline-flex;
+    /* زر الاستماع الكامل للشرح والمتلازمة والمثال معاً (مطابق لنموذج صانع) */
+    .master-audio-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+      color: white;
+      border: none;
+      padding: 0.9rem 1.6rem;
+      border-radius: 30px;
+      font-size: 1.15rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      font-size: 1.1rem;
-      box-shadow: 0 2px 0 #ca8a04;
-      flex-shrink: 0;
-      transition: all 0.15s ease;
-      margin-right: 0.6rem;
+      gap: 0.6rem;
+      box-shadow: 0 6px 20px rgba(67, 56, 202, 0.4);
+      transition: all 0.2s;
+      margin-top: 1rem;
     }
 
-    .mini-speaker-btn:hover {
-      transform: scale(1.12);
-      background: #fde047;
+    .master-audio-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(67, 56, 202, 0.55);
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
     }
 
-    .mini-speaker-btn:active {
+    .master-audio-btn:active {
       transform: translateY(2px);
       box-shadow: none;
     }
@@ -1015,7 +1021,7 @@
       color: #854d0e;
       font-weight: 900;
       font-size: 1.05rem;
-      margin-top: 0.8rem;
+      margin-top: 1rem;
       line-height: 1.6;
     }
 
@@ -1088,7 +1094,7 @@
   </nav>
 
   <main>
-    <!-- 1. شمس الجذر الفضائية بتوزيع انسيابي متزن غير مكتظ -->
+    <!-- 1. شمس الجذر الفضائية بتوزيع انسيابي متزن وكواكب متوهجة -->
     <div id="radialMap" class="tab-view active">
       <div class="space-system-arena" id="starsSky">
         <div class="orbit-ellipse-wide"></div>
@@ -1387,7 +1393,7 @@
       </div>
     </div>
 
-    <!-- 5. ميدان التحدي الصرفي والقياس (الوحدة الجديدة) -->
+    <!-- 5. ميدان التحدي الصرفي والقياس -->
     <div id="challengeTab" class="tab-view">
       <div class="challenge-arena-box">
         <h3 class="challenge-hero-title">🚀 مَيْدَانُ التَّحَدِّي الصَّرْفِيِّ (اخْتَبِرْ نَفْسَكَ فِي النَّظَائِرِ)</h3>
@@ -1399,7 +1405,7 @@
     </div>
   </main>
 
-  <!-- النافذة المنبثقة للتحليل وقرص الشمس -->
+  <!-- النافذة المنبثقة للتحليل وقرص الشمس (تصميم نقي بنطق شامل) -->
   <div class="modal-overlay" id="morphModal" onclick="closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -1412,28 +1418,25 @@
 
       <div class="detail-card" id="mDetailCard">
         <div class="detail-row" id="rowDesc">
-          <div class="detail-row-text">
-            <span class="detail-label">💡 الشَّرْحُ وَالدَّلَالَةُ:</span>
-            <span id="mDesc"></span>
-          </div>
-          <button class="mini-speaker-btn" id="btnPlayDesc" title="استمع للشرح">🔊</button>
+          <span class="detail-label">💡 الشَّرْحُ وَالدَّلَالَةُ: </span>
+          <span id="mDesc"></span>
         </div>
 
         <div class="detail-row" id="rowColloc">
-          <div class="detail-row-text">
-            <span class="detail-label">🔗 المُتَلَازِمَةُ اللَّفْظِيَّةُ:</span>
-            <span id="mColloc" style="color: var(--primary); font-weight: 900;"></span>
-          </div>
-          <button class="mini-speaker-btn" id="btnPlayColloc" title="استمع للمتلازمة">🔊</button>
+          <span class="detail-label">🔗 المُتَلَازِمَةُ اللَّفْظِيَّةُ: </span>
+          <span id="mColloc" style="color: var(--primary); font-weight: 900;"></span>
         </div>
 
         <div class="detail-row" id="rowExample">
-          <div class="detail-row-text">
-            <span class="detail-label">📖 المِثَالُ فِي سِيَاقٍ:</span>
-            <span id="mExample" style="color: #1e293b; font-style: italic;"></span>
-          </div>
-          <button class="mini-speaker-btn" id="btnPlayExample" title="استمع للمثال">🔊</button>
+          <span class="detail-label">📖 المِثَالُ فِي سِيَاقٍ: </span>
+          <span id="mExample" style="color: #1e293b; font-style: italic;"></span>
         </div>
+
+        <!-- زر الاستماع الشامل الموحد (مطابق لنموذج صانع) -->
+        <button class="master-audio-btn" id="btnMasterAudio">
+          <span>🎧</span>
+          <span>اضْغَطْ لِلاسْتِمَاعِ لِلشَّرْحِ وَالنُّطْقِ الكَامِلِ</span>
+        </button>
 
         <div class="rule-gold-banner" id="mRuleBanner" style="display: none;"></div>
       </div>
@@ -1552,7 +1555,7 @@
     };
 
     /* ========================================================================= */
-    /* قاعدة البيانات الشاملة مع بنك التحديات القياسية (الميدان الخامس) */
+    /* قاعدة البيانات الشاملة مع تعاريف دلالية واضحة وبنك التحديات القياسية */
     /* ========================================================================= */
     const db = {
       // 1. صحيح سالم (ثلاثي)
@@ -1601,7 +1604,6 @@
           { q: "الفِعْلُ (اسْتَكْتَبَ) هُوَ فِعْلٌ:", ans: "مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ", opts: ["مُجَرَّدٌ", "مَزِيدٌ بِحَرْفٍ", "مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ"] },
           { q: "مَصْدَرُ الفِعْلِ (كَتَبَ) الدَّالُّ عَلَى الحِرْفَةِ وَالشِّبْهِ هُوَ:", ans: "كِتَابَةٌ", opts: ["كِتَابَةٌ", "كِتَابٌ", "مَكْتَبٌ"] }
         ],
-        // تحديات القياس لنظائر الفعل الصحيح السالم
         challenges: [
           { badge: "قِيَاسُ اسْمِ الفَاعِلِ", prompt: "قِسْ عَلَى (كَتَبَ -> كَاتِبٌ): مَا اسْمُ الفَاعِلِ مِنَ الفِعْلِ السَّالِمِ (رَسَمَ)؟", ans: "رَاسِمٌ", opts: ["رَاسِمٌ", "مَرْسُومٌ", "مِرْسَمٌ"] },
           { badge: "قِيَاسُ اسْمِ المَفْعُولِ", prompt: "قِسْ عَلَى (كَتَبَ -> مَكْتُوبٌ): مَا اسْمُ المَفْعُولِ مِنَ الفِعْلِ السَّالِمِ (طَبَخَ)؟", ans: "مَطْبُوخٌ", opts: ["طَابِخٌ", "مَطْبُوخٌ", "مَطْبَخٌ"] },
@@ -1663,7 +1665,7 @@
         ]
       },
 
-      // 3. باقي الجذور مع بنك التحديات المناسب
+      // 3. صحيح مضعف (ثلاثي)
       "مدد": {
         letters: ['م', 'د', 'د'],
         concept: "البَسْطُ وَالعَوْنُ (صَحِيحٌ مُضَعَّفٌ)",
@@ -2130,8 +2132,8 @@
         branches: [
           { isVerb: true, role: "الحدث / الفعل", word: "اسْتَخْرَجَ", colored: "<span class='c-a'>اسْتَ</span><span class='c-r'>خْ</span><span class='c-r'>رَ</span><span class='c-r'>جَ</span>", plain: "اسْتَخْرَجَ", weight: "اسْتَفْعَلَ (سداسي مزيد)", desc: "فعل ثلاثي مزيد بثلاثة أحرف (الهمزة والسين والتاء) يفيد السعي والطلب وبذل الجهد لاستخراج الشيء.", colloc: "اسْتَخْرَجَ النِّفْطَ", ex: "«اسْتَخْرَجَ العُمَّالُ مَعْدِنَ الفُوسْفَاطِ»", rule: "الفِعْلُ الثُّلَاثِيُّ المَزِيدُ بِثَلَاثَةِ أَحْرُفٍ عَلَى وَزْنِ (اسْتَفْعَلَ) تَكُونُ فِيهِ هَمْزَةُ الوَصْلِ وَالسِّينُ وَالتَّاءُ زَائِدَةً عَلَى الأُصُولِ الثَّلَاثَةِ." },
           { isVerb: false, role: "اسْمُ الفَاعِلِ", word: "مُسْتَخْرِجٌ", colored: "<span class='c-a'>مُسْتَ</span><span class='c-r'>خْ</span><span class='c-r'>رِ</span><span class='c-r'>جٌ</span>", plain: "مُسْتَخْرِجٌ", weight: "مُسْتَفْعِلٌ (اسم فاعل)", desc: "اسم مشتق يدل على العامل أو الفريق الهندسي القائم باستخراج المعادن.", colloc: "مُسْتَخْرِجُ المَعَادِنِ", ex: "«انْطَلَقَ الفَرِيقُ المُسْتَخْرِجُ لِلخَيْرَاتِ»", rule: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ الفِعْلِ المَزِيدِ بِثَلَاثَةِ أَحْرُفٍ عَلَى وَزْنِ (مُسْتَفْعِلٌ) بِمِيمٍ مَضْمُومَةٍ فِي أَوَّلِهِ وَكَسْرِ مَا قَبْلَ الآخِرِ: مُسْتَخْرِجٌ." },
-          { isVerb: false, role: "اسْمُ المَفْعُولِ", word: "مُسْتَخْرَجٌ", colored: "<span class='c-a'>مُسْتَ</span><span class='c-r'>خْ</span><span class='c-r'>رَ</span><span class='c-r'>جٌ</span>", plain: "مُسْتَخْرَجٌ", weight: "مُسْتَفْعَلٌ (اسم مفعول)", desc: "اسم مشتق يدل على المادة الخام التي تم انتشالها وإخراجها من باطن الأرض.", colloc: "فُوسْفَاطٌ مُسْتَخْرَجٌ", ex: "«صَارَ المُنْتَجُ مُسْتَخْرَجاً بِجَوْدَةٍ»", rule: "يُصَاغُ اسْمُ المَفْعُولِ مِنَ الفِعْلِ المَزِيدِ بِثَلَاثَةِ أَحْرُفٍ عَلَى وَزْنِ (مُسْتَفْعَلٌ) بِمِيمٍ مَضْمُومَةٍ فِي أَوَّلِهِ وَفَتْحِ مَا قَبْلَ الآخِرِ: مُسْتَخْرَجٌ." },
-          { isVerb: false, role: "اسْمُ المَكَانِ", word: "مُسْتَخْرَجٌ", colored: "<span class='c-a'>مُسْتَ</span><span class='c-r'>خْ</span><span class='c-r'>رَ</span><span class='c-r'>جٌ</span>", plain: "مُسْتَخْرَجٌ", weight: "مُسْتَفْعَلٌ (اسم مكان)", desc: "موضع وميدان استخراج المواد الخام والمنجم.", colloc: "مُسْتَخْرَجُ الطَّاقَةِ", ex: "«المَنْجَمُ هُوَ مُسْتَخْرَجُ الفُوسْفَاطِ»", rule: "يُصَاغُ اسْمُ المَكَانِ مِنَ الفِعْلِ المَزِيدِ بِثَلَاثَةِ أَحْرُفٍ عَلَى صِيغَةِ اسْمِ المَفْعُولِ عَلَى وَزْنِ (مُسْتَفْعَلٌ): مُسْتَخْرَجٌ." },
+          { isVerb: false, role: "اسْمُ المَفْعُولِ", word: "مُسْتَخْرَجٌ", colored: "<span class='c-a'>مُسْتَ</span><span class='c-r'>خْ</span><span class='c-r'>رَ</span><span class='c-r'>جٌ</span>", plain: "مُسْتَخْرَجٌ", weight: "مُفَعَّلٌ (اسم مفعول)", desc: "اسم مشتق يدل على المادة الخام التي تم انتشالها وإخراجها من باطن الأرض.", colloc: "فُوسْفَاطٌ مُسْتَخْرَجٌ", ex: "«صَارَ المُنْتَجُ مُسْتَخْرَجاً بِجَوْدَةٍ»", rule: "يُصَاغُ اسْمُ المَفْعُولِ مِنَ الفِعْلِ المَزِيدِ بِثَلَاثَةِ أَحْرُفٍ عَلَى وَزْنِ (مُسْتَفْعَلٌ) بِمِيمٍ مَضْمُومَةٍ فِي أَوَّلِهِ وَفَتْحِ مَا قَبْلَ الآخِرِ: مُسْتَخْرَجٌ." },
+          { isVerb: false, role: "اسْمُ المَكَانِ", word: "مُسْتَخْرَجٌ", colored: "<span class='c-a'>مُسْتَ</span><span class='c-r'>خْ</span><span class='c-r'>رَ</span><span class='c-r'>جٌ</span>", plain: "مُسْتَخْرَجٌ", weight: "مُفْتَعَلٌ (اسم مكان)", desc: "موضع وميدان استخراج المواد الخام والمنجم.", colloc: "مُسْتَخْرَجُ الطَّاقَةِ", ex: "«المَنْجَمُ هُوَ مُسْتَخْرَجُ الفُوسْفَاطِ»", rule: "يُصَاغُ اسْمُ المَكَانِ مِنَ الفِعْلِ المَزِيدِ بِثَلَاثَةِ أَحْرُفٍ عَلَى صِيغَةِ اسْمِ المَفْعُولِ عَلَى وَزْنِ (مُسْتَفْعَلٌ): مُسْتَخْرَجٌ." },
           { isVerb: false, role: "المَصْدَرُ", word: "اسْتِخْرَاجٌ", colored: "<span class='c-a'>اسْتِ</span><span class='c-r'>خْ</span><span class='c-r'>رَ</span><span class='c-a'>ا</span><span class='c-r'>جٌ</span>", plain: "اسْتِخْرَاجٌ", weight: "اسْتِفْعَالٌ (مصدر)", desc: "اسم يدل على عمليات التنقيب والانتشال مجرداً من الزمان.", colloc: "اسْتِخْرَاجُ الخَيْرَاتِ", ex: "«يُسَاهِمُ اسْتِخْرَاجُهُ فِي الصِّنَاعَةِ»", rule: "مَصْدَرُ الفِعْلِ المَزِيدِ بِثَلَاثَةِ أَحْرُفٍ (اسْتَفْعَلَ) يَكُونُ قِيَاساً عَلَى وَزْنِ (اسْتِفْعَالٌ) بِكَسْرِ ثَالِثِهِ وَزِيَادَةِ أَلِفٍ قَبْلَ آخِرِهِ: اسْتِخْرَاجٌ." }
         ],
         affixes: [
@@ -2227,29 +2229,29 @@
       document.getElementById('mHeroWeight').style.display = 'block';
 
       document.getElementById('mDetailCard').style.display = 'block';
-      document.getElementById('rowColloc').style.display = 'flex';
-      document.getElementById('rowExample').style.display = 'flex';
+      document.getElementById('rowColloc').style.display = 'block';
+      document.getElementById('rowExample').style.display = 'block';
 
       document.getElementById('mDesc').textContent = branch.desc;
       document.getElementById('mColloc').textContent = branch.colloc;
       document.getElementById('mExample').textContent = branch.ex;
 
-      const btnDesc = document.getElementById('btnPlayDesc');
-      const btnColloc = document.getElementById('btnPlayColloc');
-      const btnExample = document.getElementById('btnPlayExample');
-
-      // أصوات ElevenLabs المحددة أو البديل التلقائي
       const folder = Sound.rootFolderMap[rootKey] || rootKey;
       const filePrefixes = ['verb', 'actor', 'product', 'place', 'source'];
       const prefix = filePrefixes[branchIdx];
 
-      btnDesc.style.display = 'inline-flex';
-      btnColloc.style.display = 'inline-flex';
-      btnExample.style.display = 'inline-flex';
+      // زر نطق الكلمة الفردي بالأعلى
+      document.getElementById('mAudioBtn').onclick = () => {
+        Sound.playAsset(folder, prefix, branch.plain);
+      };
 
-      btnDesc.onclick = () => Sound.playAsset(folder, `${prefix}_desc`, branch.desc);
-      btnColloc.onclick = () => Sound.playAsset(folder, `${prefix}_colloc`, branch.colloc);
-      btnExample.onclick = () => Sound.playAsset(folder, `${prefix}_ex`, branch.ex.replace(/[«»]/g, ''));
+      // زر الاستماع الشامل الموحد (نطق الشرح والمتلازمة والمثال معاً بالتسلسل)
+      const masterBtn = document.getElementById('btnMasterAudio');
+      masterBtn.style.display = 'flex';
+      masterBtn.onclick = () => {
+        const fullLessonText = `${branch.plain}. ${branch.desc}. المُتَلَازِمَةُ اللَّفْظِيَّةُ: ${branch.colloc}. المِثَالُ فِي سِيَاقٍ: ${branch.ex.replace(/[«»]/g, '')}`;
+        Sound.playAsset(folder, `${prefix}_desc`, fullLessonText);
+      };
 
       const ruleBanner = document.getElementById('mRuleBanner');
       if (branch.rule) {
@@ -2258,10 +2260,6 @@
       } else {
         ruleBanner.style.display = 'none';
       }
-
-      document.getElementById('mAudioBtn').onclick = () => {
-        Sound.playAsset(folder, prefix, branch.plain);
-      };
 
       const affixCard = document.getElementById('mAffixCard');
       const affixList = document.getElementById('mAffixList');
@@ -2307,14 +2305,11 @@
       document.getElementById('mDetailCard').style.display = 'block';
       document.getElementById('rowColloc').style.display = 'none';
       document.getElementById('rowExample').style.display = 'none';
+      document.getElementById('btnMasterAudio').style.display = 'none';
       document.getElementById('mRuleBanner').style.display = 'none';
       document.getElementById('mAffixCard').style.display = 'none';
 
       document.getElementById('mDesc').innerHTML = `<strong>${rootObj.concept}</strong><br><span style="color:#64748b; font-size:1rem;">الأَصْلُ المُعْجَمِيُّ الدَّالُّ عَلَى مَعْنَى المَادَّةِ اللُّغَوِيَّةِ وَمِنْهُ تَتَفَرَّعُ كَافَّةُ الصِّيَغِ الصَّرْفِيَّةِ.</span>`;
-
-      const btnDesc = document.getElementById('btnPlayDesc');
-      btnDesc.style.display = 'inline-flex';
-      btnDesc.onclick = () => Sound.speak(rootObj.concept);
 
       document.getElementById('mAudioBtn').onclick = () => {
         Sound.playAsset(folder, 'core', `جذر ${rootObj.letters.join(' ')}`);
@@ -2606,7 +2601,6 @@
       }
     }
 
-    /* دالة توليد ميدان التحدي الصرفي والقياس (الوحدة الخامسة) */
     function renderChallengeArena(challenges) {
       const container = document.getElementById('challengeContainer');
       container.innerHTML = '';
