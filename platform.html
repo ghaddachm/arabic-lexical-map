@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ الأَلْعَابِ اللُّغَوِيَّةِ</title>
   <style>
     :root {
@@ -22,7 +20,7 @@
     }
 
     body {
-      background: #060919 radial-gradient(circle at center, #1b1446 0%, #030511 100%);
+      background: #060919 radial-gradient(circle at center, #1e1548 0%, #030511 100%);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -168,7 +166,7 @@
       100% { opacity: 1; transform: scale(1.3); filter: drop-shadow(0 0 6px #fde047); }
     }
 
-    /* 1. شمس الجذر الفضائية بتصميم كروي كرتوني */
+    /* 1. شمس الجذر وكواكب الفضاء الكرتونية المتجهة بالكامل */
     .space-system-arena {
       position: relative;
       width: 100%;
@@ -185,7 +183,7 @@
 
     .orbit-ellipse-wide {
       position: absolute;
-      width: 1020px;
+      width: 1040px;
       height: 560px;
       border: 3.5px dashed rgba(56, 189, 248, 0.45);
       border-radius: 50%;
@@ -212,8 +210,8 @@
 
     .sun-rays-halo {
       position: absolute;
-      width: 370px;
-      height: 370px;
+      width: 380px;
+      height: 380px;
       pointer-events: none;
       animation: spinHalo 24s linear infinite;
     }
@@ -247,7 +245,7 @@
       box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     }
 
-    /* أجرام كروية ثلاثية الأبعاد مرسومة بـ SVG */
+    /* أجرام كروية ثلاثية الأبعاد بـ SVG مع حلقات وتضاريس */
     .planet-station {
       position: absolute;
       display: flex;
@@ -282,7 +280,7 @@
     .planet-globe-svg {
       width: 175px;
       height: 175px;
-      filter: drop-shadow(0 12px 25px rgba(0,0,0,0.7));
+      filter: drop-shadow(0 14px 28px rgba(0,0,0,0.7));
     }
 
     .station-1 { top: 30px; right: 11%; }
@@ -318,12 +316,8 @@
 
     .cloud-svg-frame-art {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1; pointer-events: none;
       filter: drop-shadow(0 25px 50px rgba(56, 189, 248, 0.45));
     }
 
@@ -537,7 +531,7 @@
       font-weight: 900; font-size: 0.95rem; display: none;
     }
 
-    /* 5. مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ بتصميم كرتوني غير تقليدي */
+    /* 5. مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ (كبسولات أطباق طائرة مرسومة بـ SVG) */
     .spacecraft-challenge-deck {
       background: radial-gradient(circle at 50% 30%, #2e1065 0%, #0c0824 100%);
       border: 8px solid #c084fc;
@@ -569,57 +563,73 @@
       margin-top: 2.8rem;
     }
 
-    /* كبسولات دائرية وبيضوية كرتونية مبهجة مستوحاة من ألعاب الصغار */
-    .spacecraft-pod-unit {
-      background: radial-gradient(circle at 40% 30%, #ffffff 0%, #f1f5f9 100%);
-      color: #0f172a;
-      border: 6px solid #38bdf8;
-      border-radius: 60px;
-      padding: 2.4rem 1.8rem;
+    /* كبسولات الأطباق الفضائية المتجهة ثلاثية الأبعاد */
+    .ufo-saucer-pod {
+      position: relative;
       width: 380px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(56, 189, 248, 0.35);
+      min-height: 380px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: relative;
+      justify-content: center;
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      filter: drop-shadow(0 18px 30px rgba(0,0,0,0.65));
     }
 
-    .spacecraft-pod-unit:hover {
+    .ufo-saucer-pod:hover {
       transform: translateY(-10px) scale(1.03);
-      border-color: #facc15;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 45px rgba(250, 204, 21, 0.5);
     }
 
-    .pod-bubble-header {
-      background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
-      color: white;
-      font-size: 1.05rem;
-      font-weight: 900;
-      padding: 0.4rem 1.6rem;
-      border-radius: 30px;
-      box-shadow: 0 4px 0 #9d174d;
-      margin-bottom: 1.2rem;
-      display: inline-flex;
+    .ufo-svg-hull {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1; pointer-events: none;
+    }
+
+    .ufo-pod-content {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 0.5rem;
+      width: 100%;
+      padding: 45px 25px 25px;
+    }
+
+    .pod-icon-bubble {
+      font-size: 2.6rem;
+      margin-bottom: 0.2rem;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    }
+
+    .pod-badge-tag {
+      background: #ffffff;
+      color: #701a75;
+      font-size: 1rem;
+      font-weight: 900;
+      padding: 0.35rem 1.4rem;
+      border-radius: 25px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      margin-bottom: 1.1rem;
     }
 
     .pod-question-speech {
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 900;
       line-height: 1.65;
-      color: #1e1b4b;
-      min-height: 85px;
+      color: #ffffff;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+      min-height: 75px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 1.6rem;
+      margin-bottom: 1.4rem;
+      text-align: center;
     }
 
     .pod-answers-dock {
       display: flex;
-      gap: 0.8rem;
+      gap: 0.7rem;
       flex-wrap: wrap;
       justify-content: center;
       width: 100%;
@@ -629,9 +639,9 @@
       background: #ffffff;
       border: 3.5px solid #facc15;
       color: #713f12;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 900;
-      padding: 0.6rem 1.6rem;
+      padding: 0.5rem 1.4rem;
       border-radius: 30px;
       cursor: pointer;
       box-shadow: 0 5px 0 #ca8a04;
@@ -645,16 +655,17 @@
     }
 
     .pod-feedback-toast {
-      margin-top: 1.2rem;
+      margin-top: 1rem;
       font-weight: 900;
-      font-size: 1.05rem;
+      font-size: 1rem;
       display: none;
-      padding: 0.6rem 1.4rem;
+      padding: 0.5rem 1.2rem;
       border-radius: 25px;
       width: 100%;
+      text-align: center;
     }
 
-    /* Modal - تصميم نقي موحد */
+    /* Modal - تصميم نقي موحد مطابق لنموذج صانع */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -713,6 +724,11 @@
     .master-audio-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(67, 56, 202, 0.55);
+    }
+
+    .master-audio-btn:active {
+      transform: translateY(2px);
+      box-shadow: none;
     }
 
     .rule-gold-banner {
@@ -793,34 +809,6 @@
       <div class="space-system-arena" id="starsSky">
         <div class="orbit-ellipse-wide"></div>
 
-        <div class="astro-kid astro-kid-1">
-          <svg viewBox="0 0 120 120" width="105" height="105">
-            <circle cx="60" cy="45" r="35" fill="rgba(255,255,255,0.25)" stroke="#38bdf8" stroke-width="4"/>
-            <circle cx="60" cy="45" r="24" fill="#fed7aa"/>
-            <path d="M42 36 Q60 15 78 36 Z" fill="#f97316"/>
-            <circle cx="52" cy="44" r="3" fill="#1e293b"/>
-            <circle cx="68" cy="44" r="3" fill="#1e293b"/>
-            <circle cx="48" cy="49" r="3" fill="#f43f5e" opacity="0.6"/>
-            <circle cx="72" cy="49" r="3" fill="#f43f5e" opacity="0.6"/>
-            <path d="M56 50 Q60 55 64 50" stroke="#1e293b" stroke-width="2" fill="none"/>
-            <rect x="42" y="75" width="36" height="30" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="3"/>
-            <rect x="52" y="80" width="16" height="12" rx="3" fill="#0284c7"/>
-          </svg>
-        </div>
-
-        <div class="astro-kid astro-kid-2">
-          <svg viewBox="0 0 120 120" width="100" height="100">
-            <circle cx="60" cy="45" r="34" fill="rgba(255,255,255,0.25)" stroke="#ec4899" stroke-width="4"/>
-            <circle cx="60" cy="45" r="23" fill="#fed7aa"/>
-            <path d="M44 38 Q60 18 76 38 Z" fill="#78350f"/>
-            <circle cx="53" cy="44" r="3" fill="#1e293b"/>
-            <circle cx="67" cy="44" r="3" fill="#1e293b"/>
-            <circle cx="48" cy="49" r="3" fill="#f43f5e" opacity="0.6"/>
-            <circle cx="72" cy="49" r="3" fill="#f43f5e" opacity="0.6"/>
-            <rect x="44" y="74" width="32" height="28" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="3"/>
-          </svg>
-        </div>
-
         <svg class="sun-rays-halo" viewBox="0 0 100 100">
           <polygon points="50,0 55,14 45,14" fill="#fde047"/>
           <polygon points="50,100 55,86 45,86" fill="#fde047"/>
@@ -855,9 +843,9 @@
               </radialGradient>
             </defs>
             <circle cx="80" cy="80" r="70" fill="url(#gradP1)" stroke="#ffffff" stroke-width="6"/>
-            <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4" transform="rotate(-25 80 80)"/>
+            <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(-25 80 80)"/>
             <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b1_word">كَتَبَ</text>
-            <rect x="42" y="88" width="76" height="24" rx="12" fill="rgba(0,0,0,0.5)"/>
+            <rect x="42" y="88" width="76" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
             <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b1_pattern">(فَعَلَ)</text>
           </svg>
         </div>
@@ -878,9 +866,9 @@
               </radialGradient>
             </defs>
             <circle cx="80" cy="80" r="70" fill="url(#gradP2)" stroke="#ffffff" stroke-width="6"/>
-            <ellipse cx="80" cy="80" rx="65" ry="24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4" transform="rotate(25 80 80)"/>
+            <ellipse cx="80" cy="80" rx="65" ry="24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(25 80 80)"/>
             <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b2_word">كَاتِبٌ</text>
-            <rect x="40" y="88" width="80" height="24" rx="12" fill="rgba(0,0,0,0.5)"/>
+            <rect x="40" y="88" width="80" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
             <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b2_pattern">(فَاعِلٌ)</text>
           </svg>
         </div>
@@ -901,9 +889,9 @@
               </radialGradient>
             </defs>
             <circle cx="80" cy="80" r="70" fill="url(#gradP3)" stroke="#ffffff" stroke-width="6"/>
-            <ellipse cx="80" cy="80" rx="65" ry="20" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4" transform="rotate(-15 80 80)"/>
+            <ellipse cx="80" cy="80" rx="65" ry="20" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(-15 80 80)"/>
             <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="27" font-weight="900" id="b3_word">مَكْتُوبٌ</text>
-            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.5)"/>
+            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
             <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b3_pattern">(مَفْعُولٌ)</text>
           </svg>
         </div>
@@ -924,9 +912,9 @@
               </radialGradient>
             </defs>
             <circle cx="80" cy="80" r="70" fill="url(#gradP4)" stroke="#ffffff" stroke-width="6"/>
-            <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4" transform="rotate(35 80 80)"/>
+            <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(35 80 80)"/>
             <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b4_word">مَكْتَبٌ</text>
-            <rect x="40" y="88" width="80" height="24" rx="12" fill="rgba(0,0,0,0.5)"/>
+            <rect x="40" y="88" width="80" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
             <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b4_pattern">(مَفْعَلٌ)</text>
           </svg>
         </div>
@@ -947,9 +935,9 @@
               </radialGradient>
             </defs>
             <circle cx="80" cy="80" r="70" fill="url(#gradP5)" stroke="#ffffff" stroke-width="6"/>
-            <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="4" transform="rotate(-30 80 80)"/>
+            <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(-30 80 80)"/>
             <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b5_word">كِتَابَةٌ</text>
-            <rect x="40" y="88" width="80" height="24" rx="12" fill="rgba(0,0,0,0.5)"/>
+            <rect x="40" y="88" width="80" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
             <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b5_pattern">(فِعَالَةٌ)</text>
           </svg>
         </div>
@@ -1005,7 +993,7 @@
       </div>
     </div>
 
-    <!-- 5. مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ -->
+    <!-- 5. مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ (أطباق طائرة كرتونية بـ SVG) -->
     <div id="challengeTab" class="tab-view">
       <div class="spacecraft-challenge-deck">
         <h3 class="spacecraft-header-title">🚀 مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ</h3>
@@ -1015,7 +1003,7 @@
     </div>
   </main>
 
-  <!-- النافذة المنبثقة للتحليل وقرص الشمس (زر استماع شامل موحد متسلسل مع نطق التوجيهات) -->
+  <!-- النافذة المنبثقة للتحليل وقرص الشمس (زر استماع شامل موحد متسلسل) -->
   <div class="modal-overlay" id="morphModal" onclick="closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -1093,7 +1081,7 @@
         };
 
         this.audioPlayer.play().catch(() => {
-          // محاولة تشغيل الملف من المجلد الرئيسي إذا لم يوجد في المجلد الفرعي
+          // محاولة تشغيل الملف من مجلد audio المباشر إذا رُفع هناك
           const altPath = `audio/${fileName}.mp3`;
           const altPlayer = new Audio(altPath);
           altPlayer.onended = () => { if (onEndCallback) onEndCallback(); };
@@ -1101,14 +1089,6 @@
             if (fallbackText) this.speak(fallbackText, onEndCallback);
             else if (onEndCallback) onEndCallback();
           });
-        });
-      },
-
-      // تشغيل متسلسل للملفات لتقرأ كل شيء مع التوجيهات دفعة واحدة
-      playSequence(folder, playlist, fallbackTexts, index = 0) {
-        if (index >= playlist.length) return;
-        this.playAsset(folder, playlist[index], fallbackTexts[index], () => {
-          this.playSequence(folder, playlist, fallbackTexts, index + 1);
         });
       },
 
@@ -1233,6 +1213,7 @@
           { q: "الفِعْلُ (اسْتَكْتَبَ) هُوَ فِعْلٌ:", ans: "مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ", opts: ["مُجَرَّدٌ", "مَزِيدٌ بِحَرْفٍ", "مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ"] },
           { q: "مَصْدَرُ الفِعْلِ (كَتَبَ) الدَّالُّ عَلَى الحِرْفَةِ وَالشِّبْهِ هُوَ:", ans: "كِتَابَةٌ", opts: ["كِتَابَةٌ", "كِتَابٌ", "مَكْتَبٌ"] }
         ],
+        // تحديات أطباق مركبة الصرف الفضائية الستة
         challenges: [
           { icon: "🎨", badge: "1. تَحَدِّي الفَاعِلِ", prompt: "صَاحِبُ المِهْنَةِ الَّذِي يَكْتُبُ يُدْعَى (كَاتِباً)، فَمَاذَا نُطْلِقُ عَلَى مَنْ (يَرْسُمُ)؟", ans: "رَاسِمٌ", opts: ["رَاسِمٌ", "مَرْسُومٌ", "مِرْسَمٌ"] },
           { icon: "🍲", badge: "2. تَحَدِّي المَفْعُولِ", prompt: "النَّصُّ كَتَبْنَاهُ فَهُوَ (مَكْتُوبٌ)، فَكَيْفَ نَصِفُ الطَّعَامَ الَّذِي (طَبَخْنَاهُ)؟", ans: "مَطْبُوخٌ", opts: ["طَابِخٌ", "مَطْبُوخٌ", "مَطْبَخٌ"] },
@@ -1310,18 +1291,12 @@
       const filePrefixes = ['verb', 'actor', 'product', 'place', 'source'];
       const prefix = filePrefixes[branchIdx];
 
-      // تشغيل السلسلة الكاملة دفعة واحدة مع نطق أسماء التوجيهات
+      // تشغيل ملف التسجيل الموحد الكامل الذي يشمل (الشرح + المتلازمة + المثال) متصلين دفعة واحدة
       const masterBtn = document.getElementById('btnMasterAudio');
       masterBtn.style.display = 'flex';
       masterBtn.onclick = () => {
-        const playlist = [prefix, `${prefix}_desc`, `${prefix}_colloc`, `${prefix}_ex`];
-        const fallbacks = [
-          branch.plain,
-          `الشَّرْحُ وَالدَّلَالَةُ: ${branch.desc}`,
-          `المُتَلَازِمَةُ اللَّفْظِيَّةُ: ${branch.colloc}`,
-          `المِثَالُ فِي سِيَاقٍ: ${branch.ex.replace(/[«»]/g, '')}`
-        ];
-        Sound.playSequence(folder, playlist, fallbacks);
+        const fullLessonText = `الشَّرْحُ وَالدَّلَالَةُ: ${branch.desc}. المُتَلَازِمَةُ اللَّفْظِيَّةُ: ${branch.colloc}. المِثَالُ فِي سِيَاقٍ: ${branch.ex.replace(/[«»]/g, '')}`;
+        Sound.playAsset(folder, `${prefix}_full`, fullLessonText);
       };
 
       const ruleBanner = document.getElementById('mRuleBanner');
@@ -1332,12 +1307,12 @@
         ruleBanner.style.display = 'none';
       }
 
-      // إخفاء عائلة الأفعال المزيدة وأزرارها
+      // إخفاء عائلة الأفعال المزيدة وأزرارها نهائياً
       const affixCard = document.getElementById('mAffixCard');
       if (affixCard) affixCard.style.display = 'none';
 
       document.getElementById('morphModal').classList.add('open');
-      // نطق الكلمة المجردة تلقائياً فور فتح البطاقة
+      // نطق اسم الكوكب المجرد فقط عند الفتح
       Sound.playAsset(folder, prefix, branch.plain);
     }
 
@@ -1625,7 +1600,7 @@
       }
     }
 
-    /* دالة توليد مقصورات مركبة الصرف الفضائية الدائرية الكرتونية */
+    /* دالة توليد كبسولات الأطباق الفضائية المتجهة (مركبة الصرف غير المستطيلة) */
     function renderSpacecraftChallenge(challenges) {
       const container = document.getElementById('challengeContainer');
       container.innerHTML = '';
@@ -1635,21 +1610,43 @@
         return;
       }
 
+      const podColors = [
+        { dome: '#38bdf8', rim: '#0284c7', base: '#1e293b' },
+        { dome: '#f472b6', rim: '#db2777', base: '#1e293b' },
+        { dome: '#facc15', rim: '#eab308', base: '#1e293b' },
+        { dome: '#4ade80', rim: '#16a34a', base: '#1e293b' },
+        { dome: '#c084fc', rim: '#9333ea', base: '#1e293b' },
+        { dome: '#fb923c', rim: '#ea580c', base: '#1e293b' }
+      ];
+
       challenges.forEach((c, idx) => {
+        const color = podColors[idx % podColors.length];
         const card = document.createElement('div');
-        card.className = 'spacecraft-pod-unit';
+        card.className = 'ufo-saucer-pod';
         card.innerHTML = `
-          <div class="pod-bubble-header">
-            <span>${c.icon || '🚀'}</span>
-            <span>${c.badge}</span>
+          <svg class="ufo-svg-hull" viewBox="0 0 380 380" preserveAspectRatio="none">
+            <!-- قبة المركبة الفضائية الزجاجية المستديرة -->
+            <path d="M 130,90 C 130,25 250,25 250,90 Z" fill="${color.dome}" opacity="0.35" stroke="#ffffff" stroke-width="4"/>
+            <!-- الهيكل البيضوي المتوهج للصحن الطائر -->
+            <ellipse cx="190" cy="190" rx="175" ry="155" fill="${color.base}" stroke="${color.rim}" stroke-width="7"/>
+            <ellipse cx="190" cy="190" rx="155" ry="135" fill="none" stroke="${color.dome}" stroke-width="3" stroke-dasharray="8,6"/>
+            <!-- أضواء سفلية متوهجة -->
+            <circle cx="90" cy="270" r="10" fill="#facc15" filter="drop-shadow(0 0 8px #facc15)"/>
+            <circle cx="190" cy="300" r="12" fill="#38bdf8" filter="drop-shadow(0 0 8px #38bdf8)"/>
+            <circle cx="290" cy="270" r="10" fill="#f472b6" filter="drop-shadow(0 0 8px #f472b6)"/>
+          </svg>
+
+          <div class="ufo-pod-content">
+            <div class="pod-icon-bubble">${c.icon || '🛸'}</div>
+            <span class="pod-badge-tag">${c.badge}</span>
+            <div class="pod-question-speech">${c.prompt}</div>
+            <div class="pod-answers-dock">
+              ${c.opts.map(opt => `
+                <button class="pod-btn-choice" onclick="evaluatePodChoice(this, '${opt}', '${c.ans}', ${idx})">${opt}</button>
+              `).join('')}
+            </div>
+            <div class="pod-feedback-toast" id="fb_pod_${idx}"></div>
           </div>
-          <div class="pod-question-speech">${c.prompt}</div>
-          <div class="pod-answers-dock">
-            ${c.opts.map(opt => `
-              <button class="pod-btn-choice" onclick="evaluatePodChoice(this, '${opt}', '${c.ans}', ${idx})">${opt}</button>
-            `).join('')}
-          </div>
-          <div class="pod-feedback-toast" id="fb_pod_${idx}"></div>
         `;
         container.appendChild(card);
       });
