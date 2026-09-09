@@ -166,7 +166,7 @@
       100% { opacity: 1; transform: scale(1.3); filter: drop-shadow(0 0 6px #fde047); }
     }
 
-    /* 1. شمس الجذر الفضائية بكواكب متجهة SVG */
+    /* 1. شمس الجذر */
     .space-system-arena {
       position: relative;
       width: 100%;
@@ -724,6 +724,11 @@
       box-shadow: 0 8px 25px rgba(67, 56, 202, 0.55);
     }
 
+    .master-audio-btn:active {
+      transform: translateY(2px);
+      box-shadow: none;
+    }
+
     .rule-gold-banner {
       background: #fefce8; border: 3px dashed #facc15;
       padding: 0.9rem 1.2rem; border-radius: 20px;
@@ -792,7 +797,7 @@
   </nav>
 
   <main>
-    <!-- 1. شمس الجذر الفضائية بكواكب ثلاثية الأبعاد مرسومة بـ SVG -->
+    <!-- 1. شمس الجذر الفضائية بكواكب ثلاثية الأبعاد -->
     <div id="radialMap" class="tab-view active">
       <div class="space-system-arena" id="starsSky">
         <div class="orbit-ellipse-wide"></div>
@@ -808,7 +813,6 @@
           <polygon points="15,85 28,79 21,72" fill="#fde047"/>
         </svg>
 
-        <!-- قرص الشمس -->
         <div class="cartoon-sun-core" onclick="openRootModal()">
           <div class="sun-root-letters" id="coreLetters">[ ك - ت - ب ]</div>
           <div class="sun-badge-desc" id="coreConcept">صَحِيحٌ سَالِمٌ</div>
@@ -991,7 +995,7 @@
     </div>
   </main>
 
-  <!-- النافذة المنبثقة للتحليل وقرص الشمس -->
+  <!-- النافذة المنبثقة -->
   <div class="modal-overlay" id="morphModal" onclick="closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -1017,7 +1021,6 @@
           <span id="mExample" style="color: #1e293b; font-style: italic;"></span>
         </div>
 
-        <!-- زر الاستماع الشامل الموحد المعتمد -->
         <button class="master-audio-btn" id="btnMasterAudio">
           <span>🎧</span>
           <span>اضْغَطْ لِلاسْتِمَاعِ لِلشَّرْحِ وَالنُّطْقِ الكَامِلِ</span>
@@ -1038,26 +1041,13 @@
 
   <script>
     const Sound = {
-      ctx: null,
       audioPlayer: new Audio(),
-      
-      init() {
-        if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-      },
+      sfxPlayer: new Audio(),
 
       rootFolderMap: {
-        "كتب": "ktb",
-        "قرأ": "qra",
-        "مدد": "mdd",
-        "دحرج": "dhrj",
-        "زلزل": "zlzl",
-        "وقف": "wqf",
-        "قول": "qwl",
-        "رمي": "rmy",
-        "درس": "drs",
-        "كسر": "ksr",
-        "كشف": "kshf",
-        "خرج": "khrj"
+        "كتب": "ktb", "قرأ": "qra", "مدد": "mdd", "دحرج": "dhrj",
+        "زلزل": "zlzl", "وقف": "wqf", "قول": "qwl", "رمي": "rmy",
+        "درس": "drs", "كسر": "ksr", "كشف": "kshf", "خرج": "khrj"
       },
 
       playAsset(folder, fileName, fallbackText, onEndCallback) {
@@ -1069,71 +1059,40 @@
         };
 
         this.audioPlayer.play().catch(() => {
-          // محاولة تشغيل الملف من مسار audio/ المباشر تلقائياً
           const fallbackPath = `audio/${fileName}.mp3`;
-          const secondaryPlayer = new Audio(fallbackPath);
-          secondaryPlayer.onended = () => { if (onEndCallback) onEndCallback(); };
-          secondaryPlayer.play().catch(() => {
+          const secondary = new Audio(fallbackPath);
+          secondary.onended = () => { if (onEndCallback) onEndCallback(); };
+          secondary.play().catch(() => {
             if (fallbackText) this.speak(fallbackText, onEndCallback);
             else if (onEndCallback) onEndCallback();
           });
         });
       },
 
+      // تشغيل أصوات التعزيز عند الإجابة الصحيحة
       correct() {
-        this.init();
-        if (!this.ctx) return;
-        const now = this.ctx.currentTime;
-        const notes = [440, 554.37, 659.25, 880, 1108.73];
-        notes.forEach((freq, idx) => {
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
-          gain.gain.setValueAtTime(0.25, now + idx * 0.08);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.25);
-          osc.connect(gain);
-          gain.connect(this.ctx.destination);
-          osc.start(now + idx * 0.08);
-          osc.stop(now + idx * 0.08 + 0.25);
+        const cheerFiles = ['correct_1', 'correct_2', 'correct_3'];
+        const randomCheer = cheerFiles[Math.floor(Math.random() * cheerFiles.length)];
+        this.sfxPlayer.src = `audio/${randomCheer}.mp3`;
+        this.sfxPlayer.play().catch(() => {
+          this.speak("أَحْسَنْتَ يَا بَطَلُ! إِجَابَةٌ رَائِعَةٌ.");
         });
-
-        const cheers = ["رَائِعٌ جِدّاً!", "أَحْسَنْتَ يَا بَطَلُ!", "عَبْقَرِيٌّ!", "مُمْتَازٌ!"];
-        setTimeout(() => this.speak(cheers[Math.floor(Math.random() * cheers.length)]), 450);
       },
 
+      // تشغيل أصوات التنبيه اللطيفة عند الخطأ
       wrong() {
-        this.init();
-        if (!this.ctx) return;
-        const now = this.ctx.currentTime;
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(280, now);
-        osc.frequency.exponentialRampToValueAtTime(120, now + 0.35);
-        gain.gain.setValueAtTime(0.3, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start(now);
-        osc.stop(now + 0.35);
+        const wrongFiles = ['wrong_1', 'wrong_2'];
+        const randomWrong = wrongFiles[Math.floor(Math.random() * wrongFiles.length)];
+        this.sfxPlayer.src = `audio/${randomWrong}.mp3`;
+        this.sfxPlayer.play().catch(() => {
+          this.speak("انْتَبِهْ يَا بَطَلُ، تَأَمَّلِ الوَزْنَ وَحَاوِلْ مَرَّةً أُخْرَى.");
+        });
       },
 
+      // صوت النقرة اللطيفة
       pop() {
-        this.init();
-        if (!this.ctx) return;
-        const now = this.ctx.currentTime;
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(800, now);
-        osc.frequency.exponentialRampToValueAtTime(400, now + 0.08);
-        gain.gain.setValueAtTime(0.2, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start(now);
-        osc.stop(now + 0.08);
+        this.sfxPlayer.src = `audio/pop.mp3`;
+        this.sfxPlayer.play().catch(() => {});
       },
 
       speak(txt, callback) {
@@ -1141,13 +1100,11 @@
           window.speechSynthesis.cancel();
           const utter = new SpeechSynthesisUtterance(txt);
           utter.lang = 'ar-SA';
-          utter.rate = 0.88;
+          utter.rate = 0.9;
           const voices = window.speechSynthesis.getVoices();
           const ar = voices.find(v => v.lang.startsWith('ar') || v.lang.startsWith('ara'));
           if (ar) utter.voice = ar;
-          if (callback) {
-            utter.onend = () => callback();
-          }
+          if (callback) utter.onend = () => callback();
           window.speechSynthesis.speak(utter);
         } else if (callback) {
           callback();
@@ -1278,7 +1235,6 @@
       const filePrefixes = ['verb', 'actor', 'product', 'place', 'source'];
       const prefix = filePrefixes[branchIdx];
 
-      // تشغيل ملف التسجيل الموحد الكامل الذي يشمل (الشرح + المتلازمة + المثال) متصلين دفعة واحدة
       const masterBtn = document.getElementById('btnMasterAudio');
       masterBtn.style.display = 'flex';
       masterBtn.onclick = () => {
@@ -1298,7 +1254,6 @@
       if (affixCard) affixCard.style.display = 'none';
 
       document.getElementById('morphModal').classList.add('open');
-      // نطق اسم الكوكب المجرد فقط عند الفتح
       Sound.playAsset(folder, prefix, branch.plain);
     }
 
@@ -1383,7 +1338,7 @@
             const victoryMsg = "🎉 بَطَلٌ خَارِقٌ! اسْتَخْرَجْتَ كَافَّةَ مَشَاهِدِ الجَذْرِ الخَمْسَةِ بِنَجَاحٍ!";
             document.getElementById('storyMissionBadge').textContent = victoryMsg;
             addStars(30);
-            Sound.playAsset(folder, 'victory', "بَطَلٌ خَارِقٌ! اسْتَخْرَجْتَ كَافَّةَ مَشَاهِدِ الجَذْرِ الخَمْسَةِ بِنَجَاحٍ!");
+            Sound.playAsset(folder, 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
           }, 600);
         }
       } else {
@@ -1566,7 +1521,6 @@
 
     function evaluateJigsawSolve(selected, correct, sIdx, slotEl) {
       const fb = document.getElementById(`fb_jigsaw_${sIdx}`);
-      Sound.speak(selected);
 
       if (selected === correct) {
         slotEl.textContent = `✓ رُكِّبَتْ: (${selected})`;
@@ -1586,7 +1540,6 @@
       }
     }
 
-    /* دالة توليد كبسولات الأطباق الطائرة الفضائية لمركبة الصرف بـ SVG */
     function renderSpacecraftChallenge(challenges) {
       const container = document.getElementById('challengeContainer');
       container.innerHTML = '';
@@ -1645,7 +1598,6 @@
     function evaluatePodChoice(btn, selected, correct, idx) {
       Sound.pop();
       const fb = document.getElementById(`fb_pod_${idx}`);
-      Sound.speak(selected);
 
       if (selected === correct) {
         fb.style.display = 'block';
@@ -1679,7 +1631,12 @@
     }
 
     window.onload = () => {
-      window.addEventListener('click', () => Sound.init(), { once: true });
+      // فك قفل الصوت تلقائياً مع أول لمسة
+      window.addEventListener('click', () => {
+        Sound.sfxPlayer.load();
+        Sound.audioPlayer.load();
+      }, { once: true });
+
       loadRadialWorld('كتب');
     };
   </script>
