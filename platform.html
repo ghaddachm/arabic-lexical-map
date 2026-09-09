@@ -166,7 +166,7 @@
       100% { opacity: 1; transform: scale(1.3); filter: drop-shadow(0 0 6px #fde047); }
     }
 
-    /* 1. شمس الجذر وكواكب الفضاء الكرتونية المتجهة بالكامل */
+    /* 1. شمس الجذر الفضائية بكواكب متجهة SVG */
     .space-system-arena {
       position: relative;
       width: 100%;
@@ -245,7 +245,6 @@
       box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     }
 
-    /* أجرام كروية ثلاثية الأبعاد بـ SVG مع حلقات وتضاريس */
     .planet-station {
       position: absolute;
       display: flex;
@@ -531,7 +530,7 @@
       font-weight: 900; font-size: 0.95rem; display: none;
     }
 
-    /* 5. مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ (كبسولات أطباق طائرة مرسومة بـ SVG) */
+    /* 5. مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ */
     .spacecraft-challenge-deck {
       background: radial-gradient(circle at 50% 30%, #2e1065 0%, #0c0824 100%);
       border: 8px solid #c084fc;
@@ -563,7 +562,6 @@
       margin-top: 2.8rem;
     }
 
-    /* كبسولات الأطباق الفضائية المتجهة ثلاثية الأبعاد */
     .ufo-saucer-pod {
       position: relative;
       width: 380px;
@@ -665,7 +663,7 @@
       text-align: center;
     }
 
-    /* Modal - تصميم نقي موحد مطابق لنموذج صانع */
+    /* Modal */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -726,11 +724,6 @@
       box-shadow: 0 8px 25px rgba(67, 56, 202, 0.55);
     }
 
-    .master-audio-btn:active {
-      transform: translateY(2px);
-      box-shadow: none;
-    }
-
     .rule-gold-banner {
       background: #fefce8; border: 3px dashed #facc15;
       padding: 0.9rem 1.2rem; border-radius: 20px;
@@ -742,11 +735,6 @@
       background: #fffbeb; border: 3px solid #fde68a;
       border-radius: 30px; padding: 1.3rem; display: none;
     }
-
-    .affix-box-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
-    .affix-box-title { color: #92400e; font-weight: 900; font-size: 1.15rem; }
-    .affix-rule-badge { background: #fef08a; color: #854d0e; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 900; }
-    .affix-item { background: white; border-radius: 25px; padding: 0.8rem 1.2rem; margin-bottom: 0.7rem; display: flex; justify-content: space-between; align-items: center; border: 2px solid #fef3c7; }
 
     .c-r { color: var(--c-root) !important; }
     .c-a { color: var(--c-affix) !important; }
@@ -993,7 +981,7 @@
       </div>
     </div>
 
-    <!-- 5. مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ (أطباق طائرة كرتونية بـ SVG) -->
+    <!-- 5. مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ -->
     <div id="challengeTab" class="tab-view">
       <div class="spacecraft-challenge-deck">
         <h3 class="spacecraft-header-title">🚀 مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ</h3>
@@ -1003,7 +991,7 @@
     </div>
   </main>
 
-  <!-- النافذة المنبثقة للتحليل وقرص الشمس (زر استماع شامل موحد متسلسل) -->
+  <!-- النافذة المنبثقة للتحليل وقرص الشمس -->
   <div class="modal-overlay" id="morphModal" onclick="closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -1073,19 +1061,19 @@
       },
 
       playAsset(folder, fileName, fallbackText, onEndCallback) {
-        const audioPath = `audio/${folder}/${fileName}.mp3`;
-        this.audioPlayer.src = audioPath;
+        const primaryPath = `audio/${folder}/${fileName}.mp3`;
+        this.audioPlayer.src = primaryPath;
         
         this.audioPlayer.onended = () => {
           if (onEndCallback) onEndCallback();
         };
 
         this.audioPlayer.play().catch(() => {
-          // محاولة تشغيل الملف من مجلد audio المباشر إذا رُفع هناك
-          const altPath = `audio/${fileName}.mp3`;
-          const altPlayer = new Audio(altPath);
-          altPlayer.onended = () => { if (onEndCallback) onEndCallback(); };
-          altPlayer.play().catch(() => {
+          // محاولة تشغيل الملف من مسار audio/ المباشر تلقائياً
+          const fallbackPath = `audio/${fileName}.mp3`;
+          const secondaryPlayer = new Audio(fallbackPath);
+          secondaryPlayer.onended = () => { if (onEndCallback) onEndCallback(); };
+          secondaryPlayer.play().catch(() => {
             if (fallbackText) this.speak(fallbackText, onEndCallback);
             else if (onEndCallback) onEndCallback();
           });
@@ -1213,7 +1201,6 @@
           { q: "الفِعْلُ (اسْتَكْتَبَ) هُوَ فِعْلٌ:", ans: "مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ", opts: ["مُجَرَّدٌ", "مَزِيدٌ بِحَرْفٍ", "مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ"] },
           { q: "مَصْدَرُ الفِعْلِ (كَتَبَ) الدَّالُّ عَلَى الحِرْفَةِ وَالشِّبْهِ هُوَ:", ans: "كِتَابَةٌ", opts: ["كِتَابَةٌ", "كِتَابٌ", "مَكْتَبٌ"] }
         ],
-        // تحديات أطباق مركبة الصرف الفضائية الستة
         challenges: [
           { icon: "🎨", badge: "1. تَحَدِّي الفَاعِلِ", prompt: "صَاحِبُ المِهْنَةِ الَّذِي يَكْتُبُ يُدْعَى (كَاتِباً)، فَمَاذَا نُطْلِقُ عَلَى مَنْ (يَرْسُمُ)؟", ans: "رَاسِمٌ", opts: ["رَاسِمٌ", "مَرْسُومٌ", "مِرْسَمٌ"] },
           { icon: "🍲", badge: "2. تَحَدِّي المَفْعُولِ", prompt: "النَّصُّ كَتَبْنَاهُ فَهُوَ (مَكْتُوبٌ)، فَكَيْفَ نَصِفُ الطَّعَامَ الَّذِي (طَبَخْنَاهُ)؟", ans: "مَطْبُوخٌ", opts: ["طَابِخٌ", "مَطْبُوخٌ", "مَطْبَخٌ"] },
@@ -1295,7 +1282,7 @@
       const masterBtn = document.getElementById('btnMasterAudio');
       masterBtn.style.display = 'flex';
       masterBtn.onclick = () => {
-        const fullLessonText = `الشَّرْحُ وَالدَّلَالَةُ: ${branch.desc}. المُتَلَازِمَةُ اللَّفْظِيَّةُ: ${branch.colloc}. المِثَالُ فِي سِيَاقٍ: ${branch.ex.replace(/[«»]/g, '')}`;
+        const fullLessonText = `${branch.plain}. الشَّرْحُ وَالدَّلَالَةُ: ${branch.desc}. المُتَلَازِمَةُ اللَّفْظِيَّةُ: ${branch.colloc}. المِثَالُ فِي سِيَاقٍ: ${branch.ex.replace(/[«»]/g, '')}`;
         Sound.playAsset(folder, `${prefix}_full`, fullLessonText);
       };
 
@@ -1307,7 +1294,6 @@
         ruleBanner.style.display = 'none';
       }
 
-      // إخفاء عائلة الأفعال المزيدة وأزرارها نهائياً
       const affixCard = document.getElementById('mAffixCard');
       if (affixCard) affixCard.style.display = 'none';
 
@@ -1600,7 +1586,7 @@
       }
     }
 
-    /* دالة توليد كبسولات الأطباق الفضائية المتجهة (مركبة الصرف غير المستطيلة) */
+    /* دالة توليد كبسولات الأطباق الطائرة الفضائية لمركبة الصرف بـ SVG */
     function renderSpacecraftChallenge(challenges) {
       const container = document.getElementById('challengeContainer');
       container.innerHTML = '';
@@ -1610,30 +1596,34 @@
         return;
       }
 
-      const podColors = [
-        { dome: '#38bdf8', rim: '#0284c7', base: '#1e293b' },
-        { dome: '#f472b6', rim: '#db2777', base: '#1e293b' },
-        { dome: '#facc15', rim: '#eab308', base: '#1e293b' },
-        { dome: '#4ade80', rim: '#16a34a', base: '#1e293b' },
-        { dome: '#c084fc', rim: '#9333ea', base: '#1e293b' },
-        { dome: '#fb923c', rim: '#ea580c', base: '#1e293b' }
+      const ufoThemes = [
+        { dome: '#38bdf8', rim: '#0284c7', glow: '#38bdf8' },
+        { dome: '#f472b6', rim: '#db2777', glow: '#f472b6' },
+        { dome: '#facc15', rim: '#eab308', glow: '#facc15' },
+        { dome: '#4ade80', rim: '#16a34a', glow: '#4ade80' },
+        { dome: '#c084fc', rim: '#9333ea', glow: '#c084fc' },
+        { dome: '#fb923c', rim: '#ea580c', glow: '#fb923c' }
       ];
 
       challenges.forEach((c, idx) => {
-        const color = podColors[idx % podColors.length];
+        const t = ufoThemes[idx % ufoThemes.length];
         const card = document.createElement('div');
         card.className = 'ufo-saucer-pod';
         card.innerHTML = `
           <svg class="ufo-svg-hull" viewBox="0 0 380 380" preserveAspectRatio="none">
-            <!-- قبة المركبة الفضائية الزجاجية المستديرة -->
-            <path d="M 130,90 C 130,25 250,25 250,90 Z" fill="${color.dome}" opacity="0.35" stroke="#ffffff" stroke-width="4"/>
-            <!-- الهيكل البيضوي المتوهج للصحن الطائر -->
-            <ellipse cx="190" cy="190" rx="175" ry="155" fill="${color.base}" stroke="${color.rim}" stroke-width="7"/>
-            <ellipse cx="190" cy="190" rx="155" ry="135" fill="none" stroke="${color.dome}" stroke-width="3" stroke-dasharray="8,6"/>
-            <!-- أضواء سفلية متوهجة -->
-            <circle cx="90" cy="270" r="10" fill="#facc15" filter="drop-shadow(0 0 8px #facc15)"/>
-            <circle cx="190" cy="300" r="12" fill="#38bdf8" filter="drop-shadow(0 0 8px #38bdf8)"/>
-            <circle cx="290" cy="270" r="10" fill="#f472b6" filter="drop-shadow(0 0 8px #f472b6)"/>
+            <defs>
+              <linearGradient id="ufoGrad_${idx}" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#1e293b"/>
+                <stop offset="60%" stop-color="#0f172a"/>
+                <stop offset="100%" stop-color="#020617"/>
+              </linearGradient>
+            </defs>
+            <path d="M 130,85 C 130,20 250,20 250,85 Z" fill="${t.dome}" opacity="0.4" stroke="#ffffff" stroke-width="4"/>
+            <ellipse cx="190" cy="190" rx="175" ry="155" fill="url(#ufoGrad_${idx})" stroke="${t.rim}" stroke-width="7"/>
+            <ellipse cx="190" cy="190" rx="155" ry="135" fill="none" stroke="${t.glow}" stroke-width="3" stroke-dasharray="8,6" opacity="0.75"/>
+            <circle cx="90" cy="280" r="11" fill="#facc15" filter="drop-shadow(0 0 8px #facc15)"/>
+            <circle cx="190" cy="310" r="13" fill="#38bdf8" filter="drop-shadow(0 0 8px #38bdf8)"/>
+            <circle cx="290" cy="280" r="11" fill="#f472b6" filter="drop-shadow(0 0 8px #f472b6)"/>
           </svg>
 
           <div class="ufo-pod-content">
