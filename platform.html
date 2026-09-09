@@ -97,19 +97,20 @@
       gap: 0.5rem;
     }
 
-    /* التبويبات الفضائية */
+    /* التبويبات الفضائية الخمسة */
     .nav-tabs-container {
       display: flex;
       justify-content: center;
       padding: 0.4rem 1rem 0;
-      gap: 1.2rem;
+      gap: 0.8rem;
+      flex-wrap: wrap;
     }
 
     .tab-pill {
-      padding: 0.8rem 2rem;
+      padding: 0.7rem 1.6rem;
       border: 3px solid #38bdf8;
       background: rgba(15, 23, 42, 0.85);
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 900;
       color: #bae6fd;
       cursor: pointer;
@@ -173,7 +174,7 @@
     .space-system-arena {
       position: relative;
       width: 100%;
-      min-height: 720px;
+      min-height: 740px;
       background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #0c0a24 45%, #020617 100%);
       border-radius: 80px;
       border: 8px solid #38bdf8;
@@ -186,8 +187,8 @@
 
     .orbit-ellipse-wide {
       position: absolute;
-      width: 840px;
-      height: 500px;
+      width: 900px;
+      height: 520px;
       border: 3px dashed rgba(56, 189, 248, 0.35);
       border-radius: 50%;
       pointer-events: none;
@@ -200,8 +201,8 @@
       pointer-events: none;
       filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
     }
-    .astro-kid-1 { top: 50px; right: 5%; }
-    .astro-kid-2 { bottom: 60px; left: 4%; animation-delay: 1.5s; }
+    .astro-kid-1 { top: 40px; right: 4%; }
+    .astro-kid-2 { bottom: 50px; left: 3%; animation-delay: 1.5s; }
 
     @keyframes astroFloat {
       0% { transform: translateY(0) rotate(-4deg); }
@@ -211,8 +212,8 @@
     .cartoon-sun-core {
       position: absolute;
       z-index: 10;
-      width: 270px;
-      height: 270px;
+      width: 280px;
+      height: 280px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #fffbeb 0%, #fde047 45%, #eab308 100%);
       border: 8px solid #ffffff;
@@ -228,8 +229,8 @@
 
     .sun-rays-halo {
       position: absolute;
-      width: 350px;
-      height: 350px;
+      width: 360px;
+      height: 360px;
       pointer-events: none;
       animation: spinHalo 24s linear infinite;
     }
@@ -245,7 +246,7 @@
     }
 
     .sun-root-letters {
-      font-size: 2.1rem;
+      font-size: 2.2rem;
       font-weight: 900;
       color: #7f1d1d;
       letter-spacing: 2px;
@@ -264,82 +265,97 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    .space-planet-sphere {
+    /* هندسة الكواكب الفضائية الجديدة لمنع التكدس */
+    .planet-satellite-station {
       position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      z-index: 5;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .planet-satellite-station:hover {
+      transform: scale(1.12) translateY(-6px);
+      z-index: 25;
+    }
+
+    /* شارات الرأس التوجيهية الطافية خارج الكوكب */
+    .planet-orbit-badge {
+      background: rgba(15, 23, 42, 0.9);
+      border: 2px solid #38bdf8;
+      border-radius: 20px;
+      padding: 0.25rem 0.9rem;
+      margin-bottom: 0.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .planet-badge-title {
+      font-size: 0.85rem;
+      font-weight: 900;
+      color: #fef08a;
+    }
+
+    .planet-badge-q {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #bae6fd;
+    }
+
+    .space-planet-sphere {
       border-radius: 50%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      cursor: pointer;
-      border: 6px solid rgba(255, 255, 255, 0.9);
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      z-index: 5;
+      border: 6px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
 
-    .space-planet-sphere:hover {
-      transform: scale(1.15) translateY(-8px);
-      z-index: 25;
-    }
+    .station-1 { top: 40px; right: 15%; }
+    .station-2 { top: 40px; left: 15%; }
+    .station-3 { bottom: 45px; left: 14%; }
+    .station-4 { bottom: 45px; right: 14%; }
+    .station-5 { bottom: 20px; left: 50%; transform: translateX(-50%); }
+    .station-5:hover { transform: translateX(-50%) scale(1.12) translateY(-6px); }
 
-    .planet-1-verb {
-      width: 175px; height: 175px;
+    .sphere-1 {
+      width: 155px; height: 155px;
       background: radial-gradient(circle at 30% 30%, #f472b6 0%, #db2777 50%, #831843 100%);
       box-shadow: 0 0 35px rgba(219, 39, 119, 0.65);
-      top: 50px; right: 17%;
     }
 
-    .planet-2-agent {
-      width: 180px; height: 180px;
+    .sphere-2 {
+      width: 160px; height: 160px;
       background: radial-gradient(circle at 30% 30%, #60a5fa 0%, #2563eb 50%, #1e3a8a 100%);
       box-shadow: 0 0 35px rgba(37, 99, 235, 0.65);
-      top: 50px; left: 17%;
     }
 
-    .planet-3-patient {
-      width: 175px; height: 175px;
+    .sphere-3 {
+      width: 155px; height: 155px;
       background: radial-gradient(circle at 30% 30%, #f87171 0%, #dc2626 50%, #7f1d1d 100%);
       box-shadow: 0 0 35px rgba(220, 38, 38, 0.65);
-      bottom: 45px; left: 15%;
     }
 
-    .planet-4-place {
-      width: 175px; height: 175px;
+    .sphere-4 {
+      width: 155px; height: 155px;
       background: radial-gradient(circle at 30% 30%, #4ade80 0%, #16a34a 50%, #14532d 100%);
       box-shadow: 0 0 35px rgba(22, 163, 74, 0.65);
-      bottom: 45px; right: 15%;
     }
 
-    .planet-5-source {
-      width: 170px; height: 170px;
+    .sphere-5 {
+      width: 150px; height: 150px;
       background: radial-gradient(circle at 30% 30%, #fb923c 0%, #ea580c 50%, #7c2d12 100%);
       box-shadow: 0 0 35px rgba(234, 88, 12, 0.65);
-      bottom: 20px; left: 50%; transform: translateX(-50%);
-    }
-    .planet-5-source:hover { transform: translateX(-50%) scale(1.15) translateY(-8px); }
-
-    .planet-title-label {
-      background: rgba(0, 0, 0, 0.65);
-      color: #fef08a;
-      font-size: 0.8rem;
-      font-weight: 900;
-      padding: 0.15rem 0.65rem;
-      border-radius: 12px;
-      margin-bottom: 0.15rem;
-    }
-
-    .planet-question-hint {
-      font-size: 0.8rem;
-      font-weight: 900;
-      color: #ffffff;
-      opacity: 0.9;
-      margin-bottom: 0.1rem;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     }
 
     .planet-word-text {
-      font-size: 1.8rem;
+      font-size: 2.1rem;
       font-weight: 900;
       color: #ffffff;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
@@ -347,10 +363,13 @@
     }
 
     .planet-weight-sub {
-      font-size: 0.8rem;
-      color: #e2e8f0;
+      font-size: 0.85rem;
+      color: #fef08a;
       font-weight: bold;
-      margin-top: 0.1rem;
+      background: rgba(0,0,0,0.35);
+      padding: 0.15rem 0.6rem;
+      border-radius: 12px;
+      margin-top: 0.2rem;
     }
 
     /* 2. سحابة الحكاية */
@@ -784,6 +803,98 @@
       text-align: center;
     }
 
+    /* ========================================================= */
+    /* 5. ميدان التحدي الصرفي والقياس (الوحدة الجديدة) */
+    /* ========================================================= */
+    .challenge-arena-box {
+      background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #0c0a24 100%);
+      border: 8px solid #a855f7;
+      border-radius: 60px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 50px rgba(168, 85, 247, 0.35);
+      text-align: center;
+    }
+
+    .challenge-hero-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #facc15;
+      text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .challenge-cards-grid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .analogy-card {
+      background: rgba(255, 255, 255, 0.95);
+      color: #1e293b;
+      border: 4px solid #38bdf8;
+      border-radius: 35px;
+      padding: 1.8rem;
+      width: 380px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .analogy-badge {
+      background: #ec4899;
+      color: white;
+      font-size: 0.95rem;
+      font-weight: 900;
+      padding: 0.3rem 1.2rem;
+      border-radius: 20px;
+      margin-bottom: 0.8rem;
+    }
+
+    .analogy-prompt {
+      font-size: 1.25rem;
+      font-weight: 900;
+      margin-bottom: 1.2rem;
+      color: #0369a1;
+    }
+
+    .analogy-options-row {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .analogy-btn {
+      background: #f8fafc;
+      border: 3px solid #cbd5e1;
+      color: #1e293b;
+      font-size: 1.2rem;
+      font-weight: 900;
+      padding: 0.5rem 1.4rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .analogy-btn:hover {
+      border-color: #38bdf8;
+      background: #e0f2fe;
+      transform: translateY(-2px);
+    }
+
+    .analogy-feedback {
+      margin-top: 0.9rem;
+      font-weight: 900;
+      font-size: 1rem;
+      display: none;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+    }
+
     /* Modal */
     .modal-overlay {
       position: fixed;
@@ -973,16 +1084,17 @@
     <button class="tab-pill" onclick="switchMainTab('storyTab', this)">📖 سَحَابَةُ الحِكَايَةِ</button>
     <button class="tab-pill" onclick="switchMainTab('labTab', this)">🛸 أَقْرَاصُ التَّرْكِيبِ</button>
     <button class="tab-pill" onclick="switchMainTab('quizTab', this)">🧩 حَلَبَةُ البَزْل</button>
+    <button class="tab-pill" onclick="switchMainTab('challengeTab', this)">🚀 مَيْدَانُ التَّحَدِّي</button>
   </nav>
 
   <main>
-    <!-- 1. شمس الجذر الفضائية -->
+    <!-- 1. شمس الجذر الفضائية بتوزيع انسيابي متزن غير مكتظ -->
     <div id="radialMap" class="tab-view active">
       <div class="space-system-arena" id="starsSky">
         <div class="orbit-ellipse-wide"></div>
 
         <div class="astro-kid astro-kid-1">
-          <svg viewBox="0 0 120 120" width="110" height="110">
+          <svg viewBox="0 0 120 120" width="105" height="105">
             <circle cx="60" cy="45" r="35" fill="rgba(255,255,255,0.25)" stroke="#38bdf8" stroke-width="4"/>
             <circle cx="60" cy="45" r="24" fill="#fed7aa"/>
             <path d="M42 36 Q60 15 78 36 Z" fill="#f97316"/>
@@ -1001,7 +1113,7 @@
         </div>
 
         <div class="astro-kid astro-kid-2">
-          <svg viewBox="0 0 120 120" width="105" height="105">
+          <svg viewBox="0 0 120 120" width="100" height="100">
             <circle cx="60" cy="45" r="34" fill="rgba(255,255,255,0.25)" stroke="#ec4899" stroke-width="4"/>
             <circle cx="60" cy="45" r="23" fill="#fed7aa"/>
             <path d="M44 38 Q60 18 76 38 Z" fill="#78350f"/>
@@ -1030,50 +1142,71 @@
           <polygon points="15,85 28,79 21,72" fill="#fde047"/>
         </svg>
 
+        <!-- قرص الشمس الصافي للاستكشاف -->
         <div class="cartoon-sun-core" onclick="openRootModal()">
           <div class="sun-root-letters" id="coreLetters">[ ك - ت - ب ]</div>
           <div class="sun-badge-desc" id="coreConcept">صَحِيحٌ سَالِمٌ</div>
-          <span style="font-size: 0.8rem; color: #78350f; font-weight: 900; margin-top: 0.4rem;">🔊 انقر للاستكشاف</span>
+          <span style="font-size: 0.8rem; color: #78350f; font-weight: 900; margin-top: 0.4rem;">🔊 انقر لاستكشاف الجذر</span>
         </div>
 
-        <!-- 1. كوكب الحدث / الفعل -->
-        <div class="space-planet-sphere planet-1-verb" onclick="openMorphModal(0)">
-          <span class="planet-title-label">الحدث / الفعل</span>
-          <span class="planet-question-hint">مَاذَا حَدَثَ؟</span>
-          <div class="planet-word-text" id="b1_word">كَتَبَ</div>
-          <span class="planet-weight-sub" id="b1_pattern">(فَعَلَ)</span>
+        <!-- 1. محطة الحدث / الفعل -->
+        <div class="planet-satellite-station station-1" onclick="openMorphModal(0)">
+          <div class="planet-orbit-badge">
+            <span class="planet-badge-title">الحدث / الفعل</span>
+            <span class="planet-badge-q">مَاذَا حَدَثَ؟</span>
+          </div>
+          <div class="space-planet-sphere sphere-1">
+            <div class="planet-word-text" id="b1_word">كَتَبَ</div>
+            <span class="planet-weight-sub" id="b1_pattern">(فَعَلَ)</span>
+          </div>
         </div>
 
-        <!-- 2. كوكب اسم الفاعل -->
-        <div class="space-planet-sphere planet-2-agent" onclick="openMorphModal(1)">
-          <span class="planet-title-label">اسْمُ الفَاعِلِ</span>
-          <span class="planet-question-hint">مَنْ يَفْعَلُ؟</span>
-          <div class="planet-word-text" id="b2_word">كَاتِبٌ</div>
-          <span class="planet-weight-sub" id="b2_pattern">(فَاعِلٌ)</span>
+        <!-- 2. محطة اسم الفاعل -->
+        <div class="planet-satellite-station station-2" onclick="openMorphModal(1)">
+          <div class="planet-orbit-badge">
+            <span class="planet-badge-title">اسْمُ الفَاعِلِ</span>
+            <span class="planet-badge-q">مَنْ يَفْعَلُ؟</span>
+          </div>
+          <div class="space-planet-sphere sphere-2">
+            <div class="planet-word-text" id="b2_word">كَاتِبٌ</div>
+            <span class="planet-weight-sub" id="b2_pattern">(فَاعِلٌ)</span>
+          </div>
         </div>
 
-        <!-- 3. كوكب اسم المفعول -->
-        <div class="space-planet-sphere planet-3-patient" onclick="openMorphModal(2)">
-          <span class="planet-title-label">اسْمُ المَفْعُولِ</span>
-          <span class="planet-question-hint">مَا الَّذِي فُعِلَ؟</span>
-          <div class="planet-word-text" id="b3_word">مَكْتُوبٌ</div>
-          <span class="planet-weight-sub" id="b3_pattern">(مَفْعُولٌ)</span>
+        <!-- 3. محطة اسم المفعول -->
+        <div class="planet-satellite-station station-3" onclick="openMorphModal(2)">
+          <div class="planet-orbit-badge">
+            <span class="planet-badge-title">اسْمُ المَفْعُولِ</span>
+            <span class="planet-badge-q">مَا الَّذِي فُعِلَ؟</span>
+          </div>
+          <div class="space-planet-sphere sphere-3">
+            <div class="planet-word-text" id="b3_word">مَكْتُوبٌ</div>
+            <span class="planet-weight-sub" id="b3_pattern">(مَفْعُولٌ)</span>
+          </div>
         </div>
 
-        <!-- 4. كوكب اسم المكان -->
-        <div class="space-planet-sphere planet-4-place" onclick="openMorphModal(3)">
-          <span class="planet-title-label">اسْمُ المَكَانِ</span>
-          <span class="planet-question-hint">أَيْنَ يَقَعُ؟</span>
-          <div class="planet-word-text" id="b4_word">مَكْتَبٌ</div>
-          <span class="planet-weight-sub" id="b4_pattern">(مَفْعَلٌ)</span>
+        <!-- 4. محطة اسم المكان -->
+        <div class="planet-satellite-station station-4" onclick="openMorphModal(3)">
+          <div class="planet-orbit-badge">
+            <span class="planet-badge-title">اسْمُ المَكَانِ</span>
+            <span class="planet-badge-q">أَيْنَ يَقَعُ؟</span>
+          </div>
+          <div class="space-planet-sphere sphere-4">
+            <div class="planet-word-text" id="b4_word">مَكْتَبٌ</div>
+            <span class="planet-weight-sub" id="b4_pattern">(مَفْعَلٌ)</span>
+          </div>
         </div>
 
-        <!-- 5. كوكب المصدر -->
-        <div class="space-planet-sphere planet-5-source" onclick="openMorphModal(4)">
-          <span class="planet-title-label">المَصْدَرُ</span>
-          <span class="planet-question-hint">مَا اسْمُ النَّشَاطِ؟</span>
-          <div class="planet-word-text" id="b5_word">كِتَابَةٌ</div>
-          <span class="planet-weight-sub" id="b5_pattern">(فِعَالَةٌ)</span>
+        <!-- 5. محطة المصدر -->
+        <div class="planet-satellite-station station-5" onclick="openMorphModal(4)">
+          <div class="planet-orbit-badge">
+            <span class="planet-badge-title">المَصْدَرُ</span>
+            <span class="planet-badge-q">مَا اسْمُ النَّشَاطِ؟</span>
+          </div>
+          <div class="space-planet-sphere sphere-5">
+            <div class="planet-word-text" id="b5_word">كِتَابَةٌ</div>
+            <span class="planet-weight-sub" id="b5_pattern">(فِعَالَةٌ)</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1253,9 +1386,20 @@
         <div class="jigsaw-pieces-flex" id="puzzleContainer"></div>
       </div>
     </div>
+
+    <!-- 5. ميدان التحدي الصرفي والقياس (الوحدة الجديدة) -->
+    <div id="challengeTab" class="tab-view">
+      <div class="challenge-arena-box">
+        <h3 class="challenge-hero-title">🚀 مَيْدَانُ التَّحَدِّي الصَّرْفِيِّ (اخْتَبِرْ نَفْسَكَ فِي النَّظَائِرِ)</h3>
+        <p style="font-size: 1.2rem; font-weight: 800; color: #bae6fd; margin-top: 0.5rem;">
+          طَبِّقِ القَاعِدَةَ الَّتِي تَعَلَّمْتَهَا عَلَى أَفْعَالٍ جَدِيدَةٍ مِنْ نَفْسِ الجِنْسِ:
+        </p>
+        <div class="challenge-cards-grid" id="challengeContainer"></div>
+      </div>
+    </div>
   </main>
 
-  <!-- النافذة المنبثقة -->
+  <!-- النافذة المنبثقة للتحليل وقرص الشمس -->
   <div class="modal-overlay" id="morphModal" onclick="closeModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeModal()">✕</button>
@@ -1408,7 +1552,7 @@
     };
 
     /* ========================================================================= */
-    /* قاعدة البيانات الشاملة مع تعاريف دلالية واضحة للجذور والمشتقات */
+    /* قاعدة البيانات الشاملة مع بنك التحديات القياسية (الميدان الخامس) */
     /* ========================================================================= */
     const db = {
       // 1. صحيح سالم (ثلاثي)
@@ -1456,6 +1600,12 @@
           { q: "اسْمُ المَكَانِ مِنَ الفِعْلِ (كَتَبَ) يَأْتِي عَلَى وَزْنِ مَفْعَل وَهُوَ:", ans: "مَكْتَبٌ", opts: ["مَكْتَبٌ", "كَاتِبٌ", "مَكْتُوبٌ"] },
           { q: "الفِعْلُ (اسْتَكْتَبَ) هُوَ فِعْلٌ:", ans: "مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ", opts: ["مُجَرَّدٌ", "مَزِيدٌ بِحَرْفٍ", "مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ"] },
           { q: "مَصْدَرُ الفِعْلِ (كَتَبَ) الدَّالُّ عَلَى الحِرْفَةِ وَالشِّبْهِ هُوَ:", ans: "كِتَابَةٌ", opts: ["كِتَابَةٌ", "كِتَابٌ", "مَكْتَبٌ"] }
+        ],
+        // تحديات القياس لنظائر الفعل الصحيح السالم
+        challenges: [
+          { badge: "قِيَاسُ اسْمِ الفَاعِلِ", prompt: "قِسْ عَلَى (كَتَبَ -> كَاتِبٌ): مَا اسْمُ الفَاعِلِ مِنَ الفِعْلِ السَّالِمِ (رَسَمَ)؟", ans: "رَاسِمٌ", opts: ["رَاسِمٌ", "مَرْسُومٌ", "مِرْسَمٌ"] },
+          { badge: "قِيَاسُ اسْمِ المَفْعُولِ", prompt: "قِسْ عَلَى (كَتَبَ -> مَكْتُوبٌ): مَا اسْمُ المَفْعُولِ مِنَ الفِعْلِ السَّالِمِ (طَبَخَ)؟", ans: "مَطْبُوخٌ", opts: ["طَابِخٌ", "مَطْبُوخٌ", "مَطْبَخٌ"] },
+          { badge: "قِيَاسُ اسْمِ المَكَانِ", prompt: "قِسْ عَلَى (كَتَبَ -> مَكْتَبٌ): مَا اسْمُ المَكَانِ الَّذِي نَطْبُخُ فِيهِ مِنْ (طَبَخَ)؟", ans: "مَطْبَخٌ", opts: ["مَطْبَخٌ", "طَابِخٌ", "مَطْبُوخٌ"] }
         ]
       },
 
@@ -1505,10 +1655,15 @@
           { q: "يَأْتِي اسْمُ المَفْعُولِ مِنَ الفِعْلِ (قَرَأَ) عَلَى وَزْنِ مَفْعُول وَهُوَ:", ans: "مَقْرُوءٌ", opts: ["مَقْرُوءٌ", "قَارِئٌ", "مَقْرَأٌ"] },
           { q: "الفِعْلُ (أَقْرَأَ) هُوَ فِعْلٌ مَزِيدٌ بِـ:", ans: "الهَمْزَةِ فِي أَوَّلِهِ", opts: ["الهَمْزَةِ فِي أَوَّلِهِ", "التَّضْعِيفِ", "الأَلِفِ"] },
           { q: "مَصْدَرُ الفِعْلِ (قَرَأَ) الدَّالُّ عَلَى المُلَازَمَةِ هُوَ:", ans: "قِرَاءَةٌ", opts: ["قِرَاءَةٌ", "مَقْرَأٌ", "قَارِئٌ"] }
+        ],
+        challenges: [
+          { badge: "قِيَاسُ اسْمِ الفَاعِلِ", prompt: "قِسْ عَلَى (قَرَأَ -> قَارِئٌ): مَا اسْمُ الفَاعِلِ مِنَ الفِعْلِ المَهْمُوزِ (بَدَأَ)؟", ans: "بَادِئٌ", opts: ["بَادِئٌ", "مَبْدُوءٌ", "مَبْدَأٌ"] },
+          { badge: "قِيَاسُ اسْمِ المَفْعُولِ", prompt: "قِسْ عَلَى (قَرَأَ -> مَقْرُوءٌ): مَا اسْمُ المَفْعُولِ مِنَ الفِعْلِ المَهْمُوزِ (بَدَأَ)؟", ans: "مَبْدُوءٌ", opts: ["بَادِئٌ", "مَبْدُوءٌ", "مَبْدَأٌ"] },
+          { badge: "قِيَاسُ اسْمِ المَكَانِ", prompt: "قِسْ عَلَى (قَرَأَ -> مَقْرَأٌ): مَا اسْمُ المَكَانِ الَّذِي نَبْدَأُ مِنْهُ مِنْ (بَدَأَ)؟", ans: "مَبْدَأٌ", opts: ["مَبْدَأٌ", "بَادِئٌ", "مَبْدُوءٌ"] }
         ]
       },
 
-      // 3. صحيح مضعف (ثلاثي)
+      // 3. باقي الجذور مع بنك التحديات المناسب
       "مدد": {
         letters: ['م', 'د', 'د'],
         concept: "البَسْطُ وَالعَوْنُ (صَحِيحٌ مُضَعَّفٌ)",
@@ -1553,10 +1708,14 @@
           { q: "اسْمُ الفَاعِلِ مِنَ الفِعْلِ المُضَعَّفِ (مَدَّ) هُوَ:", ans: "مَادٌّ", opts: ["مَادٌّ", "مَمْدُودٌ", "مَدَّادٌ"] },
           { q: "الفِعْلُ (امْتَدَّ) عَلَى وَزْنِ (افْتَعَلَ) مَزِيدٌ بِـ:", ans: "حَرْفَيْنِ", opts: ["حَرْفٍ وَاحِدٍ", "حَرْفَيْنِ", "ثَلَاثَةِ أَحْرُفٍ"] },
           { q: "يَأْتِي اسْمُ المَفْعُولِ مِنْ (مَدَّ) عَلَى وَزْنِ:", ans: "مَفْعُولٌ", opts: ["مَفْعُولٌ", "فَاعِلٌ", "مَفْعَلٌ"] }
+        ],
+        challenges: [
+          { badge: "قِيَاسُ اسْمِ المَفْعُولِ", prompt: "قِسْ عَلَى (مَدَّ -> مَمْدُودٌ): مَا اسْمُ المَفْعُولِ مِنَ الفِعْلِ المُضَعَّفِ (شَدَّ)؟", ans: "مَشْدُودٌ", opts: ["شَادٌّ", "مَشْدُودٌ", "مَشَدٌّ"] },
+          { badge: "قِيَاسُ اسْمِ الفَاعِلِ", prompt: "قِسْ عَلَى (مَدَّ -> مَادٌّ): مَا اسْمُ الفَاعِلِ مِنَ الفِعْلِ المُضَعَّفِ (رَدَّ)؟", ans: "رَادٌّ", opts: ["رَادٌّ", "مَرْدُودٌ", "رَدَّادٌ"] },
+          { badge: "قِيَاسُ اسْمِ المَكَانِ", prompt: "قِسْ عَلَى (مَدَّ -> مَمَدٌّ): مَا اسْمُ المَكَانِ مِنَ الفِعْلِ المُضَعَّفِ (مَرَّ)؟", ans: "مَمَرٌّ", opts: ["مَمَرٌّ", "مَارٌّ", "مَمْرُورٌ"] }
         ]
       },
 
-      // 4. صحيح سالم (رباعي مجرد)
       "دحرج": {
         letters: ['د', 'ح', 'ر', 'ج'],
         concept: "الحَرَكَةُ الدَّائِرِيَّةُ (رُبَاعِيٌّ مُجَرَّدٌ)",
@@ -1598,10 +1757,14 @@
           { q: "مَا هُوَ مَصْدَرُ الفِعْلِ الرُّبَاعِيِّ المُجَرَّدِ (دَحْرَجَ)؟", ans: "دَحْرَجَةٌ", opts: ["دَحْرَجَةٌ", "دِحْرَاجٌ", "تَدَحْرُجٌ"] },
           { q: "اسْمُ الفَاعِلِ مِنَ الرُّبَاعِيِّ (دَحْرَجَ) يَأْتِي عَلَى وَزْنِ:", ans: "مُفَعْلِلٌ", opts: ["مُفَعْلِلٌ", "مُفَعْلَلٌ", "فَاعِلٌ"] },
           { q: "الفِعْلُ (تَدَحْرَجَ) مَزِيدٌ بِـ:", ans: "حَرْفِ التَّاءِ فِي أَوَّلِهِ", opts: ["حَرْفِ التَّاءِ فِي أَوَّلِهِ", "حَرْفَيْنِ", "تَضْعِيفِ الرَّاءِ"] }
+        ],
+        challenges: [
+          { badge: "قِيَاسُ اسْمِ الفَاعِلِ", prompt: "قِسْ عَلَى (دَحْرَجَ -> مُدَحْرِجٌ): مَا اسْمُ الفَاعِلِ مِنَ الرُّبَاعِيِّ (بَعْثَرَ)؟", ans: "مُبَعْثِرٌ", opts: ["مُبَعْثِرٌ", "مُبَعْثَرٌ", "بَاعِثٌ"] },
+          { badge: "قِيَاسُ اسْمِ المَفْعُولِ", prompt: "قِسْ عَلَى (دَحْرَجَ -> مُدَحْرَجٌ): مَا اسْمُ المَفْعُولِ مِنَ الرُّبَاعِيِّ (طَمْأَنَ)؟", ans: "مُطَمْأَنٌ", opts: ["مُطَمْئِنٌ", "مُطَمْأَنٌ", "طَمْأَنَةٌ"] },
+          { badge: "قِيَاسُ المَصْدَرِ", prompt: "قِسْ عَلَى (دَحْرَجَ -> دَحْرَجَةٌ): مَا مَصْدَرُ الفِعْلِ الرُّبَاعِيِّ (بَعْثَرَ)؟", ans: "بَعْثَرَةٌ", opts: ["بَعْثَرَةٌ", "بِعْثَارٌ", "تَبَعْثُرٌ"] }
         ]
       },
 
-      // 5. صحيح مضعف (رباعي مجرد)
       "زلزل": {
         letters: ['ز', 'ل', 'ز', 'ل'],
         concept: "الاهْتِزَازُ وَالارْتِجَاجُ (رُبَاعِيٌّ مُجَرَّدٌ)",
@@ -1641,13 +1804,16 @@
         ],
         quizzes: [
           { q: "يَأْتِي مَصْدَرُ الرُّبَاعِيِّ المُضَاعَفِ (زَلْزَلَ) عَلَى وَزْنَيْنِ هُمَا:", ans: "فَعْلَلَةٌ وَفِعْلَالٌ", opts: ["فَعْلَلَةٌ وَفِعْلَالٌ", "فُعُولٌ وَتَفْعِيلٌ", "مُفَاعَلَةٌ"] },
-          { q: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ الرُّبَاعِيِّ (زَلْزَلَ) عَلَى وَزْنِ مُفَعْلِل بِـ:", ans: "ضَمِّ أَوَّلِهِ وَكَسْرِ مَا قَبْلَ آخِرِهِ", opts: ["ضَمِّ أَوَّلِهِ وَكَسْرِ مَا قَبْلَ آخِرِهِ", "فَتْحِ أَوَّلِهِ", "عَلَى وَزْنِ فَاعِلٍ"] },
+          { q: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ الرُّبَاعِيِّ (زَلْزَلَ) عَلَى وَزْنِ مُفَعْلِل بِـ:", ans: "ضَمِّ أَوَّلِهِ وَكَسْرِ مَا قَبْلَ الآخِرِ", opts: ["ضَمِّ أَوَّلِهِ وَكَسْرِ مَا قَبْلَ الآخِرِ", "فَتْحِ أَوَّلِهِ", "عَلَى وَزْنِ فَاعِلٍ"] },
           { q: "اسْمُ المَفْعُولِ مِنَ الرُّبَاعِيِّ (زَلْزَلَ) هُوَ:", ans: "مُزَلْزَلٌ", opts: ["مُزَلْزَلٌ", "مُزَلْزِلٌ", "مَزْلُولٌ"] },
           { q: "الفِعْلُ (تَزَلْزَلَ) هُوَ فِعْلٌ رُبَاعِيٌّ مَزِيدٌ بِـ:", ans: "حَرْفِ التَّاءِ فِي أَوَّلِهِ", opts: ["حَرْفِ التَّاءِ فِي أَوَّلِهِ", "حَرْفَيْنِ", "ثَلَاثَةِ أَحْرُفٍ"] }
+        ],
+        challenges: [
+          { badge: "قِيَاسُ المَصْدَرِ المُضَاعَفِ", prompt: "قِسْ عَلَى (زَلْزَلَ -> زَلْزَلَةٌ وَزِلْزَالٌ): مَا مَصْدَرُ الرُّبَاعِيِّ المُضَاعَفِ (وَسْوَسَ)؟", ans: "وَسْوَسَةٌ وَوِسْوَاسٌ", opts: ["وَسْوَسَةٌ وَوِسْوَاسٌ", "تَوَسْوُسٌ", "مُوَسْوِسٌ"] },
+          { badge: "قِيَاسُ اسْمِ الفَاعِلِ", prompt: "قِسْ عَلَى (زَلْزَلَ -> مُزَلْزِلٌ): مَا اسْمُ الفَاعِلِ مِنَ الرُّبَاعِيِّ المُضَاعَفِ (وَسْوَسَ)؟", ans: "مُوَسْوِسٌ", opts: ["مُوَسْوِسٌ", "مُوَسْوَسٌ", "وَسْوَاسٌ"] }
         ]
       },
 
-      // 6. معتل مثال
       "وقف": {
         letters: ['و', 'ق', 'ف'],
         concept: "الثَّبَاتُ وَالانْتِظَامُ (مُعْتَلٌّ مِثَالٌ)",
@@ -1693,10 +1859,14 @@
           { q: "الفِعْلُ (وَقَفَ) هُوَ فِعْلٌ مُعْتَلٌّ نَوْعُهُ:", ans: "مِثَالٌ", opts: ["مِثَالٌ", "أَجْوَفُ", "نَاقِصٌ"] },
           { q: "اسْمُ الفَاعِلِ مِنَ الفِعْلِ (وَقَفَ) هُوَ:", ans: "وَاقِفٌ", opts: ["وَاقِفٌ", "مَوْقُوفٌ", "مَوْقِفٌ"] },
           { q: "يُصَاغُ اسْمُ المَفْعُولِ مِنْ (وَقَفَ) عَلَى وَزْنِ:", ans: "مَفْعُولٌ", opts: ["مَفْعُولٌ", "فَاعِلٌ", "مَفْعَلٌ"] }
+        ],
+        challenges: [
+          { badge: "قِيَاسُ اسْمِ المَكَانِ المِثَالِ", prompt: "قِسْ عَلَى (وَقَفَ -> مَوْقِفٌ): مَا اسْمُ المَكَانِ مِنَ الفِعْلِ المِثَالِ (وَضَعَ)؟", ans: "مَوْضِعٌ", opts: ["مَوْضِعٌ", "وَاضِعٌ", "مَوْضُوعٌ"] },
+          { badge: "قِيَاسُ اسْمِ المَفْعُولِ", prompt: "قِسْ عَلَى (وَقَفَ -> مَوْقُوفٌ): مَا اسْمُ المَفْعُولِ مِنَ الفِعْلِ المِثَالِ (وَجَدَ)؟", ans: "مَوْجُودٌ", opts: ["وَاجِدٌ", "مَوْجُودٌ", "مَوْجِدٌ"] },
+          { badge: "قِيَاسُ اسْمِ الفَاعِلِ", prompt: "قِسْ عَلَى (وَقَفَ -> وَاقِفٌ): مَا اسْمُ الفَاعِلِ مِنَ الفِعْلِ المِثَالِ (وَصَلَ)؟", ans: "وَاصِلٌ", opts: ["وَاصِلٌ", "مَوْصُولٌ", "مَوْصِلٌ"] }
         ]
       },
 
-      // 7. معتل أجوف
       "قول": {
         letters: ['ق', 'و', 'ل'],
         concept: "القَوْلُ وَالكَلَامُ (مُعْتَلٌّ أَجْوَفُ)",
@@ -1743,10 +1913,14 @@
           { q: "اسْمُ المَفْعُولِ مِنَ الفِعْلِ الأَجْوَفِ (قَالَ) هُوَ:", ans: "مَقُولٌ", opts: ["مَقُولٌ", "مَقْوُولٌ", "قَائِلٌ"] },
           { q: "الفِعْلُ (تَقَوَّلَ) هُوَ فِعْلٌ مَزِيدٌ بِـ:", ans: "حَرْفَيْنِ", opts: ["حَرْفَيْنِ", "حَرْفٍ وَاحِدٍ", "ثَلَاثَةِ أَحْرُفٍ"] },
           { q: "أَصْلُ حَرْفِ العِلَّةِ فِي الفِعْلِ (قَالَ) هُوَ:", ans: "الوَاوُ", opts: ["الوَاوُ", "اليَاءُ", "الأَلِفُ أَصْلِيَّةٌ"] }
+        ],
+        challenges: [
+          { badge: "قِيَاسُ اسْمِ الفَاعِلِ الأَجْوَفِ", prompt: "قِسْ عَلَى (قَالَ -> قَائِلٌ): مَا اسْمُ الفَاعِلِ مِنَ الفِعْلِ الأَجْوَفِ (صَامَ)؟", ans: "صَائِمٌ", opts: ["صَائِمٌ", "مَصُومٌ", "صَوَّامٌ"] },
+          { badge: "قِيَاسُ اسْمِ المَفْعُولِ الأَجْوَفِ", prompt: "قِسْ عَلَى (قَالَ -> مَقُولٌ): مَا اسْمُ المَفْعُولِ مِنَ الفِعْلِ الأَجْوَفِ (صَانَ)؟", ans: "مَصُونٌ", opts: ["صَائِنٌ", "مَصُونٌ", "مَصْوُونٌ"] },
+          { badge: "قِيَاسُ اسْمِ المَكَانِ", prompt: "قِسْ عَلَى (قَالَ -> مَقَالٌ): مَا اسْمُ المَكَانِ مِنَ الفِعْلِ الأَجْوَفِ (قَامَ)؟", ans: "مَقَامٌ", opts: ["مَقَامٌ", "قَائِمٌ", "مَقُومٌ"] }
         ]
       },
 
-      // 8. معتل ناقص
       "رمي": {
         letters: ['ر', 'م', 'ي'],
         concept: "القَذْفُ وَالإِطْلَاقُ (مُعْتَلٌّ نَاقِصٌ)",
@@ -1791,10 +1965,13 @@
           { q: "عِنْدَمَا يَكُونُ اسْمُ الفَاعِلِ مِنَ النَّاقِصِ نَكِرَةً مَرْفُوعاً يُكْتَبُ:", ans: "رَامٍ", opts: ["رَامٍ", "رَامِيٌ", "رَامِي"] },
           { q: "اسْمُ المَكَانِ مِنَ الفِعْلِ (رَمَى) يَأْتِي عَلَى وَزْنِ مَفْعَل:", ans: "مَرْمَى", opts: ["مَرْمَى", "مَرْمِيٌّ", "مَرْمٍ"] },
           { q: "الفِعْلُ (ارْتَمَى) هُوَ فِعْلٌ مَزِيدٌ بِـ:", ans: "حَرْفَيْنِ", opts: ["حَرْفَيْنِ", "حَرْفٍ وَاحِدٍ", "ثَلَاثَةِ أَحْرُفٍ"] }
+        ],
+        challenges: [
+          { badge: "قِيَاسُ اسْمِ المَفْعُولِ النَّاقِصِ", prompt: "قِسْ عَلَى (رَمَى -> مَرْمِيٌّ): مَا اسْمُ المَفْعُولِ مِنَ الفِعْلِ النَّاقِصِ (بَنَى)؟", ans: "مَبْنِيٌّ", opts: ["بَانٍ", "مَبْنِيٌّ", "مَبْنَى"] },
+          { badge: "قِيَاسُ اسْمِ المَكَانِ النَّاقِصِ", prompt: "قِسْ عَلَى (رَمَى -> مَرْمَى): مَا اسْمُ المَكَانِ مِنَ الفِعْلِ النَّاقِصِ (سَعَى)؟", ans: "مَسْعَى", opts: ["مَسْعَى", "سَاعٍ", "مَسْعِيٌّ"] }
         ]
       },
 
-      // 9. مزيد بالتضعيف (تعدية)
       "درس": {
         letters: ['د', 'ر', 'س'],
         concept: "التَّعْلِيمُ وَالتَّدْرِيبُ (ثُلَاثِيٌّ مَزِيدٌ)",
@@ -1841,10 +2018,13 @@
           { q: "يُصَاغُ اسْمُ الفَاعِلِ مِنْ غَيْرِ الثُّلَاثِيِّ (دَرَّسَ) بِـ:", ans: "مِيمٍ مَضْمُومَةٍ وَكَسْرِ مَا قَبْلَ الآخِرِ", opts: ["مِيمٍ مَضْمُومَةٍ وَكَسْرِ مَا قَبْلَ الآخِرِ", "مِيمٍ مَفْتُوحَةٍ", "وَزْنِ فَاعِلٍ"] },
           { q: "الفَرْقُ بَيْنَ اسْمِ الفَاعِلِ (مُدَرِّسٌ) وَاسْمِ المَفْعُولِ (مُدَرَّسٌ) هُوَ:", ans: "حَرَكَةُ الحَرْفِ قَبْلَ الآخِرِ", opts: ["حَرَكَةُ الحَرْفِ قَبْلَ الآخِرِ", "المِيمُ فِي الأَوَّلِ", "عَدَدُ الحُرُوفِ"] },
           { q: "الفِعْلُ (دَرَّسَ) مَزِيدٌ بِـ:", ans: "تَضْعِيفِ العَيْنِ", opts: ["تَضْعِيفِ العَيْنِ", "حَرْفَيْنِ", "ثَلَاثَةِ أَحْرُفٍ"] }
+        ],
+        challenges: [
+          { badge: "قِيَاسُ المَصْدَرِ المُضَعَّفِ", prompt: "قِسْ عَلَى (دَرَّسَ -> تَدْرِيسٌ): مَا مَصْدَرُ الفِعْلِ المَزِيدِ (عَلَّمَ)؟", ans: "تَعْلِيمٌ", opts: ["تَعْلِيمٌ", "عِلْمٌ", "تَعَلُّمٌ"] },
+          { badge: "قِيَاسُ اسْمِ الفَاعِلِ", prompt: "قِسْ عَلَى (دَرَّسَ -> مُدَرِّسٌ): مَا اسْمُ الفَاعِلِ مِنَ الفِعْلِ (دَرَّبَ)؟", ans: "مُدَرِّبٌ", opts: ["مُدَرِّبٌ", "مُدَرَّبٌ", "تَدْرِيبٌ"] }
         ]
       },
 
-      // 10. مزيد بالتضعيف (تكثير)
       "كسر": {
         letters: ['ك', 'س', 'ر'],
         concept: "التَّهْشِيمُ وَالتَّكْسِيرُ (ثُلَاثِيٌّ مَزِيدٌ)",
@@ -1888,10 +2068,13 @@
           { q: "اسْمُ المَفْعُولِ مِنَ الفِعْلِ غَيْرِ الثُّلَاثِيِّ (كَسَّرَ) هُوَ:", ans: "مُكَسَّرٌ", opts: ["مُكَسَّرٌ", "مَكْسُورٌ", "كَاسِرٌ"] },
           { q: "مَصْدَرُ الفِعْلِ (كَسَّرَ) يَأْتِي عَلَى وَزْنِ تَفْعِيل وَهُوَ:", ans: "تَكْسِيرٌ", opts: ["تَكْسِيرٌ", "كَسْرٌ", "انْكِسَارٌ"] },
           { q: "الفِعْلُ (انْكَسَرَ) هُوَ فِعْلٌ:", ans: "مَزِيدٌ بِحَرْفَيْنِ", opts: ["مَزِيدٌ بِحَرْفَيْنِ", "مُجَرَّدٌ", "مَزِيدٌ بِحَرْفٍ"] }
+        ],
+        challenges: [
+          { badge: "قِيَاسُ التَّكْثِيرِ", prompt: "قِسْ عَلَى (كَسَّرَ -> تَقْطِيعٌ): مَا مَصْدَرُ الفِعْلِ الدَّالِّ عَلَى الكَثْرَةِ (قَطَّعَ)؟", ans: "تَقْطِيعٌ", opts: ["تَقْطِيعٌ", "قَطْعٌ", "انْقِطَاعٌ"] },
+          { badge: "قِيَاسُ اسْمِ المَفْعُولِ", prompt: "قِسْ عَلَى (كَسَّرَ -> مُكَسَّرٌ): مَا اسْمُ المَفْعُولِ مِنَ الفِعْلِ (مَزَّقَ)؟", ans: "مُمَزَّقٌ", opts: ["مُمَزِّقٌ", "مُمَزَّقٌ", "مَمْزُوقٌ"] }
         ]
       },
 
-      // 11. مزيد بحرفين (خماسي)
       "كشف": {
         letters: ['ك', 'ش', 'ف'],
         concept: "الظُّهُورُ وَالاكْتِشَافُ (ثُلَاثِيٌّ مَزِيدٌ)",
@@ -1934,10 +2117,13 @@
           { q: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ الخُمَاسِيِّ (اكْتَشَفَ) بِـ:", ans: "مِيمٍ مَضْمُومَةٍ وَكَسْرِ مَا قَبْلَ الآخِرِ", opts: ["مِيمٍ مَضْمُومَةٍ وَكَسْرِ مَا قَبْلَ الآخِرِ", "مِيمٍ مَضْمُومَةٍ وَفَتْحِ مَا قَبْلَ الآخِرِ", "وَزْنِ فَاعِلٍ"] },
           { q: "الفِعْلُ (اكْتَشَفَ) هُوَ فِعْلٌ مَزِيدٌ بِـ:", ans: "حَرْفَيْنِ", opts: ["حَرْفَيْنِ", "حَرْفٍ وَاحِدٍ", "ثَلَاثَةِ أَحْرُفٍ"] },
           { q: "يَأْتِي اسْمُ المَفْعُولِ مِنْ (اكْتَشَفَ) عَلَى وَزْنِ:", ans: "مُفْتَعَلٌ", opts: ["مُفْتَعَلٌ", "مُفْتَعِلٌ", "مَفْعُولٌ"] }
+        ],
+        challenges: [
+          { badge: "قِيَاسُ الخُمَاسِيِّ المَزِيدِ", prompt: "قِسْ عَلَى (اكْتَشَفَ -> اكْتِشَافٌ): مَا مَصْدَرُ الفِعْلِ المَزِيدِ بِحَرْفَيْنِ (اخْتَرَعَ)؟", ans: "اخْتِرَاعٌ", opts: ["اخْتِرَاعٌ", "مُخْتَرَعٌ", "تَخْرِيعٌ"] },
+          { badge: "قِيَاسُ اسْمِ الفَاعِلِ", prompt: "قِسْ عَلَى (اكْتَشَفَ -> مُكْتَشِفٌ): مَا اسْمُ الفَاعِلِ مِنَ الفِعْلِ (اخْتَرَعَ)؟", ans: "مُخْتَرِعٌ", opts: ["مُخْتَرِعٌ", "مُخْتَرَعٌ", "مَخْرُوعٌ"] }
         ]
       },
 
-      // 12. مزيد بثلاثة أحرف (سداسي)
       "خرج": {
         letters: ['خ', 'ر', 'ج'],
         concept: "السَّعْيُ وَالاسْتِخْرَاجُ (ثُلَاثِيٌّ مَزِيدٌ)",
@@ -1980,6 +2166,10 @@
           { q: "مَصْدَرُ الفِعْلِ (اسْتَخْرَجَ) هُوَ:", ans: "اسْتِخْرَاجٌ", opts: ["اسْتِخْرَاجٌ", "تَخْرِيجٌ", "خُرُوجٌ"] },
           { q: "يُصَاغُ اسْمُ المَفْعُولِ مِنْ (اسْتَخْرَجَ) بِـ:", ans: "مِيمٍ مَضْمُومَةٍ وَفَتْحِ مَا قَبْلَ الآخِرِ", opts: ["مِيمٍ مَضْمُومَةٍ وَفَتْحِ مَا قَبْلَ الآخِرِ", "مِيمٍ مَضْمُومَةٍ وَكَسْرِ مَا قَبْلَ الآخِرِ", "وَزْنِ مَفْعُولٍ"] },
           { q: "يَأْتِي اسْمُ الفَاعِلِ مِنْ (اسْتَخْرَجَ) عَلَى وَزْنِ:", ans: "مُسْتَفْعِلٌ", opts: ["مُسْتَفْعِلٌ", "مُسْتَفْعَلٌ", "فَاعِلٌ"] }
+        ],
+        challenges: [
+          { badge: "قِيَاسُ السُّدَاسِيِّ المَزِيدِ", prompt: "قِسْ عَلَى (اسْتَخْرَجَ -> اسْتِخْرَاجٌ): مَا مَصْدَرُ الفِعْلِ السُّدَاسِيِّ (اسْتَغْفَرَ)؟", ans: "اسْتِغْفَارٌ", opts: ["اسْتِغْفَارٌ", "مُسْتَغْفِرٌ", "غُفْرَانٌ"] },
+          { badge: "قِيَاسُ اسْمِ المَفْعُولِ", prompt: "قِسْ عَلَى (اسْتَخْرَجَ -> مُسْتَخْرَجٌ): مَا اسْمُ المَفْعُولِ مِنَ الفِعْلِ (اسْتَعْمَلَ)؟", ans: "مُسْتَعْمَلٌ", opts: ["مُسْتَعْمِلٌ", "مُسْتَعْمَلٌ", "مَعْمُولٌ"] }
         ]
       }
     };
@@ -2024,6 +2214,7 @@
       loadInteractiveStory(data);
       renderDiscsWorkshop(data.labs);
       renderRealPuzzleArena(data.quizzes);
+      renderChallengeArena(data.challenges || []);
     }
 
     function openMorphModal(branchIdx) {
@@ -2043,24 +2234,22 @@
       document.getElementById('mColloc').textContent = branch.colloc;
       document.getElementById('mExample').textContent = branch.ex;
 
-      // أزرار نطق الشرح والمتلازمة والمثال (تظهر في الحدث فقط)
       const btnDesc = document.getElementById('btnPlayDesc');
       const btnColloc = document.getElementById('btnPlayColloc');
       const btnExample = document.getElementById('btnPlayExample');
 
-      if (branch.isVerb) {
-        btnDesc.style.display = 'inline-flex';
-        btnColloc.style.display = 'inline-flex';
-        btnExample.style.display = 'inline-flex';
+      // أصوات ElevenLabs المحددة أو البديل التلقائي
+      const folder = Sound.rootFolderMap[rootKey] || rootKey;
+      const filePrefixes = ['verb', 'actor', 'product', 'place', 'source'];
+      const prefix = filePrefixes[branchIdx];
 
-        btnDesc.onclick = () => Sound.speak(branch.desc);
-        btnColloc.onclick = () => Sound.speak(branch.colloc);
-        btnExample.onclick = () => Sound.speak(branch.ex.replace(/[«»]/g, ''));
-      } else {
-        btnDesc.style.display = 'none';
-        btnColloc.style.display = 'none';
-        btnExample.style.display = 'none';
-      }
+      btnDesc.style.display = 'inline-flex';
+      btnColloc.style.display = 'inline-flex';
+      btnExample.style.display = 'inline-flex';
+
+      btnDesc.onclick = () => Sound.playAsset(folder, `${prefix}_desc`, branch.desc);
+      btnColloc.onclick = () => Sound.playAsset(folder, `${prefix}_colloc`, branch.colloc);
+      btnExample.onclick = () => Sound.playAsset(folder, `${prefix}_ex`, branch.ex.replace(/[«»]/g, ''));
 
       const ruleBanner = document.getElementById('mRuleBanner');
       if (branch.rule) {
@@ -2070,12 +2259,8 @@
         ruleBanner.style.display = 'none';
       }
 
-      const fileNames = ['verb', 'actor', 'product', 'place', 'source'];
-      const folder = Sound.rootFolderMap[rootKey] || rootKey;
-      const currentAudioFile = fileNames[branchIdx];
-
       document.getElementById('mAudioBtn').onclick = () => {
-        Sound.playAsset(folder, currentAudioFile, branch.plain);
+        Sound.playAsset(folder, prefix, branch.plain);
       };
 
       const affixCard = document.getElementById('mAffixCard');
@@ -2087,7 +2272,7 @@
         affixList.innerHTML = '';
         affixTitle.textContent = "📚 عَائِلَةُ الأَفْعَالِ المَزِيدَةِ";
 
-        rootObj.affixes.forEach(aff => {
+        rootObj.affixes.forEach((aff, aIdx) => {
           const div = document.createElement('div');
           div.className = 'affix-item';
           div.innerHTML = `
@@ -2098,7 +2283,7 @@
               </div>
               <div style="font-size: 0.95rem; color: #64748b;">${aff.desc}</div>
             </div>
-            <button style="border:none; background:#fef08a; padding:0.4rem 0.8rem; border-radius:20px; cursor:pointer; font-weight:bold; color:#854d0e;" onclick="Sound.speak('${aff.plain}')">🔊</button>
+            <button style="border:none; background:#fef08a; padding:0.4rem 0.8rem; border-radius:20px; cursor:pointer; font-weight:bold; color:#854d0e;" onclick="Sound.playAsset('${folder}', 'affix_${aIdx+1}', '${aff.plain}')">🔊</button>
           `;
           affixList.appendChild(div);
         });
@@ -2107,7 +2292,7 @@
       }
 
       document.getElementById('morphModal').classList.add('open');
-      Sound.playAsset(folder, currentAudioFile, branch.plain);
+      Sound.playAsset(folder, prefix, branch.plain);
     }
 
     // نافذة استكشاف معنى الجذر الصافي عند النقر على قرص الشمس
@@ -2179,11 +2364,12 @@
           }, 800);
         } else {
           setTimeout(() => {
+            const rootKey = document.getElementById('rootSelect').value;
+            const folder = Sound.rootFolderMap[rootKey] || rootKey;
             const victoryMsg = "🎉 بَطَلٌ خَارِقٌ! اسْتَخْرَجْتَ كَافَّةَ مَشَاهِدِ الجَذْرِ الخَمْسَةِ بِنَجَاحٍ!";
             document.getElementById('storyMissionBadge').textContent = victoryMsg;
-            Sound.correct();
             addStars(30);
-            Sound.speak("بَطَلٌ خَارِقٌ! اسْتَخْرَجْتَ كَافَّةَ مَشَاهِدِ الجَذْرِ الخَمْسَةِ بِنَجَاحٍ!");
+            Sound.playAsset(folder, 'victory', "بَطَلٌ خَارِقٌ! اسْتَخْرَجْتَ كَافَّةَ مَشَاهِدِ الجَذْرِ الخَمْسَةِ بِنَجَاحٍ!");
           }, 600);
         }
       } else {
@@ -2416,6 +2602,57 @@
         fb.style.background = '#fee2e2';
         fb.style.color = '#b91c1c';
         fb.innerHTML = `✕ قِطْعَةٌ غَيْرُ مُطَابِقَةٍ! أَعِدِ المُحَاوَلَةَ يَا بَطَلُ.`;
+        Sound.wrong();
+      }
+    }
+
+    /* دالة توليد ميدان التحدي الصرفي والقياس (الوحدة الخامسة) */
+    function renderChallengeArena(challenges) {
+      const container = document.getElementById('challengeContainer');
+      container.innerHTML = '';
+
+      if (!challenges || challenges.length === 0) {
+        container.innerHTML = '<p style="font-size:1.3rem; color:#bae6fd;">تَحَدِّيَاتُ هَذَا الجَذْرِ قَيْدَ الإِعْدَادِ يَا بَطَلُ!</p>';
+        return;
+      }
+
+      challenges.forEach((c, idx) => {
+        const card = document.createElement('div');
+        card.className = 'analogy-card';
+        card.innerHTML = `
+          <span class="analogy-badge">${c.badge}</span>
+          <div class="analogy-prompt">${c.prompt}</div>
+          <div class="analogy-options-row">
+            ${c.opts.map(opt => `
+              <button class="analogy-btn" onclick="evaluateChallengeClick(this, '${opt}', '${c.ans}', ${idx})">${opt}</button>
+            `).join('')}
+          </div>
+          <div class="analogy-feedback" id="fb_chal_${idx}"></div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function evaluateChallengeClick(btn, selected, correct, idx) {
+      Sound.pop();
+      const fb = document.getElementById(`fb_chal_${idx}`);
+      Sound.speak(selected);
+
+      if (selected === correct) {
+        fb.style.display = 'block';
+        fb.style.background = '#dcfce7';
+        fb.style.color = '#15803d';
+        fb.innerHTML = '🌟 صَحِيحٌ! أَجَبْتَ بِقِيَاسٍ صَرْفِيٍّ دَقِيقٍ.';
+        btn.style.background = '#22c55e';
+        btn.style.color = 'white';
+        btn.style.borderColor = '#15803d';
+        Sound.correct();
+        addStars(20);
+      } else {
+        fb.style.display = 'block';
+        fb.style.background = '#fee2e2';
+        fb.style.color = '#b91c1c';
+        fb.innerHTML = '✕ إِجَابَةٌ غَيْرُ صَحِيحَةٍ! تَأَمَّلِ الوَزْنَ وَحَاوِلْ مَرَّةً أُخْرَى.';
         Sound.wrong();
       }
     }
