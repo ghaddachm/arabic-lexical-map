@@ -1061,6 +1061,20 @@
         "زلزل": "zlzl", "وقف": "wqf", "قول": "qwl", "رمي": "rmy",
         "درس": "drs", "كسر": "ksr", "كشف": "kshf", "خرج": "khrj"
       },
+      pause() {
+        this.audioPlayer.pause();
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+        }
+      },
+
+      stop() {
+        this.audioPlayer.pause();
+        this.audioPlayer.currentTime = 0;
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+        }
+      },
       stop() {
      this.audioPlayer.pause();
      this.audioPlayer.currentTime = 0;
@@ -1805,6 +1819,7 @@
     }
 
     function loadRadialWorld(rootKey) {
+      Sound.stop();
       const data = db[rootKey];
       if (!data) return;
 
@@ -1934,15 +1949,23 @@
     function speakCurrentStory() {
       const rootKey = document.getElementById('rootSelect').value;
       const folder = Sound.rootFolderMap[rootKey] || rootKey;
+      const targetSrc = `audio/${folder}/story.mp3`;
+
+      // إذا كان الصوت متوقفاً مؤقتاً في منتصف الحكاية نفسها، استأنف من حيث توقف
+      if (Sound.audioPlayer.src.includes(targetSrc) && Sound.audioPlayer.paused && Sound.audioPlayer.currentTime > 0) {
+        Sound.audioPlayer.play();
+        return;
+      }
+
+      // إذا كانت بداية جديدة
       const fallbackText = db[rootKey].storyParagraph.map(p => p.word).join(' ');
       Sound.playAsset(folder, 'story', fallbackText);
     }
 
     function stopStoryAudio() {
-      Sound.stop();
+      Sound.pause(); // إيقاف مؤقت مع حفظ موضع الثواني
       Sound.pop();
     }
-
     function speakCurrentMissionAudio() {
       const rootKey = document.getElementById('rootSelect').value;
       const folder = Sound.rootFolderMap[rootKey] || rootKey;
