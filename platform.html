@@ -968,7 +968,7 @@
 
              <div style="margin-top: 0.8rem; display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap;">
              <button class="master-audio-btn" style="width:auto; margin-top:0; padding:0.4rem 1.1rem; font-size:0.95rem;" onclick="speakCurrentStoryIntro()">📢 اسْتَمِعْ لِلتَّوْجِيهِ</button>
-             <button id="btnPlayStory" class="master-audio-btn" style="width:auto; margin-top:0; padding:0.4rem 1.2rem; font-size:0.95rem; background: #0284c7;" onclick="playStoryAudio()">▶️ اسْتَمِعْ لِلنَّصِّ</button>
+             <button id="btnPlayStory" class="master-audio-btn" style="width:auto; margin-top:0; padding:0.4rem 1.2rem; font-size:0.95rem; background: #0284c7;" onclick="speakCurrentStory()">▶️ اسْتَمِعْ لِلنَّصِّ</button>
              <button id="btnStopStory" class="master-audio-btn" style="width:auto; margin-top:0; padding:0.4rem 1.2rem; font-size:0.95rem; background: #dc2626;" onclick="stopStoryAudio()">⏹️ إِيقَافٌ</button>
            </div>
             </div>
@@ -1069,9 +1069,8 @@
      }
    },
 
-     playAsset(folder, fileName, fallbackText, onEndCallback) {
-  this.stop();
-  const primaryPath = folder ? `audio/${folder}/${fileName}.mp3` : `audio/${fileName}.mp3`;
+    playAsset(folder, fileName, fallbackText, onEndCallback) {
+        const primaryPath = folder ? `audio/${folder}/${fileName}.mp3` : `audio/${fileName}.mp3`;
         this.audioPlayer.src = primaryPath;
         
         this.audioPlayer.onended = () => {
@@ -1088,7 +1087,6 @@
           });
         });
       },
-
       correct(callback) {
         const cheerFiles = ['correct_1', 'correct_2', 'correct_3'];
         const randomCheer = cheerFiles[Math.floor(Math.random() * cheerFiles.length)];
@@ -1932,6 +1930,17 @@
       const rootKey = document.getElementById('rootSelect').value;
       const folder = Sound.rootFolderMap[rootKey] || rootKey;
       Sound.playAsset(folder, 'story_intro', "اقْرَأِ النَّصَّ يَا بَطَلُ، وَانْقُرْ مُبَاشَرَةً عَلَى الكَلِمَةِ المَطْلُوبَةِ لِتَتَلَوَّنَ بِالأَخْضَرِ!");
+    }
+    function speakCurrentStory() {
+      const rootKey = document.getElementById('rootSelect').value;
+      const folder = Sound.rootFolderMap[rootKey] || rootKey;
+      const fallbackText = db[rootKey].storyParagraph.map(p => p.word).join(' ');
+      Sound.playAsset(folder, 'story', fallbackText);
+    }
+
+    function stopStoryAudio() {
+      Sound.stop();
+      Sound.pop();
     }
 
     function speakCurrentMissionAudio() {
