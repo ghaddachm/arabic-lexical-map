@@ -1978,7 +1978,7 @@
       const rootKey = document.getElementById('rootSelect').value;
       const folder = Sound.rootFolderMap[rootKey] || rootKey;
 
-      // قائمة جامعة للكلمات الخارجية التي قد ينقر عليها المتعلم
+      // قائمة الكلمات اللغوية الصحيحة في النص ولكنها خارج عائلة الجذر
       const externalWords = [
         "جَلَسَ", "وَقَفَ", "أَمْسَكَ", "عَمِلَ", "ذَهَبَ", "قَالَ",
         "رَبَطَا", "وَصَلَا", "أَقْبَلَ", "حَضَرَ", "نَظَرَ", "سَمِعَ",
@@ -1987,17 +1987,19 @@
       const clickedWordClean = item.word.replace(/[.,،؛:«»]/g, '').trim();
 
       if (externalWords.includes(clickedWordClean) && !item.target) {
-        const generalAlertText = "أَحْسَنْتَ! هَذِهِ الكَلِمَةُ صَحِيحَةٌ لُغَوِيّاً، لَكِنَّهَا لَا تَنْتَمِي إِلَى عَائِلَةِ جَذْرِنَا اليَوْمَ.. تَأَمَّلِ النَّصَّ جَيِّداً وَابْحَثْ عَنْ كَلِمَةِ الجَذْرِ المَطْلُوبَةِ يَا بَطَلُ!";
+        // العبارة الرشيقة الجديدة
+        const generalAlertText = "كَلِمَةٌ صَحِيحَةٌ، لَكِنَّهَا لَيْسَتْ مِنْ شَمْسِ جَذْرِنَا.. حَاوِلْ مَرَّةً أُخْرَى!";
         
-        // تشغيل الملف الصوتي العام الموحد من مجلد audio
+        // تشغيل ملف التنبيه العام المولّد من ElevenLabs
         Sound.playAsset('', 'hint_general', generalAlertText);
 
+        // التنبيه البصري باللون البرتقالي/الأصفر
         el.style.borderColor = '#f59e0b';
         el.style.boxShadow = '0 5px 0 #d97706';
         setTimeout(() => {
           el.style.borderColor = '#94a3b8';
           el.style.boxShadow = '0 4px 0 #94a3b8';
-        }, 1800);
+        }, 1500);
         return;
       }
 
