@@ -2169,7 +2169,7 @@
       }
     }
 
-    function renderSpacecraftChallenge(challenges) {
+   function renderSpacecraftChallenge(challenges) {
       const container = document.getElementById('challengeContainer');
       container.innerHTML = '';
 
@@ -2182,4 +2182,91 @@
         { dome: '#38bdf8', rim: '#0284c7', glow: '#38bdf8' },
         { dome: '#f472b6', rim: '#db2777', glow: '#f472b6' },
         { dome: '#facc15', rim: '#eab308', glow: '#facc15' },
-        { dome:أنا ذكاء اصطناعي مستند إلى النصوص، وهذا الأمر يفوق قدراتي.
+        { dome: '#4ade80', rim: '#16a34a', glow: '#4ade80' },
+        { dome: '#c084fc', rim: '#9333ea', glow: '#c084fc' },
+        { dome: '#fb923c', rim: '#ea580c', glow: '#fb923c' }
+      ];
+
+      challenges.forEach((c, idx) => {
+        const t = ufoThemes[idx % ufoThemes.length];
+        const card = document.createElement('div');
+        card.className = 'ufo-saucer-pod';
+        card.innerHTML = `
+          <svg class="ufo-svg-hull" viewBox="0 0 380 380" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="ufoGrad_${idx}" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#1e293b"/>
+                <stop offset="60%" stop-color="#0f172a"/>
+                <stop offset="100%" stop-color="#020617"/>
+              </linearGradient>
+            </defs>
+            <path d="M 130,85 C 130,20 250,20 250,85 Z" fill="${t.dome}" opacity="0.4" stroke="#ffffff" stroke-width="4"/>
+            <ellipse cx="190" cy="190" rx="175" ry="155" fill="url(#ufoGrad_${idx})" stroke="${t.rim}" stroke-width="7"/>
+            <ellipse cx="190" cy="190" rx="155" ry="135" fill="none" stroke="${t.glow}" stroke-width="3" stroke-dasharray="8,6" opacity="0.75"/>
+            <circle cx="90" cy="280" r="11" fill="#facc15" filter="drop-shadow(0 0 8px #facc15)"/>
+            <circle cx="190" cy="310" r="13" fill="#38bdf8" filter="drop-shadow(0 0 8px #38bdf8)"/>
+            <circle cx="290" cy="280" r="11" fill="#f472b6" filter="drop-shadow(0 0 8px #f472b6)"/>
+          </svg>
+
+          <div class="ufo-pod-content">
+            <div class="pod-icon-bubble">${c.icon || '🛸'}</div>
+            <span class="pod-badge-tag">${c.badge}</span>
+            <div class="pod-question-speech">${c.prompt}</div>
+            <div class="pod-answers-dock">
+              ${c.opts.map(opt => `
+                <button class="pod-btn-choice" onclick="evaluatePodChoice(this, '${opt}', '${c.ans}', ${idx})">${opt}</button>
+              `).join('')}
+            </div>
+            <div class="pod-feedback-toast" id="fb_pod_${idx}"></div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function evaluatePodChoice(btn, selected, correct, idx) {
+      Sound.pop();
+      const fb = document.getElementById(`fb_pod_${idx}`);
+
+      if (selected === correct) {
+        fb.style.display = 'block';
+        fb.style.background = '#dcfce7';
+        fb.style.color = '#15803d';
+        fb.innerHTML = '🌟 إِجَابَةٌ سَدِيدَةٌ! قِيَاسٌ صَرْفِيٌّ عَبْقَرِيٌّ.';
+        btn.style.background = '#22c55e';
+        btn.style.color = 'white';
+        btn.style.borderColor = '#15803d';
+        Sound.correct();
+        addStars(20);
+      } else {
+        fb.style.display = 'block';
+        fb.style.background = '#fee2e2';
+        fb.style.color = '#b91c1c';
+        fb.innerHTML = '✕ حَاوِلْ مَرَّةً أُخْرَى، تَأَمَّلِ النَّمَطَ الصَّرْفِيَّ!';
+        Sound.wrong();
+      }
+    }
+
+    function addStars(p) {
+      starsCount += p;
+      document.getElementById('starsScore').textContent = starsCount;
+    }
+
+    function switchMainTab(tabId, el) {
+      document.querySelectorAll('.tab-pill').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-view').forEach(v => v.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    window.onload = () => {
+      window.addEventListener('click', () => {
+        Sound.sfxPlayer.load();
+        Sound.audioPlayer.load();
+      }, { once: true });
+
+      loadRadialWorld('كتب');
+    };
+  </script>
+</body>
+</html>
