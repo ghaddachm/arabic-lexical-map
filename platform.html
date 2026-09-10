@@ -966,10 +966,11 @@
                 <button class="master-audio-btn" style="width:auto; margin-top:0; padding:0.35rem 1.2rem; font-size:1rem;" onclick="speakCurrentMissionAudio()">🔊 اسْتَمِعْ لِلمَهَمَّةِ</button>
               </div>
 
-              <div style="margin-top: 0.8rem; display: flex; justify-content: center; gap: 0.6rem;">
-                <button class="master-audio-btn" style="width:auto; margin-top:0; padding:0.4rem 1.3rem; font-size:1rem;" onclick="speakCurrentStoryIntro()">📢 اسْتَمِعْ لِلتَّوْجِيهِ</button>
-                <button class="master-audio-btn" style="width:auto; margin-top:0; padding:0.4rem 1.3rem; font-size:1rem;" onclick="speakCurrentStory()">📖 اسْتَمِعْ لِلنَّصِّ كَامِلاً</button>
-              </div>
+             <div style="margin-top: 0.8rem; display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap;">
+             <button class="master-audio-btn" style="width:auto; margin-top:0; padding:0.4rem 1.1rem; font-size:0.95rem;" onclick="speakCurrentStoryIntro()">📢 اسْتَمِعْ لِلتَّوْجِيهِ</button>
+             <button id="btnPlayStory" class="master-audio-btn" style="width:auto; margin-top:0; padding:0.4rem 1.2rem; font-size:0.95rem; background: #0284c7;" onclick="playStoryAudio()">▶️ اسْتَمِعْ لِلنَّصِّ</button>
+             <button id="btnStopStory" class="master-audio-btn" style="width:auto; margin-top:0; padding:0.4rem 1.2rem; font-size:0.95rem; background: #dc2626;" onclick="stopStoryAudio()">⏹️ إِيقَافٌ</button>
+           </div>
             </div>
 
             <div class="story-words-cloud-box" id="storyWordsContainer"></div>
@@ -1060,9 +1061,17 @@
         "زلزل": "zlzl", "وقف": "wqf", "قول": "qwl", "رمي": "rmy",
         "درس": "drs", "كسر": "ksr", "كشف": "kshf", "خرج": "khrj"
       },
+      stop() {
+     this.audioPlayer.pause();
+     this.audioPlayer.currentTime = 0;
+     if ('speechSynthesis' in window) {
+       window.speechSynthesis.cancel();
+     }
+   },
 
-      playAsset(folder, fileName, fallbackText, onEndCallback) {
-        const primaryPath = `audio/${folder}/${fileName}.mp3`;
+     playAsset(folder, fileName, fallbackText, onEndCallback) {
+  this.stop();
+  const primaryPath = folder ? `audio/${folder}/${fileName}.mp3` : `audio/${fileName}.mp3`;
         this.audioPlayer.src = primaryPath;
         
         this.audioPlayer.onended = () => {
@@ -1938,18 +1947,26 @@
       const rootKey = document.getElementById('rootSelect').value;
       const folder = Sound.rootFolderMap[rootKey] || rootKey;
 
-      // فحص ذكي للأفعال المجردة الأخرى في النص التي ليست من الجذر المطلوب (مثل: جلس)
-      const externalVerbs = ["جَلَسَ", "وَقَفَ", "أَمْسَكَ", "عَمِلَ", "ذَهَبَ"];
+      // قائمة جامعة للكلمات الخارجية التي قد ينقر عليها المتعلم
+      const externalWords = [
+        "جَلَسَ", "وَقَفَ", "أَمْسَكَ", "عَمِلَ", "ذَهَبَ", "قَالَ",
+        "رَبَطَا", "وَصَلَا", "أَقْبَلَ", "حَضَرَ", "نَظَرَ", "سَمِعَ",
+        "الصَّغِيرُ", "القِرَاءَةِ", "المُسَافِرُ", "الحَارِسُ", "البَاحِثُ", "العَامِلُ"
+      ];
       const clickedWordClean = item.word.replace(/[.,،؛:«»]/g, '').trim();
 
-      if (currentTargetType === "الفعل المجرد" && externalVerbs.includes(clickedWordClean) && !item.target) {
-        Sound.speak(`«${clickedWordClean}» فِعْلٌ ثُلَاثِيٌّ مُجَرَّدٌ صَحِيحٌ فِعْلاً! لَكِنَّهُ لَيْسَ مِنْ شَمْسِ جَذْرِنَا، ابْحَثْ عَنْ فِعْلِ الجَذْرِ [${data.letters.join(' - ')}]!`);
+      if (externalWords.includes(clickedWordClean) && !item.target) {
+        const generalAlertText = "أَحْسَنْتَ! هَذِهِ الكَلِمَةُ صَحِيحَةٌ لُغَوِيّاً، لَكِنَّهَا لَا تَنْتَمِي إِلَى عَائِلَةِ جَذْرِنَا اليَوْمَ.. تَأَمَّلِ النَّصَّ جَيِّداً وَابْحَثْ عَنْ كَلِمَةِ الجَذْرِ المَطْلُوبَةِ يَا بَطَلُ!";
+        
+        // تشغيل الملف الصوتي العام الموحد من مجلد audio
+        Sound.playAsset('', 'hint_general', generalAlertText);
+
         el.style.borderColor = '#f59e0b';
         el.style.boxShadow = '0 5px 0 #d97706';
         setTimeout(() => {
           el.style.borderColor = '#94a3b8';
           el.style.boxShadow = '0 4px 0 #94a3b8';
-        }, 1500);
+        }, 1800);
         return;
       }
 
@@ -1976,14 +1993,6 @@
         setTimeout(() => el.style.borderColor = '#94a3b8', 500);
       }
     }
-
-    function speakCurrentStory() {
-      const rootKey = document.getElementById('rootSelect').value;
-      const folder = Sound.rootFolderMap[rootKey] || rootKey;
-      const fallbackText = db[rootKey].storyParagraph.map(p => p.word).join(' ');
-      Sound.playAsset(folder, 'story', fallbackText);
-    }
-
     function renderDiscsWorkshop(labs) {
       const container = document.getElementById('discsContainer');
       container.innerHTML = '';
