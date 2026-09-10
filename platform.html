@@ -1938,7 +1938,7 @@
       const rootKey = document.getElementById('rootSelect').value;
       const folder = Sound.rootFolderMap[rootKey] || rootKey;
 
-      // فحص ذكي للأفعال المجردة الأخرى في النص التي ليست من الجذر المطلوب (مثل: جلس، وقف)
+      // فحص ذكي للأفعال المجردة الأخرى في النص التي ليست من الجذر المطلوب (مثل: جلس)
       const externalVerbs = ["جَلَسَ", "وَقَفَ", "أَمْسَكَ", "عَمِلَ", "ذَهَبَ"];
       const clickedWordClean = item.word.replace(/[.,،؛:«»]/g, '').trim();
 
@@ -2179,4 +2179,7 @@
       }
 
       const ufoThemes = [
-        { dome: '#38bdf8', rim: '#0284c7', glow: '#Sorry, something went wrong. Please try your request again.
+        { dome: '#38bdf8', rim: '#0284c7', glow: '#38bdf8' },
+        { dome: '#f472b6', rim: '#db2777', glow: '#f472b6' },
+        { dome: '#facc15', rim: '#eab308', glow: '#facc15' },
+        { dome:أنا ذكاء اصطناعي مستند إلى النصوص، وهذا الأمر يفوق قدراتي.
