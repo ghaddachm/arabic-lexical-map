@@ -2415,39 +2415,68 @@ let starsCount = 0;
     currentChallenges = currentChallenges.slice(0, 6);
   }
 
-  // دالة عرض المحطة الحالية
+  // دالة عرض المحطة الحالية //
   function renderCurrentPod(idx) {
     container.innerHTML = '';
 
-    // شاشة اكتمال الرحلة
+    // شاشة اكتمال المجرّة الفضائية //
     if (idx >= currentChallenges.length) {
-      // تشغيل صوت التشجيع والاحتفال المعتمد في المنصة
-      if (typeof Sound !== "undefined") {
-        if (Sound.playAsset) {
-          Sound.playAsset('', 'celebration.mp3', 'celebration');
-        } else if (Sound.celebrate) {
-          Sound.celebrate();
+      if (typeof window.currentGalaxyNum === 'undefined') {
+        window.currentGalaxyNum = 1;
+      }
+
+      const totalGalaxies = 5;
+      const isFinalGalaxy = (window.currentGalaxyNum >= totalGalaxies);
+
+      // تشغيل الصوت الصوتي المولد
+      if (typeof Sound !== "undefined" && Sound.playAsset) {
+        if (isFinalGalaxy) {
+          Sound.playAsset('', 'space_success.mp3', 'space_success');
+        } else {
+          Sound.playAsset('', 'galaxy_transition.mp3', 'galaxy_transition');
         }
       }
 
-      // إضافة النجوم للمتعلم تشجيعاً لإتمامه المجرة
+      // إضافة النجوم للمتعلم تشجيعاً
       if (typeof addStars === "function") {
-        addStars(30);
+        addStars(20);
       }
 
-      container.innerHTML = `
-        <div style="width: 100%; max-width: 650px; margin: 0 auto; text-align:center; padding: 2.5rem 1.5rem; background: radial-gradient(circle at center, #1e1b4b, #090d16); border: 2px solid #38bdf8; border-radius: 28px; box-shadow: 0 0 35px rgba(56, 189, 248, 0.35);">
-          <div style="font-size: 3.8rem; margin-bottom: 0.8rem;">✨🪐🚀</div>
-          <h3 style="color: #ffd166; font-size: 1.6rem; margin-bottom: 0.6rem;">اكْتَمَلَتْ رِحْلَةُ المَرْكَبَةِ الصَّرْفِيَّةِ!</h3>
-          <p style="color: #e2e8f0; font-size: 1.15rem; line-height: 1.7; margin-bottom: 1.8rem;">أَحْسَنْتَ يَا بَطَلَ المَجَرَّةِ، لَقَدْ أَثْبَتَّ تَمَكُّنَكَ مِنْ كَافَّةِ مَحَطَّاتِ الجَذْرِ (${rootKey})!</p>
-          
-          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <button class="master-audio-btn" style="width:auto; padding: 0.75rem 2rem; font-size: 1.05rem; background: #0284c7; border-radius: 16px; border:none; color:#fff; font-weight:bold; cursor:pointer;" onclick="renderSpacecraftChallenge()">
-              🔄 نَمُوذَجُ أَسْئِلَةٍ جَدِيدٍ
-            </button>
+      if (!isFinalGalaxy) {
+        // شاشة الانتقال إلى المجرة التالية بالعبارة المعتمدة
+        container.innerHTML = `
+          <div style="width: 100%; max-width: 650px; margin: 0 auto; text-align:center; padding: 2.5rem 1.5rem; background: radial-gradient(circle at center, #1e1b4b, #090d16); border: 2px solid #facc15; border-radius: 28px; box-shadow: 0 0 35px rgba(250, 204, 21, 0.35);">
+            <div style="font-size: 3.8rem; margin-bottom: 0.8rem;">🎉 🚀 🌟</div>
+            <h3 style="color: #ffd166; font-size: 1.6rem; margin-bottom: 0.6rem;">أَحْسَنْتَ! اكْتَمَلَتِ المَجَرَّةُ (${window.currentGalaxyNum})</h3>
+            <p style="color: #e2e8f0; font-size: 1.25rem; font-weight: bold; line-height: 1.7; margin-bottom: 1.8rem;">
+              رَائِعٌ جِدّاً يَا بَطَلَ الفَضَاءِ! اسْتَعِدَّ لِلانْطِلَاقِ نَحْوَ المَجَرَّةِ التَّالِيَةِ!
+            </p>
+            
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+              <button class="master-audio-btn" style="width:auto; padding: 0.85rem 2.2rem; font-size: 1.15rem; background: #22c55e; border-radius: 16px; border:none; color:#fff; font-weight:bold; cursor:pointer; box-shadow: 0 4px 0 #15803d;" onclick="window.currentGalaxyNum++; renderSpacecraftChallenge();">
+                الانْطِلَاقُ إِلَى المَجَرَّةِ التَّالِيَةِ 🌌 ➔
+              </button>
+            </div>
           </div>
-        </div>
-      `;
+        `;
+      } else {
+        // شاشة ختام كافة المجرات
+        container.innerHTML = `
+          <div style="width: 100%; max-width: 650px; margin: 0 auto; text-align:center; padding: 2.5rem 1.5rem; background: radial-gradient(circle at center, #1e1b4b, #090d16); border: 2px solid #38bdf8; border-radius: 28px; box-shadow: 0 0 35px rgba(56, 189, 248, 0.35);">
+            <div style="font-size: 3.8rem; margin-bottom: 0.8rem;">🏆 🪐 👑</div>
+            <h3 style="color: #ffd166; font-size: 1.6rem; margin-bottom: 0.6rem;">اكْتَمَلَتْ كَافَّةُ المَجَرَّاتِ الصَّرْفِيَّةِ!</h3>
+            <p style="color: #e2e8f0; font-size: 1.2rem; line-height: 1.7; margin-bottom: 1.8rem;">
+              أَحْسَنْتَ يَا بَطَلَ الكَوْنِ! لَقَدْ أَتْمَمْتَ كُلَّ مَرَاحِلِ مَرْكَبَةِ الصَّرْفِ بِتَفَوُّقٍ بَاهِرٍ!
+            </p>
+            
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+              <button class="master-audio-btn" style="width:auto; padding: 0.85rem 2.2rem; font-size: 1.15rem; background: #0284c7; border-radius: 16px; border:none; color:#fff; font-weight:bold; cursor:pointer; box-shadow: 0 4px 0 #0369a1;" onclick="window.currentGalaxyNum = 1; renderSpacecraftChallenge();">
+                🔄 إِعَادَةُ الرِّحْلَةِ مِنَ المَجَرَّةِ الأُولَى
+              </button>
+            </div>
+          </div>
+        `;
+      }
       return;
     }
 
