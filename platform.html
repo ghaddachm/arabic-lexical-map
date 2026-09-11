@@ -2155,57 +2155,76 @@ let starsCount = 0;
       Sound.playAsset(folder, mission.audio, mission.label);
     }
 
-    function handleStoryWordClick(el, item, data) {
-  Sound.pop();
+function handleStoryWordClick(el, item, data) {
   const currentMission = data.missions[currentMissionIdx];
+  if (!currentMission) return;
+
   const currentTargetType = currentMission.targetType;
   const rootKey = document.getElementById('rootSelect').value;
   const folder = Sound.rootFolderMap[rootKey] || rootKey;
 
-  // تنظيف الكلمة من علامات الترقيم
   const clickedWordClean = item.word.replace(/[.,،؛:«»]/g, '').trim();
 
-  // 1. قائمة الأفعال الصحيحة السالمة الثلاثية في النص فقط
-  const validSoundVerbsInStory = [
-    "كَتَبَ", "وَكَتَبَ", "جَلَسَ", "فَخَرَجَتْ", "خَرَجَتْ"
-  ];
-
-  // التحقق إن كانت المهمة الحالية تبحث عن الفعل الصحيح السالم / الثلاثي
+  // الأفعال الصحيحة السالمة الواردة في نص القصة
+  const validSoundVerbsInStory = ["كَتَبَ", "وَكَتَبَ", "جَلَسَ", "فَخَرَجَتْ", "خَرَجَتْ"];
   const isLookingForSoundVerb = (currentTargetType === 'core' || 
     (currentMission.label && (currentMission.label.includes('السَّالِم') || currentMission.label.includes('الثُّلَاثِي'))));
 
-  // قبول أي فعل صحيح سالم بديل من النص
-  const isAcceptedSoundVerb = isLookingForSoundVerb && validSoundVerbsInStory.includes(clickedWordClean);
+  const isAlternativeSoundVerb = isLookingForSoundVerb && 
+    validSoundVerbsInStory.includes(clickedWordClean) && 
+    !clickedWordClean.includes("كَتَبَ");
 
-  // ==========================================
-  // حالة الإجابة الصحيحة (الجذر المستهدف أو فعل صحيح سالم بديل)
-  // ==========================================
-  if (item.target === currentTargetType || isAcceptedSoundVerb) {
-    el.classList.add('found');
-    addStars(10);
-    currentMissionIdx++;
+  // فعل صحيح سالم خارج جذر الدرس: تنبيه برتقالي + تشغيل الصوت المولد دون نقل المهمة
+  if (isAlternativeSoundVerb) {
+    const alertMsg = "كَلِمَةٌ صَحِيحَةٌ، لَكِنَّهَا لَيْسَتْ مِنْ شَمْسِ جَذْرِنَا.. حَاوِلْ مَرَّةً أُخْرَى!";
+    
+    if (typeof Sound !== "undefined" && Sound.playAsset) {
+      Sound.playAsset('', 'hint_general.mp3', alertMsg);
+    }
 
-    Sound.correct(() => {
-      if (currentMissionIdx < data.missions.length) {
-        const nextMission = data.missions[currentMissionIdx];
-        document.getElementById('storyMissionBadge').textContent = nextMission.label;
-        Sound.playAsset(folder, nextMission.audio, nextMission.label);
-      } else {
-        const victoryMsg = "🎉 بَطَلٌ خَارِقٌ! اسْتَخْرَجْتَ كَافَّةَ مَشَاهِدِ القِصَّةِ بِنَجَاحٍ!";
-        document.getElementById('storyMissionBadge').textContent = victoryMsg;
-        addStars(30);
-        Sound.playAsset(folder, 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
-      }
-    });
+    el.style.borderColor = '#f59e0b';
+    el.style.boxShadow = '0 0 15px rgba(245, 158, 11, 0.6)';
+    setTimeout(() => {
+      el.style.borderColor = '#94a3b8';
+      el.style.boxShadow = 'none';
+    }, 1800);
     return;
   }
 
-  // ==========================================
-  // توجيهات ديداكتيكية ذكية للأفعال غير المطابقة للشروط
-  // ==========================================
+  // الإجابة الصحيحة التامة المطابقة للمهمة والجذر
+  if (item.target === currentTargetType || (isLookingForSoundVerb && clickedWordClean.includes("كَتَبَ"))) {
+    el.classList.add('found');
+    if (typeof addStars === "function") addStars(10);
+    currentMissionIdx++;
+
+    if (typeof Sound !== "undefined" && Sound.correct) {
+      Sound.correct(() => {
+        if (currentMissionIdx < data.missions.length) {
+          const nextMission = data.missions[currentMissionIdx];
+          const badge = document.getElementById('storyMissionBadge');
+          if (badge) badge.textContent = nextMission.label;
+          Sound.playAsset(folder, nextMission.audio, nextMission.label);
+        } else {
+          const badge = document.getElementById('storyMissionBadge');
+          if (badge) {
+            badge.innerHTML = `
+              <span>🎉 بَطَلٌ خَارِقٌ! اسْتَخْرَجْتَ كَافَّةَ مَشَاهِدِ القِصَّةِ بِنَجَاحٍ!</span>
+              <button type="button" onclick="window.resetStoryCloud();" style="margin-right:0.8rem; background:#facc15; color:#0f172a; border:none; padding:0.25rem 0.8rem; border-radius:12px; font-weight:bold; cursor:pointer; font-size:0.85rem;">
+                🔄 إِعَادَةُ الاسْتِكْشَافِ
+              </button>
+            `;
+          }
+          if (typeof addStars === "function") addStars(30);
+          Sound.playAsset(folder, 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
+        }
+      });
+    }
+    return;
+  }
+
+  // أفعال غير سالمة واردة في النص
   if (isLookingForSoundVerb) {
     let specificHint = "";
-
     if (clickedWordClean === "بَاتَ") {
       specificHint = "«بَاتَ» فِعْلٌ مُعْتَلٌّ أَجْوَف.. والمَطْلُوبُ فِعْلٌ صَحِيحٌ سَالِمٌ!";
     } else if (clickedWordClean === "أَمْسَكَ") {
@@ -2213,24 +2232,50 @@ let starsCount = 0;
     }
 
     if (specificHint) {
-      Sound.playAsset('', 'hint_general', specificHint);
+      if (typeof Sound !== "undefined" && Sound.playAsset) {
+        Sound.playAsset('', 'hint_general.mp3', specificHint);
+      }
       el.style.borderColor = '#f59e0b';
-      el.style.boxShadow = '0 5px 0 #d97706';
+      el.style.boxShadow = '0 0 15px rgba(245, 158, 11, 0.6)';
       setTimeout(() => {
         el.style.borderColor = '#94a3b8';
-        el.style.boxShadow = '0 4px 0 #94a3b8';
-      }, 1600);
+        el.style.boxShadow = 'none';
+      }, 1800);
       return;
     }
   }
 
-  // ==========================================
-  // حالة الخطأ (اسم مثل "سِحْرُ" أو حرف أو مشتق آخر في غير محله)
-  // ==========================================
-  Sound.wrong();
+  // نقر غير صحيح
+  if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
   el.style.borderColor = '#ef4444';
-  setTimeout(() => el.style.borderColor = '#94a3b8', 500);
+  el.style.boxShadow = '0 0 10px rgba(239, 68, 68, 0.5)';
+  setTimeout(() => {
+    el.style.borderColor = '#94a3b8';
+    el.style.boxShadow = 'none';
+  }, 600);
 }
+
+// دالة إعادة ضبط السحابة
+window.resetStoryCloud = function() {
+  currentMissionIdx = 0;
+  const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
+  const data = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey] : null;
+  
+  document.querySelectorAll('.story-click-pill').forEach(pill => {
+    pill.classList.remove('found');
+    pill.style.borderColor = '#94a3b8';
+    pill.style.boxShadow = 'none';
+  });
+
+  if (data && data.missions && data.missions[0]) {
+    const badge = document.getElementById('storyMissionBadge');
+    if (badge) badge.textContent = data.missions[0].label;
+    const folder = (typeof Sound !== "undefined" && Sound.rootFolderMap) ? (Sound.rootFolderMap[rootKey] || rootKey) : rootKey;
+    if (typeof Sound !== "undefined" && Sound.playAsset) {
+      Sound.playAsset(folder, data.missions[0].audio, data.missions[0].label);
+    }
+  }
+};
     function renderDiscsWorkshop(labs) {
       const container = document.getElementById('discsContainer');
       container.innerHTML = '';
