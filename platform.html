@@ -2402,174 +2402,264 @@ let starsCount = 0;
   const rootSelect = document.getElementById('rootSelect');
   const rootKey = rootSelect ? rootSelect.value : Object.keys(db)[0];
 
-  // جلب الأسئلة الأصلية للجذر
+  // جلب الأسئلة الأصلية للجذر (30 تحدياً)
   const rawChallenges = (challenges && challenges.length) ? challenges : (db[rootKey]?.challenges || []);
 
   if (!rawChallenges || rawChallenges.length === 0) {
     container.innerHTML = '<p style="font-size:1.4rem; color:#bae6fd; font-weight:bold; text-align:center;">🚀 مَرْكَبَةُ التَّحَدِّي لِهَذَا الجَذْرِ قَيْدَ الإِعْدَادِ! ✨</p>';
     return;
   }
-// خلط الأسئلة لتوليد نموذج جديد في كل رحلة
-  let currentChallenges = [...rawChallenges].sort(() => Math.random() - 0.5);
-  if (currentChallenges.length > 6) {
-    currentChallenges = currentChallenges.slice(0, 6);
+
+  // ==========================================
+  // بيانات المجرات الفضائية الخمس (كبسولات متنوعة)
+  // ==========================================
+  const GALAXY_METADATA = [
+    { id: 1, name: "مَجَرَّةُ الانْطِلَاقِ", icon: "🚀" },
+    { id: 2, name: "مَجَرَّةُ السَّدِيمِ", icon: "🌌" },
+    { id: 3, name: "مَجَرَّةُ المِيزَانِ الفَضَائِيِّ", icon: "⚖️" },
+    { id: 4, name: "مَجَرَّةُ الشِّهَابِ الثَّاقِبِ", icon: "🌠" },
+    { id: 5, name: "مَجَرَّةُ التَّفَوُّقِ الأَسْمَى", icon: "👑" }
+  ];
+
+  if (typeof window.unlockedGalaxy === 'undefined') window.unlockedGalaxy = 1;
+  if (typeof window.currentGalaxyNum === 'undefined') window.currentGalaxyNum = 1;
+
+  // دالة التنقل بين المجرات
+  window.switchGalaxy = function(targetGalaxyNum, forceUnlock = false) {
+    if (forceUnlock || targetGalaxyNum <= window.unlockedGalaxy) {
+      window.currentGalaxyNum = targetGalaxyNum;
+      renderSpacecraftChallenge();
+    }
+  };
+
+  // دالة تشغيل الصوت المباشر والآمن دون نطق الإنجليزية
+  function playSpaceAudio(fileName, fallbackArabicText) {
+    try {
+      const audio = new Audio('audio/' + fileName);
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          if ('speechSynthesis' in window && fallbackArabicText) {
+            const utter = new SpeechSynthesisUtterance(fallbackArabicText);
+            utter.lang = 'ar-SA';
+            window.speechSynthesis.speak(utter);
+          }
+        });
+      }
+    } catch(e) {
+      console.warn("Audio error:", e);
+    }
   }
 
-  // دالة عرض المحطة الحالية //
+  // بناء الشريط الجانبي للمجرات
+  function renderGalaxySidebar() {
+    let html = `
+      <div class="galaxy-nav-sidebar" style="background: rgba(15, 23, 42, 0.85); border: 2px solid #38bdf8; border-radius: 20px; padding: 1rem; width: 220px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); text-align: right;">
+        <div style="font-size: 1.05rem; font-weight: bold; color: #ffd166; margin-bottom: 0.8rem; text-align: center; border-bottom: 1px solid rgba(56, 189, 248, 0.3); padding-bottom: 0.5rem;">
+          🌌 خَرِيطَةُ المَجَرَّاتِ
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+    `;
+
+    GALAXY_METADATA.forEach((gal) => {
+      const isCurrent = (gal.id === window.currentGalaxyNum);
+      const isLocked = (gal.id > window.unlockedGalaxy);
+      
+      let style = "display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 0.6rem 0.75rem; border-radius: 12px; font-size: 0.85rem; transition: all 0.2s; font-family: inherit;";
+      if (isCurrent) {
+        style += "background: linear-gradient(135deg, #0284c7, #0369a1); border: 1.5px solid #38bdf8; color: #fff; font-weight: bold; box-shadow: 0 0 10px rgba(56, 189, 248, 0.6); cursor: default;";
+      } else if (!isLocked) {
+        style += "background: rgba(30, 41, 59, 0.7); border: 1px solid #38bdf8; color: #e2e8f0; cursor: pointer;";
+      } else {
+        style += "background: rgba(30, 41, 59, 0.3); border: 1px solid #475569; color: #64748b; cursor: not-allowed;";
+      }
+
+      html += `
+        <button type="button" style="${style}" onclick="window.switchGalaxy(${gal.id})" ${isLocked ? 'disabled' : ''}>
+          <span>${gal.icon} ${gal.name}</span>
+          <span>${isLocked ? '🔒' : (isCurrent ? '🚀' : '✨')}</span>
+        </button>
+      `;
+    });
+
+    html += `
+        </div>
+        <div style="margin-top: 1rem; text-align: center;">
+          <button type="button" onclick="window.unlockedGalaxy = 5; renderSpacecraftChallenge();" style="background: none; border: none; color: #94a3b8; font-size: 0.75rem; text-decoration: underline; cursor: pointer;">
+            🛠️ نمط المعلم (فتح الكل)
+          </button>
+        </div>
+      </div>
+    `;
+    return html;
+  }
+
+  // =========================================================================
+  // توزيع الأسئلة في كبسولات متنوعة لكل مجرة (تنوع شامل بين المشتقات)
+  // =========================================================================
+  const galaxySize = 6;
+  let currentChallenges = [];
+  const gIdx = window.currentGalaxyNum - 1;
+
+  if (rawChallenges.length >= 30) {
+    for (let step = 0; step < galaxySize; step++) {
+      const qIndex = (gIdx + (step * 5)) % rawChallenges.length;
+      currentChallenges.push(rawChallenges[qIndex]);
+    }
+  } else {
+    const startIdx = gIdx * galaxySize;
+    currentChallenges = rawChallenges.slice(startIdx, startIdx + galaxySize);
+    if (currentChallenges.length === 0) currentChallenges = rawChallenges.slice(0, 6);
+  }
+
+  // دالة عرض المحطة الحالية
   function renderCurrentPod(idx) {
     container.innerHTML = '';
 
-    // شاشة اكتمال المجرّة الفضائية //
+    // ===================================
+    // حالة اكتمال أسئلة المجرة الحالية
+    // ===================================
     if (idx >= currentChallenges.length) {
-      if (typeof window.currentGalaxyNum === 'undefined') {
-        window.currentGalaxyNum = 1;
+      const isFinalGalaxy = (window.currentGalaxyNum >= 5);
+
+      if (window.unlockedGalaxy <= window.currentGalaxyNum && !isFinalGalaxy) {
+        window.unlockedGalaxy = window.currentGalaxyNum + 1;
       }
 
-      const totalGalaxies = 5;
-      const isFinalGalaxy = (window.currentGalaxyNum >= totalGalaxies);
-
-      // تشغيل الصوت الصوتي المولد
-      if (typeof Sound !== "undefined" && Sound.playAsset) {
-        if (isFinalGalaxy) {
-          Sound.playAsset('audio', 'space_success.mp3', 'space_success');
-        } else {
-          Sound.playAsset('audio', 'galaxy_transition.mp3', 'galaxy_transition');
-        }
+      // تشغيل الصوت المعتمد في نهاية المجرة فقط
+      if (isFinalGalaxy) {
+        playSpaceAudio('space_success.mp3', 'أَحْسَنْتَ يَا بَطَلَ الكَوْنِ! لَقَدْ أَتْمَمْتَ كُلَّ رِحْلَاتِ المَرْكَبَةِ بِتَفَوُّقٍ بَاهِرٍ!');
+      } else {
+        playSpaceAudio('galaxy_transition.mp3', 'رَائِعٌ جِدّاً يَا بَطَلَ الفَضَاءِ! اسْتَعِدَّ لِلانْطِلَاقِ نَحْوَ المَجَرَّةِ التَّالِيَةِ!');
       }
 
-      // إضافة النجوم للمتعلم تشجيعاً
+      // إضافة النجوم بهدوء
       if (typeof addStars === "function") {
         addStars(20);
       }
 
-      if (!isFinalGalaxy) {
-        // شاشة الانتقال إلى المجرة التالية بالعبارة المعتمدة
-        container.innerHTML = `
-          <div style="width: 100%; max-width: 650px; margin: 0 auto; text-align:center; padding: 2.5rem 1.5rem; background: radial-gradient(circle at center, #1e1b4b, #090d16); border: 2px solid #facc15; border-radius: 28px; box-shadow: 0 0 35px rgba(250, 204, 21, 0.35);">
-            <div style="font-size: 3.8rem; margin-bottom: 0.8rem;">🎉 🚀 🌟</div>
-            <h3 style="color: #ffd166; font-size: 1.6rem; margin-bottom: 0.6rem;">أَحْسَنْتَ! اكْتَمَلَتِ المَجَرَّةُ (${window.currentGalaxyNum})</h3>
-            <p style="color: #e2e8f0; font-size: 1.25rem; font-weight: bold; line-height: 1.7; margin-bottom: 1.8rem;">
-              رَائِعٌ جِدّاً يَا بَطَلَ الفَضَاءِ! اسْتَعِدَّ لِلانْطِلَاقِ نَحْوَ المَجَرَّةِ التَّالِيَةِ!
+      container.innerHTML = `
+        <div style="display: flex; gap: 1.5rem; justify-content: center; align-items: flex-start; width: 100%; flex-wrap: wrap;">
+          ${renderGalaxySidebar()}
+          <div style="flex: 1; min-width: 320px; max-width: 600px; text-align:center; padding: 2.5rem 1.5rem; background: radial-gradient(circle at center, #1e1b4b, #090d16); border: 2px solid ${isFinalGalaxy ? '#38bdf8' : '#facc15'}; border-radius: 28px; box-shadow: 0 0 35px rgba(56, 189, 248, 0.35);">
+            <div style="font-size: 3.5rem; margin-bottom: 0.8rem;">${isFinalGalaxy ? '🏆 👑 🌟' : '🎉 🚀 ✨'}</div>
+            <h3 style="color: #ffd166; font-size: 1.5rem; margin-bottom: 0.6rem;">
+              ${isFinalGalaxy ? 'اكْتَمَلَتْ كَافَّةُ المَجَرَّاتِ الصَّرْفِيَّةِ!' : `أَحْسَنْتَ! اكْتَمَلَتْ ${GALAXY_METADATA[window.currentGalaxyNum - 1].name}`}
+            </h3>
+            <p style="color: #e2e8f0; font-size: 1.2rem; font-weight: bold; line-height: 1.7; margin-bottom: 1.8rem;">
+              ${isFinalGalaxy ? 'أَحْسَنْتَ يَا بَطَلَ الكَوْنِ! لَقَدْ أَتْمَمْتَ كُلَّ مَرَاحِلِ مَرْكَبَةِ الصَّرْفِ بِتَفَوُّقٍ بَاهِرٍ!' : 'رَائِعٌ جِدّاً يَا بَطَلَ الفَضَاءِ! اسْتَعِدَّ لِلانْطِلَاقِ نَحْوَ المَجَرَّةِ التَّالِيَةِ!'}
             </p>
-            
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-              <button class="master-audio-btn" style="width:auto; padding: 0.85rem 2.2rem; font-size: 1.15rem; background: #22c55e; border-radius: 16px; border:none; color:#fff; font-weight:bold; cursor:pointer; box-shadow: 0 4px 0 #15803d;" onclick="window.currentGalaxyNum++; renderSpacecraftChallenge();">
-                الانْطِلَاقُ إِلَى المَجَرَّةِ التَّالِيَةِ 🌌 ➔
-              </button>
+            <div>
+              ${!isFinalGalaxy ? `
+                <button type="button" style="padding: 0.85rem 2.2rem; font-size: 1.1rem; background: #22c55e; border-radius: 16px; border:none; color:#fff; font-weight:bold; cursor:pointer; box-shadow: 0 4px 0 #15803d;" onclick="window.switchGalaxy(${window.currentGalaxyNum + 1})">
+                  الانْطِلَاقُ إِلَى المَجَرَّةِ التَّالِيَةِ 🌌 ➔
+                </button>
+              ` : `
+                <button type="button" style="padding: 0.85rem 2.2rem; font-size: 1.1rem; background: #0284c7; border-radius: 16px; border:none; color:#fff; font-weight:bold; cursor:pointer; box-shadow: 0 4px 0 #0369a1;" onclick="window.switchGalaxy(1)">
+                  🔄 إِعَادَةُ الرِّحْلَةِ مِنَ المَجَرَّةِ الأُولَى
+                </button>
+              `}
             </div>
           </div>
-        `;
-      } else {
-        // شاشة ختام كافة المجرات
-        container.innerHTML = `
-          <div style="width: 100%; max-width: 650px; margin: 0 auto; text-align:center; padding: 2.5rem 1.5rem; background: radial-gradient(circle at center, #1e1b4b, #090d16); border: 2px solid #38bdf8; border-radius: 28px; box-shadow: 0 0 35px rgba(56, 189, 248, 0.35);">
-            <div style="font-size: 3.8rem; margin-bottom: 0.8rem;">🏆 🪐 👑</div>
-            <h3 style="color: #ffd166; font-size: 1.6rem; margin-bottom: 0.6rem;">اكْتَمَلَتْ كَافَّةُ المَجَرَّاتِ الصَّرْفِيَّةِ!</h3>
-            <p style="color: #e2e8f0; font-size: 1.2rem; line-height: 1.7; margin-bottom: 1.8rem;">
-              أَحْسَنْتَ يَا بَطَلَ الكَوْنِ! لَقَدْ أَتْمَمْتَ كُلَّ مَرَاحِلِ مَرْكَبَةِ الصَّرْفِ بِتَفَوُّقٍ بَاهِرٍ!
-            </p>
-            
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-              <button class="master-audio-btn" style="width:auto; padding: 0.85rem 2.2rem; font-size: 1.15rem; background: #0284c7; border-radius: 16px; border:none; color:#fff; font-weight:bold; cursor:pointer; box-shadow: 0 4px 0 #0369a1;" onclick="window.currentGalaxyNum = 1; renderSpacecraftChallenge();">
-                🔄 إِعَادَةُ الرِّحْلَةِ مِنَ المَجَرَّةِ الأُولَى
-              </button>
-            </div>
-          </div>
-        `;
-      }
+        </div>
+      `;
       return;
     }
 
+    // ===================================
+    // عرض السؤال مع خريطة المجرات
+    // ===================================
     const c = currentChallenges[idx];
+    const currentGal = GALAXY_METADATA[window.currentGalaxyNum - 1];
 
-    // مؤشرات التقدم الدائرية
-    let progressHtml = '<div style="display:flex; justify-content:center; gap: 0.6rem; margin-bottom: 1.2rem;">';
+    // مؤشرات التقدم
+    let dotsHtml = '';
     for (let i = 0; i < currentChallenges.length; i++) {
-      const dotColor = i < idx ? '#10b981' : (i === idx ? '#38bdf8' : 'rgba(255,255,255,0.2)');
-      const glow = i === idx ? 'box-shadow: 0 0 10px #38bdf8; transform: scale(1.25);' : '';
-      progressHtml += `<span style="width: 13px; height: 13px; border-radius: 50%; background: ${dotColor}; ${glow} transition: all 0.3s; display:inline-block;"></span>`;
+      const active = (i === idx) ? 'background:#38bdf8; transform:scale(1.25);' : (i < idx ? 'background:#22c55e;' : 'background:#475569;');
+      dotsHtml += `<span style="display:inline-block; width:10px; height:10px; border-radius:50%; margin:0 3px; transition:0.3s; ${active}"></span>`;
     }
-    progressHtml += '</div>';
 
-    const card = document.createElement('div');
-    card.style.cssText = "width: 100%; max-width: 680px; margin: 0 auto; background: radial-gradient(circle at top, #1e293b, #0b0f19); border: 2px solid #38bdf8; border-radius: 26px; padding: 1.8rem 1.6rem; box-shadow: 0 0 30px rgba(56, 189, 248, 0.2); text-align: center; position: relative;";
+    // استخراج الخيارات بشكل مرن ودقيق
+    const rawOptions = c.opts || c.choices || c.options || [];
+    const optionsList = [...rawOptions].sort(() => Math.random() - 0.5);
+    const promptQuestion = c.prompt || c.q || '';
+    const badgeName = c.badge || c.title || currentGal.name;
 
-    const badgeText = c.badge || c.title || `تَحَدِّي الصَّرْفِ`;
-    const promptText = c.prompt || c.q || '';
-    const optionsList = [...(c.opts || c.options || [])].sort(() => Math.random() - 0.5);
-
-    // الشريط العلوي الذي يضع زر المجرة التالية في الزاوية المقابلة للشارة
-    const topBarHtml = `
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 0.5rem;">
-        <div style="background: #0284c7; color:#fff; padding: 0.35rem 1.2rem; border-radius: 30px; font-weight: bold; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);">
-          🛸 ${badgeText} (${idx + 1} مِنْ ${currentChallenges.length})
-        </div>
-        <button onclick="goToNextGalaxy()" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 0.4rem 1.1rem; border-radius: 20px; font-weight: bold; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);">
-          <span>🚀 المَجَرَّةُ التَّالِيَةُ</span>
+    let choicesHtml = '';
+    optionsList.forEach(opt => {
+      choicesHtml += `
+        <button type="button" class="pod-choice-btn" style="flex: 1; min-width: 140px; background: rgba(30, 41, 59, 0.85); border: 2px solid #38bdf8; color: #fff; padding: 0.85rem 1.2rem; border-radius: 16px; font-size: 1.15rem; font-weight: bold; cursor: pointer; transition: all 0.2s;" onclick="window.evaluatePodChoice(this, '${opt}', '${c.ans}', ${idx})">
+          ${opt}
         </button>
+      `;
+    });
+
+    container.innerHTML = `
+      <div style="display: flex; gap: 1.5rem; justify-content: center; align-items: flex-start; width: 100%; flex-wrap: wrap;">
+        ${renderGalaxySidebar()}
+        
+        <div style="flex: 1; min-width: 320px; max-width: 650px; background: radial-gradient(circle at center, #0f172a, #030712); border: 2px solid #38bdf8; border-radius: 24px; padding: 2rem 1.5rem; box-shadow: 0 0 25px rgba(56, 189, 248, 0.25); text-align: center;">
+          <div style="margin-bottom: 1rem;">${dotsHtml}</div>
+          <div style="display:inline-block; background:rgba(56, 189, 248, 0.15); border:1px solid #38bdf8; color:#ffd166; padding:0.3rem 1rem; border-radius:20px; font-size:0.95rem; margin-bottom:1.2rem;">
+            ${currentGal.icon} ${badgeName} - المحطة (${idx + 1} مِنْ ${currentChallenges.length})
+          </div>
+          
+          <div style="font-size: 1.3rem; color: #f8fafc; font-weight: bold; line-height: 1.8; margin-bottom: 2rem; min-height: 60px; display:flex; align-items:center; justify-content:center;">
+            ${promptQuestion}
+          </div>
+          
+          <div id="podChoicesWrapper" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+            ${choicesHtml}
+          </div>
+        </div>
       </div>
     `;
-
-    card.innerHTML = `
-      ${progressHtml}
-      ${topBarHtml}
-      
-      <div style="color: #f8fafc; font-size: 1.25rem; font-weight: 600; line-height: 1.8; margin-bottom: 2rem; min-height: 70px; display:flex; align-items:center; justify-content:center;">
-        ${promptText}
-      </div>
-
-      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-        ${optionsList.map(opt => `
-          <button class="pod-single-choice-btn" style="flex: 1; min-width: 160px; padding: 0.85rem 1.2rem; font-size: 1.2rem; font-family: inherit; font-weight: bold; color: #fff; background: rgba(30, 41, 59, 0.85); border: 2px solid #38bdf8; border-radius: 16px; cursor: pointer; transition: all 0.2s;" onclick="evaluatePodChoice(this, '${opt}', '${c.ans}', ${idx})">
-            ${opt}
-          </button>
-        `).join('')}
-      </div>
-    `;
-    container.appendChild(card);
   }
 
-  // آلية تقييم الإجابات (انتقال سريع ومباشر بدون صوت بين الأسئلة)
+  // ==========================================
+  // آلية التقييم والتفاعل البصري الفوري
+  // ==========================================
   window.evaluatePodChoice = function(btn, chosen, correct, idx) {
-    if (chosen === correct) {
-      btn.style.background = '#10b981';
-      btn.style.borderColor = '#059669';
-      btn.style.boxShadow = '0 0 18px #10b981';
+    const parent = document.getElementById('podChoicesWrapper');
+    if (parent) {
+      const allBtns = parent.querySelectorAll('button');
+      allBtns.forEach(b => b.style.pointerEvents = 'none');
+    }
 
-      // إضافة النجوم بهدوء
+    if (chosen === correct) {
+      // تفاعل بصري أخضر فوري ومشع
+      btn.style.setProperty('background', '#10b981', 'important');
+      btn.style.setProperty('border-color', '#059669', 'important');
+      btn.style.setProperty('box-shadow', '0 0 20px #10b981', 'important');
+      btn.style.transform = 'scale(1.08)';
+
       if (typeof addStars === "function") addStars(10);
 
-      // انتقال سريع ومباشر للمحطة الموالية خلال نصف ثانية فقط بدون صوت
+      // انتقال سريع بدون صوت معطل
       setTimeout(() => {
         renderCurrentPod(idx + 1);
-      }, 500);
+      }, 450);
 
     } else {
-      btn.style.background = '#ef4444';
-      btn.style.borderColor = '#dc2626';
-      btn.style.boxShadow = '0 0 15px #ef4444';
+      // تفاعل بصري أحمر فوري
+      btn.style.setProperty('background', '#ef4444', 'important');
+      btn.style.setProperty('border-color', '#dc2626', 'important');
+      btn.style.setProperty('box-shadow', '0 0 20px #ef4444', 'important');
+      btn.style.transform = 'scale(0.95)';
 
-      // تنبيه خفيف عند الخطأ
       if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
 
       setTimeout(() => {
-        btn.style.background = 'rgba(30, 41, 59, 0.85)';
-        btn.style.borderColor = '#38bdf8';
-        btn.style.boxShadow = 'none';
-      }, 700);
-    }
-  };
-
-  // دالة القفز إلى الجذر التالي
-  window.goToNextGalaxy = function() {
-    const keys = Object.keys(db);
-    const currIdx = keys.indexOf(rootKey);
-    const nextKey = keys[(currIdx + 1) % keys.length];
-    
-    const sel = document.getElementById('rootSelect');
-    if (sel) {
-      sel.value = nextKey;
-      sel.dispatchEvent(new Event('change'));
+        btn.style.setProperty('background', 'rgba(30, 41, 59, 0.85)', 'important');
+        btn.style.setProperty('border-color', '#38bdf8', 'important');
+        btn.style.setProperty('box-shadow', 'none', 'important');
+        btn.style.transform = 'scale(1)';
+        
+        if (parent) {
+          const allBtns = parent.querySelectorAll('button');
+          allBtns.forEach(b => b.style.pointerEvents = 'auto');
+        }
+      }, 650);
     }
   };
 
