@@ -1180,10 +1180,41 @@
           { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ) مِنْ جَذْرِ كَتَبَ", targetType: "المصدر", audio: "mission_5" }
         ],
         labs: [
-          { title: "قُرْصُ: اسْمُ الفَاعِلِ", slots: [{ch:"كَـ"}, {ch:"", correct:"ا"}, {ch:"تِـ"}, {ch:"بٌ"}], pool: ["ا", "و", "ي"] },
-          { title: "قُرْصُ: اسْمُ المَكَانِ", slots: [{ch:"", correct:"مَـ"}, {ch:"كْ"}, {ch:"تَ"}, {ch:"بٌ"}], pool: ["مَـ", "أَ", "نَـ"] },
-          { title: "قُرْصُ: اسْمُ المَفْعُولِ", slots: [{ch:"مَـ"}, {ch:"كْ"}, {ch:"تُـ"}, {ch:"", correct:"و"}, {ch:"بٌ"}], pool: ["و", "ا", "ي"] }
-        ],
+  {
+    title: "المَحَطَّة 1: تَرْكِيبُ اسْمِ الفَاعِلِ",
+    type: "slots",
+    question: "أَكْمِلْ صِيغَةَ اسْمِ الفَاعِلِ بِإِضَافَةِ حَرْفِ المَدِّ المُنَاسِبِ لِوَزْنِ (فَاعِل):",
+    slots: [{ch: 'كَـ'}, {ch: ''}, {ch: 'تِـ'}, {ch: 'بٌ'}],
+    targetChar: 'ا',
+    pool: ['ا', 'و', 'ي'],
+    hint: "اسْمُ الفَاعِلِ مِنَ الثُّلَاثِيِّ يَكُونُ عَلَى وَزْنِ (فَاعِل) بِزِيَادَةِ أَلِفٍ بَعْدَ الحَرْفِ الأَوَّلِ."
+  },
+  {
+    title: "المَحَطَّة 2: ضَبْطُ عَيْنِ اسْمِ المَكَانِ",
+    type: "choice",
+    question: "اخْتَرْ صِيغَةَ اسْمِ المَكَانِ المَضْبُوطَةَ بِالشَّكْلِ التَّامِّ عَلَى وَزْنِ (مَفْعَل):",
+    options: ["مَكْتَبٌ", "مَكْتِبٌ", "مُكْتَبٌ"],
+    correctAnswer: "مَكْتَبٌ",
+    hint: "اسْمُ المَكَانِ مِنْ كَتَبَ يَكُونُ عَلَى وَزْنِ (مَفْعَل) بِفَتْحِ العَيْنِ (التَّاءِ)."
+  },
+  {
+    title: "المَحَطَّة 3: تَرْكِيبُ اسْمِ المَفْعُولِ",
+    type: "slots",
+    question: "أَكْمِلْ حَرْفَ المَدِّ النَّاقِصَ لِاكْتِمَالِ وَزْنِ (مَفْعُول):",
+    slots: [{ch: 'مَـ'}, {ch: 'كْ'}, {ch: 'تُـ'}, {ch: ''}, {ch: 'بٌ'}],
+    targetChar: 'و',
+    pool: ['و', 'ا', 'ي'],
+    hint: "اسْمُ المَفْعُولِ يَزْدَادُ فِيهِ مِيمٌ فِي أَوَّلِهِ وَوَاوٌ قَبْلَ آخِرِهِ (مَفْعُول)."
+  },
+  {
+    title: "المَحَطَّة 4: المُقَابَلَةُ الصَّرْفِيَّةُ",
+    type: "choice",
+    question: "أَيٌّ مِنَ الكَلِمَاتِ التَّالِيَةِ جَاءَتْ عَلَى نَفْسِ وَزْنِ (كَاتِب)؟",
+    options: ["سَاجِد", "مَسْجُود", "مَسْجِد"],
+    correctAnswer: "سَاجِد",
+    hint: "سَاجِد عَلَى وَزْنِ فَاعِل، مِثْل كَاتِب تَمَاماً."
+  }
+],
         quizzes: [
           { q: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ الثُّلَاثِيِّ المُجَرَّدِ (كَتَبَ) عَلَى وَزْنِ:", ans: "فَاعِلٌ", opts: ["فَاعِلٌ", "مُفَعِّلٌ", "مَفْعُولٌ"] },
           { q: "اسْمُ المَكَانِ مِنَ الفِعْلِ (كَتَبَ) يَأْتِي عَلَى وَزْنِ مَفْعَل وَهُوَ:", ans: "مَكْتَبٌ", opts: ["مَكْتَبٌ", "كَاتِبٌ", "مَكْتُوبٌ"] },
@@ -2297,88 +2328,201 @@ window.resetStoryCloud = function() {
     }
   }
 };
-    function renderDiscsWorkshop(labs) {
-      const container = document.getElementById('discsContainer');
-      container.innerHTML = '';
+    let currentDiscStationIdx = 0;
 
-      const saucerColors = [
-        { hull: 'url(#saucerGrad1)', rim: '#eab308', glow: '#fef08a' },
-        { hull: 'url(#saucerGrad2)', rim: '#0284c7', glow: '#38bdf8' },
-        { hull: 'url(#saucerGrad3)', rim: '#db2777', glow: '#f472b6' }
-      ];
-      const mascots = ['🛸', '👨‍🚀', '👾'];
+function renderDiscsWorkshop(labs) {
+  const container = document.getElementById('discsContainer');
+  if (!container || !labs || labs.length === 0) return;
 
-      labs.forEach((lab, lIdx) => {
-        const saucer = document.createElement('div');
-        saucer.className = 'saucer-station-unit';
-        saucer.innerHTML = `
-          <svg class="saucer-svg-bg" viewBox="0 0 440 380" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="saucerGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#fef08a"/>
-                <stop offset="40%" stop-color="#fde047"/>
-                <stop offset="100%" stop-color="#f59e0b"/>
-              </linearGradient>
-              <linearGradient id="saucerGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#bae6fd"/>
-                <stop offset="40%" stop-color="#38bdf8"/>
-                <stop offset="100%" stop-color="#0284c7"/>
-              </linearGradient>
-              <linearGradient id="saucerGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#fbcfe8"/>
-                <stop offset="40%" stop-color="#f472b6"/>
-                <stop offset="100%" stop-color="#db2777"/>
-              </linearGradient>
-            </defs>
-            <path d="M 160,85 C 160,25 280,25 280,85 Z" fill="rgba(255,255,255,0.4)" stroke="#ffffff" stroke-width="4"/>
-            <path d="M 220,50 C 380,50 435,110 435,210 C 435,320 370,365 220,365 C 70,365 5,320 5,210 C 5,110 60,50 220,50 Z" fill="${saucerColors[lIdx % 3].hull}" stroke="#ffffff" stroke-width="8"/>
-            <ellipse cx="220" cy="210" rx="205" ry="140" fill="none" stroke="${saucerColors[lIdx % 3].glow}" stroke-width="4" opacity="0.75"/>
-          </svg>
+  if (currentDiscStationIdx >= labs.length) currentDiscStationIdx = 0;
+  const currentLab = labs[currentDiscStationIdx];
 
-          <div class="saucer-content-wrapper">
-            <div class="saucer-mascot-head">${mascots[lIdx % 3]}</div>
-            <div class="saucer-badge-tag">${lab.title}</div>
+  const saucerColors = [
+    { hull: '#f59e0b', rim: '#eab308', glow: '#fef08a' },
+    { hull: '#0284c7', rim: '#38bdf8', glow: '#bae6fd' },
+    { hull: '#db2777', rim: '#f472b6', glow: '#fbcfe8' },
+    { hull: '#10b981', rim: '#34d399', glow: '#a7f3d0' }
+  ];
+  const colorTheme = saucerColors[currentDiscStationIdx % saucerColors.length];
+  const mascotIcons = ['🛸', '👨‍🚀', '👾', '🚀'];
 
-            <div class="saucer-slots-stream" id="slots_wrap_${lIdx}">
-              ${lab.slots.map(s => `<div class="saucer-char-bubble ${s.ch ? 'filled' : ''}">${s.ch}</div>`).join('')}
+  container.innerHTML = `
+    <div style="display: flex; gap: 1.5rem; justify-content: center; align-items: flex-start; max-width: 1050px; margin: 0 auto; flex-wrap: wrap;">
+      
+      <!-- خريطة مسار المحطات الجانبية -->
+      <div style="background: rgba(15, 23, 42, 0.85); border: 2px solid #38bdf8; border-radius: 18px; padding: 1.2rem; min-width: 240px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+        <h4 style="color: #facc15; margin: 0 0 1rem 0; font-size: 1.1rem; text-align: center; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 0.5rem;">
+          🗺️ خَرِيطَةُ مَدَارَاتِ التَّرْكِيبِ
+        </h4>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          ${labs.map((l, idx) => `
+            <div style="display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.8rem; border-radius: 12px; cursor: pointer; border: 1px solid ${idx === currentDiscStationIdx ? '#38bdf8' : 'rgba(255,255,255,0.1)'}; background: ${idx === currentDiscStationIdx ? 'rgba(56, 189, 248, 0.25)' : 'rgba(255,255,255,0.03)'}; color: ${idx === currentDiscStationIdx ? '#ffffff' : '#94a3b8'}; font-weight: ${idx === currentDiscStationIdx ? 'bold' : 'normal'}; transition: all 0.2s;" onclick="goToDiscStation(${idx})">
+              <span>${idx < currentDiscStationIdx ? '✅' : (idx === currentDiscStationIdx ? '📍' : '🔒')}</span>
+              <span style="font-size: 0.9rem;">${l.title.replace('المَحَطَّة ', 'المَدَار ')}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- الطبق الفضائي النشط مع كشكول السؤال -->
+      <div style="flex: 1; min-width: 320px; max-width: 650px; background: radial-gradient(circle, rgba(30,41,59,0.95) 0%, rgba(15,23,42,0.95) 100%); border: 3px solid ${colorTheme.rim}; border-radius: 28px; padding: 1.8rem; box-shadow: 0 12px 35px rgba(0,0,0,0.6); text-align: center;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <span style="font-size: 1.8rem;">${mascotIcons[currentDiscStationIdx % mascotIcons.length]}</span>
+          <span style="background: ${colorTheme.hull}; color: #ffffff; padding: 0.35rem 1.1rem; border-radius: 20px; font-weight: bold; font-size: 0.95rem;">
+            ${currentLab.title} (${currentDiscStationIdx + 1} مِنْ ${labs.length})
+          </span>
+          <span style="color: #94a3b8; font-size: 0.85rem;">نُقَاط: +15 🌟</span>
+        </div>
+
+        <p style="color: #e2e8f0; font-size: 1.15rem; line-height: 1.8; margin-bottom: 1.5rem; font-weight: 500;">
+          ${currentLab.question}
+        </p>
+
+        <!-- منطقة التفاعل -->
+        <div id="discInteractionArea" style="margin: 1.5rem 0;">
+          ${currentLab.type === 'slots' ? `
+            <!-- نمط تركيب الحرف في الخانات -->
+            <div style="display: inline-flex; gap: 0.6rem; background: rgba(0,0,0,0.4); padding: 0.8rem 1.4rem; border-radius: 40px; border: 2px dashed ${colorTheme.rim}; margin-bottom: 1.5rem;">
+              ${currentLab.slots.map(s => `
+                <div style="width: 48px; height: 52px; border-radius: 12px; background: ${s.ch ? 'rgba(255,255,255,0.15)' : 'rgba(234, 179, 8, 0.2)'}; border: 2px solid ${s.ch ? '#ffffff' : colorTheme.rim}; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; color: #ffffff;">
+                  ${s.ch ? s.ch : '<span id="emptySlotPlaceholder" style="color:#facc15; animation: pulse 1.2s infinite;">؟</span>'}
+                </div>
+              `).join('')}
             </div>
 
-            <div class="saucer-buttons-rack">
-              ${lab.pool.map(p => `<button class="saucer-gem-btn" onclick="checkSphereChar(this, ${lIdx}, '${p}')">${p}</button>`).join('')}
+            <div style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
+              ${currentLab.pool.map(char => `
+                <button type="button" style="width: 55px; height: 55px; border-radius: 50%; background: #ffffff; color: #0f172a; border: 3px solid ${colorTheme.hull}; font-size: 1.4rem; font-weight: bold; cursor: pointer; box-shadow: 0 5px 0 #64748b; transition: all 0.15s;" onclick="submitDiscChar(this, '${char}')" onmousedown="this.style.transform='translateY(4px)'; this.style.boxShadow='none';" onmouseup="this.style.transform='none'; this.style.boxShadow='0 5px 0 #64748b';">
+                  ${char}
+                </button>
+              `).join('')}
             </div>
+          ` : `
+            <!-- نمط الاختيار المتعدد -->
+            <div style="display: flex; flex-direction: column; gap: 0.8rem; max-width: 400px; margin: 0 auto;">
+              ${currentLab.options.map(opt => `
+                <button type="button" style="padding: 0.85rem 1.4rem; border-radius: 16px; background: rgba(255,255,255,0.08); color: #ffffff; border: 2px solid rgba(255,255,255,0.2); font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" onclick="submitDiscChoice(this, '${opt}')" onmouseover="this.style.borderColor='${colorTheme.rim}'; this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)'; this.style.background='rgba(255,255,255,0.08)';">
+                  ${opt}
+                </button>
+              `).join('')}
+            </div>
+          `}
+        </div>
 
-            <div class="saucer-feedback-toast" id="fb_sphere_${lIdx}"></div>
-          </div>
-        `;
-        container.appendChild(saucer);
-      });
+        <div id="discToastFeedback" style="min-height: 28px; margin-top: 1rem; font-size: 1rem; font-weight: bold;"></div>
+      </div>
+
+    </div>
+  `;
+}
+
+// دالة فحص الحرف الناقص
+function submitDiscChar(btn, char) {
+  const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
+  const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
+  const currentLab = labs[currentDiscStationIdx];
+  const toast = document.getElementById('discToastFeedback');
+
+  if (char === currentLab.targetChar) {
+    if (typeof Sound !== "undefined" && Sound.correct) Sound.correct();
+    if (typeof addStars === "function") addStars(15);
+    
+    const placeholder = document.getElementById('emptySlotPlaceholder');
+    if (placeholder) {
+      placeholder.textContent = char;
+      placeholder.style.color = '#4ade80';
     }
 
-    function checkSphereChar(btn, lIdx, char) {
-      Sound.pop();
-      const rootKey = document.getElementById('rootSelect').value;
-      const lab = db[rootKey].labs[lIdx];
-      const target = lab.slots.find(s => !s.ch);
-      const fb = document.getElementById(`fb_sphere_${lIdx}`);
-      const emptySlot = document.querySelectorAll(`#slots_wrap_${lIdx} .saucer-char-bubble:not(.filled)`)[0];
-
-      if (target && char === target.correct) {
-        emptySlot.textContent = char;
-        emptySlot.classList.add('filled');
-        fb.style.display = 'block';
-        fb.style.background = '#dcfce7';
-        fb.style.color = '#15803d';
-        fb.innerHTML = '🎉 مُمْتَاز! رَكَّبْتَ الوَزْنَ بِدِقَّةٍ.';
-        Sound.correct();
-        addStars(15);
-      } else {
-        fb.style.display = 'block';
-        fb.style.background = '#fee2e2';
-        fb.style.color = '#b91c1c';
-        fb.innerHTML = `⚠️ انْتَبِهْ! الحَرْفُ [ ${char} ] لَا يُطَابِقُ الوَزْنَ.`;
-        Sound.wrong();
-      }
+    if (toast) {
+      toast.style.color = '#4ade80';
+      toast.textContent = "✨ إِجَابَةٌ رَائِعَةٌ! تَمَّ تَرْكِيبُ الوَزْنِ بِنَجَاحٍ!";
     }
+
+    setTimeout(() => {
+      advanceDiscStation(labs);
+    }, 1300);
+  } else {
+    if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
+    if (toast) {
+      toast.style.color = '#f87171';
+      toast.textContent = currentLab.hint || "حَاوِلْ مَرَّةً أُخْرَى!";
+    }
+  }
+}
+
+// دالة فحص الاختيار من متعدد
+function submitDiscChoice(btn, selectedOpt) {
+  const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
+  const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
+  const currentLab = labs[currentDiscStationIdx];
+  const toast = document.getElementById('discToastFeedback');
+
+  if (selectedOpt === currentLab.correctAnswer) {
+    btn.style.background = '#22c55e';
+    btn.style.borderColor = '#16a34a';
+    if (typeof Sound !== "undefined" && Sound.correct) Sound.correct();
+    if (typeof addStars === "function") addStars(15);
+
+    if (toast) {
+      toast.style.color = '#4ade80';
+      toast.textContent = "🌟 مُمْتَازٌ! اخْتِيَارٌ صَرْفِيٌّ دَقِيقٌ!";
+    }
+
+    setTimeout(() => {
+      advanceDiscStation(labs);
+    }, 1300);
+  } else {
+    btn.style.background = '#ef4444';
+    btn.style.borderColor = '#dc2626';
+    if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
+    if (toast) {
+      toast.style.color = '#f87171';
+      toast.textContent = currentLab.hint || "حَاوِلْ مَرَّةً أُخْرَى!";
+    }
+    setTimeout(() => {
+      btn.style.background = 'rgba(255,255,255,0.08)';
+      btn.style.borderColor = 'rgba(255,255,255,0.2)';
+    }, 900);
+  }
+}
+
+// الانتقال للمحطة التالية
+function advanceDiscStation(labs) {
+  if (currentDiscStationIdx + 1 < labs.length) {
+    currentDiscStationIdx++;
+    renderDiscsWorkshop(labs);
+  } else {
+    const container = document.getElementById('discsContainer');
+    if (container) {
+      container.innerHTML = `
+        <div style="background: rgba(15, 23, 42, 0.95); border: 3px solid #facc15; border-radius: 28px; padding: 2.5rem; text-align: center; max-width: 600px; margin: 2rem auto; box-shadow: 0 15px 40px rgba(0,0,0,0.7);">
+          <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">🏆</div>
+          <h3 style="color: #facc15; font-size: 1.6rem; margin-bottom: 0.8rem;">مُبَارَكٌ أَيُّهَا الرَّائِدُ الصَّرْفِيُّ!</h3>
+          <p style="color: #e2e8f0; font-size: 1.15rem; line-height: 1.8; margin-bottom: 1.5rem;">
+            لَقَدْ أَكْمَلْتَ كَافَّةَ مَدَارَاتِ التَّرْكِيبِ الفَضَائِيِّ لِجَذْرِ (كَتَبَ) بِإِتْقَانٍ بَاهِرٍ!
+          </p>
+          <button type="button" onclick="goToDiscStation(0)" style="background: #facc15; color: #0f172a; border: none; padding: 0.75rem 2rem; border-radius: 18px; font-weight: bold; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(250, 204, 21, 0.4);">
+            🔄 إِعَادَةُ جَوْلَةِ التَّرْكِيبِ
+          </button>
+        </div>
+      `;
+    }
+    if (typeof Sound !== "undefined" && Sound.playAsset) {
+      const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
+      const folder = Sound.rootFolderMap[rootKey] || rootKey;
+      Sound.playAsset(folder, 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ!");
+    }
+  }
+}
+
+// التنقل عبر الخريطة
+function goToDiscStation(idx) {
+  currentDiscStationIdx = idx;
+  const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
+  const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
+  renderDiscsWorkshop(labs);
+}
 
     function renderRealPuzzleArena(quizzes) {
       const container = document.getElementById('puzzleContainer');
