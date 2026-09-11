@@ -2505,9 +2505,10 @@ function submitDynamicDiscChar(btn, char) {
       toast.textContent = "✨ مُمْتَازٌ! تَرْكِيبٌ صَرْفِيٌّ صَحِيحٌ!";
     }
 
+    // زيادة المهلة إلى 2.2 ثانية ليكتمل نطق التعزيز الصوتي
     setTimeout(() => {
       advanceStepInRound(labs);
-    }, 1200);
+    }, 2200);
   } else {
     if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
     if (toast) {
@@ -2535,9 +2536,10 @@ function submitDynamicDiscChoice(btn, selectedOpt) {
       toast.textContent = "🌟 أَحْسَنْتَ! إِجَابَةٌ دَقِيقَةٌ!";
     }
 
+    // زيادة المهلة إلى 2.2 ثانية ليكتمل نطق التعزيز الصوتي
     setTimeout(() => {
       advanceStepInRound(labs);
-    }, 1200);
+    }, 2200);
   } else {
     btn.style.background = '#ef4444';
     btn.style.borderColor = '#dc2626';
