@@ -2178,8 +2178,19 @@ function handleStoryWordClick(el, item, data) {
   if (isAlternativeSoundVerb) {
     const alertMsg = "كَلِمَةٌ صَحِيحَةٌ، لَكِنَّهَا لَيْسَتْ مِنْ شَمْسِ جَذْرِنَا.. حَاوِلْ مَرَّةً أُخْرَى!";
     
-    if (typeof Sound !== "undefined" && Sound.playAsset) {
-      Sound.playAsset('', 'hint_general.mp3', alertMsg);
+    // تشغيل مباشر وسريع من مجلد audio
+    try {
+      const hintAudio = new Audio('audio/hint_general.mp3');
+      hintAudio.currentTime = 0;
+      hintAudio.play().catch(() => {
+        if (typeof Sound !== "undefined" && Sound.playAsset) {
+          Sound.playAsset('', 'hint_general', alertMsg);
+        }
+      });
+    } catch(e) {
+      if (typeof Sound !== "undefined" && Sound.playAsset) {
+        Sound.playAsset('', 'hint_general', alertMsg);
+      }
     }
 
     el.style.borderColor = '#f59e0b';
@@ -2190,7 +2201,6 @@ function handleStoryWordClick(el, item, data) {
     }, 1800);
     return;
   }
-
   // الإجابة الصحيحة التامة المطابقة للمهمة والجذر
   if (item.target === currentTargetType || (isLookingForSoundVerb && clickedWordClean.includes("كَتَبَ"))) {
     el.classList.add('found');
@@ -2231,10 +2241,21 @@ function handleStoryWordClick(el, item, data) {
       specificHint = "«أَمْسَكَ» فِعْلٌ رُبَاعِيٌّ مَهْمُوز.. والمَطْلُوبُ فِعْلٌ ثُلَاثِيٌّ سَالِمٌ!";
     }
 
-    if (specificHint) {
-      if (typeof Sound !== "undefined" && Sound.playAsset) {
-        Sound.playAsset('', 'hint_general.mp3', specificHint);
+   if (specificHint) {
+      try {
+        const hintAudio = new Audio('audio/hint_general.mp3');
+        hintAudio.currentTime = 0;
+        hintAudio.play().catch(() => {
+          if (typeof Sound !== "undefined" && Sound.playAsset) {
+            Sound.playAsset('', 'hint_general', specificHint);
+          }
+        });
+      } catch(e) {
+        if (typeof Sound !== "undefined" && Sound.playAsset) {
+          Sound.playAsset('', 'hint_general', specificHint);
+        }
       }
+
       el.style.borderColor = '#f59e0b';
       el.style.boxShadow = '0 0 15px rgba(245, 158, 11, 0.6)';
       setTimeout(() => {
