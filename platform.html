@@ -1180,41 +1180,94 @@
           { label: "المَهَمَّةُ 5: انْقُرْ عَلَى (المَصْدَرِ) مِنْ جَذْرِ كَتَبَ", targetType: "المصدر", audio: "mission_5" }
         ],
         labs: [
-  {
-    title: "المَحَطَّة 1: تَرْكِيبُ اسْمِ الفَاعِلِ",
-    type: "slots",
-    question: "أَكْمِلْ صِيغَةَ اسْمِ الفَاعِلِ بِإِضَافَةِ حَرْفِ المَدِّ المُنَاسِبِ لِوَزْنِ (فَاعِل):",
-    slots: [{ch: 'كَـ'}, {ch: ''}, {ch: 'تِـ'}, {ch: 'بٌ'}],
-    targetChar: 'ا',
-    pool: ['ا', 'و', 'ي'],
-    hint: "اسْمُ الفَاعِلِ مِنَ الثُّلَاثِيِّ يَكُونُ عَلَى وَزْنِ (فَاعِل) بِزِيَادَةِ أَلِفٍ بَعْدَ الحَرْفِ الأَوَّلِ."
-  },
-  {
-    title: "المَحَطَّة 2: ضَبْطُ عَيْنِ اسْمِ المَكَانِ",
-    type: "choice",
-    question: "اخْتَرْ صِيغَةَ اسْمِ المَكَانِ المَضْبُوطَةَ بِالشَّكْلِ التَّامِّ عَلَى وَزْنِ (مَفْعَل):",
-    options: ["مَكْتَبٌ", "مَكْتِبٌ", "مُكْتَبٌ"],
-    correctAnswer: "مَكْتَبٌ",
-    hint: "اسْمُ المَكَانِ مِنْ كَتَبَ يَكُونُ عَلَى وَزْنِ (مَفْعَل) بِفَتْحِ العَيْنِ (التَّاءِ)."
-  },
-  {
-    title: "المَحَطَّة 3: تَرْكِيبُ اسْمِ المَفْعُولِ",
-    type: "slots",
-    question: "أَكْمِلْ حَرْفَ المَدِّ النَّاقِصَ لِاكْتِمَالِ وَزْنِ (مَفْعُول):",
-    slots: [{ch: 'مَـ'}, {ch: 'كْ'}, {ch: 'تُـ'}, {ch: ''}, {ch: 'بٌ'}],
-    targetChar: 'و',
-    pool: ['و', 'ا', 'ي'],
-    hint: "اسْمُ المَفْعُولِ يَزْدَادُ فِيهِ مِيمٌ فِي أَوَّلِهِ وَوَاوٌ قَبْلَ آخِرِهِ (مَفْعُول)."
-  },
-  {
-    title: "المَحَطَّة 4: المُقَابَلَةُ الصَّرْفِيَّةُ",
-    type: "choice",
-    question: "أَيٌّ مِنَ الكَلِمَاتِ التَّالِيَةِ جَاءَتْ عَلَى نَفْسِ وَزْنِ (كَاتِب)؟",
-    options: ["سَاجِد", "مَسْجُود", "مَسْجِد"],
-    correctAnswer: "سَاجِد",
-    hint: "سَاجِد عَلَى وَزْنِ فَاعِل، مِثْل كَاتِب تَمَاماً."
-  }
-],
+          {
+            galaxyTitle: "مَدَارُ اسْمِ الفَاعِلِ",
+            mascot: "🛸",
+            color: { hull: '#0284c7', rim: '#38bdf8', glow: '#bae6fd' },
+            questions: [
+              {
+                type: "slots",
+                qText: "أَكْمِلْ حَرْفَ المَدِّ النَّاقِصَ لِبِنَاءِ اسْمِ الفَاعِلِ عَلَى وَزْنِ (فَاعِل):",
+                slots: [{ch: 'كَـ'}, {ch: ''}, {ch: 'تِـ'}, {ch: 'بٌ'}],
+                targetChar: 'ا',
+                pool: ['ا', 'و', 'ي'],
+                hint: "اسْمُ الفَاعِلِ يُصَاغُ بِزِيَادَةِ أَلِفٍ بَعْدَ فِاءِ الفِعْلِ (فَـاعِـل)."
+              },
+              {
+                type: "choice",
+                qText: "مَا هُوَ حُكْمُ حَرَكَةِ عَيْنِ الفِعْلِ فِي صِيغَةِ (فَاعِل)؟",
+                options: ["مَكْسُورَة (كـاتِـب)", "مَفْتُوحَة (كـاتَـب)", "مَضْمُومَة (كـاتُـب)"],
+                correctAnswer: "مَكْسُورَة (كـاتِـب)",
+                hint: "عَيْنُ اسْمِ الفَاعِلِ تَكُونُ دَائِماً مَكْسُورَةً: فَاعِـل."
+              },
+              {
+                type: "choice",
+                qText: "أَيُّ كَلِمَةٍ مِنَ التَّالِيَةِ تُمَثِّلُ اسْمَ فَاعِلٍ صَحِيحٍ سَالِمٍ؟",
+                options: ["سَاجِد", "مَسْجُود", "مَسْجِد"],
+                correctAnswer: "سَاجِد",
+                hint: "سَاجِد عَلَى وَزْنِ فَاعِل مِنَ الفِعْلِ السَّالِمِ (سَجَدَ)."
+              }
+            ]
+          },
+          {
+            galaxyTitle: "مَدَارُ اسْمِ المَكَانِ",
+            mascot: "👨‍🚀",
+            color: { hull: '#f59e0b', rim: '#eab308', glow: '#fef08a' },
+            questions: [
+              {
+                type: "slots",
+                qText: "أَكْمِلْ حَرْفَ الزِّيَادَةِ فِي أَوَّلِ الكَلِمَةِ لِصِيَاغَةِ اسْمِ المَكَانِ (مَفْعَل):",
+                slots: [{ch: ''}, {ch: 'كْ'}, {ch: 'تَ'}, {ch: 'بٌ'}],
+                targetChar: 'مَـ',
+                pool: ['مَـ', 'أَ', 'تَـ'],
+                hint: "اسْمُ المَكَانِ مِنَ الثُّلَاثِيِّ يَبْدَأُ بِمِيمٍ مَفْتُوحَةٍ زَائِدَةٍ (مَفْعَل)."
+              },
+              {
+                type: "choice",
+                qText: "اخْتَرْ صِيغَةَ اسْمِ المَكَانِ المَضْبُوطَةَ بِالشَّكْلِ التَّامِّ مِنْ كَتَبَ:",
+                options: ["مَكْتَبٌ", "مَكْتِبٌ", "مُكْتَبٌ"],
+                correctAnswer: "مَكْتَبٌ",
+                hint: "يَكُونُ عَلَى وَزْنِ (مَفْعَل) بِفَتْحِ التَّاءِ لِأَنَّ مُضَارِعَهُ (يَكْتُبُ) مَضْمُومُ العَيْنِ."
+              },
+              {
+                type: "choice",
+                qText: "«المَكْتَبُ» هُوَ اسْمُ مَكَانٍ لِأَنَّهُ يَدُلُّ عَلَى:",
+                options: ["مَكَانِ وُقُوعِ الكِتَابَةِ", "مَنْ قَامَ بِالكِتَابَةِ", "الشَّيْءِ المَكْتُوبِ"],
+                correctAnswer: "مَكَانِ وُقُوعِ الكِتَابَةِ",
+                hint: "اسْمُ المَكَانِ يَدُلُّ عَلَى مَوْضِعِ حُدُوثِ الفِعْلِ."
+              }
+            ]
+          },
+          {
+            galaxyTitle: "مَدَارُ اسْمِ المَفْعُولِ",
+            mascot: "👾",
+            color: { hull: '#db2777', rim: '#f472b6', glow: '#fbcfe8' },
+            questions: [
+              {
+                type: "slots",
+                qText: "أَكْمِلْ حَرْفَ المَدِّ قَبْلَ الآخِرِ لِاسْتِيفَاءِ وَزْنِ (مَفْعُول):",
+                slots: [{ch: 'مَـ'}, {ch: 'كْ'}, {ch: 'تُـ'}, {ch: ''}, {ch: 'بٌ'}],
+                targetChar: 'و',
+                pool: ['و', 'ا', 'ي'],
+                hint: "وَزْنُ مَفْعُولٍ يَتَضَمَّنُ وَاواً سَاكِنَةً قَبْلَ الحَرْفِ الأَخِيرِ."
+              },
+              {
+                type: "choice",
+                qText: "كَمْ حَرْفَ زِيَادَةٍ وُجِدَ فِي اسْمِ المَفْعُولِ (مَكْتُوب) عَنْ جَذْرِهِ (كتب)؟",
+                options: ["حَرْفَانِ: المِيمُ وَالوَاوُ", "حَرْفٌ وَاحِدٌ: المِيمُ", "ثَلَاثَةُ أَحْرُفٍ"],
+                correctAnswer: "حَرْفَانِ: المِيمُ وَالوَاوُ",
+                hint: "الجَذْرُ هُوَ (ك، ت، ب)، والزَّائِدُ هُوَ المِيمُ فِي الأَوَّلِ وَالوَاوُ قَبْلَ الآخِرِ."
+              },
+              {
+                type: "choice",
+                qText: "أَيٌّ مِنَ الكَلِمَاتِ التَّالِيَةِ جَاءَتْ عَلَى وَزْنِ (مَفْعُول)؟",
+                options: ["مَعْلُوم", "عَالِم", "مَعْلَم"],
+                correctAnswer: "مَعْلُوم",
+                hint: "مَعْلُوم عَلَى وَزْنِ مَفْعُول مِنْ عَلِمَ."
+              }
+            ]
+          }
+        ],
         quizzes: [
           { q: "يُصَاغُ اسْمُ الفَاعِلِ مِنَ الثُّلَاثِيِّ المُجَرَّدِ (كَتَبَ) عَلَى وَزْنِ:", ans: "فَاعِلٌ", opts: ["فَاعِلٌ", "مُفَعِّلٌ", "مَفْعُولٌ"] },
           { q: "اسْمُ المَكَانِ مِنَ الفِعْلِ (كَتَبَ) يَأْتِي عَلَى وَزْنِ مَفْعَل وَهُوَ:", ans: "مَكْتَبٌ", opts: ["مَكْتَبٌ", "كَاتِبٌ", "مَكْتُوبٌ"] },
@@ -2330,61 +2383,72 @@ window.resetStoryCloud = function() {
 };
     let currentDiscStationIdx = 0;
 
+let currentDiscGalaxyIdx = 0;   // رقم المدار الحالي
+let currentDiscQuestionIdx = 0; // رقم السؤال الحالي داخل المدار
+
 function renderDiscsWorkshop(labs) {
   const container = document.getElementById('discsContainer');
   if (!container || !labs || labs.length === 0) return;
 
-  if (currentDiscStationIdx >= labs.length) currentDiscStationIdx = 0;
-  const currentLab = labs[currentDiscStationIdx];
-
-  const saucerColors = [
-    { hull: '#f59e0b', rim: '#eab308', glow: '#fef08a' },
-    { hull: '#0284c7', rim: '#38bdf8', glow: '#bae6fd' },
-    { hull: '#db2777', rim: '#f472b6', glow: '#fbcfe8' },
-    { hull: '#10b981', rim: '#34d399', glow: '#a7f3d0' }
-  ];
-  const colorTheme = saucerColors[currentDiscStationIdx % saucerColors.length];
-  const mascotIcons = ['🛸', '👨‍🚀', '👾', '🚀'];
+  if (currentDiscGalaxyIdx >= labs.length) currentDiscGalaxyIdx = 0;
+  const currentGalaxy = labs[currentDiscGalaxyIdx];
+  const totalQuestions = currentGalaxy.questions.length;
+  
+  if (currentDiscQuestionIdx >= totalQuestions) currentDiscQuestionIdx = 0;
+  const q = currentGalaxy.questions[currentDiscQuestionIdx];
+  const colorTheme = currentGalaxy.color;
 
   container.innerHTML = `
     <div style="display: flex; gap: 1.5rem; justify-content: center; align-items: flex-start; max-width: 1050px; margin: 0 auto; flex-wrap: wrap;">
       
-      <!-- خريطة مسار المحطات الجانبية -->
+      <!-- خريطة المدارات الجانبية -->
       <div style="background: rgba(15, 23, 42, 0.85); border: 2px solid #38bdf8; border-radius: 18px; padding: 1.2rem; min-width: 240px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
         <h4 style="color: #facc15; margin: 0 0 1rem 0; font-size: 1.1rem; text-align: center; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 0.5rem;">
-          🗺️ خَرِيطَةُ مَدَارَاتِ التَّرْكِيبِ
+          🗺️ مَدَارَاتُ التَّرْكِيبِ
         </h4>
         <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-          ${labs.map((l, idx) => `
-            <div style="display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0.8rem; border-radius: 12px; cursor: pointer; border: 1px solid ${idx === currentDiscStationIdx ? '#38bdf8' : 'rgba(255,255,255,0.1)'}; background: ${idx === currentDiscStationIdx ? 'rgba(56, 189, 248, 0.25)' : 'rgba(255,255,255,0.03)'}; color: ${idx === currentDiscStationIdx ? '#ffffff' : '#94a3b8'}; font-weight: ${idx === currentDiscStationIdx ? 'bold' : 'normal'}; transition: all 0.2s;" onclick="goToDiscStation(${idx})">
-              <span>${idx < currentDiscStationIdx ? '✅' : (idx === currentDiscStationIdx ? '📍' : '🔒')}</span>
-              <span style="font-size: 0.9rem;">${l.title.replace('المَحَطَّة ', 'المَدَار ')}</span>
+          ${labs.map((g, gIdx) => `
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.65rem 0.85rem; border-radius: 12px; cursor: pointer; border: 1px solid ${gIdx === currentDiscGalaxyIdx ? '#38bdf8' : 'rgba(255,255,255,0.1)'}; background: ${gIdx === currentDiscGalaxyIdx ? 'rgba(56, 189, 248, 0.25)' : 'rgba(255,255,255,0.03)'}; color: ${gIdx === currentDiscGalaxyIdx ? '#ffffff' : '#94a3b8'}; font-weight: ${gIdx === currentDiscGalaxyIdx ? 'bold' : 'normal'}; transition: all 0.2s;" onclick="switchDiscGalaxy(${gIdx})">
+              <span>${gIdx < currentDiscGalaxyIdx ? '✅' : (gIdx === currentDiscGalaxyIdx ? '🚀' : '🔒')} ${g.galaxyTitle}</span>
+              <span style="font-size: 0.8rem; background: rgba(0,0,0,0.3); padding: 2px 6px; border-radius: 8px;">${g.questions.length} أسئلة</span>
             </div>
           `).join('')}
         </div>
       </div>
 
-      <!-- الطبق الفضائي النشط مع كشكول السؤال -->
+      <!-- منصة السؤال والطبق الفضائي النشط -->
       <div style="flex: 1; min-width: 320px; max-width: 650px; background: radial-gradient(circle, rgba(30,41,59,0.95) 0%, rgba(15,23,42,0.95) 100%); border: 3px solid ${colorTheme.rim}; border-radius: 28px; padding: 1.8rem; box-shadow: 0 12px 35px rgba(0,0,0,0.6); text-align: center;">
         
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-          <span style="font-size: 1.8rem;">${mascotIcons[currentDiscStationIdx % mascotIcons.length]}</span>
+        <!-- الترويسة ومؤشر التقدم النقطي داخل المدار -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+          <span style="font-size: 1.8rem;">${currentGalaxy.mascot}</span>
           <span style="background: ${colorTheme.hull}; color: #ffffff; padding: 0.35rem 1.1rem; border-radius: 20px; font-weight: bold; font-size: 0.95rem;">
-            ${currentLab.title} (${currentDiscStationIdx + 1} مِنْ ${labs.length})
+            ${currentGalaxy.galaxyTitle}
           </span>
-          <span style="color: #94a3b8; font-size: 0.85rem;">نُقَاط: +15 🌟</span>
+          <span style="color: #facc15; font-size: 0.9rem; font-weight: bold;">+15 🌟</span>
+        </div>
+
+        <!-- مؤشر الدوائر المتتالية مثل مركبة الصرف تماماً -->
+        <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1.2rem;">
+          ${currentGalaxy.questions.map((_, qIdx) => `
+            <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: ${qIdx < currentDiscQuestionIdx ? '#22c55e' : (qIdx === currentDiscQuestionIdx ? colorTheme.rim : 'rgba(255,255,255,0.2)')}; border: 1px solid ${qIdx === currentDiscQuestionIdx ? '#ffffff' : 'transparent'}; transition: all 0.3s;"></span>
+          `).join('')}
+        </div>
+
+        <div style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 0.5rem;">
+          تَحَدِّي (${currentDiscQuestionIdx + 1} مِنْ ${totalQuestions})
         </div>
 
         <p style="color: #e2e8f0; font-size: 1.15rem; line-height: 1.8; margin-bottom: 1.5rem; font-weight: 500;">
-          ${currentLab.question}
+          ${q.qText}
         </p>
 
-        <!-- منطقة التفاعل -->
+        <!-- منطقة تفاعل السؤال الحالي -->
         <div id="discInteractionArea" style="margin: 1.5rem 0;">
-          ${currentLab.type === 'slots' ? `
-            <!-- نمط تركيب الحرف في الخانات -->
+          ${q.type === 'slots' ? `
+            <!-- نمط الخانات الناقصة -->
             <div style="display: inline-flex; gap: 0.6rem; background: rgba(0,0,0,0.4); padding: 0.8rem 1.4rem; border-radius: 40px; border: 2px dashed ${colorTheme.rim}; margin-bottom: 1.5rem;">
-              ${currentLab.slots.map(s => `
+              ${q.slots.map(s => `
                 <div style="width: 48px; height: 52px; border-radius: 12px; background: ${s.ch ? 'rgba(255,255,255,0.15)' : 'rgba(234, 179, 8, 0.2)'}; border: 2px solid ${s.ch ? '#ffffff' : colorTheme.rim}; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; color: #ffffff;">
                   ${s.ch ? s.ch : '<span id="emptySlotPlaceholder" style="color:#facc15; animation: pulse 1.2s infinite;">؟</span>'}
                 </div>
@@ -2392,17 +2456,17 @@ function renderDiscsWorkshop(labs) {
             </div>
 
             <div style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
-              ${currentLab.pool.map(char => `
-                <button type="button" style="width: 55px; height: 55px; border-radius: 50%; background: #ffffff; color: #0f172a; border: 3px solid ${colorTheme.hull}; font-size: 1.4rem; font-weight: bold; cursor: pointer; box-shadow: 0 5px 0 #64748b; transition: all 0.15s;" onclick="submitDiscChar(this, '${char}')" onmousedown="this.style.transform='translateY(4px)'; this.style.boxShadow='none';" onmouseup="this.style.transform='none'; this.style.boxShadow='0 5px 0 #64748b';">
+              ${q.pool.map(char => `
+                <button type="button" style="width: 55px; height: 55px; border-radius: 50%; background: #ffffff; color: #0f172a; border: 3px solid ${colorTheme.hull}; font-size: 1.4rem; font-weight: bold; cursor: pointer; box-shadow: 0 5px 0 #64748b; transition: all 0.15s;" onclick="submitDiscChar(this, '${char}')">
                   ${char}
                 </button>
               `).join('')}
             </div>
           ` : `
-            <!-- نمط الاختيار المتعدد -->
-            <div style="display: flex; flex-direction: column; gap: 0.8rem; max-width: 400px; margin: 0 auto;">
-              ${currentLab.options.map(opt => `
-                <button type="button" style="padding: 0.85rem 1.4rem; border-radius: 16px; background: rgba(255,255,255,0.08); color: #ffffff; border: 2px solid rgba(255,255,255,0.2); font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" onclick="submitDiscChoice(this, '${opt}')" onmouseover="this.style.borderColor='${colorTheme.rim}'; this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)'; this.style.background='rgba(255,255,255,0.08)';">
+            <!-- نمط كشكول الاختيار المتعدد -->
+            <div style="display: flex; flex-direction: column; gap: 0.8rem; max-width: 440px; margin: 0 auto;">
+              ${q.options.map(opt => `
+                <button type="button" style="padding: 0.85rem 1.4rem; border-radius: 16px; background: rgba(255,255,255,0.08); color: #ffffff; border: 2px solid rgba(255,255,255,0.2); font-size: 1.15rem; font-weight: bold; cursor: pointer; transition: all 0.2s;" onclick="submitDiscChoice(this, '${opt}')" onmouseover="this.style.borderColor='${colorTheme.rim}'; this.style.background='rgba(255,255,255,0.15)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)'; this.style.background='rgba(255,255,255,0.08)';">
                   ${opt}
                 </button>
               `).join('')}
@@ -2417,17 +2481,18 @@ function renderDiscsWorkshop(labs) {
   `;
 }
 
-// دالة فحص الحرف الناقص
+// فحص الحرف في نمط الخانات
 function submitDiscChar(btn, char) {
   const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
   const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
-  const currentLab = labs[currentDiscStationIdx];
+  const currentGalaxy = labs[currentDiscGalaxyIdx];
+  const q = currentGalaxy.questions[currentDiscQuestionIdx];
   const toast = document.getElementById('discToastFeedback');
 
-  if (char === currentLab.targetChar) {
+  if (char === q.targetChar) {
     if (typeof Sound !== "undefined" && Sound.correct) Sound.correct();
     if (typeof addStars === "function") addStars(15);
-    
+
     const placeholder = document.getElementById('emptySlotPlaceholder');
     if (placeholder) {
       placeholder.textContent = char;
@@ -2436,29 +2501,30 @@ function submitDiscChar(btn, char) {
 
     if (toast) {
       toast.style.color = '#4ade80';
-      toast.textContent = "✨ إِجَابَةٌ رَائِعَةٌ! تَمَّ تَرْكِيبُ الوَزْنِ بِنَجَاحٍ!";
+      toast.textContent = "✨ إِجَابَةٌ رَائِعَةٌ! تَمَّ تَرْكِيبُ الصِّيغَةِ بِنَجَاحٍ!";
     }
 
     setTimeout(() => {
-      advanceDiscStation(labs);
-    }, 1300);
+      advanceDiscProgress(labs);
+    }, 1200);
   } else {
     if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
     if (toast) {
       toast.style.color = '#f87171';
-      toast.textContent = currentLab.hint || "حَاوِلْ مَرَّةً أُخْرَى!";
+      toast.textContent = q.hint || "حَاوِلْ مَرَّةً أُخْرَى!";
     }
   }
 }
 
-// دالة فحص الاختيار من متعدد
+// فحص الاختيار المتعدد
 function submitDiscChoice(btn, selectedOpt) {
   const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
   const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
-  const currentLab = labs[currentDiscStationIdx];
+  const currentGalaxy = labs[currentDiscGalaxyIdx];
+  const q = currentGalaxy.questions[currentDiscQuestionIdx];
   const toast = document.getElementById('discToastFeedback');
 
-  if (selectedOpt === currentLab.correctAnswer) {
+  if (selectedOpt === q.correctAnswer) {
     btn.style.background = '#22c55e';
     btn.style.borderColor = '#16a34a';
     if (typeof Sound !== "undefined" && Sound.correct) Sound.correct();
@@ -2470,27 +2536,33 @@ function submitDiscChoice(btn, selectedOpt) {
     }
 
     setTimeout(() => {
-      advanceDiscStation(labs);
-    }, 1300);
+      advanceDiscProgress(labs);
+    }, 1200);
   } else {
     btn.style.background = '#ef4444';
     btn.style.borderColor = '#dc2626';
     if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
     if (toast) {
       toast.style.color = '#f87171';
-      toast.textContent = currentLab.hint || "حَاوِلْ مَرَّةً أُخْرَى!";
+      toast.textContent = q.hint || "حَاوِلْ مَرَّةً أُخْرَى!";
     }
     setTimeout(() => {
       btn.style.background = 'rgba(255,255,255,0.08)';
       btn.style.borderColor = 'rgba(255,255,255,0.2)';
-    }, 900);
+    }, 800);
   }
 }
 
-// الانتقال للمحطة التالية
-function advanceDiscStation(labs) {
-  if (currentDiscStationIdx + 1 < labs.length) {
-    currentDiscStationIdx++;
+// التقدم للسؤال التالي أو المدار التالي
+function advanceDiscProgress(labs) {
+  const currentGalaxy = labs[currentDiscGalaxyIdx];
+  
+  if (currentDiscQuestionIdx + 1 < currentGalaxy.questions.length) {
+    currentDiscQuestionIdx++;
+    renderDiscsWorkshop(labs);
+  } else if (currentDiscGalaxyIdx + 1 < labs.length) {
+    currentDiscGalaxyIdx++;
+    currentDiscQuestionIdx = 0;
     renderDiscsWorkshop(labs);
   } else {
     const container = document.getElementById('discsContainer');
@@ -2498,11 +2570,11 @@ function advanceDiscStation(labs) {
       container.innerHTML = `
         <div style="background: rgba(15, 23, 42, 0.95); border: 3px solid #facc15; border-radius: 28px; padding: 2.5rem; text-align: center; max-width: 600px; margin: 2rem auto; box-shadow: 0 15px 40px rgba(0,0,0,0.7);">
           <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">🏆</div>
-          <h3 style="color: #facc15; font-size: 1.6rem; margin-bottom: 0.8rem;">مُبَارَكٌ أَيُّهَا الرَّائِدُ الصَّرْفِيُّ!</h3>
+          <h3 style="color: #facc15; font-size: 1.6rem; margin-bottom: 0.8rem;">أَحْسَنْتَ يَا عَبْقَرِيَّ الصَّرْفِ!</h3>
           <p style="color: #e2e8f0; font-size: 1.15rem; line-height: 1.8; margin-bottom: 1.5rem;">
-            لَقَدْ أَكْمَلْتَ كَافَّةَ مَدَارَاتِ التَّرْكِيبِ الفَضَائِيِّ لِجَذْرِ (كَتَبَ) بِإِتْقَانٍ بَاهِرٍ!
+            لَقَدْ اجْتَزْتَ كَافَّةَ مَدَارَاتِ التَّرْكِيبِ وَأَسْئِلَتِهَا لِجَذْرِ (كَتَبَ) بِنَجَاحٍ سَاحِقٍ!
           </p>
-          <button type="button" onclick="goToDiscStation(0)" style="background: #facc15; color: #0f172a; border: none; padding: 0.75rem 2rem; border-radius: 18px; font-weight: bold; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(250, 204, 21, 0.4);">
+          <button type="button" onclick="switchDiscGalaxy(0)" style="background: #facc15; color: #0f172a; border: none; padding: 0.75rem 2rem; border-radius: 18px; font-weight: bold; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(250, 204, 21, 0.4);">
             🔄 إِعَادَةُ جَوْلَةِ التَّرْكِيبِ
           </button>
         </div>
@@ -2516,9 +2588,10 @@ function advanceDiscStation(labs) {
   }
 }
 
-// التنقل عبر الخريطة
-function goToDiscStation(idx) {
-  currentDiscStationIdx = idx;
+// التبديل بين المدارات يدويًا عبر الخريطة
+function switchDiscGalaxy(gIdx) {
+  currentDiscGalaxyIdx = gIdx;
+  currentDiscQuestionIdx = 0;
   const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
   const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
   renderDiscsWorkshop(labs);
