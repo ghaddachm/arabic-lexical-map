@@ -2258,19 +2258,20 @@
         { dome: '#fb923c', rim: '#ea580c', glow: '#fb923c' }
       ];
 
-     // المتغير العام لتتبع السؤال الحالي
-      window.currentPodIndex = 0;
-
+   // قراءة التحديات ديناميكياً بحسب الجذر المختار حالياً
       function renderCurrentPod(idx) {
+        const rootKey = document.getElementById('rootSelect').value;
+        const currentChallenges = db[rootKey].challenges;
+        
         container.innerHTML = '';
         
-        // عند إتمام كافة المحطات الست
-        if (idx >= challenges.length) {
+        // عند إتمام جميع المحطات
+        if (idx >= currentChallenges.length) {
           container.innerHTML = `
             <div style="width: 100%; max-width: 650px; margin: 0 auto; text-align:center; padding: 2.5rem 1.5rem; background: radial-gradient(circle at center, #1e1b4b, #090d16); border: 2px solid #38bdf8; border-radius: 28px; box-shadow: 0 0 35px rgba(56, 189, 248, 0.35);">
               <div style="font-size: 3.8rem; margin-bottom: 0.8rem;">🚀🪐✨</div>
               <h3 style="color: #38bdf8; font-size: 1.6rem; margin-bottom: 0.6rem;">اكْتَمَلَتْ رِحْلَةُ المَرْكَبَةِ الصَّرْفِيَّةِ!</h3>
-              <p style="color: #e2e8f0; font-size: 1.15rem; line-height: 1.7; margin-bottom: 1.5rem;">أَحْسَنْتَ يَا بَطَلَ المَجَرَّةِ، لَقَدْ أَثْبَتَّ تَمَكُّنَكَ مِنْ جَمِيعِ مَحَطَّاتِ الثُّلَاثِيِّ المُجَرَّدِ!</p>
+              <p style="color: #e2e8f0; font-size: 1.15rem; line-height: 1.7; margin-bottom: 1.5rem;">أَحْسَنْتَ يَا بَطَلَ المَجَرَّةِ، لَقَدْ أَثْبَتَّ تَمَكُّنَكَ مِنْ كَافَّةِ مَحَطَّاتِ الجَذْرِ (${rootKey})!</p>
               <button class="master-audio-btn" style="width:auto; padding: 0.6rem 2.2rem; font-size: 1.05rem; background: #0284c7;" onclick="renderCurrentPod(0)">🔄 إِعَادَةُ اسْتِكْشَافِ المَجَرَّةِ</button>
             </div>
           `;
@@ -2279,11 +2280,11 @@
           return;
         }
 
-        const c = challenges[idx];
+        const c = currentChallenges[idx];
 
-        // شريط مؤشرات التقدم لمحطات الرحلة الفضائية
+        // شريط مؤشرات التقدم
         let progressHtml = '<div style="display:flex; justify-content:center; gap: 0.6rem; margin-bottom: 1.2rem;">';
-        for (let i = 0; i < challenges.length; i++) {
+        for (let i = 0; i < currentChallenges.length; i++) {
           const dotColor = i < idx ? '#10b981' : (i === idx ? '#38bdf8' : 'rgba(255,255,255,0.2)');
           const glow = i === idx ? 'box-shadow: 0 0 10px #38bdf8; transform: scale(1.25);' : '';
           progressHtml += `<span style="width: 13px; height: 13px; border-radius: 50%; background: ${dotColor}; ${glow} transition: all 0.3s; display:inline-block;"></span>`;
@@ -2293,18 +2294,23 @@
         const card = document.createElement('div');
         card.style.cssText = "width: 100%; max-width: 680px; margin: 0 auto; background: radial-gradient(circle at top, #1e293b, #0b0f19); border: 2px solid #38bdf8; border-radius: 26px; padding: 2rem 1.6rem; box-shadow: 0 0 30px rgba(56, 189, 248, 0.2); text-align: center;";
 
+        // توافق تلقائي مع صيغ الأسئلة القديمة والجديدة
+        const badgeText = c.badge || c.title || `تَحَدِّي الصَّرْفِ`;
+        const promptText = c.prompt || c.q || '';
+        const optionsList = c.opts || c.options || [];
+
         card.innerHTML = `
           ${progressHtml}
           <div style="display:inline-block; background: #0284c7; color:#fff; padding: 0.35rem 1.4rem; border-radius: 30px; font-weight: bold; font-size: 0.95rem; margin-bottom: 1.2rem; box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);">
-            🛸 ${c.badge} (المَحَطَّةُ ${idx + 1} مِنْ ${challenges.length})
+            🛸 ${badgeText} (المَحَطَّةُ ${idx + 1} مِنْ ${currentChallenges.length})
           </div>
           
           <div style="color: #f8fafc; font-size: 1.25rem; font-weight: 600; line-height: 1.8; margin-bottom: 2rem; min-height: 70px; display:flex; align-items:center; justify-content:center;">
-            ${c.prompt}
+            ${promptText}
           </div>
 
           <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-            ${c.opts.map(opt => `
+            ${optionsList.map(opt => `
               <button class="pod-single-choice-btn" style="flex: 1; min-width: 160px; padding: 0.85rem 1.2rem; font-size: 1.2rem; font-family: inherit; font-weight: bold; color: #fff; background: rgba(30, 41, 59, 0.85); border: 2px solid #38bdf8; border-radius: 16px; cursor: pointer; transition: all 0.2s;" onclick="evaluatePodChoice(this, '${opt}', '${c.ans}', ${idx})">
                 ${opt}
               </button>
@@ -2314,10 +2320,10 @@
         container.appendChild(card);
       }
 
-      // تشغيل المحطة الأولى
+      // تشغيل المحطة الأولى مباشرة للجذر الحالي
       renderCurrentPod(0);
 
-      // دالة تقييم الإجابة والانتقال التلقائي
+      // دالة التقييم التفاعلي والانتقال التلقائي
       window.evaluatePodChoice = function(btn, chosen, correct, idx) {
         if (chosen === correct) {
           btn.style.background = '#10b981';
