@@ -2562,29 +2562,39 @@ function advanceStepInRound(labs) {
     currentStepInRound++;
     renderDiscsWorkshop(labs);
   } else {
-    // ختام الجولة الحالية بنجاح
-    const container = document.getElementById('discsContainer');
-    if (container) {
-      container.innerHTML = `
-        <div style="background: rgba(15, 23, 42, 0.95); border: 3px solid #facc15; border-radius: 28px; padding: 2.5rem; text-align: center; max-width: 620px; margin: 2rem auto; box-shadow: 0 15px 40px rgba(0,0,0,0.7);">
-          <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">🏆</div>
-          <h3 style="color: #facc15; font-size: 1.6rem; margin-bottom: 0.8rem;">أَنْهَيْتَ الجَوْلَةَ ${currentRoundIdx + 1} بِنَجَاحٍ!</h3>
-          <p style="color: #e2e8f0; font-size: 1.15rem; line-height: 1.8; margin-bottom: 1.5rem;">
-            أَكْمَلْتَ كَافَّةَ أَسْئِلَةِ هَذِهِ الجَوْلَةِ بِإِتْقَانٍ. يُمْكِنُ الآنَ لِمُتَعَلِّمٍ آخَرَ خَوْضُ جَوْلَةٍ جَدِيدَةٍ بِأَسْئِلَةٍ أُخْرَى!
-          </p>
-          <button type="button" onclick="nextCohortRound()" style="background: #facc15; color: #0f172a; border: none; padding: 0.75rem 2rem; border-radius: 18px; font-weight: bold; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(250, 204, 21, 0.4);">
-            🚀 بَدْءُ جَوْلَةٍ جَدِيدَةٍ (أَسْئِلَةٌ جَدِيدَةٌ)
-          </button>
-        </div>
-      `;
-    }
+    // تشغيل صوت التعزيز الاحتفالي دون تجميد الشاشة
+    const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
     if (typeof Sound !== "undefined" && Sound.playAsset) {
       const folder = Sound.rootFolderMap[rootKey] || rootKey;
       Sound.playAsset(folder, 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ!");
     }
+
+    // استبدال منطقة التفاعل فقط ببطاقة تهنئة وخيارات مرنة مع بقاء الخريطة كاملة
+    const interactionArea = document.getElementById('discInteractionArea');
+    const toast = document.getElementById('discToastFeedback');
+    if (toast) toast.textContent = '';
+
+    if (interactionArea) {
+      interactionArea.innerHTML = `
+        <div style="background: rgba(15, 23, 42, 0.6); border: 2px dashed #facc15; border-radius: 20px; padding: 1.5rem; margin-top: 1rem;">
+          <div style="font-size: 2.5rem; margin-bottom: 0.3rem;">🌟 🏆 🌟</div>
+          <h3 style="color: #facc15; font-size: 1.3rem; margin-bottom: 0.5rem;">أَحْسَنْتَ! اكْتَمَلَتْ أَسْئِلَةُ هَذِهِ الجَوْلَةِ!</h3>
+          <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 1.2rem;">
+            يُمْكِنُكَ الآنَ بَدْءُ جَوْلَةٍ بِأَسْئِلَةٍ جَدِيدَةٍ لِمُتَعَلِّمٍ آخَرَ، أَوْ مَتَابَعَةُ اسْتِكْشَافِ بَقِيَّةِ المَدَارَاتِ مِنَ القَائِمَةِ.
+          </p>
+          <div style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
+            <button type="button" onclick="nextCohortRound()" style="background: #facc15; color: #0f172a; border: none; padding: 0.6rem 1.4rem; border-radius: 14px; font-weight: bold; font-size: 0.95rem; cursor: pointer; box-shadow: 0 4px 12px rgba(250, 204, 21, 0.3);">
+              🔄 جَوْلَةٌ جَدِيدَةٌ (أَسْئِلَةٌ جَدِيدَةٌ)
+            </button>
+            <button type="button" onclick="selectGalaxyStation((${(currentDiscGalaxyIdx + 1) % labs.length}))" style="background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #38bdf8; padding: 0.6rem 1.4rem; border-radius: 14px; font-weight: bold; font-size: 0.95rem; cursor: pointer;">
+              🚀 انْتَقِلْ لِلْمَدَارِ التَّالِي
+            </button>
+          </div>
+        </div>
+      `;
+    }
   }
 }
-
 // الانتقال لجولة جديدة تماماً بأسئلة مختلفة (للمتعلم الثاني أو الثالث)
 function nextCohortRound() {
   const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
