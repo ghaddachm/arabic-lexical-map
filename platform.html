@@ -2409,8 +2409,7 @@ let starsCount = 0;
     container.innerHTML = '<p style="font-size:1.4rem; color:#bae6fd; font-weight:bold; text-align:center;">🚀 مَرْكَبَةُ التَّحَدِّي لِهَذَا الجَذْرِ قَيْدَ الإِعْدَادِ! ✨</p>';
     return;
   }
-
-  // خلط الأسئلة لتوليد نموذج جديد في كل رحلة
+// خلط الأسئلة لتوليد نموذج جديد في كل رحلة
   let currentChallenges = [...rawChallenges].sort(() => Math.random() - 0.5);
   if (currentChallenges.length > 6) {
     currentChallenges = currentChallenges.slice(0, 6);
@@ -2422,6 +2421,20 @@ let starsCount = 0;
 
     // شاشة اكتمال الرحلة
     if (idx >= currentChallenges.length) {
+      // تشغيل صوت التشجيع والاحتفال المعتمد في المنصة
+      if (typeof Sound !== "undefined") {
+        if (Sound.playAsset) {
+          Sound.playAsset('', 'celebration.mp3', 'celebration');
+        } else if (Sound.celebrate) {
+          Sound.celebrate();
+        }
+      }
+
+      // إضافة النجوم للمتعلم تشجيعاً لإتمامه المجرة
+      if (typeof addStars === "function") {
+        addStars(30);
+      }
+
       container.innerHTML = `
         <div style="width: 100%; max-width: 650px; margin: 0 auto; text-align:center; padding: 2.5rem 1.5rem; background: radial-gradient(circle at center, #1e1b4b, #090d16); border: 2px solid #38bdf8; border-radius: 28px; box-shadow: 0 0 35px rgba(56, 189, 248, 0.35);">
           <div style="font-size: 3.8rem; margin-bottom: 0.8rem;">✨🪐🚀</div>
@@ -2435,10 +2448,6 @@ let starsCount = 0;
           </div>
         </div>
       `;
-      if (typeof Sound !== "undefined" && Sound.playAsset) {
-        Sound.playAsset('', 'celebrate', "مبارك يا بطل! لقد أكملت رحلة مركبة الصرف الفضائية بنجاح باهر!");
-      }
-      if (typeof addStars === "function") addStars(30);
       return;
     }
 
