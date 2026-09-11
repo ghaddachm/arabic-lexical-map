@@ -2431,9 +2431,9 @@ let starsCount = 0;
       // تشغيل الصوت الصوتي المولد
       if (typeof Sound !== "undefined" && Sound.playAsset) {
         if (isFinalGalaxy) {
-          Sound.playAsset('', 'space_success.mp3', 'space_success');
+          Sound.playAsset('audio', 'space_success.mp3', 'space_success');
         } else {
-          Sound.playAsset('', 'galaxy_transition.mp3', 'galaxy_transition');
+          Sound.playAsset('audio', 'galaxy_transition.mp3', 'galaxy_transition');
         }
       }
 
