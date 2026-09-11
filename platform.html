@@ -2616,8 +2616,8 @@ let starsCount = 0;
     `;
   }
 
-  // ==========================================
-  // آلية التقييم والتفاعل البصري والصوتي السريع
+ // ==========================================
+  // آلية التقييم والتفاعل البصري الحركي (صامت بدون أي صوت)
   // ==========================================
   window.evaluatePodChoice = function(btn, chosen, correct, idx) {
     const parent = document.getElementById('podChoicesWrapper');
@@ -2626,55 +2626,66 @@ let starsCount = 0;
       allBtns.forEach(b => b.style.pointerEvents = 'none');
     }
 
+    // إيجاد أو إنشاء شريط التغذية الراجعة البصرية
+    let feedbackBanner = document.getElementById('podFeedbackBanner');
+    if (!feedbackBanner) {
+      feedbackBanner = document.createElement('div');
+      feedbackBanner.id = 'podFeedbackBanner';
+      feedbackBanner.style.cssText = "margin: 1rem auto 0; padding: 0.6rem 1.4rem; border-radius: 16px; font-weight: bold; font-size: 1.15rem; transition: all 0.3s ease; text-align: center; max-width: 400px;";
+      if (parent) parent.parentNode.insertBefore(feedbackBanner, parent);
+    }
+
     if (chosen === correct) {
-      // تفاعل بصري أخضر فوري
+      // تفاعل بصري للزر بالأخضر
       btn.style.setProperty('background', '#10b981', 'important');
       btn.style.setProperty('border-color', '#059669', 'important');
-      btn.style.setProperty('box-shadow', '0 0 20px #10b981', 'important');
+      btn.style.setProperty('box-shadow', '0 0 25px #10b981', 'important');
       btn.style.transform = 'scale(1.08)';
 
-      // صوت النغمة الخاطفة للإجابة الصحيحة
-      try {
-        const soundCorrect = new Audio('audio/correct_1.mp3');
-        soundCorrect.currentTime = 0;
-        soundCorrect.play();
-      } catch(e) {}
+      // رسالة التعزيز الإيجابي
+      feedbackBanner.style.background = 'rgba(16, 185, 129, 0.2)';
+      feedbackBanner.style.border = '2px solid #10b981';
+      feedbackBanner.style.color = '#34d399';
+      feedbackBanner.style.boxShadow = '0 0 15px rgba(16, 185, 129, 0.4)';
+      feedbackBanner.innerHTML = '🎉 أَحْسَنْتَ يَا بَطَلُ! إِجَابَةٌ رَائِعَةٌ ✨';
+      feedbackBanner.style.display = 'block';
 
       if (typeof addStars === "function") addStars(10);
 
-      // انتقال سريع بعد الرنة التفاعلية
+      // انتقال سريع للمحطة الموالية
       setTimeout(() => {
         renderCurrentPod(idx + 1);
-      }, 550);
+      }, 700);
 
     } else {
-      // تفاعل بصري أحمر فوري
+      // تفاعل بصري للزر بالأحمر
       btn.style.setProperty('background', '#ef4444', 'important');
       btn.style.setProperty('border-color', '#dc2626', 'important');
-      btn.style.setProperty('box-shadow', '0 0 20px #ef4444', 'important');
+      btn.style.setProperty('box-shadow', '0 0 25px #ef4444', 'important');
       btn.style.transform = 'scale(0.95)';
 
-      // صوت النغمة الخاطفة عند الخطأ
-      try {
-        const soundWrong = new Audio('audio/wrong_1.mp3');
-        soundWrong.currentTime = 0;
-        soundWrong.play();
-      } catch(e) {}
+      // رسالة التوجيه عند الخطأ
+      feedbackBanner.style.background = 'rgba(239, 68, 68, 0.2)';
+      feedbackBanner.style.border = '2px solid #ef4444';
+      feedbackBanner.style.color = '#f87171';
+      feedbackBanner.style.boxShadow = '0 0 15px rgba(239, 68, 68, 0.4)';
+      feedbackBanner.innerHTML = '⚠️ حَاوِلْ مَرَّةً أُخْرَى!';
+      feedbackBanner.style.display = 'block';
 
       setTimeout(() => {
         btn.style.setProperty('background', 'rgba(30, 41, 59, 0.85)', 'important');
         btn.style.setProperty('border-color', '#38bdf8', 'important');
         btn.style.setProperty('box-shadow', 'none', 'important');
         btn.style.transform = 'scale(1)';
+        feedbackBanner.style.display = 'none';
         
         if (parent) {
           const allBtns = parent.querySelectorAll('button');
           allBtns.forEach(b => b.style.pointerEvents = 'auto');
         }
-      }, 700);
+      }, 900);
     }
   };
-
   // إطلاق المحطة الأولى
   renderCurrentPod(0);
 }
