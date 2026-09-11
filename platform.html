@@ -2423,14 +2423,8 @@ window.resetStoryCloud = function() {
     }
   }
 };
-    let currentDiscStationIdx = 0;
-
-let currentDiscGalaxyIdx = 0;   // رقم المدار الحالي
-let currentDiscQuestionIdx = 0; // رقم السؤال الحالي داخل المدار
-
-let currentDiscGalaxyIdx = 0;   // المدار المختار
-let activeQuestionIndex = -1;   // مؤشر السؤال النشط داخل بنك المدار
-
+   var currentDiscGalaxyIdx = 0;
+var activeQuestionIndex = -1;
 function renderDiscsWorkshop(labs) {
   const container = document.getElementById('discsContainer');
   if (!container || !labs || labs.length === 0) return;
