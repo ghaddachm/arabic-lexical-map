@@ -2617,7 +2617,47 @@ let starsCount = 0;
   }
 
  // ==========================================
-  // آلية التقييم والتفاعل البصري الحركي (صامت بدون أي صوت)
+  // مُولّد أصوات البيب الرقمية (Web Audio API - بدون ملفات خارجية)
+  // ==========================================
+  function playBeepTone(type) {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      
+      const now = ctx.currentTime;
+
+      if (type === 'correct') {
+        // نغمة صواب تصاعدية خاطفة ولطيفة (بيب مبهج)
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, now); // D5
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.15); // A5
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      } else {
+        // نغمة خطأ خفيضة وقصيرة جداً (تنبيه لطيف)
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(220, now); // A3
+        osc.frequency.setValueAtTime(164.81, now + 0.08); // E3
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      }
+    } catch (e) {
+      console.warn("Audio Context error:", e);
+    }
+  }
+
+  // ==========================================
+  // آلية التقييم والتفاعل البصري مع صوت البيب الرقمي
   // ==========================================
   window.evaluatePodChoice = function(btn, chosen, correct, idx) {
     const parent = document.getElementById('podChoicesWrapper');
@@ -2626,23 +2666,26 @@ let starsCount = 0;
       allBtns.forEach(b => b.style.pointerEvents = 'none');
     }
 
-    // إيجاد أو إنشاء شريط التغذية الراجعة البصرية
+    // إيجاد أو إنشاء شريط التغذية الراجعة البصرية المضيئة
     let feedbackBanner = document.getElementById('podFeedbackBanner');
     if (!feedbackBanner) {
       feedbackBanner = document.createElement('div');
       feedbackBanner.id = 'podFeedbackBanner';
-      feedbackBanner.style.cssText = "margin: 1rem auto 0; padding: 0.6rem 1.4rem; border-radius: 16px; font-weight: bold; font-size: 1.15rem; transition: all 0.3s ease; text-align: center; max-width: 400px;";
+      feedbackBanner.style.cssText = "margin: 0.8rem auto; padding: 0.6rem 1.4rem; border-radius: 16px; font-weight: bold; font-size: 1.15rem; transition: all 0.3s ease; text-align: center; max-width: 420px;";
       if (parent) parent.parentNode.insertBefore(feedbackBanner, parent);
     }
 
     if (chosen === correct) {
-      // تفاعل بصري للزر بالأخضر
+      // 1. تشغيل صوت البيب الخاص بالصواب فوراً
+      playBeepTone('correct');
+
+      // 2. التفاعل البصري للزر بالأخضر
       btn.style.setProperty('background', '#10b981', 'important');
       btn.style.setProperty('border-color', '#059669', 'important');
       btn.style.setProperty('box-shadow', '0 0 25px #10b981', 'important');
       btn.style.transform = 'scale(1.08)';
 
-      // رسالة التعزيز الإيجابي
+      // 3. العبارة التشجيعية
       feedbackBanner.style.background = 'rgba(16, 185, 129, 0.2)';
       feedbackBanner.style.border = '2px solid #10b981';
       feedbackBanner.style.color = '#34d399';
@@ -2652,19 +2695,22 @@ let starsCount = 0;
 
       if (typeof addStars === "function") addStars(10);
 
-      // انتقال سريع للمحطة الموالية
+      // انتقال سريع ومباشر بعد ربع ثانية
       setTimeout(() => {
         renderCurrentPod(idx + 1);
       }, 700);
 
     } else {
-      // تفاعل بصري للزر بالأحمر
+      // 1. تشغيل صوت البيب الخاص بالخطأ فوراً
+      playBeepTone('wrong');
+
+      // 2. التفاعل البصري للزر بالأحمر
       btn.style.setProperty('background', '#ef4444', 'important');
       btn.style.setProperty('border-color', '#dc2626', 'important');
       btn.style.setProperty('box-shadow', '0 0 25px #ef4444', 'important');
       btn.style.transform = 'scale(0.95)';
 
-      // رسالة التوجيه عند الخطأ
+      // 3. عبارة التنبيه
       feedbackBanner.style.background = 'rgba(239, 68, 68, 0.2)';
       feedbackBanner.style.border = '2px solid #ef4444';
       feedbackBanner.style.color = '#f87171';
