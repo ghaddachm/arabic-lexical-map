@@ -2494,9 +2494,22 @@ function submitDynamicDiscChar(btn, char) {
     const area = document.getElementById('discInteractionArea');
     if (area) area.style.pointerEvents = 'none';
 
-    // نغمة نجاح قصيرة فورية بدون كلام مطوّل
-    if (typeof Sound !== "undefined" && Sound.correct) Sound.correct();
-    if (typeof addStars === "function") addStars(15);
+    // نغمة بيب قصيرة فقط بدون تشغيل الكلام الصوتي المطول
+    try {
+      if (typeof Sound !== "undefined" && Sound.beep) {
+        Sound.beep();
+      } else if (typeof Sound !== "undefined" && Sound.play) {
+        Sound.play('chime');
+      }
+    } catch(e) {}
+
+    // زيادة النجوم في الشاشة بصمت بدون تشغيل الجمل الصوتية المرافقة
+    const starEl = document.getElementById('starsCount') || document.getElementById('starCount');
+    if (starEl) {
+      starEl.textContent = (parseInt(starEl.textContent) || 0) + 15;
+    } else if (typeof addStars === "function") {
+      addStars(15, false);
+    }
 
     const placeholder = document.getElementById('emptySlotPlaceholder');
     if (placeholder) {
@@ -2509,12 +2522,14 @@ function submitDynamicDiscChar(btn, char) {
       toast.textContent = "✨ صَحِيحٌ!";
     }
 
-    // انتقال سريع ونشط بعد 800 ميلي ثانية فقط
+    // انتقال سريع وخفيف (800 ميلي ثانية) كمركبة الصرف
     setTimeout(() => {
       advanceStepInRound(labs);
     }, 800);
   } else {
-    if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
+    try {
+      if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
+    } catch(e) {}
     if (toast) {
       toast.style.color = '#f87171';
       toast.textContent = q.hint || "حَاوِلْ مَرَّةً أُخْرَى!";
@@ -2536,23 +2551,38 @@ function submitDynamicDiscChoice(btn, selectedOpt) {
     btn.style.background = '#22c55e';
     btn.style.borderColor = '#16a34a';
 
-    // نغمة نجاح قصيرة فورية
-    if (typeof Sound !== "undefined" && Sound.correct) Sound.correct();
-    if (typeof addStars === "function") addStars(15);
+    // نغمة بيب قصيرة فقط
+    try {
+      if (typeof Sound !== "undefined" && Sound.beep) {
+        Sound.beep();
+      } else if (typeof Sound !== "undefined" && Sound.play) {
+        Sound.play('chime');
+      }
+    } catch(e) {}
+
+    // زيادة النجوم بصمت
+    const starEl = document.getElementById('starsCount') || document.getElementById('starCount');
+    if (starEl) {
+      starEl.textContent = (parseInt(starEl.textContent) || 0) + 15;
+    } else if (typeof addStars === "function") {
+      addStars(15, false);
+    }
 
     if (toast) {
       toast.style.color = '#4ade80';
       toast.textContent = "✨ صَحِيحٌ!";
     }
 
-    // انتقال رشيق كمركبة الصرف
+    // انتقال سريع بعد 800 ميلي ثانية
     setTimeout(() => {
       advanceStepInRound(labs);
     }, 800);
   } else {
     btn.style.background = '#ef4444';
     btn.style.borderColor = '#dc2626';
-    if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
+    try {
+      if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
+    } catch(e) {}
     if (toast) {
       toast.style.color = '#f87171';
       toast.textContent = q.hint || "حَاوِلْ مَرَّةً أُخْرَى!";
@@ -2563,7 +2593,6 @@ function submitDynamicDiscChoice(btn, selectedOpt) {
     }, 800);
   }
 }
-
 // دالة فحص الاختيار
 function submitDynamicDiscChoice(btn, selectedOpt) {
   const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
