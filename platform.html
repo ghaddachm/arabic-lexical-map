@@ -2156,59 +2156,81 @@ let starsCount = 0;
     }
 
     function handleStoryWordClick(el, item, data) {
-      Sound.pop();
-      const currentTargetType = data.missions[currentMissionIdx].targetType;
-      const rootKey = document.getElementById('rootSelect').value;
-      const folder = Sound.rootFolderMap[rootKey] || rootKey;
+  Sound.pop();
+  const currentMission = data.missions[currentMissionIdx];
+  const currentTargetType = currentMission.targetType;
+  const rootKey = document.getElementById('rootSelect').value;
+  const folder = Sound.rootFolderMap[rootKey] || rootKey;
 
-      // قائمة الكلمات اللغوية الصحيحة في النص ولكنها خارج عائلة الجذر
-      const externalWords = [
-        "جَلَسَ", "وَقَفَ", "أَمْسَكَ", "عَمِلَ", "ذَهَبَ", "قَالَ",
-        "رَبَطَا", "وَصَلَا", "أَقْبَلَ", "حَضَرَ", "نَظَرَ", "سَمِعَ",
-        "الصَّغِيرُ", "القِرَاءَةِ", "المُسَافِرُ", "الحَارِسُ", "البَاحِثُ", "العَامِلُ"
-      ];
-      const clickedWordClean = item.word.replace(/[.,،؛:«»]/g, '').trim();
+  // تنظيف الكلمة من علامات الترقيم
+  const clickedWordClean = item.word.replace(/[.,،؛:«»]/g, '').trim();
 
-      if (externalWords.includes(clickedWordClean) && !item.target) {
-        // العبارة الرشيقة الجديدة
-        const generalAlertText = "كَلِمَةٌ صَحِيحَةٌ، لَكِنَّهَا لَيْسَتْ مِنْ شَمْسِ جَذْرِنَا.. حَاوِلْ مَرَّةً أُخْرَى!";
-        
-        // تشغيل ملف التنبيه العام المولّد من ElevenLabs
-        Sound.playAsset('', 'hint_general', generalAlertText);
+  // 1. قائمة الأفعال الصحيحة السالمة الثلاثية في النص فقط
+  const validSoundVerbsInStory = [
+    "كَتَبَ", "وَكَتَبَ", "جَلَسَ", "فَخَرَجَتْ", "خَرَجَتْ"
+  ];
 
-        // التنبيه البصري باللون البرتقالي/الأصفر
-        el.style.borderColor = '#f59e0b';
-        el.style.boxShadow = '0 5px 0 #d97706';
-        setTimeout(() => {
-          el.style.borderColor = '#94a3b8';
-          el.style.boxShadow = '0 4px 0 #94a3b8';
-        }, 1500);
-        return;
-      }
+  // التحقق إن كانت المهمة الحالية تبحث عن الفعل الصحيح السالم / الثلاثي
+  const isLookingForSoundVerb = (currentTargetType === 'core' || 
+    (currentMission.label && (currentMission.label.includes('السَّالِم') || currentMission.label.includes('الثُّلَاثِي'))));
 
-      if (item.target === currentTargetType) {
-        el.classList.add('found');
-        addStars(10);
-        currentMissionIdx++;
+  // قبول أي فعل صحيح سالم بديل من النص
+  const isAcceptedSoundVerb = isLookingForSoundVerb && validSoundVerbsInStory.includes(clickedWordClean);
 
-        Sound.correct(() => {
-          if (currentMissionIdx < data.missions.length) {
-            const nextMission = data.missions[currentMissionIdx];
-            document.getElementById('storyMissionBadge').textContent = nextMission.label;
-            Sound.playAsset(folder, nextMission.audio, nextMission.label);
-          } else {
-            const victoryMsg = "🎉 بَطَلٌ خَارِقٌ! اسْتَخْرَجْتَ كَافَّةَ مَشَاهِدِ الجَذْرِ الخَمْسَةِ بِنَجَاحٍ!";
-            document.getElementById('storyMissionBadge').textContent = victoryMsg;
-            addStars(30);
-            Sound.playAsset(folder, 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
-          }
-        });
+  // ==========================================
+  // حالة الإجابة الصحيحة (الجذر المستهدف أو فعل صحيح سالم بديل)
+  // ==========================================
+  if (item.target === currentTargetType || isAcceptedSoundVerb) {
+    el.classList.add('found');
+    addStars(10);
+    currentMissionIdx++;
+
+    Sound.correct(() => {
+      if (currentMissionIdx < data.missions.length) {
+        const nextMission = data.missions[currentMissionIdx];
+        document.getElementById('storyMissionBadge').textContent = nextMission.label;
+        Sound.playAsset(folder, nextMission.audio, nextMission.label);
       } else {
-        Sound.wrong();
-        el.style.borderColor = '#ef4444';
-        setTimeout(() => el.style.borderColor = '#94a3b8', 500);
+        const victoryMsg = "🎉 بَطَلٌ خَارِقٌ! اسْتَخْرَجْتَ كَافَّةَ مَشَاهِدِ القِصَّةِ بِنَجَاحٍ!";
+        document.getElementById('storyMissionBadge').textContent = victoryMsg;
+        addStars(30);
+        Sound.playAsset(folder, 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
       }
+    });
+    return;
+  }
+
+  // ==========================================
+  // توجيهات ديداكتيكية ذكية للأفعال غير المطابقة للشروط
+  // ==========================================
+  if (isLookingForSoundVerb) {
+    let specificHint = "";
+
+    if (clickedWordClean === "بَاتَ") {
+      specificHint = "«بَاتَ» فِعْلٌ مُعْتَلٌّ أَجْوَف.. والمَطْلُوبُ فِعْلٌ صَحِيحٌ سَالِمٌ!";
+    } else if (clickedWordClean === "أَمْسَكَ") {
+      specificHint = "«أَمْسَكَ» فِعْلٌ رُبَاعِيٌّ مَهْمُوز.. والمَطْلُوبُ فِعْلٌ ثُلَاثِيٌّ سَالِمٌ!";
     }
+
+    if (specificHint) {
+      Sound.playAsset('', 'hint_general', specificHint);
+      el.style.borderColor = '#f59e0b';
+      el.style.boxShadow = '0 5px 0 #d97706';
+      setTimeout(() => {
+        el.style.borderColor = '#94a3b8';
+        el.style.boxShadow = '0 4px 0 #94a3b8';
+      }, 1600);
+      return;
+    }
+  }
+
+  // ==========================================
+  // حالة الخطأ (اسم مثل "سِحْرُ" أو حرف أو مشتق آخر في غير محله)
+  // ==========================================
+  Sound.wrong();
+  el.style.borderColor = '#ef4444';
+  setTimeout(() => el.style.borderColor = '#94a3b8', 500);
+}
     function renderDiscsWorkshop(labs) {
       const container = document.getElementById('discsContainer');
       container.innerHTML = '';
