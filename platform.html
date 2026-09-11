@@ -2562,7 +2562,7 @@ function submitDynamicDiscChar(btn, char) {
   }
 }
 
-// دالة فحص الاختيار (الأسئلة الأربعة التالية)
+// دالة فحص الاختيار (نسخة واحدة موحدة بنغمة بيب وانتقال سريع)
 function submitDynamicDiscChoice(btn, selectedOpt) {
   const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
   const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
@@ -2576,13 +2576,13 @@ function submitDynamicDiscChoice(btn, selectedOpt) {
     btn.style.background = '#22c55e';
     btn.style.borderColor = '#16a34a';
 
-    // إسكات أي جملة صوتية بشرية
+    // إسكات أي صوت أو كلام بشري مسبق
     try {
       if (typeof Sound !== "undefined" && Sound.stop) Sound.stop();
       if (window.speechSynthesis) window.speechSynthesis.cancel();
     } catch(e) {}
 
-    // نغمة البيب الفورية
+    // تشغيل نغمة البيب الخفيفة
     playQuickBeep();
 
     // تحديث النجوم بصمت
@@ -2608,45 +2608,6 @@ function submitDynamicDiscChoice(btn, selectedOpt) {
     try {
       if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
     } catch(e) {}
-    if (toast) {
-      toast.style.color = '#f87171';
-      toast.textContent = q.hint || "حَاوِلْ مَرَّةً أُخْرَى!";
-    }
-    setTimeout(() => {
-      btn.style.background = 'rgba(255,255,255,0.08)';
-      btn.style.borderColor = 'rgba(255,255,255,0.2)';
-    }, 800);
-  }
-}
-// دالة فحص الاختيار
-function submitDynamicDiscChoice(btn, selectedOpt) {
-  const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
-  const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
-  const q = labs[currentDiscGalaxyIdx].rounds[currentRoundIdx][currentStepInRound];
-  const toast = document.getElementById('discToastFeedback');
-
-  if (selectedOpt === q.correctAnswer) {
-    // تجميد خيارات السؤال لمنع التكرار وقص الصوت
-    const area = document.getElementById('discInteractionArea');
-    if (area) area.style.pointerEvents = 'none';
-
-    btn.style.background = '#22c55e';
-    btn.style.borderColor = '#16a34a';
-    if (typeof Sound !== "undefined" && Sound.correct) Sound.correct();
-    if (typeof addStars === "function") addStars(15);
-
-    if (toast) {
-      toast.style.color = '#4ade80';
-      toast.textContent = "🌟 أَحْسَنْتَ! إِجَابَةٌ دَقِيقَةٌ!";
-    }
-
-    setTimeout(() => {
-      advanceStepInRound(labs);
-    }, 3200);
-  } else {
-    btn.style.background = '#ef4444';
-    btn.style.borderColor = '#dc2626';
-    if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
     if (toast) {
       toast.style.color = '#f87171';
       toast.textContent = q.hint || "حَاوِلْ مَرَّةً أُخْرَى!";
