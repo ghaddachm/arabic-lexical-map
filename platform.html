@@ -2483,7 +2483,32 @@ function renderDiscsWorkshop(labs) {
   `;
 }
 
-// دالة فحص الحرف (نغمة بيب قصيرة وانتقال سريع وسلس)
+// دالة توليد نغمة بيب لطيفة وفورية (Web Audio API)
+function playQuickBeep() {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = 'sine';
+    // نغمتان مبهجتان متتاليتان وسريعتان
+    osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+    osc.frequency.setValueAtTime(880.00, ctx.currentTime + 0.08);
+
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 0.25);
+  } catch(e) {}
+}
+
+// دالة فحص الحرف (السؤال الأول)
 function submitDynamicDiscChar(btn, char) {
   const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
   const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
@@ -2494,21 +2519,22 @@ function submitDynamicDiscChar(btn, char) {
     const area = document.getElementById('discInteractionArea');
     if (area) area.style.pointerEvents = 'none';
 
-    // نغمة بيب قصيرة فقط بدون تشغيل الكلام الصوتي المطول
+    // إسكات أي جملة صوتية بشرية سابقة
     try {
-      if (typeof Sound !== "undefined" && Sound.beep) {
-        Sound.beep();
-      } else if (typeof Sound !== "undefined" && Sound.play) {
-        Sound.play('chime');
-      }
+      if (typeof Sound !== "undefined" && Sound.stop) Sound.stop();
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
     } catch(e) {}
 
-    // زيادة النجوم في الشاشة بصمت بدون تشغيل الجمل الصوتية المرافقة
+    // نغمة البيب الفورية
+    playQuickBeep();
+
+    // تحديث النجوم بصمت
     const starEl = document.getElementById('starsCount') || document.getElementById('starCount');
     if (starEl) {
       starEl.textContent = (parseInt(starEl.textContent) || 0) + 15;
-    } else if (typeof addStars === "function") {
-      addStars(15, false);
+    }
+    if (typeof userStars !== "undefined") {
+      userStars += 15;
     }
 
     const placeholder = document.getElementById('emptySlotPlaceholder');
@@ -2522,7 +2548,6 @@ function submitDynamicDiscChar(btn, char) {
       toast.textContent = "✨ صَحِيحٌ!";
     }
 
-    // انتقال سريع وخفيف (800 ميلي ثانية) كمركبة الصرف
     setTimeout(() => {
       advanceStepInRound(labs);
     }, 800);
@@ -2537,7 +2562,7 @@ function submitDynamicDiscChar(btn, char) {
   }
 }
 
-// دالة فحص الاختيار (نغمة بيب قصيرة وانتقال سريع وسلس)
+// دالة فحص الاختيار (الأسئلة الأربعة التالية)
 function submitDynamicDiscChoice(btn, selectedOpt) {
   const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
   const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
@@ -2551,21 +2576,22 @@ function submitDynamicDiscChoice(btn, selectedOpt) {
     btn.style.background = '#22c55e';
     btn.style.borderColor = '#16a34a';
 
-    // نغمة بيب قصيرة فقط
+    // إسكات أي جملة صوتية بشرية
     try {
-      if (typeof Sound !== "undefined" && Sound.beep) {
-        Sound.beep();
-      } else if (typeof Sound !== "undefined" && Sound.play) {
-        Sound.play('chime');
-      }
+      if (typeof Sound !== "undefined" && Sound.stop) Sound.stop();
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
     } catch(e) {}
 
-    // زيادة النجوم بصمت
+    // نغمة البيب الفورية
+    playQuickBeep();
+
+    // تحديث النجوم بصمت
     const starEl = document.getElementById('starsCount') || document.getElementById('starCount');
     if (starEl) {
       starEl.textContent = (parseInt(starEl.textContent) || 0) + 15;
-    } else if (typeof addStars === "function") {
-      addStars(15, false);
+    }
+    if (typeof userStars !== "undefined") {
+      userStars += 15;
     }
 
     if (toast) {
@@ -2573,7 +2599,6 @@ function submitDynamicDiscChoice(btn, selectedOpt) {
       toast.textContent = "✨ صَحِيحٌ!";
     }
 
-    // انتقال سريع بعد 800 ميلي ثانية
     setTimeout(() => {
       advanceStepInRound(labs);
     }, 800);
