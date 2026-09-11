@@ -2241,20 +2241,29 @@ let starsCount = 0;
       }
     }
 
-   function renderSpacecraftChallenge(challenges) {
+  function renderSpacecraftChallenge(challenges) {
   const container = document.getElementById('challengeContainer');
   if (!container) return;
   container.innerHTML = '';
 
-  const rootKey = document.getElementById('rootSelect').value;
-  const currentChallenges = (challenges && challenges.length) ? challenges : (db[rootKey]?.challenges || []);
+  const rootSelect = document.getElementById('rootSelect');
+  const rootKey = rootSelect ? rootSelect.value : Object.keys(db)[0];
+  
+  // جلب الأسئلة الأصلية للجذر
+  const rawChallenges = (challenges && challenges.length) ? challenges : (db[rootKey]?.challenges || []);
 
-  if (!currentChallenges || currentChallenges.length === 0) {
+  if (!rawChallenges || rawChallenges.length === 0) {
     container.innerHTML = '<p style="font-size:1.4rem; color:#bae6fd; font-weight:bold; text-align:center;">🚀 مَرْكَبَةُ التَّحَدِّي لِهَذَا الجَذْرِ قَيْدَ الإِعْدَادِ! ✨</p>';
     return;
   }
 
-  // قراءة التحديات ديناميكياً وعرض محطة واحدة في كل مرة
+  // خلط وترشيح الأسئلة لتنويع النماذج وتجنب الحفظ
+  let currentChallenges = [...rawChallenges].sort(() => Math.random() - 0.5);
+  if (currentChallenges.length > 6) {
+    currentChallenges = currentChallenges.slice(0, 6);
+  }
+
+  // دالة عرض المحطة الحالية
   function renderCurrentPod(idx) {
     container.innerHTML = '';
 
@@ -2263,13 +2272,23 @@ let starsCount = 0;
       container.innerHTML = `
         <div style="width: 100%; max-width: 650px; margin: 0 auto; text-align:center; padding: 2.5rem 1.5rem; background: radial-gradient(circle at center, #1e1b4b, #090d16); border: 2px solid #38bdf8; border-radius: 28px; box-shadow: 0 0 35px rgba(56, 189, 248, 0.35);">
           <div style="font-size: 3.8rem; margin-bottom: 0.8rem;">🚀🪐✨</div>
-          <h3 style="color: #38bdf8; font-size: 1.6rem; margin-bottom: 0.6rem;">اكْتَمَلَتْ رِحْلَةُ المَرْكَبَةِ الصَّرْفِيَّةِ!</h3>
-          <p style="color: #e2e8f0; font-size: 1.15rem; line-height: 1.7; margin-bottom: 1.5rem;">أَحْسَنْتَ يَا بَطَلَ المَجَرَّةِ، لَقَدْ أَثْبَتَّ تَمَكُّنَكَ مِنْ كَافَّةِ مَحَطَّاتِ الجَذْرِ (${rootKey})!</p>
-          <button class="master-audio-btn" style="width:auto; padding: 0.6rem 2.2rem; font-size: 1.05rem; background: #0284c7;" onclick="renderCurrentPod(0)">🔄 إِعَادَةُ اسْتِكْشَافِ المَجَرَّةِ</button>
+          <h3 style="color: #ffd166; font-size: 1.6rem; margin-bottom: 0.6rem;">اكْتَمَلَتْ رِحْلَةُ المَرْكَبَةِ الصَّرْفِيَّةِ!</h3>
+          <p style="color: #e2e8f0; font-size: 1.15rem; line-height: 1.7; margin-bottom: 1.8rem;">أَحْسَنْتَ يَا بَطَلَ المَجَرَّةِ، لَقَدْ أَثْبَتَّ تَمَكُّنَكَ مِنْ كَافَّةِ مَحَطَّاتِ الجَذْرِ (${rootKey})!</p>
+          
+          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <button class="master-audio-btn" style="width:auto; padding: 0.75rem 1.8rem; font-size: 1.05rem; background: #0284c7; border-radius: 16px; border:none; color:#fff; font-weight:bold; cursor:pointer;" onclick="renderSpacecraftChallenge()">
+              🔄 نَمُوذَجُ أَسْئِلَةٍ جَدِيدٍ
+            </button>
+            <button class="master-audio-btn" style="width:auto; padding: 0.75rem 1.8rem; font-size: 1.05rem; background: linear-gradient(135deg, #10b981, #059669); border-radius: 16px; border:none; color:#fff; font-weight:bold; cursor:pointer;" onclick="goToNextGalaxy()">
+              🚀 الانْطِلَاقُ إِلَى المَجَرَّةِ التَّالِيَةِ
+            </button>
+          </div>
         </div>
       `;
-      Sound.playAsset('', 'celebrate', "مبارك يا بطل! لقد أكملت رحلة مركبة الصرف الفضائية بنجاح باهر!");
-      addStars(30);
+      if (typeof Sound !== "undefined" && Sound.playAsset) {
+        Sound.playAsset('', 'celebrate', "مبارك يا بطل! لقد أكملت رحلة مركبة الصرف الفضائية بنجاح باهر!");
+      }
+      if (typeof addStars === "function") addStars(30);
       return;
     }
 
@@ -2287,10 +2306,9 @@ let starsCount = 0;
     const card = document.createElement('div');
     card.style.cssText = "width: 100%; max-width: 680px; margin: 0 auto; background: radial-gradient(circle at top, #1e293b, #0b0f19); border: 2px solid #38bdf8; border-radius: 26px; padding: 2rem 1.6rem; box-shadow: 0 0 30px rgba(56, 189, 248, 0.2); text-align: center;";
 
-    // توافق تلقائي مع صيغ الأسئلة القديمة والجديدة
     const badgeText = c.badge || c.title || `تَحَدِّي الصَّرْفِ`;
     const promptText = c.prompt || c.q || '';
-    const optionsList = c.opts || c.options || [];
+    const optionsList = [...(c.opts || c.options || [])].sort(() => Math.random() - 0.5);
 
     card.innerHTML = `
       ${progressHtml}
@@ -2313,21 +2331,23 @@ let starsCount = 0;
     container.appendChild(card);
   }
 
-  // دالة التقييم التفاعلي والانتقال التلقائي
+  // تقييم الإجابة
   window.evaluatePodChoice = function(btn, chosen, correct, idx) {
     if (chosen === correct) {
       btn.style.background = '#10b981';
       btn.style.borderColor = '#059669';
       btn.style.boxShadow = '0 0 18px #10b981';
-      addStars(10);
-      Sound.correct(() => {
-        renderCurrentPod(idx + 1);
-      });
+      if (typeof addStars === "function") addStars(10);
+      if (typeof Sound !== "undefined" && Sound.correct) {
+        Sound.correct(() => { renderCurrentPod(idx + 1); });
+      } else {
+        setTimeout(() => { renderCurrentPod(idx + 1); }, 600);
+      }
     } else {
       btn.style.background = '#ef4444';
       btn.style.borderColor = '#dc2626';
       btn.style.boxShadow = '0 0 15px #ef4444';
-      Sound.wrong();
+      if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
       setTimeout(() => {
         btn.style.background = 'rgba(30, 41, 59, 0.85)';
         btn.style.borderColor = '#38bdf8';
@@ -2335,6 +2355,23 @@ let starsCount = 0;
       }, 700);
     }
   };
+
+  // دالة التنقل التلقائي للمجرة التالية
+  window.goToNextGalaxy = function() {
+    const keys = Object.keys(db);
+    const currIdx = keys.indexOf(rootKey);
+    const nextKey = keys[(currIdx + 1) % keys.length];
+    
+    const sel = document.getElementById('rootSelect');
+    if (sel) {
+      sel.value = nextKey;
+      sel.dispatchEvent(new Event('change'));
+    }
+  };
+
+  // بدء تشغيل المحطة الأولى
+  renderCurrentPod(0);
+}
 
   // تشغيل المحطة الأولى مباشرة للجذر الحالي
   renderCurrentPod(0);
