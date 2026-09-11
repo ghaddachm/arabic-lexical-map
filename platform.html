@@ -2529,23 +2529,29 @@ let starsCount = 0;
     container.appendChild(card);
   }
 
-  // آلية تقييم الإجابات
+  // آلية تقييم الإجابات (انتقال سريع ومباشر بدون صوت بين الأسئلة)
   window.evaluatePodChoice = function(btn, chosen, correct, idx) {
     if (chosen === correct) {
       btn.style.background = '#10b981';
       btn.style.borderColor = '#059669';
       btn.style.boxShadow = '0 0 18px #10b981';
+
+      // إضافة النجوم بهدوء
       if (typeof addStars === "function") addStars(10);
-      if (typeof Sound !== "undefined" && Sound.correct) {
-        Sound.correct(() => { renderCurrentPod(idx + 1); });
-      } else {
-        setTimeout(() => { renderCurrentPod(idx + 1); }, 600);
-      }
+
+      // انتقال سريع ومباشر للمحطة الموالية خلال نصف ثانية فقط بدون صوت
+      setTimeout(() => {
+        renderCurrentPod(idx + 1);
+      }, 500);
+
     } else {
       btn.style.background = '#ef4444';
       btn.style.borderColor = '#dc2626';
       btn.style.boxShadow = '0 0 15px #ef4444';
+
+      // تنبيه خفيف عند الخطأ
       if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
+
       setTimeout(() => {
         btn.style.background = 'rgba(30, 41, 59, 0.85)';
         btn.style.borderColor = '#38bdf8';
