@@ -2518,6 +2518,44 @@ function submitDynamicDiscChar(btn, char) {
   }
 }
 
+// دالة فحص الحرف
+function submitDynamicDiscChar(btn, char) {
+  const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
+  const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
+  const q = labs[currentDiscGalaxyIdx].rounds[currentRoundIdx][currentStepInRound];
+  const toast = document.getElementById('discToastFeedback');
+
+  if (char === q.targetChar) {
+    // تجميد نقرات أزرار الحروف لمنع مقاطعة الصوت
+    const area = document.getElementById('discInteractionArea');
+    if (area) area.style.pointerEvents = 'none';
+
+    if (typeof Sound !== "undefined" && Sound.correct) Sound.correct();
+    if (typeof addStars === "function") addStars(15);
+
+    const placeholder = document.getElementById('emptySlotPlaceholder');
+    if (placeholder) {
+      placeholder.textContent = char;
+      placeholder.style.color = '#4ade80';
+    }
+
+    if (toast) {
+      toast.style.color = '#4ade80';
+      toast.textContent = "✨ مُمْتَازٌ! تَرْكِيبٌ صَرْفِيٌّ صَحِيحٌ!";
+    }
+
+    setTimeout(() => {
+      advanceStepInRound(labs);
+    }, 3200);
+  } else {
+    if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
+    if (toast) {
+      toast.style.color = '#f87171';
+      toast.textContent = q.hint || "حَاوِلْ مَرَّةً أُخْرَى!";
+    }
+  }
+}
+
 // دالة فحص الاختيار
 function submitDynamicDiscChoice(btn, selectedOpt) {
   const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
@@ -2526,6 +2564,10 @@ function submitDynamicDiscChoice(btn, selectedOpt) {
   const toast = document.getElementById('discToastFeedback');
 
   if (selectedOpt === q.correctAnswer) {
+    // تجميد خيارات السؤال لمنع التكرار وقص الصوت
+    const area = document.getElementById('discInteractionArea');
+    if (area) area.style.pointerEvents = 'none';
+
     btn.style.background = '#22c55e';
     btn.style.borderColor = '#16a34a';
     if (typeof Sound !== "undefined" && Sound.correct) Sound.correct();
@@ -2536,10 +2578,9 @@ function submitDynamicDiscChoice(btn, selectedOpt) {
       toast.textContent = "🌟 أَحْسَنْتَ! إِجَابَةٌ دَقِيقَةٌ!";
     }
 
-    // زيادة المهلة إلى 2.2 ثانية ليكتمل نطق التعزيز الصوتي
     setTimeout(() => {
       advanceStepInRound(labs);
-    }, 2200);
+    }, 3200);
   } else {
     btn.style.background = '#ef4444';
     btn.style.borderColor = '#dc2626';
