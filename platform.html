@@ -1151,7 +1151,8 @@
       }
     };
 
-    const db = window.ROADS_DATA || {
+    window.ROADS_DATA = window.ROADS_DATA || {};
+    const localDb = {
       "كتب": {
         letters: ['ك', 'ت', 'ب'],
         concept: "الكِتَابَةُ وَالتَّدْوِينُ (صَحِيحٌ سَالِمٌ)",
@@ -2058,6 +2059,7 @@
     }
   }
 };
+    const db = Object.assign(localDb, window.ROADS_DATA);
 
 let starsCount = 0;
     let currentMissionIdx = 0;
