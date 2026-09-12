@@ -805,6 +805,7 @@
     <button class="tab-pill" onclick="switchMainTab('labTab', this)">🛸 أَقْرَاصُ التَّرْكِيبِ</button>
     <button class="tab-pill" onclick="switchMainTab('quizTab', this)">🧩 حَلَبَةُ البَزْل</button>
     <button class="tab-pill" onclick="switchMainTab('challengeTab', this)">🚀 مَرْكَبَةُ الصَّرْفِ</button>
+    <button class="tab-pill" onclick="switchMainTab('freeChallengeTab', this)">🎯 مَحَطَّةُ الإِنْتَاجِ الحُرِّ</button>
   </nav>
 
   <main>
@@ -1004,6 +1005,10 @@
         <p class="spacecraft-subtext">تَحَدَّ نَفْسَكَ يَا بَطَلُ، وَطَبِّقِ الأَوْزَانَ عَلَى كَلِمَاتٍ جَدِيدَةٍ مِنْ نَفْسِ المَجَرَّةِ:</p>
         <div class="spacecraft-pods-row" id="challengeContainer"></div>
       </div>
+    </div>
+    <!-- 6. مَحَطَّةُ الإِنْتَاجِ الحُرِّ -->
+    <div id="freeChallengeTab" class="tab-view" style="display: none;">
+      <div id="freeChallengeContainer"></div>
     </div>
   </main>
 
@@ -3181,9 +3186,231 @@ function rollNewQuestionForGalaxy() {
 
     function switchMainTab(tabId, el) {
       document.querySelectorAll('.tab-pill').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-view').forEach(v => v.classList.remove('active'));
+      document.querySelectorAll('.tab-view').forEach(v => {
+        v.classList.remove('active');
+        v.style.display = 'none';
+      });
+      
       el.classList.add('active');
-      document.getElementById(tabId).classList.add('active');
+      const activeView = document.getElementById(tabId);
+      if (activeView) {
+        activeView.classList.add('active');
+        activeView.style.display = 'block';
+      }
+
+      // تشغيل محطة الإنتاج الحر تلقائياً عند فتح التبويب
+      if (tabId === 'freeChallengeTab') {
+        renderFreeSentenceChallenge();
+      }
+    }
+
+    // ==========================================
+    // بنك محطة الإنتاج الحر (توليد غير متكرر)
+    // ==========================================
+    const freeSentenceBank = {
+      ktb: [
+        {
+          beforeText: "التِّلْمِيذُ يُؤَلِّفُ قِصَّةً شَيِّقَةً، إِذَنْ هُوَ",
+          afterText: "مُبْدِعٌ فِي فَصْلِهِ.",
+          expected: ["كاتب", "كَاتِبٌ", "كَاتِب"]
+        },
+        {
+          beforeText: "قَرَأْتُ خِطَاباً وَاضِحَ الكَلِمَاتِ، فَهُوَ نَصٌّ",
+          afterText: "بِخَطٍّ مَغْرِبِيٍّ أَنِيقٍ.",
+          expected: ["مكتوب", "مَكْتُوبٌ", "مَكْتُوب"]
+        },
+        {
+          beforeText: "دَخَلَ البَاحِثُونَ إِلَى",
+          afterText: "العَامَّةِ لِمُطَالَعَةِ المَرَاجِعِ النَّادِرَةِ.",
+          expected: ["المكتبة", "مكتبة", "المَكْتَبَةِ", "مَكْتَبَةِ", "المَكْتَبَة"]
+        },
+        {
+          beforeText: "رَتَّبَ المُعَلِّمُ الأَوْرَاقَ وَالأَقْلاَمَ فَوْقَ",
+          afterText: "الخَشَبِيِّ المُرِيحِ.",
+          expected: ["المكتب", "مكتب", "المَكْتَبِ", "مَكْتَبٍ", "المَكْتَب"]
+        },
+        {
+          beforeText: "الفَتَاةُ الَّتِي تُدَوِّنُ يَوْمِيَّاتِهَا هِيَ",
+          afterText: "مُجْتَهِدَةٌ وَفَصِيحَةٌ.",
+          expected: ["كاتبة", "كَاتِبَةٌ", "كَاتِبَة"]
+        }
+      ],
+      sjd: [
+        {
+          beforeText: "المُؤْمِنُ الخَاشِعُ للهِ تَعَالَى يَكُونُ دَائِماً",
+          afterText: "فِي صَلاَتِهِ بِطُمَأْنِينَةٍ.",
+          expected: ["ساجدا", "سَاجِداً", "ساجد", "سَاجِدٌ", "سَاجِد"]
+        },
+        {
+          beforeText: "يَجْتَمِعُ أَهْلُ الحَيِّ لِأَدَاءِ الصَّلَوَاتِ فِي",
+          afterText: "القَرِيبِ مِنْ بُيُوتِهِمْ.",
+          expected: ["المسجد", "مسجد", "المَسْجِدِ", "مَسْجِدٍ", "المَسْجِد"]
+        },
+        {
+          beforeText: "يَقْتَرِبُ العَبْدُ مِنْ خَالِقِهِ عِنْدَ",
+          afterText: "الطَّوِيلِ وَالدُّعَاءِ الصَّادِقِ.",
+          expected: ["السجود", "سجود", "السُّجُودِ", "سُجُودٍ", "السُّجُود"]
+        }
+      ],
+      rsm: [
+        {
+          beforeText: "يُمْسِكُ الفَنَّانُ رِيشَتَهُ بِمَهَارَةٍ، فَهُوَ",
+          afterText: "يَعْشَقُ الأَلْوَانَ الزَّاهِيَةَ.",
+          expected: ["راسم", "رَاسِمٌ", "رَاسِم"]
+        },
+        {
+          beforeText: "شَاهَدْتُ مَنْظَراً طَبِيعِيّاً خَلاَّباً",
+          afterText: "بِدِقَّةٍ عَلَى جِدَارِ القَاعَةِ.",
+          expected: ["مرسوما", "مَرْسُوماً", "مَرْسُومٌ", "مرسوم"]
+        },
+        {
+          beforeText: "يَقْضِي الصِّغَارُ حِصَّةَ التَّشْكِيلِ دَاخِلَ",
+          afterText: "المُجَهَّزِ بِاللَّوْحَاتِ.",
+          expected: ["المرسم", "مرسم", "المَرْسَمِ", "مَرْسَمٍ", "المَرْسَم"]
+        }
+      ],
+      sn3: [
+        {
+          beforeText: "العَامِلُ الَّذِي يُتْقِنُ عَمَلَهُ بَيَدَيْهِ هُوَ",
+          afterText: "مَاهِرٌ يَسْتَحِقُّ التَّقْدِيرَ.",
+          expected: ["صانع", "صَانِعٌ", "صَانِع"]
+        },
+        {
+          beforeText: "هَذَا الصَّارُوخُ الفَضَائِيُّ جِهَازٌ",
+          afterText: "بِأَحْدَثِ التِّقْنِيَّاتِ العِلْمِيَّةِ.",
+          expected: ["مصنوع", "مَصْنُوعٌ", "مَصْنُوع"]
+        },
+        {
+          beforeText: "تَشْتَغِلُ الآلاَتُ الحَدِيثَةُ دَاخِلَ",
+          afterText: "الكَبِيرِ دُونَ انْقِطَاعٍ.",
+          expected: ["المصنع", "مصنع", "المَصْنَعِ", "مَصْنَعٍ", "المَصْنَع"]
+        }
+      ],
+      fth: [
+        {
+          beforeText: "القَائِدُ الَّذِي يَقُودُ لِلنَّصْرِ يُلَقَّبُ بِـ",
+          afterText: "الشُّجَاعِ المِقْدَامِ.",
+          expected: ["الفاتح", "فاتح", "الفَاتِحِ", "فَاتِحٍ", "الفَاتِح"]
+        },
+        {
+          beforeText: "بَابُ المَرْكَبَةِ لَيْسَ مُغْلَقاً، بَلْ هُوَ",
+          afterText: "لِاسْتِقْبَالِ رُوَّادِ الفَضَاءِ.",
+          expected: ["مفتوح", "مَفْتُوحٌ", "مَفْتُوح"]
+        },
+        {
+          beforeText: "اسْتَعْمَلَ الحَارِسُ",
+          afterText: "الحَدِيدِيَّ لِفَتْحِ قِفْلِ البَوَّابَةِ.",
+          expected: ["المفتاح", "مفتاح", "المِفْتَاحَ", "مِفْتَاحاً", "المِفْتَاح"]
+        }
+      ]
+    };
+
+    let availableFreeQuestions = [];
+    let currentSentenceQ = null;
+
+    function renderFreeSentenceChallenge() {
+      const container = document.getElementById('freeChallengeContainer');
+      if (!container) return;
+
+      const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
+      const fullList = freeSentenceBank[rootKey] || freeSentenceBank['ktb'];
+
+      if (!availableFreeQuestions.length || availableFreeQuestions.root !== rootKey) {
+        availableFreeQuestions = [...fullList];
+        availableFreeQuestions.root = rootKey;
+      }
+
+      const randIdx = Math.floor(Math.random() * availableFreeQuestions.length);
+      currentSentenceQ = availableFreeQuestions.splice(randIdx, 1)[0];
+
+      container.innerHTML = `
+        <div style="max-width: 800px; margin: 2rem auto; background: radial-gradient(circle, rgba(23,37,84,0.95) 0%, rgba(15,23,42,0.98) 100%); border: 2.5px solid #6366f1; border-radius: 28px; padding: 2.5rem; box-shadow: 0 15px 35px rgba(0,0,0,0.6); text-align: center;">
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.2rem;">
+            <span style="background: rgba(99, 102, 241, 0.2); color: #a5b4fc; border: 1px solid #6366f1; padding: 0.4rem 1.2rem; border-radius: 20px; font-weight: bold; font-size: 0.95rem;">
+              🎯 مَحَطَّةُ الإِنْتَاجِ الحُرِّ (امْلأِ الفَرَاغَ دُونَ خِيَارَاتٍ)
+            </span>
+            <button type="button" onclick="renderFreeSentenceChallenge()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: #facc15; padding: 0.45rem 1.1rem; border-radius: 12px; font-size: 0.85rem; font-weight: bold; cursor: pointer;">
+              🎲 سُؤَالٌ آخَرُ
+            </button>
+          </div>
+
+          <div style="font-size: 1.5rem; color: #f8fafc; line-height: 2.6; margin-bottom: 2.2rem; font-weight: 500;">
+            ${currentSentenceQ.beforeText}
+            <input type="text" id="freeSentenceInput" placeholder="... اكْتُبْ هُنَا ..." 
+              style="display: inline-block; width: 190px; padding: 0.45rem 0.8rem; margin: 0 0.6rem; border-radius: 12px; border: 2px dashed #facc15; background: rgba(0,0,0,0.5); color: #facc15; font-size: 1.35rem; font-weight: bold; text-align: center; outline: none; font-family: inherit;"
+              onkeydown="if(event.key === 'Enter') verifySentenceAnswer()"
+              autocomplete="off">
+            ${currentSentenceQ.afterText}
+          </div>
+
+          <div>
+            <button type="button" onclick="verifySentenceAnswer()" 
+              style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: #ffffff; border: none; padding: 0.85rem 3rem; border-radius: 16px; font-size: 1.2rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(99,102,241,0.4); transition: transform 0.1s;">
+              تَحَقَّقْ مِنَ الإِجَابَةِ 🚀
+            </button>
+          </div>
+
+          <div id="sentenceFeedbackToast" style="min-height: 35px; margin-top: 1.5rem; font-size: 1.15rem; font-weight: bold;"></div>
+        </div>
+      `;
+
+      setTimeout(() => {
+        document.getElementById('freeSentenceInput')?.focus();
+      }, 100);
+    }
+
+    function verifySentenceAnswer() {
+      const input = document.getElementById('freeSentenceInput');
+      const toast = document.getElementById('sentenceFeedbackToast');
+      if (!input || !toast || !currentSentenceQ) return;
+
+      const rawVal = input.value.trim();
+      if (!rawVal) {
+        toast.style.color = '#facc15';
+        toast.textContent = "⚠️ اكْتُبِ الكَلِمَةَ المُنَاسِبَةَ فِي الفَرَاغِ أَوَّلاً!";
+        return;
+      }
+
+      const cleanInput = rawVal
+        .replace(/([^\u0621-\u064A\s])/g, '')
+        .replace(/[أإآ]/g, 'ا')
+        .replace(/ة/g, 'ه')
+        .trim();
+
+      const isCorrect = currentSentenceQ.expected.some(ans => {
+        const cleanExpected = ans
+          .replace(/([^\u0621-\u064A\s])/g, '')
+          .replace(/[أإآ]/g, 'ا')
+          .replace(/ة/g, 'ه')
+          .trim();
+        return cleanExpected === cleanInput;
+      });
+
+      if (isCorrect) {
+        input.style.borderColor = '#22c55e';
+        input.style.color = '#4ade80';
+        playQuickBeep();
+
+        toast.style.color = '#4ade80';
+        toast.textContent = "✨ مُمْتَازٌ! صِيغَةٌ صَرْفِيَّةٌ صَحِيحَةٌ عَنْ جَدَارَةٍ!";
+
+        setTimeout(() => {
+          renderFreeSentenceChallenge();
+        }, 1300);
+      } else {
+        input.style.borderColor = '#ef4444';
+        input.style.color = '#f87171';
+        playSoftWrongTone();
+
+        toast.style.color = '#f87171';
+        toast.textContent = "حَاوِلْ مَرَّةً أُخْرَى! ضَعِ الصِّيغَةَ الصَّرْفِيَّةَ المُنَاسِبَةَ لِلسِّيَاقِ.";
+
+        setTimeout(() => {
+          input.style.borderColor = '#facc15';
+          input.style.color = '#facc15';
+        }, 800);
+      }
     }
 
     window.onload = () => {
