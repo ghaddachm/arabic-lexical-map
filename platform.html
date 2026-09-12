@@ -3308,18 +3308,16 @@ function rollNewQuestionForGalaxy() {
     let availableFreeQuestions = [];
     let currentSentenceQ = null;
 
-    function renderFreeSentenceChallenge() {
+function renderFreeSentenceChallenge() {
       const container = document.getElementById('freeChallengeContainer');
       if (!container) return;
 
-      const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
-      const fullList = freeSentenceBank[rootKey] || freeSentenceBank['ktb'];
-
-      if (!availableFreeQuestions.length || availableFreeQuestions.root !== rootKey) {
-        availableFreeQuestions = [...fullList];
-        availableFreeQuestions.root = rootKey;
+      // دمج جميع أسئلة كافة الجذور في قائمة موحدة للتنويع الشامل
+      if (!availableFreeQuestions.length) {
+        availableFreeQuestions = Object.values(freeSentenceBank).flat();
       }
 
+      // سحب عشوائي مع حذف السؤال المسحوب لضمان عدم تكراره
       const randIdx = Math.floor(Math.random() * availableFreeQuestions.length);
       currentSentenceQ = availableFreeQuestions.splice(randIdx, 1)[0];
 
@@ -3328,7 +3326,7 @@ function rollNewQuestionForGalaxy() {
           
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.2rem;">
             <span style="background: rgba(99, 102, 241, 0.2); color: #a5b4fc; border: 1px solid #6366f1; padding: 0.4rem 1.2rem; border-radius: 20px; font-weight: bold; font-size: 0.95rem;">
-              🎯 مَحَطَّةُ الإِنْتَاجِ الحُرِّ (امْلأِ الفَرَاغَ دُونَ خِيَارَاتٍ)
+              🎯 مَحَطَّةُ الإِنْتَاجِ الحُرِّ (تَحَدٍّ شَامِلٌ لِكُلِّ الأَفْعَالِ)
             </span>
             <button type="button" onclick="renderFreeSentenceChallenge()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: #facc15; padding: 0.45rem 1.1rem; border-radius: 12px; font-size: 0.85rem; font-weight: bold; cursor: pointer;">
               🎲 سُؤَالٌ آخَرُ
