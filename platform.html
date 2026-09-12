@@ -755,6 +755,7 @@
     .c-r { color: var(--c-root) !important; }
     .c-a { color: var(--c-affix) !important; }
   </style>
+  <script src="roots_data/ktb.js"></script>
 </head>
 <body>
 
@@ -1149,7 +1150,7 @@
       }
     };
 
-    const db = {
+    const db = window.ROADS_DATA || {
       "كتب": {
         letters: ['ك', 'ت', 'ب'],
         concept: "الكِتَابَةُ وَالتَّدْوِينُ (صَحِيحٌ سَالِمٌ)",
