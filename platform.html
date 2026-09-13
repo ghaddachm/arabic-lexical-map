@@ -3469,33 +3469,33 @@ function renderFreeSentenceChallenge() {
   const container = document.getElementById('freeChallengeContainer');
   if (!container) return;
 
-  // تحديد مفتاح الجذر المختار
+  // 1. تحديد بيانات الجذر النشط حالياً من نافذة الاختيار
   const rootSelectEl = document.getElementById('rootSelect');
-  const selectedRoot = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
-  const isQra = (selectedRoot === 'قرأ' || selectedRoot === 'qra' || selectedRoot.includes('قرأ'));
+  const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
+  const database = window.db || (typeof db !== 'undefined' ? db : {});
+  const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
+  const currentRootData = database[rawKey] || database[cleanKey] || database['كتب'];
 
+  // 2. سحب الأسئلة مباشرة من roots_data إن وجدت، أو من البنك الاحتياطي
   let targetBank = [];
-
-  if (isQra) {
-    // إذا كان الدرس عن الصحيح المهموز: بنك مهموزات قرأ
-    targetBank = freeSentenceBank['qra'] || [];
+  if (currentRootData && currentRootData.freeSentences && currentRootData.freeSentences.length > 0) {
+    targetBank = currentRootData.freeSentences;
   } else {
-    // إذا كان الدرس عن الصحيح السالم (كتب): دمج كافة الأفعال السالمة (كتب، سجد، رسم، صنع، فتح) في بنك واحد عشوائي
-    targetBank = [
-      ...(freeSentenceBank.ktb || []),
-      ...(freeSentenceBank.sjd || []),
-      ...(freeSentenceBank.rsm || []),
-      ...(freeSentenceBank.sn3 || []),
-      ...(freeSentenceBank.fth || [])
-    ];
+    const isQra = (rawKey === 'قرأ' || rawKey === 'qra' || rawKey.includes('قرأ'));
+    targetBank = isQra 
+      ? (freeSentenceBank.qra || [])
+      : [
+          ...(freeSentenceBank.ktb || []),
+          ...(freeSentenceBank.sjd || []),
+          ...(freeSentenceBank.rsm || []),
+          ...(freeSentenceBank.sn3 || []),
+          ...(freeSentenceBank.fth || [])
+        ];
   }
 
-  // إعادة ملء الأسئلة العشوائية عند نفادها أو عند تبديل الجذر
-  if (!availableFreeQuestions.length || availableFreeQuestions[0]?.rootKeyType !== (isQra ? 'qra' : 'sound')) {
-    availableFreeQuestions = targetBank.map(q => ({
-      ...q,
-      rootKeyType: isQra ? 'qra' : 'sound'
-    }));
+  // 3. إعادة ملء بنك الأسئلة العشوائية وتتبع الجذر النشط لمنع التكرار
+  if (!availableFreeQuestions.length || availableFreeQuestions[0]?.activeRootKey !== rawKey) {
+    availableFreeQuestions = targetBank.map(q => ({ ...q, activeRootKey: rawKey }));
   }
 
   const randIdx = Math.floor(Math.random() * availableFreeQuestions.length);
@@ -3509,7 +3509,6 @@ function renderFreeSentenceChallenge() {
           <span style="background: rgba(99, 102, 241, 0.2); color: #a5b4fc; border: 1px solid #6366f1; padding: 0.4rem 1.2rem; border-radius: 20px; font-weight: bold; font-size: 0.95rem;">
             🎯 مَحَطَّةُ الإِنْتَاجِ الحُرِّ
           </span>
-          <!-- شارة الفعل المستهدف لتوجيه تفكير المتعلم -->
           <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; padding: 0.4rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.95rem;">
             🔍 ${currentSentenceQ.rootName}
           </span>
