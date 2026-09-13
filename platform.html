@@ -2153,25 +2153,31 @@ let starsCount = 0;
     }
 
     function openRootModal() {
-      const rootKey = document.getElementById('rootSelect').value;
-      const rootObj = db[rootKey];
-      const folder = Sound.rootFolderMap[rootKey] || rootKey;
+    const rootSelectEl = document.getElementById('rootSelect');
+    const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
+    
+    // البحث في window.db أو db مع فحص جميع الصيغ الممكنة للمفتاح
+    const database = window.db || (typeof db !== 'undefined' ? db : {});
+    const rootObj = database[rawKey] || database[rawKey.replace(/[^\u0621-\u064A]/g, '')] || database['كتب'];
+    
+    if (!rootObj) return;
 
-      document.getElementById('mHeroWord').innerHTML = `[ ${rootObj.letters.join(' - ')} ]`;
-      document.getElementById('mHeroWeight').style.display = 'none';
-      
-      document.getElementById('mDetailCard').style.display = 'block';
-      document.getElementById('rowColloc').style.display = 'none';
-      document.getElementById('rowExample').style.display = 'none';
-      document.getElementById('btnMasterAudio').style.display = 'none';
-      document.getElementById('mRuleBanner').style.display = 'none';
+    const folder = (typeof Sound !== 'undefined' && Sound.rootFolderMap && Sound.rootFolderMap[rawKey]) ? Sound.rootFolderMap[rawKey] : rawKey;
 
-      document.getElementById('mDesc').innerHTML = `<strong>${rootObj.concept}</strong><br><span style="color:#64748b; font-size:1.05rem;">الأَصْلُ المُعْجَمِيُّ الَّذِي تَتَفَرَّعُ مِنْهُ كَافَّةُ صِيَغِ المَجَرَّةِ اللُّغَوِيَّةِ.</span>`;
+    document.getElementById('mHeroWord').innerHTML = `[ ${rootObj.letters.join(' - ')} ]`;
+    document.getElementById('mHeroWeight').style.display = 'none';
 
-      const affixCard = document.getElementById('mAffixCard');
-      const affixList = document.getElementById('mAffixList');
-      if (affixCard && rootObj.affixes && rootObj.affixes.length > 0) {
-        affixList.innerHTML = rootObj.affixes.map(af => `
+    document.getElementById('mDetailCard').style.display = 'block';
+    document.getElementById('rowColloc').style.display = 'none';
+    document.getElementById('rowExample').style.display = 'none';
+    document.getElementById('btnMasterAudio').style.display = 'none';
+    document.getElementById('mRuleBanner').style.display = 'none';
+
+    document.getElementById('mDesc').innerHTML = `<strong>${rootObj.concept}</strong><br><span style="color:#64748b; font-size:1.05rem;">الأَصْلُ المُعْجَمِيُّ الَّذِي تَتَفَرَّعُ مِنْهُ كَافَّةُ صِيَغِ الجَذْرِ اللُّغَوِيَّةِ.</span>`;
+
+    const affixCard = document.getElementById('mAffixCard');
+    const affixList = document.getElementById('mAffixList');
+    if (affixCard && affixList && rootObj.affixes && rootObj.affixes.length > 0) {
           <div class="affix-item-row">
             <span style="font-size:1.5rem; font-weight:900;">${af.word} (${af.weight})</span>
             <span style="font-size:0.95rem; color:#475569; font-weight:bold;">${af.desc}</span>
