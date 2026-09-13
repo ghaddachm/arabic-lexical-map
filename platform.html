@@ -2101,6 +2101,7 @@ let starsCount = 0;
 
       generateTwinkleStars();
       currentMissionIdx = 0;
+      availableFreeQuestions = [];
       loadInteractiveStory(data);
       renderDiscsWorkshop(data.labs);
       renderRealPuzzleArena(data.quizzes);
@@ -3438,15 +3439,23 @@ function rollNewQuestionForGalaxy() {
     let currentSentenceQ = null;
 
 function renderFreeSentenceChallenge() {
-      const container = document.getElementById('freeChallengeContainer');
-      if (!container) return;
+  const container = document.getElementById('freeChallengeContainer');
+  if (!container) return;
 
-      if (!availableFreeQuestions.length) {
-        availableFreeQuestions = Object.values(freeSentenceBank).flat();
-      }
+  // تحديد مفتاح الجذر المختار (qra أو ktb)
+  const rootSelectEl = document.getElementById('rootSelect');
+  const selectedRoot = rootSelectEl ? rootSelectEl.value : 'كتب';
+  const currentKey = (selectedRoot === 'قرأ' || selectedRoot === 'qra') ? 'qra' : 'ktb';
 
-      const randIdx = Math.floor(Math.random() * availableFreeQuestions.length);
-      currentSentenceQ = availableFreeQuestions.splice(randIdx, 1)[0];
+  // جلب بنك الجذر المختار فقط
+  const targetBank = freeSentenceBank[currentKey] || freeSentenceBank['ktb'];
+
+  if (!availableFreeQuestions.length) {
+    availableFreeQuestions = [...targetBank];
+  }
+
+  const randIdx = Math.floor(Math.random() * availableFreeQuestions.length);
+  currentSentenceQ = availableFreeQuestions.splice(randIdx, 1)[0];
 
       container.innerHTML = `
         <div style="max-width: 800px; margin: 2rem auto; background: radial-gradient(circle, rgba(23,37,84,0.95) 0%, rgba(15,23,42,0.98) 100%); border: 2.5px solid #6366f1; border-radius: 28px; padding: 2.5rem; box-shadow: 0 15px 35px rgba(0,0,0,0.6); text-align: center;">
