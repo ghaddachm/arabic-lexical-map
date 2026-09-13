@@ -2192,10 +2192,8 @@ document.getElementById('morphModal').classList.add('open');
       if (typeof Sound !== 'undefined') {
         Sound.playAsset(folder, 'core', `جذر ${rootObj.letters.join(' ')}`);
       }
-    }      document.getElementById('morphModal').classList.add('open');
-      Sound.playAsset(folder, 'core', `جذر ${rootObj.letters.join(' ')}`);
-    }
-
+      }
+    
     function closeModal(e) {
       if (!e || e.target.id === 'morphModal' || e.target.classList.contains('modal-close')) {
         document.getElementById('morphModal').classList.remove('open');
