@@ -2306,49 +2306,21 @@ function handleStoryWordClick(el, item, data) {
   if (!currentMission) return;
 
   const currentTargetType = currentMission.targetType;
-  const rootKey = document.getElementById('rootSelect').value;
-  const folder = Sound.rootFolderMap[rootKey] || rootKey;
+  const rootSelectEl = document.getElementById('rootSelect');
+  const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
+  const database = window.db || (typeof db !== 'undefined' ? db : {});
+  const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
+  const rootObj = database[rawKey] || database[cleanKey] || database['كتب'];
 
   const clickedWordClean = item.word.replace(/[.,،؛:«»]/g, '').trim();
 
-  // الأفعال الصحيحة السالمة الواردة في نص القصة
-  const validSoundVerbsInStory = ["كَتَبَ", "وَكَتَبَ", "جَلَسَ", "فَخَرَجَتْ", "خَرَجَتْ"];
-  const isLookingForSoundVerb = (currentTargetType === 'core' || 
-    (currentMission.label && (currentMission.label.includes('السَّالِم') || currentMission.label.includes('الثُّلَاثِي'))));
+  // فحص ما إذا كانت الكلمة المنقورة هي الفعل المجرد للجذر الحالي (كتب، مد، قرأ...)
+  const currentRootVerb = (rootObj && rootObj.branches && rootObj.branches[0]) ? rootObj.branches[0].plain : '';
+  const isTargetVerbMatched = (currentTargetType === 'الفعل المجرد' || currentTargetType === 'core') && 
+                              (item.target === 'الفعل المجرد' || (currentRootVerb && clickedWordClean.includes(currentRootVerb)));
 
-  const isAlternativeSoundVerb = isLookingForSoundVerb && 
-    validSoundVerbsInStory.includes(clickedWordClean) && 
-    !clickedWordClean.includes("كَتَبَ");
-
-  // فعل صحيح سالم خارج جذر الدرس: تنبيه برتقالي + تشغيل الصوت المولد دون نقل المهمة
-  if (isAlternativeSoundVerb) {
-    const alertMsg = "كَلِمَةٌ صَحِيحَةٌ، لَكِنَّهَا لَيْسَتْ مِنْ شَمْسِ جَذْرِنَا.. حَاوِلْ مَرَّةً أُخْرَى!";
-    
-    // تشغيل مباشر وسريع من مجلد audio
-    try {
-      const hintAudio = new Audio('audio/hint_general.mp3');
-      hintAudio.currentTime = 0;
-      hintAudio.play().catch(() => {
-        if (typeof Sound !== "undefined" && Sound.playAsset) {
-          Sound.playAsset('', 'hint_general', alertMsg);
-        }
-      });
-    } catch(e) {
-      if (typeof Sound !== "undefined" && Sound.playAsset) {
-        Sound.playAsset('', 'hint_general', alertMsg);
-      }
-    }
-
-    el.style.borderColor = '#f59e0b';
-    el.style.boxShadow = '0 0 15px rgba(245, 158, 11, 0.6)';
-    setTimeout(() => {
-      el.style.borderColor = '#94a3b8';
-      el.style.boxShadow = 'none';
-    }, 1800);
-    return;
-  }
-  // الإجابة الصحيحة التامة المطابقة للمهمة والجذر
-  if (item.target === currentTargetType || (isLookingForSoundVerb && clickedWordClean.includes("كَتَبَ"))) {
+  // الإجابة الصحيحة التامة المطابقة للمهمة والجذر الحالي
+  if (item.target === currentTargetType || isTargetVerbMatched) {
     el.classList.add('found');
     if (typeof addStars === "function") addStars(10);
     currentMissionIdx++;
@@ -2359,7 +2331,8 @@ function handleStoryWordClick(el, item, data) {
           const nextMission = data.missions[currentMissionIdx];
           const badge = document.getElementById('storyMissionBadge');
           if (badge) badge.textContent = nextMission.label;
-          Sound.playAsset(folder, nextMission.audio, nextMission.label);
+          // تشغيل صوت المهمة من المجلد العام مباشرة لتفادي 404
+          Sound.playAsset('', nextMission.audio, nextMission.label);
         } else {
           const badge = document.getElementById('storyMissionBadge');
           if (badge) {
@@ -2371,37 +2344,27 @@ function handleStoryWordClick(el, item, data) {
             `;
           }
           if (typeof addStars === "function") addStars(30);
-          Sound.playAsset(folder, 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
+          // تشغيل صوت الاحتفال من المجلد العام مباشرة لتفادي 404
+          Sound.playAsset('', 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
         }
       });
     }
     return;
   }
 
-  // أفعال غير سالمة واردة في النص
-  if (isLookingForSoundVerb) {
+  // تنبيهات الكلمات البديلة أو الأفعال غير السالمة
+  if (currentTargetType === 'الفعل المجرد' || currentTargetType === 'core') {
     let specificHint = "";
     if (clickedWordClean === "بَاتَ") {
-      specificHint = "«بَاتَ» فِعْلٌ مُعْتَلٌّ أَجْوَف.. والمَطْلُوبُ فِعْلٌ صَحِيحٌ سَالِمٌ!";
+      specificHint = "«بَاتَ» فِعْلٌ مُعْتَلٌّ أَجْوَف.. والمَطْلُوبُ فِعْلٌ صَحِيحٌ!";
     } else if (clickedWordClean === "أَمْسَكَ") {
-      specificHint = "«أَمْسَكَ» فِعْلٌ رُبَاعِيٌّ مَهْمُوز.. والمَطْلُوبُ فِعْلٌ ثُلَاثِيٌّ سَالِمٌ!";
+      specificHint = "«أَمْسَكَ» فِعْلٌ رُبَاعِيٌّ مَهْمُوز.. والمَطْلُوبُ فِعْلٌ ثُلَاثِيٌّ!";
     }
 
-   if (specificHint) {
-      try {
-        const hintAudio = new Audio('audio/hint_general.mp3');
-        hintAudio.currentTime = 0;
-        hintAudio.play().catch(() => {
-          if (typeof Sound !== "undefined" && Sound.playAsset) {
-            Sound.playAsset('', 'hint_general', specificHint);
-          }
-        });
-      } catch(e) {
-        if (typeof Sound !== "undefined" && Sound.playAsset) {
-          Sound.playAsset('', 'hint_general', specificHint);
-        }
+    if (specificHint) {
+      if (typeof Sound !== "undefined" && Sound.playAsset) {
+        Sound.playAsset('', 'hint_general', specificHint);
       }
-
       el.style.borderColor = '#f59e0b';
       el.style.boxShadow = '0 0 15px rgba(245, 158, 11, 0.6)';
       setTimeout(() => {
@@ -2425,8 +2388,11 @@ function handleStoryWordClick(el, item, data) {
 // دالة إعادة ضبط السحابة
 window.resetStoryCloud = function() {
   currentMissionIdx = 0;
-  const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
-  const data = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey] : null;
+  const rootSelectEl = document.getElementById('rootSelect');
+  const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
+  const database = window.db || (typeof db !== 'undefined' ? db : {});
+  const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
+  const data = database[rawKey] || database[cleanKey] || database['كتب'];
   
   document.querySelectorAll('.story-click-pill').forEach(pill => {
     pill.classList.remove('found');
@@ -2437,9 +2403,8 @@ window.resetStoryCloud = function() {
   if (data && data.missions && data.missions[0]) {
     const badge = document.getElementById('storyMissionBadge');
     if (badge) badge.textContent = data.missions[0].label;
-    const folder = (typeof Sound !== "undefined" && Sound.rootFolderMap) ? (Sound.rootFolderMap[rootKey] || rootKey) : rootKey;
     if (typeof Sound !== "undefined" && Sound.playAsset) {
-      Sound.playAsset(folder, data.missions[0].audio, data.missions[0].label);
+      Sound.playAsset('', data.missions[0].audio, data.missions[0].label);
     }
   }
 };
