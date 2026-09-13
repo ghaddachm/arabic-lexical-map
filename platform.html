@@ -2086,69 +2086,113 @@ let starsCount = 0;
     }
 
     function loadRadialWorld(rootKey) {
-      Sound.stop();
-      const data = db[rootKey];
+      if (typeof Sound !== 'undefined' && Sound.stop) Sound.stop();
+
+      const key = rootKey ? rootKey.trim() : (document.getElementById('rootSelect') ? document.getElementById('rootSelect').value.trim() : 'كتب');
+      const database = window.db || (typeof db !== 'undefined' ? db : {});
+      const cleanKey = key.replace(/[^\u0621-\u064A]/g, '');
+      
+      const data = database[key] || database[cleanKey] || database['كتب'];
       if (!data) return;
 
-      document.getElementById('coreLetters').textContent = `[ ${data.letters.join(' - ')} ]`;
-      document.getElementById('coreConcept').textContent = data.concept;
+      const coreLettersEl = document.getElementById('coreLetters');
+      const coreConceptEl = document.getElementById('coreConcept');
+      if (coreLettersEl && data.letters) coreLettersEl.textContent = `[ ${data.letters.join(' - ')} ]`;
+      if (coreConceptEl) coreConceptEl.textContent = data.concept || '';
 
-      data.branches.forEach((b, i) => {
-        const wordEl = document.getElementById(`b${i+1}_word`);
-        const patternEl = document.getElementById(`b${i+1}_pattern`);
-        if (wordEl) wordEl.textContent = b.plain;
-        if (patternEl) patternEl.textContent = `(${b.weight.split(' ')[0]})`;
-      });
+      if (data.branches) {
+        data.branches.forEach((b, i) => {
+          const wordEl = document.getElementById(`b${i+1}_word`);
+          const patternEl = document.getElementById(`b${i+1}_pattern`);
+          if (wordEl) wordEl.textContent = b.plain;
+          if (patternEl) patternEl.textContent = `(${b.weight.split(' ')[0]})`;
+        });
+      }
 
-      generateTwinkleStars();
+      if (typeof generateTwinkleStars === 'function') generateTwinkleStars();
       currentMissionIdx = 0;
       availableFreeQuestions = [];
-      loadInteractiveStory(data);
-      renderDiscsWorkshop(data.labs);
-      renderRealPuzzleArena(data.quizzes);
-      renderSpacecraftChallenge(data.challenges || []);
+      
+      if (typeof loadInteractiveStory === 'function') loadInteractiveStory(data);
+      if (typeof renderDiscsWorkshop === 'function') renderDiscsWorkshop(data.labs);
+      if (typeof renderRealPuzzleArena === 'function') renderRealPuzzleArena(data.quizzes);
+      if (typeof renderSpacecraftChallenge === 'function') renderSpacecraftChallenge(data.challenges || []);
     }
 
     function openMorphModal(branchIdx) {
-      const rootKey = document.getElementById('rootSelect').value;
-      const rootObj = db[rootKey];
+      const rootSelectEl = document.getElementById('rootSelect');
+      const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
+      const database = window.db || (typeof db !== 'undefined' ? db : {});
+      const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
+      const rootObj = database[rawKey] || database[cleanKey] || database['كتب'];
+
+      if (!rootObj || !rootObj.branches || !rootObj.branches[branchIdx]) return;
       const branch = rootObj.branches[branchIdx];
 
-      document.getElementById('mHeroWord').innerHTML = branch.colored;
+      document.getElementById('mHeroWord').innerHTML = branch.colored || branch.plain;
       document.getElementById('mHeroWeight').textContent = branch.weight;
       document.getElementById('mHeroWeight').style.display = 'block';
 
       document.getElementById('mDetailCard').style.display = 'block';
-      document.getElementById('rowColloc').style.display = 'block';
-      document.getElementById('rowExample').style.display = 'block';
+      
+      // التوافق بين مفردات desc و meaning
+      const descText = branch.desc || branch.meaning || '';
+      document.getElementById('mDesc').textContent = descText;
 
-      document.getElementById('mDesc').textContent = branch.desc;
-      document.getElementById('mColloc').textContent = branch.colloc;
-      document.getElementById('mExample').textContent = branch.ex;
+      // ضبط المتلازمة والمثال إن وجدا
+      const rowColloc = document.getElementById('rowColloc');
+      const rowExample = document.getElementById('rowExample');
+      const mColloc = document.getElementById('mColloc');
+      const mExample = document.getElementById('mExample');
 
-      const folder = Sound.rootFolderMap[rootKey] || rootKey;
+      if (branch.colloc && mColloc && rowColloc) {
+        rowColloc.style.display = 'block';
+        mColloc.textContent = branch.colloc;
+      } else if (rowColloc) {
+        rowColloc.style.display = 'none';
+      }
+
+      if (branch.ex && mExample && rowExample) {
+        rowExample.style.display = 'block';
+        mExample.textContent = branch.ex;
+      } else if (rowExample) {
+        rowExample.style.display = 'none';
+      }
+
+      const folder = (typeof Sound !== 'undefined' && Sound.rootFolderMap && Sound.rootFolderMap[rawKey]) ? Sound.rootFolderMap[rawKey] : rawKey;
       const filePrefixes = ['verb', 'actor', 'product', 'place', 'source'];
-      const prefix = filePrefixes[branchIdx];
+      const prefix = filePrefixes[branchIdx] || `b${branchIdx+1}`;
 
       const masterBtn = document.getElementById('btnMasterAudio');
-      masterBtn.style.display = 'flex';
-      masterBtn.onclick = () => {
-        const fullLessonText = `${branch.plain}. الشَّرْحُ وَالدَّلَالَةُ: ${branch.desc}. المُتَلَازِمَةُ اللَّفْظِيَّةُ: ${branch.colloc}. المِثَالُ فِي سِيَاقٍ: ${branch.ex.replace(/[«»]/g, '')}`;
-        Sound.playAsset(folder, `${prefix}_full`, fullLessonText);
-      };
+      if (masterBtn) {
+        if (branch.colloc || branch.ex) {
+          masterBtn.style.display = 'flex';
+          masterBtn.onclick = () => {
+            const fullLessonText = `${branch.plain}. الشَّرْحُ: ${descText}. ${branch.colloc ? 'المُتَلَازِمَةُ: ' + branch.colloc : ''}. ${branch.ex ? 'المِثَالُ: ' + branch.ex.replace(/[«»]/g, '') : ''}`;
+            if (typeof Sound !== 'undefined') Sound.playAsset(folder, `${prefix}_full`, fullLessonText);
+          };
+        } else {
+          masterBtn.style.display = 'none';
+        }
+      }
 
       const ruleBanner = document.getElementById('mRuleBanner');
-      if (branch.rule) {
-        ruleBanner.style.display = 'block';
-        ruleBanner.innerHTML = `🌟 <strong>القَاعِدَةُ الصَّرْفِيَّةُ:</strong> ${branch.rule}`;
-      } else {
-        ruleBanner.style.display = 'none';
+      if (ruleBanner) {
+        if (branch.rule) {
+          ruleBanner.style.display = 'block';
+          ruleBanner.innerHTML = `🌟 <strong>القَاعِدَةُ الصَّرْفِيَّةُ:</strong> ${branch.rule}`;
+        } else {
+          ruleBanner.style.display = 'none';
+        }
       }
 
       const affixCard = document.getElementById('mAffixCard');
       if (affixCard) affixCard.style.display = 'none';
-document.getElementById('morphModal').classList.add('open');
-      Sound.playAsset(folder, prefix, branch.plain);
+
+      document.getElementById('morphModal').classList.add('open');
+      if (typeof Sound !== 'undefined') {
+        Sound.playAsset(folder, prefix, branch.plain);
+      }
     }
 
     function openRootModal() {
