@@ -3469,64 +3469,81 @@ function renderFreeSentenceChallenge() {
   const container = document.getElementById('freeChallengeContainer');
   if (!container) return;
 
-  // تحديد مفتاح الجذر المختار (qra أو ktb)
+  // تحديد مفتاح الجذر المختار
   const rootSelectEl = document.getElementById('rootSelect');
-  const selectedRoot = rootSelectEl ? rootSelectEl.value : 'كتب';
-  const currentKey = (selectedRoot === 'قرأ' || selectedRoot === 'qra') ? 'qra' : 'ktb';
+  const selectedRoot = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
+  const isQra = (selectedRoot === 'قرأ' || selectedRoot === 'qra' || selectedRoot.includes('قرأ'));
 
-  // جلب بنك الجذر المختار فقط
-  const targetBank = freeSentenceBank[currentKey] || freeSentenceBank['ktb'];
+  let targetBank = [];
 
-  if (!availableFreeQuestions.length) {
-    availableFreeQuestions = [...targetBank];
+  if (isQra) {
+    // إذا كان الدرس عن الصحيح المهموز: بنك مهموزات قرأ
+    targetBank = freeSentenceBank['qra'] || [];
+  } else {
+    // إذا كان الدرس عن الصحيح السالم (كتب): دمج كافة الأفعال السالمة (كتب، سجد، رسم، صنع، فتح) في بنك واحد عشوائي
+    targetBank = [
+      ...(freeSentenceBank.ktb || []),
+      ...(freeSentenceBank.sjd || []),
+      ...(freeSentenceBank.rsm || []),
+      ...(freeSentenceBank.sn3 || []),
+      ...(freeSentenceBank.fth || [])
+    ];
+  }
+
+  // إعادة ملء الأسئلة العشوائية عند نفادها أو عند تبديل الجذر
+  if (!availableFreeQuestions.length || availableFreeQuestions[0]?.rootKeyType !== (isQra ? 'qra' : 'sound')) {
+    availableFreeQuestions = targetBank.map(q => ({
+      ...q,
+      rootKeyType: isQra ? 'qra' : 'sound'
+    }));
   }
 
   const randIdx = Math.floor(Math.random() * availableFreeQuestions.length);
   currentSentenceQ = availableFreeQuestions.splice(randIdx, 1)[0];
 
-      container.innerHTML = `
-        <div style="max-width: 800px; margin: 2rem auto; background: radial-gradient(circle, rgba(23,37,84,0.95) 0%, rgba(15,23,42,0.98) 100%); border: 2.5px solid #6366f1; border-radius: 28px; padding: 2.5rem; box-shadow: 0 15px 35px rgba(0,0,0,0.6); text-align: center;">
-          
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.2rem; flex-wrap: wrap; gap: 0.8rem;">
-            <div style="display: flex; align-items: center; gap: 0.6rem;">
-              <span style="background: rgba(99, 102, 241, 0.2); color: #a5b4fc; border: 1px solid #6366f1; padding: 0.4rem 1.2rem; border-radius: 20px; font-weight: bold; font-size: 0.95rem;">
-                🎯 مَحَطَّةُ الإِنْتَاجِ الحُرِّ
-              </span>
-              <!-- شارة الفعل المستهدف لتوجيه تفكير المتعلم -->
-              <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; padding: 0.4rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.95rem;">
-                🔍 ${currentSentenceQ.rootName}
-              </span>
-            </div>
-
-            <button type="button" onclick="renderFreeSentenceChallenge()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: #facc15; padding: 0.45rem 1.1rem; border-radius: 12px; font-size: 0.85rem; font-weight: bold; cursor: pointer;">
-              🎲 سُؤَالٌ آخَرُ
-            </button>
-          </div>
-
-          <div style="font-size: 1.5rem; color: #f8fafc; line-height: 2.6; margin-bottom: 2.2rem; font-weight: 500;">
-            ${currentSentenceQ.beforeText}
-            <input type="text" id="freeSentenceInput" placeholder="... اكْتُبْ هُنَا ..." 
-              style="display: inline-block; width: 190px; padding: 0.45rem 0.8rem; margin: 0 0.6rem; border-radius: 12px; border: 2px dashed #facc15; background: rgba(0,0,0,0.5); color: #facc15; font-size: 1.35rem; font-weight: bold; text-align: center; outline: none; font-family: inherit;"
-              onkeydown="if(event.key === 'Enter') verifySentenceAnswer()"
-              autocomplete="off">
-            ${currentSentenceQ.afterText}
-          </div>
-
-          <div>
-            <button type="button" onclick="verifySentenceAnswer()" 
-              style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: #ffffff; border: none; padding: 0.85rem 3rem; border-radius: 16px; font-size: 1.2rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(99,102,241,0.4); transition: transform 0.1s;">
-              تَحَقَّقْ مِنَ الإِجَابَةِ 🚀
-            </button>
-          </div>
-
-          <div id="sentenceFeedbackToast" style="min-height: 35px; margin-top: 1.5rem; font-size: 1.15rem; font-weight: bold;"></div>
+  container.innerHTML = `
+    <div style="max-width: 800px; margin: 2rem auto; background: radial-gradient(circle, rgba(23,37,84,0.95) 0%, rgba(15,23,42,0.98) 100%); border: 2.5px solid #6366f1; border-radius: 28px; padding: 2.5rem; box-shadow: 0 15px 35px rgba(0,0,0,0.6); text-align: center;">
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.2rem; flex-wrap: wrap; gap: 0.8rem;">
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <span style="background: rgba(99, 102, 241, 0.2); color: #a5b4fc; border: 1px solid #6366f1; padding: 0.4rem 1.2rem; border-radius: 20px; font-weight: bold; font-size: 0.95rem;">
+            🎯 مَحَطَّةُ الإِنْتَاجِ الحُرِّ
+          </span>
+          <!-- شارة الفعل المستهدف لتوجيه تفكير المتعلم -->
+          <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; padding: 0.4rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.95rem;">
+            🔍 ${currentSentenceQ.rootName}
+          </span>
         </div>
-      `;
 
-      setTimeout(() => {
-        document.getElementById('freeSentenceInput')?.focus();
-      }, 100);
-    }
+        <button type="button" onclick="renderFreeSentenceChallenge()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: #facc15; padding: 0.45rem 1.1rem; border-radius: 12px; font-size: 0.85rem; font-weight: bold; cursor: pointer;">
+          🎲 سُؤَالٌ آخَرُ
+        </button>
+      </div>
+
+      <div style="font-size: 1.5rem; color: #f8fafc; line-height: 2.6; margin-bottom: 2.2rem; font-weight: 500;">
+        ${currentSentenceQ.beforeText}
+        <input type="text" id="freeSentenceInput" placeholder="... اكْتُبْ هُنَا ..." 
+          style="display: inline-block; width: 190px; padding: 0.45rem 0.8rem; margin: 0 0.6rem; border-radius: 12px; border: 2px dashed #facc15; background: rgba(0,0,0,0.5); color: #facc15; font-size: 1.35rem; font-weight: bold; text-align: center; outline: none; font-family: inherit;"
+          onkeydown="if(event.key === 'Enter') verifySentenceAnswer()"
+          autocomplete="off">
+        ${currentSentenceQ.afterText}
+      </div>
+
+      <div>
+        <button type="button" onclick="verifySentenceAnswer()" 
+          style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: #ffffff; border: none; padding: 0.85rem 3rem; border-radius: 16px; font-size: 1.2rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(99,102,241,0.4); transition: transform 0.1s;">
+          تَحَقَّقْ مِنَ الإِجَابَةِ 🚀
+        </button>
+      </div>
+
+      <div id="sentenceFeedbackToast" style="min-height: 35px; margin-top: 1.5rem; font-size: 1.15rem; font-weight: bold;"></div>
+    </div>
+  `;
+
+  setTimeout(() => {
+    document.getElementById('freeSentenceInput')?.focus();
+  }, 100);
+}
     function verifySentenceAnswer() {
       const input = document.getElementById('freeSentenceInput');
       const toast = document.getElementById('sentenceFeedbackToast');
