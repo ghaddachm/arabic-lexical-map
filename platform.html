@@ -2285,12 +2285,21 @@ let starsCount = 0;
     function stopStoryAudio() {
       Sound.pause(); // إيقاف مؤقت مع حفظ موضع الثواني
     }
-    function speakCurrentMissionAudio() {
-      const rootKey = document.getElementById('rootSelect').value;
-      const folder = Sound.rootFolderMap[rootKey] || rootKey;
-      const mission = db[rootKey].missions[currentMissionIdx];
-      Sound.playAsset(folder, mission.audio, mission.label);
+   function speakCurrentMissionAudio() {
+    const rootSelectEl = document.getElementById('rootSelect');
+    const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
+    const database = window.db || (typeof db !== 'undefined' ? db : {});
+    const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
+    const data = database[rawKey] || database[cleanKey] || database['كتب'];
+
+    if (!data || !data.missions || !data.missions[currentMissionIdx]) return;
+    const mission = data.missions[currentMissionIdx];
+
+    // نمرر المجلد فارغاً '' لتشغيل ملفات المهمات من مجلد audio الرئيسي مباشرة وتفادي خطأ 404
+    if (typeof Sound !== 'undefined') {
+      Sound.playAsset('', mission.audio, mission.label);
     }
+  }
 
 function handleStoryWordClick(el, item, data) {
   const currentMission = data.missions[currentMissionIdx];
