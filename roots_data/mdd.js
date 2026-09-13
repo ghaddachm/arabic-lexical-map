@@ -43,6 +43,11 @@ window.db["مدد"] = {
       meaning: "حَدَثُ البَسْطِ وَالزِّيَادَةِ."
     }
   ],
+  affixes: [
+    { word: "<span class='c-a'>أَ</span><span class='c-r'>مَدَّ</span>", plain: "أَمَدَّ", weight: "أَفْعَلَ", desc: "مزيد بالهمزة في أوله: أعانه وقدّم له العونَ والمدد" },
+    { word: "<span class='c-r'>مَ</span><span class='c-a'>ا</span><span class='c-r'>دَّ</span>", plain: "مَادَّ", weight: "فَاعَلَ", desc: "مزيد بالألف: طاوله ونافسه في الامتداد" },
+    { word: "<span class='c-a'>امْتَ</span><span class='c-r'>دَّ</span>", plain: "امْتَدَّ", weight: "افْتَعَلَ", desc: "مزيد بالهمزة والتاء: انبسط واسترسل في الطول والمكان" }
+  ],
 
   // 🟢 2. سحابة الحكاية
   story: {
