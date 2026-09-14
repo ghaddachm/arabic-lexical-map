@@ -7,3 +7,4 @@
 الأساس الديداكتيكي: نظرية الحمل المعرفي (Cognitive Load Theory) والترميز المزدوج (Dual Coding) عبر دمج الصوت الفصيح بالصورة والوزن الصرفي والمتلازمات اللفظية.
 
 التقنيات المستعملة: HTML5, Tailwind CSS, JavaScript, ElevenLabs AI Voice Synthesis, GitHub Pages.
+v1.0 - All modules fully working & tested
