@@ -75,30 +75,38 @@ const ktbData = {
     { word: "<span class='c-a'>اسْتَ</span><span class='c-r'>كْتَبَ</span>", plain: "اسْتَكْتَبَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف: طلب منه أن يكتب له" }
   ],
 
-  // 🟢 2. سحابة الحكاية
+// 🟢 2. سحابة الحكاية (مطابقة للتسجيل الصوتي ktb_story.mp3 بدقة)
   storyParagraph: [
-    { word: "دَخَلَ", target: false },
-    { word: "عُمَرُ", target: false },
+    { word: "فِي", target: false },
+    { word: "حُجْرَةِ", target: false },
+    { word: "القِرَاءَةِ،", target: false },
+    { word: "جَلَسَ", target: false, isOtherVerb: true }, // فعل ثلاثي مجرد
+    { word: "الكَاتِبُ", target: "اسم الفاعل" },
+    { word: "الصَّغِيرُ", target: false },
     { word: "إِلَى", target: false },
-    { word: "مَكْتَبِ", target: "اسم المكان" },
-    { word: "وَالِدِهِ،", target: false },
-    { word: "فَوَجَدَهُ", target: false },
-    { word: "كَاتِباً", target: "اسم الفاعل" },
-    { word: "مَشْغُولاً.", target: false },
-    { word: "ثُمَّ", target: false },
-    { word: "كَتَبَ", target: "الفعل المجرد" },
-    { word: "الأَبُ", target: false },
-    { word: "مُلَاحَظَةً", target: false },
-    { word: "كَانَتْ", target: false },
-    { word: "سَطْراً", target: false },
-    { word: "مَكْتُوباً", target: "اسم المفعول" },
-    { word: "بِعِنَايَةٍ،", target: false },
-    { word: "يَحُثُّ", target: false },
-    { word: "فِيهِ", target: false },
-    { word: "عَلَى", target: false },
+    { word: "مَكْتَبِهِ", target: "اسم المكان" },
+    { word: "المُرَتَّبِ.", target: false },
+    { word: "أَمْسَكَ", target: false },                  // فعل مزيد بالهمزة
+    { word: "قَلَمَهُ", target: false },
+    { word: "الرَّشِيقَ،", target: false },
+    { word: "وَكَتَبَ", target: "الفعل المجرد" },
+    { word: "قِصَّةً", target: false },
+    { word: "عَنْ", target: false },
     { word: "حُبِّ", target: false },
+    { word: "الوَطَنِ،", target: false },
+    { word: "فَخَرَجَتْ", target: false, isOtherVerb: true }, // فعل ثلاثي مجرد اتصل بتاء التأنيث
+    { word: "فِي", target: false },
+    { word: "نَصٍّ", target: false },
+    { word: "أَنِيقٍ", target: false },
+    { word: "بَاتَ", target: false, isOtherVerb: true },   // فعل ثلاثي مجرد ناقص
+    { word: "مَكْتُوباً", target: "اسم المفعول" },
+    { word: "بِحُرُوفٍ", target: false },
+    { word: "مُلَوَّنَةٍ،", target: false },
+    { word: "تُعَلِّمُ", target: false },
+    { word: "الأَطْفَالَ", target: false },
+    { word: "سِحْرَ", target: false },
     { word: "الكِتَابَةِ", target: "المصدر" },
-    { word: "وَالمَعْرِفَةِ.", target: false }
+    { word: "وَجَمَالَهَا.", target: false }
   ],
 
   missions: [
