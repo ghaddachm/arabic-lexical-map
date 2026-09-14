@@ -2915,18 +2915,23 @@ function rollNewQuestionForGalaxy() {
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
-          if ('speechSynthesis' in window && fallbackArabicText) {
-            const utter = new SpeechSynthesisUtterance(fallbackArabicText);
-            utter.lang = 'ar-SA';
-            window.speechSynthesis.speak(utter);
-          }
+          speakArabicText(fallbackArabicText);
         });
       }
     } catch(e) {
-      console.warn("Audio error:", e);
+      speakArabicText(fallbackArabicText);
     }
   }
 
+  function speakArabicText(text) {
+    if ('speechSynthesis' in window && text) {
+      window.speechSynthesis.cancel(); // إيقاف أي صوت معلق
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'ar-SA';
+      utter.rate = 0.9;
+      window.speechSynthesis.speak(utter);
+    }
+  }
   // بناء الشريط الجانبي للمجرات
   function renderGalaxySidebar() {
     let html = `
