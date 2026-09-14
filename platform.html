@@ -2227,152 +2227,164 @@ let starsCount = 0;
             <span style="font-size:0.95rem; color:#475569; font-weight:bold;">${af.desc}</span>
           </div>
         `).join('');
-        affixCard.style.display = 'block';
-      } else if (affixCard) {
-        affixCard.style.display = 'none';
-      }
-
-      document.getElementById('morphModal').classList.add('open');
-      if (typeof Sound !== 'undefined') {
-        Sound.playAsset(folder, 'core', `جذر ${rootObj.letters.join(' ')}`);
-      }
-      }
-    
-    function closeModal(e) {
-      if (!e || e.target.id === 'morphModal' || e.target.classList.contains('modal-close')) {
-        document.getElementById('morphModal').classList.remove('open');
-      }
+       affixCard.style.display = 'block';
+    } else if (affixCard) {
+      affixCard.style.display = 'none';
     }
+
+    document.getElementById('morphModal').classList.add('open');
+    if (typeof Sound !== 'undefined') {
+      Sound.playAsset(folder, 'core', `جذر ${rootObj.letters.join(' ')}`);
+    }
+  }
+    
+  function closeModal(e) {
+    if (!e || e.target.id === 'morphModal' || e.target.classList.contains('modal-close')) {
+      document.getElementById('morphModal').classList.remove('open');
+    }
+  }
+
+  var currentMissionIdx = currentMissionIdx || 0;
 
   function handleStoryWordClick(el, item, data) {
-  const currentMission = data.missions[currentMissionIdx];
-  if (!currentMission) return;
+    if (!data || !data.missions || data.missions.length === 0) return;
+    if (typeof currentMissionIdx === 'undefined' || currentMissionIdx >= data.missions.length) {
+      currentMissionIdx = 0;
+    }
 
-  const currentTargetType = currentMission.targetType;
-  const rootSelectEl = document.getElementById('rootSelect');
-  const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
-  const database = window.db || (typeof db !== 'undefined' ? db : {});
-  const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
-  const rootObj = database[rawKey] || database[cleanKey] || database['كتب'];
+    const currentMission = data.missions[currentMissionIdx];
+    if (!currentMission) return;
 
-  const clickedWordClean = item.word.replace(/[.,،؛:«»]/g, '').trim();
+    const currentTargetType = currentMission.targetType;
+    const rootSelectEl = document.getElementById('rootSelect');
+    const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
+    const database = window.db || (typeof db !== 'undefined' ? db : {});
+    const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
+    const rootObj = database[rawKey] || database[cleanKey] || database['كتب'];
 
-  // فحص ما إذا كانت الكلمة المنقورة هي الفعل المجرد للجذر الحالي (كتب، مد، قرأ...)
-  const currentRootVerb = (rootObj && rootObj.branches && rootObj.branches[0]) ? rootObj.branches[0].plain : '';
-  const isTargetVerbMatched = (currentTargetType === 'الفعل المجرد' || currentTargetType === 'core') && 
-                              (item.target === 'الفعل المجرد' || (currentRootVerb && clickedWordClean.includes(currentRootVerb)));
+    const clickedWordClean = (item.word || '').replace(/[.,،؛:«»?!]/g, '').trim();
 
-  // 🟢 1. الإجابة الصحيحة التامة (تلوين بالأخضر وزيادة النجوم)
-  if (item.target === currentTargetType || isTargetVerbMatched) {
-    el.classList.add('found');
-    if (typeof addStars === "function") addStars(10);
-    currentMissionIdx++;
+    // فحص ما إذا كانت الكلمة المنقورة هي الفعل المجرد للجذر الحالي (كتب، مد، قرأ...)
+    const currentRootVerb = (rootObj && rootObj.branches && rootObj.branches[0]) ? rootObj.branches[0].plain : '';
+    const isTargetVerbMatched = (currentTargetType === 'الفعل المجرد' || currentTargetType === 'core') && 
+                                (item.target === 'الفعل المجرد' || (currentRootVerb && clickedWordClean === currentRootVerb));
 
-    if (typeof Sound !== "undefined" && Sound.correct) {
-      Sound.correct(() => {
-        if (currentMissionIdx < data.missions.length) {
-          const nextMission = data.missions[currentMissionIdx];
-          const badge = document.getElementById('storyMissionBadge');
-          if (badge) badge.textContent = nextMission.label;
-          Sound.playAsset('', nextMission.audio, nextMission.label);
-        } else {
-          const badge = document.getElementById('storyMissionBadge');
-          if (badge) {
-            badge.innerHTML = `
-              <span>🎉 بَطَلٌ خَارِقٌ! اسْتَخْرَجْتَ كَافَّةَ مَشَاهِدِ القِصَّةِ بِنَجَاحٍ!</span>
-              <button type="button" onclick="window.resetStoryCloud();" style="margin-right:0.8rem; background:#facc15; color:#0f172a; border:none; padding:0.25rem 0.8rem; border-radius:12px; font-weight:bold; cursor:pointer; font-size:0.85rem;">
-                🔄 إِعَادَةُ الاسْتِكْشَافِ
-              </button>
-            `;
+    // 🟢 1. الإجابة الصحيحة التامة (تلوين بالأخضر وزيادة النجوم)
+    if (item.target === currentTargetType || isTargetVerbMatched) {
+      el.classList.add('found');
+      el.style.backgroundColor = '#22c55e';
+      el.style.color = '#ffffff';
+      el.style.borderColor = '#16a34a';
+
+      if (typeof addStars === "function") addStars(10);
+      currentMissionIdx++;
+
+      if (typeof Sound !== "undefined" && Sound.correct) {
+        Sound.correct(() => {
+          if (currentMissionIdx < data.missions.length) {
+            const nextMission = data.missions[currentMissionIdx];
+            const badge = document.getElementById('storyMissionBadge');
+            if (badge) badge.textContent = nextMission.label;
+            Sound.playAsset('', nextMission.audio, nextMission.label);
+          } else {
+            const badge = document.getElementById('storyMissionBadge');
+            if (badge) {
+              badge.innerHTML = `
+                <span>🎉 بَطَلٌ خَارِقٌ! اسْتَخْرَجْتَ كَافَّةَ مَشَاهِدِ القِصَّةِ بِنَجَاحٍ!</span>
+                <button type="button" onclick="window.resetStoryCloud();" style="margin-right:0.8rem; background:#facc15; color:#0f172a; border:none; padding:0.25rem 0.8rem; border-radius:12px; font-weight:bold; cursor:pointer; font-size:0.85rem;">
+                  🔄 إِعَادَةُ الاسْتِكْشَافِ
+                </button>
+              `;
+            }
+            if (typeof addStars === "function") addStars(30);
+            Sound.playAsset('', 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
           }
-          if (typeof addStars === "function") addStars(30);
-          Sound.playAsset('', 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
-        }
-      });
-    }
-    return;
-  }
-
-  // 🟠 2. التوجيه الديداكتيكي الذكي للأفعال الثلاثية المجردة الأخرى (برتقالي + صوت hint_general)
-  const isOtherVerbClicked = item.isOtherVerb || clickedWordClean === "بَاتَ" || clickedWordClean === "وَقَفَ" || clickedWordClean === "رَبَطَا" || clickedWordClean === "لِيَصْعَدَ";
-  
-  if ((currentTargetType === 'الفعل المجرد' || currentTargetType === 'core') && isOtherVerbClicked) {
-    // تشغيل التسجيل الصوتي التوجيهي
-    if (typeof Sound !== "undefined" && Sound.playAsset) {
-      Sound.playAsset('', 'hint_general', "كَلِمَةٌ صَحِيحَةٌ لَكِنَّهَا لَيْسَتْ مِنْ شَمْسِ جَذْرِنَا، حَاوِلْ مَرَّةً أُخْرَى");
+        });
+      }
+      return;
     }
 
-    // تلوين الزر باللون البرتقالي وإبرازه
-    el.style.backgroundColor = '#f97316';
-    el.style.color = '#ffffff';
-    el.style.borderColor = '#ea580c';
-    el.style.boxShadow = '0 0 15px rgba(249, 115, 22, 0.7)';
+    // 🟠 2. التوجيه الديداكتيكي الذكي للأفعال الثلاثية المجردة الأخرى (برتقالي + صوت hint_general)
+    const isOtherVerbClicked = Boolean(item.isOtherVerb) || 
+                               ["جَلَسَ", "فَخَرَجَتْ", "بَاتَ", "وَقَفَ", "كَانَ", "وَصَلَا", "رَبَطَا", "لِيَصْعَدَ"].includes(clickedWordClean);
+    
+    if ((currentTargetType === 'الفعل المجرد' || currentTargetType === 'core') && isOtherVerbClicked) {
+      if (typeof Sound !== "undefined" && Sound.playAsset) {
+        Sound.playAsset('', 'hint_general', "كَلِمَةٌ صَحِيحَةٌ لَكِنَّهَا لَيْسَتْ مِنْ شَمْسِ جَذْرِنَا، حَاوِلْ مَرَّةً أُخْرَى");
+      }
 
+      el.style.backgroundColor = '#f97316';
+      el.style.color = '#ffffff';
+      el.style.borderColor = '#ea580c';
+      el.style.boxShadow = '0 0 15px rgba(249, 115, 22, 0.7)';
+
+      setTimeout(() => {
+        el.style.backgroundColor = '';
+        el.style.color = '';
+        el.style.borderColor = '#94a3b8';
+        el.style.boxShadow = 'none';
+      }, 1800);
+      return;
+    }
+
+    // 🔴 3. نقر خاطئ تماماً
+    if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
+    el.style.borderColor = '#ef4444';
+    el.style.boxShadow = '0 0 10px rgba(239, 68, 68, 0.5)';
     setTimeout(() => {
-      el.style.backgroundColor = '';
-      el.style.color = '';
       el.style.borderColor = '#94a3b8';
       el.style.boxShadow = 'none';
-    }, 2000);
-    return;
+    }, 600);
   }
 
-  // 🔴 3. نقر خاطئ تماماً
-  if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
-  el.style.borderColor = '#ef4444';
-  el.style.boxShadow = '0 0 10px rgba(239, 68, 68, 0.5)';
-  setTimeout(() => {
-    el.style.borderColor = '#94a3b8';
-    el.style.boxShadow = 'none';
-  }, 600);
-}
+  // دالة إعادة ضبط السحابة
+  window.resetStoryCloud = function() {
+    currentMissionIdx = 0;
+    const rootSelectEl = document.getElementById('rootSelect');
+    const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
+    const database = window.db || (typeof db !== 'undefined' ? db : {});
+    const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
+    const data = database[rawKey] || database[cleanKey] || database['كتب'];
+    
+    document.querySelectorAll('.story-click-pill').forEach(pill => {
+      pill.classList.remove('found');
+      pill.style.backgroundColor = '';
+      pill.style.color = '';
+      pill.style.borderColor = '#94a3b8';
+      pill.style.boxShadow = 'none';
+    });
 
-// دالة إعادة ضبط السحابة
-window.resetStoryCloud = function() {
-  currentMissionIdx = 0;
-  const rootSelectEl = document.getElementById('rootSelect');
-  const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
-  const database = window.db || (typeof db !== 'undefined' ? db : {});
-  const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
-  const data = database[rawKey] || database[cleanKey] || database['كتب'];
-  
-  document.querySelectorAll('.story-click-pill').forEach(pill => {
-    pill.classList.remove('found');
-    pill.style.borderColor = '#94a3b8';
-    pill.style.boxShadow = 'none';
-  });
-
-  if (data && data.missions && data.missions[0]) {
-    const badge = document.getElementById('storyMissionBadge');
-    if (badge) badge.textContent = data.missions[0].label;
-    if (typeof Sound !== "undefined" && Sound.playAsset) {
-      Sound.playAsset('', data.missions[0].audio, data.missions[0].label);
+    if (data && data.missions && data.missions[0]) {
+      const badge = document.getElementById('storyMissionBadge');
+      if (badge) badge.textContent = data.missions[0].label;
+      if (typeof Sound !== "undefined" && Sound.playAsset) {
+        Sound.playAsset('', data.missions[0].audio, data.missions[0].label);
+      }
     }
-  }
-};
-   var currentDiscGalaxyIdx = 0;
-var activeQuestionIndex = -1;
-var currentDiscGalaxyIdx = 0;   // المدار المختار
-var currentRoundIdx = 0;        // رقم الجولة الحالية للمتعلم
-var currentStepInRound = 0;     // رقم السؤال داخل الجولة (0 إلى 4)
+  };
 
-function renderDiscsWorkshop(labs) {
-  const container = document.getElementById('discsContainer');
-  if (!container || !labs || labs.length === 0) return;
+  var activeQuestionIndex = -1;
+  var currentDiscGalaxyIdx = 0;   // المدار المختار
+  var currentRoundIdx = 0;        // رقم الجولة الحالية للمتعلم
+  var currentStepInRound = 0;     // رقم السؤال داخل الجولة (0 إلى 4)
 
-  if (currentDiscGalaxyIdx >= labs.length) currentDiscGalaxyIdx = 0;
-  const currentGalaxy = labs[currentDiscGalaxyIdx];
-  const rounds = currentGalaxy.rounds;
+  function renderDiscsWorkshop(labs) {
+    const container = document.getElementById('discsContainer');
+    if (!container || !labs || labs.length === 0) return;
 
-  // التأكد من صحة رقم الجولة
-  if (currentRoundIdx >= rounds.length) currentRoundIdx = 0;
-  const activeRoundQuestions = rounds[currentRoundIdx];
+    if (currentDiscGalaxyIdx >= labs.length) currentDiscGalaxyIdx = 0;
+    const currentGalaxy = labs[currentDiscGalaxyIdx];
+    const rounds = currentGalaxy.rounds;
 
-  // التأكد من صحة رقم السؤال داخل الجولة
-  if (currentStepInRound >= activeRoundQuestions.length) currentStepInRound = 0;
-  const q = activeRoundQuestions[currentStepInRound];
-  const totalInRound = activeRoundQuestions.length;
-  const colorTheme = currentGalaxy.color;
+    // التأكد من صحة رقم الجولة
+    if (currentRoundIdx >= rounds.length) currentRoundIdx = 0;
+    const activeRoundQuestions = rounds[currentRoundIdx];
+
+    // التأكد من صحة رقم السؤال داخل الجولة
+    if (currentStepInRound >= activeRoundQuestions.length) currentStepInRound = 0;
+    const q = activeRoundQuestions[currentStepInRound];
+    const totalInRound = activeRoundQuestions.length;
+    const colorTheme = currentGalaxy.color;
 
   container.innerHTML = `
     <div style="display: flex; gap: 1.5rem; justify-content: center; align-items: flex-start; max-width: 1080px; margin: 0 auto; flex-wrap: wrap;">
