@@ -2244,8 +2244,6 @@ let starsCount = 0;
     }
   }
 
-  var currentMissionIdx = currentMissionIdx || 0;
-
   function handleStoryWordClick(el, item, data) {
     if (!data || !data.missions || data.missions.length === 0) return;
     if (typeof currentMissionIdx === 'undefined' || currentMissionIdx >= data.missions.length) {
