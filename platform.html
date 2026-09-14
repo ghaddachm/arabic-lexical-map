@@ -2237,7 +2237,82 @@ let starsCount = 0;
       Sound.playAsset(folder, 'core', `جذر ${rootObj.letters.join(' ')}`);
     }
   }
-    
+    // ==========================================
+    // دَوَالُ سَحَابَةِ الحِكَايَةِ التَّفَاعُلِيَّةِ
+    // ==========================================
+    function loadInteractiveStory(data) {
+      const container = document.getElementById('storyWordsContainer');
+      if (!container) return;
+      container.innerHTML = '';
+      
+      if (typeof currentMissionIdx === 'undefined' || currentMissionIdx >= data.missions.length) {
+        currentMissionIdx = 0;
+      }
+
+      const missionBadge = document.getElementById('storyMissionBadge');
+      if (missionBadge && data.missions[currentMissionIdx]) {
+        missionBadge.textContent = data.missions[currentMissionIdx].label;
+      }
+
+      if (!data.storyParagraph) return;
+
+      data.storyParagraph.forEach(item => {
+        const span = document.createElement('span');
+        span.className = 'story-click-pill';
+        span.textContent = item.word;
+        span.onclick = () => handleStoryWordClick(span, item, data);
+        container.appendChild(span);
+        container.appendChild(document.createTextNode(' '));
+      });
+    }
+
+    function speakCurrentStoryIntro() {
+      const rootSelectEl = document.getElementById('rootSelect');
+      const rootKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
+      const folder = (typeof Sound !== 'undefined' && Sound.rootFolderMap && Sound.rootFolderMap[rootKey]) || rootKey;
+      if (typeof Sound !== 'undefined') {
+        Sound.playAsset(folder, 'story_intro', "اقْرَأِ النَّصَّ يَا بَطَلُ، وَانْقُرْ مُبَاشَرَةً عَلَى الكَلِمَةِ المَطْلُوبَةِ لِتَتَلَوَّنَ بِالأَخْضَرِ!");
+      }
+    }
+
+    function speakCurrentStory() {
+      const rootSelectEl = document.getElementById('rootSelect');
+      const rootKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
+      const folder = (typeof Sound !== 'undefined' && Sound.rootFolderMap && Sound.rootFolderMap[rootKey]) || rootKey;
+      const targetSrc = `audio/${folder}/story.mp3`;
+
+      if (typeof Sound !== 'undefined' && Sound.audioPlayer) {
+        if (Sound.audioPlayer.src.includes(targetSrc) && Sound.audioPlayer.paused && Sound.audioPlayer.currentTime > 0) {
+          Sound.audioPlayer.play();
+          return;
+        }
+        const database = window.db || (typeof db !== 'undefined' ? db : {});
+        const data = database[rootKey] || database['كتب'];
+        const fallbackText = data && data.storyParagraph ? data.storyParagraph.map(p => p.word).join(' ') : '';
+        Sound.playAsset(folder, 'story', fallbackText);
+      }
+    }
+
+    function stopStoryAudio() {
+      if (typeof Sound !== 'undefined' && Sound.pause) {
+        Sound.pause();
+      }
+    }
+
+    function speakCurrentMissionAudio() {
+      const rootSelectEl = document.getElementById('rootSelect');
+      const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
+      const database = window.db || (typeof db !== 'undefined' ? db : {});
+      const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
+      const data = database[rawKey] || database[cleanKey] || database['كتب'];
+
+      if (!data || !data.missions || !data.missions[currentMissionIdx]) return;
+      const mission = data.missions[currentMissionIdx];
+
+      if (typeof Sound !== 'undefined') {
+        Sound.playAsset('', mission.audio, mission.label);
+      }
+    }
   function closeModal(e) {
     if (!e || e.target.id === 'morphModal' || e.target.classList.contains('modal-close')) {
       document.getElementById('morphModal').classList.remove('open');
