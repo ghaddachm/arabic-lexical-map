@@ -2244,64 +2244,7 @@ let starsCount = 0;
       }
     }
 
-    function loadInteractiveStory(data) {
-      const container = document.getElementById('storyWordsContainer');
-      container.innerHTML = '';
-      
-      const missionBadge = document.getElementById('storyMissionBadge');
-      missionBadge.textContent = data.missions[currentMissionIdx].label;
-
-      data.storyParagraph.forEach(item => {
-        const span = document.createElement('span');
-        span.className = 'story-click-pill';
-        span.textContent = item.word;
-        span.onclick = () => handleStoryWordClick(span, item, data);
-        container.appendChild(span);
-        container.appendChild(document.createTextNode(' '));
-      });
-    }
-
-    function speakCurrentStoryIntro() {
-      const rootKey = document.getElementById('rootSelect').value;
-      const folder = Sound.rootFolderMap[rootKey] || rootKey;
-      Sound.playAsset(folder, 'story_intro', "اقْرَأِ النَّصَّ يَا بَطَلُ، وَانْقُرْ مُبَاشَرَةً عَلَى الكَلِمَةِ المَطْلُوبَةِ لِتَتَلَوَّنَ بِالأَخْضَرِ!");
-    }
-    function speakCurrentStory() {
-      const rootKey = document.getElementById('rootSelect').value;
-      const folder = Sound.rootFolderMap[rootKey] || rootKey;
-      const targetSrc = `audio/${folder}/story.mp3`;
-
-      // إذا كان الصوت متوقفاً مؤقتاً في منتصف الحكاية نفسها، استأنف من حيث توقف
-      if (Sound.audioPlayer.src.includes(targetSrc) && Sound.audioPlayer.paused && Sound.audioPlayer.currentTime > 0) {
-        Sound.audioPlayer.play();
-        return;
-      }
-
-      // إذا كانت بداية جديدة
-      const fallbackText = db[rootKey].storyParagraph.map(p => p.word).join(' ');
-      Sound.playAsset(folder, 'story', fallbackText);
-    }
-
-    function stopStoryAudio() {
-      Sound.pause(); // إيقاف مؤقت مع حفظ موضع الثواني
-    }
-   function speakCurrentMissionAudio() {
-    const rootSelectEl = document.getElementById('rootSelect');
-    const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
-    const database = window.db || (typeof db !== 'undefined' ? db : {});
-    const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
-    const data = database[rawKey] || database[cleanKey] || database['كتب'];
-
-    if (!data || !data.missions || !data.missions[currentMissionIdx]) return;
-    const mission = data.missions[currentMissionIdx];
-
-    // نمرر المجلد فارغاً '' لتشغيل ملفات المهمات من مجلد audio الرئيسي مباشرة وتفادي خطأ 404
-    if (typeof Sound !== 'undefined') {
-      Sound.playAsset('', mission.audio, mission.label);
-    }
-  }
-
-function handleStoryWordClick(el, item, data) {
+  function handleStoryWordClick(el, item, data) {
   const currentMission = data.missions[currentMissionIdx];
   if (!currentMission) return;
 
@@ -2319,7 +2262,7 @@ function handleStoryWordClick(el, item, data) {
   const isTargetVerbMatched = (currentTargetType === 'الفعل المجرد' || currentTargetType === 'core') && 
                               (item.target === 'الفعل المجرد' || (currentRootVerb && clickedWordClean.includes(currentRootVerb)));
 
-  // الإجابة الصحيحة التامة المطابقة للمهمة والجذر الحالي
+  // 🟢 1. الإجابة الصحيحة التامة (تلوين بالأخضر وزيادة النجوم)
   if (item.target === currentTargetType || isTargetVerbMatched) {
     el.classList.add('found');
     if (typeof addStars === "function") addStars(10);
@@ -2331,7 +2274,6 @@ function handleStoryWordClick(el, item, data) {
           const nextMission = data.missions[currentMissionIdx];
           const badge = document.getElementById('storyMissionBadge');
           if (badge) badge.textContent = nextMission.label;
-          // تشغيل صوت المهمة من المجلد العام مباشرة لتفادي 404
           Sound.playAsset('', nextMission.audio, nextMission.label);
         } else {
           const badge = document.getElementById('storyMissionBadge');
@@ -2344,7 +2286,6 @@ function handleStoryWordClick(el, item, data) {
             `;
           }
           if (typeof addStars === "function") addStars(30);
-          // تشغيل صوت الاحتفال من المجلد العام مباشرة لتفادي 404
           Sound.playAsset('', 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
         }
       });
@@ -2352,30 +2293,31 @@ function handleStoryWordClick(el, item, data) {
     return;
   }
 
-  // تنبيهات الكلمات البديلة أو الأفعال غير السالمة
-  if (currentTargetType === 'الفعل المجرد' || currentTargetType === 'core') {
-    let specificHint = "";
-    if (clickedWordClean === "بَاتَ") {
-      specificHint = "«بَاتَ» فِعْلٌ مُعْتَلٌّ أَجْوَف.. والمَطْلُوبُ فِعْلٌ صَحِيحٌ!";
-    } else if (clickedWordClean === "أَمْسَكَ") {
-      specificHint = "«أَمْسَكَ» فِعْلٌ رُبَاعِيٌّ مَهْمُوز.. والمَطْلُوبُ فِعْلٌ ثُلَاثِيٌّ!";
+  // 🟠 2. التوجيه الديداكتيكي الذكي للأفعال الثلاثية المجردة الأخرى (برتقالي + صوت hint_general)
+  const isOtherVerbClicked = item.isOtherVerb || clickedWordClean === "بَاتَ" || clickedWordClean === "وَقَفَ" || clickedWordClean === "رَبَطَا" || clickedWordClean === "لِيَصْعَدَ";
+  
+  if ((currentTargetType === 'الفعل المجرد' || currentTargetType === 'core') && isOtherVerbClicked) {
+    // تشغيل التسجيل الصوتي التوجيهي
+    if (typeof Sound !== "undefined" && Sound.playAsset) {
+      Sound.playAsset('', 'hint_general', "كَلِمَةٌ صَحِيحَةٌ لَكِنَّهَا لَيْسَتْ مِنْ شَمْسِ جَذْرِنَا، حَاوِلْ مَرَّةً أُخْرَى");
     }
 
-    if (specificHint) {
-      if (typeof Sound !== "undefined" && Sound.playAsset) {
-        Sound.playAsset('', 'hint_general', specificHint);
-      }
-      el.style.borderColor = '#f59e0b';
-      el.style.boxShadow = '0 0 15px rgba(245, 158, 11, 0.6)';
-      setTimeout(() => {
-        el.style.borderColor = '#94a3b8';
-        el.style.boxShadow = 'none';
-      }, 1800);
-      return;
-    }
+    // تلوين الزر باللون البرتقالي وإبرازه
+    el.style.backgroundColor = '#f97316';
+    el.style.color = '#ffffff';
+    el.style.borderColor = '#ea580c';
+    el.style.boxShadow = '0 0 15px rgba(249, 115, 22, 0.7)';
+
+    setTimeout(() => {
+      el.style.backgroundColor = '';
+      el.style.color = '';
+      el.style.borderColor = '#94a3b8';
+      el.style.boxShadow = 'none';
+    }, 2000);
+    return;
   }
 
-  // نقر غير صحيح
+  // 🔴 3. نقر خاطئ تماماً
   if (typeof Sound !== "undefined" && Sound.wrong) Sound.wrong();
   el.style.borderColor = '#ef4444';
   el.style.boxShadow = '0 0 10px rgba(239, 68, 68, 0.5)';
