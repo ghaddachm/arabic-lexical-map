@@ -3034,14 +3034,6 @@ function rollNewQuestionForGalaxy() {
         window.unlockedGalaxy = window.currentGalaxyNum + 1;
       }
 
-      // تشغيل الصوت المعتمد في نهاية المجرة فقط
-      if (isFinalGalaxy) {
-        playSpaceAudio('space_success.mp3', 'أَحْسَنْتَ يَا بَطَلَ الكَوْنِ! لَقَدْ أَتْمَمْتَ كُلَّ رِحْلَاتِ المَرْكَبَةِ بِتَفَوُّقٍ بَاهِرٍ!');
-      } else {
-        playSpaceAudio('galaxy_transition.mp3', 'رَائِعٌ جِدّاً يَا بَطَلَ الفَضَاءِ! اسْتَعِدَّ لِلانْطِلَاقِ نَحْوَ المَجَرَّةِ التَّالِيَةِ!');
-      }
-
-      // إضافة النجوم بهدوء
       if (typeof addStars === "function") {
         addStars(20);
       }
@@ -3057,22 +3049,34 @@ function rollNewQuestionForGalaxy() {
             <p style="color: #e2e8f0; font-size: 1.2rem; font-weight: bold; line-height: 1.7; margin-bottom: 1.8rem;">
               ${isFinalGalaxy ? 'أَحْسَنْتَ يَا بَطَلَ الكَوْنِ! لَقَدْ أَتْمَمْتَ كُلَّ مَرَاحِلِ مَرْكَبَةِ الصَّرْفِ بِتَفَوُّقٍ بَاهِرٍ!' : 'رَائِعٌ جِدّاً يَا بَطَلَ الفَضَاءِ! اسْتَعِدَّ لِلانْطِلَاقِ نَحْوَ المَجَرَّةِ التَّالِيَةِ!'}
             </p>
-           <div>
-        ${!isFinalGalaxy ? `
-          <button type="button" style="padding: 0.85rem 2.2rem; font-size: 1.1rem; background: #22c55e; border-radius: 16px; border:none; color:#fff; font-weight:bold; cursor:pointer; box-shadow: 0 4px 0 #15803d;" onclick="goToNextGalaxy()">
-            الانْطِلَاقُ إِلَى المَجَرَّةِ التَّالِيَةِ ➔
-          </button>
-        ` : `
-          <button type="button" onclick="speakArabicText('أَحْسَنْتَ يَا بَطَلَ الكَوْنِ! لَقَدْ أَتْمَمْتَ كُلَّ مَرَاحِلِ مَرْكَبَةِ الصَّرْفِ بِتَفَوُّقٍ بَاهِرٍ!')" style="display: block; margin: 0 auto 1.2rem; padding: 0.65rem 1.8rem; font-size: 1rem; background: rgba(56, 189, 248, 0.15); border: 2px solid #38bdf8; border-radius: 14px; color: #bae6fd; font-weight: bold; cursor: pointer;">
-            🔊 اسْتَمِعْ لِلتَّهْنِئَةِ
-          </button>
-          <button type="button" style="padding: 0.85rem 2.2rem; font-size: 1.1rem; background: #0284c7; border-radius: 16px; border:none; color:#fff; font-weight:bold; cursor:pointer; box-shadow: 0 4px 0 #0369a1;" onclick="restartMission()">
-            🔄 إِعَادَةُ الرِّحْلَةِ مِنَ المَجَرَّةِ الأُولَى
-          </button>
-        `}
+            <div>
+              ${!isFinalGalaxy ? `
+                <button type="button" style="padding: 0.85rem 2.2rem; font-size: 1.1rem; background: #22c55e; border-radius: 16px; border:none; color:#fff; font-weight:bold; cursor:pointer; box-shadow: 0 4px 0 #15803d;" onclick="goToNextGalaxy()">
+                  الانْطِلَاقُ إِلَى المَجَرَّةِ التَّالِيَةِ ➔
+                </button>
+              ` : `
+                <button type="button" style="padding: 0.85rem 2.2rem; font-size: 1.1rem; background: #0284c7; border-radius: 16px; border:none; color:#fff; font-weight:bold; cursor:pointer; box-shadow: 0 4px 0 #0369a1;" onclick="restartMission()">
+                  🔄 إِعَادَةُ الرِّحْلَةِ مِنَ المَجَرَّةِ الأُولَى
+                </button>
+              `}
+            </div>
           </div>
         </div>
       `;
+
+      // 🔊 تشغيل الصوت التشجيعي تلقائياً فور إتمام المجرة
+      if (isFinalGalaxy) {
+        if (typeof Sound !== "undefined" && Sound.playAsset) {
+          Sound.playAsset('', 'celebrate', 'أَحْسَنْتَ يَا بَطَلَ الكَوْنِ! لَقَدْ أَتْمَمْتَ كُلَّ مَرَاحِلِ مَرْكَبَةِ الصَّرْفِ بِتَفَوُّقٍ بَاهِرٍ!');
+        } else if (typeof speakArabicText === "function") {
+          speakArabicText('أَحْسَنْتَ يَا بَطَلَ الكَوْنِ! لَقَدْ أَتْمَمْتَ كُلَّ مَرَاحِلِ مَرْكَبَةِ الصَّرْفِ بِتَفَوُّقٍ بَاهِرٍ!');
+        }
+      } else {
+        if (typeof playSpaceAudio === "function") {
+          playSpaceAudio('galaxy_transition.mp3', 'رَائِعٌ جِدّاً يَا بَطَلَ الفَضَاءِ! اسْتَعِدَّ لِلانْطِلَاقِ نَحْوَ المَجَرَّةِ التَّالِيَةِ!');
+        }
+      }
+
       return;
     }
 
@@ -3126,7 +3130,7 @@ function rollNewQuestionForGalaxy() {
     `;
   }
 
- // ==========================================
+  // ==========================================
   // مُولّد أصوات البيب الرقمية (Web Audio API - بدون ملفات خارجية)
   // ==========================================
   function playBeepTone(type) {
@@ -3143,7 +3147,6 @@ function rollNewQuestionForGalaxy() {
       const now = ctx.currentTime;
 
       if (type === 'correct') {
-        // نغمة صواب تصاعدية خاطفة ولطيفة (بيب مبهج)
         osc.type = 'sine';
         osc.frequency.setValueAtTime(587.33, now); // D5
         osc.frequency.exponentialRampToValueAtTime(880, now + 0.15); // A5
@@ -3152,7 +3155,6 @@ function rollNewQuestionForGalaxy() {
         osc.start(now);
         osc.stop(now + 0.25);
       } else {
-        // نغمة خطأ خفيضة وقصيرة جداً (تنبيه لطيف)
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(220, now); // A3
         osc.frequency.setValueAtTime(164.81, now + 0.08); // E3
@@ -3176,7 +3178,6 @@ function rollNewQuestionForGalaxy() {
       allBtns.forEach(b => b.style.pointerEvents = 'none');
     }
 
-    // إيجاد أو إنشاء شريط التغذية الراجعة البصرية المضيئة
     let feedbackBanner = document.getElementById('podFeedbackBanner');
     if (!feedbackBanner) {
       feedbackBanner = document.createElement('div');
@@ -3186,16 +3187,13 @@ function rollNewQuestionForGalaxy() {
     }
 
     if (chosen === correct) {
-      // 1. تشغيل صوت البيب الخاص بالصواب فوراً
       playBeepTone('correct');
 
-      // 2. التفاعل البصري للزر بالأخضر
       btn.style.setProperty('background', '#10b981', 'important');
       btn.style.setProperty('border-color', '#059669', 'important');
       btn.style.setProperty('box-shadow', '0 0 25px #10b981', 'important');
       btn.style.transform = 'scale(1.08)';
 
-      // 3. العبارة التشجيعية
       feedbackBanner.style.background = 'rgba(16, 185, 129, 0.2)';
       feedbackBanner.style.border = '2px solid #10b981';
       feedbackBanner.style.color = '#34d399';
@@ -3205,22 +3203,18 @@ function rollNewQuestionForGalaxy() {
 
       if (typeof addStars === "function") addStars(10);
 
-      // انتقال سريع ومباشر بعد ربع ثانية
       setTimeout(() => {
         renderCurrentPod(idx + 1);
       }, 700);
 
     } else {
-      // 1. تشغيل صوت البيب الخاص بالخطأ فوراً
       playBeepTone('wrong');
 
-      // 2. التفاعل البصري للزر بالأحمر
       btn.style.setProperty('background', '#ef4444', 'important');
       btn.style.setProperty('border-color', '#dc2626', 'important');
       btn.style.setProperty('box-shadow', '0 0 25px #ef4444', 'important');
       btn.style.transform = 'scale(0.95)';
 
-      // 3. عبارة التنبيه
       feedbackBanner.style.background = 'rgba(239, 68, 68, 0.2)';
       feedbackBanner.style.border = '2px solid #ef4444';
       feedbackBanner.style.color = '#f87171';
@@ -3242,6 +3236,7 @@ function rollNewQuestionForGalaxy() {
       }, 900);
     }
   };
+
   // إطلاق المحطة الأولى
   renderCurrentPod(0);
 }
