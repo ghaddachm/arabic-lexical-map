@@ -3002,7 +3002,18 @@ function rollNewQuestionForGalaxy() {
     `;
     return html;
   }
-
+window.goToNextGalaxy = function() {
+  if (!window.currentGalaxyNum) window.currentGalaxyNum = 1;
+  if (window.currentGalaxyNum < 5) {
+    window.currentGalaxyNum++;
+  }
+  if (!window.unlockedGalaxy || window.unlockedGalaxy < window.currentGalaxyNum) {
+    window.unlockedGalaxy = window.currentGalaxyNum;
+  }
+  if (typeof renderSpacecraftChallenge === "function") {
+    renderSpacecraftChallenge();
+  }
+};
   // =========================================================================
   // توزيع الأسئلة في كبسولات متنوعة لكل مجرة (تنوع شامل بين المشتقات)
   // =========================================================================
