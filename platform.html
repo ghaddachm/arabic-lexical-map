@@ -2296,10 +2296,23 @@ let starsCount = 0;
     }
 
     function stopStoryAudio() {
-      if (typeof Sound !== 'undefined' && Sound.pause) {
-        Sound.pause();
-      }
+  if (typeof Sound !== 'undefined') {
+    if (Sound.audioPlayer) {
+      Sound.audioPlayer.pause();
+      Sound.audioPlayer.currentTime = 0;
     }
+    if (Sound.sfxPlayer) {
+      Sound.sfxPlayer.pause();
+      Sound.sfxPlayer.currentTime = 0;
+    }
+    if (typeof Sound.pause === 'function') {
+      Sound.pause();
+    }
+  }
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  }
+}
 
     function speakCurrentMissionAudio() {
       const rootSelectEl = document.getElementById('rootSelect');
