@@ -1,6 +1,7 @@
-window.rootsData = window.rootsData || {};
+window.db = window.db || {};
+window.ROADS_DATA = window.ROADS_DATA || {};
 
-window.rootsData["زلزل"] = {
+const zlzlData = {
   letters: ['ز', 'ل', 'ز', 'ل'],
   concept: "الاهْتِزَازُ وَالتَّحْرِيكُ الشَّدِيدُ (رُبَاعِيٌّ مُضَعَّفٌ)",
   branches: [
@@ -101,3 +102,7 @@ window.rootsData["زلزل"] = {
     { icon: "🔍", badge: "6. اكْتِشَافُ الصِّيغَةِ المُخَالِفَةِ", prompt: "كُلُّ هَذِهِ الكَلِمَاتِ أَفْعَالٌ رُبَاعِيَّةٌ مُضَعَّفَةٌ مَاعَدَا فِعْلاً وَاحِداً هُوَ:", ans: "طَمْأَنَ", opts: ["وَسْوَسَ", "طَمْأَنَ", "عَسْعَسَ"] }
   ]
 };
+
+// تسجيل البيانات بكلا المفتاحين لضمان عمل القائمة مهما كانت القيمة المختارة
+window.db["zlzl"] = zlzlData;
+window.db["زلزل"] = zlzlData;
