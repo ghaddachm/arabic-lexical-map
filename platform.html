@@ -2760,50 +2760,47 @@ function nextCohortRound() {
 }
 
 // اختيار مدار من القائمة الجانبية
-function selectGalaxyStation(gIdx) {
-  currentDiscGalaxyIdx = gIdx;
-  currentRoundIdx = 0;
-  currentStepInRound = 0;
-  const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
-  const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
-  renderDiscsWorkshop(labs);
-}function selectGalaxyStation(gIdx) {
-  currentDiscGalaxyIdx = gIdx;
-  activeQuestionIndex = -1; // إعادة تعيين لاختيار سؤال جديد عشوائياً
-  const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
-  const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
-  renderDiscsWorkshop(labs);
-}
-
-// توليد سؤال عشوائي جديد داخل نفس المدار (لتنويع الأسئلة بين المتعلمين)
-function rollNewQuestionForGalaxy() {
-  const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
-  const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
-  const bank = labs[currentDiscGalaxyIdx].questionBank;
-
-  // اختيار فهرس مختلف عن الحالي قدر الإمكان
-  let nextIdx = Math.floor(Math.random() * bank.length);
-  if (bank.length > 1 && nextIdx === activeQuestionIndex) {
-    nextIdx = (nextIdx + 1) % bank.length;
+  function selectGalaxyStation(gIdx) {
+    currentDiscGalaxyIdx = gIdx;
+    currentRoundIdx = 0;
+    currentStepInRound = 0;
+    const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
+    const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
+    renderDiscsWorkshop(labs);
   }
-  activeQuestionIndex = nextIdx;
-  renderDiscsWorkshop(labs);
-}function switchDiscGalaxy(gIdx) {
-  currentDiscGalaxyIdx = gIdx;
-  currentDiscQuestionIdx = 0;
-  const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
-  const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
-  renderDiscsWorkshop(labs);
-}
 
-    function renderRealPuzzleArena(quizzes) {
-      const container = document.getElementById('puzzleContainer');
-      container.innerHTML = '';
+  // توليد سؤال عشوائي داخل نفس المدار (لتنويع الأسئلة بين المتعلمين)
+  function rollNewQuestionForGalaxy() {
+    const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
+    const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
+    const bank = labs[currentDiscGalaxyIdx].questionBank;
 
-      const puzzleFills = ['#84cc16', '#06b6d4', '#f97316', '#a855f7'];
-      const puzzleBorders = ['#65a30d', '#0891b2', '#ea580c', '#9333ea'];
+    // اختيار فهرس مختلف عن الحالي قدر الإمكان
+    let nextIdx = Math.floor(Math.random() * bank.length);
+    if (bank.length > 1 && nextIdx === activeQuestionIndex) {
+      nextIdx = (nextIdx + 1) % bank.length;
+    }
+    activeQuestionIndex = nextIdx;
+    renderDiscsWorkshop(labs);
+  }
 
-      quizzes.forEach((q, idx) => {
+  function switchDiscGalaxy(gIdx) {
+    currentDiscGalaxyIdx = gIdx;
+    currentRoundIdx = 0;
+    currentStepInRound = 0;
+    const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
+    const labs = (typeof db !== "undefined" && db[rootKey]) ? db[rootKey].labs : [];
+    renderDiscsWorkshop(labs);
+  }
+
+  function renderRealPuzzleArena(quizzes) {
+    const container = document.getElementById('puzzleContainer');
+    container.innerHTML = '';
+
+    const puzzleFills = ['#84cc16', '#06b6d4', '#f97316', '#a855f7'];
+    const puzzleBorders = ['#65a30d', '#0891b2', '#ea580c', '#9333ea'];
+
+    quizzes.forEach((q, idx) => {
         const card = document.createElement('div');
         card.className = 'jigsaw-svg-card';
         card.innerHTML = `
