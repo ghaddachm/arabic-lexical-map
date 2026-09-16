@@ -2315,19 +2315,25 @@ let starsCount = 0;
 }
 
     function speakCurrentMissionAudio() {
-      const rootSelectEl = document.getElementById('rootSelect');
-      const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
-      const database = window.db || (typeof db !== 'undefined' ? db : {});
-      const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
-      const data = database[rawKey] || database[cleanKey] || database['كتب'];
+  const rootSelectEl = document.getElementById('rootSelect');
+  const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
+  const database = window.db || (typeof db !== 'undefined' ? db : {});
+  const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
+  const data = database[rawKey] || database[cleanKey] || database['كتب'];
 
-      if (!data || !data.missions || !data.missions[currentMissionIdx]) return;
-      const mission = data.missions[currentMissionIdx];
+  if (!data || !data.missions || !data.missions[currentMissionIdx]) return;
+  const mission = data.missions[currentMissionIdx];
 
-      if (typeof Sound !== 'undefined') {
-        Sound.playAsset('', mission.audio, mission.label);
-      }
-    }
+  const folder = (typeof Sound !== 'undefined' && Sound.rootFolderMap && Sound.rootFolderMap[cleanKey]) ||
+                 (typeof Sound !== 'undefined' && Sound.rootFolderMap && Sound.rootFolderMap[rawKey]) ||
+                 cleanKey;
+
+  if (typeof Sound !== 'undefined') {
+    // إزالة امتداد .mp3 إن كان موجوداً داخل خاصية mission.audio
+    const audioName = (mission.audio || `mission_${currentMissionIdx + 1}`).replace('.mp3', '');
+    Sound.playAsset(folder, audioName, mission.label);
+  }
+}
   function closeModal(e) {
     if (!e || e.target.id === 'morphModal' || e.target.classList.contains('modal-close')) {
       document.getElementById('morphModal').classList.remove('open');
