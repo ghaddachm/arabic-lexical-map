@@ -2400,22 +2400,24 @@ function handleStoryWordClick(el, item, data) {
       if (typeof addStars === "function") addStars(10);
       currentMissionIdx++;
 
-      // تشغيل نغمة التعزيز أولاً
       if (typeof Sound !== "undefined" && Sound.correct) {
         Sound.correct();
       }
 
-      // الانتظار حتى ينتهي صوت التعزيز قبل نطق سؤال المهمة التالية
       setTimeout(() => {
+        // حاسم جداً: إيقاف القراءة الآلية وأي صوت متبقٍ فوراً قبل نطق السؤال التالي
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+        }
+        if (typeof Sound !== "undefined" && typeof Sound.pause === 'function') {
+          Sound.pause();
+        }
+
         if (currentMissionIdx < data.missions.length) {
           const nextMission = data.missions[currentMissionIdx];
           const badge = document.getElementById('storyMissionBadge');
           if (badge) badge.textContent = nextMission.label;
 
-          // إيقاف أي بقايا صوتية للمؤثر قبل تشغيل السؤال الجديد
-          if (typeof Sound !== "undefined" && Sound.pause) {
-            Sound.pause();
-          }
           speakCurrentMissionAudio();
         } else {
           const badge = document.getElementById('storyMissionBadge');
@@ -2432,7 +2434,7 @@ function handleStoryWordClick(el, item, data) {
             Sound.playAsset('', 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
           }
         }
-      }, 1200); // إتاحة 1.2 ثانية لإنهاء صوت النجاح بسلاسة
+      }, 1400);
       return;
     }
 
