@@ -2324,34 +2324,20 @@ function speakCurrentMissionAudio() {
 
   const database = window.db || (typeof db !== 'undefined' ? db : {});
   const data = database[rawKey] || database[cleanKey] || {};
-  const mission = (data.missions && data.missions[currentMissionIdx]) || {};
+  if (!data.missions || !data.missions[currentMissionIdx]) return;
+  const mission = data.missions[currentMissionIdx];
 
-  // تحديد اسم مجلد الجذر صوتياً بدقة
-  const folder = (typeof Sound !== 'undefined' && Sound.rootFolderMap && (Sound.rootFolderMap[cleanKey] || Sound.rootFolderMap[rawKey])) || cleanKey || 'qwl';
+  const folder = (typeof Sound !== 'undefined' && Sound.rootFolderMap && (Sound.rootFolderMap[cleanKey] || Sound.rootFolderMap[rawKey])) || cleanKey;
+  const audioFile = (mission.audio || `mission_${currentMissionIdx + 1}`).replace('.mp3', '');
 
-  // قراءة اسم الملف المحدد في مصفوفة missions بدقة، وإن لم يوجد نعتمد الترتيب الافتراضي
-  const rawAudio = mission.audio || `mission_${currentMissionIdx + 1}`;
-  const audioFileName = rawAudio.replace('.mp3', '');
-  const audioPath = `audio/${folder}/${audioFileName}.mp3`;
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  if (typeof Sound !== 'undefined' && Sound.pause) Sound.pause();
 
-  // إيقاف أي صوت مشغل حالياً في النظام وإسكات النطق الآلي فوراً
-  if (typeof Sound !== 'undefined' && typeof Sound.pause === 'function') {
-    Sound.pause();
-  }
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
-  }
-
-  // محاولة تشغيل الملف الصوتي المسجل أولاً
-  const audio = new Audio(audioPath);
-  audio.play().catch(err => {
-    console.warn(`تعذر تشغيل الملف الصوتي: ${audioPath}، جاري الانتقال للصوت الآلي`, err);
-    
-    // البديل في حال تعذر تشغيل ملف MP3
-    const textToSpeak = mission.label || `انْقُرْ عَلَى ${mission.targetType || ''}`;
+  const audio = new Audio(`audio/${folder}/${audioFile}.mp3`);
+  audio.play().catch(e => {
+    console.warn("جاري استخدام النطق الآلي كبديل:", e);
     if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const utter = new SpeechSynthesisUtterance(textToSpeak);
+      const utter = new SpeechSynthesisUtterance(mission.label);
       utter.lang = 'ar-SA';
       window.speechSynthesis.speak(utter);
     }
