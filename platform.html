@@ -2400,16 +2400,17 @@ function handleStoryWordClick(el, item, data) {
       if (typeof addStars === "function") addStars(10);
       currentMissionIdx++;
 
+      // تشغيل نغمة التعزيز الخفيفة
       if (typeof Sound !== "undefined" && Sound.correct) {
         Sound.correct();
       }
 
+      // الانتقال للمهمة الموالية وتشغيل صوتها بعد انتهاء نغمة النجاح تماماً
       setTimeout(() => {
-        // حاسم جداً: إيقاف القراءة الآلية وأي صوت متبقٍ فوراً قبل نطق السؤال التالي
         if ('speechSynthesis' in window) {
           window.speechSynthesis.cancel();
         }
-        if (typeof Sound !== "undefined" && typeof Sound.pause === 'function') {
+        if (typeof Sound !== "undefined" && Sound.pause) {
           Sound.pause();
         }
 
@@ -2418,6 +2419,7 @@ function handleStoryWordClick(el, item, data) {
           const badge = document.getElementById('storyMissionBadge');
           if (badge) badge.textContent = nextMission.label;
 
+          // تشغيل صوت ElevenLabs للمهمة الحالية
           speakCurrentMissionAudio();
         } else {
           const badge = document.getElementById('storyMissionBadge');
@@ -2434,7 +2436,7 @@ function handleStoryWordClick(el, item, data) {
             Sound.playAsset('', 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
           }
         }
-      }, 1400);
+      }, 1600); // 1.6 ثانية كافية لسماع نغمة النجاح ثم الاستماع للسؤال التالي بنقاء
       return;
     }
 
