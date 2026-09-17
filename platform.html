@@ -2317,25 +2317,39 @@ let starsCount = 0;
   }
 }
 
-    function speakCurrentMissionAudio() {
+   function speakCurrentMissionAudio() {
   const rootSelectEl = document.getElementById('rootSelect');
   const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
-  const database = window.db || (typeof db !== 'undefined' ? db : {});
   const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
-  const data = database[rawKey] || database[cleanKey] || database['كتب'];
+  
+  // تحديد اسم مجلد الجذر صوتياً بدقة
+  const folder = (typeof Sound !== 'undefined' && Sound.rootFolderMap && (Sound.rootFolderMap[cleanKey] || Sound.rootFolderMap[rawKey])) || 'qwl';
+  
+  const missionNumber = currentMissionIdx + 1;
+  const audioPath = `audio/${folder}/mission_${missionNumber}.mp3`;
 
-  if (!data || !data.missions || !data.missions[currentMissionIdx]) return;
-  const mission = data.missions[currentMissionIdx];
-
-  const folder = (typeof Sound !== 'undefined' && Sound.rootFolderMap && Sound.rootFolderMap[cleanKey]) ||
-                 (typeof Sound !== 'undefined' && Sound.rootFolderMap && Sound.rootFolderMap[rawKey]) ||
-                 cleanKey;
-
-  if (typeof Sound !== 'undefined') {
-    // إزالة امتداد .mp3 إن كان موجوداً داخل خاصية mission.audio
-    const audioName = (mission.audio || `mission_${currentMissionIdx + 1}`).replace('.mp3', '');
-    Sound.playAsset(folder, audioName, mission.label);
+  // إيقاف أي صوت حالي
+  if (typeof Sound !== 'undefined' && Sound.pause) {
+    Sound.pause();
   }
+
+  // محاولة تشغيل الملف الصوتي المسجل أولاً
+  const audio = new Audio(audioPath);
+  audio.play().catch(err => {
+    console.warn(`تعذر تشغيل الملف الصوتي: ${audioPath}، جاري الانتقال للصوت الآلي`, err);
+    // البديل في حال عدم وجود الملف
+    const database = window.db || (typeof db !== 'undefined' ? db : {});
+    const data = database[rawKey] || database[cleanKey] || {};
+    const mission = (data.missions && data.missions[currentMissionIdx]) || {};
+    const textToSpeak = mission.label || `انْقُرْ عَلَى ${mission.targetType || ''}`;
+    
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(textToSpeak);
+      utter.lang = 'ar-SA';
+      window.speechSynthesis.speak(utter);
+    }
+  });
 }
   function closeModal(e) {
     if (!e || e.target.id === 'morphModal' || e.target.classList.contains('modal-close')) {
