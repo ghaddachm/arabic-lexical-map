@@ -2402,7 +2402,7 @@ function handleStoryWordClick(el, item, data) {
     if (item.target === currentTargetType || isTargetVerbMatched) {
       if ('speechSynthesis' in window) window.speechSynthesis.cancel();
 
-      // تلوين الكلمة وزيادة النجوم فوراً
+      // تلوين الكلمة المنقورة فوراً
       el.classList.add('found');
       el.style.backgroundColor = '#22c55e';
       el.style.color = '#ffffff';
@@ -2411,18 +2411,20 @@ function handleStoryWordClick(el, item, data) {
       if (typeof addStars === "function") addStars(10);
       currentMissionIdx++;
 
-      // تشغيل عبارة الثناء والتعزيز فقط
-      if (typeof Sound !== "undefined" && Sound.correct) {
-        Sound.correct();
-      }
-
-      // تحديث نص الشارة فوراً بصمت تام (بدون تشغيل أي صوت للسؤال القادم)
+      // فحص: هل لا تزال هناك مهام تالية أم انتهت القصة بالكامل؟
       if (currentMissionIdx < data.missions.length) {
+        // للمهام من 1 إلى 4: تشغيل صوت الثناء العادي فقط
+        if (typeof Sound !== "undefined" && Sound.correct) {
+          Sound.correct();
+        }
+
+        // تحديث نص الشارة للمهمة القادمة بهدوء
         const nextMission = data.missions[currentMissionIdx];
         const badge = document.getElementById('storyMissionBadge');
         if (badge) badge.textContent = nextMission.label;
+
       } else {
-        // عند إتمام كافة المهام
+        // للمهمة 5 (الإنجاز الأخير): تشغيل احتفال التتويج الكبير فقط دون تداخل
         const badge = document.getElementById('storyMissionBadge');
         if (badge) {
           badge.innerHTML = `
@@ -2432,7 +2434,15 @@ function handleStoryWordClick(el, item, data) {
             </button>
           `;
         }
+
         if (typeof addStars === "function") addStars(30);
+
+        // إيقاف أي مؤثر قبل الاحتفال الكبير
+        if (typeof Sound !== "undefined" && Sound.pause) {
+          Sound.pause();
+        }
+
+        // إطلاق صوت التتويج النهائي الصافي
         if (typeof Sound !== "undefined" && Sound.playAsset) {
           Sound.playAsset('', 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
         }
