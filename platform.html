@@ -2317,32 +2317,38 @@ let starsCount = 0;
   }
 }
 
-   function speakCurrentMissionAudio() {
+function speakCurrentMissionAudio() {
   const rootSelectEl = document.getElementById('rootSelect');
   const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
   const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
-  
-  // تحديد اسم مجلد الجذر صوتياً بدقة
-  const folder = (typeof Sound !== 'undefined' && Sound.rootFolderMap && (Sound.rootFolderMap[cleanKey] || Sound.rootFolderMap[rawKey])) || 'qwl';
-  
-  const missionNumber = currentMissionIdx + 1;
-  const audioPath = `audio/${folder}/mission_${missionNumber}.mp3`;
 
-  // إيقاف أي صوت حالي
-  if (typeof Sound !== 'undefined' && Sound.pause) {
+  const database = window.db || (typeof db !== 'undefined' ? db : {});
+  const data = database[rawKey] || database[cleanKey] || {};
+  const mission = (data.missions && data.missions[currentMissionIdx]) || {};
+
+  // تحديد اسم مجلد الجذر صوتياً بدقة
+  const folder = (typeof Sound !== 'undefined' && Sound.rootFolderMap && (Sound.rootFolderMap[cleanKey] || Sound.rootFolderMap[rawKey])) || cleanKey || 'qwl';
+
+  // قراءة اسم الملف المحدد في مصفوفة missions بدقة، وإن لم يوجد نعتمد الترتيب الافتراضي
+  const rawAudio = mission.audio || `mission_${currentMissionIdx + 1}`;
+  const audioFileName = rawAudio.replace('.mp3', '');
+  const audioPath = `audio/${folder}/${audioFileName}.mp3`;
+
+  // إيقاف أي صوت مشغل حالياً في النظام وإسكات النطق الآلي فوراً
+  if (typeof Sound !== 'undefined' && typeof Sound.pause === 'function') {
     Sound.pause();
+  }
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
   }
 
   // محاولة تشغيل الملف الصوتي المسجل أولاً
   const audio = new Audio(audioPath);
   audio.play().catch(err => {
     console.warn(`تعذر تشغيل الملف الصوتي: ${audioPath}، جاري الانتقال للصوت الآلي`, err);
-    // البديل في حال عدم وجود الملف
-    const database = window.db || (typeof db !== 'undefined' ? db : {});
-    const data = database[rawKey] || database[cleanKey] || {};
-    const mission = (data.missions && data.missions[currentMissionIdx]) || {};
-    const textToSpeak = mission.label || `انْقُرْ عَلَى ${mission.targetType || ''}`;
     
+    // البديل في حال تعذر تشغيل ملف MP3
+    const textToSpeak = mission.label || `انْقُرْ عَلَى ${mission.targetType || ''}`;
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
       const utter = new SpeechSynthesisUtterance(textToSpeak);
