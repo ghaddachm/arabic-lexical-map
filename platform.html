@@ -2324,24 +2324,50 @@ function speakCurrentMissionAudio() {
 
   const database = window.db || (typeof db !== 'undefined' ? db : {});
   const data = database[rawKey] || database[cleanKey] || {};
-  if (!data.missions || !data.missions[currentMissionIdx]) return;
+  if (!data.missions || typeof currentMissionIdx === 'undefined' || !data.missions[currentMissionIdx]) return;
   const mission = data.missions[currentMissionIdx];
 
   const folder = (typeof Sound !== 'undefined' && Sound.rootFolderMap && (Sound.rootFolderMap[cleanKey] || Sound.rootFolderMap[rawKey])) || cleanKey;
   const audioFile = (mission.audio || `mission_${currentMissionIdx + 1}`).replace('.mp3', '');
+  const audioPath = `audio/${folder}/${audioFile}.mp3`;
 
+  // 1. إسكات تام وشامل لأي صوت متحدث أو مؤثر ثناء سابق
   if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-  if (typeof Sound !== 'undefined' && Sound.pause) Sound.pause();
-
-  const audio = new Audio(`audio/${folder}/${audioFile}.mp3`);
-  audio.play().catch(e => {
-    console.warn("جاري استخدام النطق الآلي كبديل:", e);
-    if ('speechSynthesis' in window) {
-      const utter = new SpeechSynthesisUtterance(mission.label);
-      utter.lang = 'ar-SA';
-      window.speechSynthesis.speak(utter);
+  if (typeof Sound !== 'undefined') {
+    if (Sound.audioPlayer) {
+      Sound.audioPlayer.pause();
+      Sound.audioPlayer.currentTime = 0;
     }
-  });
+    if (Sound.sfxPlayer) {
+      Sound.sfxPlayer.pause();
+      Sound.sfxPlayer.currentTime = 0;
+    }
+    if (typeof Sound.pause === 'function') Sound.pause();
+  }
+
+  // 2. تشغيل تسجيل المهمة عبر المشغل الرئيسي لمنع تراكب المقاطع
+  if (typeof Sound !== 'undefined' && Sound.audioPlayer) {
+    Sound.audioPlayer.src = audioPath;
+    Sound.audioPlayer.currentTime = 0;
+    Sound.audioPlayer.play().catch(e => {
+      console.warn("جاري استخدام النطق الآلي كبديل:", e);
+      if ('speechSynthesis' in window) {
+        const utter = new SpeechSynthesisUtterance(mission.label);
+        utter.lang = 'ar-SA';
+        window.speechSynthesis.speak(utter);
+      }
+    });
+  } else {
+    const audio = new Audio(audioPath);
+    audio.play().catch(e => {
+      console.warn("جاري استخدام النطق الآلي كبديل:", e);
+      if ('speechSynthesis' in window) {
+        const utter = new SpeechSynthesisUtterance(mission.label);
+        utter.lang = 'ar-SA';
+        window.speechSynthesis.speak(utter);
+      }
+    });
+  }
 }
   function closeModal(e) {
     if (!e || e.target.id === 'morphModal' || e.target.classList.contains('modal-close')) {
@@ -2372,11 +2398,9 @@ function handleStoryWordClick(el, item, data) {
     const isTargetVerbMatched = (currentTargetType === 'الفعل المجرد' || currentTargetType === 'core') && 
                                 (item.target === 'الفعل المجرد' || (currentRootVerb && clickedWordClean === currentRootVerb));
 
-// 🟢 1. الإجابة الصحيحة التامة (تلوين فوري + صوت التعزيز + تحديث نص المهمة بصمت)
+// 🟢 1. الإجابة الصحيحة التامة
     if (item.target === currentTargetType || isTargetVerbMatched) {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
 
       // تلوين الكلمة وزيادة النجوم فوراً
       el.classList.add('found');
@@ -2387,18 +2411,18 @@ function handleStoryWordClick(el, item, data) {
       if (typeof addStars === "function") addStars(10);
       currentMissionIdx++;
 
-      // تشغيل عبارة التعزيز والثناء الصوتي فقط
+      // تشغيل عبارة الثناء والتعزيز فقط
       if (typeof Sound !== "undefined" && Sound.correct) {
         Sound.correct();
       }
 
-      // تحديث نص شارة المهمة في الشاشة بدون تشغيل أي صوت آلي لها
+      // تحديث نص الشارة فوراً بصمت تام (بدون تشغيل أي صوت للسؤال القادم)
       if (currentMissionIdx < data.missions.length) {
         const nextMission = data.missions[currentMissionIdx];
         const badge = document.getElementById('storyMissionBadge');
         if (badge) badge.textContent = nextMission.label;
       } else {
-        // عند إتمام جميع المهام الخمس
+        // عند إتمام كافة المهام
         const badge = document.getElementById('storyMissionBadge');
         if (badge) {
           badge.innerHTML = `
@@ -2415,6 +2439,7 @@ function handleStoryWordClick(el, item, data) {
       }
       return;
     }
+  
     // 🟠 2. التوجيه الذكي للأفعال الثلاثية المجردة الأخرى
     const isOtherVerbClicked = Boolean(item.isOtherVerb) || 
                                ["جَلَسَ", "فَخَرَجَتْ", "بَاتَ", "وَقَفَ", "كَانَ", "وَصَلَا", "رَبَطَا", "لِيَصْعَدَ"].includes(clickedWordClean);
