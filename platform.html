@@ -2357,7 +2357,7 @@ let starsCount = 0;
     }
   }
 
-  function handleStoryWordClick(el, item, data) {
+function handleStoryWordClick(el, item, data) {
     if (!data || !data.missions || data.missions.length === 0) return;
     if (typeof currentMissionIdx === 'undefined' || currentMissionIdx >= data.missions.length) {
       currentMissionIdx = 0;
@@ -2375,13 +2375,19 @@ let starsCount = 0;
 
     const clickedWordClean = (item.word || '').replace(/[.,،؛:«»?!]/g, '').trim();
 
-    // فحص ما إذا كانت الكلمة المنقورة هي الفعل المجرد للجذر الحالي (كتب، مد، قرأ...)
+    // فحص ما إذا كانت الكلمة المنقورة هي الفعل المجرد للجذر الحالي
     const currentRootVerb = (rootObj && rootObj.branches && rootObj.branches[0]) ? rootObj.branches[0].plain : '';
     const isTargetVerbMatched = (currentTargetType === 'الفعل المجرد' || currentTargetType === 'core') && 
                                 (item.target === 'الفعل المجرد' || (currentRootVerb && clickedWordClean === currentRootVerb));
 
-    // 🟢 1. الإجابة الصحيحة التامة (تلوين بالأخضر وزيادة النجوم)
+    // 🟢 1. الإجابة الصحيحة التامة
     if (item.target === currentTargetType || isTargetVerbMatched) {
+      // إيقاف أي قراءة آلية سابقة فوراً لمنع التداخل
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+
+      // تلوين فوري سريع بدون تأخير تفاعلي
       el.classList.add('found');
       el.style.backgroundColor = '#22c55e';
       el.style.color = '#ffffff';
@@ -2390,32 +2396,40 @@ let starsCount = 0;
       if (typeof addStars === "function") addStars(10);
       currentMissionIdx++;
 
+      // تشغيل نغمة التعزيز السريعة
       if (typeof Sound !== "undefined" && Sound.correct) {
-        Sound.correct(() => {
-          if (currentMissionIdx < data.missions.length) {
-            const nextMission = data.missions[currentMissionIdx];
-            const badge = document.getElementById('storyMissionBadge');
-            if (badge) badge.textContent = nextMission.label;
-            Sound.playAsset('', nextMission.audio, nextMission.label);
-          } else {
-            const badge = document.getElementById('storyMissionBadge');
-            if (badge) {
-              badge.innerHTML = `
-                <span>🎉 بَطَلٌ خَارِقٌ! اسْتَخْرَجْتَ كَافَّةَ مَشَاهِدِ القِصَّةِ بِنَجَاحٍ!</span>
-                <button type="button" onclick="window.resetStoryCloud();" style="margin-right:0.8rem; background:#facc15; color:#0f172a; border:none; padding:0.25rem 0.8rem; border-radius:12px; font-weight:bold; cursor:pointer; font-size:0.85rem;">
-                  🔄 إِعَادَةُ الاسْتِكْشَافِ
-                </button>
-              `;
-            }
-            if (typeof addStars === "function") addStars(30);
+        Sound.correct();
+      }
+
+      // الانتقال الفوري للمهمة التالية وتشغيل التسجيل الصوتي الحصري لها
+      setTimeout(() => {
+        if (currentMissionIdx < data.missions.length) {
+          const nextMission = data.missions[currentMissionIdx];
+          const badge = document.getElementById('storyMissionBadge');
+          if (badge) badge.textContent = nextMission.label;
+
+          // استدعاء دالتنا المخصصة التي تشغل ملف ElevenLabs مباشرة وتمنع التراكب
+          speakCurrentMissionAudio();
+        } else {
+          const badge = document.getElementById('storyMissionBadge');
+          if (badge) {
+            badge.innerHTML = `
+              <span>🎉 بَطَلٌ خَارِقٌ! اسْتَخْرَجْتَ كَافَّةَ مَشَاهِدِ القِصَّةِ بِنَجَاحٍ!</span>
+              <button type="button" onclick="window.resetStoryCloud();" style="margin-right:0.8rem; background:#facc15; color:#0f172a; border:none; padding:0.25rem 0.8rem; border-radius:12px; font-weight:bold; cursor:pointer; font-size:0.85rem;">
+                🔄 إِعَادَةُ الاسْتِكْشَافِ
+              </button>
+            `;
+          }
+          if (typeof addStars === "function") addStars(30);
+          if (typeof Sound !== "undefined" && Sound.playAsset) {
             Sound.playAsset('', 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
           }
-        });
-      }
+        }
+      }, 300); // 300 جزء من الثانية استجابة فائقة السرعة
       return;
     }
 
-    // 🟠 2. التوجيه الديداكتيكي الذكي للأفعال الثلاثية المجردة الأخرى (برتقالي + صوت hint_general)
+    // 🟠 2. التوجيه الذكي للأفعال الثلاثية المجردة الأخرى
     const isOtherVerbClicked = Boolean(item.isOtherVerb) || 
                                ["جَلَسَ", "فَخَرَجَتْ", "بَاتَ", "وَقَفَ", "كَانَ", "وَصَلَا", "رَبَطَا", "لِيَصْعَدَ"].includes(clickedWordClean);
     
@@ -2434,7 +2448,7 @@ let starsCount = 0;
         el.style.color = '';
         el.style.borderColor = '#94a3b8';
         el.style.boxShadow = 'none';
-      }, 1800);
+      }, 1500);
       return;
     }
 
@@ -2445,7 +2459,7 @@ let starsCount = 0;
     setTimeout(() => {
       el.style.borderColor = '#94a3b8';
       el.style.boxShadow = 'none';
-    }, 600);
+    }, 500);
   }
 
   // دالة إعادة ضبط السحابة
