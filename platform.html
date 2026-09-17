@@ -2380,14 +2380,12 @@ function handleStoryWordClick(el, item, data) {
     const isTargetVerbMatched = (currentTargetType === 'الفعل المجرد' || currentTargetType === 'core') && 
                                 (item.target === 'الفعل المجرد' || (currentRootVerb && clickedWordClean === currentRootVerb));
 
-    // 🟢 1. الإجابة الصحيحة التامة
+// 🟢 1. الإجابة الصحيحة التامة
     if (item.target === currentTargetType || isTargetVerbMatched) {
-      // إيقاف أي قراءة آلية سابقة فوراً لمنع التداخل
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
       }
 
-      // تلوين فوري سريع بدون تأخير تفاعلي
       el.classList.add('found');
       el.style.backgroundColor = '#22c55e';
       el.style.color = '#ffffff';
@@ -2396,19 +2394,22 @@ function handleStoryWordClick(el, item, data) {
       if (typeof addStars === "function") addStars(10);
       currentMissionIdx++;
 
-      // تشغيل نغمة التعزيز السريعة
+      // تشغيل نغمة التعزيز أولاً
       if (typeof Sound !== "undefined" && Sound.correct) {
         Sound.correct();
       }
 
-      // الانتقال الفوري للمهمة التالية وتشغيل التسجيل الصوتي الحصري لها
+      // الانتظار حتى ينتهي صوت التعزيز قبل نطق سؤال المهمة التالية
       setTimeout(() => {
         if (currentMissionIdx < data.missions.length) {
           const nextMission = data.missions[currentMissionIdx];
           const badge = document.getElementById('storyMissionBadge');
           if (badge) badge.textContent = nextMission.label;
 
-          // استدعاء دالتنا المخصصة التي تشغل ملف ElevenLabs مباشرة وتمنع التراكب
+          // إيقاف أي بقايا صوتية للمؤثر قبل تشغيل السؤال الجديد
+          if (typeof Sound !== "undefined" && Sound.pause) {
+            Sound.pause();
+          }
           speakCurrentMissionAudio();
         } else {
           const badge = document.getElementById('storyMissionBadge');
@@ -2425,7 +2426,7 @@ function handleStoryWordClick(el, item, data) {
             Sound.playAsset('', 'celebrate', "مُبَارَكٌ! لَقَدْ حَصَدْتَ كَافَّةَ نُجُومِ التَّحَدِّي الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ!");
           }
         }
-      }, 300); // 300 جزء من الثانية استجابة فائقة السرعة
+      }, 1200); // إتاحة 1.2 ثانية لإنهاء صوت النجاح بسلاسة
       return;
     }
 
