@@ -2876,41 +2876,42 @@ function nextCohortRound() {
     renderDiscsWorkshop(labs);
   }
 
-  function renderRealPuzzleArena(quizzes) {
-    const container = document.getElementById('puzzleContainer');
-    container.innerHTML = '';
+ function renderRealPuzzleArena(quizzes) {
+  const container = document.getElementById('puzzleContainer');
+  if (!container || !quizzes) return;
+  container.innerHTML = '';
 
-    const puzzleFills = ['#84cc16', '#06b6d4', '#f97316', '#a855f7'];
-    const puzzleBorders = ['#65a30d', '#0891b2', '#ea580c', '#9333ea'];
+  const puzzleFills = ['#84cc16', '#06b6d4', '#f97316', '#a855f7'];
+  const puzzleBorders = ['#65a30d', '#0891b2', '#ea580c', '#9333ea'];
 
-    quizzes.forEach((q, idx) => {
-        const card = document.createElement('div');
-        card.className = 'jigsaw-svg-card';
-        card.innerHTML = `
-          <svg class="jigsaw-bg-shape" viewBox="0 0 320 420" preserveAspectRatio="none">
-            <path d="M 40,40 L 130,40 C 130,10 190,10 190,40 L 280,40 C 280,40 290,40 290,50 L 290,170 C 320,170 320,230 290,230 L 290,380 C 290,390 280,390 280,390 L 190,390 C 190,360 130,360 130,390 L 40,390 C 30,390 30,380 30,380 L 30,230 C 60,230 60,170 30,170 L 30,50 C 30,40 40,40 40,40 Z" fill="${puzzleFills[idx % 4]}" stroke="${puzzleBorders[idx % 4]}" stroke-width="8"/>
-          </svg>
+  quizzes.forEach((q, idx) => {
+    const card = document.createElement('div');
+    card.className = 'jigsaw-svg-card';
+    card.innerHTML = `
+      <svg class="jigsaw-bg-shape" viewBox="0 0 320 420" preserveAspectRatio="none">
+        <path d="M 40,40 L 130,40 C 130,10 190,10 190,40 L 280,40 C 280,40 290,40 290,50 L 290,170 C 320,170 320,230 290,230 L 290,380 C 290,390 280,390 280,390 L 190,390 C 190,360 130,360 130,390 L 40,390 C 30,390 30,380 30,380 L 30,230 C 60,230 60,170 30,170 L 30,50 C 30,40 40,40 40,40 Z" fill="${puzzleFills[idx % 4]}" stroke="${puzzleBorders[idx % 4]}" stroke-width="8"/>
+      </svg>
 
-          <div class="jigsaw-content-body">
-            <span class="puzzle-number-badge">🧩 قِطْعَةُ البَزْل ${idx + 1}</span>
-            <div class="puzzle-question-text">${q.q}</div>
+      <div class="jigsaw-content-body">
+        <span class="puzzle-number-badge">🧩 قِطْعَةُ البَزْل ${idx + 1}</span>
+        <div class="puzzle-question-text">${q.q}</div>
 
-            <div class="puzzle-target-slot" id="jigsaw_drop_${idx}">اسْحَبْ هُنَا ⬇️</div>
+        <div class="puzzle-target-slot" id="jigsaw_drop_${idx}">اسْحَبْ هُنَا ⬇️</div>
 
-            <div class="puzzle-options-rack">
-              ${q.opts.map(opt => `
-                <div class="drag-piece-token" draggable="true" data-word="${opt}" data-j-idx="${idx}" onclick="handleJigsawClick('${opt}', '${q.ans}', ${idx})">${opt}</div>
-              `).join('')}
-            </div>
+        <div class="puzzle-options-rack">
+          ${shuffleArray(q.opts || []).map(opt => `
+            <div class="drag-piece-token" draggable="true" data-word="${opt}" data-j-idx="${idx}" onclick="handleJigsawClick('${opt}', '${q.ans}', ${idx})">${opt}</div>
+          `).join('')}
+        </div>
 
-            <div class="puzzle-feedback-toast" id="fb_jigsaw_${idx}"></div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
+        <div class="puzzle-feedback-toast" id="fb_jigsaw_${idx}"></div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
 
-      setupJigsawDragDrop(quizzes);
-    }
+  setupJigsawDragDrop(quizzes);
+}
 
     function setupJigsawDragDrop(quizzes) {
       document.querySelectorAll('.drag-piece-token').forEach(token => {
