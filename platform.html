@@ -2332,7 +2332,7 @@ function speakCurrentMissionAudio() {
   let rawAudio = mission.audio || `mission_${currentMissionIdx + 1}`;
   rawAudio = rawAudio.replace('.mp3', '').replace(/\s+/g, '_').trim();
   if (rawAudio.startsWith(`${folder}/`)) rawAudio = rawAudio.replace(`${folder}/`, '');
-  const audioPath = `audio/${folder}/${rawAudio}.mp3`;
+  const audioPath = `audio/${folder}/${rawAudio}.mp3?v=2`;
 
   // 1. إسكات تام وشامل لأي صوت متحدث أو مؤثر ثناء سابق
   if ('speechSynthesis' in window) window.speechSynthesis.cancel();
