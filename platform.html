@@ -2329,8 +2329,10 @@ function speakCurrentMissionAudio() {
   const mission = data.missions[currentMissionIdx];
 
   const folder = (typeof Sound !== 'undefined' && Sound.rootFolderMap && (Sound.rootFolderMap[cleanKey] || Sound.rootFolderMap[rawKey])) || cleanKey;
-  const audioFile = (mission.audio || `mission_${currentMissionIdx + 1}`).replace('.mp3', '');
-  const audioPath = `audio/${folder}/${audioFile}.mp3`;
+  let rawAudio = mission.audio || `mission_${currentMissionIdx + 1}`;
+  rawAudio = rawAudio.replace('.mp3', '').replace(/\s+/g, '_').trim();
+  if (rawAudio.startsWith(`${folder}/`)) rawAudio = rawAudio.replace(`${folder}/`, '');
+  const audioPath = `audio/${folder}/${rawAudio}.mp3`;
 
   // 1. إسكات تام وشامل لأي صوت متحدث أو مؤثر ثناء سابق
   if ('speechSynthesis' in window) window.speechSynthesis.cancel();
