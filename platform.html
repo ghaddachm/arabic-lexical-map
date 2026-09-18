@@ -2515,7 +2515,17 @@ function handleStoryWordClick(el, item, data) {
   var currentRoundIdx = 0;        // رقم الجولة الحالية للمتعلم
   var currentStepInRound = 0;     // رقم السؤال داخل الجولة (0 إلى 4)
 
-  function renderDiscsWorkshop(labs) {
+  // 🔀 دالة خلط المصفوفات عشوائياً
+function shuffleArray(arr) {
+  if (!Array.isArray(arr)) return [];
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+    function renderDiscsWorkshop(labs) {
     const container = document.getElementById('discsContainer');
     if (!container || !labs || labs.length === 0) return;
 
