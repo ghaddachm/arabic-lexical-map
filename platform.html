@@ -3188,7 +3188,7 @@ window.goToNextGalaxy = function() {
 
     // استخراج الخيارات بشكل مرن ودقيق
     const rawOptions = c.opts || c.choices || c.options || [];
-    const optionsList = [...rawOptions].sort(() => Math.random() - 0.5);
+    const optionsList = shuffleArray(rawOptions);
     const promptQuestion = c.prompt || c.q || '';
     const badgeName = c.badge || c.title || currentGal.name;
 
