@@ -769,7 +769,7 @@
   <script src="roots_data/khrj.js?v=1"></script>
 </head>
 <body>
-<!-- 🌌 بوابة الفضاء الكوني الرحب المعتمدة ديداكتيكياً: بذرة الكلمات -->
+<!-- 🌌 شمس الكلمات: رحلة الاشتقاق الصرفي -->
 <div id="welcomeScreen" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #0f172a 45%, #030712 100%); z-index: 99999; display: flex; align-items: center; justify-content: center; overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif; transition: opacity 0.8s ease, transform 0.8s ease;">
 
   <style>
@@ -783,17 +783,17 @@
       100% { transform: translate(0, 0) rotate(0deg); }
     }
     @keyframes orbitPlanet {
-      0% { transform: rotate(0deg) translateX(46px) rotate(0deg); }
-      100% { transform: rotate(360deg) translateX(46px) rotate(-360deg); }
+      0% { transform: rotate(0deg) translateX(48px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(48px) rotate(-360deg); }
     }
     @keyframes shootingStar1 {
       0% { transform: translateX(110vw) translateY(-40px) rotate(-35deg); opacity: 1; }
       40% { opacity: 1; }
       70%, 100% { transform: translateX(-20vw) translateY(550px) rotate(-35deg); opacity: 0; }
     }
-    @keyframes pulseAura {
-      0%, 100% { filter: drop-shadow(0 0 30px rgba(245, 158, 11, 0.75)); }
-      50% { filter: drop-shadow(0 0 60px rgba(251, 191, 36, 1)); }
+    @keyframes pulseSolar {
+      0%, 100% { filter: drop-shadow(0 0 35px rgba(251, 191, 36, 0.85)); transform: scale(1); }
+      50% { filter: drop-shadow(0 0 65px rgba(245, 158, 11, 1)); transform: scale(1.03); }
     }
     @keyframes twinkleCosmic {
       0%, 100% { opacity: 0.3; transform: scale(0.8); }
@@ -814,57 +814,56 @@
     }
   </style>
 
-  <!-- 🌌 سُدم السماء البعيدة المضيئة -->
+  <!-- 🌌 سُدم السماء المضيئة -->
   <div style="position: absolute; width: 750px; height: 750px; background: radial-gradient(circle, rgba(168, 85, 247, 0.26) 0%, transparent 70%); top: -150px; left: -100px; filter: blur(75px); pointer-events: none;"></div>
   <div style="position: absolute; width: 850px; height: 850px; background: radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, transparent 75%); bottom: -200px; right: -150px; filter: blur(80px); pointer-events: none;"></div>
-  <div style="position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(251, 191, 36, 0.18) 0%, transparent 70%); top: 40%; left: 50%; transform: translate(-50%, -50%); filter: blur(55px); pointer-events: none;"></div>
+  <div style="position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(251, 191, 36, 0.22) 0%, transparent 70%); top: 40%; left: 50%; transform: translate(-50%, -50%); filter: blur(55px); pointer-events: none;"></div>
 
-  <!-- 🌠 شهاب فضائي يمر في الأفق -->
+  <!-- 🌠 شهاب يمر في الأفق -->
   <div style="position: absolute; top: 14%; width: 160px; height: 3px; background: linear-gradient(90deg, #fff, rgba(255,255,255,0.8), transparent); border-radius: 50%; animation: shootingStar1 9s linear infinite; pointer-events: none;"></div>
 
-  <!-- 🪐 الكواكب المضيئة في الأطراف بتوازن بصري يمنع التشتيت -->
+  <!-- 🪐 أجرام وكواكب الفضاء المحيطة -->
   <div style="position: absolute; top: 10%; left: 7%; font-size: 3.8rem; filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.7)); animation: floatCosmicSlow 7s ease-in-out infinite;">🪐</div>
   <div style="position: absolute; top: 14%; right: 8%; font-size: 3.5rem; filter: drop-shadow(0 0 22px rgba(168, 85, 247, 0.75)); animation: floatCosmicSlow 8s ease-in-out infinite 1s;">🌌</div>
   <div style="position: absolute; bottom: 18%; left: 6%; font-size: 3rem; filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.8)); animation: floatCosmicSlow 6.5s ease-in-out infinite 0.5s;">🌍</div>
   <div style="position: absolute; bottom: 12%; right: 7%; font-size: 3.2rem; filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.8)); animation: floatCosmicSlow 6s ease-in-out infinite 1.5s;">🛸</div>
 
-  <!-- 👨‍🚀 رواد الفضاء يسبحون بتناغم -->
+  <!-- 👨‍🚀 رواد الفضاء في الرحلة -->
   <div style="position: absolute; bottom: 12%; left: 15%; font-size: 3.6rem; filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.7)); animation: spacewalker 7s ease-in-out infinite;">👨‍🚀</div>
   <div style="position: absolute; top: 22%; right: 17%; font-size: 3.3rem; filter: drop-shadow(0 0 18px rgba(236, 72, 153, 0.7)); animation: spacewalker 9s ease-in-out infinite 1.5s; transform: scaleX(-1);">🧑‍🚀</div>
 
-  <!-- ✨ النجوم المتلألئة الموزعة -->
+  <!-- ✨ النجوم المتلألئة -->
   <div style="position: absolute; top: 20%; left: 24%; color: #fef08a; font-size: 1.5rem; animation: twinkleCosmic 3s infinite;">✨</div>
   <div style="position: absolute; top: 32%; right: 28%; color: #38bdf8; font-size: 1.7rem; animation: twinkleCosmic 4.5s infinite 1s;">⭐</div>
   <div style="position: absolute; bottom: 28%; left: 26%; color: #f472b6; font-size: 1.3rem; animation: twinkleCosmic 3.5s infinite 1.5s;">✦</div>
   <div style="position: absolute; bottom: 22%; right: 24%; color: #fde047; font-size: 1.6rem; animation: twinkleCosmic 2.8s infinite 0.5s;">✨</div>
 
-  <!-- 🛸 المحتوى الرئيسي للمنصة المعلق في الفضاء -->
+  <!-- 🛸 المحتوى الرئيسي -->
   <div style="position: relative; z-index: 10; width: 100%; max-width: 980px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.4rem;">
 
-    <!-- نواة بذرة الكلمات المضيئة -->
+    <!-- شمس الكلمات المركزية المتوهجة -->
     <div style="animation: floatCosmicSlow 5s ease-in-out infinite; display: flex; flex-direction: column; align-items: center;">
-      <div style="position: relative; width: 135px; height: 135px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ffffff 0%, #fde047 30%, #f59e0b 70%, #b45309 100%); display: flex; align-items: center; justify-content: center; font-size: 5rem; box-shadow: 0 0 70px rgba(245, 158, 11, 0.95), inset -8px -8px 20px rgba(0,0,0,0.5); border: 4px solid #fffdf0; animation: pulseAura 4s infinite;">
-        🌱
+      <div style="position: relative; width: 135px; height: 135px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ffffff 0%, #fde047 30%, #f59e0b 70%, #d97706 100%); display: flex; align-items: center; justify-content: center; font-size: 4.8rem; box-shadow: 0 0 75px rgba(245, 158, 11, 0.95), inset -6px -6px 18px rgba(0,0,0,0.35); border: 4px solid #fffdf0; animation: pulseSolar 4s infinite;">
+        ☀️
         <span style="position: absolute; font-size: 1.9rem; animation: orbitPlanet 8s linear infinite;">🚀</span>
       </div>
     </div>
 
-    <!-- العنوان والشارة الفضائية المضيئة -->
+    <!-- العنوان والشارة الفلكية -->
     <div>
       <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 1.8rem; border-radius: 50px; background: rgba(255, 255, 255, 0.1); border: 1.5px solid rgba(251, 191, 36, 0.7); color: #fde047; font-size: 1rem; font-weight: bold; letter-spacing: 1px; backdrop-filter: blur(6px); box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);">
-        <span>🛸</span>
-        <span>رِحْلَةُ اسْتِكْشَافِ الصَّرْفِ وَالِاشْتِقَاقِ الفَضَائِيِّ</span>
+        <span>🚀</span>
+        <span>رِحْلَةُ الِاشْتِقَاقِ الصَّرْفِيِّ فِي فَضَاءِ اللُّغَةِ</span>
       </div>
       <h1 style="font-size: clamp(3rem, 6vw, 4.4rem); font-weight: 900; margin: 0.7rem 0 0.3rem 0; background: linear-gradient(180deg, #ffffff 15%, #fef08a 50%, #f59e0b 95%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 5px 25px rgba(245, 158, 11, 0.7)); letter-spacing: 1px;">
-        بَذْرَةُ الكَلِمَاتِ
+        شَمْسُ الكَلِمَاتِ
       </h1>
-      <!-- النص الترحيبي المدقق لغوياً مع زيادة الحجم والتباين -->
       <p style="color: #f1f5f9; font-size: clamp(1.1rem, 2.2vw, 1.35rem); font-weight: 600; margin: 0.4rem auto 0 auto; max-width: 720px; line-height: 1.8; text-shadow: 0 2px 12px rgba(0,0,0,0.9);">
         مَرْحَباً بِكَ يَا رَائِدَ اللُّغَةِ! هَيَّا نَنْطَلِقْ فِي رِحْلَةٍ كَوْنِيَّةٍ نَصْنَعُ فِيهَا المُشْتَقَّاتِ، نَجْتَازُ مَحَطَّاتِ الأَوْزَانِ، وَنَبْنِي رَوَائِعَ الكَلِمَاتِ.
       </p>
     </div>
 
-    <!-- بوابات المحطات الكونية الأربع مع تحسين وضوح وتباين الخطوط الفرعية -->
+    <!-- بوابات المحطات الكونية الأربع -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.1rem; width: 100%; max-width: 900px; margin-top: 0.4rem;">
       
       <div class="space-station-card" style="padding: 1.2rem 0.9rem; border-color: rgba(251, 191, 36, 0.6); box-shadow: 0 6px 22px rgba(251, 191, 36, 0.2);">
@@ -893,7 +892,7 @@
 
     </div>
 
-    <!-- زر منصة الإطلاق الكونية المتوهج -->
+    <!-- زر الانطلاق المتوهج -->
     <button onclick="startAdventure()" style="margin-top: 0.6rem; padding: 1.15rem 4.4rem; border-radius: 60px; background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%); border: 3.5px solid #fffdf0; color: #090a0f; font-size: 1.5rem; font-weight: 900; cursor: pointer; box-shadow: 0 0 45px rgba(245, 158, 11, 0.9), 0 15px 30px rgba(0, 0, 0, 0.6); display: inline-flex; align-items: center; gap: 1.1rem; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='scale(1.08) translateY(-4px)'; this.style.boxShadow='0 0 70px rgba(245, 158, 11, 1), 0 20px 40px rgba(0, 0, 0, 0.8)';" onmouseout="this.style.transform='scale(1) translateY(0)'; this.style.boxShadow='0 0 45px rgba(245, 158, 11, 0.9), 0 15px 30px rgba(0, 0, 0, 0.6)';">
       <span>انْطَلِقْ فِي الرِّحْلَةِ الكَوْنِيَّةِ</span>
       <span style="font-size: 2rem; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));">🚀</span>
@@ -4060,6 +4059,41 @@ function startAdventure() {
     setTimeout(() => {
       welcome.style.display = 'none';
     }, 700);
+  }
+}
+
+// دالة إظهار شاشة ختام الرحلة
+function showEndJourney() {
+  const endScreen = document.getElementById('endJourneyScreen');
+  if (endScreen) {
+    endScreen.style.display = 'flex';
+    endScreen.style.opacity = '0';
+    setTimeout(() => {
+      endScreen.style.opacity = '1';
+    }, 50);
+  }
+}
+
+// زر إعادة الجولة
+function restartAdventure() {
+  const endScreen = document.getElementById('endJourneyScreen');
+  if (endScreen) {
+    endScreen.style.opacity = '0';
+    setTimeout(() => {
+      endScreen.style.display = 'none';
+      location.reload();
+    }, 600);
+  }
+}
+
+// زر اختيار جذر آخر
+function closeEndScreen() {
+  const endScreen = document.getElementById('endJourneyScreen');
+  if (endScreen) {
+    endScreen.style.opacity = '0';
+    setTimeout(() => {
+      endScreen.style.display = 'none';
+    }, 600);
   }
 }
 </script>
