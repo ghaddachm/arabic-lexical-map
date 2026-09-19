@@ -4079,40 +4079,33 @@ function startAdventure() {
   }
 }
 
-// 🎵 تشغيل الموسيقى الخلفية وصوت التهنئة بالتزامن مع فك حظر المتصفح
+// 🎵 تشغيل صوت التتويج من مجلد audio
 function playVictorySound() {
-  const bgMusic = new Audio('victory.mp3');
-  const voice = new Audio('victory_voice.mp3');
+  const bgMusic = new Audio('audio/victory.mp3');
+  const voice = new Audio('audio/victory_voice.mp3');
 
-  bgMusic.volume = 0.35; // موسيقى تصويرية واضحة في الخلفية
-  voice.volume = 1.0;    // صوت التهنئة البشري بكامل الوضوح
+  bgMusic.volume = 0.35;
+  voice.volume = 1.0;
 
-  // محاولة تشغيل الموسيقى أولاً
-  const playMusicPromise = bgMusic.play();
+  // تشغيل الموسيقى الخلفية
+  bgMusic.play().then(() => {
+    // إطلاق صوت التهنئة بعد 400 جزء من الثانية
+    setTimeout(() => {
+      voice.play().catch(e => console.log('تعذر تشغيل الصوت تلقائياً:', e));
+    }, 400);
+  }).catch(e => {
+    console.log('حظر المتصفح التشغيل التلقائي للموسيقى:', e);
+    // تشغيل الصوت البشري مباشرة إذا حُظرت موسيقى الخلفية
+    voice.play().catch(err => console.log(err));
+  });
 
-  if (playMusicPromise !== undefined) {
-    playMusicPromise.then(() => {
-      // إطلاق التعليق الصوتي بعد 400 مللي ثانية من انطلاق الموسيقى
-      setTimeout(() => {
-        voice.play().catch(err => {
-          console.warn('تعذر تشغيل الصوت البشري تلقائياً:', err);
-        });
-      }, 400);
-    }).catch(err => {
-      console.warn('حظر المتصفح التشغيل التلقائي للموسيقى:', err);
-      // محاولة تشغيل الصوت البشري مباشرة إذا حُظرت الموسيقى
-      voice.play().catch(e => console.warn('تعذر التشغيل المباشر للصوت:', e));
-    });
-  }
-
-  // إيقاف موسيقى الخلفية تلقائياً عند انتهاء عبارة التهنئة
+  // إيقاف موسيقى الخلفية عند اكتمال عبارة التهنئة
   voice.onended = () => {
     setTimeout(() => {
       bgMusic.pause();
     }, 1000);
   };
 }
-
 // 🏆 دالة إظهار شاشة التتويج المتزامنة مع الصوت واسم الجذر
 function showEndJourney() {
   triggerEndJourney();
