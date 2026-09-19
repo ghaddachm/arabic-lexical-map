@@ -4116,11 +4116,79 @@ function toggleGuideModal() {
     function triggerEndJourney() {
   const end = document.getElementById('endJourneyScreen');
   if (end) {
+    // قراءة اسم الجذر الحالي تلقائياً من القائمة العلوية
+    const sel = document.getElementById('rootSelect');
+    const rootName = sel ? sel.options[sel.selectedIndex].text : '';
+    const desc = document.getElementById('endJourneyDesc');
+    if (desc && rootName) {
+      desc.innerHTML = `مُبَارَكٌ لَكَ! لَقَدْ أَتْقَنْتَ رِحْلَةَ الجَذْرِ <strong style="color:#fde047;">[ ${rootName} ]</strong> وَشَيَّدْتَ مَبَانِيَهُ الصَّرْفِيَّةَ بِنَجَاحٍ.`;
+    }
     end.style.display = 'flex';
     end.style.opacity = '1';
   }
 }
 </script>
+  <!-- 🏆 محطة تتويج الجذر الصرفي (رحلة الجذر المكتملة) -->
+<div id="endJourneyScreen" style="display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #0f172a 45%, #030712 100%); z-index: 9999999; align-items: center; justify-content: center; overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif; transition: opacity 0.5s ease;">
+
+  <!-- هالة احتفالية كونية -->
+  <div style="position: absolute; width: 650px; height: 650px; background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, rgba(168, 85, 247, 0.15) 50%, transparent 70%); filter: blur(70px); pointer-events: none;"></div>
+
+  <div style="position: relative; z-index: 10; width: 100%; max-width: 780px; padding: 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.2rem;">
+
+    <!-- الكأس الفضائي المتوهج -->
+    <div style="position: relative; width: 110px; height: 110px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff, #fde047 35%, #f59e0b 75%, #b45309 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; box-shadow: 0 0 50px rgba(245, 158, 11, 0.9); border: 4px solid #fffdf0;">
+      🏆
+    </div>
+
+    <!-- بطاقة التهنئة وتحديد الجذر المنجز -->
+    <div>
+      <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 1.6rem; border-radius: 50px; background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(251, 191, 36, 0.6); color: #fde047; font-size: 0.95rem; font-weight: bold;">
+        <span>🎖️</span>
+        <span>اكْتَمَلَتْ رِحْلَةُ هَذَا الجَذْرِ بِنَجَاحٍ بَاهِرٍ!</span>
+      </div>
+
+      <h1 style="font-size: 2.5rem; font-weight: 900; margin: 0.7rem 0 0.2rem 0; background: linear-gradient(180deg, #ffffff 15%, #fef08a 50%, #f59e0b 95%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 18px rgba(245, 158, 11, 0.6));">
+        وَسَامُ رَائِدِ الصَّرْفِ
+      </h1>
+      
+      <p id="endJourneyDesc" style="color: #cbd5e1; font-size: 1.15rem; font-weight: 500; max-width: 620px; line-height: 1.7; margin: 0.3rem auto;">
+        مُبَارَكٌ لَكَ! لَقَدْ أَتْقَنْتَ اشْتِقَاقَ صِيَغِ هَذَا الجَذْرِ وَأَحْيَيْتَ مَدَارَاتِهِ بِإِبْدَاعٍ.
+      </p>
+    </div>
+
+    <!-- ملخص إنجاز محطات الجذر -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; width: 100%; max-width: 600px;">
+      <div style="background: rgba(15, 23, 42, 0.75); border: 1.5px solid rgba(251, 191, 36, 0.5); border-radius: 16px; padding: 0.9rem; backdrop-filter: blur(8px);">
+        <div style="font-size: 1.6rem;">☀️</div>
+        <div style="font-size: 1.2rem; font-weight: 900; color: #fde047;">مُكْتَشَفٌ</div>
+        <div style="color: #94a3b8; font-size: 0.8rem; font-weight: 600;">نَوَاةُ الجَذْرِ</div>
+      </div>
+      <div style="background: rgba(15, 23, 42, 0.75); border: 1.5px solid rgba(56, 189, 248, 0.5); border-radius: 16px; padding: 0.9rem; backdrop-filter: blur(8px);">
+        <div style="font-size: 1.6rem;">⚙️</div>
+        <div style="font-size: 1.2rem; font-weight: 900; color: #7dd3fc;">مَصُوغَةٌ</div>
+        <div style="color: #94a3b8; font-size: 0.8rem; font-weight: 600;">صِيَغُ الأَوْزَانِ</div>
+      </div>
+      <div style="background: rgba(15, 23, 42, 0.75); border: 1.5px solid rgba(244, 63, 94, 0.5); border-radius: 16px; padding: 0.9rem; backdrop-filter: blur(8px);">
+        <div style="font-size: 1.6rem;">✍️</div>
+        <div style="font-size: 1.2rem; font-weight: 900; color: #fda4af;">مُكْتَمِلٌ</div>
+        <div style="color: #94a3b8; font-size: 0.8rem; font-weight: 600;">الإِنْتَاجُ اللُّغَوِيُّ</div>
+      </div>
+    </div>
+
+    <!-- أزرار المتابعة والانتقال -->
+    <div style="display: flex; gap: 1rem; margin-top: 0.6rem;">
+      <button onclick="document.getElementById('endJourneyScreen').style.display='none';" style="padding: 0.85rem 2.2rem; border-radius: 40px; background: linear-gradient(90deg, #f59e0b, #fbbf24); border: 2px solid #fffdf0; color: #090a0f; font-size: 1.1rem; font-weight: 900; cursor: pointer; box-shadow: 0 0 25px rgba(245, 158, 11, 0.7);">
+        <span>🔄 مُرَاجَعَةُ هَذَا الجَذْرِ</span>
+      </button>
+
+      <button onclick="document.getElementById('endJourneyScreen').style.display='none'; document.getElementById('rootSelect').focus();" style="padding: 0.85rem 2.2rem; border-radius: 40px; background: rgba(255, 255, 255, 0.1); border: 1.5px solid rgba(255, 255, 255, 0.3); color: #ffffff; font-size: 1.1rem; font-weight: 900; cursor: pointer;">
+        <span>🚀 انْطَلِقْ لِجَذْرٍ جَدِيدٍ</span>
+      </button>
+    </div>
+
+  </div>
+</div>
   <!-- 🧭 أزرار التوجيه الجانبية العائمة -->
 <div style="position: fixed; left: 16px; top: 50%; transform: translateY(-50%); z-index: 999999; display: flex; flex-direction: column; gap: 12px;">
   <button onclick="document.getElementById('welcomeScreen').style.display='flex'; document.getElementById('welcomeScreen').style.opacity='1';" title="شاشة البداية" style="width: 46px; height: 46px; border-radius: 50%; background: #0f172a; border: 2px solid #f59e0b; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
