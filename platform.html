@@ -4079,45 +4079,29 @@ function startAdventure() {
   }
 }
 
-// 🎵 توليد المؤثر الصوتي الاحتفالي الفضائي مع ضمان فك حظر المتصفح
+// 🎵 تشغيل الموسيقى الخلفية وصوت التهنئة بالتزامن
 function playVictorySound() {
-  try {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContext) return;
-    const audioCtx = new AudioContext();
+  // 1. تشغيل موسيقى الاحتفال في الخلفية بصوت هادئ ومناسب
+  const bgMusic = new Audio('victory.mp3');
+  bgMusic.volume = 0.3; // خفض الموسيقى لتكون خلفية رقيقة
+  bgMusic.play().catch(e => console.log(e));
 
-    // فك تعليق الصوت فوراً إذا كان المتصفح يحظره
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
+  // 2. تشغيل صوت التهنئة بوضوح تام
+  const voice = new Audio('victory_voice.mp3');
+  voice.volume = 1.0; // صوت التهنئة مرتفع وواضح
+  
+  // تشغيل الصوت بعد 300 جزء من الثانية لتبدأ الموسيقى أولاً
+  setTimeout(() => {
+    voice.play().catch(e => console.log(e));
+  }, 300);
 
-    // سلم نغمات تصاعدي احتفالي وفضائي
-    const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
-
-    notes.forEach((freq, index) => {
-      const startTime = audioCtx.currentTime + (index * 0.11);
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-
-      // موجة صوتية رنانة وواضحة
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(freq, startTime);
-
-      // مستوى صوت واضح مع تلاشٍ ناعم
-      gain.gain.setValueAtTime(0.3, startTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.4);
-
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      osc.start(startTime);
-      osc.stop(startTime + 0.4);
-    });
-  } catch (e) {
-    console.error("Audio error:", e);
-  }
+  // إيقاف الموسيقى تلقائياً بنعومة عند نهاية الكلام
+  voice.onended = () => {
+    setTimeout(() => {
+      bgMusic.pause();
+    }, 800);
+  };
 }
-
 // 🏆 دالة إظهار شاشة التتويج المتزامنة مع الصوت واسم الجذر
 function showEndJourney() {
   triggerEndJourney();
