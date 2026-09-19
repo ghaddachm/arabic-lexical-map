@@ -2932,7 +2932,19 @@ function advanceStepInRound(labs) {
     if (interactionArea) {
       interactionArea.style.pointerEvents = 'auto';
     }
+// ⭐ إضافة 15 نجمة إلى رصيد المتعلم وتحديث الشارة
+    let starsBadge = document.getElementById('starsScore');
+    if (starsBadge) {
+      let currentVal = parseInt(starsBadge.innerText) || 0;
+      starsBadge.innerText = currentVal + 15;
+    }
 
+    // 🏆 إظهار شاشة التتويج الاحتفالية تلقائياً بالتزامن مع نهاية الجولة
+    setTimeout(() => {
+      if (typeof triggerEndJourney === 'function') {
+        triggerEndJourney();
+      }
+    }, 1200);
     // 2. تشغيل صوت التعزيز
     const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
     if (typeof Sound !== "undefined" && Sound.playAsset) {
@@ -4020,7 +4032,12 @@ function renderFreeSentenceChallenge() {
         input.style.borderColor = '#22c55e';
         input.style.color = '#4ade80';
         playQuickBeep();
-
+// ⭐ إضافة 5 نجوم لرصيد الإنتاج الحر وتحديث الشارة العلوية
+    const starsBadge = document.getElementById('starsScore');
+    if (starsBadge) {
+      const currentScore = parseInt(starsBadge.innerText) || 0;
+      starsBadge.innerText = currentScore + 5;
+    }
         toast.style.color = '#4ade80';
         toast.textContent = "✨ مُمْتَازٌ! صِيغَةٌ صَرْفِيَّةٌ صَحِيحَةٌ عَنْ جَدَارَةٍ!";
 
@@ -4062,15 +4079,51 @@ function startAdventure() {
   }
 }
 
-// دالة إظهار شاشة ختام الرحلة
+// 🎵 توليد مؤثر صوتي احتفالي وفضائي
+function playVictorySound() {
+  try {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99]; // معزوفة نصر تصاعدية
+    notes.forEach((freq, index) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.12);
+      gain.gain.setValueAtTime(0.18, audioCtx.currentTime + index * 0.12);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.12 + 0.35);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(audioCtx.currentTime + index * 0.12);
+      osc.stop(audioCtx.currentTime + index * 0.12 + 0.35);
+    });
+  } catch (e) {
+    console.log("Audio play blocked or not supported");
+  }
+}
+
+// 🏆 دالة إظهار شاشة التتويج المتزامنة مع الصوت واسم الجذر
 function showEndJourney() {
+  triggerEndJourney();
+}
+
+function triggerEndJourney() {
   const endScreen = document.getElementById('endJourneyScreen');
   if (endScreen) {
+    // قراءة اسم الجذر الحالي تلقائياً لعرضه في وسام الإنجاز
+    const sel = document.getElementById('rootSelect');
+    const rootName = sel ? sel.options[sel.selectedIndex].text : '';
+    const desc = document.getElementById('endJourneyDesc');
+    if (desc && rootName) {
+      desc.innerHTML = `مُبَارَكٌ لَكَ! لَقَدْ أَتْقَنْتَ رِحْلَةَ الجَذْرِ <strong style="color:#fde047;">[ ${rootName} ]</strong> وَشَيَّدْتَ مَبَانِيَهُ الصَّرْفِيَّةَ بِنَجَاحٍ.`;
+    }
+
     endScreen.style.display = 'flex';
     endScreen.style.opacity = '0';
     setTimeout(() => {
       endScreen.style.opacity = '1';
     }, 50);
+
+    playVictorySound(); // إطلاق النغمة الاحتفالية
   }
 }
 
@@ -4128,101 +4181,125 @@ function toggleGuideModal() {
   }
 }
 </script>
-  <!-- 🏆 محطة تتويج الجذر الصرفي (رحلة الجذر المكتملة) -->
-<div id="endJourneyScreen" style="display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #0f172a 45%, #030712 100%); z-index: 9999999; align-items: center; justify-content: center; overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif; transition: opacity 0.5s ease;">
+ <!-- 🏆 محطة تتويج الجذر الصرفي الاحتفالية الكونية -->
+  <div id="endJourneyScreen" style="display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #0b0f19 50%, #030712 100%); z-index: 9999999; align-items: center; justify-content: center; overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif; transition: opacity 0.6s ease;">
 
-  <!-- هالة احتفالية كونية -->
-  <div style="position: absolute; width: 650px; height: 650px; background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, rgba(168, 85, 247, 0.15) 50%, transparent 70%); filter: blur(70px); pointer-events: none;"></div>
+    <style>
+      @keyframes victoryPulse {
+        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 35px #f59e0b); }
+        50% { transform: scale(1.08); filter: drop-shadow(0 0 60px #fbbf24); }
+      }
+      @keyframes floatCosmicDecor {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-14px) rotate(6deg); }
+      }
+    </style>
 
-  <div style="position: relative; z-index: 10; width: 100%; max-width: 780px; padding: 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.2rem;">
+    <!-- سدم وهالات ضوئية احتفالية -->
+    <div style="position: absolute; width: 720px; height: 720px; background: radial-gradient(circle, rgba(245, 158, 11, 0.28) 0%, rgba(168, 85, 247, 0.2) 40%, transparent 70%); filter: blur(75px); pointer-events: none;"></div>
 
-    <!-- الكأس الفضائي المتوهج -->
-    <div style="position: relative; width: 110px; height: 110px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff, #fde047 35%, #f59e0b 75%, #b45309 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; box-shadow: 0 0 50px rgba(245, 158, 11, 0.9); border: 4px solid #fffdf0;">
-      🏆
-    </div>
+    <!-- رسومات وعناصر فضائية متحركة في الأرجاء -->
+    <div style="position: absolute; top: 12%; left: 10%; font-size: 3.6rem; animation: floatCosmicDecor 6s ease-in-out infinite; pointer-events: none;">🛸</div>
+    <div style="position: absolute; top: 14%; right: 12%; font-size: 3.8rem; animation: floatCosmicDecor 7s ease-in-out infinite 1s; pointer-events: none;">🪐</div>
+    <div style="position: absolute; bottom: 14%; left: 12%; font-size: 3.6rem; animation: floatCosmicDecor 5s ease-in-out infinite 0.5s; pointer-events: none;">👨‍🚀</div>
+    <div style="position: absolute; bottom: 12%; right: 10%; font-size: 3.3rem; animation: floatCosmicDecor 6.5s ease-in-out infinite 1.5s; pointer-events: none;">🚀</div>
 
-    <!-- بطاقة التهنئة وتحديد الجذر المنجز -->
-    <div>
-      <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 1.6rem; border-radius: 50px; background: rgba(255, 255, 255, 0.08); border: 1.5px solid rgba(251, 191, 36, 0.6); color: #fde047; font-size: 0.95rem; font-weight: bold;">
-        <span>🎖️</span>
-        <span>اكْتَمَلَتْ رِحْلَةُ هَذَا الجَذْرِ بِنَجَاحٍ بَاهِرٍ!</span>
+    <!-- نجوم وبريق احتفالي متلألئ -->
+    <div style="position: absolute; top: 26%; left: 22%; font-size: 1.8rem; color: #fde047; pointer-events: none;">✨</div>
+    <div style="position: absolute; top: 28%; right: 24%; font-size: 2rem; color: #38bdf8; pointer-events: none;">⭐</div>
+    <div style="position: absolute; bottom: 32%; left: 24%; font-size: 1.7rem; color: #f472b6; pointer-events: none;">✦</div>
+    <div style="position: absolute; bottom: 26%; right: 22%; font-size: 2rem; color: #fde047; pointer-events: none;">✨</div>
+
+    <div style="position: relative; z-index: 10; width: 100%; max-width: 780px; padding: 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.2rem;">
+
+      <!-- الكأس الفضائي المتوهج مع النبض الاحتفالي -->
+      <div style="position: relative; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff, #fde047 35%, #f59e0b 75%, #b45309 100%); display: flex; align-items: center; justify-content: center; font-size: 4.2rem; box-shadow: 0 0 60px rgba(245, 158, 11, 0.95); border: 4px solid #fffdf0; animation: victoryPulse 3s infinite;">
+        🏆
       </div>
 
-      <h1 style="font-size: 2.5rem; font-weight: 900; margin: 0.7rem 0 0.2rem 0; background: linear-gradient(180deg, #ffffff 15%, #fef08a 50%, #f59e0b 95%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 18px rgba(245, 158, 11, 0.6));">
-        وَسَامُ رَائِدِ الصَّرْفِ
-      </h1>
-      
-      <p id="endJourneyDesc" style="color: #cbd5e1; font-size: 1.15rem; font-weight: 500; max-width: 620px; line-height: 1.7; margin: 0.3rem auto;">
-        مُبَارَكٌ لَكَ! لَقَدْ أَتْقَنْتَ اشْتِقَاقَ صِيَغِ هَذَا الجَذْرِ وَأَحْيَيْتَ مَدَارَاتِهِ بِإِبْدَاعٍ.
-      </p>
-    </div>
+      <!-- بطاقة التهنئة وتحديد الجذر المنجز -->
+      <div>
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1.8rem; border-radius: 50px; background: rgba(255, 255, 255, 0.1); border: 1.5px solid rgba(251, 191, 36, 0.7); color: #fde047; font-size: 1rem; font-weight: bold; box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);">
+          <span>🎖️</span>
+          <span>اكْتَمَلَتْ رِحْلَةُ هَذَا الجَذْرِ بِنَجَاحٍ بَاهِرٍ!</span>
+        </div>
 
-    <!-- ملخص إنجاز محطات الجذر -->
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; width: 100%; max-width: 600px;">
-      <div style="background: rgba(15, 23, 42, 0.75); border: 1.5px solid rgba(251, 191, 36, 0.5); border-radius: 16px; padding: 0.9rem; backdrop-filter: blur(8px);">
-        <div style="font-size: 1.6rem;">☀️</div>
-        <div style="font-size: 1.2rem; font-weight: 900; color: #fde047;">مُكْتَشَفٌ</div>
-        <div style="color: #94a3b8; font-size: 0.8rem; font-weight: 600;">نَوَاةُ الجَذْرِ</div>
+        <h1 style="font-size: 2.8rem; font-weight: 900; margin: 0.6rem 0 0.2rem 0; background: linear-gradient(180deg, #ffffff 15%, #fef08a 50%, #f59e0b 95%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 20px rgba(245, 158, 11, 0.7));">
+          وَسَامُ رَائِدِ الصَّرْفِ
+        </h1>
+        
+        <p id="endJourneyDesc" style="color: #e2e8f0; font-size: 1.2rem; font-weight: 600; max-width: 620px; line-height: 1.8; margin: 0.3rem auto; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
+          مُبَارَكٌ لَكَ! لَقَدْ أَتْقَنْتَ اشْتِقَاقَ صِيَغِ هَذَا الجَذْرِ وَأَحْيَيْتَ مَدَارَاتِهِ بِإِبْدَاعٍ.
+        </p>
       </div>
-      <div style="background: rgba(15, 23, 42, 0.75); border: 1.5px solid rgba(56, 189, 248, 0.5); border-radius: 16px; padding: 0.9rem; backdrop-filter: blur(8px);">
-        <div style="font-size: 1.6rem;">⚙️</div>
-        <div style="font-size: 1.2rem; font-weight: 900; color: #7dd3fc;">مَصُوغَةٌ</div>
-        <div style="color: #94a3b8; font-size: 0.8rem; font-weight: 600;">صِيَغُ الأَوْزَانِ</div>
+
+      <!-- ملخص إنجاز محطات الجذر -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; width: 100%; max-width: 620px;">
+        <div style="background: rgba(15, 23, 42, 0.85); border: 2px solid rgba(251, 191, 36, 0.6); border-radius: 18px; padding: 1rem; backdrop-filter: blur(10px); box-shadow: 0 6px 20px rgba(251, 191, 36, 0.2);">
+          <div style="font-size: 1.8rem;">☀️</div>
+          <div style="font-size: 1.25rem; font-weight: 900; color: #fde047;">مُكْتَشَفٌ</div>
+          <div style="color: #94a3b8; font-size: 0.85rem; font-weight: 600;">نَوَاةُ الجَذْرِ</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.85); border: 2px solid rgba(56, 189, 248, 0.6); border-radius: 18px; padding: 1rem; backdrop-filter: blur(10px); box-shadow: 0 6px 20px rgba(56, 189, 248, 0.2);">
+          <div style="font-size: 1.8rem;">⚙️</div>
+          <div style="font-size: 1.25rem; font-weight: 900; color: #7dd3fc;">مَصُوغَةٌ</div>
+          <div style="color: #94a3b8; font-size: 0.85rem; font-weight: 600;">صِيَغُ الأَوْزَانِ</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.85); border: 2px solid rgba(244, 63, 94, 0.6); border-radius: 18px; padding: 1rem; backdrop-filter: blur(10px); box-shadow: 0 6px 20px rgba(244, 63, 94, 0.2);">
+          <div style="font-size: 1.8rem;">✍️</div>
+          <div style="font-size: 1.25rem; font-weight: 900; color: #fda4af;">مُكْتَمِلٌ</div>
+          <div style="color: #94a3b8; font-size: 0.85rem; font-weight: 600;">الإِنْتَاجُ اللُّغَوِيُّ</div>
+        </div>
       </div>
-      <div style="background: rgba(15, 23, 42, 0.75); border: 1.5px solid rgba(244, 63, 94, 0.5); border-radius: 16px; padding: 0.9rem; backdrop-filter: blur(8px);">
-        <div style="font-size: 1.6rem;">✍️</div>
-        <div style="font-size: 1.2rem; font-weight: 900; color: #fda4af;">مُكْتَمِلٌ</div>
-        <div style="color: #94a3b8; font-size: 0.8rem; font-weight: 600;">الإِنْتَاجُ اللُّغَوِيُّ</div>
+
+      <!-- أزرار المتابعة والانتقال -->
+      <div style="display: flex; gap: 1rem; margin-top: 0.6rem;">
+        <button onclick="document.getElementById('endJourneyScreen').style.display='none';" style="padding: 0.9rem 2.4rem; border-radius: 40px; background: linear-gradient(90deg, #f59e0b, #fbbf24); border: 2.5px solid #fffdf0; color: #090a0f; font-size: 1.15rem; font-weight: 900; cursor: pointer; box-shadow: 0 0 30px rgba(245, 158, 11, 0.8);">
+          <span>🔄 مُرَاجَعَةُ هَذَا الجَذْرِ</span>
+        </button>
+
+        <button onclick="document.getElementById('endJourneyScreen').style.display='none'; document.getElementById('rootSelect').focus();" style="padding: 0.9rem 2.4rem; border-radius: 40px; background: rgba(255, 255, 255, 0.12); border: 2px solid rgba(255, 255, 255, 0.4); color: #ffffff; font-size: 1.15rem; font-weight: 900; cursor: pointer; backdrop-filter: blur(8px);">
+          <span>🚀 انْطَلِقْ لِجَذْرٍ جَدِيدٍ</span>
+        </button>
       </div>
+
     </div>
-
-    <!-- أزرار المتابعة والانتقال -->
-    <div style="display: flex; gap: 1rem; margin-top: 0.6rem;">
-      <button onclick="document.getElementById('endJourneyScreen').style.display='none';" style="padding: 0.85rem 2.2rem; border-radius: 40px; background: linear-gradient(90deg, #f59e0b, #fbbf24); border: 2px solid #fffdf0; color: #090a0f; font-size: 1.1rem; font-weight: 900; cursor: pointer; box-shadow: 0 0 25px rgba(245, 158, 11, 0.7);">
-        <span>🔄 مُرَاجَعَةُ هَذَا الجَذْرِ</span>
-      </button>
-
-      <button onclick="document.getElementById('endJourneyScreen').style.display='none'; document.getElementById('rootSelect').focus();" style="padding: 0.85rem 2.2rem; border-radius: 40px; background: rgba(255, 255, 255, 0.1); border: 1.5px solid rgba(255, 255, 255, 0.3); color: #ffffff; font-size: 1.1rem; font-weight: 900; cursor: pointer;">
-        <span>🚀 انْطَلِقْ لِجَذْرٍ جَدِيدٍ</span>
-      </button>
-    </div>
-
   </div>
-</div>
+
   <!-- 🧭 أزرار التوجيه الجانبية العائمة -->
-<div style="position: fixed; left: 16px; top: 50%; transform: translateY(-50%); z-index: 999999; display: flex; flex-direction: column; gap: 12px;">
-  <button onclick="document.getElementById('welcomeScreen').style.display='flex'; document.getElementById('welcomeScreen').style.opacity='1';" title="شاشة البداية" style="width: 46px; height: 46px; border-radius: 50%; background: #0f172a; border: 2px solid #f59e0b; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-    🚀
-  </button>
+  <div style="position: fixed; left: 16px; top: 50%; transform: translateY(-50%); z-index: 999999; display: flex; flex-direction: column; gap: 12px;">
+    <button onclick="document.getElementById('welcomeScreen').style.display='flex'; document.getElementById('welcomeScreen').style.opacity='1';" title="شاشة البداية" style="width: 46px; height: 46px; border-radius: 50%; background: #0f172a; border: 2px solid #f59e0b; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+      🚀
+    </button>
 
-  <button onclick="document.getElementById('guideModalBox').style.display='flex';" title="دليل التوجيه" style="width: 46px; height: 46px; border-radius: 50%; background: #0f172a; border: 2px solid #38bdf8; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-    🧭
-  </button>
+    <button onclick="document.getElementById('guideModalBox').style.display='flex';" title="دليل التوجيه" style="width: 46px; height: 46px; border-radius: 50%; background: #0f172a; border: 2px solid #38bdf8; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+      🧭
+    </button>
 
-  <button onclick="triggerEndJourney();" title="وسام ختام الرحلة" style="width: 46px; height: 46px; border-radius: 50%; background: #0f172a; border: 2px solid #ec4899; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-    🏆
-  </button>
-</div>
-
-<!-- 💡 نافذة دليل التوجيه الإرشادي المستقلة -->
-<div id="guideModalBox" style="display: none; position: fixed; inset: 0; background: rgba(3, 7, 18, 0.85); backdrop-filter: blur(8px); z-index: 9999999; align-items: center; justify-content: center; padding: 1.5rem;">
-  <div style="background: #0f172a; border: 2px solid #38bdf8; border-radius: 22px; max-width: 520px; width: 90%; padding: 1.8rem; color: #fff; text-align: right; box-shadow: 0 0 35px rgba(56, 189, 248, 0.35);">
-    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.6rem; margin-bottom: 1.2rem;">
-      <h3 style="margin: 0; color: #38bdf8; font-size: 1.3rem;">🧭 خَارِطَةُ المَسَارِ الصَّرْفِيِّ</h3>
-      <button onclick="document.getElementById('guideModalBox').style.display='none';" style="background: none; border: none; color: #94a3b8; font-size: 1.5rem; cursor: pointer;">✕</button>
-    </div>
-    
-    <div style="display: flex; flex-direction: column; gap: 0.9rem; font-size: 0.95rem; line-height: 1.7; color: #cbd5e1;">
-      <div>☀️ <strong style="color: #fde047;">1. شَمْسُ الجَذْرِ:</strong> اكْتَشِفْ نَوَاةَ المَعْنَى وَالمُشْتَقَّاتِ الَّتِي تَدُورُ حَوْلَهَا.</div>
-      <div>⚙️ <strong style="color: #7dd3fc;">2. أَقْرَاصُ التَّرْكِيبِ:</strong> قُمْ بِتَرْكِيبِ حُرُوفِ الجَذْرِ عَلَى مِيزَانِ الصَّرْفِ.</div>
-      <div>🚀 <strong style="color: #d8b4fe;">3. مَرْكَبَةُ الصَّرْفِ:</strong> اخْتَبِرْ سُرْعَتَكَ فِي تَحَدِّيَاتِ الأَوْزَانِ الفَضَائِيَّةِ.</div>
-      <div>✍️ <strong style="color: #fda4af;">4. الإِنْتَاجُ الحُرُّ:</strong> شَيِّدْ جُمَلاً مُفِيدَةً بِالمُشْتَقَّاتِ الَّتِي بَنَيْتَهَا.</div>
-    </div>
-
-    <button onclick="document.getElementById('guideModalBox').style.display='none';" style="margin-top: 1.4rem; width: 100%; padding: 0.75rem; border-radius: 40px; background: #38bdf8; border: none; color: #0f172a; font-weight: 900; font-size: 1.05rem; cursor: pointer;">
-      مُوَافِقْ، لِنُوَاصِلِ الرِّحْلَةَ!
+    <button onclick="triggerEndJourney();" title="وسام ختام الرحلة" style="width: 46px; height: 46px; border-radius: 50%; background: #0f172a; border: 2px solid #ec4899; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+      🏆
     </button>
   </div>
-</div>
+
+  <!-- 💡 نافذة دليل التوجيه الإرشادي المستقلة -->
+  <div id="guideModalBox" style="display: none; position: fixed; inset: 0; background: rgba(3, 7, 18, 0.85); backdrop-filter: blur(8px); z-index: 9999999; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background: #0f172a; border: 2px solid #38bdf8; border-radius: 22px; max-width: 520px; width: 90%; padding: 1.8rem; color: #fff; text-align: right; box-shadow: 0 0 35px rgba(56, 189, 248, 0.35);">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.6rem; margin-bottom: 1.2rem;">
+        <h3 style="margin: 0; color: #38bdf8; font-size: 1.3rem;">🧭 خَارِطَةُ المَسَارِ الصَّرْفِيِّ</h3>
+        <button onclick="document.getElementById('guideModalBox').style.display='none';" style="background: none; border: none; color: #94a3b8; font-size: 1.5rem; cursor: pointer;">✕</button>
+      </div>
+      
+      <div style="display: flex; flex-direction: column; gap: 0.9rem; font-size: 0.95rem; line-height: 1.7; color: #cbd5e1;">
+        <div>☀️ <strong style="color: #fde047;">1. شَمْسُ الجَذْرِ:</strong> اكْتَشِفْ نَوَاةَ المَعْنَى وَالمُشْتَقَّاتِ الَّتِي تَدُورُ حَوْلَهَا.</div>
+        <div>⚙️ <strong style="color: #7dd3fc;">2. أَقْرَاصُ التَّرْكِيبِ:</strong> قُمْ بِتَرْكِيبِ حُرُوفِ الجَذْرِ عَلَى مِيزَانِ الصَّرْفِ.</div>
+        <div>🚀 <strong style="color: #d8b4fe;">3. مَرْكَبَةُ الصَّرْفِ:</strong> اخْتَبِرْ سُرْعَتَكَ فِي تَحَدِّيَاتِ الأَوْزَانِ الفَضَائِيَّةِ.</div>
+        <div>✍️ <strong style="color: #fda4af;">4. الإِنْتَاجُ الحُرُّ:</strong> شَيِّدْ جُمَلاً مُفِيدَةً بِالمُشْتَقَّاتِ الَّتِي بَنَيْتَهَا.</div>
+      </div>
+
+      <button onclick="document.getElementById('guideModalBox').style.display='none';" style="margin-top: 1.4rem; width: 100%; padding: 0.75rem; border-radius: 40px; background: #38bdf8; border: none; color: #0f172a; font-weight: 900; font-size: 1.05rem; cursor: pointer;">
+        مُوَافِقْ، لِنُوَاصِلِ الرِّحْلَةَ!
+      </button>
+    </div>
+  </div>
 </body>
 </html>
