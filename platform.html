@@ -904,10 +904,10 @@
 
   <header>
     <div class="brand-box">
-      <div style="font-size: 2.2rem;">🪐</div>
+      <div style="font-size: 2.2rem; filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.8));">☀️</div>
       <div class="brand-texts">
-        <h1>بَذْرَةُ الكَلِمَاتِ ☀️</h1>
-        <p>مَجَرَّةُ الحُرُوفِ وَالمُعْجَمِ الفَضَائِيِّ</p>
+        <h1 style="color: #fde047; font-weight: 900; margin: 0;">شَمْسُ الكَلِمَاتِ 🚀</h1>
+        <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">رِحْلَةُ الِاشْتِقَاقِ الصَّرْفِيِّ</p>
       </div>
     </div>
 
@@ -942,7 +942,64 @@
       <span id="starsScore">0</span>
     </div>
   </header>
+</header>
 
+<!-- 🧭 لوحة التوجيه والتحكم الجانبية العائمة -->
+<div id="quickGuideNav" style="position: fixed; left: 18px; top: 50%; transform: translateY(-50%); z-index: 9999; display: flex; flex-direction: column; gap: 10px;">
+  
+  <!-- زر العودة للبداية -->
+  <button onclick="openWelcomeScreen()" title="شاشة الانطلاق" style="width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #1e293b, #0f172a); border: 2px solid #f59e0b; color: #fde047; font-size: 1.4rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.transform='scale(1.15)';" onmouseout="this.style.transform='scale(1)';">
+    🚀
+  </button>
+
+  <!-- زر دليل التوجيه والتعليمات -->
+  <button onclick="toggleGuideModal()" title="دليل رائد الصرف" style="width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #1e293b, #0f172a); border: 2px solid #38bdf8; color: #38bdf8; font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.transform='scale(1.15)';" onmouseout="this.style.transform='scale(1)';">
+    🧭
+  </button>
+
+  <!-- زر الاطلاع على شاشة النهاية والتتويج -->
+  <button onclick="showEndJourney()" title="وسام ختام الرحلة" style="width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #1e293b, #0f172a); border: 2px solid #ec4899; color: #ec4899; font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.transform='scale(1.15)';" onmouseout="this.style.transform='scale(1)';">
+    🏆
+  </button>
+
+</div>
+
+<!-- 💡 نافذة التوجيه الإرشادي للمتعلم -->
+<div id="guideModal" style="display: none; position: fixed; inset: 0; background: rgba(3, 7, 18, 0.85); backdrop-filter: blur(8px); z-index: 999999; align-items: center; justify-content: center; padding: 1.5rem;">
+  <div style="background: linear-gradient(145deg, #1e293b, #0f172a); border: 2px solid #38bdf8; border-radius: 24px; max-width: 600px; width: 100%; padding: 2rem; color: #fff; text-align: right; box-shadow: 0 0 40px rgba(56, 189, 248, 0.3);">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
+      <h2 style="margin: 0; color: #38bdf8; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+        <span>🧭</span><span>خَارِطَةُ التَّوْجِيهِ لِرَائِدِ اللُّغَةِ</span>
+      </h2>
+      <button onclick="toggleGuideModal()" style="background: none; border: none; color: #94a3b8; font-size: 1.6rem; cursor: pointer;">✕</button>
+    </div>
+    
+    <div style="display: flex; flex-direction: column; gap: 1rem; font-size: 0.95rem; line-height: 1.7; color: #e2e8f0;">
+      <div style="display: flex; align-items: center; gap: 0.8rem;">
+        <span style="font-size: 1.5rem;">☀️</span>
+        <div><strong style="color: #fde047;">1. شَمْسُ الجَذْرِ:</strong> تَعَرَّفْ عَلَى مَعْنَى الجَذْرِ الأَصِيلِ وَالمُشْتَقَّاتِ الَّتِي تَدُورُ فِي مَدَارِهِ.</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.8rem;">
+        <span style="font-size: 1.5rem;">⚙️</span>
+        <div><strong style="color: #7dd3fc;">2. أَقْرَاصُ التَّرْكِيبِ:</strong> قُمْ بِتَرْكِيبِ حُرُوفِ الجَذْرِ عَلَى مِيزَانِ الصَّرْفِ لِصِيَاغَةِ الكَلِمَةِ.</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.8rem;">
+        <span style="font-size: 1.5rem;">🚀</span>
+        <div><strong style="color: #d8b4fe;">3. مَرْكَبَةُ الصَّرْفِ:</strong> اجْتَزْ مَحَطَّاتِ القِيَاسِ وَاخْتَبِرْ سُرْعَتَكَ فِي تَحَدِّي الأَوْزَانِ.</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.8rem;">
+        <span style="font-size: 1.5rem;">✍️</span>
+        <div><strong style="color: #fda4af;">4. الإِنْتَاجُ الحُرُّ:</strong> شَيِّدْ جُمَلاً مُفِيدَةً تُوَظِّفُ فِيهَا المُشْتَقَّاتِ الَّتِي بَنَيْتَهَا.</div>
+      </div>
+    </div>
+
+    <button onclick="toggleGuideModal()" style="margin-top: 1.5rem; width: 100%; padding: 0.8rem; border-radius: 50px; background: #38bdf8; border: none; color: #0f172a; font-weight: 900; font-size: 1.1rem; cursor: pointer;">
+      فَهِمْتُ المَسَارَ، لِنُوَاصِلِ الرِّحْلَةَ!
+    </button>
+  </div>
+</div>
+
+<nav class="nav-tabs-container">
   <nav class="nav-tabs-container">
     <button class="tab-pill active" onclick="switchMainTab('radialMap', this)">☀️ شَمْسُ الجَذْرِ</button>
     <button class="tab-pill" onclick="switchMainTab('storyTab', this)">📖 سَحَابَةُ الحِكَايَةِ</button>
@@ -4094,6 +4151,23 @@ function closeEndScreen() {
     setTimeout(() => {
       endScreen.style.display = 'none';
     }, 600);
+  }
+}
+    // فتح شاشة البداية
+function openWelcomeScreen() {
+  const welcome = document.getElementById('welcomeScreen');
+  if (welcome) {
+    welcome.style.display = 'flex';
+    welcome.style.opacity = '1';
+    welcome.style.transform = 'scale(1)';
+  }
+}
+
+// فتح وإغلاق نافذة التوجيه
+function toggleGuideModal() {
+  const modal = document.getElementById('guideModal');
+  if (modal) {
+    modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
   }
 }
 </script>
