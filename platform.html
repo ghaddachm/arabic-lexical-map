@@ -4079,33 +4079,34 @@ function startAdventure() {
   }
 }
 
-// 🎵 تشغيل صوت التتويج من مجلد audio
+// 🎵 تشغيل صوت التتويج والموسيقى بالتزامن المضمون
 function playVictorySound() {
-  const bgMusic = new Audio('audio/victory.mp3');
-  const voice = new Audio('audio/victory_voice.mp3');
+  try {
+    const bgMusic = new Audio('audio/victory.mp3');
+    const voice = new Audio('audio/victory_voice.mp3');
 
-  bgMusic.volume = 0.35;
-  voice.volume = 1.0;
+    bgMusic.volume = 0.25; // موسيقى تصويرية هادئة في الخلفية
+    voice.volume = 1.0;    // صوت التهنئة البشري واضح بالكامل
 
-  // تشغيل الموسيقى الخلفية
-  bgMusic.play().then(() => {
-    // إطلاق صوت التهنئة بعد 400 جزء من الثانية
+    // 1. تشغيل الموسيقى الاحتفالية
+    bgMusic.play().catch(e => console.log('Music play error:', e));
+
+    // 2. إطلاق التهنئة البشرية بعد 400 جزء من الثانية
     setTimeout(() => {
-      voice.play().catch(e => console.log('تعذر تشغيل الصوت تلقائياً:', e));
+      voice.play().catch(e => console.log('Voice play error:', e));
     }, 400);
-  }).catch(e => {
-    console.log('حظر المتصفح التشغيل التلقائي للموسيقى:', e);
-    // تشغيل الصوت البشري مباشرة إذا حُظرت موسيقى الخلفية
-    voice.play().catch(err => console.log(err));
-  });
 
-  // إيقاف موسيقى الخلفية عند اكتمال عبارة التهنئة
-  voice.onended = () => {
-    setTimeout(() => {
-      bgMusic.pause();
-    }, 1000);
-  };
+    // 3. إيقاف الموسيقى تلقائياً فور انتهاء صوت التهنئة
+    voice.onended = () => {
+      setTimeout(() => {
+        bgMusic.pause();
+      }, 1000);
+    };
+  } catch (err) {
+    console.error('Audio execution failed:', err);
+  }
 }
+
 // 🏆 دالة إظهار شاشة التتويج المتزامنة مع الصوت واسم الجذر
 function showEndJourney() {
   triggerEndJourney();
@@ -4128,7 +4129,8 @@ function triggerEndJourney() {
       endScreen.style.opacity = '1';
     }, 50);
 
-    playVictorySound(); // إطلاق النغمة والصوت الاحتفالي
+    // تشغيل المنظومة الصوتية الاحتفالية المزدوجة
+    playVictorySound();
   }
 }
 
@@ -4154,7 +4156,8 @@ function closeEndScreen() {
     }, 600);
   }
 }
-    // فتح شاشة البداية
+
+// فتح شاشة البداية
 function openWelcomeScreen() {
   const welcome = document.getElementById('welcomeScreen');
   if (welcome) {
@@ -4166,27 +4169,14 @@ function openWelcomeScreen() {
 
 // فتح وإغلاق نافذة التوجيه
 function toggleGuideModal() {
-  const modal = document.getElementById('guideModal');
+  const modal = document.getElementById('guideModalBox');
   if (modal) {
     modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
   }
 }
-    function triggerEndJourney() {
-  const end = document.getElementById('endJourneyScreen');
-  if (end) {
-    // قراءة اسم الجذر الحالي تلقائياً من القائمة العلوية
-    const sel = document.getElementById('rootSelect');
-    const rootName = sel ? sel.options[sel.selectedIndex].text : '';
-    const desc = document.getElementById('endJourneyDesc');
-    if (desc && rootName) {
-      desc.innerHTML = `مُبَارَكٌ لَكَ! لَقَدْ أَتْقَنْتَ رِحْلَةَ الجَذْرِ <strong style="color:#fde047;">[ ${rootName} ]</strong> وَشَيَّدْتَ مَبَانِيَهُ الصَّرْفِيَّةَ بِنَجَاحٍ.`;
-    }
-    end.style.display = 'flex';
-    end.style.opacity = '1';
-  }
-}
 </script>
- <!-- 🏆 محطة تتويج الجذر الصرفي الاحتفالية الكونية -->
+
+  <!-- 🏆 محطة تتويج الجذر الصرفي الاحتفالية الكونية -->
   <div id="endJourneyScreen" style="display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #0b0f19 50%, #030712 100%); z-index: 9999999; align-items: center; justify-content: center; overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif; transition: opacity 0.6s ease;">
 
     <style>
@@ -4236,6 +4226,12 @@ function toggleGuideModal() {
         <p id="endJourneyDesc" style="color: #e2e8f0; font-size: 1.2rem; font-weight: 600; max-width: 620px; line-height: 1.8; margin: 0.3rem auto; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
           مُبَارَكٌ لَكَ! لَقَدْ أَتْقَنْتَ اشْتِقَاقَ صِيَغِ هَذَا الجَذْرِ وَأَحْيَيْتَ مَدَارَاتِهِ بِإِبْدَاعٍ.
         </p>
+
+        <!-- زر إعادة تشغيل الصوت التفاعلي -->
+        <button onclick="playVictorySound();" style="margin: 0.4rem auto 0 auto; padding: 0.35rem 1.1rem; border-radius: 20px; background: rgba(251, 191, 36, 0.18); border: 1px solid #f59e0b; color: #fde047; font-size: 0.88rem; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+          <span>🔊</span>
+          <span>إِعَادَةُ سَمَاعِ التَّتْوِيجِ</span>
+        </button>
       </div>
 
       <!-- ملخص إنجاز محطات الجذر -->
