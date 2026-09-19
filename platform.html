@@ -4079,25 +4079,42 @@ function startAdventure() {
   }
 }
 
-// 🎵 توليد مؤثر صوتي احتفالي وفضائي
+// 🎵 توليد المؤثر الصوتي الاحتفالي الفضائي مع ضمان فك حظر المتصفح
 function playVictorySound() {
   try {
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99]; // معزوفة نصر تصاعدية
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    const audioCtx = new AudioContext();
+
+    // فك تعليق الصوت فوراً إذا كان المتصفح يحظره
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+
+    // سلم نغمات تصاعدي احتفالي وفضائي
+    const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
+
     notes.forEach((freq, index) => {
+      const startTime = audioCtx.currentTime + (index * 0.11);
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
+
+      // موجة صوتية رنانة وواضحة
       osc.type = 'triangle';
-      osc.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.12);
-      gain.gain.setValueAtTime(0.18, audioCtx.currentTime + index * 0.12);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.12 + 0.35);
+      osc.frequency.setValueAtTime(freq, startTime);
+
+      // مستوى صوت واضح مع تلاشٍ ناعم
+      gain.gain.setValueAtTime(0.3, startTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.4);
+
       osc.connect(gain);
       gain.connect(audioCtx.destination);
-      osc.start(audioCtx.currentTime + index * 0.12);
-      osc.stop(audioCtx.currentTime + index * 0.12 + 0.35);
+
+      osc.start(startTime);
+      osc.stop(startTime + 0.4);
     });
   } catch (e) {
-    console.log("Audio play blocked or not supported");
+    console.error("Audio error:", e);
   }
 }
 
