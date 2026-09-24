@@ -947,7 +947,6 @@
     <button class="tab-pill active" onclick="switchMainTab('radialMap', this)">☀️ شَمْسُ الجَذْرِ</button>
     <button class="tab-pill" onclick="switchMainTab('storyTab', this)">📖 سَحَابَةُ الحِكَايَةِ</button>
     <button class="tab-pill" onclick="switchMainTab('labTab', this)">🛸 أَقْرَاصُ التَّرْكِيبِ</button>
-    <button class="tab-pill" onclick="switchMainTab('quizTab', this)">🧩 حَلَبَةُ البَزْل</button>
     <button class="tab-pill" onclick="switchMainTab('challengeTab', this)">🚀 مَرْكَبَةُ الصَّرْفِ</button>
     <button class="tab-pill" onclick="switchMainTab('freeChallengeTab', this)">🎯 مَحَطَّةُ الإِنْتَاجِ الحُرِّ</button>
   </nav>
@@ -1130,15 +1129,6 @@
         <h3 style="font-size: 2.3rem; font-weight: 900; color: #facc15;">🛸 مَحَطَّاتُ التَّرْكِيبِ الفَضَائِيِّ 🪐</h3>
         <p style="font-size: 1.2rem; font-weight: 800; color: #bae6fd; margin-top: 0.4rem;">اخْتَرِ الحَرْفَ المُنَاسِبَ لِتَكْتَمِلَ دَائِرَةُ الوَزْنِ الصَّحِيحِ:</p>
         <div class="saucer-stations-row" id="discsContainer"></div>
-      </div>
-    </div>
-
-    <!-- 4. حلبة قطع البزل -->
-    <div id="quizTab" class="tab-view">
-      <div class="puzzle-free-arena">
-        <h3 style="font-size: 2.3rem; font-weight: 900; color: #a3e635;">🧩 حَلَبَةُ قِطَعِ البَزْل الصَّرْفِيَّةِ</h3>
-        <p style="font-size: 1.2rem; font-weight: 800; color: #bae6fd; margin-top: 0.4rem;">اسْحَبْ قِطْعَةَ البَزْل المُنَاسِبَةَ وَأَفْلِتْهَا فِي الفَجْوَةِ، أَوْ انْقُرْ عَلَيْهَا:</p>
-        <div class="jigsaw-pieces-flex" id="puzzleContainer"></div>
       </div>
     </div>
 
@@ -2256,7 +2246,6 @@ let starsCount = 0;
       
       if (typeof loadInteractiveStory === 'function') loadInteractiveStory(data);
       if (typeof renderDiscsWorkshop === 'function') renderDiscsWorkshop(data.labs);
-      if (typeof renderRealPuzzleArena === 'function') renderRealPuzzleArena(data.quizzes);
       if (typeof renderSpacecraftChallenge === 'function') renderSpacecraftChallenge(data.challenges || []);
     }
 
@@ -3021,174 +3010,6 @@ function nextCohortRound() {
     renderDiscsWorkshop(labs);
   }
 
-// متغيرات تتبع جولات حلبة البزل
-let currentPuzzleRound = 0;
-const PUZZLE_ITEMS_PER_ROUND = 4;
-
-// 🧩 نظام بزل المشهد الدلالي المفقود (بدون أسئلة نظرية مكررة)
-let selectedSemanticPiece = null;
-
-function renderRealPuzzleArena(quizzes) {
-  const container = document.getElementById('puzzleContainer');
-  if (!container) return;
-  container.innerHTML = '';
-
-  // 1. استخراج بيانات الجذر الحالي
-  const rootSelectEl = document.getElementById('rootSelect');
-  const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
-  const database = window.db || (typeof db !== 'undefined' ? db : {});
-  const cleanKey = rawKey.replace(/[^\u0621-\u064A]/g, '');
-  const rootData = database[rawKey] || database[cleanKey] || database['كتب'];
-
-  if (!rootData || !rootData.branches) return;
-
-  // 2. تصنيف الأدوار الدلالية الأربعة تلقائياً من معالم الجذر
-  const actor = rootData.branches.find(b => b.role && (b.role.includes('الفَاعِل') || b.role.includes('الفاعل'))) || rootData.branches[1];
-  const product = rootData.branches.find(b => b.role && (b.role.includes('المَفْعُول') || b.role.includes('المفعول'))) || rootData.branches[2];
-  const place = rootData.branches.find(b => b.role && (b.role.includes('المَكَان') || b.role.includes('المكان'))) || rootData.branches[3];
-  const source = rootData.branches.find(b => b.role && (b.role.includes('المَصْدَر') || b.role.includes('المصدر'))) || rootData.branches[4];
-
-  const roles = [
-    { 
-      id: 'actor', 
-      roleTitle: 'مَنْ يَقُومُ بِالعَمَلِ؟', 
-      sub: '(دَوْرُ الفَاعِلِ)', 
-      icon: '🧑‍💼', 
-      targetWord: actor.plain.replace(/[^\u0621-\u064A]/g, ''), 
-      displayWord: actor.plain, 
-      fill: '#84cc16', 
-      stroke: '#65a30d' 
-    },
-    { 
-      id: 'product', 
-      roleTitle: 'مَا الَّذِي تَمَّ إِنْجَازُهُ؟', 
-      sub: '(دَوْرُ المَفْعُولِ)', 
-      icon: '📦', 
-      targetWord: product.plain.replace(/[^\u0621-\u064A]/g, ''), 
-      displayWord: product.plain, 
-      fill: '#06b6d4', 
-      stroke: '#0891b2' 
-    },
-    { 
-      id: 'place', 
-      roleTitle: 'أَيْنَ يَقَعُ الحَدَثُ؟', 
-      sub: '(مَسْرَحُ المَكَانِ)', 
-      icon: '🏛️', 
-      targetWord: place.plain.replace(/[^\u0621-\u064A]/g, ''), 
-      displayWord: place.plain, 
-      fill: '#f97316', 
-      stroke: '#ea580c' 
-    },
-    { 
-      id: 'source', 
-      roleTitle: 'الحَدَثُ دُونَ زَمَانٍ', 
-      sub: '(المَصْدَرُ الصَّرِيحُ)', 
-      icon: '⚡', 
-      targetWord: source.plain.replace(/[^\u0621-\u064A]/g, ''), 
-      displayWord: source.plain, 
-      fill: '#a855f7', 
-      stroke: '#9333ea' 
-    }
-  ];
-
-  // خلط قطع البزل للرف السفلي
-  const shuffledPieces = typeof shuffleArray === 'function' ? shuffleArray([...roles]) : roles.sort(() => Math.random() - 0.5);
-
-  container.innerHTML = `
-    <div style="max-width: 1050px; margin: 0 auto; text-align: center;">
-      
-      <!-- إرشاد اللعبة البصري -->
-      <div style="margin-bottom: 1.5rem; color: #cbd5e1; font-size: 1.15rem; font-weight: 500;">
-        🧩 رَكِّبْ كُلَّ قِطْعَةِ مُشْتَقٍّ فِي دَوْرِهَا المُنَاسِبِ لِاكْتِمَالِ مَشْهَدِ الجَذْرِ:
-      </div>
-
-      <!-- شبكة فجوات البزل الدلالية الأربع -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-bottom: 2rem;">
-        ${roles.map(r => `
-          <div class="semantic-puzzle-slot" id="slot_${r.id}" data-target="${r.targetWord}" 
-               style="background: rgba(15,23,42,0.85); border: 2.5px dashed ${r.stroke}; border-radius: 22px; padding: 1.4rem 1rem; position: relative; min-height: 205px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
-            
-            <div style="font-size: 2.5rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));">${r.icon}</div>
-            
-            <div style="margin: 0.5rem 0;">
-              <div style="color: #f8fafc; font-weight: bold; font-size: 1.05rem;">${r.roleTitle}</div>
-              <div style="color: ${r.fill}; font-size: 0.85rem; font-weight: bold; margin-top: 2px;">${r.sub}</div>
-            </div>
-
-            <!-- فجوة إسقاط القطعة -->
-            <div class="drop-target-zone" id="zone_${r.id}" 
-                 style="width: 90%; height: 50px; border-radius: 14px; background: rgba(0,0,0,0.4); border: 1.5px solid rgba(255,255,255,0.15); display: flex; justify-content: center; align-items: center; color: #64748b; font-size: 0.9rem; font-weight: bold; transition: all 0.3s;">
-              اسْحَبْ أَوِ انْقُرْ هُنَا ⬇️
-            </div>
-          </div>
-        `).join('')}
-      </div>
-
-      <!-- رف قطع البزل المبعثرة أسفل اللوحة -->
-      <div style="background: rgba(15,23,42,0.6); border: 1.5px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 1rem 1.5rem; display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center; align-items: center;">
-        <span style="color: #94a3b8; font-weight: bold; font-size: 0.95rem; margin-left: 0.5rem;">قِطَعُ البَزْل:</span>
-        ${shuffledPieces.map(p => `
-          <div class="puzzle-draggable-piece" draggable="true" data-word="${p.targetWord}" data-display="${p.displayWord}"
-               onclick="handleSemanticPieceClick(this)"
-               style="background: linear-gradient(135deg, ${p.fill},${p.stroke}); color: #ffffff; padding: 0.6rem 1.6rem; border-radius: 14px; font-size: 1.25rem; font-weight: bold; cursor: grab; box-shadow: 0 5px 15px rgba(0,0,0,0.3); border: 1.5px solid rgba(255,255,255,0.3); user-select: none; transition: transform 0.15s ease;">
-            ${p.displayWord}
-          </div>
-        `).join('')}
-      </div>
-
-      <!-- راية الاحتفال عند اكتمال تركيب المشهد -->
-      <div id="puzzleSuccessBanner" style="min-height: 40px; margin-top: 1.5rem;"></div>
-    </div>
-  `;
-
-  setupSemanticPuzzleLogic(roles);
-}
-
-// ⚙️ منطق التفاعل (سحب وإفلات + دعم الأجهزة اللمسية)
-function setupSemanticPuzzleLogic(roles) {
-  let completedCount = 0;
-  const pieces = document.querySelectorAll('.puzzle-draggable-piece');
-  const slots = document.querySelectorAll('.semantic-puzzle-slot');
-
-  selectedSemanticPiece = null;
-
-  // أحداث السحب
-  pieces.forEach(piece => {
-    piece.addEventListener('dragstart', (e) => {
-      e.dataTransfer.setData('text/plain', piece.dataset.word);
-      piece.style.opacity = '0.5';
-    });
-    piece.addEventListener('dragend', () => {
-      piece.style.opacity = '1';
-    });
-  });
-
-  // أحداث الفجوات
-  slots.forEach(slot => {
-    slot.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      slot.style.transform = 'scale(1.03)';
-    });
-
-    slot.addEventListener('dragleave', () => {
-      slot.style.transform = 'scale(1)';
-    });
-
-    slot.addEventListener('drop', (e) => {
-      e.preventDefault();
-      slot.style.transform = 'scale(1)';
-      const droppedWord = e.dataTransfer.getData('text/plain');
-      const targetWord = slot.dataset.target;
-      const matchedPiece = document.querySelector(`.puzzle-draggable-piece[data-word="${droppedWord}"]`);
-
-      if (droppedWord === targetWord && matchedPiece) {
-        snapPieceIntoSlot(matchedPiece, slot);
-      } else {
-        triggerPuzzleError(slot);
-      }
-    });
-  });
-
   // دالة الالتحام الصوتي والبصري
   function snapPieceIntoSlot(pieceEl, slotEl) {
     const zone = slotEl.querySelector('.drop-target-zone');
@@ -3204,124 +3025,10 @@ function setupSemanticPuzzleLogic(roles) {
       playFeedbackSound(true);
     }
 
-    completedCount++;
-    if (completedCount === roles.length) {
-      triggerPuzzleCompleteCelebration();
-    }
-  }
-
-  function triggerPuzzleError(slotEl) {
-    if (typeof playFeedbackSound === 'function') {
-      playFeedbackSound(false);
-    }
-    slotEl.style.animation = 'shake 0.4s ease';
-    setTimeout(() => slotEl.style.animation = '', 400);
-  }
-
-  // دعم النقر للأجهزة اللوحية
-  window.handleSemanticPieceClick = function(pieceEl) {
-    if (selectedSemanticPiece === pieceEl) {
-      selectedSemanticPiece.style.transform = 'scale(1)';
-      selectedSemanticPiece = null;
-      return;
-    }
-    if (selectedSemanticPiece) selectedSemanticPiece.style.transform = 'scale(1)';
-    selectedSemanticPiece = pieceEl;
-    selectedSemanticPiece.style.transform = 'scale(1.1) translateY(-4px)';
-  };
-
-  slots.forEach(slot => {
-    slot.onclick = () => {
-      if (!selectedSemanticPiece) return;
-      const clickedWord = selectedSemanticPiece.dataset.word;
-      const targetWord = slot.dataset.target;
-      if (clickedWord === targetWord) {
-        snapPieceIntoSlot(selectedSemanticPiece, slot);
-        selectedSemanticPiece = null;
-      } else {
-        triggerPuzzleError(slot);
-      }
-    };
-  });
-
-  function triggerPuzzleCompleteCelebration() {
-    const banner = document.getElementById('puzzleSuccessBanner');
-    if (banner) {
-      banner.innerHTML = `
-        <div style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; padding: 1rem 2rem; border-radius: 16px; font-size: 1.3rem; font-weight: bold; display: inline-flex; align-items: center; gap: 0.8rem; box-shadow: 0 8px 25px rgba(16,185,129,0.4); animation: popIn 0.5s ease;">
-          🎉 عَبْقَرِيٌّ! اكْتَمَلَ مَشْهَدُ الجَذْرِ الصَّرْفِيِّ بِنَجَاحٍ بَاهِرٍ! 🏆
-        </div>
-      `;
-    }
-    if (typeof playCelebrationSound === 'function') {
-      playCelebrationSound();
-    }
-  }
-}
-    function setupJigsawDragDrop(quizzes) {
-      document.querySelectorAll('.drag-piece-token').forEach(token => {
-        token.addEventListener('dragstart', (e) => {
-          e.dataTransfer.setData('text/plain', JSON.stringify({
-            word: token.dataset.word,
-            idx: token.dataset.jIdx
-          }));
-          token.style.opacity = '0.4';
-        });
-
-        token.addEventListener('dragend', () => {
-          token.style.opacity = '1';
-        });
-      });
-
-      document.querySelectorAll('.puzzle-target-slot').forEach((slot, sIdx) => {
-        slot.addEventListener('dragover', (e) => {
-          e.preventDefault();
-          slot.classList.add('drag-over');
-        });
-
-        slot.addEventListener('dragleave', () => {
-          slot.classList.remove('drag-over');
-        });
-
-        slot.addEventListener('drop', (e) => {
-          e.preventDefault();
-          slot.classList.remove('drag-over');
-          try {
-            const data = JSON.parse(e.dataTransfer.getData('text/plain'));
-            if (parseInt(data.idx) === sIdx) {
-              const quiz = quizzes[sIdx];
-              evaluateJigsawSolve(data.word, quiz.ans, sIdx, slot);
-            }
-          } catch(err){}
-        });
-      });
-    }
-
     function handleJigsawClick(word, correct, sIdx) {
       Sound.pop();
       const slot = document.getElementById(`jigsaw_drop_${sIdx}`);
       evaluateJigsawSolve(word, correct, sIdx, slot);
-    }
-
-    function evaluateJigsawSolve(selected, correct, sIdx, slotEl) {
-      const fb = document.getElementById(`fb_jigsaw_${sIdx}`);
-
-      if (selected === correct) {
-        slotEl.textContent = `✓ رُكِّبَتْ: (${selected})`;
-        slotEl.className = 'puzzle-target-slot solved';
-        fb.style.display = 'block';
-        fb.style.background = '#dcfce7';
-        fb.style.color = '#15803d';
-        fb.innerHTML = `🎉 عَبْقَرِيٌّ! رَكَّبْتَ قِطْعَةَ البَزْل الصَّحِيحَةَ.`;
-        Sound.correct();
-        addStars(15);
-      } else {
-        fb.style.display = 'block';
-        fb.style.background = '#fee2e2';
-        fb.style.color = '#b91c1c';
-        fb.innerHTML = `✕ قِطْعَةٌ غَيْرُ مُطَابِقَةٍ! أَعِدِ المُحَاوَلَةَ يَا بَطَلُ.`;
-        Sound.wrong();
-      }
     }
 
   function renderSpacecraftChallenge(challenges) {
