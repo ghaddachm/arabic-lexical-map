@@ -2918,7 +2918,7 @@ function submitDynamicDiscChoice(btn, selectedOpt) {
   }
 }
 
-// التقدم المرتب داخل نفس الجولة
+// التقدم المرتب داخل نفس الجولة (بدون إطلاق شاشة التتويج النهائية)
 function advanceStepInRound(labs) {
   const currentGalaxy = labs[currentDiscGalaxyIdx];
   const roundQuestions = currentGalaxy.rounds[currentRoundIdx];
@@ -2932,20 +2932,15 @@ function advanceStepInRound(labs) {
     if (interactionArea) {
       interactionArea.style.pointerEvents = 'auto';
     }
-// ⭐ إضافة 15 نجمة إلى رصيد المتعلم وتحديث الشارة
+
+    // ⭐ إضافة 15 نجمة إلى رصيد المتعلم وتحديث الشارة
     let starsBadge = document.getElementById('starsScore');
     if (starsBadge) {
       let currentVal = parseInt(starsBadge.innerText) || 0;
       starsBadge.innerText = currentVal + 15;
     }
 
-    // 🏆 إظهار شاشة التتويج الاحتفالية تلقائياً بالتزامن مع نهاية الجولة
-    setTimeout(() => {
-      if (typeof triggerEndJourney === 'function') {
-        triggerEndJourney();
-      }
-    }, 1200);
-    // 2. تشغيل صوت التعزيز
+    // 2. تشغيل صوت التعزيز الخاص بالمحطة
     const rootKey = document.getElementById('rootSelect')?.value || 'ktb';
     if (typeof Sound !== "undefined" && Sound.playAsset) {
       const folder = Sound.rootFolderMap[rootKey] || rootKey;
@@ -2958,14 +2953,14 @@ function advanceStepInRound(labs) {
     // 3. حساب مؤشر المدار التالي بشكل سليم
     const nextGalaxyIdx = (currentDiscGalaxyIdx + 1) % labs.length;
 
-    // 4. رسم بطاقة الخيارات التفاعلية
+    // 4. رسم بطاقة الخيارات التفاعلية للانتقال
     if (interactionArea) {
       interactionArea.innerHTML = `
         <div style="background: rgba(15, 23, 42, 0.7); border: 2px dashed #facc15; border-radius: 20px; padding: 1.5rem; margin-top: 1rem; position: relative; z-index: 999;">
-          <div style="font-size: 2.5rem; margin-bottom: 0.3rem;">🌟 🏆 🌟</div>
+          <div style="font-size: 2.5rem; margin-bottom: 0.3rem;">🌟 🚀 🌟</div>
           <h3 style="color: #facc15; font-size: 1.3rem; margin-bottom: 0.5rem;">أَحْسَنْتَ! اكْتَمَلَتْ أَسْئِلَةُ هَذِهِ الجَوْلَةِ!</h3>
           <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 1.2rem;">
-            يُمْكِنُكَ الآنَ بَدْءُ جَوْلَةٍ بِأَسْئِلَةٍ جَدِيدَةٍ لِمُتَعَلِّمٍ آخَرَ، أَوْ مُتَابَعَةُ اسْتِكْشَافِ بَقِيَّةِ المَدَارَاتِ مِنَ القَائِمَةِ.
+            يُمْكِنُكَ الآنَ بَدْءُ جَوْلَةٍ بِأَسْئِلَةٍ جَدِيدَةٍ، أَوْ مُتَابَعَةُ اسْتِكْشَافِ بَقِيَّةِ المَدَارَاتِ وَالانْتِقَالِ لِمَحَطَّةِ الإِنْتَاجِ الحُرِّ.
           </p>
           <div style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
             <button type="button" onclick="nextCohortRound()" style="background: #facc15; color: #0f172a; border: none; padding: 0.75rem 1.6rem; border-radius: 14px; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(250, 204, 21, 0.4);">
