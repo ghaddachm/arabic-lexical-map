@@ -3996,72 +3996,97 @@ function renderFreeSentenceChallenge() {
     document.getElementById('freeSentenceInput')?.focus();
   }, 100);
 }
-    function verifySentenceAnswer() {
-      const input = document.getElementById('freeSentenceInput');
-      const toast = document.getElementById('sentenceFeedbackToast');
-      if (!input || !toast || !currentSentenceQ) return;
+   // 🌟 متغيرات تتبع إنجاز محطة الإنتاج اللغوي الحر
+let sentenceQuestionsCompleted = 0;
+const TOTAL_SENTENCE_GOAL = 3; // عدد الأسئلة المطلوبة لإتمام المحطة والتتويج
 
-      const rawVal = input.value.trim();
-      if (!rawVal) {
-        toast.style.color = '#facc15';
-        toast.textContent = "⚠️ اكْتُبِ الكَلِمَةَ المُنَاسِبَةَ فِي الفَرَاغِ أَوَّلاً!";
-        return;
-      }
+function verifySentenceAnswer() {
+  const input = document.getElementById('freeSentenceInput');
+  const toast = document.getElementById('sentenceFeedbackToast');
+  if (!input || !toast || !currentSentenceQ) return;
 
-      const cleanInput = rawVal
-        .replace(/([^\u0621-\u064A\s])/g, '')
-        .replace(/[أإآ]/g, 'ا')
-        .replace(/ة/g, 'ه')
-        .trim();
+  const rawVal = input.value.trim();
+  if (!rawVal) {
+    toast.style.color = '#facc15';
+    toast.textContent = "⚠️ اكْتُبِ الكَلِمَةَ المُنَاسِبَةَ فِي الفَرَاغِ أَوَّلاً!";
+    return;
+  }
 
-      const isCorrect = currentSentenceQ.expected.some(ans => {
-        const cleanExpected = ans
-          .replace(/([^\u0621-\u064A\s])/g, '')
-          .replace(/[أإآ]/g, 'ا')
-          .replace(/ة/g, 'ه')
-          .trim();
-        return cleanExpected === cleanInput;
-      });
+  const cleanInput = rawVal
+    .replace(/([^\u0621-\u064A\s])/g, '')
+    .replace(/[أإآ]/g, 'ا')
+    .replace(/ة/g, 'ه')
+    .trim();
 
-      if (isCorrect) {
-        input.style.borderColor = '#22c55e';
-        input.style.color = '#4ade80';
-        playQuickBeep();
-// ⭐ إضافة 5 نجوم لرصيد الإنتاج الحر وتحديث الشارة العلوية
+  const isCorrect = currentSentenceQ.expected.some(ans => {
+    const cleanExpected = ans
+      .replace(/([^\u0621-\u064A\s])/g, '')
+      .replace(/[أإآ]/g, 'ا')
+      .replace(/ة/g, 'ه')
+      .trim();
+    return cleanExpected === cleanInput;
+  });
+
+  if (isCorrect) {
+    input.style.borderColor = '#22c55e';
+    input.style.color = '#4ade80';
+    playQuickBeep();
+
+    // ⭐ إضافة 5 نجوم لرصيد الإنتاج الحر وتحديث الشارة العلوية
     const starsBadge = document.getElementById('starsScore');
     if (starsBadge) {
       const currentScore = parseInt(starsBadge.innerText) || 0;
       starsBadge.innerText = currentScore + 5;
     }
-        toast.style.color = '#4ade80';
-        toast.textContent = "✨ مُمْتَازٌ! صِيغَةٌ صَرْفِيَّةٌ صَحِيحَةٌ عَنْ جَدَارَةٍ!";
 
-        setTimeout(() => {
-          renderFreeSentenceChallenge();
-        }, 1300);
-      } else {
-        input.style.borderColor = '#ef4444';
-        input.style.color = '#f87171';
-        playSoftWrongTone();
+    // زيادة عداد الأسئلة المنجزة
+    sentenceQuestionsCompleted++;
 
-        toast.style.color = '#f87171';
-        toast.textContent = "حَاوِلْ مَرَّةً أُخْرَى! ضَعِ الصِّيغَةَ الصَّرْفِيَّةَ المُنَاسِبَةَ لِلسِّيَاقِ.";
+    // التحقق هل أتم المتعلم التحدي المطلوب للتتويج
+    if (sentenceQuestionsCompleted >= TOTAL_SENTENCE_GOAL) {
+      toast.style.color = '#facc15';
+      toast.innerHTML = "🎉 <strong>مُبَارَكٌ! لَقَدْ أَتْمَمْتَ كَافَّةَ تَحَدِّيَاتِ الإِنْتَاجِ اللُّغَوِيِّ!</strong>";
 
-        setTimeout(() => {
-          input.style.borderColor = '#facc15';
-          input.style.color = '#facc15';
-        }, 800);
-      }
+      // 🏆 إطلاق التتويج النهائي الفضائي والصوتي بعد ثانية واحدة
+      setTimeout(() => {
+        if (typeof triggerEndJourney === 'function') {
+          triggerEndJourney();
+        }
+        sentenceQuestionsCompleted = 0; // إعادة التعيين لجولة قادمة
+      }, 1200);
+
+    } else {
+      toast.style.color = '#4ade80';
+      toast.textContent = `✨ مُمْتَازٌ! صِيغَةٌ صَحِيحَةٌ! (أَنْجَزْتَ ${sentenceQuestionsCompleted} مِنْ ${TOTAL_SENTENCE_GOAL})`;
+
+      setTimeout(() => {
+        renderFreeSentenceChallenge();
+      }, 1300);
     }
 
-    window.onload = () => {
-      window.addEventListener('click', () => {
-        Sound.sfxPlayer.load();
-        Sound.audioPlayer.load();
-      }, { once: true });
+  } else {
+    input.style.borderColor = '#ef4444';
+    input.style.color = '#f87171';
+    playSoftWrongTone();
 
-      loadRadialWorld('كتب');
-    };
+    toast.style.color = '#f87171';
+    toast.textContent = "حَاوِلْ مَرَّةً أُخْرَى! ضَعِ الصِّيغَةَ الصَّرْفِيَّةَ المُنَاسِبَةَ لِلسِّيَاقِ.";
+
+    setTimeout(() => {
+      input.style.borderColor = '#facc15';
+      input.style.color = '#facc15';
+    }, 800);
+  }
+}
+
+window.onload = () => {
+  window.addEventListener('click', () => {
+    Sound.sfxPlayer.load();
+    Sound.audioPlayer.load();
+  }, { once: true });
+
+  loadRadialWorld('كتب');
+};
 
 function startAdventure() {
   const welcome = document.getElementById('welcomeScreen');
