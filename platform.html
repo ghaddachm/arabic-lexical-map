@@ -3958,6 +3958,15 @@ function renderFreeSentenceChallenge() {
   const randIdx = Math.floor(Math.random() * availableFreeQuestions.length);
   currentSentenceQ = availableFreeQuestions.splice(randIdx, 1)[0];
 
+  // 🛡️ تنظيف اسم الشارة البرمجية: إزالة أي تلميح بين قوسين لعرض الفعل العام فقط
+  let cleanRootDisplay = currentSentenceQ.rootName || rawKey;
+  // حذف أي شيء بين قوسين
+  cleanRootDisplay = cleanRootDisplay.split('(')[0].trim();
+  // التأكد من تنسيق "الفِعْل: ..." بشكل نظيف دون تكرار
+  if (!cleanRootDisplay.includes(':') && !cleanRootDisplay.includes('الفِعْل')) {
+    cleanRootDisplay = `الفِعْل: ${cleanRootDisplay}`;
+  }
+
   // توليد شريط النجوم التفاعلي (5 نجوم)
   let starsHtml = '';
   for (let i = 0; i < TOTAL_SENTENCE_GOAL; i++) {
@@ -3971,14 +3980,14 @@ function renderFreeSentenceChallenge() {
   container.innerHTML = `
     <div style="max-width: 800px; margin: 2rem auto; background: radial-gradient(circle, rgba(23,37,84,0.95) 0%, rgba(15,23,42,0.98) 100%); border: 2.5px solid #6366f1; border-radius: 28px; padding: 2.2rem; box-shadow: 0 15px 35px rgba(0,0,0,0.6); text-align: center;">
       
-      <!-- الشريط العلوي: العنوان واسم الجذر وزر سؤال آخر -->
+      <!-- الشريط العلوي: العنوان واسم الفعل الموجه فقط دون تلميح وزر سؤال آخر -->
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.8rem;">
         <div style="display: flex; align-items: center; gap: 0.6rem;">
           <span style="background: rgba(99, 102, 241, 0.2); color: #a5b4fc; border: 1px solid #6366f1; padding: 0.4rem 1.2rem; border-radius: 20px; font-weight: bold; font-size: 0.95rem;">
             🎯 مَحَطَّةُ الإِنْتَاجِ الحُرِّ
           </span>
           <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; padding: 0.4rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.95rem;">
-            🔍 ${currentSentenceQ.rootName}
+            🔍 ${cleanRootDisplay}
           </span>
         </div>
 
