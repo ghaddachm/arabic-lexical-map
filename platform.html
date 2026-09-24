@@ -3010,27 +3010,6 @@ function nextCohortRound() {
     renderDiscsWorkshop(labs);
   }
 
-  // دالة الالتحام الصوتي والبصري
-  function snapPieceIntoSlot(pieceEl, slotEl) {
-    const zone = slotEl.querySelector('.drop-target-zone');
-    zone.innerHTML = `<span style="color: #facc15; font-size: 1.35rem; font-weight: bold;">✓ ${pieceEl.dataset.display}</span>`;
-    zone.style.background = 'rgba(34, 197, 94, 0.25)';
-    zone.style.border = '2px solid #22c55e';
-    slotEl.style.border = '2.5px solid #22c55e';
-    slotEl.style.boxShadow = '0 0 20px rgba(34, 197, 94, 0.35)';
-    
-    pieceEl.style.display = 'none';
-
-    if (typeof playFeedbackSound === 'function') {
-      playFeedbackSound(true);
-    }
-
-    function handleJigsawClick(word, correct, sIdx) {
-      Sound.pop();
-      const slot = document.getElementById(`jigsaw_drop_${sIdx}`);
-      evaluateJigsawSolve(word, correct, sIdx, slot);
-    }
-
   function renderSpacecraftChallenge(challenges) {
   const container = document.getElementById('challengeContainer');
   if (!container) return;
