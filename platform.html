@@ -3021,15 +3021,78 @@ function nextCohortRound() {
     renderDiscsWorkshop(labs);
   }
 
- function renderRealPuzzleArena(quizzes) {
+// متغيرات تتبع جولات حلبة البزل
+let currentPuzzleRound = 0;
+const PUZZLE_ITEMS_PER_ROUND = 4;
+
+function renderRealPuzzleArena(quizzes) {
   const container = document.getElementById('puzzleContainer');
-  if (!container || !quizzes) return;
+  if (!container || !quizzes || !quizzes.length) return;
   container.innerHTML = '';
+
+  const totalQuestions = quizzes.length;
+  const totalRounds = Math.ceil(totalQuestions / PUZZLE_ITEMS_PER_ROUND);
+
+  // التأكد من حدود رقم الجولة
+  if (currentPuzzleRound >= totalRounds) {
+    currentPuzzleRound = 0;
+  }
+
+  // اقتطاع أسئلة الجولة الحالية (4 أسئلة)
+  const startIdx = currentPuzzleRound * PUZZLE_ITEMS_PER_ROUND;
+  const currentBatch = quizzes.slice(startIdx, startIdx + PUZZLE_ITEMS_PER_ROUND);
+
+  // 🌟 شريط الجولات العلوي
+  const headerBar = document.createElement('div');
+  headerBar.style.cssText = `
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto 1.5rem auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1.5px solid rgba(250, 204, 21, 0.3);
+    padding: 0.6rem 1.4rem;
+    border-radius: 20px;
+    box-sizing: border-box;
+  `;
+
+  headerBar.innerHTML = `
+    <div style="display: flex; align-items: center; gap: 0.6rem;">
+      <span style="background: rgba(234, 179, 8, 0.2); color: #facc15; border: 1px solid #eab308; padding: 0.25rem 0.9rem; border-radius: 14px; font-weight: bold; font-size: 0.9rem;">
+        🌟 الجَوْلَةُ: ${currentPuzzleRound + 1} مِنْ ${totalRounds > 1 ? totalRounds : 1}
+      </span>
+      <span style="color: #94a3b8; font-size: 0.85rem; font-weight: bold;">
+        (أَسْئِلَةُ الجَوْلَةِ: ${currentBatch.length})
+      </span>
+    </div>
+
+    ${totalQuestions > PUZZLE_ITEMS_PER_ROUND ? `
+      <button type="button" id="nextPuzzleRoundBtn" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; border: 1px solid #818cf8; padding: 0.45rem 1.2rem; border-radius: 12px; font-weight: bold; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 4px 12px rgba(99,102,241,0.3);">
+        🎲 جَوْلَةٌ أُخْرَى
+      </button>
+    ` : ''}
+  `;
+
+  container.appendChild(headerBar);
+
+  // حاوية القطع الأربع
+  const cardsWrapper = document.createElement('div');
+  cardsWrapper.style.cssText = `
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    width: 100%;
+  `;
+  container.appendChild(cardsWrapper);
 
   const puzzleFills = ['#84cc16', '#06b6d4', '#f97316', '#a855f7'];
   const puzzleBorders = ['#65a30d', '#0891b2', '#ea580c', '#9333ea'];
 
-  quizzes.forEach((q, idx) => {
+  currentBatch.forEach((q, idx) => {
     const card = document.createElement('div');
     card.className = 'jigsaw-svg-card';
     card.innerHTML = `
@@ -3052,10 +3115,20 @@ function nextCohortRound() {
         <div class="puzzle-feedback-toast" id="fb_jigsaw_${idx}"></div>
       </div>
     `;
-    container.appendChild(card);
+    cardsWrapper.appendChild(card);
   });
 
-  setupJigsawDragDrop(quizzes);
+  // تفعيل السحب والإفلات للدفعة الحالية
+  setupJigsawDragDrop(currentBatch);
+
+  // ربط زر الانتقال للجولة التالية
+  const nextBtn = document.getElementById('nextPuzzleRoundBtn');
+  if (nextBtn) {
+    nextBtn.onclick = () => {
+      currentPuzzleRound = (currentPuzzleRound + 1) % totalRounds;
+      renderRealPuzzleArena(quizzes);
+    };
+  }
 }
 
     function setupJigsawDragDrop(quizzes) {
