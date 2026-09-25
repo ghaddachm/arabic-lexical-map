@@ -2405,24 +2405,38 @@ let starsCount = 0;
       }
     }
 
-  function speakCurrentStory() {
+ function speakCurrentStory() {
   const rootSelectEl = document.getElementById('rootSelect');
   const rootKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
   const cleanKey = rootKey.replace(/[^\u0621-\u064A]/g, '');
 
-  // خريطة أسماء المجلدات مع التأكد من إضافة drs
+  // خريطة أسماء المجلدات الافتراضية للجذور القديمة
   let folder = cleanKey;
   if (typeof Sound !== 'undefined' && Sound.rootFolderMap) {
     folder = Sound.rootFolderMap[cleanKey] || Sound.rootFolderMap[rootKey] || cleanKey;
   }
   
-  // تطابق صريح مع الفعل درس ومجلده drs
-  if (cleanKey === 'درس' || cleanKey === 'درّس' || rootKey.includes('درس')) {
+  // خريطة مطابقة للأفعال المزيدة ومجلداتها الصوتية
+  const extraRoots = {
+    'درس': 'drs',
+    'درّس': 'drs',
+    'كسر': 'ksr',
+    'كسّر': 'ksr',
+    'كشف': 'kshf',
+    'اكتشف': 'kshf',
+    'خرج': 'khrj',
+    'استخرج': 'khrj'
+  };
+
+  // إذا كان الجذر المختار من الأفعال المزيدة يتم توجيهه لمجلده الصوتي
+  if (extraRoots[cleanKey]) {
+    folder = extraRoots[cleanKey];
+  } else if (cleanKey.includes('درس')) {
     folder = 'drs';
   }
 
   if (typeof Sound !== 'undefined') {
-    // إيقاف أي صوت سابق قبل البدء
+    // إيقاف أي صوت سابق قبل البدء لتفادي التداخل
     stopStoryAudio();
 
     if (Sound.audioPlayer) {
