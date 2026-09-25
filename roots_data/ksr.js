@@ -481,11 +481,13 @@ missions: [
 
 // 🔑 تسجيل الجذر بجميع المفاتيح لضمان التوافق التام مع القائمة المنسدلة
 window.db["كسر"] = ksrData;
+window.db["كسّر"] = ksrData;
 window.db["كَسَّرَ"] = ksrData;
 window.db["ksr"] = ksrData;
 window.db["كَسَّرَ (مَزِيدٌ بِالتَّضْعِيفِ - تَكْثِيرٌ)"] = ksrData;
 
 window.ROADS_DATA["كسر"] = ksrData;
+window.ROADS_DATA["كسّر"] = ksrData;
 window.ROADS_DATA["كَسَّرَ"] = ksrData;
 window.ROADS_DATA["ksr"] = ksrData;
 window.ROADS_DATA["كَسَّرَ (مَزِيدٌ بِالتَّضْعِيفِ - تَكْثِيرٌ)"] = ksrData;
