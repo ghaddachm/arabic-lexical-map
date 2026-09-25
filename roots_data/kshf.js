@@ -74,45 +74,45 @@ const kshfData = {
     { word: "<span class='c-a'>اجْ</span><span class='c-r'>تَ</span><span class='c-r'>مَ</span><span class='c-r'>عَ</span>", plain: "اجْتَمَعَ", weight: "افْتَعَلَ", desc: "خماسي مزيد بحرفين: التقى مع غيره وتآلف" }
   ],
 
-  // 🟢 2. سحابة الحكاية
+ // 🟢 2. سحابة الحكاية
   storyParagraph: [
     { word: "فِي", target: false },
-    { word: "المُخْتَبَرِ", target: false },
-    { word: "المَدْرَسِيِّ،", target: false },
-    { word: "وَقَفَ", target: false, isOtherVerb: true },
-    { word: "التِّلْمِيذُ", target: false },
-    { word: "مُكْتَشِفاً", target: "اسم الفاعل" },
-    { word: "خَصَائِصَ", target: false },
-    { word: "النَّبَاتِ؛", target: false },
-    { word: "حَيْثُ", target: false },
+    { word: "مُكْتَشَفِ", target: "اسم المكان" },
+    { word: "العُلُومِ", target: false },
+    { word: "بِالمَدْرَسَةِ،", target: false },
     { word: "اكْتَشَفَ", target: "الفعل المجرد" },
-    { word: "فَائِدَةَ", target: false },
-    { word: "الضَّوْءِ", target: false },
-    { word: "دَاخِلَ", target: false },
-    { word: "مُكْتَشَفٍ", target: "اسم المكان" },
-    { word: "عِلْمِيٍّ", target: false },
-    { word: "مُبْهِرٍ،", target: false },
-    { word: "فَصَارَ", target: false, isOtherVerb: true },
-    { word: "السِّرُّ", target: false },
+    { word: "التِّلْمِيذُ", target: false },
+    { word: "النَّشِيطُ", target: false },
+    { word: "حَلَّ", target: false },
+    { word: "المَسْأَلَةِ", target: false },
+    { word: "الصَّعْبَةِ؛", target: false },
+    { word: "فَكَانَ", target: false, isOtherVerb: true },
+    { word: "بَيْنَ", target: false },
+    { word: "أَقْرَانِهِ", target: false },
+    { word: "مُكْتَشِفاً", target: "اسم الفاعل" },
+    { word: "ذَكِيّاً،", target: false },
+    { word: "حِينَ", target: false },
+    { word: "أَصْبَحَ", target: false, isOtherVerb: true },
+    { word: "الجَوَابُ", target: false },
     { word: "أَمْراً", target: false },
     { word: "مُكْتَشَفاً", target: "اسم المفعول" },
     { word: "لِلْجَمِيعِ،", target: false },
-    { word: "وَأَثْنَى", target: false, isOtherVerb: true },
-    { word: "المُعَلِّمُ", target: false },
+    { word: "لِيَنَالَ", target: false, isOtherVerb: true },
+    { word: "تَقْدِيرَ", target: false },
+    { word: "أُسْتَاذِهِ", target: false },
     { word: "عَلَى", target: false },
     { word: "هَذَا", target: false },
     { word: "الاكْتِشَافِ", target: "المصدر" },
-    { word: "العَظِيمِ.", target: false }
+    { word: "البَاهِرِ.", target: false }
   ],
 
   missions: [
-    { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى الفِعْلِ الخُمَاسِيِّ المَزِيدِ بِحَرْفَيْنِ اكْتَشَفَ", targetType: "الفعل المجرد", audio: "mission_1" },
-    { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى (اسْمِ الفَاعِلِ) مِنْ جَذْرِ اكْتَشَفَ", targetType: "اسم الفاعل", audio: "mission_2" },
-    { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى (اسْمِ المَكَانِ الخُمَاسِيِّ) مِنْ جَذْرِ اكْتَشَفَ", targetType: "اسم المكان", audio: "mission_3" },
-    { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى (اسْمِ المَفْعُولِ) مِنْ جَذْرِ اكْتَشَفَ", targetType: "اسم المفعول", audio: "mission_4" },
-    { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى (المَصْدَرِ) مِنْ جَذْرِ اكْتَشَفَ", targetType: "المصدر", audio: "mission_5" }
-  ],
-
+    { label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى الفِعْلِ الخُمَاسِيِّ مِنْ جَذْرِ كَشَفَ.", targetType: "الفعل المجرد", audio: "mission_1" },
+    { label: "المَهَمَّةُ الثَّانِيَةُ: انْقُرْ عَلَى اسْمِ الفَاعِلِ مِنَ الفِعْلِ اكْتَشَفَ.", targetType: "اسم الفاعل", audio: "mission_2" },
+    { label: "المَهَمَّةُ الثَّالِثَةُ: انْقُرْ عَلَى اسْمِ المَكَانِ لِلْفِعْلِ اكْتَشَفَ.", targetType: "اسم المكان", audio: "mission_3" },
+    { label: "المَهَمَّةُ الرَّابِعَةُ: انْقُرْ عَلَى اسْمِ المَفْعُولِ مِنَ الفِعْلِ اكْتَشَفَ.", targetType: "اسم المفعول", audio: "mission_4" },
+    { label: "المَهَمَّةُ الخَامِسَةُ: انْقُرْ عَلَى المَصْدَرِ الصَّرِيحِ لِلْفِعْلِ اكْتَشَفَ.", targetType: "المصدر", audio: "mission_5" }
+  ]
   // 🟢 3. مختبر أقراص التركيب
   labs: [
     {
