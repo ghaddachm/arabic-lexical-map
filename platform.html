@@ -764,7 +764,7 @@
   <script src="roots_data/qwl.js?v=2"></script>
   <script src="roots_data/rmy.js?v=2"></script>
   <script src="roots_data/drs.js?v=1"></script>
-  <script src="roots_data/ksr.js?v=3"></script>
+  <script src="roots_data/sbq.js?v=1"></script>
   <script src="roots_data/kshf.js?v=1"></script>
   <script src="roots_data/khrj.js?v=1"></script>
 </head>
@@ -930,7 +930,7 @@
         </optgroup>
         <optgroup label="د. قِسْمُ الأَفْعَالِ المَزِيدَةِ القِيَاسِيَّةِ">
           <option value="درس">🏫 دَرَّسَ (مَزِيدٌ بِالتَّضْعِيفِ - تَعْدِيَةٌ)</option>
-          <option value="كسر">🔨 كَسَّرَ (مَزِيدٌ بِالتَّضْعِيفِ - تَكْثِيرٌ)</option>
+          <option value="سبق">🏃 سَابَقَ (مَزِيدٌ بِالأَلِفِ - مُشَارَكَةٌ)</option>
           <option value="كشف">🔬 اكْتَشَفَ (مَزِيدٌ بِحَرْفَيْنِ - خُمَاسِيٌّ)</option>
           <option value="خرج">⛏️ اسْتَخْرَجَ (مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ - سُدَاسِيٌّ)</option>
         </optgroup>
@@ -1195,11 +1195,11 @@
       audioPlayer: new Audio(),
       sfxPlayer: new Audio(),
 
-      rootFolderMap: {
-        "كتب": "ktb", "قرأ": "qra", "مدد": "mdd", "دحرج": "dhrj",
-        "زلزل": "zlzl", "وقف": "wqf", "قول": "qwl", "رمي": "rmy",
-        "درس": "drs", "كسر": "ksr", "كشف": "kshf", "خرج": "khrj"
-      },
+     rootFolderMap: {
+  "كتب": "ktb", "قرأ": "qra", "مدد": "mdd", "دحرج": "dhrj",
+  "زلزل": "zlzl", "وقف": "wqf", "قول": "qwl", "رمي": "rmy",
+  "درس": "drs", "سبق": "sbq", "كشف": "kshf", "خرج": "khrj"
+},
       pause() {
         this.audioPlayer.pause();
         if ('speechSynthesis' in window) {
