@@ -2405,36 +2405,49 @@ let starsCount = 0;
       }
     }
 
-   function speakCurrentStory() {
+  function speakCurrentStory() {
   const rootSelectEl = document.getElementById('rootSelect');
   const rootKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
   const cleanKey = rootKey.replace(/[^\u0621-\u064A]/g, '');
-  const folder = (typeof Sound !== 'undefined' && Sound.rootFolderMap && (Sound.rootFolderMap[cleanKey] || Sound.rootFolderMap[rootKey])) || cleanKey;
 
-  if (typeof Sound !== 'undefined' && Sound.audioPlayer) {
-    // التحقق من أن المشغل يحمل قصة نفس المجلد وهو متوقف ولديه ثوانٍ مسجلة
-    if (Sound.audioPlayer.src.includes(`audio/${folder}/story`) && Sound.audioPlayer.paused && Sound.audioPlayer.currentTime > 0) {
-      Sound.audioPlayer.play();
-      return;
+  // خريطة أسماء المجلدات مع التأكد من إضافة drs
+  let folder = cleanKey;
+  if (typeof Sound !== 'undefined' && Sound.rootFolderMap) {
+    folder = Sound.rootFolderMap[cleanKey] || Sound.rootFolderMap[rootKey] || cleanKey;
+  }
+  
+  // تطابق صريح مع الفعل درس ومجلده drs
+  if (cleanKey === 'درس' || cleanKey === 'درّس' || rootKey.includes('درس')) {
+    folder = 'drs';
+  }
+
+  if (typeof Sound !== 'undefined') {
+    // إيقاف أي صوت سابق قبل البدء
+    stopStoryAudio();
+
+    if (Sound.audioPlayer) {
+      const database = window.db || (typeof db !== 'undefined' ? db : {});
+      const data = database[rootKey] || database[cleanKey] || database['كتب'];
+      const fallbackText = data && data.storyParagraph ? data.storyParagraph.map(p => p.word).join(' ') : '';
+      
+      Sound.playAsset(folder, 'story', fallbackText);
     }
-
-    const database = window.db || (typeof db !== 'undefined' ? db : {});
-    const data = database[rootKey] || database[cleanKey] || database['كتب'];
-    const fallbackText = data && data.storyParagraph ? data.storyParagraph.map(p => p.word).join(' ') : '';
-    Sound.playAsset(folder, 'story', fallbackText);
   }
 }
 
-    function stopStoryAudio() {
+function stopStoryAudio() {
   if (typeof Sound !== 'undefined') {
     if (Sound.audioPlayer) {
       Sound.audioPlayer.pause();
+      Sound.audioPlayer.currentTime = 0;
     }
     if (Sound.sfxPlayer) {
       Sound.sfxPlayer.pause();
       Sound.sfxPlayer.currentTime = 0;
     }
-    if (typeof Sound.pause === 'function') {
+    if (typeof Sound.stop === 'function') {
+      Sound.stop();
+    } else if (typeof Sound.pause === 'function') {
       Sound.pause();
     }
   }
