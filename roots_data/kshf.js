@@ -3,7 +3,7 @@ window.ROADS_DATA = window.ROADS_DATA || {};
 
 const kshfData = {
   letters: ['ك', 'ش', 'ف'],
-  concept: "الظُّهُورُ وَالبَحْثُ عَنِ المَعْرِفَةِ (خُمَاسِيٌّ مَزِيدٌ بِحَرْفَيْنِ)",
+  concept: "جَذْرُ: كَشَفَ. يَدُلُّ عَلَى رَفْعِ الحِجَابِ وَإِظْهَارِ المَسْتُورِ، وَمِنْهُ اشْتُقَّ الفِعْلُ الخُمَاسِيُّ (اكْتَشَفَ).",
 
   // 🟢 1. معالم شمس الجذر
   branches: [
@@ -69,9 +69,26 @@ const kshfData = {
     }
   ],
 
+ // 🟢 عائلة الأفعال المزيدة من نفس جذر (ك - ش - ف) حصراً
   affixes: [
-    { word: "<span class='c-a'>ا</span><span class='c-r'>بْ</span><span class='c-a'>تَ</span><span class='c-r'>كَ</span><span class='c-r'>رَ</span>", plain: "ابْتَكَرَ", weight: "افْتَعَلَ", desc: "خماسي مزيد بحرفين: أحدث وأبدع شيئاً جديداً" },
-    { word: "<span class='c-a'>اجْ</span><span class='c-r'>تَ</span><span class='c-r'>مَ</span><span class='c-r'>عَ</span>", plain: "اجْتَمَعَ", weight: "افْتَعَلَ", desc: "خماسي مزيد بحرفين: التقى مع غيره وتآلف" }
+    { 
+      word: "<span class='c-a'>انْـ</span><span class='c-r'>كَـ</span><span class='c-r'>شَـ</span><span class='c-r'>فَ</span>", 
+      plain: "انْكَشَفَ", 
+      weight: "انْفَعَلَ", 
+      desc: "مزيد بحرفين (الهمزة والنون): ظهر وبان بعد خفاء" 
+    },
+    { 
+      word: "<span class='c-a'>تَـ</span><span class='c-r'>كَـ</span><span class='c-r'>شَّـ</span><span class='c-r'>فَ</span>", 
+      plain: "تَكَشَّفَ", 
+      weight: "تَفَعَّلَ", 
+      desc: "مزيد بحرفين (التاء والتضعيف): وضح وتبين شيئاً فشيئاً" 
+    },
+    { 
+      word: "<span class='c-a'>اسْتَـ</span><span class='c-r'>كْـ</span><span class='c-r'>شَـ</span><span class='c-r'>فَ</span>", 
+      plain: "اسْتَكْشَفَ", 
+      weight: "اسْتَفْعَلَ", 
+      desc: "مزيد بثلاثة أحرف: تطلّع إلى معرفة الشيء واستطلاعه" 
+    }
   ],
 
   // 🟢 2. سحابة الحكاية
