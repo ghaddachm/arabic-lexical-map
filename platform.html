@@ -2405,12 +2405,10 @@ let starsCount = 0;
       }
     }
 
- let currentStoryAudioInstance = null;
+let currentStoryAudioInstance = null;
+let lastStoryFolder = '';
 
 function speakCurrentStory() {
-  // إيقاف أي صوت سابق قبل البدء
-  stopStoryAudio();
-
   const rootSelectEl = document.getElementById('rootSelect');
   const rootKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
   const cleanKey = rootKey.replace(/[^\u0621-\u064A]/g, '');
@@ -2437,9 +2435,28 @@ function speakCurrentStory() {
     folder = 'drs';
   }
 
-  // تشغيل ملف الصوت MP3 مباشرة
+  // 1. إذا كان المقطع الصوتي لنفس الفعل متوقفاً مؤقتاً، واصل التشغيل من نفس الموضع
+  if (currentStoryAudioInstance && lastStoryFolder === folder && currentStoryAudioInstance.paused && currentStoryAudioInstance.currentTime > 0) {
+    currentStoryAudioInstance.play();
+    return;
+  }
+
+  // 2. إذا تم تغيير الفعل أو لم يكن المقطع مهيأً، أوقف القديم وابدأ مقطعاً جديداً
+  if (currentStoryAudioInstance) {
+    currentStoryAudioInstance.pause();
+    currentStoryAudioInstance.currentTime = 0;
+  }
+
+  lastStoryFolder = folder;
   const audioPath = `audio/${folder}/story.mp3?v=${new Date().getTime()}`;
   currentStoryAudioInstance = new Audio(audioPath);
+
+  // تصفير العداد تلقائياً عند انتهاء الملف الصوتي بالكامل
+  currentStoryAudioInstance.onended = function() {
+    if (currentStoryAudioInstance) {
+      currentStoryAudioInstance.currentTime = 0;
+    }
+  };
 
   currentStoryAudioInstance.play().catch(function(err) {
     console.warn("لم يتم العثور على ملف القصة الصوتي أو تم حظر التشغيل التلقائي:", err);
@@ -2454,18 +2471,15 @@ function speakCurrentStory() {
 }
 
 function stopStoryAudio() {
-  // 1. إيقاف المشغل المباشر وتصفيره
+  // 1. إيقاف مؤقت مع الاحتفاظ بموضع الثواني (currentTime) لاستئناف القراءة
   if (currentStoryAudioInstance) {
     currentStoryAudioInstance.pause();
-    currentStoryAudioInstance.currentTime = 0;
-    currentStoryAudioInstance = null;
   }
 
   // 2. إيقاف مشغلات كائن Sound
   if (typeof Sound !== 'undefined') {
     if (Sound.audioPlayer) {
       Sound.audioPlayer.pause();
-      Sound.audioPlayer.currentTime = 0;
     }
     if (Sound.sfxPlayer) {
       Sound.sfxPlayer.pause();
