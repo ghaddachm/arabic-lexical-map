@@ -2405,18 +2405,21 @@ let starsCount = 0;
       }
     }
 
- function speakCurrentStory() {
+ let currentStoryAudioInstance = null;
+
+function speakCurrentStory() {
+  // إيقاف أي صوت سابق قبل البدء
+  stopStoryAudio();
+
   const rootSelectEl = document.getElementById('rootSelect');
   const rootKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
   const cleanKey = rootKey.replace(/[^\u0621-\u064A]/g, '');
 
-  // خريطة أسماء المجلدات الافتراضية للجذور القديمة
   let folder = cleanKey;
   if (typeof Sound !== 'undefined' && Sound.rootFolderMap) {
     folder = Sound.rootFolderMap[cleanKey] || Sound.rootFolderMap[rootKey] || cleanKey;
   }
-  
-  // خريطة مطابقة للأفعال المزيدة ومجلداتها الصوتية
+
   const extraRoots = {
     'درس': 'drs',
     'درّس': 'drs',
@@ -2428,28 +2431,37 @@ let starsCount = 0;
     'استخرج': 'khrj'
   };
 
-  // إذا كان الجذر المختار من الأفعال المزيدة يتم توجيهه لمجلده الصوتي
   if (extraRoots[cleanKey]) {
     folder = extraRoots[cleanKey];
-  } else if (cleanKey.includes('درس')) {
+  } else if (cleanKey.includes('درس') || rootKey.includes('درس') || rootKey.includes('drs')) {
     folder = 'drs';
   }
 
-  if (typeof Sound !== 'undefined') {
-    // إيقاف أي صوت سابق قبل البدء لتفادي التداخل
-    stopStoryAudio();
+  // تشغيل ملف الصوت MP3 مباشرة
+  const audioPath = `audio/${folder}/story.mp3?v=${new Date().getTime()}`;
+  currentStoryAudioInstance = new Audio(audioPath);
 
-    if (Sound.audioPlayer) {
+  currentStoryAudioInstance.play().catch(function(err) {
+    console.warn("لم يتم العثور على ملف القصة الصوتي أو تم حظر التشغيل التلقائي:", err);
+    // بديل احتياطي فقط في حال تعذر تشغيل ملف MP3
+    if (typeof Sound !== 'undefined' && Sound.playAsset) {
       const database = window.db || (typeof db !== 'undefined' ? db : {});
       const data = database[rootKey] || database[cleanKey] || database['كتب'];
-      const fallbackText = data && data.storyParagraph ? data.storyParagraph.map(p => p.word).join(' ') : '';
-      
+      const fallbackText = data && data.storyParagraph ? data.storyParagraph.map(function(p) { return p.word; }).join(' ') : '';
       Sound.playAsset(folder, 'story', fallbackText);
     }
-  }
+  });
 }
 
 function stopStoryAudio() {
+  // 1. إيقاف المشغل المباشر وتصفيره
+  if (currentStoryAudioInstance) {
+    currentStoryAudioInstance.pause();
+    currentStoryAudioInstance.currentTime = 0;
+    currentStoryAudioInstance = null;
+  }
+
+  // 2. إيقاف مشغلات كائن Sound
   if (typeof Sound !== 'undefined') {
     if (Sound.audioPlayer) {
       Sound.audioPlayer.pause();
@@ -2465,6 +2477,8 @@ function stopStoryAudio() {
       Sound.pause();
     }
   }
+
+  // 3. إلغاء نطق المتصفح إن وجد
   if ('speechSynthesis' in window) {
     window.speechSynthesis.cancel();
   }
