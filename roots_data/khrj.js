@@ -69,10 +69,10 @@ const khrjData = {
     }
   ],
 
-  // 🟢 عائلة الأفعال المزيدة من نفس جذر (خ - ر - ج) حصراً
+ // 🟢 عائلة الأفعال المزيدة من نفس جذر (خ - ر - ج) حصراً
   affixes: [
     { 
-      word: "<span class='c-a'>أَخْـ</span><span class='c-r'>رَ</span><span class='c-r'>جَ</span>", 
+      word: "<span class='c-a'>أَ</span><span class='c-r'>خْـ</span><span class='c-r'>رَ</span><span class='c-r'>جَ</span>", 
       plain: "أَخْرَجَ", 
       weight: "أَفْعَلَ", 
       desc: "مزيد بالهمزة: جعله يبرز ويخرج إلى العلن" 
