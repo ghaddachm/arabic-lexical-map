@@ -97,11 +97,11 @@ const qwlData = {
     { word: "الفِعْلَ.", target: false }
   ],
 
-  missions: [
+ missions: [
     { 
       label: "المَهَمَّةُ 1: انْقُرْ عَلَى الفِعْلِ الثُّلَاثِيِّ المُجَرَّدِ مِنْ جَذْرِ قَوْلْ", 
       targetType: "الفعل المجرد", 
-      audio: "mission_1" 
+      audio: "mission_1.mp3?v=new" 
     },
     { 
       label: "المَهَمَّةُ 2: انْقُرْ عَلَى اسْمِ الفَاعِلِ مِنَ الفِعْلِ قَالَ", 
