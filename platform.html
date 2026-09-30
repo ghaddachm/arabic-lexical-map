@@ -2226,7 +2226,7 @@ let starsCount = 0;
       if (typeof renderSpacecraftChallenge === 'function') renderSpacecraftChallenge(data.challenges || []);
     }
 
-    function openMorphModal(branchIdx) {
+   function openMorphModal(branchIdx) {
       const rootSelectEl = document.getElementById('rootSelect');
       const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
       const database = window.db || (typeof db !== 'undefined' ? db : {});
@@ -2267,7 +2267,8 @@ let starsCount = 0;
       }
 
       const folder = (typeof Sound !== 'undefined' && Sound.rootFolderMap && Sound.rootFolderMap[rawKey]) ? Sound.rootFolderMap[rawKey] : rawKey;
-      const filePrefixes = ['verb', 'actor', 'product', 'place', 'source'];
+      // تم الاقتصار على المشتقات الأربعة بتسلسل متطابق مع الفهارس: 0: فعل، 1: فاعل، 2: مفعول، 3: مصدر
+      const filePrefixes = ['verb', 'actor', 'product', 'source'];
       const prefix = filePrefixes[branchIdx] || `b${branchIdx+1}`;
 
       const masterBtn = document.getElementById('btnMasterAudio');
