@@ -3,7 +3,9 @@ window.ROADS_DATA = window.ROADS_DATA || {};
 
 const qwlData = {
   letters: ['ق', 'و', 'ل'],
-  concept: "يَدُلُّ عَلَى النُّطْقِ وَالكَـلَامِ. وَهُوَ فِعْلٌ ثُلَاثِيٌّ مُعْتَلُّ العَيْنِ، مُعْتَلٌّ أَجْوَفُ.",
+  concept: "النُّطْقُ وَالكَلَامُ بِاللِّسَانِ (مُعْتَلٌّ أَجْوَفُ)",
+  subNote: "الأَصْلُ المُعْجَمِيُّ الَّذِي تَتَفَرَّعُ مِنْهُ كَافَّةُ الأَفْعَالِ وَالمُشْتَقَّاتِ.",
+  audioCore: "audio/qwl/core.mp3",
 
   // 🟢 1. معالم شمس الجذر (4 كواكب: الفعل، اسم الفاعل، اسم المفعول، المصدر)
   branches: [
@@ -58,9 +60,9 @@ const qwlData = {
   ],
 
   affixes: [
-    { word: "<span class='c-a'>أَ</span><span class='c-r'>قَ</span><span class='c-r'>ا</span><span class='c-r'>لَ</span>", plain: "أَقَالَ", weight: "أَفْعَلَ", desc: "مزيد بالهمزة: عفا عنه وأراحه من العثرة" },
-    { word: "<span class='c-a'>تَ</span><span class='c-r'>قَ</span><span class='c-a'>وَّ</span><span class='c-r'>لَ</span>", plain: "تَقَوَّلَ", weight: "تَفَعَّلَ", desc: "مزيد بالتاء والتضعيف: ادّعى وافترى كذباً" },
-    { word: "<span class='c-a'>اسْتَ</span><span class='c-r'>قَ</span><span class='c-r'>ا</span><span class='c-r'>لَ</span>", plain: "اسْتَقَالَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف: طلب إعفاءه من منصبه" }
+    { word: "<span class='c-a'>أَ</span><span class='c-r'>قَا</span><span class='c-r'>لَ</span>", plain: "أَقَالَ", weight: "أَفْعَلَ", desc: "مزيد بالهمزة: وافقه على التراجع عن البيع أو العهد (التعدية)" },
+    { word: "<span class='c-a'>تَـ</span><span class='c-r'>قَـ</span><span class='c-a'>وَّ</span><span class='c-r'>لَ</span>", plain: "تَقَوَّلَ", weight: "تَفَعَّلَ", desc: "مزيد بالتاء والتضعيف: ادّعى وافترى كلاماً لم يُقَل (التكلف)" },
+    { word: "<span class='c-a'>اسْتَـ</span><span class='c-r'>قَا</span><span class='c-r'>لَ</span>", plain: "اسْتَقَالَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف: طلب الإعفاء والتنحي عن العمل (الطلب)" }
   ],
 
   // 🟢 2. سحابة الحكاية
