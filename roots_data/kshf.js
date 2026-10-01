@@ -3,7 +3,9 @@ window.ROADS_DATA = window.ROADS_DATA || {};
 
 const kshfData = {
   letters: ['ك', 'ش', 'ف'],
-  concept: "جَذْرُ: كَشَفَ. يَدُلُّ عَلَى رَفْعِ الحِجَابِ وَإِظْهَارِ المَسْتُورِ، وَمِنْهُ اشْتُقَّ الفِعْلُ الخُمَاسِيُّ (اكْتَشَفَ).",
+  concept: "رَفْعُ الحِجَابِ وَإِظْهَارُ المَسْتُورِ (صَحِيحٌ سَالِمٌ)",
+  subNote: "الأَصْلُ المُعْجَمِيُّ الَّذِي تَتَفَرَّعُ مِنْهُ كَافَّةُ الأَفْعَالِ وَالمُشْتَقَّاتِ.",
+  audioCore: "audio/kshf/core.mp3",
 
   // 🟢 1. معالم شمس الجذر (4 كواكب: الفعل، اسم الفاعل، اسم المفعول، المصدر)
   branches: [
@@ -59,24 +61,9 @@ const kshfData = {
 
   // 🟢 عائلة الأفعال المزيدة من نفس جذر (ك - ش - ف) حصراً
   affixes: [
-    { 
-      word: "<span class='c-a'>انْـ</span><span class='c-r'>كَـ</span><span class='c-r'>شَـ</span><span class='c-r'>فَ</span>", 
-      plain: "انْكَشَفَ", 
-      weight: "انْفَعَلَ", 
-      desc: "مزيد بحرفين (الهمزة والنون): ظهر وبان بعد خفاء" 
-    },
-    { 
-      word: "<span class='c-a'>تَـ</span><span class='c-r'>كَـ</span><span class='c-r'>شَّـ</span><span class='c-r'>فَ</span>", 
-      plain: "تَكَشَّفَ", 
-      weight: "تَفَعَّلَ", 
-      desc: "مزيد بحرفين (التاء والتضعيف): وضح وتبين شيئاً فشيئاً" 
-    },
-    { 
-      word: "<span class='c-a'>اسْتَـ</span><span class='c-r'>كْـ</span><span class='c-r'>شَـ</span><span class='c-r'>فَ</span>", 
-      plain: "اسْتَكْشَفَ", 
-      weight: "اسْتَفْعَلَ", 
-      desc: "مزيد بثلاثة أحرف: تطلّع إلى معرفة الشيء واستطلاعه" 
-    }
+    { word: "<span class='c-r'>كَـ</span><span class='c-a'>ا</span><span class='c-r'>شَفَ</span>", plain: "كَاشَفَ", weight: "فَاعَلَ", desc: "مزيد بالألف: صارحه وأظهر له ما في نفسه (المشاركة)" },
+    { word: "<span class='c-a'>انْـ</span><span class='c-r'>كَشَفَ</span>", plain: "انْكَشَفَ", weight: "انْفَعَلَ", desc: "مزيد بحرفين (الهمزة والنون): ظهر وزال عنه الغطاء (المطاوعة)" },
+    { word: "<span class='c-a'>اسْتَـ</span><span class='c-r'>كْشَفَ</span>", plain: "اسْتَكْشَفَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف: سعى وبحث لمعرفة المجهول (الطلب والبحث)" }
   ],
 
   // 🟢 2. سحابة الحكاية
