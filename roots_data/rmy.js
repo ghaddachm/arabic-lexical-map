@@ -60,9 +60,24 @@ const rmyData = {
   ],
 
   affixes: [
-    { word: "<span class='c-a'>أَ</span><span class='c-r'>رْ</span><span class='c-r'>مَ</span><span class='c-a'>ى</span>", plain: "أَرْمَى", weight: "أَفْعَلَ", desc: "مزيد بالهمزة: ألقى وزاد في الشيء (التعدية)" },
-    { word: "<span class='c-r'>رَ</span><span class='c-a'>ا</span><span class='c-r'>مَ</span><span class='c-a'>ى</span>", plain: "رَامَى", weight: "فَاعَلَ", desc: "مزيد بالألف: بادله الرّمي وتنافس معه فيه (المشاركة)" },
-    { word: "<span class='c-a'>تَـ</span><span class='c-r'>رَ</span><span class='c-a'>ا</span><span class='c-r'>مَ</span><span class='c-a'>ى</span>", plain: "تَرَامَى", weight: "تَفَاعَلَ", desc: "مزيد بحرفين: تباعدت أطرافه وامتدّ أفقياً (المطاوعة والاتساع)" }
+    { 
+      word: "<span class='c-a'>أَ</span><span class='c-r'>رْ</span><span class='c-r'>مَ</span><span class='c-r'>ى</span>", 
+      plain: "أَرْمَى", 
+      weight: "أَفْعَلَ", 
+      desc: "مزيد بالهمزة: ألقى وزاد في الشيء (التعدية)" 
+    },
+    { 
+      word: "<span class='c-r'>رَ</span><span class='c-a'>ا</span><span class='c-r'>مَ</span><span class='c-r'>ى</span>", 
+      plain: "رَامَى", 
+      weight: "فَاعَلَ", 
+      desc: "مزيد بالألف: بادله الرّمي وتنافس معه فيه (المشاركة)" 
+    },
+    { 
+      word: "<span class='c-a'>تَـ</span><span class='c-r'>رَ</span><span class='c-a'>ا</span><span class='c-r'>مَ</span><span class='c-r'>ى</span>", 
+      plain: "تَرَامَى", 
+      weight: "تَفَاعَلَ", 
+      desc: "مزيد بحرفين: تباعدت أطرافه وامتدّ أفقياً (المطاوعة والاتساع)" 
+    }
   ],
 
   // 🟢 2. سحابة الحكاية
