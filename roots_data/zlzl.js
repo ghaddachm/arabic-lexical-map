@@ -3,7 +3,9 @@ window.ROADS_DATA = window.ROADS_DATA || {};
 
 const zlzlData = {
   letters: ['ز', 'ل', 'ز', 'ل'],
-  concept: "يَدُلُّ عَلَى التَّحْرِيكِ الشَّدِيدِ وَالاضْطِرَابِ.",
+  concept: "التَّحْرِيكُ الشَّدِيدُ وَالاضْطِرَابُ (رُبَاعِيٌّ مُضَعَّفٌ)",
+  subNote: "الأَصْلُ المُعْجَمِيُّ الَّذِي تَتَفَرَّعُ مِنْهُ كَافَّةُ الأَفْعَالِ وَالمُشْتَقَّاتِ.",
+  audioCore: "audio/zlzl/core.mp3",
 
   // 🟢 1. معالم شمس الجذر (4 كواكب: الفعل، اسم الفاعل، اسم المفعول، المصدر)
   branches: [
@@ -58,7 +60,7 @@ const zlzlData = {
   ],
 
   affixes: [
-    { word: "<span class='c-a'>تَ</span><span class='c-r'>زَ</span><span class='c-r'>لْ</span><span class='c-r'>زَ</span><span class='c-r'>لَ</span>", plain: "تَزَلْزَلَ", weight: "تَفَعْلَلَ", desc: "مزيد بالتاء للمطاوعة: اهتز واضطرب بنفسه" }
+    { word: "<span class='c-a'>تَـ</span><span class='c-r'>زَلْزَلَ</span>", plain: "تَزَلْزَلَ", weight: "تَفَعْلَلَ", desc: "مزيد بحرف التاء: اضطرب واهتز بشدة من تلقاء نفسه (المطاوعة)" }
   ],
 
   // 🟢 2. سحابة الحكاية
