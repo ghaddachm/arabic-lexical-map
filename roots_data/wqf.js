@@ -3,7 +3,9 @@ window.ROADS_DATA = window.ROADS_DATA || {};
 
 const wqfData = {
   letters: ['و', 'ق', 'ف'],
-  concept:"يَدُلُّ عَلَى الثَّبَاتِ وَانْقِطَاعِ الحَرَكَةِ.",
+  concept: "الثَّبَاتُ وَانْقِطَاعُ الحَرَكَةِ (مُعْتَلٌّ مِثَالٌ)",
+  subNote: "الأَصْلُ المُعْجَمِيُّ الَّذِي تَتَفَرَّعُ مِنْهُ كَافَّةُ الأَفْعَالِ وَالمُشْتَقَّاتِ.",
+  audioCore: "audio/wqf/core.mp3",
 
   // 🟢 1. معالم شمس الجذر (4 كواكب: الفعل، اسم الفاعل، اسم المفعول، المصدر)
   branches: [
@@ -57,10 +59,10 @@ const wqfData = {
     }
   ],
 
-  affixes: [
-    { word: "<span class='c-a'>أَ</span><span class='c-r'>وْقَفَ</span>", plain: "أَوْقَفَ", weight: "أَفْعَلَ", desc: "مزيد بالهمزة: جعله يقف وحبسه" },
-    { word: "<span class='c-r'>وَ</span><span class='c-a'>ا</span><span class='c-r'>قَفَ</span>", plain: "وَاقَفَ", weight: "فَاعَلَ", desc: "مزيد بالألف: واجهه وثبت أمامه" },
-    { word: "<span class='c-a'>اسْتَ</span><span class='c-r'>وْقَفَ</span>", plain: "اسْتَوْقَفَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف: طلب منه الوقوف" }
+ affixes: [
+    { word: "<span class='c-a'>أَوْ</span><span class='c-r'>قَفَ</span>", plain: "أَوْقَفَ", weight: "أَفْعَلَ", desc: "مزيد بالهمزة: حَبَسَهُ ومَنَعَهُ مِنَ الحَرَكَةِ (التعدية)" },
+    { word: "<span class='c-a'>تَـ</span><span class='c-r'>وَ</span><span class='c-a'>قَّ</span><span class='c-r'>فَ</span>", plain: "تَوَقَّفَ", weight: "تَفَعَّلَ", desc: "مزيد بالتاء والتضعيف: كَفَّ وَسَكَنَ عَنِ المَسِيرِ (المطاوعة)" },
+    { word: "<span class='c-a'>اسْتَـ</span><span class='c-r'>وْقَفَ</span>", plain: "اسْتَوْقَفَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف: طَلَبَ مِنْهُ أَنْ يَقِفَ وَيَنْتَبِهَ (الطلب)" }
   ],
 
   // 🟢 2. سحابة الحكاية
