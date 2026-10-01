@@ -3,7 +3,9 @@ window.ROADS_DATA = window.ROADS_DATA || {};
 
 const sbqData = {
   letters: ['س', 'ب', 'ق'],
-  concept: "جَذْرُ: سَبَقَ. يَدُلُّ عَلَى التَّقَدُّمِ فِي السَّيْرِ أَوِ الزَّمَانِ وَالوُصُولِ أَوَّلاً.",
+  concept: "التَّقَدُّمُ فِي السَّيْرِ وَالوُصُولُ أَوَّلاً (صَحِيحٌ سَالِمٌ)",
+  subNote: "الأَصْلُ المُعْجَمِيُّ الَّذِي تَتَفَرَّعُ مِنْهُ كَافَّةُ الأَفْعَالِ وَالمُشْتَقَّاتِ.",
+  audioCore: "audio/sbq/core.mp3",
   
   // 🟢 1. معالم شمس الجذر (4 كواكب: الفعل، اسم الفاعل، اسم المفعول، المصدر)
   branches: [
@@ -57,10 +59,10 @@ const sbqData = {
     }
   ],
 
-  affixes: [
-    { word: "<span class='c-a'>أَ</span><span class='c-r'>سْبَقَ</span>", plain: "أَسْبَقَ", weight: "أَفْعَلَ", desc: "مزيد بالهمزة: جعله يسبق أو قدّمه" },
-    { word: "<span class='c-a'>تَـ</span><span class='c-r'>سَـ</span><span class='c-a'>ا</span><span class='c-r'>بَقَ</span>", plain: "تَسَابَقَ", weight: "تَفَاعَلَ", desc: "مزيد بحرفين (التاء والألف): تبارى وتنافس القوم معاً" },
-    { word: "<span class='c-a'>اسْتَـ</span><span class='c-r'>سْبَقَ</span>", plain: "اسْتَسْبَقَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف: أراد السباق وطلب التقدم" }
+ affixes: [
+    { word: "<span class='c-a'>أَ</span><span class='c-r'>سْبَقَ</span>", plain: "أَسْبَقَ", weight: "أَفْعَلَ", desc: "مزيد بالهمزة: قدّم وأفاضَ العطاءَ وجعله يسبق (التعدية)" },
+    { word: "<span class='c-r'>سَـ</span><span class='c-a'>ا</span><span class='c-r'>بَقَ</span>", plain: "سَابَقَ", weight: "فَاعَلَ", desc: "مزيد بالألف: نافس غيره في مضمار الجري ليكون الأول (المشاركة)" },
+    { word: "<span class='c-a'>اسْـ</span><span class='c-r'>تَـ</span><span class='c-a'>ـ</span><span class='c-r'>بَقَ</span>", plain: "اسْتَبَقَ", weight: "افْتَعَلَ", desc: "مزيد بحرفين (الهمزة والتاء): بادر وسارع مع غيره نحو الغاية (المبالغة والمسارعة)" }
   ],
 
   // 🟢 2. سحابة الحكاية
