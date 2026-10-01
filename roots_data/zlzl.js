@@ -63,18 +63,34 @@ const zlzlData = {
 
   // 🟢 2. سحابة الحكاية
   storyParagraph: [
-    { word: "حِينَ", target: false }, { word: "هَبَّتِ", target: false }, { word: "العَاصِفَةُ،", target: false },
-    { word: "أَطْلَقَتْ", target: false }, { word: "صَوْتاً", target: false }, { word: "مُزَلْزِلاً", target: "اسم الفاعل" },
-    { word: "يَمْلَأُ", target: false }, { word: "الآفَاقَ،", target: false }, { word: "حَتَّى", target: false },
-    { word: "زَلْزَلَ", target: "الفعل المجرد" }, { word: "القَصْفُ", target: false }, { word: "أَرْكَانَ", target: false },
-    { word: "الجَبَلِ؛", target: false }, { word: "فَظَلَّ", target: false }, { word: "البَيْتُ", target: false },
-    { word: "القَدِيمُ", target: false }, { word: "مُزَلْزَلاً", target: "اسم المفعول" }, { word: "لِفَتْرَةٍ", target: false },
-    { word: "طَوِيلَةٍ،", target: false }, // عُدّلت لتفادي اسم المكان (مزلزل الرياح)
-    { word: "وَكَانَتْ", target: false }, { word: "تِلْكَ", target: false }, { word: "زَلْزَلَةً", target: "المصدر" },
-    { word: "قَوِيَّةً", target: false }, { word: "تَحَدَّثَ", target: false }, { word: "عَنْهَا", target: false },
-    { word: "أَهْلُ", target: false }, { word: "القَرْيَةِ.", target: false }
+    { word: "حِينَ", target: false },
+    { word: "هَبَّتِ", target: false },
+    { word: "العَاصِفَةُ،", target: false },
+    { word: "زَلْزَلَ", target: "الفعل المجرد" },
+    { word: "صَوْتُ", target: false },
+    { word: "الرَّعْدِ", target: false },
+    { word: "أَرْجَاءَ", target: false },
+    { word: "القَرْيَةِ،", target: false },
+    { word: "فَكَانَ", target: false },
+    { word: "حَدَثاً", target: false },
+    { word: "مُزَلْزِلاً", target: "اسم الفاعل" },
+    { word: "يَمْلَأُ", target: false },
+    { word: "الآفَاقَ.", target: false },
+    { word: "وَبَقِيَ", target: false },
+    { word: "الجِدَارُ", target: false },
+    { word: "القَدِيمُ", target: false },
+    { word: "كَيَاناً", target: false },
+    { word: "مُزَلْزَلاً", target: "اسم المفعول" },
+    { word: "أَمَامَ", target: false },
+    { word: "الرِّيَاحِ،", target: false },
+    { word: "لَكِنَّهُ", target: false },
+    { word: "صَمَدَ", target: false },
+    { word: "أَمَامَ", target: false },
+    { word: "تِلْكَ", target: false },
+    { word: "الزَّلْزَلَةِ", target: "المصدر" },
+    { word: "القَوِيَّةِ.", target: false }
   ],
-
+  
   missions: [
     { 
       label: "المَهَمَّةُ الأُولَى: انْقُرْ عَلَى الفِعْلِ الرُّبَاعِيِّ المُجَرَّدِ مِنْ جَذْرِ زَلْزَلَ", 
