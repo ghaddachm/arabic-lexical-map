@@ -2,10 +2,11 @@ window.db = window.db || {};
 window.ROADS_DATA = window.ROADS_DATA || {};
 
 const mddData = {
-  letters: ["م", "د", "د"],
-  verbType: "صَحِيحٌ مُضَعَّفٌ",
-  concept: "البَسْطُ وَالزِّيَادَةُ، صَحِيحٌ مُضَعَّفٌ.",
-
+  letters: ['م', 'د', 'د'],
+  concept: "البَسْطُ وَالزِّيَادَةُ (صَحِيحٌ مُضَعَّفٌ)",
+  subNote: "الأَصْلُ المُعْجَمِيُّ الَّذِي تَتَفَرَّعُ مِنْهُ كَافَّةُ الأَفْعَالِ وَالمُشْتَقَّاتِ.",
+  audioCore: "audio/mdd/core.mp3",
+  
   // 🟢 1. معالم شمس الجذر (4 كواكب: الفعل، اسم الفاعل، اسم المفعول، المصدر)
   branches: [
     {
@@ -59,10 +60,10 @@ const mddData = {
   ],
 
   // 🟢 الزيادات الصرفية
-  affixes: [
-    { word: "<span class='c-a'>أَ</span><span class='c-r'>مَدَّ</span>", plain: "أَمَدَّ", weight: "أَفْعَلَ", desc: "مزيد بالهمزة: أعانه وقدّم له العونَ والمدد" },
-    { word: "<span class='c-r'>مَـ</span><span class='c-a'>ا</span><span class='c-r'>دَّ</span>", plain: "مَادَّ", weight: "فَاعَلَ", desc: "مزيد بالألف: طاوله ونافسه في الامتداد" },
-    { word: "<span class='c-a'>امْتَ</span><span class='c-r'>دَّ</span>", plain: "امْتَدَّ", weight: "افْتَعَلَ", desc: "مزيد بحرفين: انبسط واسترسل في الطول والمكان" }
+ affixes: [
+    { word: "<span class='c-a'>أَ</span><span class='c-r'>مَدَّ</span>", plain: "أَمَدَّ", weight: "أَفْعَلَ", desc: "مزيد بالهمزة: أعانه وقدّم له العونَ والمدد (التعدية)" },
+    { word: "<span class='c-r'>مَـ</span><span class='c-a'>ا</span><span class='c-r'>دَّ</span>", plain: "مَادَّ", weight: "فَاعَلَ", desc: "مزيد بالألف: طاوله ونافسه في الامتداد (المشاركة)" },
+    { word: "<span class='c-a'>امْ</span><span class='c-r'>تَـ</span><span class='c-a'>ـ</span><span class='c-r'>دَّ</span>", plain: "امْتَدَّ", weight: "افْتَعَلَ", desc: "مزيد بحرفين: انبسط واسترسل في الطول والمكان (المطاوعة)" }
   ],
 
   // 🟢 2. سحابة الحكاية
