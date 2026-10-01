@@ -63,17 +63,29 @@ const dhrjData = {
 
   // 🟢 2. سحابة الحكاية
   storyParagraph: [
-    { word: "فِي", target: false }, { word: "حَدِيقَةِ", target: false }, { word: "الأَلْعَابِ،", target: false },
-    { word: "وَقَفَ", target: false }, { word: "الطِّفْلُ", target: false }, { word: "مُدَحْرِجاً", target: "اسم الفاعل" },
-    { word: "كُرَتَهُ", target: false }, { word: "الصَّغِيرَةَ.", target: false },
-    { word: "دَحْرَجَ", target: "الفعل المجرد" }, { word: "البَطَلُ", target: false }, { word: "الكُرَةَ", target: false },
-    { word: "بِفَرَحٍ،", target: false }, { word: "فَصَارَتْ", target: false }, { word: "شَيْئاً", target: false },
-    { word: "مُدَحْرَجاً", target: "اسم المفعول" }, { word: "بِسُرْعَةٍ", target: false }, { word: "فَوْقَ", target: false },
-    { word: "الرِّمَالِ", target: false }, { word: "الذَّهَبِيَّةِ،", target: false }, { word: "وَكَانَتْ", target: false },
-    { word: "تِلْكَ", target: false }, { word: "دَحْرَجَةً", target: "المصدر" }, { word: "رَائِعَةً", target: false },
-    { word: "مَلَأَتِ", target: false }, { word: "المَكَانَ", target: false }, { word: "مَرَحاً.", target: false }
+    { word: "دَحْرَجَ", target: "الفعل المجرد" },
+    { word: "مُحَمَّدٌ", target: false },
+    { word: "الكُرَةَ", target: false },
+    { word: "الصُّوفِيَّةَ", target: false },
+    { word: "لِقِطَّتِهِ،", target: false },
+    { word: "فَكَانَ", target: false },
+    { word: "مُدَحْرِجاً", target: "اسم الفاعل" },
+    { word: "لَهَا", target: false },
+    { word: "بِلُطْفٍ", target: false },
+    { word: "عَلَى", target: false },
+    { word: "السِّجَّادِ.", target: false },
+    { word: "فَرَكَضَتِ", target: false },
+    { word: "القِطَّةُ", target: false },
+    { word: "خَلْفَ", target: false },
+    { word: "الكُرَةِ", target: false },
+    { word: "المُدَحْرَجَةِ", target: "اسم المفعول" },
+    { word: "بِفَرَحٍ،", target: false },
+    { word: "وَتَابَعَتْ", target: false },
+    { word: "تِلْكَ", target: false },
+    { word: "الدَّحْرَجَةَ", target: "المصدر" },
+    { word: "السَّرِيعَةَ", target: false },
+    { word: "بِشَغَفٍ.", target: false }
   ],
-
   missions: [
   { 
     label: "المَهَمَّةُ 1: انْقُرْ عَلَى الفِعْلِ الرُّبَاعِيِّ المُجَرَّدِ مِنْ جَذْرِ دَحْرَجَ", 
