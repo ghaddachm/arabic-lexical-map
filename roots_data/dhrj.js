@@ -4,6 +4,8 @@ window.ROADS_DATA = window.ROADS_DATA || {};
 const dhrjData = {
   letters: ['د', 'ح', 'ر', 'ج'],
   concept: "التَّدْوِيرُ وَالتَّقْلِيبُ (رُبَاعِيٌّ مُجَرَّدٌ)",
+  subNote: "الأَصْلُ المُعْجَمِيُّ الَّذِي تَتَفَرَّعُ مِنْهُ كَافَّةُ الأَفْعَالِ وَالمُشْتَقَّاتِ.",
+  audioCore: "audio/dhrj/core.mp3",
   
   // 🟢 1. معالم شمس الجذر (4 كواكب: الفعل، اسم الفاعل، اسم المفعول، المصدر)
   branches: [
@@ -58,7 +60,7 @@ const dhrjData = {
   ],
 
   affixes: [
-    { word: "<span class='c-a'>تَ</span><span class='c-r'>دَ</span><span class='c-r'>حْ</span><span class='c-r'>رَ</span><span class='c-r'>جَ</span>", plain: "تَدَحْرَجَ", weight: "تَفَعْلَلَ", desc: "مزيد بالتاء للمطاوعة: تدحرج الشيء بنفسه" }
+    { word: "<span class='c-a'>تَـ</span><span class='c-r'>دَحْرَجَ</span>", plain: "تَدَحْرَجَ", weight: "تَفَعْلَلَ", desc: "مزيد بحرف التاء: تحرّك منقلباً وهابطاً من تلقاء نفسه (المطاوعة)" }
   ],
 
   // 🟢 2. سحابة الحكاية
