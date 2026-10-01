@@ -4,6 +4,8 @@ window.ROADS_DATA = window.ROADS_DATA || {};
 const rmyData = {
   letters: ['ر', 'م', 'ي'],
   concept: "الإِلْقَاءُ وَالقَذْفُ (مُعْتَلٌّ نَاقِصٌ)",
+  subNote: "الأَصْلُ المُعْجَمِيُّ الَّذِي تَتَفَرَّعُ مِنْهُ كَافَّةُ الأَفْعَالِ وَالمُشْتَقَّاتِ.",
+  audioCore: "audio/rmy/core.mp3",
 
   // 🟢 1. معالم شمس الجذر [ ر - م - ي ] (4 كواكب: الفعل، اسم الفاعل، اسم المفعول، المصدر)
   branches: [
@@ -58,9 +60,9 @@ const rmyData = {
   ],
 
   affixes: [
-    { word: "<span class='c-r'>رَ</span><span class='c-a'>ا</span><span class='c-r'>مَ</span><span class='c-r'>ى</span>", plain: "رَامَى", weight: "فَاعَلَ", desc: "مزيد بالألف للمشاركة: قاذفه وباراه بالرمي" },
-    { word: "<span class='c-a'>ا</span><span class='c-r'>رْ</span><span class='c-a'>تَ</span><span class='c-r'>مَ</span><span class='c-r'>ى</span>", plain: "ارْتَمَى", weight: "افْتَعَلَ", desc: "مزيد بالألف والتاء للمطاوعة: ألقى بنفسه في مكانٍ آمن" },
-    { word: "<span class='c-a'>اسْتَ</span><span class='c-r'>رْمَى</span>", plain: "اسْتَرْمَى", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف: خضع واستسلم وطلب الأمان" }
+    { word: "<span class='c-a'>أَ</span><span class='c-r'>رْ</span><span class='c-r'>مَ</span><span class='c-a'>ى</span>", plain: "أَرْمَى", weight: "أَفْعَلَ", desc: "مزيد بالهمزة: ألقى وزاد في الشيء (التعدية)" },
+    { word: "<span class='c-r'>رَ</span><span class='c-a'>ا</span><span class='c-r'>مَ</span><span class='c-a'>ى</span>", plain: "رَامَى", weight: "فَاعَلَ", desc: "مزيد بالألف: بادله الرّمي وتنافس معه فيه (المشاركة)" },
+    { word: "<span class='c-a'>تَـ</span><span class='c-r'>رَ</span><span class='c-a'>ا</span><span class='c-r'>مَ</span><span class='c-a'>ى</span>", plain: "تَرَامَى", weight: "تَفَاعَلَ", desc: "مزيد بحرفين: تباعدت أطرافه وامتدّ أفقياً (المطاوعة والاتساع)" }
   ],
 
   // 🟢 2. سحابة الحكاية
