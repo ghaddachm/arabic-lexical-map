@@ -89,7 +89,7 @@ const sbqData = {
     { word: "مَنَحَ", target: false },
     { word: "تِلْكَ", target: false },
     { word: "المُسَابَقَةَ", target: "المصدر" },
-    { word: "رَوْحاً", target: false },
+    { word: "رُوحاً", target: false },
     { word: "جَمِيلَةً", target: false },
     { word: "مِنَ", target: false },
     { word: "التَّحَدِّي.", target: false }
