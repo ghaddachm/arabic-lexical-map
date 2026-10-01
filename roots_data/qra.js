@@ -4,6 +4,8 @@ window.ROADS_DATA = window.ROADS_DATA || {};
 const qraData = {
   letters: ['ق', 'ر', 'أ'],
   concept: "القِرَاءَةُ وَالتِّلَاوَةُ (صَحِيحٌ مَهْمُوزٌ)",
+  subNote: "الأَصْلُ المُعْجَمِيُّ الَّذِي تَتَفَرَّعُ مِنْهُ كَافَّةُ الأَفْعَالِ وَالمُشْتَقَّاتِ.",
+  audioCore: "audio/qra/core.mp3",
 
   // 🟢 1. معالم شمس الجذر (4 كواكب: الفعل، اسم الفاعل، اسم المفعول، المصدر)
   branches: [
@@ -58,9 +60,9 @@ const qraData = {
   ],
 
   affixes: [
-    { word: "<span class='c-a'>أَ</span><span class='c-r'>قْ</span><span class='c-r'>رَ</span><span class='c-r'>أَ</span>", plain: "أَقْرَأَ", weight: "أَفْعَلَ", desc: "مزيد بحرف الهمزة في أوله: جعله يقرأ ويتلو" },
-    { word: "<span class='c-r'>قَ</span><span class='c-a'>ا</span><span class='c-r'>رَ</span><span class='c-r'>أَ</span>", plain: "قَارَأَ", weight: "فَاعَلَ", desc: "مزيد بالألف: بادله وشاركه القراءة والتدارس" },
-    { word: "<span class='c-a'>اسْتَ</span><span class='c-r'>قْ</span><span class='c-r'>رَ</span><span class='c-r'>أَ</span>", plain: "اسْتَقْرَأَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف: تتبّع الجزئيات وتفحّصها بدقة" }
+    { word: "<span class='c-a'>أَ</span><span class='c-r'>قْرَأَ</span>", plain: "أَقْرَأَ", weight: "أَفْعَلَ", desc: "مزيد بالهمزة: جعله يقرأ ويتلو (التعدية)" },
+    { word: "<span class='c-r'>قَـ</span><span class='c-a'>ا</span><span class='c-r'>رَأَ</span>", plain: "قَارَأَ", weight: "فَاعَلَ", desc: "مزيد بالألف: بادله وشاركه القراءة والتدارس (المشاركة)" },
+    { word: "<span class='c-a'>اسْتَ</span><span class='c-r'>قْرَأَ</span>", plain: "اسْتَقْرَأَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف: تتبّع الجزئيات وتفحّصها بدقة (الطلب والبحث)" }
   ],
 
   // 🟢 2. سحابة الحكاية
