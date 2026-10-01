@@ -3,7 +3,9 @@ window.ROADS_DATA = window.ROADS_DATA || {};
 
 const drsData = {
   letters: ['د', 'ر', 'س'],
-  concept: "القِرَاءَةُ وَتَعَلُّمُ العِلْمِ، وَهُوَ الأَصْلُ المُعْجَمِيُّ الَّذِي تَتَفَرَّعُ مِنْهُ الأَفْعَالُ وَالمُشْتَقَّاتُ.",
+  concept: "القِرَاءَةُ وَتَعَلُّمُ العِلْمِ (صَحِيحٌ سَالِمٌ)",
+  subNote: "الأَصْلُ المُعْجَمِيُّ الَّذِي تَتَفَرَّعُ مِنْهُ كَافَّةُ الأَفْعَالِ وَالمُشْتَقَّاتِ.",
+  audioCore: "audio/drs/core.mp3",
 
   // 🟢 1. معالم شمس الجذر (4 كواكب متناظرة)
   branches: [
@@ -58,8 +60,9 @@ const drsData = {
   ],
 
   affixes: [
-    { word: "<span class='c-a'>تَ</span><span class='c-r'>دَ</span><span class='c-a'>ا</span><span class='c-r'>رَ</span><span class='c-r'>سَ</span>", plain: "تَدَارَسَ", weight: "تَفَاعَلَ", desc: "مزيد بالتاء والألف للمشاركة: راجع العلم مع زملائه" },
-    { word: "<span class='c-r'>دَ</span><span class='c-a'>ا</span><span class='c-r'>رَ</span><span class='c-r'>سَ</span>", plain: "دَارَسَ", weight: "فَاعَلَ", desc: "مزيد بالألف: ذاكر وباحث غيره في موضوع الدرس" }
+    { word: "<span class='c-r'>دَ</span><span class='c-a'>رَّ</span><span class='c-r'>سَ</span>", plain: "دَرَّسَ", weight: "فَعَّلَ", desc: "مزيد بالتضعيف: علَّم غيره ولقّنه المعرفة (التعدية والتكثير)" },
+    { word: "<span class='c-r'>دَ</span><span class='c-a'>ا</span><span class='c-r'>رَسَ</span>", plain: "دَارَسَ", weight: "فَاعَلَ", desc: "مزيد بالألف: راجع العلم وتباحث فيه مع غيره (المشاركة)" },
+    { word: "<span class='c-a'>تَـ</span><span class='c-r'>دَ</span><span class='c-a'>ا</span><span class='c-r'>رَسَ</span>", plain: "تَدَارَسَ", weight: "تَفَاعَلَ", desc: "مزيد بحرفين: تبادل دراسة المسائل بين جماعة (المشاركة الجماعية)" }
   ],
 
   // 🟢 2. سحابة الحكاية
