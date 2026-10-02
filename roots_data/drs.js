@@ -2,7 +2,6 @@ window.db = window.db || {};
 window.ROADS_DATA = window.ROADS_DATA || {};
 
 const drsData = {
-  const drsData = {
   letters: ['د', 'ر', 'س'],
   concept: "القِرَاءَةُ وَتَعَلُّمُ العِلْمِ (صَحِيحٌ سَالِمٌ)",
   subNote: "الأَصْلُ المُعْجَمِيُّ الَّذِي اشْتُقَّ مِنْهُ الفِعْلُ الرُّبَاعِيُّ المَزِيدُ: دَرَّسَ.",
