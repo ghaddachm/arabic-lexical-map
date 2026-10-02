@@ -3,7 +3,9 @@ window.ROADS_DATA = window.ROADS_DATA || {};
 
 const khrjData = {
   letters: ['خ', 'ر', 'ج'],
-  concept: "جَذْرُ: خَرَجَ. يَدُلُّ عَلَى البُرُوزِ وَالانْتِقَالِ مِنَ الدَّاخِلِ إِلَى الخَارِجِ.",
+  concept: "البُرُوزُ وَالانْتِقَالُ مِنَ الدَّاخِلِ (صَحِيحٌ سَالِمٌ)",
+  subNote: "الأَصْلُ المُعْجَمِيُّ الَّذِي تَتَفَرَّعُ مِنْهُ كَافَّةُ الأَفْعَالِ وَالمُشْتَقَّاتِ.",
+  audioCore: "audio/xrj/core.mp3",
 
   // 🟢 1. معالم شمس الجذر (4 كواكب: الفعل، اسم الفاعل، اسم المفعول، المصدر)
   branches: [
@@ -59,24 +61,9 @@ const khrjData = {
 
   // 🟢 عائلة الأفعال المزيدة من نفس جذر (خ - ر - ج) حصراً
   affixes: [
-    { 
-      word: "<span class='c-a'>أَ</span><span class='c-r'>خْـ</span><span class='c-r'>رَ</span><span class='c-r'>جَ</span>", 
-      plain: "أَخْرَجَ", 
-      weight: "أَفْعَلَ", 
-      desc: "مزيد بالهمزة: جعله يبرز ويخرج إلى العلن" 
-    },
-    { 
-      word: "<span class='c-a'>تَـ</span><span class='c-r'>خَـ</span><span class='c-r'>رَّ</span><span class='c-r'>جَ</span>", 
-      plain: "تَخَرَّجَ", 
-      weight: "تَفَعَّلَ", 
-      desc: "مزيد بالتاء والتضعيف: أتم دراسته ونال شهادته" 
-    },
-    { 
-      word: "<span class='c-a'>اسْتَـ</span><span class='c-r'>خْـ</span><span class='c-r'>رَ</span><span class='c-r'>جَ</span>", 
-      plain: "اسْتَخْرَجَ", 
-      weight: "اسْتَفْعَلَ", 
-      desc: "مزيد بثلاثة أحرف: بذل وسعه لطلب خروجه وسحبه" 
-    }
+    { word: "<span class='c-a'>أَ</span><span class='c-r'>خْرَجَ</span>", plain: "أَخْرَجَ", weight: "أَفْعَلَ", desc: "مزيد بالهمزة: أَبْرَزَهُ وَجَعَلَهُ يَبْرُزُ إِلَى الخَارِجِ (التعدية)" },
+    { word: "<span class='c-a'>تَـ</span><span class='c-r'>خَـ</span><span class='c-a'>رَّ</span><span class='c-r'>جَ</span>", plain: "تَخَرَّجَ", weight: "تَفَعَّلَ", desc: "مزيد بحرفين (التاء والتضعيف): أَتَمَّ دِرَاسَتَهُ وَنَالَ شَهَادَتَهُ (التكلف والتدرج)" },
+    { word: "<span class='c-a'>اسْتَـ</span><span class='c-r'>خْرَجَ</span>", plain: "اسْتَخْرَجَ", weight: "اسْتَفْعَلَ", desc: "مزيد بثلاثة أحرف: طَلَبَ إِخْرَاجَ الشَّيْءِ وَاسْتَحْصَلَهُ بِجُهْدٍ (الطلب)" }
   ],
 
   // 🟢 2. سحابة الحكاية
