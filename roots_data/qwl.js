@@ -989,8 +989,13 @@ const qwlData = {
   ]
 };
 
-// تسجيل الجذر بجميع المفاتيح المعتمدة
+// تسجيل الجذر بجميع الصيغ المحتملة لضمان ربط الذاكرة
+window.db["قول"] = qwlData;
 window.db["قال"] = qwlData;
+window.db["ق-و-ل"] = qwlData;
 window.db["qwl"] = qwlData;
+
+window.ROADS_DATA["قول"] = qwlData;
 window.ROADS_DATA["قال"] = qwlData;
+window.ROADS_DATA["ق-و-ل"] = qwlData;
 window.ROADS_DATA["qwl"] = qwlData;
