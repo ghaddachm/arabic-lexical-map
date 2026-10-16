@@ -1,7 +1,7 @@
 window.db = window.db || {};
 window.ROADS_DATA = window.ROADS_DATA || {};
 
-const sbqData = {
+window.sbqData = {
   letters: ['س', 'ب', 'ق'],
   concept: "التَّقَدُّمُ فِي السَّيْرِ وَالوُصُولُ أَوَّلاً (صَحِيحٌ سَالِمٌ)",
   subNote: "الأَصْلُ المُعْجَمِيُّ الَّذِي اشْتُقَّ مِنْهُ الفِعْلُ المَزِيدُ بِالأَلِفِ: سَابَقَ.",
@@ -887,20 +887,22 @@ const sbqData = {
 };
 
 // 🔑 تسجيل الجذر بجميع المفاتيح لضمان التوافق التام ومطابقة القائمة المنسدلة
-window.db["سبق"] = sbqData;
-window.db["سابق"] = sbqData;
-window.db["سَابَقَ"] = sbqData;
-window.db["س-ب-ق"] = sbqData;
-window.db["sbq"] = sbqData;
-window.db["سَابَقَ (مَزِيدٌ بِالأَلِفِ - مُشَارَكَةٌ)"] = sbqData;
-window.db["[ س - ب - ق ] (رُبَاعِيٌّ مَزِيدٌ بِالأَلِفِ)"] = sbqData;
-window.db["[ س - ب - ق ]"] = sbqData;
+var sbqData = window.sbqData;
 
-window.ROADS_DATA["سبق"] = sbqData;
-window.ROADS_DATA["سابق"] = sbqData;
-window.ROADS_DATA["سَابَقَ"] = sbqData;
-window.ROADS_DATA["س-ب-ق"] = sbqData;
-window.ROADS_DATA["sbq"] = sbqData;
-window.ROADS_DATA["سَابَقَ (مَزِيدٌ بِالأَلِفِ - مُشَارَكَةٌ)"] = sbqData;
-window.ROADS_DATA["[ س - ب - ق ] (رُبَاعِيٌّ مَزِيدٌ بِالأَلِفِ)"] = sbqData;
-window.ROADS_DATA["[ س - ب - ق ]"] = sbqData;
+window.db["سبق"] = window.sbqData;
+window.db["سابق"] = window.sbqData;
+window.db["سَابَقَ"] = window.sbqData;
+window.db["س-ب-ق"] = window.sbqData;
+window.db["sbq"] = window.sbqData;
+window.db["سَابَقَ (مَزِيدٌ بِالأَلِفِ - مُشَارَكَةٌ)"] = window.sbqData;
+window.db["[ س - ب - ق ] (رُبَاعِيٌّ مَزِيدٌ بِالأَلِفِ)"] = window.sbqData;
+window.db["[ س - ب - ق ]"] = window.sbqData;
+
+window.ROADS_DATA["سبق"] = window.sbqData;
+window.ROADS_DATA["سابق"] = window.sbqData;
+window.ROADS_DATA["سَابَقَ"] = window.sbqData;
+window.ROADS_DATA["س-ب-ق"] = window.sbqData;
+window.ROADS_DATA["sbq"] = window.sbqData;
+window.ROADS_DATA["سَابَقَ (مَزِيدٌ بِالأَلِفِ - مُشَارَكَةٌ)"] = window.sbqData;
+window.ROADS_DATA["[ س - ب - ق ] (رُبَاعِيٌّ مَزِيدٌ بِالأَلِفِ)"] = window.sbqData;
+window.ROADS_DATA["[ س - ب - ق ]"] = window.sbqData;
