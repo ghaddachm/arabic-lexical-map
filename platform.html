@@ -918,33 +918,98 @@
     </div>
   </div>
 
-    <div class="root-dropdown-wrapper">
-      <label style="font-weight: 900;">الجَذْرُ:</label>
-      <select id="rootSelect" onchange="loadRadialWorld(this.value)">
-        <optgroup label="أ. الأَفْعَالُ الثُّلَاثِيَّةُ المُجَرَّدَةُ">
-          <option value="كتب">📚 [ ك - ت - ب ] (صَحِيحٌ سَالِمٌ)</option>
-          <option value="أخذ">📖 [ أ - خ - ذ ] (صَحِيحٌ مَهْمُوزُ الفَاءِ)</option>
-          <option value="سأل">📖 [ س - أ - ل ] (صَحِيحٌ مَهْمُوزُ العَيْنِ)</option>
-          <option value="قرأ">📖 [ ق - ر - أ ] (صَحِيحٌ مَهْمُوزُ اللَّامِ)</option>
-          <option value="مدد">🪢 [ م - د - د ] (صَحِيحٌ مُضَعَّفٌ)</option>
-        </optgroup>
-        <optgroup label="ب. الأَفْعَالُ الرُّبَاعِيَّةُ المُجَرَّدَةُ">
-          <option value="دحرج">🌀 [ د - ح - ر - ج ] (رُبَاعِيٌّ سَالِمٌ)</option>
-          <option value="زلزل">⚡ [ ز - ل - ز - ل ] (رُبَاعِيٌّ مُضَعَّفٌ)</option>
-        </optgroup>
-        <optgroup label="ج. قِسْمُ الأَفْعَالِ المُعْتَلَّةِ">
-          <option value="وقف">🚏 [ و - ق - ف ] (مُعْتَلٌّ مِثَالٌ)</option>
-          <option value="قول">🎙️ [ ق - و - ل ] (مُعْتَلٌّ أَجْوَفُ)</option>
-          <option value="رمي">🎯 [ ر - م - ي ] (مُعْتَلٌّ نَاقِصٌ)</option>
-        </optgroup>
-        <optgroup label="د. قِسْمُ الأَفْعَالِ المَزِيدَةِ القِيَاسِيَّةِ">
-          <option value="درس">🏫 دَرَّسَ ← [ د - ر - س ] (ثُلَاثِيٌّ مَزِيدٌ بِالتَّضْعِيفِ / فَعَّلَ)</option>
-          <option value="سبق">🏃 سَابَقَ ← [ س - ب - ق ] (ثُلَاثِيٌّ مَزِيدٌ بِالأَلِفِ / فَاعَلَ)</option>
-          <option value="كشف">🔬 اكْتَشَفَ ← [ ك - ش - ف ] (ثُلَاثِيٌّ مَزِيدٌ بِحَرْفَيْنِ / افْتَعَلَ)</option>
-          <option value="خرج">⛏️ اسْتَخْرَجَ ← [ خ - ر - ج ] (ثُلَاثِيٌّ مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ / اسْتَفْعَلَ)</option>
-        </optgroup>
-      </select>
+   <!-- واجهة المجرة الكوكبية البديلة للقائمة المنسدلة القديمة -->
+<div class="galaxy-container" style="padding: 15px; text-align: center; background: rgba(15, 23, 42, 0.6); border-radius: 15px; margin: 10px 0;">
+  <h3 style="color: #fde047; margin-bottom: 15px; font-size: 1.2rem;">🪐 اختر كوكب الجذر أو الفعل للانطلاق:</h3>
+  
+  <div class="planets-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+    
+    <!-- كوكب الأفعال الثلاثية المجردة -->
+    <div class="planet-card" onclick="togglePlanet('triadic')" style="background: rgba(15, 23, 42, 0.9); border: 2px solid #3b82f6; border-radius: 12px; padding: 12px; cursor: pointer; transition: 0.3s;">
+      <div style="font-size: 1.8rem;">📚</div>
+      <h4 style="color: #60a5fa; margin: 8px 0; font-size: 0.95rem;">الثلاثية المجردة</h4>
+      <p style="color: #94a3b8; font-size: 0.75rem;">(السالم، المهموز، المضعف)</p>
     </div>
+
+    <!-- كوكب الأفعال الرباعية المجردة -->
+    <div class="planet-card" onclick="togglePlanet('quadriadic')" style="background: rgba(15, 23, 42, 0.9); border: 2px solid #10b981; border-radius: 12px; padding: 12px; cursor: pointer; transition: 0.3s;">
+      <div style="font-size: 1.8rem;">🌀</div>
+      <h4 style="color: #34d399; margin: 8px 0; font-size: 0.95rem;">الرباعية المجردة</h4>
+      <p style="color: #94a3b8; font-size: 0.75rem;">(السالم، المضعف)</p>
+    </div>
+
+    <!-- كوكب الأفعال المعتلة -->
+    <div class="planet-card" onclick="togglePlanet('weak')" style="background: rgba(15, 23, 42, 0.9); border: 2px solid #8b5cf6; border-radius: 12px; padding: 12px; cursor: pointer; transition: 0.3s;">
+      <div style="font-size: 1.8rem;">🌙</div>
+      <h4 style="color: #a78bfa; margin: 8px 0; font-size: 0.95rem;">الأفعال المعتلة</h4>
+      <p style="color: #94a3b8; font-size: 0.75rem;">(المثال، الأجوف، الناقص)</p>
+    </div>
+
+    <!-- كوكب الأفعال المزيدة القياسية -->
+    <div class="planet-card" onclick="togglePlanet('augmented')" style="background: rgba(15, 23, 42, 0.9); border: 2px solid #f59e0b; border-radius: 12px; padding: 12px; cursor: pointer; transition: 0.3s;">
+      <div style="font-size: 1.8rem;">☀️</div>
+      <h4 style="color: #fbbf24; margin: 8px 0; font-size: 0.95rem;">الأفعال المزيدة</h4>
+      <p style="color: #94a3b8; font-size: 0.75rem;">(مزيد بالتضعيف، بالألف، بحرفين...)</p>
+    </div>
+
+  </div>
+
+  <!-- الأقمار الفرعية (تظهر عند النقر على الكوكب) -->
+  <div id="moonsContainer" style="margin-top: 20px; padding: 12px; background: rgba(30, 41, 59, 0.8); border-radius: 10px; display: none;">
+    <p style="color: #e2e8f0; font-weight: bold; font-size: 0.9rem;">اختر الفعل المحدد:</p>
+    <div id="moonsList" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 8px;"></div>
+  </div>
+</div>
+
+<script>
+  // بيانات الأقمار والكواكب مضبوطة علمياً وصرفياً
+  const galaxyData = {
+    triadic: [
+      { name: "📚 [ ك - ت - ب ] (صَحِيحٌ سَالِمٌ)", val: "كتب" },
+      { name: "📖 [ أ - خ - ذ ] (مَهْمُوزُ الفَاءِ)", val: "أخذ" },
+      { name: "📖 [ س - أ - ل ] (مَهْمُوزُ العَيْنِ)", val: "سأل" },
+      { name: "📖 [ ق - ر - أ ] (مَهْمُوزُ اللَّامِ)", val: "قرأ" },
+      { name: "🪢 [ م - د - د ] (صَحِيحٌ مُضَعَّفٌ)", val: "مدد" }
+    ],
+    quadriadic: [
+      { name: "🌀 [ د - ح - ر - ج ] (رُبَاعِيٌّ سَالِمٌ)", val: "دحرج" },
+      { name: "⚡ [ ز - ل - ز - ل ] (رُبَاعِيٌّ مُضَعَّفٌ)", val: "زلزل" }
+    ],
+    weak: [
+      { name: "🚏 [ و - ق - ف ] (مُعْتَلٌّ مِثَالٌ)", val: "وقف" },
+      { name: "🎙️ [ ق - و - ل ] (مُعْتَلٌّ أَجْوَفُ)", val: "قول" },
+      { name: "🎯 [ ر - م - ي ] (مُعْتَلٌّ نَاقِصٌ)", val: "رمي" }
+    ],
+    augmented: [
+      { name: "🏫 دَرَّسَ (ثُلَاثِيٌّ مَزِيدٌ بِالتَّضْعِيفِ / فَعَّلَ)", val: "درس" },
+      { name: "🏃 سَابَقَ (ثُلَاثِيٌّ مَزِيدٌ بِالأَلِفِ / فَاعَلَ)", val: "سبق" },
+      { name: "🔬 اكْتَشَفَ (ثُلَاثِيٌّ مَزِيدٌ بِحَرْفَيْنِ / افْتَعَلَ)", val: "كشف" },
+      { name: "⛏️ اسْتَخْرَجَ (ثُلَاثِيٌّ مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ / اسْتَفْعَلَ)", val: "خرج" }
+    ]
+  };
+
+  function togglePlanet(categoryKey) {
+    const container = document.getElementById('moonsContainer');
+    const list = document.getElementById('moonsList');
+    container.style.display = 'block';
+    list.innerHTML = '';
+
+    galaxyData[categoryKey].forEach(item => {
+      const btn = document.createElement('button');
+      btn.innerText = item.name;
+      btn.style.cssText = "background: #1e293b; color: #f8fafc; border: 1px solid #64748b; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 0.85rem; transition: 0.2s;";
+      btn.onmouseover = () => btn.style.background = '#334155';
+      btn.onmouseout = () => btn.style.background = '#1e293b';
+      btn.onclick = () => {
+        // استدعاء الدالة الأصلية في مشروعك لتحميل المحطات بناءً على الفعل المختار
+        if (typeof loadRadialWorld === 'function') {
+          loadRadialWorld(item.val);
+        }
+      };
+      list.appendChild(btn);
+    });
+  }
+</script>
 
     <div class="score-badge">
       <span>⭐ النُّجُومُ:</span>
