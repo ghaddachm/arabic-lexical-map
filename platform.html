@@ -401,39 +401,41 @@
 
   <!-- 🧭 أزرار التوجيه الجانبية العائمة -->
   <div class="floating-side-controls">
-    <button class="side-control-btn" style="border-color: #f59e0b;" onclick="openWelcomeScreen()" title="شاشة البداية">🚀</button>
-    <button class="side-control-btn" style="border-color: #38bdf8;" onclick="toggleGuideModal()" title="دليل التوجيه">🧭</button>
-    <button class="side-control-btn" style="border-color: #ec4899;" onclick="triggerEndJourney()" title="وسام ختام الرحلة">🏆</button>
-  </div>
+  <button type="button" class="side-control-btn" style="border: 2px solid #f59e0b;" onclick="openWelcomeScreen()" title="شاشة البداية">🚀</button>
+  <button type="button" class="side-control-btn" style="border: 2px solid #38bdf8;" onclick="toggleGuideModal()" title="دليل التوجيه">🧭</button>
+  <button type="button" class="side-control-btn" style="border: 2px solid #ec4899;" onclick="triggerEndJourney()" title="وسام ختام الرحلة">🏆</button>
+</div>
 
  <!-- 🌌 شاشة البداية الترحيبية الأصلية بكامل عناصرها ورونقها -->
 <div id="welcomeScreen" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #0f172a 45%, #030712 100%); z-index: 99999; display: flex; align-items: center; justify-content: center; overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif; transition: opacity 0.8s ease, transform 0.8s ease;">
 
   <style>
-    .floating-side-controls {
-  position: fixed;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 9999999;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+   .floating-side-controls {
+    position: fixed !important;
+    left: 16px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 2147483647 !important; /* أعلى قيمة ممكنة في المتصفح */
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    pointer-events: auto !important; /* استقبال النقرات إجبارياً */
+  }
 
-.side-control-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: #0f172a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.35rem;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  transition: transform 0.25s;
-}
+  .side-control-btn {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    background: #0f172a !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.35rem !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+    transition: transform 0.25s !important;
+  }
 
 .side-control-btn:hover {
   transform: scale(1.15);
