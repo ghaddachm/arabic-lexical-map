@@ -29,7 +29,7 @@
       color: #ffffff;
     }
 
-    /* 🎛️ أزرار لوحة التحكم الجانبية العائمة (ظاهرة دائماً في كل الخانات) */
+    /* 🎛️ أزرار لوحة التحكم الجانبية العائمة */
     .floating-side-controls {
       position: fixed;
       left: 15px;
@@ -38,7 +38,7 @@
       display: flex;
       flex-direction: column;
       gap: 15px;
-      z-index: 100000; /* أعلى من الواجهة الترحيبية لتبقى ظاهرة دائماً */
+      z-index: 100000;
     }
 
     .side-control-btn {
@@ -56,10 +56,7 @@
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     }
 
-    .side-control-btn:hover {
-      transform: scale(1.15) translateX(5px);
-    }
-
+    .side-control-btn:hover { transform: scale(1.15) translateX(5px); }
     .ctrl-yellow { border: 2.5px solid #facc15; }
     .ctrl-blue   { border: 2.5px solid #38bdf8; }
     .ctrl-pink   { border: 2.5px solid #ec4899; }
@@ -85,7 +82,7 @@
       border-radius: 22px;
       backdrop-filter: blur(12px);
       text-align: center;
-      cursor: default; /* تعطيل النقر لتكون للعرض فقط */
+      cursor: default; 
     }
 
     /* 🪐 نافذة الكواكب والأقمار الهرمية المتسلسلة */
@@ -175,6 +172,7 @@
     @keyframes sunBeat { 0% { transform: scale(1); } 100% { transform: scale(1.04); } }
     .sun-root-letters { font-size: 2.3rem; font-weight: 900; color: #7f1d1d; letter-spacing: 2px; line-height: 1.2; }
     .sun-badge-desc { font-size: 0.95rem; font-weight: 900; color: #854d0e; background: rgba(255, 255, 255, 0.95); padding: 0.25rem 0.9rem; border-radius: 14px; margin-top: 0.3rem; box-shadow: 0 3px 8px rgba(0,0,0,0.15); }
+    
     .planet-station { position: absolute; display: flex; flex-direction: column; align-items: center; cursor: pointer; z-index: 5; transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     .planet-station:hover { transform: scale(1.15) translateY(-8px); z-index: 25; }
     .planet-pill-tag { background: rgba(15, 23, 42, 0.95); border: 2px solid #38bdf8; border-radius: 20px; padding: 0.25rem 0.9rem; margin-bottom: 0.4rem; display: flex; flex-direction: column; align-items: center; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6); white-space: nowrap; }
@@ -199,7 +197,6 @@
     .affix-box { background: #fffbeb; border: 3px solid #fde68a; border-radius: 30px; padding: 1.3rem; margin-top: 1.2rem; }
     .affix-box-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
     .affix-box-title { font-weight: 900; color: #92400e; font-size: 1.15rem; }
-    .affix-rule-badge { background: #fef3c7; color: #b45309; padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.8rem; font-weight: 800; }
     .affix-item-row { display: flex; justify-content: space-between; align-items: center; background: white; border: 1.5px solid #fef08a; padding: 0.6rem 1rem; border-radius: 16px; margin-bottom: 0.5rem; }
     .c-r { color: var(--c-root) !important; }
     .c-a { color: var(--c-affix) !important; }
@@ -207,7 +204,7 @@
 </head>
 <body>
 
-  <!-- 🎛️ أزرار التحكم الجانبية العائمة (تظهر في جميع الشاشات) -->
+  <!-- 🎛️ أزرار التحكم الجانبية العائمة -->
   <div class="floating-side-controls">
     <button class="side-control-btn ctrl-yellow" title="الواجهة الرئيسية" onclick="returnToWelcome()">🚀</button>
     <button class="side-control-btn ctrl-blue" title="دليل المحطات" onclick="openGuideModal()">🪐</button>
@@ -231,7 +228,6 @@
         </p>
       </div>
 
-      <!-- بطاقات العرض (غير قابلة للنقر) -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; width: 100%; max-width: 1050px;">
         <div class="space-station-card" style="padding: 1.2rem;">
           <div style="font-size: 2.3rem;">☀️</div>
@@ -260,7 +256,6 @@
         </div>
       </div>
 
-      <!-- زر الانطلاق الفعلي -->
       <button onclick="openCosmicHierarchy()" style="margin-top: 0.8rem; padding: 1.1rem 4rem; border-radius: 60px; background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%); border: 3.5px solid #fffdf0; color: #090a0f; font-size: 1.45rem; font-weight: 900; cursor: pointer; box-shadow: 0 0 45px rgba(245, 158, 11, 0.9); display: inline-flex; align-items: center; gap: 1rem;">
         <span>انْطَلِقْ فِي الرِّحْلَةِ الكَوْنِيَّةِ</span>
         <span>🚀</span>
@@ -320,7 +315,6 @@
       </div>
     </div>
 
-    <!-- قائمة الجذور -->
     <div class="root-dropdown-wrapper">
       <label style="font-weight: 900;">الجَذْرُ:</label>
       <select id="rootSelect" onchange="loadRadialWorld(this.value)">
@@ -374,14 +368,65 @@
           <svg class="planet-globe-svg" viewBox="0 0 160 160">
             <defs><radialGradient id="gradP1" cx="35%" cy="30%" r="70%"><stop offset="0%" stop-color="#fbcfe8"/><stop offset="40%" stop-color="#ec4899"/><stop offset="85%" stop-color="#9d174d"/><stop offset="100%" stop-color="#4c0519"/></radialGradient></defs>
             <circle cx="80" cy="80" r="70" fill="url(#gradP1)" stroke="#ffffff" stroke-width="6"/>
+            <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(-25 80 80)"/>
             <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b1_word">كَتَبَ</text>
+            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
+            <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b1_pattern">(فَعَلَ)</text>
+          </svg>
+        </div>
+
+        <div class="planet-station station-2" onclick="openMorphModal(1)">
+          <div class="planet-pill-tag"><span class="tag-title">اسْمُ الفَاعِلِ</span><span class="tag-sub">مَنْ يَفْعَلُ؟</span></div>
+          <svg class="planet-globe-svg" viewBox="0 0 160 160">
+            <defs><radialGradient id="gradP2" cx="35%" cy="30%" r="70%"><stop offset="0%" stop-color="#bae6fd"/><stop offset="40%" stop-color="#0284c7"/><stop offset="85%" stop-color="#1e40af"/><stop offset="100%" stop-color="#0f172a"/></radialGradient></defs>
+            <circle cx="80" cy="80" r="70" fill="url(#gradP2)" stroke="#ffffff" stroke-width="6"/>
+            <ellipse cx="80" cy="80" rx="65" ry="24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(25 80 80)"/>
+            <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b2_word">كَاتِبٌ</text>
+            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
+            <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b2_pattern">(فَاعِلٌ)</text>
+          </svg>
+        </div>
+
+        <div class="planet-station station-3" onclick="openMorphModal(2)">
+          <div class="planet-pill-tag"><span class="tag-title">اسْمُ المَفْعُولِ</span><span class="tag-sub">مَا الَّذِي فُعِلَ؟</span></div>
+          <svg class="planet-globe-svg" viewBox="0 0 160 160">
+            <defs><radialGradient id="gradP3" cx="35%" cy="30%" r="70%"><stop offset="0%" stop-color="#fecaca"/><stop offset="40%" stop-color="#ef4444"/><stop offset="85%" stop-color="#b91c1c"/><stop offset="100%" stop-color="#450a0a"/></radialGradient></defs>
+            <circle cx="80" cy="80" r="70" fill="url(#gradP3)" stroke="#ffffff" stroke-width="6"/>
+            <ellipse cx="80" cy="80" rx="65" ry="20" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(-15 80 80)"/>
+            <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="27" font-weight="900" id="b3_word">مَكْتُوبٌ</text>
+            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
+            <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b3_pattern">(مَفْعُولٌ)</text>
+          </svg>
+        </div>
+
+        <div class="planet-station station-4" onclick="openMorphModal(3)">
+          <div class="planet-pill-tag"><span class="tag-title">اسْمُ المَكَانِ</span><span class="tag-sub">أَيْنَ يَقَعُ؟</span></div>
+          <svg class="planet-globe-svg" viewBox="0 0 160 160">
+            <defs><radialGradient id="gradP4" cx="35%" cy="30%" r="70%"><stop offset="0%" stop-color="#bbf7d0"/><stop offset="40%" stop-color="#22c55e"/><stop offset="85%" stop-color="#15803d"/><stop offset="100%" stop-color="#052e16"/></radialGradient></defs>
+            <circle cx="80" cy="80" r="70" fill="url(#gradP4)" stroke="#ffffff" stroke-width="6"/>
+            <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(35 80 80)"/>
+            <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b4_word">مَكْتَبٌ</text>
+            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
+            <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b4_pattern">(مَفْعَلٌ)</text>
+          </svg>
+        </div>
+
+        <div class="planet-station station-5" onclick="openMorphModal(4)">
+          <div class="planet-pill-tag"><span class="tag-title">المَصْدَرُ</span><span class="tag-sub">مَا اسْمُ النَّشَاطِ؟</span></div>
+          <svg class="planet-globe-svg" viewBox="0 0 160 160">
+            <defs><radialGradient id="gradP5" cx="35%" cy="30%" r="70%"><stop offset="0%" stop-color="#fed7aa"/><stop offset="40%" stop-color="#f97316"/><stop offset="85%" stop-color="#c2410c"/><stop offset="100%" stop-color="#431407"/></radialGradient></defs>
+            <circle cx="80" cy="80" r="70" fill="url(#gradP5)" stroke="#ffffff" stroke-width="6"/>
+            <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(-30 80 80)"/>
+            <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b5_word">كِتَابَةٌ</text>
+            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
+            <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b5_pattern">(فِعَالَةٌ)</text>
           </svg>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- نافذة دليل المحطات -->
+  <!-- نافذة دليل المحطات (الكوكب 🪐) -->
   <div class="modal-overlay" id="guideModal" onclick="closeGuideModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()" style="text-align: center;">
       <button class="modal-close" onclick="closeGuideModal()">✕</button>
@@ -396,7 +441,7 @@
     </div>
   </div>
 
-  <!-- نافذة الاحتفالية الكبرى -->
+  <!-- نافذة الاحتفالية الكبرى (الكأس 🏆) -->
   <div class="modal-overlay" id="celebrationModal" onclick="closeCelebrationModal(event)">
     <div class="modal-box" onclick="event.stopPropagation()" style="text-align: center; background: radial-gradient(circle, #1e1b4b, #090d16); border: 4px solid #facc15;">
       <button class="modal-close" onclick="closeCelebrationModal()">✕</button>
@@ -418,20 +463,60 @@
         <div class="modal-weight" id="mHeroWeight"></div>
       </div>
       <div class="detail-card" id="mDetailCard">
-        <div class="detail-row"><span class="detail-label">💡 الشَّرْحُ وَالدَّلَالَةُ: </span><span id="mDesc"></span></div>
+        <div class="detail-row" id="rowDesc"><span class="detail-label">💡 الشَّرْحُ وَالدَّلَالَةُ: </span><span id="mDesc"></span></div>
+        <div class="detail-row" id="rowColloc"><span class="detail-label">🔗 المُتَلَازِمَةُ اللَّفْظِيَّةُ: </span><span id="mColloc" style="color: var(--primary); font-weight: 900;"></span></div>
+        <div class="detail-row" id="rowExample"><span class="detail-label">📖 المِثَالُ فِي سِيَاقٍ: </span><span id="mExample" style="color: #1e293b; font-style: italic;"></span></div>
+        <div class="rule-gold-banner" id="mRuleBanner" style="display: none;"></div>
+      </div>
+      <div class="affix-box" id="mAffixCard">
+        <div class="affix-box-head">
+          <span class="affix-box-title" id="mAffixTitle">📚 عَائِلَةُ الأَفْعَالِ المَزِيدَةِ</span>
+          <span class="affix-rule-badge">أَحْرُفُ الجَذْرِ بِالأَحْمَرِ</span>
+        </div>
+        <div id="mAffixList"></div>
       </div>
     </div>
   </div>
 
   <script>
-    // ==========================================
+    // ------------------------------------------------------------
+    // قاعدة البيانات (داتا الأفعال)
+    // ------------------------------------------------------------
+    const db = {
+      "كتب": {
+        letters: ['ك', 'ت', 'ب'], concept: "الكِتَابَةُ وَالتَّدْوِينُ (صَحِيحٌ سَالِمٌ)",
+        branches: [
+          { isVerb: true, role: "الحدث / الفعل", word: "كَتَبَ", plain: "كَتَبَ", weight: "فَعَلَ (ثلاثي مجرد)", desc: "فِعْلٌ مَاضٍ ثُلَاثِيٌّ صَحِيحٌ سَالِمٌ، حُرُوفُهُ كُلُّهَا أَصْلِيَّةٌ.", colloc: "كَتَبَ نَصّاً", ex: "«كَتَبَ التِّلْمِيذُ قِصَّةً رَائِعَةً»", rule: "الفِعْلُ الثُّلَاثِيُّ المُجَرَّدُ يَأْتِي عَلَى وَزْنِ (فَعَلَ)." },
+          { isVerb: false, role: "اسْمُ الفَاعِلِ", word: "كَاتِبٌ", plain: "كَاتِبٌ", weight: "فَاعِلٌ (اسم فاعل)", desc: "اسْمٌ مُشْتَقٌّ يَدُلُّ عَلَى مَنْ قَامَ بِالتَّدْوِينِ.", colloc: "كَاتِبٌ مَاهِرٌ", ex: "«جَلَسَ الكَاتِبُ أَمَامَ مَكْتَبِهِ»", rule: "يُصَاغُ اسْمُ الفَاعِلِ عَلَى وَزْنِ (فَاعِلٌ)." },
+          { isVerb: false, role: "اسْمُ المَفْعُولِ", word: "مَكْتُوبٌ", plain: "مَكْتُوبٌ", weight: "مَفْعُولٌ (اسم مفعول)", desc: "يَدُلُّ عَلَى مَا وَقَعَ عَلَيْهِ فِعْلُ الكِتَابَةِ.", colloc: "نَصٌّ مَكْتُوبٌ", ex: "«خَرَجَتِ القِصَّةُ فِي نَصٍّ مَكْتُوبٍ»", rule: "يُصَاغُ اسْمُ المَفْعُولِ عَلَى وَزْنِ (مَفْعُولٌ)." },
+          { isVerb: false, role: "اسْمُ المَكَانِ", word: "مَكْتَبٌ", plain: "مَكْتَبٌ", weight: "مَفْعَلٌ (اسم مكان)", desc: "يَدُلُّ عَلَى مَوْضِعِ الكِتَابَةِ.", colloc: "مَكْتَبٌ مُرَتَّبٌ", ex: "«جَلَسَ إِلَى مَكْتَبِهِ المُرَتَّبِ»", rule: "يُصَاغُ اسْمُ المَكَانِ عَلَى وَزْنِ (مَفْعَلٌ)." },
+          { isVerb: false, role: "المَصْدَرُ", word: "كِتَابَةٌ", plain: "كِتَابَةٌ", weight: "فِعَالَةٌ (مصدر)", desc: "يَدُلُّ عَلَى الحَدَثِ مُجَرَّداً مِنَ الزَّمَانِ.", colloc: "سِحْرُ الكِتَابَةِ", ex: "«تُعَلِّمُ الأَطْفَالَ جَمَالَ الكِتَابَةِ»", rule: "مَصْدَرُ الكِتَابَةِ يَأْتِي عَلَى وَزْنِ (فِعَالَةٌ)." }
+        ],
+        affixes: [
+          { word: "كَاتَبَ", plain: "كَاتَبَ", weight: "فَاعَلَ", desc: "مزيد بحرف الألف" },
+          { word: "اكْتَتَبَ", plain: "اكْتَتَبَ", weight: "افْتَعَلَ", desc: "مزيد بحرفين" }
+        ]
+      },
+      "قرأ": {
+        letters: ['ق', 'ر', 'أ'], concept: "القِرَاءَةُ وَالتِّلَاوَةُ (صَحِيحٌ مَهْمُوزٌ)",
+        branches: [
+          { isVerb: true, role: "الحدث / الفعل", word: "قَرَأَ", plain: "قَرَأَ", weight: "فَعَلَ", desc: "يَدُلُّ عَلَى النُّطْقِ بِالأَلْفَاظِ המَكْتُوبَةِ.", colloc: "قَرَأَ قِصَّةً", ex: "«قَرَأَ عَلِيٌّ حِكَايَةً»", rule: "يَأْتِي عَلَى وَزْنِ (فَعَلَ)." }
+        ]
+      },
+      "مدد": { letters: ['م', 'د', 'د'], concept: "البَسْطُ وَالزِّيَادَةُ (صَحِيحٌ مُضَعَّفٌ)", branches: [{ plain: "مَدَّ", weight: "فَعَلَ", desc: "صَحِيحٌ مُضَعَّفٌ." }] },
+      "دحرج": { letters: ['د', 'ح', 'ر', 'ج'], concept: "التَّدْوِيرُ (رُبَاعِيٌّ مُجَرَّدٌ)", branches: [{ plain: "دَحْرَجَ", weight: "فَعْلَلَ", desc: "رُبَاعِيٌّ مُجَرَّدٌ." }] },
+      "درس": { letters: ['د', 'ر', 'س'], concept: "التَّعْلِيمُ (مَزِيدٌ بِالتَّضْعِيفِ)", branches: [{ plain: "دَرَّسَ", weight: "فَعَّلَ", desc: "مَزِيدٌ لِلتَّعْدِيَةِ." }] },
+      "وقف": { letters: ['و', 'ق', 'ف'], concept: "الثَّبَاتُ (مُعْتَلٌّ مِثَالٌ)", branches: [{ plain: "وَقَفَ", weight: "فَعَلَ", desc: "مُعْتَلُّ الفَاءِ." }] },
+      "قول": { letters: ['ق', 'و', 'ل'], concept: "النُّطْقُ (مُعْتَلٌّ أَجْوَفُ)", branches: [{ plain: "قَالَ", weight: "فَعَلَ", desc: "مُعْتَلُّ العَيْنِ." }] },
+      "رمي": { letters: ['ر', 'م', 'ي'], concept: "الإِلْقَاءُ (مُعْتَلٌّ نَاقِصٌ)", branches: [{ plain: "رَمَى", weight: "فَعَلَ", desc: "مُعْتَلُّ اللَّامِ." }] }
+    };
+
+    // ------------------------------------------------------------
     // 🎛️ دوال أزرار لوحة التحكم الجانبية
-    // ==========================================
+    // ------------------------------------------------------------
     function returnToWelcome() {
-      // إغلاق كل النوافذ المنبثقة
       document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
       document.getElementById('cosmicHierarchyModal').style.display = 'none';
-      // إظهار الواجهة الترحيبية
       const welcome = document.getElementById('welcomeCosmicScreen');
       if (welcome) welcome.style.display = 'flex';
     }
@@ -447,9 +532,6 @@
 
     function openCelebrationModal() {
       document.getElementById('celebrationModal').classList.add('open');
-      if (typeof Sound !== 'undefined' && Sound.playAsset) {
-        Sound.playAsset('', 'celebrate', 'أَلْفُ مَبْرُوكٍ يَا بَطَل! لَقَدْ أَتْمَمْتَ رِحْلَتَكَ الكَوْنِيَّةَ بِنَجَاحٍ مُبْهِرٍ!');
-      }
     }
     function closeCelebrationModal(e) {
       if (!e || e.target.id === 'celebrationModal' || e.target.classList.contains('modal-close')) {
@@ -457,9 +539,9 @@
       }
     }
 
-    // ==========================================
-    // دوال الواجهة الهرمية الأساسية
-    // ==========================================
+    // ------------------------------------------------------------
+    // دوال الواجهة الهرمية والتنقل الأساسي
+    // ------------------------------------------------------------
     function openCosmicHierarchy() {
       document.getElementById('cosmicHierarchyModal').style.display = 'flex';
       backToLevel1();
@@ -476,66 +558,216 @@
       document.getElementById('hLevel2').style.display = 'none';
       document.getElementById('hLevel3').style.display = 'none';
     }
+
     function selectPlanet(planetType) {
       document.getElementById('hLevel1').style.display = 'none';
       document.getElementById('hLevel2').style.display = 'block';
       const container = document.getElementById('hLevel2Container');
       const title = document.getElementById('hLevel2Title');
       container.innerHTML = '';
+      
       if (planetType === 'triadic') {
         title.textContent = '🌙 أقمار الفعل الثلاثي';
-        const moons = [{id: 'correct', name: 'الفعل الصحيح', icon: '☄️', color: '#38bdf8'}];
+        const moons = [
+          {id: 'correct', name: 'الفعل الصحيح', icon: '☄️', color: '#38bdf8'},
+          {id: 'hamzouz', name: 'الفعل المهموز', icon: '🌠', color: '#f59e0b'},
+          {id: 'mudaaf', name: 'الفعل المضعف', icon: '🪐', color: '#10b981'}
+        ];
         moons.forEach(m => {
-          container.innerHTML += `<div onclick="selectMoon('${planetType}', '${m.id}')" style="background: rgba(30,41,59,0.9); border: 2px solid ${m.color}; border-radius: 18px; padding: 22px 28px; cursor: pointer; text-align: center;">
-            <div style="font-size: 2.8rem;">${m.icon}</div><h4 style="color: ${m.color}; margin-top: 10px;">${m.name}</h4>
+          container.innerHTML += `<div onclick="selectMoon('${planetType}', '${m.id}')" style="background: rgba(30,41,59,0.9); border: 2px solid ${m.color}; border-radius: 18px; padding: 22px 28px; cursor: pointer; text-align: center; min-width: 170px; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05) translateY(-5px)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="font-size: 2.8rem;">${m.icon}</div><h4 style="color: ${m.color}; margin-top: 10px; font-size: 1.15rem;">${m.name}</h4>
+          </div>`;
+        });
+      } else if (planetType === 'quadric') {
+        title.textContent = '🌙 أقمار الفعل الرباعي';
+        container.innerHTML += `<div onclick="launchSolarSystem('دحرج')" style="background: rgba(30,41,59,0.9); border: 2px solid #10b981; border-radius: 18px; padding: 22px 28px; cursor: pointer; text-align: center; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05) translateY(-5px)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="font-size: 2.8rem;">🌀</div><h4 style="color: #34d399; margin-top: 10px; font-size: 1.15rem;">رباعي مجرد (دَحْرَجَ)</h4>
+        </div>`;
+      } else if (planetType === 'augmented') {
+        title.textContent = '🌙 أقمار الفعل المزيد';
+        container.innerHTML += `<div onclick="launchSolarSystem('درس')" style="background: rgba(30,41,59,0.9); border: 2px solid #f59e0b; border-radius: 18px; padding: 22px 28px; cursor: pointer; text-align: center; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05) translateY(-5px)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="font-size: 2.8rem;">☀️</div><h4 style="color: #fbbf24; margin-top: 10px; font-size: 1.15rem;">مزيد بالتضعيف (دَرَّسَ)</h4>
+        </div>`;
+      } else if (planetType === 'weak') {
+        title.textContent = '🌙 أقمار الأفعال المعتلة';
+        const weakMoons = [{n: "المثال", v: "وقف"}, {n: "الأجوف", v: "قول"}, {n: "الناقص", v: "رمي"}];
+        weakMoons.forEach(wm => {
+          container.innerHTML += `<div onclick="launchSolarSystem('${wm.v}')" style="background: rgba(30,41,59,0.9); border: 2px solid #8b5cf6; border-radius: 18px; padding: 22px 28px; cursor: pointer; text-align: center; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05) translateY(-5px)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="font-size: 2.8rem;">🌙</div><h4 style="color: #a78bfa; margin-top: 10px; font-size: 1.15rem;">معتل ${wm.n} (${wm.v})</h4>
           </div>`;
         });
       }
     }
+
     function selectMoon(planetType, moonType) {
       document.getElementById('hLevel2').style.display = 'none';
       document.getElementById('hLevel3').style.display = 'block';
       const container = document.getElementById('hLevel3Container');
       const title = document.getElementById('hLevel3Title');
       container.innerHTML = '';
+      
       if (moonType === 'correct') {
         title.textContent = '🌟 صيغ الفعل الثلاثي الصحيح';
         const items = [{n: "فَعَلَ", v: "كتب"}];
         items.forEach(i => {
-          container.innerHTML += `<div onclick="launchSolarSystem('${i.v}')" style="background:#1e293b; border:2px solid #3b82f6; padding:16px 26px; border-radius:16px; cursor:pointer; color:#fff; font-weight:bold; font-size:1.15rem;">${i.n} (${i.v})</div>`;
+          container.innerHTML += `<div onclick="launchSolarSystem('${i.v}')" style="background:#1e293b; border:2px solid #3b82f6; padding:16px 26px; border-radius:16px; cursor:pointer; color:#fff; font-weight:bold; font-size:1.15rem; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">${i.n} (${i.v})</div>`;
         });
+      } else if (moonType === 'hamzouz') {
+        title.textContent = '🌟 أنواع الفعل المهموز';
+        const items = [{n: "مهموز اللام", v: "قرأ"}];
+        items.forEach(i => {
+          container.innerHTML += `<div onclick="launchSolarSystem('${i.v}')" style="background:#1e293b; border:2px solid #f59e0b; padding:16px 26px; border-radius:16px; cursor:pointer; color:#fff; font-weight:bold; font-size:1.15rem; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">${i.n} (${i.v})</div>`;
+        });
+      } else if (moonType === 'mudaaf') {
+        title.textContent = '🌟 الفعل المضعف';
+        container.innerHTML += `<div onclick="launchSolarSystem('مدد')" style="background:#1e293b; border:2px solid #10b981; padding:16px 26px; border-radius:16px; cursor:pointer; color:#fff; font-weight:bold; font-size:1.15rem; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">صحيح مضعف (مَدَّ)</div>`;
       }
     }
+
     function backToLevel2() {
       document.getElementById('hLevel2').style.display = 'block';
       document.getElementById('hLevel3').style.display = 'none';
     }
+
     function launchSolarSystem(rootVal) {
       document.getElementById('cosmicHierarchyModal').style.display = 'none';
       closeWelcome();
       const sel = document.getElementById('rootSelect');
       if (sel) sel.value = rootVal;
+      
+      // توجيه واجهة التبويبات إلى التبويب الأول تلقائياً
+      switchMainTab('radialMap', document.querySelector('.tab-pill'));
+      loadRadialWorld(rootVal);
     }
+
     function switchMainTab(tabId, el) {
       if (tabId !== 'radialMap') closeWelcome();
       document.getElementById('cosmicHierarchyModal').style.display = 'none';
+      
       document.querySelectorAll('.tab-pill').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-view').forEach(v => { v.classList.remove('active'); v.style.display = 'none'; });
+      document.querySelectorAll('.tab-view').forEach(v => {
+        v.classList.remove('active');
+        v.style.display = 'none';
+      });
+      
       if (el) el.classList.add('active');
+      else {
+        // في حالة استدعائها برمجيًا يتم تفعيل أول زر
+        const firstPill = document.querySelector('.tab-pill');
+        if(firstPill) firstPill.classList.add('active');
+      }
+      
       const activeView = document.getElementById(tabId);
-      if (activeView) { activeView.classList.add('active'); activeView.style.display = 'block'; }
+      if (activeView) {
+        activeView.classList.add('active');
+        activeView.style.display = 'block';
+      }
     }
+
+    // ------------------------------------------------------------
+    // دوال عرض النوافذ (Morph Modal)
+    // ------------------------------------------------------------
+    function openMorphModal(branchIdx) {
+      const rootSelectEl = document.getElementById('rootSelect');
+      const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
+      const rootObj = db[rawKey] || db['كتب'];
+
+      if (!rootObj || !rootObj.branches || !rootObj.branches[branchIdx]) return;
+      const branch = rootObj.branches[branchIdx];
+
+      document.getElementById('mHeroWord').innerHTML = branch.plain;
+      document.getElementById('mHeroWeight').textContent = branch.weight;
+      document.getElementById('mHeroWeight').style.display = 'block';
+      document.getElementById('mDetailCard').style.display = 'block';
+      
+      document.getElementById('mDesc').textContent = branch.desc || '';
+
+      const rowColloc = document.getElementById('rowColloc');
+      const rowExample = document.getElementById('rowExample');
+      const mColloc = document.getElementById('mColloc');
+      const mExample = document.getElementById('mExample');
+
+      if (branch.colloc && mColloc && rowColloc) {
+        rowColloc.style.display = 'block'; mColloc.textContent = branch.colloc;
+      } else if (rowColloc) { rowColloc.style.display = 'none'; }
+
+      if (branch.ex && mExample && rowExample) {
+        rowExample.style.display = 'block'; mExample.textContent = branch.ex;
+      } else if (rowExample) { rowExample.style.display = 'none'; }
+
+      const ruleBanner = document.getElementById('mRuleBanner');
+      if (ruleBanner) {
+        if (branch.rule) {
+          ruleBanner.style.display = 'block';
+          ruleBanner.innerHTML = `🌟 <strong>القَاعِدَةُ الصَّرْفِيَّةُ:</strong> ${branch.rule}`;
+        } else { ruleBanner.style.display = 'none'; }
+      }
+
+      const affixCard = document.getElementById('mAffixCard');
+      if (affixCard) affixCard.style.display = 'none';
+
+      document.getElementById('morphModal').classList.add('open');
+    }
+
+    function openRootModal() {
+      const rootSelectEl = document.getElementById('rootSelect');
+      const rawKey = rootSelectEl ? rootSelectEl.value.trim() : 'كتب';
+      const rootObj = db[rawKey] || db['كتب'];
+      
+      if (!rootObj) return;
+
+      document.getElementById('mHeroWord').innerHTML = `[ ${rootObj.letters.join(' - ')} ]`;
+      document.getElementById('mHeroWeight').style.display = 'none';
+      document.getElementById('mDetailCard').style.display = 'block';
+      document.getElementById('rowColloc').style.display = 'none';
+      document.getElementById('rowExample').style.display = 'none';
+      document.getElementById('mRuleBanner').style.display = 'none';
+      document.getElementById('mDesc').innerHTML = `<strong>${rootObj.concept}</strong><br><span style="color:#64748b; font-size:1.05rem;">الأَصْلُ المُعْجَمِيُّ الَّذِي تَتَفَرَّعُ مِنْهُ كَافَّةُ صِيَغِ الجَذْرِ اللُّغَوِيَّةِ.</span>`;
+
+      const affixCard = document.getElementById('mAffixCard');
+      const affixList = document.getElementById('mAffixList');
+      if (affixCard && affixList && rootObj.affixes && rootObj.affixes.length > 0) {
+        affixList.innerHTML = rootObj.affixes.map(af => `
+          <div class="affix-item-row">
+            <span style="font-size:1.5rem; font-weight:900;">${af.plain} (${af.weight})</span>
+            <span style="font-size:0.95rem; color:#475569; font-weight:bold;">${af.desc}</span>
+          </div>
+        `).join('');
+        affixCard.style.display = 'block';
+      } else if (affixCard) {
+        affixCard.style.display = 'none';
+      }
+
+      document.getElementById('morphModal').classList.add('open');
+    }
+
     function closeModal(e) {
       if (!e || e.target.id === 'morphModal' || e.target.classList.contains('modal-close')) {
         document.getElementById('morphModal').classList.remove('open');
       }
     }
-    function openMorphModal() {
-      document.getElementById('morphModal').classList.add('open');
+
+    function loadRadialWorld(rootKey) {
+      const data = db[rootKey] || db['كتب'];
+      if (!data) return;
+      const coreLettersEl = document.getElementById('coreLetters');
+      const coreConceptEl = document.getElementById('coreConcept');
+      if (coreLettersEl && data.letters) coreLettersEl.textContent = `[ ${data.letters.join(' - ')} ]`;
+      if (coreConceptEl) coreConceptEl.textContent = data.concept || '';
+
+      if (data.branches) {
+        data.branches.forEach((b, i) => {
+          const wordEl = document.getElementById(`b${i+1}_word`);
+          const patternEl = document.getElementById(`b${i+1}_pattern`);
+          if (wordEl) wordEl.textContent = b.plain;
+          if (patternEl) patternEl.textContent = `(${b.weight.split(' ')[0]})`;
+        });
+      }
     }
-    function openRootModal() {
-      document.getElementById('morphModal').classList.add('open');
-    }
+
+    window.onload = () => {
+      loadRadialWorld('كتب');
+    };
   </script>
 </body>
 </html>
