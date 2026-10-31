@@ -410,6 +410,34 @@
 <div id="welcomeScreen" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #0f172a 45%, #030712 100%); z-index: 99999; display: flex; align-items: center; justify-content: center; overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif; transition: opacity 0.8s ease, transform 0.8s ease;">
 
   <style>
+    .floating-side-controls {
+  position: fixed;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.side-control-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.25s;
+}
+
+.side-control-btn:hover {
+  transform: scale(1.15);
+}
     @keyframes floatCosmicSlow {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
       50% { transform: translateY(-16px) rotate(2deg); }
@@ -448,6 +476,35 @@
       border-color: #fbbf24;
       background: rgba(30, 41, 59, 0.95);
       box-shadow: 0 14px 30px rgba(251, 191, 36, 0.35);
+    }
+    /* 🧭 أزرار التوجيه الجانبية العائمة */
+    .floating-side-controls {
+      position: fixed;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 9999999;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .side-control-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .side-control-btn:hover {
+      transform: scale(1.15) translateX(4px);
     }
   </style>
 
