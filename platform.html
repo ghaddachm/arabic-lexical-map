@@ -961,21 +961,41 @@
     }
 
     function openWelcomeScreen() {
+      // إغلاق نافذة الكواكب إذا كانت مفتوحة لكي لا تحجب الواجهة
+      const galaxyModal = document.getElementById('galaxyModal');
+      if (galaxyModal) galaxyModal.style.display = 'none';
+
+      // إغلاق النوافذ الإرشادية والنهائية
+      const guide = document.getElementById('guideModalBox');
+      if (guide) guide.style.display = 'none';
+
+      const endScreen = document.getElementById('endJourneyScreen');
+      if (endScreen) endScreen.style.display = 'none';
+
+      // إظهار الشاشة الترحيبية
       const welcome = document.getElementById('welcomeScreen');
       if (welcome) {
         welcome.style.display = 'flex';
         welcome.style.opacity = '1';
+        welcome.style.transform = 'scale(1)';
       }
     }
 
     function toggleGuideModal() {
       const modal = document.getElementById('guideModalBox');
-      if (modal) modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+      if (modal) {
+        modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+      }
     }
 
     function triggerEndJourney() {
       const endScreen = document.getElementById('endJourneyScreen');
-      if (endScreen) endScreen.style.display = 'flex';
+      if (endScreen) {
+        endScreen.style.display = 'flex';
+        if (typeof playVictorySound === 'function') {
+          playVictorySound();
+        }
+      }
     }
 
     function closeModal(e) {
