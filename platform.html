@@ -918,7 +918,7 @@
     </div>
   </div>
 
-   <!-- واجهة المجرة الكوكبية البديلة للقائمة المنسدلة القديمة -->
+<!-- واجهة المجرة الكوكبية البديلة للقائمة المنسدلة القديمة -->
 <div class="galaxy-container" style="padding: 15px; text-align: center; background: rgba(15, 23, 42, 0.6); border-radius: 15px; margin: 10px 0;">
   <h3 style="color: #fde047; margin-bottom: 15px; font-size: 1.2rem;">🪐 اختر كوكب الجذر أو الفعل للانطلاق:</h3>
   
@@ -1001,7 +1001,6 @@
       btn.onmouseover = () => btn.style.background = '#334155';
       btn.onmouseout = () => btn.style.background = '#1e293b';
       btn.onclick = () => {
-        // استدعاء الدالة الأصلية في مشروعك لتحميل المحطات بناءً على الفعل المختار
         if (typeof loadRadialWorld === 'function') {
           loadRadialWorld(item.val);
         }
