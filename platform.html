@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <title>بَذْرَةُ الكَلِمَاتِ - عَالَمُ الأَلْعَابِ اللُّغَوِيَّةِ</title>
+  <title>عَالَمُ الجُذُورِ - رِحْلَةُ الاشْتِقَاقِ الصَّرْفِيِّ فِي فَضَاءِ اللُّغَةِ</title>
   <style>
     :root {
       --primary: #4338ca;
@@ -29,6 +29,61 @@
       color: #ffffff;
     }
 
+    /* 🌌 الشاشة الترحيبية الأولى المطابقة للصورة تماماً */
+    #welcomeCosmicScreen {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #0f172a 45%, #030712 100%);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .space-station-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 22px;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      text-align: center;
+    }
+    .space-station-card:hover {
+      transform: translateY(-8px) scale(1.05);
+      border-color: #fbbf24;
+      background: rgba(30, 41, 59, 0.95);
+      box-shadow: 0 14px 30px rgba(251, 191, 36, 0.35);
+    }
+
+    /* 🪐 نافذة الكواكب والأقمار الهرمية المتسلسلة */
+    .cosmic-hierarchy-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 15, 30, 0.96);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99998;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+    }
+    .hierarchy-box {
+      max-width: 780px;
+      width: 95%;
+      background: rgba(15, 23, 42, 0.98);
+      border: 3px solid #f59e0b;
+      border-radius: 28px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.85);
+      animation: popTab 0.35s ease;
+    }
+
     header {
       background: #ffffff;
       margin: 0.8rem 1.5rem;
@@ -41,44 +96,9 @@
       border: 4px solid #38bdf8;
     }
 
-    .brand-box {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .brand-texts h1 {
-      font-size: 1.45rem;
-      font-weight: 900;
-      color: #0369a1;
-    }
-
-    .brand-texts p {
-      font-size: 0.85rem;
-      color: #0ea5e9;
-      font-weight: 800;
-    }
-
-    .root-dropdown-wrapper {
-      background: #fef08a;
-      border: 3px solid #eab308;
-      padding: 0.4rem 1.4rem;
-      border-radius: 35px;
-      box-shadow: 0 4px 0 #ca8a04;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .root-dropdown-wrapper select {
-      border: none;
-      background: transparent;
-      font-size: 1.15rem;
-      font-weight: 900;
-      color: #854d0e;
-      outline: none;
-      cursor: pointer;
-    }
+    .brand-box { display: flex; align-items: center; gap: 0.8rem; }
+    .brand-texts h1 { font-size: 1.45rem; font-weight: 900; color: #0369a1; }
+    .brand-texts p { font-size: 0.85rem; color: #0ea5e9; font-weight: 800; }
 
     .score-badge {
       background: #ec4899;
@@ -117,53 +137,16 @@
       align-items: center;
       gap: 0.5rem;
     }
+    .tab-pill:hover { transform: translateY(-3px) scale(1.04); background: rgba(30, 41, 59, 0.95); color: #ffffff; }
+    .tab-pill.active { background: #facc15; color: #713f12; border-color: #fef08a; box-shadow: 0 6px 0 #ca8a04; transform: translateY(-2px); }
 
-    .tab-pill:hover {
-      transform: translateY(-3px) scale(1.04);
-      background: rgba(30, 41, 59, 0.95);
-      color: #ffffff;
-    }
-
-    .tab-pill.active {
-      background: #facc15;
-      color: #713f12;
-      border-color: #fef08a;
-      box-shadow: 0 6px 0 #ca8a04;
-      transform: translateY(-2px);
-    }
-
-    main {
-      flex: 1;
-      max-width: 1440px;
-      margin: 1.2rem auto 2.5rem;
-      width: 96%;
-    }
-
-    .tab-view {
-      display: none;
-      animation: popTab 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .tab-view.active {
-      display: block;
-    }
+    main { flex: 1; max-width: 1440px; margin: 1.2rem auto 2.5rem; width: 96%; }
+    .tab-view { display: none; animation: popTab 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .tab-view.active { display: block; }
 
     @keyframes popTab {
       0% { transform: scale(0.94); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
-    }
-
-    .space-twinkle-star {
-      position: absolute;
-      border-radius: 50%;
-      background: #ffffff;
-      animation: starBlink 2s infinite alternate ease-in-out;
-      pointer-events: none;
-    }
-
-    @keyframes starBlink {
-      0% { opacity: 0.2; transform: scale(0.7); }
-      100% { opacity: 1; transform: scale(1.3); filter: drop-shadow(0 0 6px #fde047); }
     }
 
     .space-system-arena {
@@ -182,409 +165,88 @@
 
     .orbit-ellipse-wide {
       position: absolute;
-      width: 1040px;
-      height: 560px;
+      width: 1040px; height: 560px;
       border: 3.5px dashed rgba(56, 189, 248, 0.45);
       border-radius: 50%;
       pointer-events: none;
     }
 
     .cartoon-sun-core {
-      position: absolute;
-      z-index: 10;
-      width: 280px;
-      height: 280px;
+      position: absolute; z-index: 10;
+      width: 280px; height: 280px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #fffbeb 0%, #fde047 45%, #eab308 100%);
       border: 8px solid #ffffff;
       box-shadow: 0 0 90px rgba(250, 204, 21, 0.95);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      cursor: pointer;
-      animation: sunBeat 3s infinite alternate ease-in-out;
-    }
-
-    .sun-rays-halo {
-      position: absolute;
-      width: 380px;
-      height: 380px;
-      pointer-events: none;
-      animation: spinHalo 24s linear infinite;
-    }
-
-    @keyframes spinHalo {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes sunBeat {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.04); }
-    }
-
-    .sun-root-letters {
-      font-size: 2.3rem;
-      font-weight: 900;
-      color: #7f1d1d;
-      letter-spacing: 2px;
-      line-height: 1.2;
-    }
-
-    .sun-badge-desc {
-      font-size: 0.95rem;
-      font-weight: 900;
-      color: #854d0e;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 0.25rem 0.9rem;
-      border-radius: 14px;
-      margin-top: 0.3rem;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    }
-
-    .planet-station {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      z-index: 5;
-      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .planet-station:hover {
-      transform: scale(1.15) translateY(-8px);
-      z-index: 25;
-    }
-
-    .planet-pill-tag {
-      background: rgba(15, 23, 42, 0.95);
-      border: 2px solid #38bdf8;
-      border-radius: 20px;
-      padding: 0.25rem 0.9rem;
-      margin-bottom: 0.4rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
-      white-space: nowrap;
-    }
-
-    .tag-title { font-size: 0.85rem; font-weight: 900; color: #fef08a; }
-    .tag-sub { font-size: 0.75rem; font-weight: 800; color: #bae6fd; }
-
-    .planet-globe-svg {
-      width: 175px;
-      height: 175px;
-      filter: drop-shadow(0 14px 28px rgba(0,0,0,0.7));
-    }
-
-    .station-1 { top: 30px; right: 11%; }
-    .station-2 { top: 30px; left: 11%; }
-    .station-3 { bottom: 35px; left: 10%; }
-    .station-4 { bottom: 35px; right: 10%; }
-    .station-5 { bottom: 10px; left: 50%; transform: translateX(-50%); }
-    .station-5:hover { transform: translateX(-50%) scale(1.15) translateY(-8px); }
-
-    /* تنسيقات نافذة الهرم الفضائي (الكواكب والأقمار والنجوم) */
-    .cosmic-hierarchy-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(10, 15, 30, 0.96);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 99998;
-      backdrop-filter: blur(10px);
-      padding: 20px;
-    }
-    .hierarchy-box {
-      max-width: 780px;
-      width: 95%;
-      background: rgba(15, 23, 42, 0.98);
-      border: 3px solid #f59e0b;
-      border-radius: 28px;
-      padding: 30px;
-      text-align: center;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.85);
-      animation: popTab 0.35s ease;
-    }
-
-    .kawaii-cloud-universe {
-      position: relative;
-      width: 100%;
-      min-height: 720px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem 0;
-      overflow: hidden;
-    }
-
-    .fluffy-puffy-cloud-card {
-      position: relative;
-      width: 100%;
-      max-width: 1360px;
-      min-height: 680px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 5;
-    }
-
-    .cloud-svg-frame-art {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1; pointer-events: none;
-      filter: drop-shadow(0 25px 50px rgba(56, 189, 248, 0.45));
-    }
-
-    .cloud-belly-interactive {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      max-width: 1180px;
-      padding: 160px 40px 60px 40px;
-      text-align: center;
-      color: #1e293b;
-    }
-
-    .cloud-instruction-badge {
-      background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
-      border: 4px solid #ca8a04;
-      border-radius: 40px;
-      padding: 0.8rem 2.5rem;
-      display: inline-block;
-      box-shadow: 0 8px 20px rgba(202, 138, 4, 0.3);
-      margin-bottom: 1.4rem;
-    }
-
-    .task-mission-pill {
-      background: #ec4899;
-      color: white;
-      padding: 0.4rem 1.8rem;
-      border-radius: 30px;
-      font-weight: 900;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 0 #be185d;
-    }
-
-    .story-words-cloud-box {
-      font-size: 1.8rem;
-      line-height: 2.6;
-      color: #1e293b;
-      margin: 0 auto;
-      max-width: 1100px;
-    }
-
-    .story-click-pill {
-      background: #f8fafc;
-      border: 3px solid #94a3b8;
-      padding: 0.25rem 1.05rem;
-      border-radius: 30px;
-      font-weight: 900;
-      cursor: pointer;
-      display: inline-block;
-      box-shadow: 0 4px 0 #94a3b8;
-      transition: all 0.15s;
-      margin: 0.25rem 0.3rem;
-    }
-
-    .story-click-pill:hover {
-      transform: scale(1.08) translateY(-2px);
-      border-color: #0284c7;
-      box-shadow: 0 6px 0 #0284c7;
-    }
-
-    .story-click-pill.found {
-      background: #22c55e !important;
-      color: white !important;
-      border-color: #15803d !important;
-      box-shadow: 0 5px 0 #166534 !important;
-      transform: scale(1.12);
-    }
-
-    .spheres-free-stage {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1rem 0 3rem;
-      text-align: center;
-    }
-
-    .saucer-stations-row {
-      display: flex;
-      justify-content: center;
-      gap: 2.6rem;
-      flex-wrap: wrap;
-      margin-top: 2.5rem;
-    }
-
-    .puzzle-free-arena {
-      display: flex; flex-direction: column; align-items: center;
-      padding: 1rem 0 3rem; text-align: center;
-    }
-
-    .jigsaw-pieces-flex { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-top: 2rem; }
-
-    .jigsaw-svg-card {
-      position: relative; width: 320px; height: 420px;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 2.5rem 1.8rem; color: white;
-      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
+      text-align: center; cursor: pointer;
     }
-
-    .jigsaw-bg-shape { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-
-    .jigsaw-content-body {
-      position: relative; z-index: 5; display: flex; flex-direction: column; align-items: center; width: 100%;
-    }
-
-    .puzzle-number-badge {
-      background: rgba(0, 0, 0, 0.3); padding: 0.3rem 1.1rem; border-radius: 20px;
-      font-weight: 900; font-size: 0.95rem; margin-bottom: 0.8rem;
-    }
-
-    .puzzle-question-text {
-      font-size: 1.25rem; font-weight: 900; line-height: 1.6; margin-bottom: 1.2rem; min-height: 60px;
-    }
-
-    .puzzle-target-slot {
-      background: rgba(0, 0, 0, 0.25); border: 3px dashed #ffffff; border-radius: 25px;
-      padding: 0.8rem 1.4rem; min-height: 55px; display: flex; align-items: center; justify-content: center;
-      font-weight: 900; font-size: 1.25rem; color: #fef08a; margin-bottom: 1.2rem; width: 85%;
-    }
-
-    .puzzle-target-slot.solved { background: #ffffff; color: #15803d; border: 3px solid #22c55e; }
-
-    .puzzle-options-rack { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
-
-    .drag-piece-token {
-      background: #ffffff; border: 3px solid #fde047; color: #713f12;
-      padding: 0.5rem 1.2rem; border-radius: 25px; font-size: 1.15rem; font-weight: 900;
-      cursor: grab; box-shadow: 0 5px 0 rgba(0,0,0,0.25);
-    }
-
-    .puzzle-feedback-toast {
-      margin-top: 0.8rem; padding: 0.4rem 0.8rem; border-radius: 18px;
-      font-weight: 900; font-size: 0.95rem; display: none;
-    }
-
-    .spacecraft-challenge-deck {
-      background: radial-gradient(circle at 50% 30%, #2e1065 0%, #0c0824 100%);
-      border: 8px solid #c084fc;
-      border-radius: 70px;
-      padding: 3rem 2rem;
-      box-shadow: 0 25px 70px rgba(192, 132, 252, 0.45);
-      text-align: center;
-    }
-
-    .spacecraft-header-title {
-      font-size: 2.5rem;
-      font-weight: 900;
-      color: #fde047;
-      text-shadow: 0 4px 15px rgba(0,0,0,0.7);
-    }
-
-    .spacecraft-subtext {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #e9d5ff;
-      margin-top: 0.6rem;
-    }
-
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(8px);
-      display: none; align-items: center; justify-content: center;
-      z-index: 1000; color: #1e293b;
-    }
-
-    .modal-overlay.open { display: flex; }
-
-    .modal-box {
-      background: white;
-      width: 90%; max-width: 620px;
-      border-radius: 45px;
-      padding: 2.2rem;
-      border: 6px solid #38bdf8;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
-      position: relative; max-height: 90vh; overflow-y: auto;
-    }
-
-    .modal-close {
-      position: absolute; top: 1.2rem; left: 1.2rem;
-      background: #fee2e2; border: 2px solid #ef4444;
-      width: 42px; height: 42px; border-radius: 50%;
-      font-size: 1.3rem; font-weight: 900; cursor: pointer; color: #b91c1c;
-    }
-
-    .modal-hero {
-      text-align: center; border-bottom: 3px dashed #e2e8f0;
-      padding-bottom: 1.2rem; margin-bottom: 1.2rem;
-    }
-
-    .modal-word { font-size: 3.6rem; font-weight: 900; letter-spacing: 1px; line-height: 1.1; }
-    .modal-weight { color: var(--primary); font-weight: 900; font-size: 1.3rem; margin-top: 0.3rem; }
-
-    .detail-card {
-      background: #f8fafc; border-radius: 30px;
-      padding: 1.5rem; border: 2px solid #e2e8f0; margin-bottom: 1.2rem;
-    }
-
-    .detail-row { margin-bottom: 1rem; font-size: 1.2rem; line-height: 1.6; }
-    .detail-row:last-child { margin-bottom: 0; }
-    .detail-label { font-weight: 900; color: #334155; }
-
-    .master-audio-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
-      color: white; border: none; padding: 1rem 1.6rem;
-      border-radius: 30px; font-size: 1.2rem; font-weight: 900;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      gap: 0.6rem; box-shadow: 0 6px 20px rgba(67, 56, 202, 0.4);
-      margin-top: 1.2rem;
-    }
-
-    .rule-gold-banner {
-      background: #fefce8; border: 3px dashed #facc15;
-      padding: 0.9rem 1.2rem; border-radius: 20px;
-      color: #854d0e; font-weight: 900; font-size: 1.05rem;
-      margin-top: 1rem; line-height: 1.6;
-    }
-
-    .affix-box {
-      background: #fffbeb; border: 3px solid #fde68a;
-      border-radius: 30px; padding: 1.3rem; margin-top: 1.2rem;
-    }
-
-    .affix-box-head {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;
-    }
-
-    .affix-box-title { font-weight: 900; color: #92400e; font-size: 1.15rem; }
-    .affix-rule-badge { background: #fef3c7; color: #b45309; padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.8rem; font-weight: 800; }
-    .affix-item-row {
-      display: flex; justify-content: space-between; align-items: center;
-      background: white; border: 1.5px solid #fef08a; padding: 0.6rem 1rem; border-radius: 16px; margin-bottom: 0.5rem;
-    }
-
-    .c-r { color: var(--c-root) !important; }
-    .c-a { color: var(--c-affix) !important; }
+    .sun-root-letters { font-size: 1.65rem; font-weight: 900; color: #7f1d1d; }
+    .sun-badge-desc { font-size: 0.95rem; font-weight: 900; color: #854d0e; background: rgba(255,255,255,0.95); padding: 0.25rem 0.9rem; border-radius: 14px; margin-top: 0.3rem; }
   </style>
-  <script src="roots_data/ktb.js"></script>
-  <script src="roots_data/qra.js"></script>
-  <script src="roots_data/mdd.js"></script>
 </head>
 <body>
 
-  <!-- نافذة التدرج الهرمي لاختيار الأفعال (الكواكب ➔ الأقمار ➔ الصيغ والأمثلة) -->
-  <div id="cosmicHierarchyModal" class="cosmic-hierarchy-modal" style="display: flex;">
+  <!-- 🌌 الشاشة الترحيبية الأولى المطابقة للصورة 111_2.jpg -->
+  <div id="welcomeCosmicScreen">
+    <div style="position: relative; z-index: 10; width: 100%; max-width: 980px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.4rem;">
+      
+      <!-- شمس الكلمات المركزية -->
+      <div style="width: 125px; height: 125px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff, #fde047 30%, #f59e0b 70%, #d97706 100%); display: flex; align-items: center; justify-content: center; font-size: 4.2rem; box-shadow: 0 0 75px rgba(245, 158, 11, 0.95); border: 4px solid #fffdf0;">☀️</div>
+
+      <div>
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 1.8rem; border-radius: 50px; background: rgba(255, 255, 255, 0.1); border: 1.5px solid rgba(251, 191, 36, 0.7); color: #fde047; font-size: 1rem; font-weight: bold;">
+          <span>🚀</span>
+          <span>رِحْلَةُ الاشْتِقَاقِ الصَّرْفِيِّ فِي فَضَاءِ اللُّغَةِ[cite: 5]</span>
+        </div>
+        <h1 style="font-size: clamp(3rem, 6vw, 4.4rem); font-weight: 900; margin: 0.7rem 0 0.3rem 0; background: linear-gradient(180deg, #ffffff 15%, #fef08a 50%, #f59e0b 95%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          عَالَمُ الجُذُورِ[cite: 5]
+        </h1>
+        <p style="color: #f1f5f9; font-size: 1.25rem; font-weight: 600; max-width: 800px; line-height: 1.9;">
+          مَرْحَباً بِكَ يَا رَائِدَ اللُّغَةِ! هَيَّا نَنْطَلِقْ فِي رِحْلَةٍ كَوْنِيَّةٍ؛ نَسْتَكْشِفُ فِيهَا الجُذُورَ، نَجْتَازُ مَحَطَّاتِ الأَوْزَانِ، وَنَصْنَعُ رَوَائِعَ المُشْتَقَّاتِ.[cite: 5]
+        </p>
+      </div>
+
+      <!-- البوابات الخمسة للواجهة الرئيسية المطابقة للصورة -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; width: 100%; max-width: 1050px;">
+        <div class="space-station-card" style="padding: 1.2rem;" onclick="switchMainTab('radialMap'); closeWelcome();">
+          <div style="font-size: 2.3rem;">☀️</div>
+          <div style="color: #fde047; font-weight: 900; font-size: 1.1rem; margin-top: 5px;">شَمْسُ الجِذْرِ[cite: 5]</div>
+          <div style="color: #94a3b8; font-size: 0.8rem; margin-top: 3px;">اكتشف نواة المعنى[cite: 5]</div>
+        </div>
+        <div class="space-station-card" style="padding: 1.2rem;" onclick="switchMainTab('storyTab'); closeWelcome();">
+          <div style="font-size: 2.3rem;">📖</div>
+          <div style="color: #38bdf8; font-weight: 900; font-size: 1.1rem; margin-top: 5px;">سَحَابَةُ الحِكَايَةِ[cite: 5]</div>
+          <div style="color: #94a3b8; font-size: 0.8rem; margin-top: 3px;">الصرف في السياق[cite: 5]</div>
+        </div>
+        <div class="space-station-card" style="padding: 1.2rem;" onclick="switchMainTab('labTab'); closeWelcome();">
+          <div style="font-size: 2.3rem;">⚙️</div>
+          <div style="color: #a5b4fc; font-weight: 900; font-size: 1.1rem; margin-top: 5px;">أَقْرَاصُ التَّرْكِيبِ[cite: 5]</div>
+          <div style="color: #94a3b8; font-size: 0.8rem; margin-top: 3px;">مختبر صياغة الأوزان[cite: 5]</div>
+        </div>
+        <div class="space-station-card" style="padding: 1.2rem;" onclick="switchMainTab('challengeTab'); closeWelcome();">
+          <div style="font-size: 2.3rem;">🚀</div>
+          <div style="color: #d8b4fe; font-weight: 900; font-size: 1.1rem; margin-top: 5px;">مَرْكَبَةُ الصَّرْفِ[cite: 5]</div>
+          <div style="color: #94a3b8; font-size: 0.8rem; margin-top: 3px;">تحديات القياس الفضائي[cite: 5]</div>
+        </div>
+        <div class="space-station-card" style="padding: 1.2rem;" onclick="switchMainTab('freeChallengeTab'); closeWelcome();">
+          <div style="font-size: 2.3rem;">✍️</div>
+          <div style="color: #fda4af; font-weight: 900; font-size: 1.1rem; margin-top: 5px;">الإِنْتَاجُ الحُرُّ[cite: 5]</div>
+          <div style="color: #94a3b8; font-size: 0.8rem; margin-top: 3px;">إبداعك اللغوي الخاص[cite: 5]</div>
+        </div>
+      </div>
+
+      <!-- زر الانطلق في الرحلة الكونية المطابق للصورة -->
+      <button onclick="openCosmicHierarchy()" style="margin-top: 0.8rem; padding: 1.1rem 4rem; border-radius: 60px; background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%); border: 3.5px solid #fffdf0; color: #090a0f; font-size: 1.45rem; font-weight: 900; cursor: pointer; box-shadow: 0 0 45px rgba(245, 158, 11, 0.9); display: inline-flex; align-items: center; gap: 1rem;">
+        <span>انْطَلِقْ فِي الرِّحْلَةِ الكَوْنِيَّةِ[cite: 5]</span>
+        <span>🚀</span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- 🪐 النافذة الهرمية المتسلسلة (الكواكب ➔ الأقمار ➔ الصيغ والأمثلة) -->
+  <div id="cosmicHierarchyModal" class="cosmic-hierarchy-modal">
     <div class="hierarchy-box">
       
       <!-- المستوى 1: الكواكب الأربعة الكبرى -->
@@ -611,7 +273,7 @@
         </div>
       </div>
 
-      <!-- المستوى 2: الأقمار الدائرة (تتغير حسب الكوكب المختار) -->
+      <!-- المستوى 2: الأقمار الدائرة -->
       <div id="hLevel2" style="display: none;">
         <h2 id="hLevel2Title" style="color: #60a5fa; font-size: 1.7rem; margin-bottom: 8px;">🌙 الأقمار الدائرة</h2>
         <p style="color: #94a3b8; font-size: 1rem; margin-bottom: 22px;">اختر القمر الفرعي لاستكشاف عوالمه:</p>
@@ -634,24 +296,9 @@
     <div class="brand-box">
       <div style="font-size: 2.2rem;">🪐</div>
       <div class="brand-texts">
-        <h1>بَذْرَةُ الكَلِمَاتِ ☀️</h1>
-        <p>مَجَرَّةُ الحُرُوفِ وَالمُعْجَمِ الفَضَائِيِّ</p>
+        <h1>عَالَمُ الجُذُورِ 🚀</h1>
+        <p>رِحْلَةُ الِاشْتِقَاقِ الصَّرْفِيِّ فِي فَضَاءِ اللُّغَةِ</p>
       </div>
-    </div>
-
-    <!-- قائمة اختيار الجذور الخفية للتحكم بالنظام الشمسي -->
-    <div style="display:none;">
-      <select id="rootSelect" onchange="loadRadialWorld(this.value)">
-        <option value="كتب">كتب</option>
-        <option value="قرأ">قرأ</option>
-        <option value="مدد">مدد</option>
-        <option value="دحرج">دحرج</option>
-        <option value="زلزل">زلزل</option>
-        <option value="وقف">وقف</option>
-        <option value="قول">قول</option>
-        <option value="رمي">رمي</option>
-        <option value="درس">درس</option>
-      </select>
     </div>
 
     <div class="score-badge">
@@ -664,218 +311,33 @@
     <button class="tab-pill active" onclick="switchMainTab('radialMap', this)">☀️ شَمْسُ الجَذْرِ</button>
     <button class="tab-pill" onclick="switchMainTab('storyTab', this)">📖 سَحَابَةُ الحِكَايَةِ</button>
     <button class="tab-pill" onclick="switchMainTab('labTab', this)">🛸 أَقْرَاصُ التَّرْكِيبِ</button>
-    <button class="tab-pill" onclick="switchMainTab('quizTab', this)">🧩 حَلَبَةُ البَزْل</button>
     <button class="tab-pill" onclick="switchMainTab('challengeTab', this)">🚀 مَرْكَبَةُ الصَّرْفِ</button>
     <button class="tab-pill" onclick="switchMainTab('freeChallengeTab', this)">🎯 مَحَطَّةُ الإِنْتَاجِ الحُرِّ</button>
   </nav>
 
   <main>
-    <!-- 1. شمس الجذر الفضائية -->
     <div id="radialMap" class="tab-view active">
-      <div class="space-system-arena" id="starsSky">
+      <div class="space-system-arena">
         <div class="orbit-ellipse-wide"></div>
-
-        <svg class="sun-rays-halo" viewBox="0 0 100 100">
-          <polygon points="50,0 55,14 45,14" fill="#fde047"/>
-          <polygon points="50,100 55,86 45,86" fill="#fde047"/>
-          <polygon points="0,50 14,55 14,45" fill="#fde047"/>
-          <polygon points="100,50 86,55 86,45" fill="#fde047"/>
-          <polygon points="15,15 28,21 21,28" fill="#fde047"/>
-          <polygon points="85,85 72,79 79,72" fill="#fde047"/>
-          <polygon points="85,15 72,21 79,28" fill="#fde047"/>
-          <polygon points="15,85 28,79 21,72" fill="#fde047"/>
-        </svg>
-
-        <div class="cartoon-sun-core" onclick="openRootModal()">
+        <div class="cartoon-sun-core">
           <div class="sun-root-letters" id="coreLetters">[ ك - ت - ب ]</div>
           <div class="sun-badge-desc" id="coreConcept">صَحِيحٌ سَالِمٌ</div>
-          <span style="font-size: 0.8rem; color: #78350f; font-weight: 900; margin-top: 0.4rem;">🔊 انقر للاستكشاف</span>
-        </div>
-
-        <!-- محطات الكواكب الخمسة حول الشمس -->
-        <div class="planet-station station-1" onclick="openMorphModal(0)">
-          <div class="planet-pill-tag">
-            <span class="tag-title">الحدث / الفعل</span>
-            <span class="tag-sub">مَاذَا حَدَثَ؟</span>
-          </div>
-          <svg class="planet-globe-svg" viewBox="0 0 160 160">
-            <defs>
-              <radialGradient id="gradP1" cx="35%" cy="30%" r="70%">
-                <stop offset="0%" stop-color="#fbcfe8"/>
-                <stop offset="40%" stop-color="#ec4899"/>
-                <stop offset="85%" stop-color="#9d174d"/>
-                <stop offset="100%" stop-color="#4c0519"/>
-              </radialGradient>
-            </defs>
-            <circle cx="80" cy="80" r="70" fill="url(#gradP1)" stroke="#ffffff" stroke-width="6"/>
-            <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(-25 80 80)"/>
-            <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b1_word">كَتَبَ</text>
-            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
-            <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b1_pattern">(فَعَلَ)</text>
-          </svg>
-        </div>
-
-        <div class="planet-station station-2" onclick="openMorphModal(1)">
-          <div class="planet-pill-tag">
-            <span class="tag-title">اسْمُ الفَاعِلِ</span>
-            <span class="tag-sub">مَنْ يَفْعَلُ؟</span>
-          </div>
-          <svg class="planet-globe-svg" viewBox="0 0 160 160">
-            <defs>
-              <radialGradient id="gradP2" cx="35%" cy="30%" r="70%">
-                <stop offset="0%" stop-color="#bae6fd"/>
-                <stop offset="40%" stop-color="#0284c7"/>
-                <stop offset="85%" stop-color="#1e40af"/>
-                <stop offset="100%" stop-color="#0f172a"/>
-              </radialGradient>
-            </defs>
-            <circle cx="80" cy="80" r="70" fill="url(#gradP2)" stroke="#ffffff" stroke-width="6"/>
-            <ellipse cx="80" cy="80" rx="65" ry="24" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(25 80 80)"/>
-            <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b2_word">كَاتِبٌ</text>
-            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
-            <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b2_pattern">(فَاعِلٌ)</text>
-          </svg>
-        </div>
-
-        <div class="planet-station station-3" onclick="openMorphModal(2)">
-          <div class="planet-pill-tag">
-            <span class="tag-title">اسْمُ المَفْعُولِ</span>
-            <span class="tag-sub">مَا الَّذِي فُعِلَ؟</span>
-          </div>
-          <svg class="planet-globe-svg" viewBox="0 0 160 160">
-            <defs>
-              <radialGradient id="gradP3" cx="35%" cy="30%" r="70%">
-                <stop offset="0%" stop-color="#fecaca"/>
-                <stop offset="40%" stop-color="#ef4444"/>
-                <stop offset="85%" stop-color="#b91c1c"/>
-                <stop offset="100%" stop-color="#450a0a"/>
-              </radialGradient>
-            </defs>
-            <circle cx="80" cy="80" r="70" fill="url(#gradP3)" stroke="#ffffff" stroke-width="6"/>
-            <ellipse cx="80" cy="80" rx="65" ry="20" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(-15 80 80)"/>
-            <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="27" font-weight="900" id="b3_word">مَكْتُوبٌ</text>
-            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
-            <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b3_pattern">(مَفْعُولٌ)</text>
-          </svg>
-        </div>
-
-        <div class="planet-station station-4" onclick="openMorphModal(3)">
-          <div class="planet-pill-tag">
-            <span class="tag-title">اسْمُ المَكَانِ</span>
-            <span class="tag-sub">أَيْنَ يَقَعُ؟</span>
-          </div>
-          <svg class="planet-globe-svg" viewBox="0 0 160 160">
-            <defs>
-              <radialGradient id="gradP4" cx="35%" cy="30%" r="70%">
-                <stop offset="0%" stop-color="#bbf7d0"/>
-                <stop offset="40%" stop-color="#22c55e"/>
-                <stop offset="85%" stop-color="#15803d"/>
-                <stop offset="100%" stop-color="#052e16"/>
-              </radialGradient>
-            </defs>
-            <circle cx="80" cy="80" r="70" fill="url(#gradP4)" stroke="#ffffff" stroke-width="6"/>
-            <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(35 80 80)"/>
-            <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b4_word">مَكْتَبٌ</text>
-            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
-            <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b4_pattern">(مَفْعَلٌ)</text>
-          </svg>
-        </div>
-
-        <div class="planet-station station-5" onclick="openMorphModal(4)">
-          <div class="planet-pill-tag">
-            <span class="tag-title">المَصْدَرُ</span>
-            <span class="tag-sub">مَا اسْمُ النَّشَاطِ؟</span>
-          </div>
-          <svg class="planet-globe-svg" viewBox="0 0 160 160">
-            <defs>
-              <radialGradient id="gradP5" cx="35%" cy="30%" r="70%">
-                <stop offset="0%" stop-color="#fed7aa"/>
-                <stop offset="40%" stop-color="#f97316"/>
-                <stop offset="85%" stop-color="#c2410c"/>
-                <stop offset="100%" stop-color="#431407"/>
-              </radialGradient>
-            </defs>
-            <circle cx="80" cy="80" r="70" fill="url(#gradP5)" stroke="#ffffff" stroke-width="6"/>
-            <ellipse cx="80" cy="80" rx="65" ry="22" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="4" transform="rotate(-30 80 80)"/>
-            <text x="50%" y="47%" text-anchor="middle" fill="#ffffff" font-size="28" font-weight="900" id="b5_word">كِتَابَةٌ</text>
-            <rect x="36" y="88" width="88" height="24" rx="12" fill="rgba(0,0,0,0.55)"/>
-            <text x="50%" y="65%" text-anchor="middle" fill="#fef08a" font-size="14" font-weight="bold" id="b5_pattern">(فِعَالَةٌ)</text>
-          </svg>
         </div>
       </div>
-    </div>
-
-    <!-- باقي تبويبات المنصة (سحابة الحكاية، أقراص التركيب، البزل، المركبة، الإنتاج الحر) -->
-    <div id="storyTab" class="tab-view">
-      <div class="kawaii-cloud-universe">
-        <div class="fluffy-puffy-cloud-card">
-          <svg class="cloud-svg-frame-art" viewBox="0 0 1400 700" preserveAspectRatio="none">
-            <path d="M 700,68 C 780,63 860,88 900,138 C 980,113 1070,138 1120,198 C 1200,198 1280,248 1310,328 C 1350,398 1340,478 1280,538 C 1260,598 1190,648 1110,658 C 1040,688 950,678 890,638 C 830,678 740,688 670,658 C 610,688 510,688 450,648 C 380,678 290,668 230,618 C 150,628 80,578 60,498 C 40,418 60,338 110,278 C 110,208 170,148 250,138 C 310,88 400,68 480,108 C 540,68 620,63 700,68 Z" fill="#bae6fd" stroke="#7dd3fc" stroke-width="6"/>
-          </svg>
-          <div class="cloud-belly-interactive">
-            <div class="story-words-cloud-box" id="storyWordsContainer"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="labTab" class="tab-view">
-      <div class="spheres-free-stage" id="labSky">
-        <h3 style="font-size: 2.3rem; font-weight: 900; color: #facc15;">🛸 مَحَطَّاتُ التَّرْكِيبِ الفَضَائِيِّ 🪐</h3>
-        <div class="saucer-stations-row" id="discsContainer"></div>
-      </div>
-    </div>
-
-    <div id="quizTab" class="tab-view">
-      <div class="puzzle-free-arena">
-        <h3 style="font-size: 2.3rem; font-weight: 900; color: #a3e635;">🧩 حَلَبَةُ قِطَعِ البَزْل الصَّرْفِيَّةِ</h3>
-        <div class="jigsaw-pieces-flex" id="puzzleContainer"></div>
-      </div>
-    </div>
-
-    <div id="challengeTab" class="tab-view">
-      <div class="spacecraft-challenge-deck">
-        <h3 class="spacecraft-header-title">🚀 مَرْكَبَةُ الصَّرْفِ الفَضَائِيَّةِ</h3>
-        <div class="spacecraft-pods-row" id="challengeContainer"></div>
-      </div>
-    </div>
-
-    <div id="freeChallengeTab" class="tab-view">
-      <div id="freeChallengeContainer"></div>
     </div>
   </main>
 
-  <!-- نافذة تحليل الجذر -->
-  <div class="modal-overlay" id="morphModal" onclick="closeModal(event)">
-    <div class="modal-box" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModal()">✕</button>
-      <div class="modal-hero">
-        <div class="modal-word" id="mHeroWord"></div>
-        <div class="modal-weight" id="mHeroWeight"></div>
-      </div>
-      <div class="detail-card" id="mDetailCard">
-        <div class="detail-row"><span class="detail-label">💡 الشَّرْحُ وَالدَّلَالَةُ: </span><span id="mDesc"></span></div>
-        <div class="detail-row" id="rowColloc"><span class="detail-label">🔗 المُتَلَازِمَةُ اللَّفْظِيَّةُ: </span><span id="mColloc" style="color: var(--primary); font-weight: 900;"></span></div>
-        <div class="detail-row" id="rowExample"><span class="detail-label">📖 المِثَالُ فِي سِيَاقٍ: </span><span id="mExample" style="color: #1e293b; font-style: italic;"></span></div>
-        <button class="master-audio-btn" id="btnMasterAudio"><span>🎧</span><span>اضْغَطْ لِلاسْتِمَاعِ لِلشَّرْحِ وَالنُّطْقِ الكَامِلِ</span></button>
-        <div class="rule-gold-banner" id="mRuleBanner" style="display: none;"></div>
-      </div>
-      <div class="affix-box" id="mAffixCard" style="display:none;">
-        <div class="affix-box-head"><span class="affix-box-title">📚 عَائِلَةُ الأَفْعَالِ المَزِيدَةِ</span></div>
-        <div id="mAffixList"></div>
-      </div>
-    </div>
-  </div>
-
   <script>
-    const database = window.db || (typeof db !== 'undefined' ? db : {
-      "كتب": { letters: ['ك', 'ت', 'ب'], concept: "الكِتَابَةُ (صَحِيحٌ سَالِمٌ)" },
-      "قرأ": { letters: ['ق', 'ر', 'أ'], concept: "القِرَاءَةُ (صَحِيحٌ مَهْمُوزٌ)" }
-    });
+    function closeWelcome() {
+      const welcome = document.getElementById('welcomeCosmicScreen');
+      if (welcome) welcome.style.display = 'none';
+    }
 
-    // ==========================================
-    // دَوَالُ التَّدْرِجِ الهَرَمِيِّ الفَضَائِيِّ (كواكب ➔ أقمار ➔ صيغ)
-    // ==========================================
+    function openCosmicHierarchy() {
+      document.getElementById('cosmicHierarchyModal').style.display = 'flex';
+      backToLevel1();
+    }
+
     function selectPlanet(planetType) {
       document.getElementById('hLevel1').style.display = 'none';
       document.getElementById('hLevel2').style.display = 'block';
@@ -891,9 +353,9 @@
           {id: 'mudaaf', name: 'الفعل المضعف', icon: '🪐', color: '#10b981'}
         ];
         moons.forEach(m => {
-          container.innerHTML += `<div onclick="selectMoon('${planetType}', '${m.id}')" style="background: rgba(30,41,59,0.9); border: 2px solid ${m.color}; border-radius: 16px; padding: 18px 24px; cursor: pointer; text-align: center; min-width: 160px; transition: 0.3s;">
+          container.innerHTML += `<div onclick="selectMoon('${planetType}', '${m.id}')" style="background: rgba(30,41,59,0.9); border: 2px solid ${m.color}; border-radius: 16px; padding: 18px 24px; cursor: pointer; text-align: center; min-width: 160px;">
             <div style="font-size: 2.2rem;">${m.icon}</div>
-            <h4 style="color: ${m.color}; margin-top: 8px; font-size: 1.1rem;">${m.name}</h4>
+            <h4 style="color: ${m.color}; margin-top: 8px;">${m.name}</h4>
           </div>`;
         });
       } else if (planetType === 'quadric') {
@@ -938,17 +400,17 @@
           title.textContent = '🌟 صيغ الفعل الثلاثي الصحيح';
           const items = [{n: "فَعَلَ", v: "كتب"}, {n: "فَعِلَ", v: "شرب"}, {n: "فَعُلَ", v: "كمل"}];
           items.forEach(i => {
-            container.innerHTML += `<div onclick="launchSolarSystem('${i.v}')" style="background:#1e293b; border:2px solid #3b82f6; padding:14px 22px; border-radius:14px; cursor:pointer; color:#fff; font-weight:bold; font-size:1.1rem;">${i.n} (${i.v})</div>`;
+            container.innerHTML += `<div onclick="launchSolarSystem('${i.v}')" style="background:#1e293b; border:2px solid #3b82f6; padding:14px 22px; border-radius:14px; cursor:pointer; color:#fff; font-weight:bold;">${i.n} (${i.v})</div>`;
           });
         } else if (moonType === 'hamzouz') {
           title.textContent = '🌟 أنواع الفعل المهموز';
           const items = [{n: "مهموز الفاء", v: "أخذ"}, {n: "مهموز العين", v: "سأل"}, {n: "مهموز اللام", v: "قرأ"}];
           items.forEach(i => {
-            container.innerHTML += `<div onclick="launchSolarSystem('${i.v}')" style="background:#1e293b; border:2px solid #f59e0b; padding:14px 22px; border-radius:14px; cursor:pointer; color:#fff; font-weight:bold; font-size:1.1rem;">${i.n} (${i.v})</div>`;
+            container.innerHTML += `<div onclick="launchSolarSystem('${i.v}')" style="background:#1e293b; border:2px solid #f59e0b; padding:14px 22px; border-radius:14px; cursor:pointer; color:#fff; font-weight:bold;">${i.n} (${i.v})</div>`;
           });
         } else if (moonType === 'mudaaf') {
           title.textContent = '🌟 الفعل المضعف';
-          container.innerHTML += `<div onclick="launchSolarSystem('مدد')" style="background:#1e293b; border:2px solid #10b981; padding:14px 22px; border-radius:14px; cursor:pointer; color:#fff; font-weight:bold; font-size:1.1rem;">صحيح مضعف (مَدَّ)</div>`;
+          container.innerHTML += `<div onclick="launchSolarSystem('مدد')" style="background:#1e293b; border:2px solid #10b981; padding:14px 22px; border-radius:14px; cursor:pointer; color:#fff; font-weight:bold;">صحيح مضعف (مَدَّ)</div>`;
         }
       }
     }
@@ -960,43 +422,16 @@
 
     function launchSolarSystem(rootVal) {
       document.getElementById('cosmicHierarchyModal').style.display = 'none';
-      const sel = document.getElementById('rootSelect');
-      if (sel) sel.value = rootVal;
-      loadRadialWorld(rootVal);
+      closeWelcome();
     }
 
-    function loadRadialWorld(rootKey) {
-      const data = database[rootKey] || database['كتب'];
-      if (!data) return;
-      const coreLettersEl = document.getElementById('coreLetters');
-      const coreConceptEl = document.getElementById('coreConcept');
-      if (coreLettersEl && data.letters) coreLettersEl.textContent = `[ ${data.letters.join(' - ')} ]`;
-      if (coreConceptEl) coreConceptEl.textContent = data.concept || '';
+    function switchMainTab(tabId) {
+      closeWelcome();
+      document.getElementById('cosmicHierarchyModal').style.display = 'none';
+      document.querySelectorAll('.tab-view').forEach(v => { v.classList.remove('active'); v.style.display = 'none'; });
+      const target = document.getElementById(tabId);
+      if (target) { target.classList.add('active'); target.style.display = 'block'; }
     }
-
-    function closeModal(e) {
-      if (!e || e.target.id === 'morphModal' || e.target.classList.contains('modal-close')) {
-        document.getElementById('morphModal').classList.remove('open');
-      }
-    }
-
-    function switchMainTab(tabId, el) {
-      document.querySelectorAll('.tab-pill').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-view').forEach(v => {
-        v.classList.remove('active');
-        v.style.display = 'none';
-      });
-      if (el) el.classList.add('active');
-      const activeView = document.getElementById(tabId);
-      if (activeView) {
-        activeView.classList.add('active');
-        activeView.style.display = 'block';
-      }
-    }
-
-    window.onload = () => {
-      loadRadialWorld('كتب');
-    };
   </script>
 </body>
 </html>
