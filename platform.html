@@ -406,97 +406,189 @@
     <button class="side-control-btn" style="border-color: #ec4899;" onclick="triggerEndJourney()" title="وسام ختام الرحلة">🏆</button>
   </div>
 
-  <!-- 🌌 شاشة البداية الترحيبية -->
-  <div id="welcomeScreen" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #0f172a 45%, #030712 100%); z-index: 99999; display: flex; align-items: center; justify-content: center; overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif; transition: opacity 0.8s ease, transform 0.8s ease;">
-    <div style="position: relative; z-index: 10; width: 100%; max-width: 980px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.4rem;">
-      <div style="display: flex; flex-direction: column; align-items: center;">
-        <div style="position: relative; width: 135px; height: 135px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ffffff 0%, #fde047 30%, #f59e0b 70%, #d97706 100%); display: flex; align-items: center; justify-content: center; font-size: 4.8rem; box-shadow: 0 0 75px rgba(245, 158, 11, 0.95); border: 4px solid #fffdf0;">☀️</div>
-      </div>
-      <div>
-        <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 1.8rem; border-radius: 50px; background: rgba(255, 255, 255, 0.1); border: 1.5px solid rgba(251, 191, 36, 0.7); color: #fde047; font-size: 1rem; font-weight: bold;">
-          <span>🚀</span>
-          <span>رِحْلَةُ الاشْتِقَاقِ الصَّرْفِيِّ فِي فَضَاءِ اللُّغَةِ</span>
-        </div>
-        <h1 style="font-size: clamp(3rem, 6vw, 4.4rem); font-weight: 900; margin: 0.7rem 0 0.3rem 0; background: linear-gradient(180deg, #ffffff 15%, #fef08a 50%, #f59e0b 95%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">عَالَمُ الجُذُورِ</h1>
-        <p style="color: #f1f5f9; font-size: 1.25rem; font-weight: 600; margin: 0.4rem auto; max-width: 880px; line-height: 1.9;">مَرْحَباً بِكَ يَا رَائِدَ اللُّغَةِ! هَيَّا نَنْطَلِقْ فِي رِحْلَةٍ كَوْنِيَّةٍ نَسْتَكْشِفُ فِيهَا الجُذُورَ وَنَصْنَعُ رَوَائِعَ المُشْتَقَّاتِ.</p>
-      </div>
+ <!-- 🌌 شاشة البداية الترحيبية الأصلية بكامل عناصرها ورونقها -->
+<div id="welcomeScreen" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #0f172a 45%, #030712 100%); z-index: 99999; display: flex; align-items: center; justify-content: center; overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif; transition: opacity 0.8s ease, transform 0.8s ease;">
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; width: 100%; max-width: 1050px; margin-top: 0.4rem;">
-        <div style="background: rgba(15, 23, 42, 0.75); border: 2px solid rgba(251, 191, 36, 0.6); border-radius: 22px; padding: 1.2rem 0.8rem; text-align: center;">
-          <div style="font-size: 2.3rem;">☀️</div>
-          <div style="color: #fde047; font-weight: 900;">شَمْسُ الجِذْرِ</div>
-        </div>
-        <div style="background: rgba(15, 23, 42, 0.75); border: 2px solid rgba(56, 189, 248, 0.6); border-radius: 22px; padding: 1.2rem 0.8rem; text-align: center;">
-          <div style="font-size: 2.3rem;">📖</div>
-          <div style="color: #38bdf8; font-weight: 900;">سَحَابَةُ الحِكَايَةِ</div>
-        </div>
-        <div style="background: rgba(15, 23, 42, 0.75); border: 2px solid rgba(99, 102, 241, 0.6); border-radius: 22px; padding: 1.2rem 0.8rem; text-align: center;">
-          <div style="font-size: 2.3rem;">⚙️</div>
-          <div style="color: #a5b4fc; font-weight: 900;">أَقْرَاصُ التَّرْكِيبِ</div>
-        </div>
-        <div style="background: rgba(15, 23, 42, 0.75); border: 2px solid rgba(168, 85, 247, 0.6); border-radius: 22px; padding: 1.2rem 0.8rem; text-align: center;">
-          <div style="font-size: 2.3rem;">🚀</div>
-          <div style="color: #d8b4fe; font-weight: 900;">مَرْكَبَةُ الصَّرْفِ</div>
-        </div>
-        <div style="background: rgba(15, 23, 42, 0.75); border: 2px solid rgba(244, 63, 94, 0.6); border-radius: 22px; padding: 1.2rem 0.8rem; text-align: center;">
-          <div style="font-size: 2.3rem;">✍️</div>
-          <div style="color: #fda4af; font-weight: 900;">الإِنْتَاجُ الحُرُّ</div>
-        </div>
-      </div>
+  <style>
+    @keyframes floatCosmicSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-16px) rotate(2deg); }
+    }
+    @keyframes spacewalker {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(18px, -15px) rotate(6deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+    @keyframes orbitPlanet {
+      0% { transform: rotate(0deg) translateX(48px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(48px) rotate(-360deg); }
+    }
+    @keyframes shootingStar1 {
+      0% { transform: translateX(110vw) translateY(-40px) rotate(-35deg); opacity: 1; }
+      40% { opacity: 1; }
+      70%, 100% { transform: translateX(-20vw) translateY(550px) rotate(-35deg); opacity: 0; }
+    }
+    @keyframes pulseSolar {
+      0%, 100% { filter: drop-shadow(0 0 35px rgba(251, 191, 36, 0.85)); transform: scale(1); }
+      50% { filter: drop-shadow(0 0 65px rgba(245, 158, 11, 1)); transform: scale(1.03); }
+    }
+    @keyframes twinkleCosmic {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    .space-station-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 22px;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .space-station-card:hover {
+      transform: translateY(-8px) scale(1.05);
+      border-color: #fbbf24;
+      background: rgba(30, 41, 59, 0.95);
+      box-shadow: 0 14px 30px rgba(251, 191, 36, 0.35);
+    }
+  </style>
 
-      <button onclick="openGalaxyChooser()" style="margin-top: 0.6rem; padding: 1.15rem 4.4rem; border-radius: 60px; background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%); border: 3.5px solid #fffdf0; color: #090a0f; font-size: 1.5rem; font-weight: 900; cursor: pointer; box-shadow: 0 0 45px rgba(245, 158, 11, 0.9); display: inline-flex; align-items: center; gap: 1.1rem;">
-        <span>انْطَلِقْ فِي الرِّحْلَةِ الكَوْنِيَّةِ</span>
-        <span style="font-size: 2rem;">🚀</span>
-      </button>
-    </div>
-  </div>
+  <!-- 🌌 سُدم السماء المضيئة -->
+  <div style="position: absolute; width: 750px; height: 750px; background: radial-gradient(circle, rgba(168, 85, 247, 0.26) 0%, transparent 70%); top: -150px; left: -100px; filter: blur(75px); pointer-events: none;"></div>
+  <div style="position: absolute; width: 850px; height: 850px; background: radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, transparent 75%); bottom: -200px; right: -150px; filter: blur(80px); pointer-events: none;"></div>
+  <div style="position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(251, 191, 36, 0.22) 0%, transparent 70%); top: 40%; left: 50%; transform: translate(-50%, -50%); filter: blur(55px); pointer-events: none;"></div>
 
-  <!-- 🪐 نافذة الملاحة الفضائية المتدرجة للأفعال (المستويات الثلاثة) -->
-  <div id="galaxyModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 30, 0.95); display: none; justify-content: center; align-items: center; z-index: 999999; backdrop-filter: blur(10px);">
-    <div style="max-width: 700px; width: 92%; padding: 25px; text-align: center; background: rgba(15, 23, 42, 0.98); border: 2.5px solid #f59e0b; border-radius: 24px; box-shadow: 0 0 45px rgba(245, 158, 11, 0.4); position: relative;">
-      <button type="button" onclick="document.getElementById('galaxyModal').style.display='none';" style="position: absolute; top: 14px; left: 16px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: #94a3b8; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1rem;">✕</button>
+  <!-- 🌠 شهاب يمر في الأفق -->
+  <div style="position: absolute; top: 14%; width: 160px; height: 3px; background: linear-gradient(90deg, #fff, rgba(255,255,255,0.8), transparent); border-radius: 50%; animation: shootingStar1 9s linear infinite; pointer-events: none;"></div>
 
-      <!-- المستوى 1: الكواكب -->
-      <div id="cosmicLevel1">
-        <h2 style="color: #fde047; margin-bottom: 6px; font-size: 1.55rem; font-weight: 900;">🪐 كَوَاكِبُ الأَفْعَالِ الكُبْرَى</h2>
-        <p style="color: #94a3b8; margin-bottom: 20px; font-size: 0.9rem;">اخْتَرِ الكَوْكَبَ لِلغَوْصِ فِي عَالَمِهِ:</p>
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
-          <div onclick="openPlanetLevel('triadic')" style="background: rgba(30, 41, 59, 0.9); border: 2px solid #3b82f6; border-radius: 16px; padding: 18px; cursor: pointer;">
-            <div style="font-size: 2.4rem;">📚</div>
-            <h4 style="color: #60a5fa; margin: 8px 0 2px; font-size: 1.1rem;">الفِعْلُ الثُّلَاثِيُّ</h4>
-          </div>
-          <div onclick="openPlanetLevel('quadric')" style="background: rgba(30, 41, 59, 0.9); border: 2px solid #10b981; border-radius: 16px; padding: 18px; cursor: pointer;">
-            <div style="font-size: 2.4rem;">🌀</div>
-            <h4 style="color: #34d399; margin: 8px 0 2px; font-size: 1.1rem;">الفِعْلُ الرُّبَاعِيُّ</h4>
-          </div>
-          <div onclick="openPlanetLevel('augmented')" style="background: rgba(30, 41, 59, 0.9); border: 2px solid #f59e0b; border-radius: 16px; padding: 18px; cursor: pointer;">
-            <div style="font-size: 2.4rem;">☀️</div>
-            <h4 style="color: #fbbf24; margin: 8px 0 2px; font-size: 1.1rem;">الفِعْلُ المَزِيدُ</h4>
-          </div>
-          <div onclick="openPlanetLevel('weak')" style="background: rgba(30, 41, 59, 0.9); border: 2px solid #8b5cf6; border-radius: 16px; padding: 18px; cursor: pointer;">
-            <div style="font-size: 2.4rem;">🌙</div>
-            <h4 style="color: #a78bfa; margin: 8px 0 2px; font-size: 1.1rem;">الأَفْعَالُ المُعْتَلَّةُ</h4>
-          </div>
-        </div>
-      </div>
+  <!-- 🪐 أجرام وكواكب الفضاء المحيطة -->
+  <div style="position: absolute; top: 10%; left: 7%; font-size: 3.8rem; filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.7)); animation: floatCosmicSlow 7s ease-in-out infinite;">🪐</div>
+  <div style="position: absolute; top: 14%; right: 8%; font-size: 3.5rem; filter: drop-shadow(0 0 22px rgba(168, 85, 247, 0.75)); animation: floatCosmicSlow 8s ease-in-out infinite 1s;">🌌</div>
+  <div style="position: absolute; bottom: 18%; left: 6%; font-size: 3rem; filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.8)); animation: floatCosmicSlow 6.5s ease-in-out infinite 0.5s;">🌍</div>
+  <div style="position: absolute; bottom: 12%; right: 7%; font-size: 3.2rem; filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.8)); animation: floatCosmicSlow 6s ease-in-out infinite 1.5s;">🛸</div>
 
-      <!-- المستوى 2: الأقمار -->
-      <div id="cosmicLevel2" style="display: none;">
-        <h2 id="planetMoonTitle" style="color: #38bdf8; margin-bottom: 6px; font-size: 1.55rem; font-weight: 900;">🌙 الأَقْمَارُ الدَّائِرَةُ</h2>
-        <p style="color: #94a3b8; margin-bottom: 20px; font-size: 0.9rem;">اخْتَرِ القَمَرَ لِتَسْتَكْشِفَ أَمْثِلَتَهُ وَصِيَغَهُ:</p>
-        <div id="moonsCardsContainer" style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;"></div>
-        <button type="button" onclick="backToPlanets()" style="margin-top: 22px; background: transparent; border: 1.5px solid #64748b; color: #cbd5e1; padding: 6px 20px; border-radius: 20px; cursor: pointer;">⟵ عَوْدَةٌ لِفَضَاءِ الكَوَاكِبِ</button>
-      </div>
+  <!-- 👨‍🚀 رواد الفضاء في الرحلة -->
+  <div style="position: absolute; bottom: 12%; left: 15%; font-size: 3.6rem; filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.7)); animation: spacewalker 7s ease-in-out infinite;">👨‍🚀</div>
+  <div style="position: absolute; top: 22%; right: 17%; font-size: 3.3rem; filter: drop-shadow(0 0 18px rgba(236, 72, 153, 0.7)); animation: spacewalker 9s ease-in-out infinite 1.5s; transform: scaleX(-1);">🧑‍🚀</div>
 
-      <!-- المستوى 3: الصيغ والأمثلة -->
-      <div id="cosmicLevel3" style="display: none;">
-        <h2 id="moonFormTitle" style="color: #fde047; margin-bottom: 6px; font-size: 1.55rem; font-weight: 900;">🌟 الصِّيَغُ وَالأَمْثِلَةُ</h2>
-        <p style="color: #94a3b8; margin-bottom: 20px; font-size: 0.9rem;">انْقُرْ عَلَى الفِعْلِ لِلانْطِلَاقِ نَحْوَ شَمْسِ الجَذْرِ:</p>
-        <div id="formsButtonsContainer" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;"></div>
-        <button type="button" onclick="backToMoons()" style="margin-top: 22px; background: transparent; border: 1.5px solid #64748b; color: #cbd5e1; padding: 6px 20px; border-radius: 20px; cursor: pointer;">⟵ عَوْدَةٌ لِلأَقْمَارِ</button>
+  <!-- ✨ النجوم المتلألئة -->
+  <div style="position: absolute; top: 20%; left: 24%; color: #fef08a; font-size: 1.5rem; animation: twinkleCosmic 3s infinite;">✨</div>
+  <div style="position: absolute; top: 32%; right: 28%; color: #38bdf8; font-size: 1.7rem; animation: twinkleCosmic 4.5s infinite 1s;">⭐</div>
+  <div style="position: absolute; bottom: 28%; left: 26%; color: #f472b6; font-size: 1.3rem; animation: twinkleCosmic 3.5s infinite 1.5s;">✦</div>
+  <div style="position: absolute; bottom: 22%; right: 24%; color: #fde047; font-size: 1.6rem; animation: twinkleCosmic 2.8s infinite 0.5s;">✨</div>
+
+  <!-- 🛸 المحتوى الرئيسي -->
+  <div style="position: relative; z-index: 10; width: 100%; max-width: 980px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.4rem;">
+
+    <!-- شمس الكلمات المركزية المتوهجة -->
+    <div style="animation: floatCosmicSlow 5s ease-in-out infinite; display: flex; flex-direction: column; align-items: center;">
+      <div style="position: relative; width: 135px; height: 135px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ffffff 0%, #fde047 30%, #f59e0b 70%, #d97706 100%); display: flex; align-items: center; justify-content: center; font-size: 4.8rem; box-shadow: 0 0 75px rgba(245, 158, 11, 0.95), inset -6px -6px 18px rgba(0,0,0,0.35); border: 4px solid #fffdf0; animation: pulseSolar 4s infinite;">
+        ☀️
+        <span style="position: absolute; font-size: 1.9rem; animation: orbitPlanet 8s linear infinite;">🚀</span>
       </div>
     </div>
+
+    <!-- العنوان والشارة الفلكية -->
+    <div>
+      <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 1.8rem; border-radius: 50px; background: rgba(255, 255, 255, 0.1); border: 1.5px solid rgba(251, 191, 36, 0.7); color: #fde047; font-size: 1rem; font-weight: bold; letter-spacing: 1px; backdrop-filter: blur(6px); box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);">
+        <span>🚀</span>
+        <span>رِحْلَةُ الاشْتِقَاقِ الصَّرْفِيِّ فِي فَضَاءِ اللُّغَةِ</span>
+      </div>
+      <h1 style="font-size: clamp(3rem, 6vw, 4.4rem); font-weight: 900; margin: 0.7rem 0 0.3rem 0; background: linear-gradient(180deg, #ffffff 15%, #fef08a 50%, #f59e0b 95%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 5px 25px rgba(245, 158, 11, 0.7)); letter-spacing: 1px;">
+        عَالَمُ الجُذُورِ
+      </h1>
+      <p style="color: #f1f5f9; font-size: clamp(1.1rem, 2.2vw, 1.35rem); font-weight: 600; margin: 0.4rem auto 0 auto; max-width: 880px; line-height: 1.9; text-shadow: 0 2px 12px rgba(0,0,0,0.9);">
+        مَرْحَباً بِكَ يَا رَائِدَ اللُّغَةِ! هَيَّا نَنْطَلِقْ فِي رِحْلَةٍ كَوْنِيَّةٍ؛<br>
+        نَسْتَكْشِفُ فِيهَا الجُذُورَ، نَجْتَازُ مَحَطَّاتِ الأَوْزَانِ، وَنَصْنَعُ رَوَائِعَ المُشْتَقَّاتِ.
+      </p>
+    </div>
+
+    <!-- بوابات المحطات الكونية الخمس بكامل تفاصيلها وتوهجها -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; width: 100%; max-width: 1050px; margin-top: 0.4rem;">
+      <div class="space-station-card" style="padding: 1.2rem 0.8rem; border-color: rgba(251, 191, 36, 0.6); box-shadow: 0 6px 22px rgba(251, 191, 36, 0.2);">
+        <div style="font-size: 2.3rem; margin-bottom: 0.35rem;">☀️</div>
+        <div style="color: #fde047; font-weight: 900; font-size: 1.15rem;">شَمْسُ الجِذْرِ</div>
+        <div style="color: #f8fafc; font-weight: 600; font-size: 0.88rem; margin-top: 0.3rem;">اكْتَشِفْ نَوَاةَ المَعْنَى</div>
+      </div>
+
+      <div class="space-station-card" style="padding: 1.2rem 0.8rem; border-color: rgba(56, 189, 248, 0.6); box-shadow: 0 6px 22px rgba(56, 189, 248, 0.2);">
+        <div style="font-size: 2.3rem; margin-bottom: 0.35rem;">📖</div>
+        <div style="color: #38bdf8; font-weight: 900; font-size: 1.15rem;">سَحَابَةُ الحِكَايَةِ</div>
+        <div style="color: #f8fafc; font-weight: 600; font-size: 0.88rem; margin-top: 0.3rem;">الصَّرْفُ فِي السِّيَاقِ</div>
+      </div>
+
+      <div class="space-station-card" style="padding: 1.2rem 0.8rem; border-color: rgba(99, 102, 241, 0.6); box-shadow: 0 6px 22px rgba(99, 102, 241, 0.2);">
+        <div style="font-size: 2.3rem; margin-bottom: 0.35rem;">⚙️</div>
+        <div style="color: #a5b4fc; font-weight: 900; font-size: 1.15rem;">أَقْرَاصُ التَّرْكِيبِ</div>
+        <div style="color: #f8fafc; font-weight: 600; font-size: 0.88rem; margin-top: 0.3rem;">مُخْتَبَرُ صِيَاغَةِ الأَوْزَانِ</div>
+      </div>
+
+      <div class="space-station-card" style="padding: 1.2rem 0.8rem; border-color: rgba(168, 85, 247, 0.6); box-shadow: 0 6px 22px rgba(168, 85, 247, 0.2);">
+        <div style="font-size: 2.3rem; margin-bottom: 0.35rem;">🚀</div>
+        <div style="color: #d8b4fe; font-weight: 900; font-size: 1.15rem;">مَرْكَبَةُ الصَّرْفِ</div>
+        <div style="color: #f8fafc; font-weight: 600; font-size: 0.88rem; margin-top: 0.3rem;">تَحَدِّيَاتُ القِيَاسِ الفَضَائِيِّ</div>
+      </div>
+
+      <div class="space-station-card" style="padding: 1.2rem 0.8rem; border-color: rgba(244, 63, 94, 0.6); box-shadow: 0 6px 22px rgba(244, 63, 94, 0.2);">
+        <div style="font-size: 2.3rem; margin-bottom: 0.35rem;">✍️</div>
+        <div style="color: #fda4af; font-weight: 900; font-size: 1.15rem;">الإِنْتَاجُ الحُرُّ</div>
+        <div style="color: #f8fafc; font-weight: 600; font-size: 0.88rem; margin-top: 0.3rem;">إِبْدَاعُكَ اللُّغَوِيُّ الخَاصُّ</div>
+      </div>
+    </div>
+
+    <!-- زر الانطلاق المتوهج -->
+    <button onclick="openGalaxyChooser()" style="margin-top: 0.6rem; padding: 1.15rem 4.4rem; border-radius: 60px; background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%); border: 3.5px solid #fffdf0; color: #090a0f; font-size: 1.5rem; font-weight: 900; cursor: pointer; box-shadow: 0 0 45px rgba(245, 158, 11, 0.9), 0 15px 30px rgba(0, 0, 0, 0.6); display: inline-flex; align-items: center; gap: 1.1rem; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='scale(1.08) translateY(-4px)'; this.style.boxShadow='0 0 70px rgba(245, 158, 11, 1), 0 20px 40px rgba(0, 0, 0, 0.8)';" onmouseout="this.style.transform='scale(1) translateY(0)'; this.style.boxShadow='0 0 45px rgba(245, 158, 11, 0.9), 0 15px 30px rgba(0, 0, 0, 0.6)';">
+      <span>انْطَلِقْ فِي الرِّحْلَةِ الكَوْنِيَّةِ</span>
+      <span style="font-size: 2rem; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));">🚀</span>
+    </button>
+
   </div>
+</div>
+
+<!-- 🪐 نافذة الملاحة الفضائية المتدرجة للأفعال (المستويات الثلاثة) -->
+<div id="galaxyModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 15, 30, 0.95); display: none; justify-content: center; align-items: center; z-index: 999999; backdrop-filter: blur(10px);">
+  <div style="max-width: 700px; width: 92%; padding: 25px; text-align: center; background: rgba(15, 23, 42, 0.98); border: 2.5px solid #f59e0b; border-radius: 24px; box-shadow: 0 0 45px rgba(245, 158, 11, 0.4); position: relative;">
+    <button type="button" onclick="document.getElementById('galaxyModal').style.display='none';" style="position: absolute; top: 14px; left: 16px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: #94a3b8; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1rem;">✕</button>
+
+    <!-- المستوى 1: الكواكب -->
+    <div id="cosmicLevel1">
+      <h2 style="color: #fde047; margin-bottom: 6px; font-size: 1.55rem; font-weight: 900;">🪐 كَوَاكِبُ الأَفْعَالِ الكُبْرَى</h2>
+      <p style="color: #94a3b8; margin-bottom: 20px; font-size: 0.9rem;">اخْتَرِ الكَوْكَبَ لِلغَوْصِ فِي عَالَمِهِ:</p>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
+        <div onclick="openPlanetLevel('triadic')" style="background: rgba(30, 41, 59, 0.9); border: 2px solid #3b82f6; border-radius: 16px; padding: 18px; cursor: pointer;">
+          <div style="font-size: 2.4rem;">📚</div>
+          <h4 style="color: #60a5fa; margin: 8px 0 2px; font-size: 1.1rem;">الفِعْلُ الثُّلَاثِيُّ</h4>
+        </div>
+        <div onclick="openPlanetLevel('quadric')" style="background: rgba(30, 41, 59, 0.9); border: 2px solid #10b981; border-radius: 16px; padding: 18px; cursor: pointer;">
+          <div style="font-size: 2.4rem;">🌀</div>
+          <h4 style="color: #34d399; margin: 8px 0 2px; font-size: 1.1rem;">الفِعْلُ الرُّبَاعِيُّ</h4>
+        </div>
+        <div onclick="openPlanetLevel('augmented')" style="background: rgba(30, 41, 59, 0.9); border: 2px solid #f59e0b; border-radius: 16px; padding: 18px; cursor: pointer;">
+          <div style="font-size: 2.4rem;">☀️</div>
+          <h4 style="color: #fbbf24; margin: 8px 0 2px; font-size: 1.1rem;">الفِعْلُ المَزِيدُ</h4>
+        </div>
+        <div onclick="openPlanetLevel('weak')" style="background: rgba(30, 41, 59, 0.9); border: 2px solid #8b5cf6; border-radius: 16px; padding: 18px; cursor: pointer;">
+          <div style="font-size: 2.4rem;">🌙</div>
+          <h4 style="color: #a78bfa; margin: 8px 0 2px; font-size: 1.1rem;">الأَفْعَالُ المُعْتَلَّةُ</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- المستوى 2: الأقمار -->
+    <div id="cosmicLevel2" style="display: none;">
+      <h2 id="planetMoonTitle" style="color: #38bdf8; margin-bottom: 6px; font-size: 1.55rem; font-weight: 900;">🌙 الأَقْمَارُ الدَّائِرَةُ</h2>
+      <p style="color: #94a3b8; margin-bottom: 20px; font-size: 0.9rem;">اخْتَرِ القَمَرَ لِتَسْتَكْشِفَ أَمْثِلَتَهُ وَصِيَغَهُ:</p>
+      <div id="moonsCardsContainer" style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;"></div>
+      <button type="button" onclick="backToPlanets()" style="margin-top: 22px; background: transparent; border: 1.5px solid #64748b; color: #cbd5e1; padding: 6px 20px; border-radius: 20px; cursor: pointer;">⟵ عَوْدَةٌ لِفَضَاءِ الكَوَاكِبِ</button>
+    </div>
+
+    <!-- المستوى 3: الصيغ والأمثلة -->
+    <div id="cosmicLevel3" style="display: none;">
+      <h2 id="moonFormTitle" style="color: #fde047; margin-bottom: 6px; font-size: 1.55rem; font-weight: 900;">🌟 الصِّيَغُ وَالأَمْثِلَةُ</h2>
+      <p style="color: #94a3b8; margin-bottom: 20px; font-size: 0.9rem;">انْقُرْ عَلَى الفِعْلِ لِلانْطِلَاقِ نَحْوَ شَمْسِ الجَذْرِ:</p>
+      <div id="formsButtonsContainer" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;"></div>
+      <button type="button" onclick="backToMoons()" style="margin-top: 22px; background: transparent; border: 1.5px solid #64748b; color: #cbd5e1; padding: 6px 20px; border-radius: 20px; cursor: pointer;">⟵ عَوْدَةٌ لِلأَقْمَارِ</button>
+    </div>
+  </div>
+</div>
 
   <header>
     <div class="brand-box">
