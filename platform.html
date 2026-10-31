@@ -29,7 +29,7 @@
       color: #ffffff;
     }
 
-    /* الشاشة الترحيبية الأولى المطابقة للصورة */
+    /* الشاشة الترحيبية الأولى */
     #welcomeCosmicScreen {
       position: fixed;
       inset: 0;
@@ -181,28 +181,8 @@
       text-align: center; cursor: pointer;
     }
 
-    .sun-rays-halo { position: absolute; width: 380px; height: 380px; pointer-events: none; animation: spinHalo 24s linear infinite; }
-    @keyframes spinHalo { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
     .sun-root-letters { font-size: 1.65rem; font-weight: 900; color: #7f1d1d; }
     .sun-badge-desc { font-size: 0.95rem; font-weight: 900; color: #854d0e; background: rgba(255,255,255,0.95); padding: 0.25rem 0.9rem; border-radius: 14px; margin-top: 0.3rem; }
-
-    .planet-station { position: absolute; display: flex; flex-direction: column; align-items: center; cursor: pointer; z-index: 5; transition: 0.35s; }
-    .planet-station:hover { transform: scale(1.15) translateY(-8px); z-index: 25; }
-    .planet-pill-tag { background: rgba(15,23,42,0.95); border: 2px solid #38bdf8; border-radius: 20px; padding: 0.25rem 0.9rem; margin-bottom: 0.4rem; display: flex; flex-direction: column; align-items: center; }
-    .tag-title { font-size: 0.85rem; font-weight: 900; color: #fef08a; }
-    .tag-sub { font-size: 0.75rem; font-weight: 800; color: #bae6fd; }
-    .planet-globe-svg { width: 175px; height: 175px; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.7)); }
-
-    .station-1 { top: 30px; right: 11%; }
-    .station-2 { top: 30px; left: 11%; }
-    .station-3 { bottom: 35px; left: 10%; }
-    .station-4 { bottom: 35px; right: 10%; }
-
-    .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 1000; color: #1e293b; }
-    .modal-overlay.open { display: flex; }
-    .modal-box { background: white; width: 90%; max-width: 620px; border-radius: 45px; padding: 2.2rem; border: 6px solid #38bdf8; box-shadow: 0 25px 60px rgba(0,0,0,0.4); position: relative; }
-    .modal-close { position: absolute; top: 1.2rem; left: 1.2rem; background: #fee2e2; border: 2px solid #ef4444; width: 42px; height: 42px; border-radius: 50%; font-size: 1.3rem; font-weight: 900; cursor: pointer; color: #b91c1c; }
   </style>
 
   <script src="roots_data/ktb.js?v=2"></script>
@@ -220,11 +200,10 @@
 </head>
 <body>
 
-  <!-- 🌌 الواجهة الأولى الافتتاحية (مطابقة لصورة 111.jpg) -->
+  <!-- 🌌 الواجهة الأولى الافتتاحية -->
   <div id="welcomeCosmicScreen">
     <div style="position: relative; z-index: 10; width: 100%; max-width: 980px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.4rem;">
       
-      <!-- شمس الكلمات المركزية -->
       <div style="width: 125px; height: 125px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff, #fde047 30%, #f59e0b 70%, #d97706 100%); display: flex; align-items: center; justify-content: center; font-size: 4.2rem; box-shadow: 0 0 75px rgba(245, 158, 11, 0.95); border: 4px solid #fffdf0;">☀️</div>
 
       <div>
@@ -264,7 +243,6 @@
         </div>
       </div>
 
-      <!-- زر الانطلق في الرحلة الكونية -->
       <button onclick="openCosmicHierarchy()" style="margin-top: 0.8rem; padding: 1.1rem 4rem; border-radius: 60px; background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%); border: 3.5px solid #fffdf0; color: #090a0f; font-size: 1.45rem; font-weight: 900; cursor: pointer; box-shadow: 0 0 45px rgba(245, 158, 11, 0.9); display: inline-flex; align-items: center; gap: 1rem;">
         <span>انْطَلِقْ فِي الرِّحْلَةِ الكَوْنِيَّةِ</span>
         <span>🚀</span>
@@ -273,7 +251,7 @@
     </div>
   </div>
 
-  <!-- 🪐 النافذة الهرمية المتسلسلة (كواكب الأفعال $\leftarrow$ الأقمار $\leftarrow$ الصيغ والأمثلة) -->
+  <!-- 🪐 النافذة الهرمية المتسلسلة (الكواكب $\leftarrow$ الأقمار $\leftarrow$ الصيغ والأمثلة) -->
   <div id="cosmicHierarchyModal" class="cosmic-hierarchy-modal">
     <div class="hierarchy-box">
       
@@ -286,15 +264,15 @@
             <div style="font-size: 2.5rem;">📚</div>
             <h3 style="color: #60a5fa; margin-top: 8px;">الفعل الثلاثي</h3>
           </div>
-          <div onclick="alert('قريباً: الفعل الرباعي')" style="background: rgba(30,41,59,0.9); border: 2px solid #10b981; border-radius: 16px; padding: 20px; cursor: pointer; transition: 0.3s;">
+          <div onclick="selectPlanet('quadric')" style="background: rgba(30,41,59,0.9); border: 2px solid #10b981; border-radius: 16px; padding: 20px; cursor: pointer; transition: 0.3s;">
             <div style="font-size: 2.5rem;">🌀</div>
             <h3 style="color: #34d399; margin-top: 8px;">الفعل الرباعي</h3>
           </div>
-          <div onclick="alert('قريباً: الأفعال المزيدة')" style="background: rgba(30,41,59,0.9); border: 2px solid #f59e0b; border-radius: 16px; padding: 20px; cursor: pointer; transition: 0.3s;">
+          <div onclick="selectPlanet('augmented')" style="background: rgba(30,41,59,0.9); border: 2px solid #f59e0b; border-radius: 16px; padding: 20px; cursor: pointer; transition: 0.3s;">
             <div style="font-size: 2.5rem;">☀️</div>
             <h3 style="color: #fbbf24; margin-top: 8px;">الفعل المزيد</h3>
           </div>
-          <div onclick="alert('قريباً: الأفعال المعتلة')" style="background: rgba(30,41,59,0.9); border: 2px solid #8b5cf6; border-radius: 16px; padding: 20px; cursor: pointer; transition: 0.3s;">
+          <div onclick="selectPlanet('weak')" style="background: rgba(30,41,59,0.9); border: 2px solid #8b5cf6; border-radius: 16px; padding: 20px; cursor: pointer; transition: 0.3s;">
             <div style="font-size: 2.5rem;">🌙</div>
             <h3 style="color: #a78bfa; margin-top: 8px;">الأفعال المعتلة</h3>
           </div>
@@ -302,24 +280,11 @@
         <button onclick="closeCosmicHierarchy()" style="margin-top: 20px; background: transparent; border: 1px solid #64748b; color: #94a3b8; padding: 6px 18px; border-radius: 20px; cursor: pointer;">✕ إغلاق</button>
       </div>
 
-      <!-- المستوى 2: الأقمار الفرعية (للفعل الثلاثي) -->
+      <!-- المستوى 2: الأقمار الفرعية (تتغير حسب الكوكب المختار) -->
       <div id="hLevel2" style="display: none;">
-        <h2 style="color: #60a5fa; font-size: 1.6rem; margin-bottom: 8px;">🌙 أقمار الفعل الثلاثي</h2>
+        <h2 id="hLevel2Title" style="color: #60a5fa; font-size: 1.6rem; margin-bottom: 8px;">🌙 الأقمار الدائرة</h2>
         <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 20px;">اختر القمر الفرعي:</p>
-        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-          <div onclick="selectMoon('correct')" style="background: rgba(30,41,59,0.9); border: 2px solid #38bdf8; border-radius: 14px; padding: 15px 25px; cursor: pointer;">
-            <div style="font-size: 2rem;">☄️</div>
-            <h4 style="color: #38bdf8; margin-top: 5px;">الفعل الصحيح</h4>
-          </div>
-          <div onclick="selectMoon('hamzouz')" style="background: rgba(30,41,59,0.9); border: 2px solid #f59e0b; border-radius: 14px; padding: 15px 25px; cursor: pointer;">
-            <div style="font-size: 2rem;">🌠</div>
-            <h4 style="color: #fbbf24; margin-top: 5px;">الفعل المهموز</h4>
-          </div>
-          <div onclick="selectMoon('mudaaf')" style="background: rgba(30,41,59,0.9); border: 2px solid #10b981; border-radius: 14px; padding: 15px 25px; cursor: pointer;">
-            <div style="font-size: 2rem;">🪐</div>
-            <h4 style="color: #34d399; margin-top: 5px;">الفعل المضعف</h4>
-          </div>
-        </div>
+        <div id="hLevel2Container" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;"></div>
         <button onclick="backToLevel1()" style="margin-top: 20px; background: transparent; border: 1px solid #64748b; color: #94a3b8; padding: 6px 18px; border-radius: 20px; cursor: pointer;">⟵ عودة للكواكب</button>
       </div>
 
@@ -343,7 +308,6 @@
       </div>
     </div>
 
-    <!-- قائمة اختيار الجذور الخفية للتحكم بالنظام الشمسي -->
     <div style="display:none;">
       <select id="rootSelect" onchange="loadRadialWorld(this.value)">
         <option value="كتب">كتب</option>
@@ -373,7 +337,6 @@
   </nav>
 
   <main>
-    <!-- شمس الجذر الفضائية -->
     <div id="radialMap" class="tab-view active">
       <div class="space-system-arena" id="starsSky">
         <div class="orbit-ellipse-wide"></div>
@@ -402,10 +365,52 @@
       document.getElementById('cosmicHierarchyModal').style.display = 'none';
     }
 
-    function selectPlanet(type) {
-      if (type === 'triadic') {
-        document.getElementById('hLevel1').style.display = 'none';
-        document.getElementById('hLevel2').style.display = 'block';
+    // دالة اختيار الكوكب وتعبئة الأقمار الخاصة به في المستوى 2
+    function selectPlanet(planetType) {
+      document.getElementById('hLevel1').style.display = 'none';
+      document.getElementById('hLevel2').style.display = 'block';
+      const container = document.getElementById('hLevel2Container');
+      const title = document.getElementById('hLevel2Title');
+      container.innerHTML = '';
+
+      if (planetType === 'triadic') {
+        title.textContent = '🌙 أقمار الفعل الثلاثي';
+        const moons = [
+          {id: 'correct', name: 'الفعل الصحيح', icon: '☄️', color: '#38bdf8'},
+          {id: 'hamzouz', name: 'الفعل المهموز', icon: '🌠', color: '#f59e0b'},
+          {id: 'mudaaf', name: 'الفعل المضعف', icon: '🪐', color: '#10b981'}
+        ];
+        moons.forEach(m => {
+          container.innerHTML += `<div onclick="selectMoon('${planetType}', '${m.id}')" style="background: rgba(30,41,59,0.9); border: 2px solid ${m.color}; border-radius: 14px; padding: 15px 25px; cursor: pointer; text-align: center;">
+            <div style="font-size: 2rem;">${m.icon}</div>
+            <h4 style="color: ${m.color}; margin-top: 5px;">${m.name}</h4>
+          </div>`;
+        });
+      } else if (planetType === 'quadric') {
+        title.textContent = '🌙 أقمار الفعل الرباعي';
+        container.innerHTML += `<div onclick="launchSolarSystem('دحرج')" style="background: rgba(30,41,59,0.9); border: 2px solid #10b981; border-radius: 14px; padding: 15px 25px; cursor: pointer; text-align: center;">
+          <div style="font-size: 2rem;">🌀</div>
+          <h4 style="color: #34d399; margin-top: 5px;">رباعي مجرد (دَحْرَجَ)</h4>
+        </div>`;
+      } else if (planetType === 'augmented') {
+        title.textContent = '🌙 أقمار الفعل المزيد';
+        container.innerHTML += `<div onclick="alert('قريباً: الأفعال المزيدة')" style="background: rgba(30,41,59,0.9); border: 2px solid #f59e0b; border-radius: 14px; padding: 15px 25px; cursor: pointer; text-align: center;">
+          <div style="font-size: 2rem;">☀️</div>
+          <h4 style="color: #fbbf24; margin-top: 5px;">مزيد بحرف أو أكثر</h4>
+        </div>`;
+      } else if (planetType === 'weak') {
+        title.textContent = '🌙 أقمار الأفعال المعتلة';
+        const weakMoons = [
+          {n: "المثال", v: "وقف"},
+          {n: "الأجوف", v: "قول"},
+          {n: "الناقص", v: "رمي"}
+        ];
+        weakMoons.forEach(wm => {
+          container.innerHTML += `<div onclick="launchSolarSystem('${wm.v}')" style="background: rgba(30,41,59,0.9); border: 2px solid #8b5cf6; border-radius: 14px; padding: 15px 25px; cursor: pointer; text-align: center;">
+            <div style="font-size: 2rem;">🌙</div>
+            <h4 style="color: #a78bfa; margin-top: 5px;">معتل ${wm.n} (${wm.v})</h4>
+          </div>`;
+        });
       }
     }
 
@@ -415,28 +420,31 @@
       document.getElementById('hLevel3').style.display = 'none';
     }
 
-    function selectMoon(moonType) {
+    // دالة اختيار القمر وعرض الصيغ أو الأنواع في المستوى 3
+    function selectMoon(planetType, moonType) {
       document.getElementById('hLevel2').style.display = 'none';
       document.getElementById('hLevel3').style.display = 'block';
       const container = document.getElementById('hLevel3Container');
       const title = document.getElementById('hLevel3Title');
       container.innerHTML = '';
 
-      if (moonType === 'correct') {
-        title.textContent = '🌟 صيغ الفعل الثلاثي الصحيح';
-        const items = [{n: "فَعَلَ", v: "كتب"}, {n: "فَعِلَ", v: "شرب"}, {n: "فَعُلَ", v: "كمل"}];
-        items.forEach(i => {
-          container.innerHTML += `<div onclick="launchSolarSystem('${i.v}')" style="background:#1e293b; border:2px solid #3b82f6; padding:12px 20px; border-radius:12px; cursor:pointer; color:#fff; font-weight:bold;">${i.n}</div>`;
-        });
-      } else if (moonType === 'hamzouz') {
-        title.textContent = '🌟 أنواع الفعل المهموز';
-        const items = [{n: "مهموز الفاء", v: "أخذ"}, {n: "مهموز العين", v: "سأل"}, {n: "مهموز اللام", v: "قرأ"}];
-        items.forEach(i => {
-          container.innerHTML += `<div onclick="launchSolarSystem('${i.v}')" style="background:#1e293b; border:2px solid #f59e0b; padding:12px 20px; border-radius:12px; cursor:pointer; color:#fff; font-weight:bold;">${i.n}</div>`;
-        });
-      } else if (moonType === 'mudaaf') {
-        title.textContent = '🌟 الفعل المضعف';
-        container.innerHTML += `<div onclick="launchSolarSystem('مدد')" style="background:#1e293b; border:2px solid #10b981; padding:12px 20px; border-radius:12px; cursor:pointer; color:#fff; font-weight:bold;">صحيح مضعف (مَدَّ)</div>`;
+      if (planetType === 'triadic') {
+        if (moonType === 'correct') {
+          title.textContent = '🌟 صيغ الفعل الثلاثي الصحيح';
+          const items = [{n: "فَعَلَ", v: "كتب"}, {n: "فَعِلَ", v: "شرب"}, {n: "فَعُلَ", v: "كمل"}];
+          items.forEach(i => {
+            container.innerHTML += `<div onclick="launchSolarSystem('${i.v}')" style="background:#1e293b; border:2px solid #3b82f6; padding:12px 20px; border-radius:12px; cursor:pointer; color:#fff; font-weight:bold;">${i.n} (${i.v})</div>`;
+          });
+        } else if (moonType === 'hamzouz') {
+          title.textContent = '🌟 أنواع الفعل المهموز';
+          const items = [{n: "مهموز الفاء", v: "أخذ"}, {n: "مهموز العين", v: "سأل"}, {n: "مهموز اللام", v: "قرأ"}];
+          items.forEach(i => {
+            container.innerHTML += `<div onclick="launchSolarSystem('${i.v}')" style="background:#1e293b; border:2px solid #f59e0b; padding:12px 20px; border-radius:12px; cursor:pointer; color:#fff; font-weight:bold;">${i.n} (${i.v})</div>`;
+          });
+        } else if (moonType === 'mudaaf') {
+          title.textContent = '🌟 الفعل المضعف';
+          container.innerHTML += `<div onclick="launchSolarSystem('مدد')" style="background:#1e293b; border:2px solid #10b981; padding:12px 20px; border-radius:12px; cursor:pointer; color:#fff; font-weight:bold;">صحيح مضعف (مَدَّ)</div>`;
+        }
       }
     }
 
