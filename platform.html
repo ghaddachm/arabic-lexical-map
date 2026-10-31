@@ -918,52 +918,53 @@
     </div>
   </div>
 
-<!-- واجهة المجرة الكوكبية البديلة للقائمة المنسدلة القديمة -->
-<div class="galaxy-container" style="padding: 15px; text-align: center; background: rgba(15, 23, 42, 0.6); border-radius: 15px; margin: 10px 0;">
-  <h3 style="color: #fde047; margin-bottom: 15px; font-size: 1.2rem;">🪐 اختر كوكب الجذر أو الفعل للانطلاق:</h3>
+<!-- الواجهة الأولى: فضاء الكواكب الكبرى للانطلاق -->
+<div id="galaxyLaunchpad" style="max-width: 850px; margin: 40px auto; padding: 30px; text-align: center; background: rgba(15, 23, 42, 0.95); border: 2px solid rgba(245, 158, 11, 0.5); border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.6);">
+  <h2 style="color: #fde047; margin-bottom: 10px; font-size: 1.6rem;">🪐 انطلق في الرحلة الكونية</h2>
+  <p style="color: #94a3b8; margin-bottom: 25px; font-size: 0.95rem;">اختر كوكب الفعل أو نوعه للولوج إلى النظام الشمسي الصرفي:</p>
   
-  <div class="planets-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">
     
-    <!-- كوكب الأفعال الثلاثية المجردة -->
-    <div class="planet-card" onclick="togglePlanet('triadic')" style="background: rgba(15, 23, 42, 0.9); border: 2px solid #3b82f6; border-radius: 12px; padding: 12px; cursor: pointer; transition: 0.3s;">
-      <div style="font-size: 1.8rem;">📚</div>
-      <h4 style="color: #60a5fa; margin: 8px 0; font-size: 0.95rem;">الثلاثية المجردة</h4>
+    <!-- كوكب الثلاثي المجرد -->
+    <div onclick="launchSolarSystem('triadic')" style="background: rgba(30, 41, 59, 0.9); border: 2px solid #3b82f6; border-radius: 15px; padding: 15px; cursor: pointer; transition: 0.3s;">
+      <div style="font-size: 2.2rem;">📚</div>
+      <h4 style="color: #60a5fa; margin: 10px 0 5px; font-size: 1rem;">الثلاثية المجردة</h4>
       <p style="color: #94a3b8; font-size: 0.75rem;">(السالم، المهموز، المضعف)</p>
     </div>
 
-    <!-- كوكب الأفعال الرباعية المجردة -->
-    <div class="planet-card" onclick="togglePlanet('quadriadic')" style="background: rgba(15, 23, 42, 0.9); border: 2px solid #10b981; border-radius: 12px; padding: 12px; cursor: pointer; transition: 0.3s;">
-      <div style="font-size: 1.8rem;">🌀</div>
-      <h4 style="color: #34d399; margin: 8px 0; font-size: 0.95rem;">الرباعية المجردة</h4>
+    <!-- كوكب الرباعي المجرد -->
+    <div onclick="launchSolarSystem('quadriadic')" style="background: rgba(30, 41, 59, 0.9); border: 2px solid #10b981; border-radius: 15px; padding: 15px; cursor: pointer; transition: 0.3s;">
+      <div style="font-size: 2.2rem;">🌀</div>
+      <h4 style="color: #34d399; margin: 10px 0 5px; font-size: 1rem;">الرباعية المجردة</h4>
       <p style="color: #94a3b8; font-size: 0.75rem;">(السالم، المضعف)</p>
     </div>
 
     <!-- كوكب الأفعال المعتلة -->
-    <div class="planet-card" onclick="togglePlanet('weak')" style="background: rgba(15, 23, 42, 0.9); border: 2px solid #8b5cf6; border-radius: 12px; padding: 12px; cursor: pointer; transition: 0.3s;">
-      <div style="font-size: 1.8rem;">🌙</div>
-      <h4 style="color: #a78bfa; margin: 8px 0; font-size: 0.95rem;">الأفعال المعتلة</h4>
+    <div onclick="launchSolarSystem('weak')" style="background: rgba(30, 41, 59, 0.9); border: 2px solid #8b5cf6; border-radius: 15px; padding: 15px; cursor: pointer; transition: 0.3s;">
+      <div style="font-size: 2.2rem;">🌙</div>
+      <h4 style="color: #a78bfa; margin: 10px 0 5px; font-size: 1rem;">الأفعال المعتلة</h4>
       <p style="color: #94a3b8; font-size: 0.75rem;">(المثال، الأجوف، الناقص)</p>
     </div>
 
-    <!-- كوكب الأفعال المزيدة القياسية -->
-    <div class="planet-card" onclick="togglePlanet('augmented')" style="background: rgba(15, 23, 42, 0.9); border: 2px solid #f59e0b; border-radius: 12px; padding: 12px; cursor: pointer; transition: 0.3s;">
-      <div style="font-size: 1.8rem;">☀️</div>
-      <h4 style="color: #fbbf24; margin: 8px 0; font-size: 0.95rem;">الأفعال المزيدة</h4>
-      <p style="color: #94a3b8; font-size: 0.75rem;">(مزيد بالتضعيف، بالألف، بحرفين...)</p>
+    <!-- كوكب الأفعال المزيدة -->
+    <div onclick="launchSolarSystem('augmented')" style="background: rgba(30, 41, 59, 0.9); border: 2px solid #f59e0b; border-radius: 15px; padding: 15px; cursor: pointer; transition: 0.3s;">
+      <div style="font-size: 2.2rem;">☀️</div>
+      <h4 style="color: #fbbf24; margin: 10px 0 5px; font-size: 1rem;">الأفعال المزيدة</h4>
+      <p style="color: #94a3b8; font-size: 0.75rem;">(مزيد بالتضعيف، بالألف...)</p>
     </div>
 
   </div>
 
-  <!-- الأقمار الفرعية (تظهر عند النقر على الكوكب) -->
-  <div id="moonsContainer" style="margin-top: 20px; padding: 12px; background: rgba(30, 41, 59, 0.8); border-radius: 10px; display: none;">
-    <p style="color: #e2e8f0; font-weight: bold; font-size: 0.9rem;">اختر الفعل المحدد:</p>
-    <div id="moonsList" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 8px;"></div>
+  <!-- قائمة الأقمار الدقيقة التي تظهر عند اختيار الكوكب -->
+  <div id="subMoonsSelection" style="margin-top: 25px; padding: 15px; background: rgba(15, 23, 42, 0.8); border-radius: 12px; border: 1px dashed #64748b; display: none;">
+    <p style="color: #e2e8f0; font-weight: bold; font-size: 0.9rem; margin-bottom: 10px;">اختر الجذر أو الفعل المحدد للانطلاق نحو الشمس:</p>
+    <div id="subMoonsList" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;"></div>
   </div>
 </div>
 
 <script>
-  // بيانات الأقمار والكواكب مضبوطة علمياً وصرفياً
-  const galaxyData = {
+  // قاعدة بيانات الأفعال مصنفة علمياً بدقة
+  const solarData = {
     triadic: [
       { name: "📚 [ ك - ت - ب ] (صَحِيحٌ سَالِمٌ)", val: "كتب" },
       { name: "📖 [ أ - خ - ذ ] (مَهْمُوزُ الفَاءِ)", val: "أخذ" },
@@ -988,19 +989,20 @@
     ]
   };
 
-  function togglePlanet(categoryKey) {
-    const container = document.getElementById('moonsContainer');
-    const list = document.getElementById('moonsList');
+  function launchSolarSystem(categoryKey) {
+    const container = document.getElementById('subMoonsSelection');
+    const list = document.getElementById('subMoonsList');
     container.style.display = 'block';
     list.innerHTML = '';
 
-    galaxyData[categoryKey].forEach(item => {
+    solarData[categoryKey].forEach(item => {
       const btn = document.createElement('button');
       btn.innerText = item.name;
-      btn.style.cssText = "background: #1e293b; color: #f8fafc; border: 1px solid #64748b; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 0.85rem; transition: 0.2s;";
-      btn.onmouseover = () => btn.style.background = '#334155';
-      btn.onmouseout = () => btn.style.background = '#1e293b';
+      btn.style.cssText = "background: #1e293b; color: #f8fafc; border: 1px solid #475569; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-family: inherit; font-size: 0.85rem; transition: 0.2s;";
+      btn.onmouseover = () => { btn.style.background = '#3b82f6'; btn.style.borderColor = '#60a5fa'; };
+      btn.onmouseout = () => { btn.style.background = '#1e293b'; btn.style.borderColor = '#475569'; };
       btn.onclick = () => {
+        // عند اختيار الفعل، يتم استدعاء الدالة المركزية لعرض النظام الشمسي الخاص به
         if (typeof loadRadialWorld === 'function') {
           loadRadialWorld(item.val);
         }
