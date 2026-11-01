@@ -1038,23 +1038,57 @@ window.onload = function() {
     };
   </script>
 
-  <!-- 💡 نافذة دليل التوجيه الإرشادي -->
-  <div id="guideModalBox" style="display: none; position: fixed; inset: 0; background: rgba(3, 7, 18, 0.85); backdrop-filter: blur(8px); z-index: 99999999; align-items: center; justify-content: center; padding: 1.5rem;">
-    <div style="background: #0f172a; border: 2px solid #38bdf8; border-radius: 22px; max-width: 520px; width: 90%; padding: 1.8rem; color: #fff; text-align: right; box-shadow: 0 0 35px rgba(56, 189, 248, 0.35); position: relative;">
-      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.6rem; margin-bottom: 1.2rem;">
-        <h3 style="margin: 0; color: #38bdf8; font-size: 1.3rem;">🧭 خَارِطَةُ المَسَارِ الصَّرْفِيِّ</h3>
-        <button type="button" onclick="toggleGuideModal()" style="background: none; border: none; color: #94a3b8; font-size: 1.5rem; cursor: pointer;">✕</button>
+ <!-- 💡 نافذة دليل التوجيه: خارطة ملاحة كواكب الأفعال -->
+<div id="guideModalBox" style="display: none; position: fixed; inset: 0; background: rgba(3, 7, 18, 0.88); backdrop-filter: blur(10px); z-index: 2147483647; align-items: center; justify-content: center; padding: 1.2rem;">
+  <div style="background: rgba(15, 23, 42, 0.98); border: 2.5px solid #38bdf8; border-radius: 26px; max-width: 580px; width: 92%; padding: 2rem; color: #fff; text-align: right; box-shadow: 0 0 45px rgba(56, 189, 248, 0.4); position: relative; font-family: 'Segoe UI', Tahoma, sans-serif;">
+    
+    <!-- زر الإغلاق -->
+    <button type="button" onclick="toggleGuideModal()" style="position: absolute; top: 16px; left: 18px; background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.2); color: #cbd5e1; border-radius: 50%; width: 34px; height: 34px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center;">✕</button>
+
+    <!-- العنوان والرأسية -->
+    <div style="display: flex; align-items: center; gap: 0.6rem; border-bottom: 1.5px solid rgba(56, 189, 248, 0.25); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
+      <span style="font-size: 1.8rem;">🧭</span>
+      <div>
+        <h3 style="margin: 0; color: #38bdf8; font-size: 1.35rem; font-weight: 900;">بَوْصَلَةُ المَلَاحَةِ فِي مَجَرَّةِ الأَفْعَالِ</h3>
+        <p style="margin: 2px 0 0; color: #94a3b8; font-size: 0.85rem;">دَلِيلُكَ لِلتَّعَرُّفِ عَلَى مَدَارَاتِ وَأَوْزَانِ الكَوَاكِبِ الأَرْبَعَةِ</p>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 0.9rem; font-size: 0.95rem; line-height: 1.7; color: #cbd5e1;">
-        <div>☀️ <strong style="color: #fde047;">1. شَمْسُ الجِذْرِ:</strong> اكْتَشِفْ نَوَاةَ المَعْنَى وَالمُشْتَقَّاتِ الَّتِي تَدُورُ حَوْلَهَا.</div>
-        <div>📖 <strong style="color: #38bdf8;">2. سَحَابَةُ الحِكَايَةِ:</strong> اقْرَأِ القِصَّةَ وَتَعَرَّفْ عَلَى المُشْتَقَّاتِ فِي سِيَاقِهَا التَّوَاصُلِيِّ.</div>
-        <div>⚙️ <strong style="color: #7dd3fc;">3. أَقْرَاصُ التَّرْكِيبِ:</strong> قُمْ بِتَرْكِيبِ حُرُوفِ الجِذْرِ عَلَى مِيزَانِ الصَّرْفِ.</div>
-        <div>🚀 <strong style="color: #d8b4fe;">4. مَرْكَبَةُ الصَّرْفِ:</strong> اخْتَبِرْ سُرْعَتَكَ فِي تَحَدِّيَاتِ الأَوْزَانِ الفَضَائِيَّةِ.</div>
-        <div>✍️ <strong style="color: #fda4af;">5. الإِنْتَاجُ الحُرُّ:</strong> شَيِّدْ جُمَلاً مُفِيدَةً بِالمُشْتَقَّاتِ الَّتِي بَنَيْتَهَا.</div>
-      </div>
-      <button type="button" onclick="toggleGuideModal()" style="margin-top: 1.4rem; width: 100%; padding: 0.75rem; border-radius: 40px; background: #38bdf8; border: none; color: #0f172a; font-weight: 900; font-size: 1.05rem; cursor: pointer;">مُوَافِقْ، لِنُوَاصِلِ الرِّحْلَةَ!</button>
     </div>
+
+    <!-- شبكة مسارات الأفعال الأربعة -->
+    <div style="display: flex; flex-direction: column; gap: 0.85rem; font-size: 0.95rem; line-height: 1.7; color: #cbd5e1;">
+      
+      <!-- 1. كوكب الثلاثي -->
+      <div style="background: rgba(2, 132, 199, 0.12); border-right: 4px solid #38bdf8; padding: 0.65rem 0.9rem; border-radius: 0 14px 14px 0;">
+        <strong style="color: #38bdf8; font-size: 1.05rem;">📚 1. كَوْكَبُ الثُّلَاثِيِّ (المُجَرَّد):</strong><br>
+        أَصْلُ الأَفْعَالِ وَأَبْسَطُهَا؛ يَشْمَلُ <span style="color: #fde047;">الصَّحِيحَ</span> (كَتَبَ، شَرِبَ)، و<span style="color: #fde047;">المَهْمُوزَ</span> (أَخَذَ، سَأَلَ)، و<span style="color: #fde047;">المُضَعَّفَ</span> (مَدَّ).
+      </div>
+
+      <!-- 2. كوكب الرباعي -->
+      <div style="background: rgba(5, 150, 105, 0.12); border-right: 4px solid #34d399; padding: 0.65rem 0.9rem; border-radius: 0 14px 14px 0;">
+        <strong style="color: #34d399; font-size: 1.05rem;">🌀 2. كَوْكَبُ الرُّبَاعِيِّ (المُجَرَّد):</strong><br>
+        أَفْعَالٌ حُرُوفُهَا الأَصْلِيَّةُ أَرْبَعَةٌ؛ مِثْلُ: <span style="color: #a7f3d0;">دَحْرَجَ</span> (فَعْلَلَ - سَالِمٌ) وَ<span style="color: #a7f3d0;">زَلْزَلَ</span> (مُضَعَّفٌ).
+      </div>
+
+      <!-- 3. كوكب المزيد -->
+      <div style="background: rgba(217, 119, 6, 0.12); border-right: 4px solid #fbbf24; padding: 0.65rem 0.9rem; border-radius: 0 14px 14px 0;">
+        <strong style="color: #fbbf24; font-size: 1.05rem;">☀️ 3. كَوْكَبُ المَزِيدِ (الأَفْعَالُ النَّامِيَة):</strong><br>
+        أَفْعَالٌ زِيدَتْ عَلَى أُصُولِهَا؛ <span style="color: #fef08a;">بِحَرْفٍ</span> (دَرَّسَ، سَابَقَ) أَوْ <span style="color: #fef08a;">بِحَرْفَيْنِ وَأَكْثَرَ</span> (اكْتَشَفَ، اسْتَخْرَجَ).
+      </div>
+
+      <!-- 4. كوكب المعتل -->
+      <div style="background: rgba(124, 58, 237, 0.12); border-right: 4px solid #c084fc; padding: 0.65rem 0.9rem; border-radius: 0 14px 14px 0;">
+        <strong style="color: #c084fc; font-size: 1.05rem;">🌙 4. كَوْكَبُ المُعْتَلِّ (سِرُّ حُرُوفِ العِلَّة):</strong><br>
+        أَفْعَالٌ حَوَتْ حُرُوفَ (و - ا - ي)؛ يَضُمُّ: <span style="color: #e9d5ff;">المِثَالَ</span> (وَقَفَ)، <span style="color: #e9d5ff;">الأَجْوَفَ</span> (قَالَ)، و<span style="color: #e9d5ff;">النَّاقِصَ</span> (رَمَى).
+      </div>
+
+    </div>
+
+    <!-- زر التأكيد -->
+    <button type="button" onclick="toggleGuideModal()" style="margin-top: 1.4rem; width: 100%; padding: 0.85rem; border-radius: 50px; background: linear-gradient(90deg, #0284c7, #38bdf8); border: none; color: #04101e; font-weight: 900; font-size: 1.05rem; cursor: pointer; box-shadow: 0 4px 18px rgba(56, 189, 248, 0.4); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='none'">
+      فَهِمْتُ المَسَارَ، لِنُوَاصِلِ الاسْتِكْشَافَ! 🚀
+    </button>
   </div>
+</div>
 
   <!-- 🏆 وسام رائد الصرف (ختام الرحلة) -->
   <div id="endJourneyScreen" style="display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #0b0f19 50%, #030712 100%); z-index: 99999999; align-items: center; justify-content: center; overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif;">
