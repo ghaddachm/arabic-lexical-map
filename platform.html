@@ -1354,10 +1354,11 @@ const cosmicData = {
 
 let currentSelectedMoon = null;
 
-// فتح المستوى الثاني (الأقمار)
-function openPlanetLevel(planetType) {
-  const planet = cosmicData[planetType];
+// دالة فتح وتوليد أقمار الكوكب كأجرام فضائية كروية حقيقية
+function openPlanetLevel(planetKey) {
+  const planet = cosmicNavTree[planetKey];
   if (!planet) return;
+  currentPlanetKey = planetKey;
 
   const lvl1 = document.getElementById('cosmicLevel1');
   const lvl2 = document.getElementById('cosmicLevel2');
@@ -1369,41 +1370,130 @@ function openPlanetLevel(planetType) {
   if (lvl3) lvl3.style.display = 'none';
   if (lvl2) lvl2.style.display = 'block';
 
-  if (title) title.innerText = planet.title;
+  if (title) {
+    title.innerHTML = `🌙 ${planet.name}`;
+    title.style.color = '#7dd3fc';
+    title.style.textShadow = '0 0 25px rgba(56, 189, 248, 0.6)';
+  }
+  
   if (!container) return;
-
   container.innerHTML = '';
+  container.style.cssText = 'display: flex; gap: clamp(30px, 5vw, 60px); justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 25px; padding: 20px 0;';
 
-  planet.moons.forEach(moon => {
-    const card = document.createElement('div');
-    card.style.cssText = `
-      background: rgba(15, 23, 42, 0.88);
-      border: 2px solid #38bdf8;
-      border-radius: 20px;
-      padding: 1.4rem;
-      width: 250px;
+  // أنماط الأقمار الثلاثة وتفاصيلها المعتمدة من كتاب التلميذ
+  const moonsRefined = [
+    {
+      id: "salim",
+      name: "قَمَرُ السَّالِمِ",
+      badge: "دَرَسَ • فَرِحَ",
+      desc: "سَلِمَتْ أُصُولُهُ مِنَ الهَمْزِ وَالتَّضْعِيفِ",
+      gradient: "radial-gradient(circle at 35% 30%, #e0f2fe 0%, #38bdf8 45%, #0369a1 100%)",
+      glow: "rgba(56, 189, 248, 0.7)",
+      forms: [
+        { label: "صَحِيحٌ سَالِمٌ (نَصّ)", val: "درس", sample: "دَرَسَ" },
+        { label: "صَحِيحٌ سَالِمٌ (تَطْبِيق)", val: "فرح", sample: "فَرِحَ" },
+        { label: "سَالِمٌ (أَصْلِيّ)", val: "كتب", sample: "كَتَبَ" }
+      ]
+    },
+    {
+      id: "mudaaf",
+      name: "قَمَرُ المُضَعَّفِ",
+      badge: "مَرَّ • فَكَّ",
+      desc: "حَرْفَانِ مِنْ أُصُولِهِ مِنْ جِنْسٍ وَاحِدٍ",
+      gradient: "radial-gradient(circle at 35% 30%, #dbeafe 0%, #60a5fa 45%, #1e40af 100%)",
+      glow: "rgba(96, 165, 250, 0.7)",
+      forms: [
+        { label: "صَحِيحٌ مُضَعَّفٌ (نَصّ)", val: "مرر", sample: "مَرَّ" },
+        { label: "مُضَعَّفٌ (تَطْبِيق)", val: "فكك", sample: "فَكَّ" },
+        { label: "مُضَعَّفٌ (مَدَّ)", val: "مدد", sample: "مَدَّ" }
+      ]
+    },
+    {
+      id: "hamzouz",
+      name: "قَمَرُ المَهْمُوزِ",
+      badge: "مَلَأَ • أَخَذَ • سَأَلَ",
+      desc: "أَحَدُ أَحْرُفِهِ الأَصْلِيَّةِ هَمْزَةٌ",
+      gradient: "radial-gradient(circle at 35% 30%, #fef08a 0%, #38bdf8 50%, #0f172a 100%)",
+      glow: "rgba(253, 224, 71, 0.65)",
+      forms: [
+        { label: "مَهْمُوزُ اللَّامِ (نَصّ)", val: "ملأ", sample: "مَلَأَ" },
+        { label: "مَهْمُوزُ الفَاءِ (أَخَذَ)", val: "أخذ", sample: "أَخَذَ" },
+        { label: "مَهْمُوزُ العَيْنِ (سَأَلَ)", val: "سأل", sample: "سَأَلَ" }
+      ]
+    }
+  ];
+
+  // إذا كان الكوكب هو الثلاثي نعتمد الباقة المخصصة، وإلا نستخدم بيانات cosmicNavTree
+  const currentMoons = (planetKey === 'triadic') ? moonsRefined : (planet.moons || []);
+
+  currentMoons.forEach((moon, idx) => {
+    const moonWrapper = document.createElement('div');
+    moonWrapper.style.cssText = `
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
       cursor: pointer;
-      text-align: center;
-      transition: all 0.3s;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: planetFloatA ${5 + idx * 0.8}s ease-in-out infinite ${idx * 0.4}s;
     `;
-    card.onmouseover = () => {
-      card.style.transform = 'translateY(-8px) scale(1.03)';
-      card.style.boxShadow = '0 0 30px rgba(56, 189, 248, 0.6)';
-    };
-    card.onmouseout = () => {
-      card.style.transform = 'none';
-      card.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.5)';
-    };
-    card.onclick = () => openMoonForms(moon);
 
-    card.innerHTML = `
-      <div style="font-size: 2.5rem; margin-bottom: 8px;">🌕</div>
-      <h3 style="color: #38bdf8; margin: 0 0 6px; font-size: 1.15rem; font-weight: 900;">${moon.name}</h3>
-      <p style="color: #cbd5e1; font-size: 0.85rem; line-height: 1.5; margin: 0 0 12px;">${moon.desc}</p>
-      <span style="display: inline-block; background: rgba(56, 189, 248, 0.15); border: 1px solid #38bdf8; color: #7dd3fc; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">انقر للاستكشاف ⟵</span>
+    // الجرم الكروي للقمر
+    const sphere = document.createElement('div');
+    sphere.style.cssText = `
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: ${moon.gradient || 'radial-gradient(circle at 35% 30%, #f1f5f9 0%, #94a3b8 50%, #1e293b 100%)'};
+      border: 3px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 0 35px ${moon.glow || 'rgba(148, 163, 184, 0.6)'}, inset -8px -8px 20px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.3s ease;
     `;
-    container.appendChild(card);
+
+    sphere.innerHTML = `
+      <div style="font-size: 2.2rem; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.6));">🌕</div>
+      <span style="color: #ffffff; font-weight: 900; font-size: 1.15rem; margin-top: 4px; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">${moon.name.replace('قَمَرُ ', '')}</span>
+    `;
+
+    // البطاقة الوصفية الشفافة المرفقة أسفل الجرم
+    const infoCard = document.createElement('div');
+    infoCard.style.cssText = `
+      background: rgba(15, 23, 42, 0.75);
+      border: 1.5px solid rgba(56, 189, 248, 0.3);
+      backdrop-filter: blur(8px);
+      padding: 8px 16px;
+      border-radius: 16px;
+      text-align: center;
+      max-width: 200px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    `;
+    infoCard.innerHTML = `
+      <div style="color: #fde047; font-size: 0.85rem; font-weight: bold; margin-bottom: 3px;">${moon.badge || 'أَمْثِلَةُ الكِتَابِ'}</div>
+      <div style="color: #cbd5e1; font-size: 0.78rem; line-height: 1.4;">${moon.desc}</div>
+    `;
+
+    moonWrapper.appendChild(sphere);
+    moonWrapper.appendChild(infoCard);
+
+    // تأثيرات التفاعل عند تمرير الفأرة
+    moonWrapper.onmouseover = () => {
+      moonWrapper.style.transform = 'scale(1.12) translateY(-10px)';
+      sphere.style.boxShadow = `0 0 50px ${moon.glow || 'rgba(56, 189, 248, 0.9)'}, inset -4px -4px 15px rgba(0,0,0,0.4)`;
+      sphere.style.borderColor = '#ffffff';
+    };
+    moonWrapper.onmouseout = () => {
+      moonWrapper.style.transform = 'none';
+      sphere.style.boxShadow = `0 0 35px ${moon.glow || 'rgba(148, 163, 184, 0.6)'}, inset -8px -8px 20px rgba(0,0,0,0.6)`;
+      sphere.style.borderColor = 'rgba(255, 255, 255, 0.85)';
+    };
+
+    moonWrapper.onclick = () => openMoonForms(moon);
+    container.appendChild(moonWrapper);
   });
 }
 
