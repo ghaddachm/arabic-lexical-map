@@ -933,6 +933,139 @@
       ]
     }
   };
+  // متغيرات التتبع
+let currentPlanetKey = null;
+let currentMoonData = null;
+
+// دالة فتح المستوى الثاني (أقمار الكوكب المختار)
+function openPlanetLevel(planetKey) {
+  const planet = cosmicNavTree[planetKey];
+  if (!planet) return;
+  currentPlanetKey = planetKey;
+
+  const lvl1 = document.getElementById('cosmicLevel1');
+  const lvl2 = document.getElementById('cosmicLevel2');
+  const lvl3 = document.getElementById('cosmicLevel3');
+  const title = document.getElementById('planetMoonTitle');
+  const container = document.getElementById('moonsCardsContainer');
+
+  if (lvl1) lvl1.style.display = 'none';
+  if (lvl3) lvl3.style.display = 'none';
+  if (lvl2) lvl2.style.display = 'block';
+
+  if (title) title.innerText = `🌙 أَقْمَارُ: ${planet.name}`;
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  planet.moons.forEach(moon => {
+    const card = document.createElement('div');
+    card.style.cssText = `
+      background: rgba(15, 23, 42, 0.9);
+      border: 2px solid ${moon.color || '#38bdf8'};
+      border-radius: 20px;
+      padding: 1.4rem;
+      width: 250px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    `;
+    card.onmouseover = () => {
+      card.style.transform = 'translateY(-8px) scale(1.04)';
+      card.style.boxShadow = `0 0 30px ${moon.color || '#38bdf8'}`;
+    };
+    card.onmouseout = () => {
+      card.style.transform = 'none';
+      card.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.5)';
+    };
+    card.onclick = () => openMoonForms(moon);
+
+    card.innerHTML = `
+      <div style="font-size: 2.8rem; margin-bottom: 8px;">${moon.icon}</div>
+      <h3 style="color: ${moon.color || '#38bdf8'}; margin: 0 0 8px; font-size: 1.2rem; font-weight: 900;">${moon.name}</h3>
+      <span style="display: inline-block; background: rgba(255, 255, 255, 0.08); border: 1px solid ${moon.color || '#38bdf8'}; color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">انقر للاستكشاف ⟵</span>
+    `;
+    container.appendChild(card);
+  });
+}
+
+// دالة فتح المستوى الثالث (صيغ وأمثلة القمر)
+function openMoonForms(moon) {
+  currentMoonData = moon;
+  const lvl2 = document.getElementById('cosmicLevel2');
+  const lvl3 = document.getElementById('cosmicLevel3');
+  const title = document.getElementById('moonFormTitle');
+  const container = document.getElementById('formsButtonsContainer');
+
+  if (lvl2) lvl2.style.display = 'none';
+  if (lvl3) lvl3.style.display = 'block';
+
+  if (title) title.innerText = `🌟 صِيَغُ وَأَمْثِلَةُ: ${moon.name}`;
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  moon.forms.forEach(form => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.style.cssText = `
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+      border: 2.5px solid ${moon.color || '#f59e0b'};
+      color: #fff;
+      padding: 0.9rem 2.2rem;
+      border-radius: 40px;
+      font-size: 1.35rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      transition: all 0.25s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    `;
+    btn.innerHTML = `
+      <span style="font-size: 1.55rem; color: #fde047;">${form.sample}</span>
+      <span style="font-size: 0.82rem; color: #94a3b8; font-weight: normal;">${form.label}</span>
+    `;
+    btn.onmouseover = () => {
+      btn.style.transform = 'scale(1.08)';
+      btn.style.boxShadow = `0 0 35px ${moon.color || '#f59e0b'}`;
+    };
+    btn.onmouseout = () => {
+      btn.style.transform = 'none';
+      btn.style.boxShadow = '0 0 20px rgba(0,0,0,0.5)';
+    };
+    btn.onclick = () => selectFormAndLaunch(form.val);
+    container.appendChild(btn);
+  });
+}
+
+// دالة اختيار الفعل والانتقال المباشر لشمس الجذر
+function selectFormAndLaunch(rootKey) {
+  const galaxyModal = document.getElementById('galaxyModal');
+  if (galaxyModal) galaxyModal.style.display = 'none';
+
+  if (typeof loadRadialWorld === 'function') {
+    loadRadialWorld(rootKey);
+  }
+}
+
+// دوال الرجوع
+function backToPlanets() {
+  const lvl1 = document.getElementById('cosmicLevel1');
+  const lvl2 = document.getElementById('cosmicLevel2');
+  if (lvl2) lvl2.style.display = 'none';
+  if (lvl1) lvl1.style.display = 'block';
+}
+
+function backToMoons() {
+  const lvl2 = document.getElementById('cosmicLevel2');
+  const lvl3 = document.getElementById('cosmicLevel3');
+  if (lvl3) lvl3.style.display = 'none';
+  if (lvl2) lvl2.style.display = 'block';
+}
 
   function openPlanetLevel(planetKey) {
     currentSelectedPlanet = planetKey;
