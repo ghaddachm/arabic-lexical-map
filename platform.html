@@ -1428,16 +1428,26 @@ function openPlanetLevel(planetKey) {
 
   const currentMoons = (planetKey === 'triadic') ? moonsRefined : (planet.moons || []);
 
-  currentMoons.forEach((moon, idx) => {
+ currentMoons.forEach((moon, idx) => {
     const moonWrapper = document.createElement('div');
+
+    // ضبط الانحناء المداري: الطرفان يرتفعان (-25px) والأوسط ينحدر (+35px)
+    let orbitOffsetY = 0;
+    if (planetKey === 'triadic') {
+      if (idx === 0) orbitOffsetY = -25; // قمر السالم (اليمين)
+      else if (idx === 1) orbitOffsetY = 38; // قمر المضعف (الوسط)
+      else if (idx === 2) orbitOffsetY = -25; // قمر المهموز (اليسار)
+    }
+
     moonWrapper.style.cssText = `
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 16px;
       cursor: pointer;
+      margin-top: ${orbitOffsetY}px;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      animation: planetFloatA ${5.2 + idx * 0.7}s ease-in-out infinite ${idx * 0.35}s;
+      animation: planetFloatA ${5 + idx * 0.9}s ease-in-out infinite ${idx * 0.45}s;
     `;
 
     // الجرم القمري الكروي بفوهات الإضاءة
