@@ -733,8 +733,8 @@
   <!-- زر إغلاق الفضاء والعودة -->
   <button type="button" onclick="document.getElementById('galaxyModal').style.display='none';" style="position: absolute; top: 28px; left: 32px; background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.3); color: #cbd5e1; border-radius: 50%; width: 44px; height: 44px; cursor: pointer; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; transition: all 0.25s; z-index: 100;" onmouseover="this.style.color='#f87171'; this.style.borderColor='#f87171'; this.style.transform='scale(1.1)';" onmouseout="this.style.color='#cbd5e1'; this.style.borderColor='rgba(255,255,255,0.3)'; this.style.transform='scale(1)';">✕</button>
 
-  <!-- 🪐 المستوى 1: الكواكب الأربعة الكبرى العائمة بحرية -->
-  <div id="cosmicLevel1" style="width: 100%; max-width: 1100px; text-align: center; position: relative; z-index: 20; padding: 0 1.5rem;">
+ <!-- 🪐 المستوى 1: كواكب الأفعال المقوسة العائمة -->
+  <div id="cosmicLevel1" style="width: 100%; max-width: 1100px; text-align: center; position: relative; z-index: 50; padding: 0 1.5rem;">
     
     <div style="display: inline-flex; align-items: center; gap: 8px; padding: 0.45rem 1.8rem; border-radius: 40px; background: rgba(245, 158, 11, 0.15); border: 1.5px solid #f59e0b; color: #fde047; font-size: 1.05rem; font-weight: bold; margin-bottom: 12px; box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);">
       <span>🪐</span><span>فَضَاءُ الأَفْعَالِ الكَوْنِيَّةِ</span>
@@ -744,14 +744,14 @@
       كَوَاكِبُ الأَفْعَالِ الكُبْرَى
     </h2>
     
-    <p style="color: #bae6fd; margin: 0 auto 40px auto; font-size: clamp(1.1rem, 2vw, 1.3rem); font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
+    <p style="color: #bae6fd; margin: 0 auto 30px auto; font-size: clamp(1.1rem, 2vw, 1.3rem); font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
       انْقُرْ عَلَى الكَوْكَبِ لِلغَوْصِ فِي مَدَارَاتِهِ وَأَقْمَارِهِ:
     </p>
     
-<!-- حزام الكواكب المقوس بعمق والمنساب في الفضاء الفسيح -->
-    <div style="display: flex; justify-content: center; align-items: center; gap: clamp(45px, 6vw, 90px); flex-wrap: wrap; margin-top: 40px; padding: 30px 10px; width: 100%;">
+    <!-- حزام الكواكب المقوس المتباعد -->
+    <div style="display: flex; justify-content: center; align-items: center; gap: clamp(45px, 6vw, 90px); flex-wrap: wrap; margin-top: 30px; padding: 20px 10px; width: 100%;">
       
-      <!-- 1. كوكب الثلاثي (أقصى اليمين - مرتفع في قمة القوس) -->
+      <!-- 1. كوكب الثلاثي -->
       <div style="margin-top: -65px;">
         <div onclick="openPlanetLevel('triadic')" class="cosmic-sphere-card planet-triadic">
           <div class="planet-ring" style="border-color: rgba(125, 211, 252, 0.75);"></div>
@@ -761,7 +761,7 @@
         </div>
       </div>
 
-      <!-- 2. كوكب الرباعي (منحدر نحو بطن القوس) -->
+      <!-- 2. كوكب الرباعي -->
       <div style="margin-top: 45px;">
         <div onclick="openPlanetLevel('quadric')" class="cosmic-sphere-card planet-quadric">
           <div class="planet-ring" style="border-color: rgba(110, 231, 183, 0.75);"></div>
@@ -771,7 +771,7 @@
         </div>
       </div>
 
-      <!-- 3. كوكب المعتل (في عمق بطن القوس الكوني) -->
+      <!-- 3. كوكب المعتل -->
       <div style="margin-top: 55px;">
         <div onclick="openPlanetLevel('weak')" class="cosmic-sphere-card planet-weak">
           <div class="planet-ring" style="border-color: rgba(192, 132, 252, 0.75);"></div>
@@ -781,7 +781,7 @@
         </div>
       </div>
 
-      <!-- 4. كوكب المزيد (أقصى اليسار - مرتفع في نهاية القوس) -->
+      <!-- 4. كوكب المزيد -->
       <div style="margin-top: -65px;">
         <div onclick="openPlanetLevel('augmented')" class="cosmic-sphere-card planet-augmented">
           <div class="planet-ring" style="border-color: rgba(253, 224, 71, 0.85);"></div>
@@ -789,26 +789,26 @@
           <div style="color: #ffffff; font-weight: 900; font-size: 1.3rem; margin-top: 4px; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">المَزِيدُ</div>
           <div style="color: #fef9c3; font-size: 0.78rem; font-weight: bold; background: rgba(0,0,0,0.4); padding: 2px 10px; border-radius: 12px; margin-top: 3px;">(بِحَرْفٍ / أَكْثَرَ)</div>
         </div>
+      </div>
 
     </div>
   </div>
 
   <!-- 🌙 المستوى 2: الأقمار الدائرة حول الكوكب المختار -->
-  <div id="cosmicLevel2" style="display: none; width: 100%; max-width: 1000px; text-align: center; position: relative; z-index: 20; padding: 0 1.5rem;">
+  <div id="cosmicLevel2" style="display: none; width: 100%; max-width: 1000px; text-align: center; position: relative; z-index: 60; padding: 0 1.5rem;">
     <h2 id="planetMoonTitle" style="color: #38bdf8; margin-bottom: 8px; font-size: clamp(2rem, 3.8vw, 2.8rem); font-weight: 900; text-shadow: 0 3px 15px rgba(0,0,0,0.8);">🌙 الأَقْمَارُ الصَّرْفِيَّةُ الدَّائِرَةُ</h2>
-    <p style="color: #94a3b8; margin-bottom: 30px; font-size: 1.1rem;">اخْتَرِ القَمَرَ لِتَسْتَكْشِفَ أَمْثِلَتَهُ وَصِيَغَهُ المُمَيَّزَةَ:</p>
+    <p style="color: #cbd5e1; margin-bottom: 30px; font-size: 1.1rem;">اخْتَرِ القَمَرَ لِتَسْتَكْشِفَ أَمْثِلَتَهُ وَصِيَغَهُ المُمَيَّزَةَ:</p>
     <div id="moonsCardsContainer" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;"></div>
     <button type="button" onclick="backToPlanets()" style="margin-top: 35px; background: rgba(255,255,255,0.08); border: 2px solid #64748b; color: #cbd5e1; padding: 9px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: all 0.25s;" onmouseover="this.style.borderColor='#38bdf8'; this.style.color='#38bdf8'; this.style.transform='scale(1.05)';" onmouseout="this.style.borderColor='#64748b'; this.style.color='#cbd5e1'; this.style.transform='none';">⟵ عَوْدَةٌ لِفَضَاءِ الكَوَاكِبِ</button>
   </div>
 
   <!-- 🌟 المستوى 3: الصيغ والأمثلة الدقيقة للبدء -->
-  <div id="cosmicLevel3" style="display: none; width: 100%; max-width: 1000px; text-align: center; position: relative; z-index: 20; padding: 0 1.5rem;">
+  <div id="cosmicLevel3" style="display: none; width: 100%; max-width: 1000px; text-align: center; position: relative; z-index: 60; padding: 0 1.5rem;">
     <h2 id="moonFormTitle" style="color: #fde047; margin-bottom: 8px; font-size: clamp(2rem, 3.8vw, 2.8rem); font-weight: 900; text-shadow: 0 3px 15px rgba(0,0,0,0.8);">🌟 الصِّيَغُ وَالأَمْثِلَةُ</h2>
-    <p style="color: #94a3b8; margin-bottom: 30px; font-size: 1.1rem;">انْقُرْ عَلَى الفِعْلِ لِلانْطِلَاقِ نَحْوَ شَمْسِ الجَذْرِ:</p>
+    <p style="color: #cbd5e1; margin-bottom: 30px; font-size: 1.1rem;">انْقُرْ عَلَى الفِعْلِ لِلانْطِلَاقِ نَحْوَ شَمْسِ الجَذْرِ:</p>
     <div id="formsButtonsContainer" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;"></div>
     <button type="button" onclick="backToMoons()" style="margin-top: 35px; background: rgba(255,255,255,0.08); border: 2px solid #64748b; color: #cbd5e1; padding: 9px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: all 0.25s;" onmouseover="this.style.borderColor='#fde047'; this.style.color='#fde047'; this.style.transform='scale(1.05)';" onmouseout="this.style.borderColor='#64748b'; this.style.color='#cbd5e1'; this.style.transform='none';">⟵ عَوْدَةٌ لِلأَقْمَارِ</button>
   </div>
-
   </div>
 </div>
 
