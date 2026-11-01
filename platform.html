@@ -1098,7 +1098,168 @@ function triggerEndJourney() {
       const activeView = document.getElementById(tabId);
       if (activeView) { activeView.classList.add('active'); activeView.style.display = 'block'; }
     }
-window.onload = function() {
+// 🪐 مصفوفة بيانات الأقمار والصيغ الصرفية للكواكب الأربعة
+const cosmicData = {
+  triadic: {
+    title: '🌙 أَقْمَارُ كَوْكَبِ الثُّلَاثِيِّ (المُجَرَّد)',
+    moons: [
+      { name: 'قَمَرُ الصَّحِيحِ السَّالِمِ', desc: 'خَلَتْ حُرُوفُهُ مِنَ العِلَّةِ وَالهَمْزِ وَالتَّضْعِيفِ', root: 'كتب', examples: ['كَتَبَ', 'شَرِبَ', 'رَسَمَ', 'فَهِمَ'] },
+      { name: 'قَمَرُ المَهْمُوزِ', desc: 'أَحَدُ حُرُوفِهِ الأَصْلِيَّةِ هَمْزَةٌ', root: 'قرأ', examples: ['قَرَأَ', 'أَخَذَ', 'سَأَلَ', 'بَدَأَ'] },
+      { name: 'قَمَرُ المُضَعَّفِ', desc: 'عَيْنُهُ وَلَامُهُ مِنْ جِنْسٍ وَاحِدٍ', root: 'مدد', examples: ['مَدَّ', 'شَدَّ', 'عَدَّ', 'رَدَّ'] }
+    ]
+  },
+  quadric: {
+    title: '🌙 أَقْمَارُ كَوْكَبِ الرُّبَاعِيِّ (المُجَرَّد)',
+    moons: [
+      { name: 'قَمَرُ الرُّبَاعِيِّ السَّالِمِ', desc: 'أَرْبَعَةُ أَحْرُفٍ أُصُولٌ عَلَى وَزْنِ فَعْلَلَ', root: 'دحرج', examples: ['دَحْرَجَ', 'بَعْثَرَ', 'طَمْأَنَ'] },
+      { name: 'قَمَرُ الرُّبَاعِيِّ المُضَعَّفِ', desc: 'فَاؤُهُ وَلَامُهُ الأُولَى مِنْ جِنْسٍ، وَعَيْنُهُ وَلَامُهُ الثَّانِيَةُ مِنْ جِنْسٍ', root: 'زلزل', examples: ['زَلْزَلَ', 'عَسْعَسَ', 'وَسْوَسَ'] }
+    ]
+  },
+  weak: {
+    title: '🌙 أَقْمَارُ كَوْكَبِ المُعْتَلِّ',
+    moons: [
+      { name: 'قَمَرُ المِثَالِ', desc: 'فَاؤُهُ (أَوَّلُهُ) حَرْفُ عِلَّةٍ', root: 'وقف', examples: ['وَقَفَ', 'وَصَلَ', 'يَبِسَ'] },
+      { name: 'قَمَرُ الأَجْوَفِ', desc: 'عَيْنُهُ (وَسَطُهُ) حَرْفُ عِلَّةٍ', root: 'قول', examples: ['قَالَ', 'صَامَ', 'بَاعَ'] },
+      { name: 'قَمَرُ النَّاقِصِ', desc: 'لَامُهُ (آخِرُهُ) حَرْفُ عِلَّةٍ', root: 'رمي', examples: ['رَمَى', 'دَعَا', 'سَعَى'] }
+    ]
+  },
+  augmented: {
+    title: '🌙 أَقْمَارُ كَوْكَبِ المَزِيدِ',
+    moons: [
+      { name: 'مَزِيدٌ بِحَرْفٍ وَاحِدٍ', desc: 'عَلَى أَوْزَانِ: فَعَّلَ، أَفْعَلَ، فَاعَلَ', root: 'درس', examples: ['دَرَّسَ', 'أَكْرَمَ', 'سَابَقَ'] },
+      { name: 'مَزِيدٌ بِحَرْفَيْنِ', desc: 'عَلَى أَوْزَانِ: انْفَعَلَ، افْتَعَلَ، تَفَاعَلَ', root: 'كشف', examples: ['انْكَسَرَ', 'اجْتَمَعَ', 'تَعَاوَنَ'] },
+      { name: 'مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ', desc: 'عَلَى وَزْنِ: اسْتَفْعَلَ', root: 'خرج', examples: ['اسْتَخْرَجَ', 'اسْتَغْفَرَ'] }
+    ]
+  }
+};
+
+let currentSelectedMoon = null;
+
+// فتح المستوى الثاني (الأقمار)
+function openPlanetLevel(planetType) {
+  const planet = cosmicData[planetType];
+  if (!planet) return;
+
+  const lvl1 = document.getElementById('cosmicLevel1');
+  const lvl2 = document.getElementById('cosmicLevel2');
+  const lvl3 = document.getElementById('cosmicLevel3');
+  const title = document.getElementById('planetMoonTitle');
+  const container = document.getElementById('moonsCardsContainer');
+
+  if (lvl1) lvl1.style.display = 'none';
+  if (lvl3) lvl3.style.display = 'none';
+  if (lvl2) lvl2.style.display = 'block';
+
+  if (title) title.innerText = planet.title;
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  planet.moons.forEach(moon => {
+    const card = document.createElement('div');
+    card.style.cssText = `
+      background: rgba(15, 23, 42, 0.88);
+      border: 2px solid #38bdf8;
+      border-radius: 20px;
+      padding: 1.4rem;
+      width: 250px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    `;
+    card.onmouseover = () => {
+      card.style.transform = 'translateY(-8px) scale(1.03)';
+      card.style.boxShadow = '0 0 30px rgba(56, 189, 248, 0.6)';
+    };
+    card.onmouseout = () => {
+      card.style.transform = 'none';
+      card.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.5)';
+    };
+    card.onclick = () => openMoonForms(moon);
+
+    card.innerHTML = `
+      <div style="font-size: 2.5rem; margin-bottom: 8px;">🌕</div>
+      <h3 style="color: #38bdf8; margin: 0 0 6px; font-size: 1.15rem; font-weight: 900;">${moon.name}</h3>
+      <p style="color: #cbd5e1; font-size: 0.85rem; line-height: 1.5; margin: 0 0 12px;">${moon.desc}</p>
+      <span style="display: inline-block; background: rgba(56, 189, 248, 0.15); border: 1px solid #38bdf8; color: #7dd3fc; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">انقر للاستكشاف ⟵</span>
+    `;
+    container.appendChild(card);
+  });
+}
+
+// فتح المستوى الثالث (الصيغ والأمثلة)
+function openMoonForms(moon) {
+  currentSelectedMoon = moon;
+  const lvl2 = document.getElementById('cosmicLevel2');
+  const lvl3 = document.getElementById('cosmicLevel3');
+  const title = document.getElementById('moonFormTitle');
+  const container = document.getElementById('formsButtonsContainer');
+
+  if (lvl2) lvl2.style.display = 'none';
+  if (lvl3) lvl3.style.display = 'block';
+
+  if (title) title.innerText = `🌟 صِيَغُ وَأَمْثِلَةُ: ${moon.name}`;
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  moon.examples.forEach(verb => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.innerText = verb;
+    btn.style.cssText = `
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+      border: 2px solid #f59e0b;
+      color: #fff;
+      padding: 0.9rem 2.2rem;
+      border-radius: 40px;
+      font-size: 1.4rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
+      transition: all 0.25s;
+    `;
+    btn.onmouseover = () => {
+      btn.style.transform = 'scale(1.1)';
+      btn.style.boxShadow = '0 0 35px rgba(245, 158, 11, 0.8)';
+      btn.style.borderColor = '#fde047';
+    };
+    btn.onmouseout = () => {
+      btn.style.transform = 'none';
+      btn.style.boxShadow = '0 0 20px rgba(245, 158, 11, 0.35)';
+      btn.style.borderColor = '#f59e0b';
+    };
+    btn.onclick = () => selectVerbAndLaunch(verb, moon.root);
+    container.appendChild(btn);
+  });
+}
+
+// اختيار الفعل والانطلاق المباشر إلى شمس الجذر
+function selectVerbAndLaunch(verb, root) {
+  const galaxyModal = document.getElementById('galaxyModal');
+  if (galaxyModal) galaxyModal.style.display = 'none';
+
+  if (typeof loadRadialWorld === 'function') {
+    loadRadialWorld(root || 'كتب');
+  }
+}
+
+// أزرار العودة
+function backToPlanets() {
+  const lvl1 = document.getElementById('cosmicLevel1');
+  const lvl2 = document.getElementById('cosmicLevel2');
+  if (lvl2) lvl2.style.display = 'none';
+  if (lvl1) lvl1.style.display = 'block';
+}
+
+function backToMoons() {
+  const lvl2 = document.getElementById('cosmicLevel2');
+  const lvl3 = document.getElementById('cosmicLevel3');
+  if (lvl3) lvl3.style.display = 'none';
+  if (lvl2) lvl2.style.display = 'block';
+}
+  window.onload = function() {
       if (typeof loadRadialWorld === 'function') {
         loadRadialWorld('كتب');
       }
