@@ -706,16 +706,17 @@
       pointer-events: none;
       animation: ringPulse 4s infinite alternate ease-in-out;
     }
-    /* مسارات مدارية واقعية لخلفية الأقمار */
+/* مسارات مدارية فلكية عملاقة تغطي كامل الشاشة */
 .orbit-system-canvas {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 900px;
-  height: 520px;
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
   z-index: 1;
+  overflow: hidden;
 }
 
 .orbit-track {
@@ -723,39 +724,46 @@
   top: 50%;
   left: 50%;
   border-radius: 50%;
-  border: 1.5px dashed rgba(125, 211, 252, 0.22);
+  border: 2px dashed rgba(125, 211, 252, 0.45);
   transform: translate(-50%, -50%) rotate(-12deg);
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.08);
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.18);
 }
 
+/* المدار الأول الأقرب */
 .orbit-track-1 { 
-  width: 550px; 
-  height: 260px; 
+  width: 70vw; 
+  height: 48vh; 
   border-style: solid; 
-  border-color: rgba(56, 189, 248, 0.2); 
+  border-width: 2px;
+  border-color: rgba(56, 189, 248, 0.4); 
 }
 
+/* المدار الأوسط المحتضن للأقمار */
 .orbit-track-2 { 
-  width: 750px; 
-  height: 350px; 
+  width: 95vw; 
+  height: 68vh; 
+  border-color: rgba(147, 197, 253, 0.4);
+  border-width: 2.5px;
 }
 
+/* المدار الخارجي العملاق الممتد لأطراف الشاشة */
 .orbit-track-3 { 
-  width: 920px; 
-  height: 440px; 
-  border-color: rgba(147, 197, 253, 0.15); 
+  width: 125vw; 
+  height: 90vh; 
+  border-color: rgba(192, 132, 252, 0.3); 
+  border-width: 2px;
 }
 
-/* توهج النواة المركزية للمجرة */
+/* سديم حلزوني متوهج وواسع في عمق الشاشة */
 .galaxy-core-glow {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 480px;
-  height: 260px;
+  width: 80vw;
+  height: 55vh;
   transform: translate(-50%, -50%) rotate(-15deg);
-  background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.25) 0%, rgba(99, 102, 241, 0.12) 45%, transparent 75%);
-  filter: blur(25px);
+  background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.28) 0%, rgba(99, 102, 241, 0.18) 45%, rgba(15, 23, 42, 0) 75%);
+  filter: blur(45px);
   pointer-events: none;
   z-index: 0;
 }
