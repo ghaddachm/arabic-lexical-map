@@ -767,59 +767,90 @@
   pointer-events: none;
   z-index: 0;
 }
-/* إخفاء تام لجميع الرسوم الجانبية والكرتونية في المستوى الثاني */
+/* 1. إخفاء صارم لجميع عناصر الزينة والرسومات الكرتونية في المستوى 2 */
 body.in-level-2 .cosmic-decor,
 body.in-level-2 .floating-decor,
 body.in-level-2 .cosmic-floating-decor,
 body.in-level-2 img,
+body.in-level-2 svg:not(.keep-svg),
 body.in-level-2 [class*="astronaut"],
 body.in-level-2 [class*="ufo"],
-body.in-level-2 [class*="planet-decor"] {
-  display: none !important;
+body.in-level-2 [class*="planet"]:not(#cosmicLevel2 *),
+body.in-level-2 [style*="position: fixed"]:not(#cosmicLevel2 *):not(.orbit-system-canvas) {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
-/* استثناء بطاقات الأقمار وعناصرها من الإخفاء لتظهر بوضوح */
-body.in-level-2 #cosmicLevel2 img,
-body.in-level-2 #moonsCardsContainer * {
-  display: flex !important;
+/* استثناء مكونات المستوى الثاني لتبقى ظاهرة تماماً */
+#cosmicLevel2,
+#cosmicLevel2 * {
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
-/* فضاء النجوم اللامعة الكثيفة */
+/* 2. فضاء النجوم اللامعة */
 .galaxy-starfield {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-image: 
     radial-gradient(1.5px 1.5px at 15% 20%, #ffffff 100%, transparent),
     radial-gradient(2px 2px at 30% 65%, #bae6fd 100%, transparent),
-    radial-gradient(1px 1px at 45% 15%, #ffffff 100%, transparent),
+    radial-gradient(1.2px 1.2px at 45% 15%, #ffffff 100%, transparent),
     radial-gradient(2.5px 2.5px at 70% 35%, #fef08a 100%, transparent),
     radial-gradient(1.5px 1.5px at 85% 75%, #ffffff 100%, transparent),
     radial-gradient(2px 2px at 10% 80%, #7dd3fc 100%, transparent),
-    radial-gradient(1px 1px at 60% 85%, #ffffff 100%, transparent),
-    radial-gradient(2px 2px at 92% 18%, #fbcfe8 100%, transparent),
-    radial-gradient(1.5px 1.5px at 50% 50%, #ffffff 100%, transparent),
-    radial-gradient(2.5px 2.5px at 25% 40%, #e0f2fe 100%, transparent);
-  background-size: 380px 380px;
+    radial-gradient(1.5px 1.5px at 60% 85%, #ffffff 100%, transparent),
+    radial-gradient(2px 2px at 92% 18%, #fbcfe8 100%, transparent);
+  background-size: 320px 320px;
   animation: starTwinkle 3s ease-in-out infinite alternate;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
 @keyframes starTwinkle {
-  0% { opacity: 0.6; transform: scale(1); }
-  100% { opacity: 1; transform: scale(1.02); }
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
 }
 
-/* حاوية النظام المداري المستقل الموزع */
-#moonsCardsContainer.orbital-galaxy-system,
-.orbital-galaxy-system {
-  position: relative !important;
-  width: 100% !important;
-  max-width: 1100px !important;
-  height: 480px !important;
-  margin: 10px auto 0 !important;
+/* 3. حاوية مسرح الفضاء والمدارات */
+.orbit-stage-container {
+  position: relative;
+  width: 1000px;
+  max-width: 95vw;
+  height: 520px;
+  margin: 15px auto 0;
+}
+
+/* خط المدار الرئيسي البيضاوي الذي تلتصق به الأقمار بدقة */
+.master-orbit-track {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-12deg);
+  width: 880px;
+  height: 380px;
+  border-radius: 50%;
+  border: 2px dashed rgba(125, 211, 252, 0.4);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.15), inset 0 0 25px rgba(56, 189, 248, 0.08);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* مسار مداري داخلي للتجسيم الفلكي */
+.inner-orbit-track {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-12deg);
+  width: 580px;
+  height: 220px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(56, 189, 248, 0.25);
+  pointer-events: none;
+  z-index: 2;
 }
   </style>
 
@@ -909,30 +940,26 @@ body.in-level-2 #moonsCardsContainer * {
     </div>
   </div>
 
-<!-- 🌙 المستوى 2: فضاء المدارات المستقلة للأقمار -->
-  <div id="cosmicLevel2" style="display: none; width: 100%; max-width: 1200px; text-align: center; position: relative; z-index: 60; padding: 0 1rem;">
+<!-- 🌙 المستوى 2: فضاء المدارات الفلكية الدقيقة -->
+  <div id="cosmicLevel2" style="display: none; width: 100%; text-align: center; position: relative; z-index: 60; padding: 0 1rem;">
     
     <!-- حقل النجوم المضيئة -->
     <div class="galaxy-starfield"></div>
 
-    <!-- خطوط المدارات الإهليلجية الفلكية الشاملة -->
-    <div class="orbit-system-canvas">
-      <div class="galaxy-core-glow"></div>
-      <div class="orbit-track orbit-track-1"></div>
-      <div class="orbit-track orbit-track-2"></div>
-      <div class="orbit-track orbit-track-3"></div>
-    </div>
-
     <!-- ترويسة المستوى -->
-    <h2 id="planetMoonTitle" style="color: #7dd3fc; margin-bottom: 6px; font-size: clamp(2rem, 3.8vw, 2.8rem); font-weight: 900; text-shadow: 0 0 25px rgba(56, 189, 248, 0.7); position: relative; z-index: 10;">
+    <h2 id="planetMoonTitle" style="color: #7dd3fc; margin-bottom: 6px; font-size: clamp(2rem, 3.5vw, 2.7rem); font-weight: 900; text-shadow: 0 0 25px rgba(56, 189, 248, 0.7); position: relative; z-index: 10;">
       🌙 الفِعْلُ الثُّلَاثِيُّ (الصَّحِيحُ)
     </h2>
-    <p style="color: #cbd5e1; margin-bottom: 15px; font-size: 1.05rem; position: relative; z-index: 10;">
+    <p style="color: #cbd5e1; margin-bottom: 10px; font-size: 1.05rem; position: relative; z-index: 10;">
       اخْتَرِ القَمَرَ لِتَسْتَكْشِفَ صِيَغَهُ المُمَيَّزَةَ فِي مَدَارِهِ:
     </p>
 
-    <!-- حاوية النظام المداري الموزع -->
-    <div id="moonsCardsContainer" class="orbital-galaxy-system"></div>
+    <!-- المسرح الفلكي الذي يحتوي خطوط المدار والأقمار المستقرة عليها -->
+    <div class="orbit-stage-container">
+      <div class="inner-orbit-track"></div>
+      <div class="master-orbit-track"></div>
+      <div id="moonsCardsContainer"></div>
+    </div>
 
     <button type="button" onclick="backToPlanets()" style="margin-top: 15px; background: rgba(15, 23, 42, 0.85); border: 2px solid #38bdf8; color: #bae6fd; padding: 9px 30px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: all 0.25s; box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); position: relative; z-index: 10;" onmouseover="this.style.background='#38bdf8'; this.style.color='#0f172a'; this.style.transform='scale(1.05)';" onmouseout="this.style.background='rgba(15, 23, 42, 0.85)'; this.style.color='#bae6fd'; this.style.transform='none';">
       ⟵ عَوْدَةٌ لِفَضَاءِ الكَوَاكِبِ
@@ -1566,18 +1593,23 @@ function openPlanetLevel(planetKey) {
 
   const currentMoons = (planetKey === 'triadic') ? moonsRefined : (planet.moons || []);
 
-// تفعيل إخفاء الرسوم والزينة الكرتونية
+// 1. تفعيل الإخفاء لجميع الرسوم الجانبية فوراً
   document.body.classList.add('in-level-2');
 
-  // إحداثيات الأقمار الثلاثة وفق الدوائر المحددة بدقة على المدارات
-  const orbitalPositions = [
-    { top: "-15px", right: "22%" },   // 1. الدائرة العليا: قمر السالم
-    { top: "155px", left: "6%" },     // 2. الدائرة اليسرى: قمر المهموز
-    { bottom: "-10px", right: "38%" } // 3. الدائرة السفلى: قمر المضعف
+  // إخفاء إضافي مباشر لضمان زوال أي عنصر كرتوني محيط
+  document.querySelectorAll('img, .cosmic-decor, .floating-decor, .stars-decor').forEach(el => {
+    if (!el.closest('#cosmicLevel2')) el.style.opacity = '0';
+  });
+
+  // 2. إحداثيات مدروسة هندسياً لتستقر الأجرام فوق مسار المدار البيضاوي المائل تماماً
+  const orbitPositions = [
+    { top: "18px", right: "215px" },  // قمر السالم: مستقر فوق أعلى القوس المداري الأيمن
+    { top: "140px", left: "45px" },   // قمر المضعف: مستقر مباشرة على حافة القوس المداري الأيسر
+    { bottom: "12px", left: "435px" } // قمر المهموز: مستقر فوق أسفل خط المدار الأوسط
   ];
 
   currentMoons.forEach((moon, idx) => {
-    const pos = orbitalPositions[idx] || { top: "40%", left: "40%" };
+    const pos = orbitPositions[idx] || { top: "50%", left: "50%" };
     const moonWrapper = document.createElement('div');
     moonWrapper.style.cssText = `
       position: absolute !important;
@@ -1588,9 +1620,9 @@ function openPlanetLevel(planetKey) {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       cursor: pointer;
-      z-index: 25;
+      z-index: 30;
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       animation: planetFloatA ${5 + idx * 1.1}s ease-in-out infinite ${idx * 0.4}s;
     `;
@@ -1598,8 +1630,8 @@ function openPlanetLevel(planetKey) {
     // الجرم القمري الكروي
     const moonSphere = document.createElement('div');
     moonSphere.style.cssText = `
-      width: 130px;
-      height: 130px;
+      width: 125px;
+      height: 125px;
       border-radius: 50%;
       background: ${moon.moonBase};
       position: relative;
@@ -1607,42 +1639,42 @@ function openPlanetLevel(planetKey) {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border: 3px solid rgba(255, 255, 255, 0.9);
+      border: 3px solid rgba(255, 255, 255, 0.95);
       box-shadow: 0 0 35px ${moon.glowColor}, inset -10px -10px 20px rgba(0,0,0,0.65);
       overflow: hidden;
       transition: all 0.35s ease;
     `;
 
-    const crater1 = `<div style="position: absolute; width: 22px; height: 22px; border-radius: 50%; background: rgba(0,0,0,0.15); top: 16px; left: 20px; box-shadow: inset 2px 2px 4px rgba(0,0,0,0.3);"></div>`;
-    const crater2 = `<div style="position: absolute; width: 14px; height: 14px; border-radius: 50%; background: rgba(0,0,0,0.12); bottom: 22px; right: 24px; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);"></div>`;
+    const crater1 = `<div style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: rgba(0,0,0,0.15); top: 14px; left: 18px; box-shadow: inset 2px 2px 4px rgba(0,0,0,0.3);"></div>`;
+    const crater2 = `<div style="position: absolute; width: 14px; height: 14px; border-radius: 50%; background: rgba(0,0,0,0.12); bottom: 18px; right: 22px; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);"></div>`;
 
     moonSphere.innerHTML = `
       ${crater1}
       ${crater2}
-      <div style="font-size: 2.2rem; z-index: 2; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));">${moon.symbol}</div>
-      <span style="color: #ffffff; font-weight: 900; font-size: 1.1rem; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">${moon.name.replace('قَمَرُ ', '')}</span>
+      <div style="font-size: 2.1rem; z-index: 2; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));">${moon.symbol}</div>
+      <span style="color: #ffffff; font-weight: 900; font-size: 1.05rem; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">${moon.name.replace('قَمَرُ ', '')}</span>
     `;
 
-    // بطاقة التعريف الصرفي المقتصرة على المفهوم
+    // بطاقة التعريف الصرفي
     const descBox = document.createElement('div');
     descBox.style.cssText = `
-      background: rgba(15, 23, 42, 0.88);
+      background: rgba(15, 23, 42, 0.9);
       border: 1.5px solid rgba(56, 189, 248, 0.4);
       backdrop-filter: blur(8px);
       padding: 6px 12px;
       border-radius: 14px;
       text-align: center;
-      max-width: 175px;
+      max-width: 170px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     `;
     descBox.innerHTML = `
-      <div style="color: #f1f5f9; font-size: 0.78rem; font-weight: 600; line-height: 1.4;">${moon.desc}</div>
+      <div style="color: #f1f5f9; font-size: 0.76rem; font-weight: 600; line-height: 1.4;">${moon.desc}</div>
     `;
 
     moonWrapper.appendChild(moonSphere);
     moonWrapper.appendChild(descBox);
 
-    // تأثير التمرير بالفأرة
+    // تأثير التمرير
     moonWrapper.onmouseover = () => {
       moonWrapper.style.transform = 'scale(1.12) translateY(-6px)';
       moonSphere.style.boxShadow = `0 0 50px ${moon.glowColor}, inset -4px -4px 12px rgba(0,0,0,0.45)`;
@@ -1651,8 +1683,12 @@ function openPlanetLevel(planetKey) {
     moonWrapper.onmouseout = () => {
       moonWrapper.style.transform = 'none';
       moonSphere.style.boxShadow = `0 0 35px ${moon.glowColor}, inset -10px -10px 20px rgba(0,0,0,0.65)`;
-      moonSphere.style.borderColor = 'rgba(255, 255, 255, 0.9)';
+      moonSphere.style.borderColor = 'rgba(255, 255, 255, 0.95)';
     };
+
+    moonWrapper.onclick = () => openMoonForms(moon);
+    container.appendChild(moonWrapper);
+  });
 
     moonWrapper.onclick = () => openMoonForms(moon);
     container.appendChild(moonWrapper);
@@ -1722,7 +1758,13 @@ function backToPlanets() {
   const lvl2 = document.getElementById('cosmicLevel2');
   if (lvl2) lvl2.style.display = 'none';
   if (lvl1) lvl1.style.display = 'block';
+
+  // إلغاء صنف إخفاء المستوى الثاني وإعادة إظهار كل الرسومات
   document.body.classList.remove('in-level-2');
+  document.querySelectorAll('img, .cosmic-decor, .floating-decor, .stars-decor').forEach(el => {
+    el.style.opacity = '1';
+    el.style.visibility = 'visible';
+  });
 }
 
 function backToMoons() {
