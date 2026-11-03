@@ -1674,7 +1674,7 @@ function openPlanetLevel(planetKey) {
     moonWrapper.appendChild(moonSphere);
     moonWrapper.appendChild(descBox);
 
-    // تأثير التمرير
+   // تأثير التمرير
     moonWrapper.onmouseover = () => {
       moonWrapper.style.transform = 'scale(1.12) translateY(-6px)';
       moonSphere.style.boxShadow = `0 0 50px ${moon.glowColor}, inset -4px -4px 12px rgba(0,0,0,0.45)`;
@@ -1689,10 +1689,15 @@ function openPlanetLevel(planetKey) {
     moonWrapper.onclick = () => openMoonForms(moon);
     container.appendChild(moonWrapper);
   });
+}
 
-    moonWrapper.onclick = () => openMoonForms(moon);
-    container.appendChild(moonWrapper);
-  });
+// أزرار العودة
+function backToPlanets() {
+  const lvl1 = document.getElementById('cosmicLevel1');
+  const lvl2 = document.getElementById('cosmicLevel2');
+  if (lvl2) lvl2.style.display = 'none';
+  if (lvl1) lvl1.style.display = 'block';
+  document.body.classList.remove('in-level-2');
 }
 
 // فتح المستوى الثالث (الصيغ والأمثلة)
