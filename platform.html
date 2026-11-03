@@ -1516,7 +1516,7 @@ const cosmicData = {
 
 let currentSelectedMoon = null;
 
-// دالة فتح وتوليد أقمار الكوكب كأجرام قمرية واقعية مع رموز بصرية مجسدة
+// دالة فتح وتوليد أقمار الكوكب كأجرام قمرية واقعية موزعة على خطوط المدار
 function openPlanetLevel(planetKey) {
   const planet = cosmicNavTree[planetKey];
   if (!planet) return;
@@ -1531,6 +1531,8 @@ function openPlanetLevel(planetKey) {
   if (lvl1) lvl1.style.display = 'none';
   if (lvl3) lvl3.style.display = 'none';
   if (lvl2) lvl2.style.display = 'block';
+
+  // تفعيل إخفاء الزينة الكرتونية
   document.body.classList.add('in-level-2');
 
   if (title) {
@@ -1541,14 +1543,15 @@ function openPlanetLevel(planetKey) {
 
   if (!container) return;
   container.innerHTML = '';
-  container.style.cssText = 'display: flex; gap: clamp(35px, 6vw, 70px); justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 35px; padding: 20px 0;';
+  // تفريغ أي نمط flex لتمكين التموضع المداري الحر
+  container.style.cssText = 'position: relative; width: 100%; height: 100%;';
 
   // بيانات الأقمار الثلاثة بتصميم قمر واقعي ورموز بصرية معبّرة
   const moonsRefined = [
     {
       id: "salim",
       name: "قَمَرُ السَّالِمِ",
-      symbol: "🛡️", // يجسد السلامة والصفاء من الهمز والتضعيف
+      symbol: "🛡️",
       symbolDesc: "سَلِمَ مِنَ العِلَّةِ وَالهَمْزِ وَالشِّدَّةِ",
       desc: "مَا خَلَتْ حُرُوفُهُ الأَصْلِيَّةُ مِنَ الهَمْزِ وَالتَّضْعِيفِ",
       moonBase: "radial-gradient(circle at 35% 30%, #f8fafc 0%, #cbd5e1 45%, #64748b 80%, #334155 100%)",
@@ -1562,7 +1565,7 @@ function openPlanetLevel(planetKey) {
     {
       id: "mudaaf",
       name: "قَمَرُ المُضَعَّفِ",
-      symbol: "🪢", // يجسد الشدة والترابط والتكرار
+      symbol: "🪢",
       symbolDesc: "حَرْفَانِ انْدَمَجَا فِي شِدَّةٍ وَاحِدَةٍ",
       desc: "مَا كَانَ حَرْفَانِ مِنْ أُصُولِهِ مِنْ جِنْسٍ وَاحِدٍ",
       moonBase: "radial-gradient(circle at 35% 30%, #e0f2fe 0%, #93c5fd 40%, #3b82f6 75%, #1e3a8a 100%)",
@@ -1576,7 +1579,7 @@ function openPlanetLevel(planetKey) {
     {
       id: "hamzouz",
       name: "قَمَرُ المَهْمُوزِ",
-      symbol: "⚡", // يجسد نبرة وقوة صوت الهمزة
+      symbol: "⚡",
       symbolDesc: "تَتَوَهَّجُ فِيهِ نَبْرَةُ الهَمْزَةِ الأَصْلِيَّةِ",
       desc: "مَا كَانَ أَحَدُ أَحْرُفِهِ الأَصْلِيَّةِ هَمْزَةً",
       moonBase: "radial-gradient(circle at 35% 30%, #fef9c3 0%, #fde047 40%, #ca8a04 75%, #713f12 100%)",
@@ -1591,23 +1594,15 @@ function openPlanetLevel(planetKey) {
 
   const currentMoons = (planetKey === 'triadic') ? moonsRefined : (planet.moons || []);
 
-// 1. تفعيل الإخفاء لجميع الرسوم الجانبية فوراً
-  document.body.classList.add('in-level-2');
-
-  // إخفاء إضافي مباشر لضمان زوال أي عنصر كرتوني محيط
-  document.querySelectorAll('img, .cosmic-decor, .floating-decor, .stars-decor').forEach(el => {
-    if (!el.closest('#cosmicLevel2')) el.style.opacity = '0';
-  });
-
-  // 2. إحداثيات مدروسة هندسياً لتستقر الأجرام فوق مسار المدار البيضاوي المائل تماماً
+  // إحداثيات توزيع الأقمار على خطوط المدار الإهليلجي
   const orbitPositions = [
-    { top: "18px", right: "215px" },  // قمر السالم: مستقر فوق أعلى القوس المداري الأيمن
-    { top: "140px", left: "45px" },   // قمر المضعف: مستقر مباشرة على حافة القوس المداري الأيسر
-    { bottom: "12px", left: "435px" } // قمر المهموز: مستقر فوق أسفل خط المدار الأوسط
+    { top: "18px", right: "215px" },  // 1. أعلى اليمين (السالم)
+    { top: "140px", left: "45px" },   // 2. أقصى اليسار (المضعف)
+    { bottom: "12px", left: "435px" } // 3. أسفل المدار (المهموز)
   ];
 
   currentMoons.forEach((moon, idx) => {
-    const pos = orbitPositions[idx] || { top: "50%", left: "50%" };
+    const pos = orbitPositions[idx] || { top: "40%", left: "40%" };
     const moonWrapper = document.createElement('div');
     moonWrapper.style.cssText = `
       position: absolute !important;
@@ -1631,14 +1626,14 @@ function openPlanetLevel(planetKey) {
       width: 125px;
       height: 125px;
       border-radius: 50%;
-      background: ${moon.moonBase};
+      background: ${moon.moonBase || 'radial-gradient(circle at 35% 30%, #f8fafc 0%, #cbd5e1 45%, #64748b 80%, #334155 100%)'};
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       border: 3px solid rgba(255, 255, 255, 0.95);
-      box-shadow: 0 0 35px ${moon.glowColor}, inset -10px -10px 20px rgba(0,0,0,0.65);
+      box-shadow: 0 0 35px ${moon.glowColor || 'rgba(56,189,248,0.7)'}, inset -10px -10px 20px rgba(0,0,0,0.65);
       overflow: hidden;
       transition: all 0.35s ease;
     `;
@@ -1649,7 +1644,7 @@ function openPlanetLevel(planetKey) {
     moonSphere.innerHTML = `
       ${crater1}
       ${crater2}
-      <div style="font-size: 2.1rem; z-index: 2; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));">${moon.symbol}</div>
+      <div style="font-size: 2.1rem; z-index: 2; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));">${moon.symbol || '🌙'}</div>
       <span style="color: #ffffff; font-weight: 900; font-size: 1.05rem; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">${moon.name.replace('قَمَرُ ', '')}</span>
     `;
 
@@ -1666,21 +1661,21 @@ function openPlanetLevel(planetKey) {
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     `;
     descBox.innerHTML = `
-      <div style="color: #f1f5f9; font-size: 0.76rem; font-weight: 600; line-height: 1.4;">${moon.desc}</div>
+      <div style="color: #f1f5f9; font-size: 0.76rem; font-weight: 600; line-height: 1.4;">${moon.desc || ''}</div>
     `;
 
     moonWrapper.appendChild(moonSphere);
     moonWrapper.appendChild(descBox);
 
-   // تأثير التمرير
+    // تأثير التمرير
     moonWrapper.onmouseover = () => {
       moonWrapper.style.transform = 'scale(1.12) translateY(-6px)';
-      moonSphere.style.boxShadow = `0 0 50px ${moon.glowColor}, inset -4px -4px 12px rgba(0,0,0,0.45)`;
+      moonSphere.style.boxShadow = `0 0 50px ${moon.glowColor || 'rgba(56,189,248,0.9)'}, inset -4px -4px 12px rgba(0,0,0,0.45)`;
       moonSphere.style.borderColor = '#ffffff';
     };
     moonWrapper.onmouseout = () => {
       moonWrapper.style.transform = 'none';
-      moonSphere.style.boxShadow = `0 0 35px ${moon.glowColor}, inset -10px -10px 20px rgba(0,0,0,0.65)`;
+      moonSphere.style.boxShadow = `0 0 35px ${moon.glowColor || 'rgba(56,189,248,0.7)'}, inset -10px -10px 20px rgba(0,0,0,0.65)`;
       moonSphere.style.borderColor = 'rgba(255, 255, 255, 0.95)';
     };
 
@@ -1689,16 +1684,7 @@ function openPlanetLevel(planetKey) {
   });
 }
 
-// أزرار العودة
-function backToPlanets() {
-  const lvl1 = document.getElementById('cosmicLevel1');
-  const lvl2 = document.getElementById('cosmicLevel2');
-  if (lvl2) lvl2.style.display = 'none';
-  if (lvl1) lvl1.style.display = 'block';
-  document.body.classList.remove('in-level-2');
-}
-
-// فتح المستوى الثالث (الصيغ والأمثلة)
+// دالة فتح المستوى الثالث (الصيغ والأمثلة)
 function openMoonForms(moon) {
   currentSelectedMoon = moon;
   const lvl2 = document.getElementById('cosmicLevel2');
@@ -1714,33 +1700,47 @@ function openMoonForms(moon) {
 
   container.innerHTML = '';
 
-  moon.examples.forEach(verb => {
+  const itemsList = moon.forms || moon.examples || [];
+
+  itemsList.forEach(item => {
+    const isObject = typeof item === 'object';
+    const sampleText = isObject ? item.sample : item;
+    const labelText = isObject ? item.label : '';
+    const rootVal = isObject ? item.val : (moon.root || 'كتب');
+
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.innerText = verb;
     btn.style.cssText = `
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
-      border: 2px solid #f59e0b;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+      border: 2.5px solid #f59e0b;
       color: #fff;
       padding: 0.9rem 2.2rem;
       border-radius: 40px;
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 900;
       cursor: pointer;
-      box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
       transition: all 0.25s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
     `;
+    btn.innerHTML = `
+      <span style="font-size: 1.55rem; color: #fde047;">${sampleText}</span>
+      ${labelText ? `<span style="font-size: 0.82rem; color: #94a3b8; font-weight: normal;">${labelText}</span>` : ''}
+    `;
+
     btn.onmouseover = () => {
-      btn.style.transform = 'scale(1.1)';
-      btn.style.boxShadow = '0 0 35px rgba(245, 158, 11, 0.8)';
-      btn.style.borderColor = '#fde047';
+      btn.style.transform = 'scale(1.08)';
+      btn.style.boxShadow = '0 0 35px #f59e0b';
     };
     btn.onmouseout = () => {
       btn.style.transform = 'none';
-      btn.style.boxShadow = '0 0 20px rgba(245, 158, 11, 0.35)';
-      btn.style.borderColor = '#f59e0b';
+      btn.style.boxShadow = '0 0 20px rgba(0,0,0,0.5)';
     };
-    btn.onclick = () => selectVerbAndLaunch(verb, moon.root);
+
+    btn.onclick = () => selectVerbAndLaunch(sampleText, rootVal);
     container.appendChild(btn);
   });
 }
@@ -1755,7 +1755,7 @@ function selectVerbAndLaunch(verb, root) {
   }
 }
 
-// أزرار العودة
+// دوال الرجوع
 function backToPlanets() {
   const lvl1 = document.getElementById('cosmicLevel1');
   const lvl2 = document.getElementById('cosmicLevel2');
@@ -1770,12 +1770,13 @@ function backToMoons() {
   if (lvl3) lvl3.style.display = 'none';
   if (lvl2) lvl2.style.display = 'block';
 }
-  window.onload = function() {
-      if (typeof loadRadialWorld === 'function') {
-        loadRadialWorld('كتب');
-      }
-    };
-  </script>
+
+window.onload = function() {
+  if (typeof loadRadialWorld === 'function') {
+    loadRadialWorld('كتب');
+  }
+};
+</script>
 
 <!-- 🧭 نافذة التوجيه الذكية المتكيفة مع سياق الفضاء -->
 <div id="guideModalBox" style="display: none; position: fixed; inset: 0; background: rgba(3, 7, 18, 0.88); backdrop-filter: blur(10px); z-index: 2147483647; align-items: center; justify-content: center; padding: 1.2rem; font-family: 'Segoe UI', Tahoma, sans-serif;">
