@@ -11,12 +11,12 @@
       --c-root: #dc2626;
       --c-affix: #2563eb;
     }
- 
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', 'Comic Sans MS', Tahoma, sans-serif;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
     }
 
     body {
@@ -153,19 +153,6 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    .space-twinkle-star {
-      position: absolute;
-      border-radius: 50%;
-      background: #ffffff;
-      animation: starBlink 2s infinite alternate ease-in-out;
-      pointer-events: none;
-    }
-
-    @keyframes starBlink {
-      0% { opacity: 0.2; transform: scale(0.7); }
-      100% { opacity: 1; transform: scale(1.3); filter: drop-shadow(0 0 6px #fde047); }
-    }
-
     .space-system-arena {
       position: relative;
       width: 100%;
@@ -207,19 +194,6 @@
       animation: sunBeat 3s infinite alternate ease-in-out;
     }
 
-    .sun-rays-halo {
-      position: absolute;
-      width: 380px;
-      height: 380px;
-      pointer-events: none;
-      animation: spinHalo 24s linear infinite;
-    }
-
-    @keyframes spinHalo {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
     @keyframes sunBeat {
       0% { transform: scale(1); }
       100% { transform: scale(1.04); }
@@ -245,201 +219,39 @@
       box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     }
 
-    .planet-station {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-      z-index: 5;
-      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .planet-station:hover {
-      transform: scale(1.15) translateY(-8px);
-      z-index: 25;
-    }
-
-    .planet-pill-tag {
-      background: rgba(15, 23, 42, 0.95);
-      border: 2px solid #38bdf8;
-      border-radius: 20px;
-      padding: 0.25rem 0.9rem;
-      margin-bottom: 0.4rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
-      white-space: nowrap;
-    }
-
-    .tag-title { font-size: 0.85rem; font-weight: 900; color: #fef08a; }
-    .tag-sub { font-size: 0.75rem; font-weight: 800; color: #bae6fd; }
-
-    .planet-globe-svg {
-      width: 175px !important;
-      height: 175px !important;
-      max-width: 175px !important;
-      max-height: 175px !important;
-      filter: drop-shadow(0 14px 28px rgba(0,0,0,0.7));
-    }
-
-    .station-1 { top: 30px; right: 11%; }
-    .station-2 { top: 30px; left: 11%; }
-    .station-3 { bottom: 35px; left: 10%; }
-    .station-4 { bottom: 35px; right: 10%; }
-
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(8px);
-      display: none; align-items: center; justify-content: center;
-      z-index: 1000; color: #1e293b;
-    }
-
-    .modal-overlay.open { display: flex; }
-
-    .modal-box {
-      background: white;
-      width: 90%; max-width: 620px;
-      border-radius: 45px;
-      padding: 2.2rem;
-      border: 6px solid #38bdf8;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
-      position: relative; max-height: 90vh; overflow-y: auto;
-    }
-
-    .modal-close {
-      position: absolute; top: 1.2rem; left: 1.2rem;
-      background: #fee2e2; border: 2px solid #ef4444;
-      width: 42px; height: 42px; border-radius: 50%;
-      font-size: 1.3rem; font-weight: 900; cursor: pointer; color: #b91c1c;
-    }
-
-    .modal-hero {
-      text-align: center; border-bottom: 3px dashed #e2e8f0;
-      padding-bottom: 1.2rem; margin-bottom: 1.2rem;
-    }
-
-    .modal-word { font-size: 3.6rem; font-weight: 900; letter-spacing: 1px; line-height: 1.1; }
-    .modal-weight { color: var(--primary); font-weight: 900; font-size: 1.3rem; margin-top: 0.3rem; }
-
-    .detail-card {
-      background: #f8fafc; border-radius: 30px;
-      padding: 1.5rem; border: 2px solid #e2e8f0; margin-bottom: 1.2rem;
-    }
-
-    .detail-row { margin-bottom: 1rem; font-size: 1.2rem; line-height: 1.6; }
-    .detail-row:last-child { margin-bottom: 0; }
-    .detail-label { font-weight: 900; color: #334155; }
-
-    .master-audio-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
-      color: white; border: none; padding: 1rem 1.6rem;
-      border-radius: 30px; font-size: 1.2rem; font-weight: 900;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      gap: 0.6rem; box-shadow: 0 6px 20px rgba(67, 56, 202, 0.4);
-      margin-top: 1.2rem;
-    }
-
-    .rule-gold-banner {
-      background: #fefce8; border: 3px dashed #facc15;
-      padding: 0.9rem 1.2rem; border-radius: 20px;
-      color: #854d0e; font-weight: 900; font-size: 1.05rem;
-      margin-top: 1rem; line-height: 1.6;
-    }
-
-    .affix-box {
-      background: #fffbeb; border: 3px solid #fde68a;
-      border-radius: 30px; padding: 1.3rem; margin-top: 1.2rem;
-    }
-
-    .affix-box-head {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;
-    }
-
-    .affix-box-title { font-weight: 900; color: #92400e; font-size: 1.15rem; }
-    .affix-rule-badge { background: #fef3c7; color: #b45309; padding: 0.2rem 0.8rem; border-radius: 12px; font-size: 0.8rem; font-weight: 800; }
-    .affix-item-row {
-      display: flex; justify-content: space-between; align-items: center;
-      background: white; border: 1.5px solid #fef08a; padding: 0.6rem 1rem; border-radius: 16px; margin-bottom: 0.5rem;
-    }
-
-    .c-r { color: var(--c-root) !important; }
-    .c-a { color: var(--c-affix) !important; }
-
+    /* أزرار التوجيه الجانبية */
     .floating-side-controls {
-      position: fixed; left: 16px; top: 50%; transform: translateY(-50%);
-      z-index: 999999; display: flex; flex-direction: column; gap: 12px;
+      position: fixed !important;
+      left: 16px !important;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      z-index: 2147483647 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+      pointer-events: auto !important;
     }
 
     .side-control-btn {
-      width: 46px; height: 46px; border-radius: 50%; background: #0f172a;
-      border: 2px solid #f59e0b; font-size: 1.3rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: transform 0.2s;
+      width: 48px !important;
+      height: 48px !important;
+      border-radius: 50% !important;
+      background: #0f172a !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 1.35rem !important;
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+      transition: transform 0.25s !important;
     }
 
-    .side-control-btn:hover { transform: scale(1.1); }
-  </style>
-  <script src="roots_data/ktb.js?v=2"></script>
-  <script src="roots_data/qra.js?v=2"></script>
-  <script src="roots_data/mdd.js?v=2"></script>
-  <script src="roots_data/dhrj.js?v=2"></script>
-  <script src="roots_data/zlzl.js?v=2"></script>
-  <script src="roots_data/wqf.js?v=2"></script>
-  <script src="roots_data/qwl.js?v=2"></script>
-  <script src="roots_data/rmy.js?v=2"></script>
-  <script src="roots_data/drs.js?v=2"></script>
-  <script src="roots_data/sbq.js?v=13"></script>
-  <script src="roots_data/kshf.js?v=2"></script>
-  <script src="roots_data/khrj.js?v=8"></script>
-</head>
-<body>
+    .side-control-btn:hover {
+      transform: scale(1.15) !important;
+    }
 
-  <!-- 🧭 أزرار التوجيه الجانبية العائمة -->
-  <div class="floating-side-controls">
-  <button type="button" class="side-control-btn" style="border: 2px solid #f59e0b;" onclick="openWelcomeScreen()" title="شاشة البداية">🚀</button>
-  <button type="button" class="side-control-btn" style="border: 2px solid #38bdf8;" onclick="toggleGuideModal()" title="دليل التوجيه">🧭</button>
-  <button type="button" class="side-control-btn" style="border: 2px solid #ec4899;" onclick="triggerEndJourney()" title="وسام ختام الرحلة">🏆</button>
-</div>
-
- <!-- 🌌 شاشة البداية الترحيبية الأصلية بكامل عناصرها ورونقها -->
-<div id="welcomeScreen" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #0f172a 45%, #030712 100%); z-index: 99999; display: flex; align-items: center; justify-content: center; overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif; transition: opacity 0.8s ease, transform 0.8s ease;">
-
-  <style>
-   .floating-side-controls {
-    position: fixed !important;
-    left: 16px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    z-index: 2147483647 !important; /* أعلى قيمة ممكنة في المتصفح */
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 12px !important;
-    pointer-events: auto !important; /* استقبال النقرات إجبارياً */
-  }
-
-  .side-control-btn {
-    width: 48px !important;
-    height: 48px !important;
-    border-radius: 50% !important;
-    background: #0f172a !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 1.35rem !important;
-    cursor: pointer !important;
-    pointer-events: auto !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
-    transition: transform 0.25s !important;
-  }
-
-.side-control-btn:hover {
-  transform: scale(1.15);
-}
+    /* حركات المجرة الترحيبية */
     @keyframes floatCosmicSlow {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
       50% { transform: translateY(-16px) rotate(2deg); }
@@ -466,12 +278,14 @@
       0%, 100% { opacity: 0.3; transform: scale(0.8); }
       50% { opacity: 1; transform: scale(1.2); }
     }
+
     .space-station-card {
       background: rgba(15, 23, 42, 0.75);
       border: 2px solid rgba(255, 255, 255, 0.2);
       border-radius: 22px;
       backdrop-filter: blur(12px);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
     }
     .space-station-card:hover {
       transform: translateY(-8px) scale(1.05);
@@ -479,133 +293,8 @@
       background: rgba(30, 41, 59, 0.95);
       box-shadow: 0 14px 30px rgba(251, 191, 36, 0.35);
     }
-    /* 🧭 أزرار التوجيه الجانبية العائمة */
-    .floating-side-controls {
-      position: fixed;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 9999999;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
 
-    .side-control-btn {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: #0f172a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.35rem;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .side-control-btn:hover {
-      transform: scale(1.15) translateX(4px);
-    }
-  </style>
-
-  <!-- 🌌 سُدم السماء المضيئة -->
-  <div style="position: absolute; width: 750px; height: 750px; background: radial-gradient(circle, rgba(168, 85, 247, 0.26) 0%, transparent 70%); top: -150px; left: -100px; filter: blur(75px); pointer-events: none;"></div>
-  <div style="position: absolute; width: 850px; height: 850px; background: radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, transparent 75%); bottom: -200px; right: -150px; filter: blur(80px); pointer-events: none;"></div>
-  <div style="position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(251, 191, 36, 0.22) 0%, transparent 70%); top: 40%; left: 50%; transform: translate(-50%, -50%); filter: blur(55px); pointer-events: none;"></div>
-
-  <!-- 🌠 شهاب يمر في الأفق -->
-  <div style="position: absolute; top: 14%; width: 160px; height: 3px; background: linear-gradient(90deg, #fff, rgba(255,255,255,0.8), transparent); border-radius: 50%; animation: shootingStar1 9s linear infinite; pointer-events: none;"></div>
-
-  <!-- 🪐 أجرام وكواكب الفضاء المحيطة -->
-  <div style="position: absolute; top: 10%; left: 7%; font-size: 3.8rem; filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.7)); animation: floatCosmicSlow 7s ease-in-out infinite;">🪐</div>
-  <div style="position: absolute; top: 14%; right: 8%; font-size: 3.5rem; filter: drop-shadow(0 0 22px rgba(168, 85, 247, 0.75)); animation: floatCosmicSlow 8s ease-in-out infinite 1s;">🌌</div>
-  <div style="position: absolute; bottom: 18%; left: 6%; font-size: 3rem; filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.8)); animation: floatCosmicSlow 6.5s ease-in-out infinite 0.5s;">🌍</div>
-  <div style="position: absolute; bottom: 12%; right: 7%; font-size: 3.2rem; filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.8)); animation: floatCosmicSlow 6s ease-in-out infinite 1.5s;">🛸</div>
-
-  <!-- 👨‍🚀 رواد الفضاء في الرحلة -->
-  <div style="position: absolute; bottom: 12%; left: 15%; font-size: 3.6rem; filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.7)); animation: spacewalker 7s ease-in-out infinite;">👨‍🚀</div>
-  <div style="position: absolute; top: 22%; right: 17%; font-size: 3.3rem; filter: drop-shadow(0 0 18px rgba(236, 72, 153, 0.7)); animation: spacewalker 9s ease-in-out infinite 1.5s; transform: scaleX(-1);">🧑‍🚀</div>
-
-  <!-- ✨ النجوم المتلألئة -->
-  <div style="position: absolute; top: 20%; left: 24%; color: #fef08a; font-size: 1.5rem; animation: twinkleCosmic 3s infinite;">✨</div>
-  <div style="position: absolute; top: 32%; right: 28%; color: #38bdf8; font-size: 1.7rem; animation: twinkleCosmic 4.5s infinite 1s;">⭐</div>
-  <div style="position: absolute; bottom: 28%; left: 26%; color: #f472b6; font-size: 1.3rem; animation: twinkleCosmic 3.5s infinite 1.5s;">✦</div>
-  <div style="position: absolute; bottom: 22%; right: 24%; color: #fde047; font-size: 1.6rem; animation: twinkleCosmic 2.8s infinite 0.5s;">✨</div>
-
-  <!-- 🛸 المحتوى الرئيسي -->
-  <div style="position: relative; z-index: 10; width: 100%; max-width: 980px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.4rem;">
-
-    <!-- شمس الكلمات المركزية المتوهجة -->
-    <div style="animation: floatCosmicSlow 5s ease-in-out infinite; display: flex; flex-direction: column; align-items: center;">
-      <div style="position: relative; width: 135px; height: 135px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ffffff 0%, #fde047 30%, #f59e0b 70%, #d97706 100%); display: flex; align-items: center; justify-content: center; font-size: 4.8rem; box-shadow: 0 0 75px rgba(245, 158, 11, 0.95), inset -6px -6px 18px rgba(0,0,0,0.35); border: 4px solid #fffdf0; animation: pulseSolar 4s infinite;">
-        ☀️
-        <span style="position: absolute; font-size: 1.9rem; animation: orbitPlanet 8s linear infinite;">🚀</span>
-      </div>
-    </div>
-
-    <!-- العنوان والشارة الفلكية -->
-    <div>
-      <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 1.8rem; border-radius: 50px; background: rgba(255, 255, 255, 0.1); border: 1.5px solid rgba(251, 191, 36, 0.7); color: #fde047; font-size: 1rem; font-weight: bold; letter-spacing: 1px; backdrop-filter: blur(6px); box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);">
-        <span>🚀</span>
-        <span>رِحْلَةُ الاشْتِقَاقِ الصَّرْفِيِّ فِي فَضَاءِ اللُّغَةِ</span>
-      </div>
-      <h1 style="font-size: clamp(3rem, 6vw, 4.4rem); font-weight: 900; margin: 0.7rem 0 0.3rem 0; background: linear-gradient(180deg, #ffffff 15%, #fef08a 50%, #f59e0b 95%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 5px 25px rgba(245, 158, 11, 0.7)); letter-spacing: 1px;">
-        عَالَمُ الجُذُورِ
-      </h1>
-      <p style="color: #f1f5f9; font-size: clamp(1.1rem, 2.2vw, 1.35rem); font-weight: 600; margin: 0.4rem auto 0 auto; max-width: 880px; line-height: 1.9; text-shadow: 0 2px 12px rgba(0,0,0,0.9);">
-        مَرْحَباً بِكَ يَا رَائِدَ اللُّغَةِ! هَيَّا نَنْطَلِقْ فِي رِحْلَةٍ كَوْنِيَّةٍ؛<br>
-        نَسْتَكْشِفُ فِيهَا الجُذُورَ، نَجْتَازُ مَحَطَّاتِ الأَوْزَانِ، وَنَصْنَعُ رَوَائِعَ المُشْتَقَّاتِ.
-      </p>
-    </div>
-
-    <!-- بوابات المحطات الكونية الخمس بكامل تفاصيلها وتوهجها -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; width: 100%; max-width: 1050px; margin-top: 0.4rem;">
-      <div class="space-station-card" style="padding: 1.2rem 0.8rem; border-color: rgba(251, 191, 36, 0.6); box-shadow: 0 6px 22px rgba(251, 191, 36, 0.2);">
-        <div style="font-size: 2.3rem; margin-bottom: 0.35rem;">☀️</div>
-        <div style="color: #fde047; font-weight: 900; font-size: 1.15rem;">شَمْسُ الجِذْرِ</div>
-        <div style="color: #f8fafc; font-weight: 600; font-size: 0.88rem; margin-top: 0.3rem;">اكْتَشِفْ نَوَاةَ المَعْنَى</div>
-      </div>
-
-      <div class="space-station-card" style="padding: 1.2rem 0.8rem; border-color: rgba(56, 189, 248, 0.6); box-shadow: 0 6px 22px rgba(56, 189, 248, 0.2);">
-        <div style="font-size: 2.3rem; margin-bottom: 0.35rem;">📖</div>
-        <div style="color: #38bdf8; font-weight: 900; font-size: 1.15rem;">سَحَابَةُ الحِكَايَةِ</div>
-        <div style="color: #f8fafc; font-weight: 600; font-size: 0.88rem; margin-top: 0.3rem;">الصَّرْفُ فِي السِّيَاقِ</div>
-      </div>
-
-      <div class="space-station-card" style="padding: 1.2rem 0.8rem; border-color: rgba(99, 102, 241, 0.6); box-shadow: 0 6px 22px rgba(99, 102, 241, 0.2);">
-        <div style="font-size: 2.3rem; margin-bottom: 0.35rem;">⚙️</div>
-        <div style="color: #a5b4fc; font-weight: 900; font-size: 1.15rem;">أَقْرَاصُ التَّرْكِيبِ</div>
-        <div style="color: #f8fafc; font-weight: 600; font-size: 0.88rem; margin-top: 0.3rem;">مُخْتَبَرُ صِيَاغَةِ الأَوْزَانِ</div>
-      </div>
-
-      <div class="space-station-card" style="padding: 1.2rem 0.8rem; border-color: rgba(168, 85, 247, 0.6); box-shadow: 0 6px 22px rgba(168, 85, 247, 0.2);">
-        <div style="font-size: 2.3rem; margin-bottom: 0.35rem;">🚀</div>
-        <div style="color: #d8b4fe; font-weight: 900; font-size: 1.15rem;">مَرْكَبَةُ الصَّرْفِ</div>
-        <div style="color: #f8fafc; font-weight: 600; font-size: 0.88rem; margin-top: 0.3rem;">تَحَدِّيَاتُ القِيَاسِ الفَضَائِيِّ</div>
-      </div>
-
-      <div class="space-station-card" style="padding: 1.2rem 0.8rem; border-color: rgba(244, 63, 94, 0.6); box-shadow: 0 6px 22px rgba(244, 63, 94, 0.2);">
-        <div style="font-size: 2.3rem; margin-bottom: 0.35rem;">✍️</div>
-        <div style="color: #fda4af; font-weight: 900; font-size: 1.15rem;">الإِنْتَاجُ الحُرُّ</div>
-        <div style="color: #f8fafc; font-weight: 600; font-size: 0.88rem; margin-top: 0.3rem;">إِبْدَاعُكَ اللُّغَوِيُّ الخَاصُّ</div>
-      </div>
-    </div>
-
-    <!-- زر الانطلاق المتوهج -->
-    <button onclick="openGalaxyChooser()" style="margin-top: 0.6rem; padding: 1.15rem 4.4rem; border-radius: 60px; background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%); border: 3.5px solid #fffdf0; color: #090a0f; font-size: 1.5rem; font-weight: 900; cursor: pointer; box-shadow: 0 0 45px rgba(245, 158, 11, 0.9), 0 15px 30px rgba(0, 0, 0, 0.6); display: inline-flex; align-items: center; gap: 1.1rem; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='scale(1.08) translateY(-4px)'; this.style.boxShadow='0 0 70px rgba(245, 158, 11, 1), 0 20px 40px rgba(0, 0, 0, 0.8)';" onmouseout="this.style.transform='scale(1) translateY(0)'; this.style.boxShadow='0 0 45px rgba(245, 158, 11, 0.9), 0 15px 30px rgba(0, 0, 0, 0.6)';">
-      <span>انْطَلِقْ فِي الرِّحْلَةِ الكَوْنِيَّةِ</span>
-      <span style="font-size: 2rem; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));">🚀</span>
-    </button>
-
-  </div>
-</div>
-
-<!-- 🪐 فضاء كواكب الأفعال الكونية (مجرة فضائية كاملة وحرة بدون إطار) -->
-<div id="galaxyModal" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 35%, #1e1b4b 0%, #0c1024 50%, #030712 100%); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; backdrop-filter: blur(14px); overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif;">
-
-  <style>
+    /* بطاقات كواكب المستوى 1 */
     @keyframes planetFloatA {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
       50% { transform: translateY(-14px) rotate(1.5deg); }
@@ -652,7 +341,6 @@
       z-index: 25;
     }
 
-    /* كوكب الثلاثي: أزرق سماوي عميق */
     .planet-triadic {
       background: radial-gradient(circle at 32% 28%, #bae6fd 0%, #0284c7 45%, #082f49 100%);
       box-shadow: 0 0 55px rgba(56, 189, 248, 0.7), inset -8px -8px 20px rgba(0,0,0,0.6);
@@ -663,7 +351,6 @@
       box-shadow: 0 0 80px rgba(56, 189, 248, 1), inset -4px -4px 15px rgba(0,0,0,0.4);
     }
 
-    /* كوكب الرباعي: زمردي ناصع */
     .planet-quadric {
       background: radial-gradient(circle at 32% 28%, #a7f3d0 0%, #059669 45%, #022c22 100%);
       box-shadow: 0 0 55px rgba(52, 211, 153, 0.7), inset -8px -8px 20px rgba(0,0,0,0.6);
@@ -674,7 +361,6 @@
       box-shadow: 0 0 80px rgba(52, 211, 153, 1), inset -4px -4px 15px rgba(0,0,0,0.4);
     }
 
-    /* كوكب المزيد: ذهبي شمسي متوهج */
     .planet-augmented {
       background: radial-gradient(circle at 32% 28%, #fef08a 0%, #d97706 50%, #451a03 100%);
       box-shadow: 0 0 55px rgba(245, 158, 11, 0.75), inset -8px -8px 20px rgba(0,0,0,0.6);
@@ -685,7 +371,6 @@
       box-shadow: 0 0 85px rgba(245, 158, 11, 1), inset -4px -4px 15px rgba(0,0,0,0.4);
     }
 
-    /* كوكب المعتل: أرجواني ليلي ساحر */
     .planet-weak {
       background: radial-gradient(circle at 32% 28%, #e9d5ff 0%, #7c3aed 48%, #2e1065 100%);
       box-shadow: 0 0 55px rgba(167, 139, 250, 0.7), inset -8px -8px 20px rgba(0,0,0,0.6);
@@ -706,680 +391,535 @@
       pointer-events: none;
       animation: ringPulse 4s infinite alternate ease-in-out;
     }
-/* 1. إخفاء زينة المستوى الأول ورسومه الكرتونية بأمان دون حجب الصفحة */
-body.in-level-2 #cosmicLevel1 {
-  display: none !important;
-}
 
-body.in-level-2 .cosmic-decor,
-body.in-level-2 .floating-decor,
-body.in-level-2 .cosmic-floating-decor {
-  display: none !important;
-}
-
-/* 2. فضاء النجوم اللامعة */
-.galaxy-starfield {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    radial-gradient(1.5px 1.5px at 15% 20%, #ffffff 100%, transparent),
-    radial-gradient(2px 2px at 30% 65%, #bae6fd 100%, transparent),
-    radial-gradient(1.2px 1.2px at 45% 15%, #ffffff 100%, transparent),
-    radial-gradient(2.5px 2.5px at 70% 35%, #fef08a 100%, transparent),
-    radial-gradient(1.5px 1.5px at 85% 75%, #ffffff 100%, transparent),
-    radial-gradient(2px 2px at 10% 80%, #7dd3fc 100%, transparent),
-    radial-gradient(1.5px 1.5px at 60% 85%, #ffffff 100%, transparent),
-    radial-gradient(2px 2px at 92% 18%, #fbcfe8 100%, transparent);
-  background-size: 320px 320px;
-  animation: starTwinkle 3s ease-in-out infinite alternate;
-  pointer-events: none;
-  z-index: 1;
-}
-
-@keyframes starTwinkle {
-  0% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-
-/* 3. حاوية مسرح الفضاء والمدارات */
-.orbit-stage-container {
-  position: relative;
-  width: 1000px;
-  max-width: 95vw;
-  height: 520px;
-  margin: 15px auto 0;
-}
-
-/* خط المدار الرئيسي البيضاوي الذي تستقر عليه الأقمار */
-.master-orbit-track {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-12deg);
-  width: 880px;
-  height: 380px;
-  border-radius: 50%;
-  border: 2px dashed rgba(125, 211, 252, 0.45);
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.15), inset 0 0 25px rgba(56, 189, 248, 0.08);
-  pointer-events: none;
-  z-index: 2;
-}
-
-/* مسار مداري داخلي */
-.inner-orbit-track {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-12deg);
-  width: 580px;
-  height: 220px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(56, 189, 248, 0.25);
-  pointer-events: none;
-  z-index: 2;
-}
-
-  <!-- 🌌 سُدم الفضاء الغامرة -->
-  <div style="position: absolute; width: 750px; height: 750px; background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%); top: -120px; left: -80px; filter: blur(80px); pointer-events: none;"></div>
-  <div style="position: absolute; width: 850px; height: 850px; background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 75%); bottom: -180px; right: -120px; filter: blur(85px); pointer-events: none;"></div>
-  <div style="position: absolute; width: 650px; height: 650px; background: radial-gradient(circle, rgba(245, 158, 11, 0.16) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); filter: blur(70px); pointer-events: none;"></div>
-
-  <!-- 🌠 شهاب ناري يعبر المجرة -->
-  <div style="position: absolute; top: 12%; width: 170px; height: 3px; background: linear-gradient(90deg, #fff, rgba(253, 224, 71, 0.9), transparent); border-radius: 50%; animation: shootingStarGalaxy 8.5s linear infinite; pointer-events: none;"></div>
-
-  <!-- 🪐 أجرام فضائية تسبح في الأفق -->
-  <div style="position: absolute; top: 8%; left: 8%; font-size: 3.5rem; filter: drop-shadow(0 0 22px rgba(244, 63, 94, 0.7)); animation: planetFloatA 7s ease-in-out infinite; pointer-events: none;">🪐</div>
-  <div style="position: absolute; top: 12%; right: 9%; font-size: 3.2rem; filter: drop-shadow(0 0 25px rgba(168, 85, 247, 0.8)); animation: planetFloatB 8s ease-in-out infinite 1s; pointer-events: none;">🌌</div>
-  <div style="position: absolute; bottom: 12%; left: 8%; font-size: 3rem; filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.8)); animation: planetFloatA 6.5s ease-in-out infinite 0.5s; pointer-events: none;">🌍</div>
-  <div style="position: absolute; bottom: 10%; right: 8%; font-size: 3rem; filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.8)); animation: planetFloatB 6s ease-in-out infinite 1.5s; pointer-events: none;">🛸</div>
-
-  <!-- 🧑‍🚀 رائد فضاء عائم في المجرة -->
-  <div style="position: absolute; top: 18%; left: 22%; font-size: 3.2rem; filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.7)); animation: spacewalkerGalaxy 8s ease-in-out infinite; pointer-events: none;">🧑‍🚀</div>
-
-  <!-- ✨ النجوم المتلألئة -->
-  <div style="position: absolute; top: 22%; right: 24%; color: #fef08a; font-size: 1.6rem; animation: twinkleGalaxy 3s infinite; pointer-events: none;">✨</div>
-  <div style="position: absolute; bottom: 25%; left: 28%; color: #38bdf8; font-size: 1.8rem; animation: twinkleGalaxy 4.5s infinite 1s; pointer-events: none;">⭐</div>
-  <div style="position: absolute; bottom: 20%; right: 26%; color: #f472b6; font-size: 1.4rem; animation: twinkleGalaxy 3.5s infinite 1.5s; pointer-events: none;">✦</div>
-
-  <!-- زر إغلاق الفضاء والعودة -->
-  <button type="button" onclick="document.getElementById('galaxyModal').style.display='none';" style="position: absolute; top: 28px; left: 32px; background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.3); color: #cbd5e1; border-radius: 50%; width: 44px; height: 44px; cursor: pointer; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; transition: all 0.25s; z-index: 100;" onmouseover="this.style.color='#f87171'; this.style.borderColor='#f87171'; this.style.transform='scale(1.1)';" onmouseout="this.style.color='#cbd5e1'; this.style.borderColor='rgba(255,255,255,0.3)'; this.style.transform='scale(1)';">✕</button>
-
- <!-- 🪐 المستوى 1: كواكب الأفعال المقوسة العائمة -->
-  <div id="cosmicLevel1" style="width: 100%; max-width: 1100px; text-align: center; position: relative; z-index: 50; padding: 0 1.5rem;">
-    
-    <div style="display: inline-flex; align-items: center; gap: 8px; padding: 0.45rem 1.8rem; border-radius: 40px; background: rgba(245, 158, 11, 0.15); border: 1.5px solid #f59e0b; color: #fde047; font-size: 1.05rem; font-weight: bold; margin-bottom: 12px; box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);">
-      <span>🪐</span><span>فَضَاءُ الأَفْعَالِ الكَوْنِيَّةِ</span>
-    </div>
-    
-    <h2 style="color: #ffffff; margin: 0 0 8px 0; font-size: clamp(2.4rem, 4.5vw, 3.4rem); font-weight: 900; text-shadow: 0 4px 20px rgba(0,0,0,0.9); background: linear-gradient(180deg, #ffffff 20%, #fde047 60%, #f59e0b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-      كَوَاكِبُ الأَفْعَالِ الكُبْرَى
-    </h2>
-    
-    <p style="color: #bae6fd; margin: 0 auto 30px auto; font-size: clamp(1.1rem, 2vw, 1.3rem); font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
-      انْقُرْ عَلَى الكَوْكَبِ لِلغَوْصِ فِي مَدَارَاتِهِ وَأَقْمَارِهِ:
-    </p>
-    
-    <!-- حزام الكواكب المقوس المتباعد -->
-    <div style="display: flex; justify-content: center; align-items: center; gap: clamp(45px, 6vw, 90px); flex-wrap: wrap; margin-top: 30px; padding: 20px 10px; width: 100%;">
-      
-      <!-- 1. كوكب الثلاثي -->
-      <div style="margin-top: -65px;">
-        <div onclick="openPlanetLevel('triadic')" class="cosmic-sphere-card planet-triadic">
-          <div class="planet-ring" style="border-color: rgba(125, 211, 252, 0.75);"></div>
-          <div style="font-size: 2.6rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));">📚</div>
-          <div style="color: #ffffff; font-weight: 900; font-size: 1.3rem; margin-top: 4px; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">الثُّلَاثِيُّ</div>
-          <div style="color: #e0f2fe; font-size: 0.78rem; font-weight: bold; background: rgba(0,0,0,0.4); padding: 2px 10px; border-radius: 12px; margin-top: 3px;">(المُجَرَّدُ)</div>
-        </div>
-      </div>
-
-      <!-- 2. كوكب الرباعي -->
-      <div style="margin-top: 45px;">
-        <div onclick="openPlanetLevel('quadric')" class="cosmic-sphere-card planet-quadric">
-          <div class="planet-ring" style="border-color: rgba(110, 231, 183, 0.75);"></div>
-          <div style="font-size: 2.6rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));">🌀</div>
-          <div style="color: #ffffff; font-weight: 900; font-size: 1.3rem; margin-top: 4px; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">الرُّبَاعِيُّ</div>
-          <div style="color: #d1fae5; font-size: 0.78rem; font-weight: bold; background: rgba(0,0,0,0.4); padding: 2px 10px; border-radius: 12px; margin-top: 3px;">(المُجَرَّدُ)</div>
-        </div>
-      </div>
-
-      <!-- 3. كوكب المعتل -->
-      <div style="margin-top: 55px;">
-        <div onclick="openPlanetLevel('weak')" class="cosmic-sphere-card planet-weak">
-          <div class="planet-ring" style="border-color: rgba(192, 132, 252, 0.75);"></div>
-          <div style="font-size: 2.6rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));">🌙</div>
-          <div style="color: #ffffff; font-weight: 900; font-size: 1.3rem; margin-top: 4px; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">المُعْتَلُّ</div>
-          <div style="color: #f3e8ff; font-size: 0.78rem; font-weight: bold; background: rgba(0,0,0,0.4); padding: 2px 10px; border-radius: 12px; margin-top: 3px;">(حُرُوفُ العِلَّةِ)</div>
-        </div>
-      </div>
-
-      <!-- 4. كوكب المزيد -->
-      <div style="margin-top: -65px;">
-        <div onclick="openPlanetLevel('augmented')" class="cosmic-sphere-card planet-augmented">
-          <div class="planet-ring" style="border-color: rgba(253, 224, 71, 0.85);"></div>
-          <div style="font-size: 2.6rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));">☀️</div>
-          <div style="color: #ffffff; font-weight: 900; font-size: 1.3rem; margin-top: 4px; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">المَزِيدُ</div>
-          <div style="color: #fef9c3; font-size: 0.78rem; font-weight: bold; background: rgba(0,0,0,0.4); padding: 2px 10px; border-radius: 12px; margin-top: 3px;">(بِحَرْفٍ / أَكْثَرَ)</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-<!-- 🌙 المستوى 2: فضاء المدارات الفلكية الدقيقة -->
-  <div id="cosmicLevel2" style="display: none; width: 100%; text-align: center; position: relative; z-index: 60; padding: 0 1rem;">
-    
-    <!-- حقل النجوم المضيئة -->
-    <div class="galaxy-starfield"></div>
-
-    <!-- ترويسة المستوى -->
-    <h2 id="planetMoonTitle" style="color: #7dd3fc; margin-bottom: 6px; font-size: clamp(2rem, 3.5vw, 2.7rem); font-weight: 900; text-shadow: 0 0 25px rgba(56, 189, 248, 0.7); position: relative; z-index: 10;">
-      🌙 الفِعْلُ الثُّلَاثِيُّ (الصَّحِيحُ)
-    </h2>
-    <p style="color: #cbd5e1; margin-bottom: 10px; font-size: 1.05rem; position: relative; z-index: 10;">
-      اخْتَرِ القَمَرَ لِتَسْتَكْشِفَ صِيَغَهُ المُمَيَّزَةَ فِي مَدَارِهِ:
-    </p>
-
-    <!-- المسرح الفلكي الذي يحتوي خطوط المدار والأقمار المستقرة عليها -->
-    <div class="orbit-stage-container">
-      <div class="inner-orbit-track"></div>
-      <div class="master-orbit-track"></div>
-      <div id="moonsCardsContainer"></div>
-    </div>
-
-    <button type="button" onclick="backToPlanets()" style="margin-top: 15px; background: rgba(15, 23, 42, 0.85); border: 2px solid #38bdf8; color: #bae6fd; padding: 9px 30px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: all 0.25s; box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); position: relative; z-index: 10;" onmouseover="this.style.background='#38bdf8'; this.style.color='#0f172a'; this.style.transform='scale(1.05)';" onmouseout="this.style.background='rgba(15, 23, 42, 0.85)'; this.style.color='#bae6fd'; this.style.transform='none';">
-      ⟵ عَوْدَةٌ لِفَضَاءِ الكَوَاكِبِ
-    </button>
-  </div>
-
-  <!-- 🌟 المستوى 3: الصيغ والأمثلة الدقيقة للبدء -->
-  <div id="cosmicLevel3" style="display: none; width: 100%; max-width: 1000px; text-align: center; position: relative; z-index: 60; padding: 0 1.5rem;">
-    <h2 id="moonFormTitle" style="color: #fde047; margin-bottom: 8px; font-size: clamp(2rem, 3.8vw, 2.8rem); font-weight: 900; text-shadow: 0 3px 15px rgba(0,0,0,0.8);">🌟 الصِّيَغُ وَالأَمْثِلَةُ</h2>
-    <p style="color: #cbd5e1; margin-bottom: 30px; font-size: 1.1rem;">انْقُرْ عَلَى الفِعْلِ لِلانْطِلَاقِ نَحْوَ شَمْسِ الجَذْرِ:</p>
-    <div id="formsButtonsContainer" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;"></div>
-    <button type="button" onclick="backToMoons()" style="margin-top: 35px; background: rgba(255,255,255,0.08); border: 2px solid #64748b; color: #cbd5e1; padding: 9px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: all 0.25s;" onmouseover="this.style.borderColor='#fde047'; this.style.color='#fde047'; this.style.transform='scale(1.05)';" onmouseout="this.style.borderColor='#64748b'; this.style.color='#cbd5e1'; this.style.transform='none';">⟵ عَوْدَةٌ لِلأَقْمَارِ</button>
-  </div>
-  </div>
-</div>
-
-<script>
-  let currentSelectedPlanet = null;
-
-  const cosmicNavTree = {
-    // 📚 1. كوكب الثلاثي المجرد (ص 27 من الكتاب المدرسي)
-    triadic: {
-      name: "الفِعْلُ الثُّلَاثِيُّ (الصَّحِيحُ)",
-      moons: [
-        {
-          id: "salim",
-          name: "السَّالِمُ",
-          icon: "📘",
-          color: "#38bdf8",
-          desc: "سَلِمَتْ أُصُولُهُ مِنَ الهَمْزِ وَالتَّضْعِيفِ",
-          forms: [
-            { label: "صَحِيحٌ سَالِمٌ (نَصّ)", val: "درس", sample: "دَرَسَ" },
-            { label: "صَحِيحٌ سَالِمٌ (تَطْبِيق)", val: "فرح", sample: "فَرِحَ" }
-          ]
-        },
-        {
-          id: "mudaaf",
-          name: "المُضَعَّفُ",
-          icon: "🪢",
-          color: "#0284c7",
-          desc: "مَا كَانَ ثَانِيهِ وَثَالِثُهُ مِنْ جِنْسٍ وَاحِدٍ",
-          forms: [
-            { label: "صَحِيحٌ مُضَعَّفٌ (نَصّ)", val: "مرر", sample: "مَرَّ" },
-            { label: "مُضَعَّفٌ (تَطْبِيق)", val: "فكك", sample: "فَكَّ" }
-          ]
-        },
-        {
-          id: "hamzouz",
-          name: "المَهْمُوزُ",
-          icon: "🌠",
-          color: "#0369a1",
-          desc: "مَا كَانَ أَحَدُ أُصُولِهِ هَمْزَةً",
-          forms: [
-            { label: "مَهْمُوزُ اللَّامِ (نَصّ)", val: "ملأ", sample: "مَلَأَ" },
-            { label: "مَهْمُوزُ الفَاءِ (أَخَذَ)", val: "أخذ", sample: "أَخَذَ" },
-            { label: "مَهْمُوزُ العَيْنِ (سَأَلَ)", val: "سأل", sample: "سَأَلَ" }
-          ]
-        }
-      ]
-    },
-
-    // 🌀 2. كوكب الرباعي المجرد
-    quadric: {
-      name: "الفِعْلُ الرُّبَاعِيُّ (المُجَرَّدُ)",
-      moons: [
-        {
-          id: "quad_salim",
-          name: "رُبَاعِيٌّ سَالِمٌ",
-          icon: "🌀",
-          color: "#34d399",
-          desc: "أَرْبَعَةُ أَحْرُفٍ أُصُولٌ عَلَى وَزْنِ فَعْلَلَ",
-          forms: [
-            { label: "صِيغَةُ (فَعْلَلَ)", val: "دحرج", sample: "دَحْرَجَ" },
-            { label: "رُبَاعِيٌّ سَالِمٌ", val: "بعثر", sample: "بَعْثَرَ" }
-          ]
-        },
-        {
-          id: "quad_mudaaf",
-          name: "رُبَاعِيٌّ مُضَعَّفٌ",
-          icon: "⚡",
-          color: "#059669",
-          desc: "فَاؤُهُ وَلَامُهُ الأُولَى مِنْ جِنْسٍ، وَعَيْنُهُ وَلَامُهُ الثَّانِيَةُ مِنْ جِنْسٍ",
-          forms: [
-            { label: "رُبَاعِيٌّ مُضَعَّفٌ", val: "زلزل", sample: "زَلْزَلَ" }
-          ]
-        }
-      ]
-    },
-
-    // 🌙 3. كوكب المعتل (ص 27 من الكتاب المدرسي كاملاً)
-    weak: {
-      name: "الفِعْلُ المُعْتَلُّ",
-      moons: [
-        {
-          id: "mithal",
-          name: "المِثَالُ",
-          icon: "🚏",
-          color: "#c084fc",
-          desc: "مَا كَانَتْ فَاؤُهُ (أَوَّلُهُ) حَرْفَ عِلَّةٍ",
-          forms: [
-            { label: "مُعْتَلُّ الفَاءِ (وَضَعَ)", val: "وضع", sample: "وَضَعَ" },
-            { label: "مِثَالٌ يَائِيٌّ (يَبِسَ)", val: "يبس", sample: "يَبِسَ" }
-          ]
-        },
-        {
-          id: "ajwaf",
-          name: "الأَجْوَفُ",
-          icon: "🎙️",
-          color: "#a855f7",
-          desc: "مَا كَانَتْ عَيْنُهُ (وَسَطُهُ) حَرْفَ عِلَّةٍ",
-          forms: [
-            { label: "مُعْتَلُّ العَيْنِ (نَالَ)", val: "نال", sample: "نَالَ" },
-            { label: "أَجْوَفُ (قَالَ)", val: "قول", sample: "قَالَ" }
-          ]
-        },
-        {
-          id: "naqis",
-          name: "النَّاقِصُ",
-          icon: "🎯",
-          color: "#9333ea",
-          desc: "مَا كَانَتْ لَامُهُ (آخِرُهُ) حَرْفَ عِلَّةٍ",
-          forms: [
-            { label: "مُعْتَلُّ اللَّامِ (سَعَى)", val: "سعى", sample: "سَعَى" },
-            { label: "نَاقِصٌ (جَنَى)", val: "جنى", sample: "جَنَى" }
-          ]
-        },
-        {
-          id: "mafrooq",
-          name: "اللَّفِيفُ المَفْرُوقُ",
-          icon: "🌿",
-          color: "#7e22ce",
-          desc: "فَاؤُهُ وَلَامُهُ حَرْفَا عِلَّةٍ بَيْنَهُمَا حَرْفٌ صَحِيحٌ",
-          forms: [
-            { label: "لَفِيفٌ مَفْرُوقٌ (وَعَى)", val: "وعى", sample: "وَعَى" },
-            { label: "لَفِيفٌ مَفْرُوقٌ (وَفَى)", val: "وفى", sample: "وَفَى" }
-          ]
-        },
-        {
-          id: "maqroon",
-          name: "اللَّفِيفُ المَقْرُونُ",
-          icon: "🔗",
-          color: "#6b21a8",
-          desc: "عَيْنُهُ وَلَامُهُ حَرْفَا عِلَّةٍ مُتَقَارِنَانِ",
-          forms: [
-            { label: "لَفِيفٌ مَقْرُونٌ (طَوَى)", val: "طوى", sample: "طَوَى" },
-            { label: "لَفِيفٌ مَقْرُونٌ (نَوَى)", val: "نوى", sample: "نَوَى" }
-          ]
-        }
-      ]
-    },
-
-    // ☀️ 4. كوكب المزيد (ص 14 من الكتاب المدرسي)
-    augmented: {
-      name: "الفِعْلُ المَزِيدُ",
-      moons: [
-        {
-          id: "aug_one",
-          name: "مَزِيدٌ بِحَرْفٍ وَاحِدٍ",
-          icon: "☀️",
-          color: "#fde047",
-          desc: "زِيدَ فِيهِ حَرْفٌ وَاحِدٌ عَلَى أَحْرُفِهِ الأَصْلِيَّةِ",
-          forms: [
-            { label: "مَزِيدٌ بِالأَلِفِ (تَابَعَ)", val: "تابع", sample: "تَابَعَ" },
-            { label: "مَزِيدٌ بِالهَمْزَةِ (أَكْرَمَ)", val: "أكرم", sample: "أَكْرَمَ" }
-          ]
-        },
-        {
-          id: "aug_two",
-          name: "مَزِيدٌ بِحَرْفَيْنِ",
-          icon: "✨",
-          color: "#fbbf24",
-          desc: "زِيدَ فِيهِ حَرْفَانِ عَلَى أَحْرُفِهِ الأَصْلِيَّةِ",
-          forms: [
-            { label: "بِالتَّاءِ وَالأَلِفِ (تَعَاظَمَ)", val: "تعاظم", sample: "تَعَاظَمَ" },
-            { label: "بِالأَلِفِ وَالتَّاءِ (انْتَقَلَ)", val: "انتقل", sample: "انْتَقَلَ" }
-          ]
-        },
-        {
-          id: "aug_three",
-          name: "مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ",
-          icon: "🚀",
-          color: "#f59e0b",
-          desc: "زِيدَتْ فِيهِ ثَلَاثَةُ أَحْرُفٍ عَلَى أَحْرُفِهِ الأَصْلِيَّةِ",
-          forms: [
-            { label: "اسْتَفْعَلَ (اسْتَقْبَلَ)", val: "استقبل", sample: "اسْتَقْبَلَ" },
-            { label: "اسْتَفْعَلَ (اسْتَخْرَجَ)", val: "استخرج", sample: "اسْتَخْرَجَ" }
-          ]
-        }
-      ]
-    },
-    weak: {
-      name: "الأَفْعَالُ المُعْتَلَّةُ",
-      moons: [
-        {
-          id: "mithal",
-          name: "مُعْتَلٌّ مِثَالٌ",
-          icon: "🚏",
-          color: "#a78bfa",
-          forms: [
-            { label: "مُعْتَلُّ الفَاءِ (مِثَالٌ)", val: "وقف", sample: "وَقَفَ" }
-          ]
-        },
-        {
-          id: "ajwaf",
-          name: "مُعْتَلٌّ أَجْوَفُ",
-          icon: "🎙️",
-          color: "#8b5cf6",
-          forms: [
-            { label: "مُعْتَلُّ العَيْنِ (أَجْوَفُ)", val: "قول", sample: "قَالَ" }
-          ]
-        },
-        {
-          id: "naqis",
-          name: "مُعْتَلٌّ نَاقِصٌ",
-          icon: "🎯",
-          color: "#7c3aed",
-          forms: [
-            { label: "مُعْتَلُّ اللَّامِ (نَاقِصٌ)", val: "رمي", sample: "رَمَى" }
-          ]
-        }
-      ]
+    /* إخفاء الزينة الكرتونية في المستوى الثاني */
+    body.in-level-2 .cosmic-decor-item,
+    body.in-level-2 .floating-astronaut,
+    body.in-level-2 .floating-ufo {
+      display: none !important;
     }
-  };
-  // متغيرات التتبع
-let currentPlanetKey = null;
-let currentMoonData = null;
 
-// دالة فتح المستوى الثاني (توزيع الأقمار كأجرام كروية على المدارات)
-function openPlanetLevel(planetKey) {
-  const planet = cosmicNavTree[planetKey];
-  if (!planet) return;
-  currentPlanetKey = planetKey;
+    /* فضاء النجوم اللامعة */
+    .galaxy-starfield {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(1.5px 1.5px at 15% 20%, #ffffff 100%, transparent),
+        radial-gradient(2px 2px at 30% 65%, #bae6fd 100%, transparent),
+        radial-gradient(1.2px 1.2px at 45% 15%, #ffffff 100%, transparent),
+        radial-gradient(2.5px 2.5px at 70% 35%, #fef08a 100%, transparent),
+        radial-gradient(1.5px 1.5px at 85% 75%, #ffffff 100%, transparent),
+        radial-gradient(2px 2px at 10% 80%, #7dd3fc 100%, transparent),
+        radial-gradient(1.5px 1.5px at 60% 85%, #ffffff 100%, transparent),
+        radial-gradient(2px 2px at 92% 18%, #fbcfe8 100%, transparent);
+      background-size: 320px 320px;
+      animation: starTwinkle 3s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 1;
+    }
 
-  const lvl1 = document.getElementById('cosmicLevel1');
-  const lvl2 = document.getElementById('cosmicLevel2');
-  const lvl3 = document.getElementById('cosmicLevel3');
-  const title = document.getElementById('planetMoonTitle');
-  const container = document.getElementById('moonsCardsContainer');
+    @keyframes starTwinkle {
+      0% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
 
-  if (lvl1) lvl1.style.display = 'none';
-  if (lvl3) lvl3.style.display = 'none';
-  if (lvl2) {
-    lvl2.style.display = 'block';
-    lvl2.style.visibility = 'visible';
-    lvl2.style.opacity = '1';
-  }
-
-  // تفعيل صنف إخفاء الزينة الخارجية
-  document.body.classList.add('in-level-2');
-
-  if (title) {
-    title.innerHTML = `🌙 ${planet.name}`;
-    title.style.color = '#7dd3fc';
-    title.style.textShadow = '0 0 25px rgba(56, 189, 248, 0.6)';
-  }
-
-  if (!container) return;
-  container.innerHTML = '';
-
-  // إحداثيات مدروسة هندسياً لاستقرار الأقمار على خط المدار البيضاوي المائل
-  const orbitPositions = [
-    { top: "18px", right: "215px" },  // 1. أعلى اليمين (السالم)
-    { top: "140px", left: "45px" },   // 2. أقصى اليسار (المضعف)
-    { bottom: "12px", left: "435px" } // 3. أسفل المدار (المهموز)
-  ];
-
-  const moonsList = planet.moons || [];
-
-  moonsList.forEach((moon, idx) => {
-    const pos = orbitPositions[idx] || { top: "40%", left: "40%" };
-    const moonWrapper = document.createElement('div');
-    moonWrapper.style.cssText = `
-      position: absolute !important;
-      top: ${pos.top || 'auto'};
-      bottom: ${pos.bottom || 'auto'};
-      left: ${pos.left || 'auto'};
-      right: ${pos.right || 'auto'};
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      z-index: 30;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      animation: planetFloatA ${5 + idx * 1.1}s ease-in-out infinite ${idx * 0.4}s;
-    `;
-
-    // الجرم القمري الكروي المجسم
-    const moonSphere = document.createElement('div');
-    const moonColor = moon.color || '#38bdf8';
-    moonSphere.style.cssText = `
-      width: 125px;
-      height: 125px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 32% 32%, #cbd5e1 0%, #64748b 55%, #1e293b 100%);
+    /* مسرح المدار الفلكي للأقمار */
+    .orbit-stage-container {
       position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 3px solid rgba(255, 255, 255, 0.95);
-      box-shadow: 0 0 35px ${moonColor}, inset -10px -10px 20px rgba(0,0,0,0.7);
-      overflow: hidden;
-      transition: all 0.35s ease;
-    `;
+      width: 1000px;
+      max-width: 95vw;
+      height: 520px;
+      margin: 15px auto 0;
+    }
 
-    const crater1 = `<div style="position: absolute; width: 18px; height: 18px; border-radius: 50%; background: rgba(0,0,0,0.18); top: 14px; left: 18px; box-shadow: inset 2px 2px 4px rgba(0,0,0,0.35);"></div>`;
-    const crater2 = `<div style="position: absolute; width: 13px; height: 13px; border-radius: 50%; background: rgba(0,0,0,0.14); bottom: 18px; right: 20px; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.35);"></div>`;
+    .master-orbit-track {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      width: 880px;
+      height: 380px;
+      border-radius: 50%;
+      border: 2px dashed rgba(125, 211, 252, 0.45);
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.15), inset 0 0 25px rgba(56, 189, 248, 0.08);
+      pointer-events: none;
+      z-index: 2;
+    }
 
-    moonSphere.innerHTML = `
-      ${crater1}
-      ${crater2}
-      <div style="font-size: 2.2rem; z-index: 2; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.6));">${moon.icon || '🌙'}</div>
-      <span style="color: #ffffff; font-weight: 900; font-size: 1.05rem; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">${moon.name}</span>
-    `;
+    .inner-orbit-track {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      width: 580px;
+      height: 220px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(56, 189, 248, 0.25);
+      pointer-events: none;
+      z-index: 2;
+    }
+  </style>
 
-    // بطاقة التعريف المختصرة أسفل الجرم
-    const descBox = document.createElement('div');
-    descBox.style.cssText = `
-      background: rgba(15, 23, 42, 0.9);
-      border: 1.5px solid ${moonColor};
-      backdrop-filter: blur(8px);
-      padding: 6px 12px;
-      border-radius: 14px;
-      text-align: center;
-      max-width: 175px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    `;
-    const moonDesc = moon.desc || 'انقر لاستكشاف الصيغ';
-    descBox.innerHTML = `
-      <div style="color: #f1f5f9; font-size: 0.78rem; font-weight: 600; line-height: 1.4;">${moonDesc}</div>
-    `;
+  <script src="roots_data/ktb.js?v=2"></script>
+  <script src="roots_data/qra.js?v=2"></script>
+  <script src="roots_data/mdd.js?v=2"></script>
+  <script src="roots_data/dhrj.js?v=2"></script>
+  <script src="roots_data/zlzl.js?v=2"></script>
+  <script src="roots_data/wqf.js?v=2"></script>
+  <script src="roots_data/qwl.js?v=2"></script>
+  <script src="roots_data/rmy.js?v=2"></script>
+  <script src="roots_data/drs.js?v=2"></script>
+  <script src="roots_data/sbq.js?v=13"></script>
+  <script src="roots_data/kshf.js?v=2"></script>
+  <script src="roots_data/khrj.js?v=8"></script>
+</head>
+<body>
 
-    moonWrapper.appendChild(moonSphere);
-    moonWrapper.appendChild(descBox);
+  <!-- 🧭 أزرار التوجيه الجانبية العائمة -->
+  <div class="floating-side-controls">
+    <button type="button" class="side-control-btn" style="border: 2px solid #f59e0b;" onclick="openWelcomeScreen()" title="شاشة البداية">🚀</button>
+    <button type="button" class="side-control-btn" style="border: 2px solid #38bdf8;" onclick="toggleGuideModal()" title="دليل التوجيه">🧭</button>
+    <button type="button" class="side-control-btn" style="border: 2px solid #ec4899;" onclick="triggerEndJourney()" title="وسام ختام الرحلة">🏆</button>
+  </div>
 
-    moonWrapper.onmouseover = () => {
-      moonWrapper.style.transform = 'scale(1.12) translateY(-6px)';
-      moonSphere.style.boxShadow = `0 0 50px ${moonColor}, inset -4px -4px 12px rgba(0,0,0,0.45)`;
-    };
-    moonWrapper.onmouseout = () => {
-      moonWrapper.style.transform = 'none';
-      moonSphere.style.boxShadow = `0 0 35px ${moonColor}, inset -10px -10px 20px rgba(0,0,0,0.7)`;
-    };
+  <!-- 🌌 شاشة البداية الترحيبية الأصلية -->
+  <div id="welcomeScreen" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #0f172a 45%, #030712 100%); z-index: 99999; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.8s ease, transform 0.8s ease;">
 
-    moonWrapper.onclick = () => openMoonForms(moon);
-    container.appendChild(moonWrapper);
-  });
-}
+    <!-- سُدم السماء المضيئة -->
+    <div style="position: absolute; width: 750px; height: 750px; background: radial-gradient(circle, rgba(168, 85, 247, 0.26) 0%, transparent 70%); top: -150px; left: -100px; filter: blur(75px); pointer-events: none;"></div>
+    <div style="position: absolute; width: 850px; height: 850px; background: radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, transparent 75%); bottom: -200px; right: -150px; filter: blur(80px); pointer-events: none;"></div>
+    <div style="position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(251, 191, 36, 0.22) 0%, transparent 70%); top: 40%; left: 50%; transform: translate(-50%, -50%); filter: blur(55px); pointer-events: none;"></div>
 
-// دالة فتح المستوى الثالث (صيغ وأمثلة القمر)
-function openMoonForms(moon) {
-  currentMoonData = moon;
-  const lvl2 = document.getElementById('cosmicLevel2');
-  const lvl3 = document.getElementById('cosmicLevel3');
-  const title = document.getElementById('moonFormTitle');
-  const container = document.getElementById('formsButtonsContainer');
+    <!-- شهاب يمر في الأفق -->
+    <div style="position: absolute; top: 14%; width: 160px; height: 3px; background: linear-gradient(90deg, #fff, rgba(255,255,255,0.8), transparent); border-radius: 50%; animation: shootingStar1 9s linear infinite; pointer-events: none;"></div>
 
-  if (lvl2) lvl2.style.display = 'none';
-  if (lvl3) lvl3.style.display = 'block';
+    <!-- أجرام وكواكب الفضاء المحيطة -->
+    <div style="position: absolute; top: 10%; left: 7%; font-size: 3.8rem; filter: drop-shadow(0 0 20px rgba(244, 63, 94, 0.7)); animation: floatCosmicSlow 7s ease-in-out infinite;">🪐</div>
+    <div style="position: absolute; top: 14%; right: 8%; font-size: 3.5rem; filter: drop-shadow(0 0 22px rgba(168, 85, 247, 0.75)); animation: floatCosmicSlow 8s ease-in-out infinite 1s;">🌌</div>
+    <div style="position: absolute; bottom: 18%; left: 6%; font-size: 3rem; filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.8)); animation: floatCosmicSlow 6.5s ease-in-out infinite 0.5s;">🌍</div>
+    <div style="position: absolute; bottom: 12%; right: 7%; font-size: 3.2rem; filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.8)); animation: floatCosmicSlow 6s ease-in-out infinite 1.5s;">🛸</div>
 
-  if (title) title.innerText = `🌟 صِيَغُ وَأَمْثِلَةُ: ${moon.name}`;
-  if (!container) return;
+    <!-- رواد الفضاء -->
+    <div style="position: absolute; bottom: 12%; left: 15%; font-size: 3.6rem; filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.7)); animation: spacewalker 7s ease-in-out infinite;">👨‍🚀</div>
+    <div style="position: absolute; top: 22%; right: 17%; font-size: 3.3rem; filter: drop-shadow(0 0 18px rgba(236, 72, 153, 0.7)); animation: spacewalker 9s ease-in-out infinite 1.5s; transform: scaleX(-1);">🧑‍🚀</div>
 
-  container.innerHTML = '';
+    <!-- النجوم المتلألئة -->
+    <div style="position: absolute; top: 20%; left: 24%; color: #fef08a; font-size: 1.5rem; animation: twinkleCosmic 3s infinite;">✨</div>
+    <div style="position: absolute; top: 32%; right: 28%; color: #38bdf8; font-size: 1.7rem; animation: twinkleCosmic 4.5s infinite 1s;">⭐</div>
+    <div style="position: absolute; bottom: 28%; left: 26%; color: #f472b6; font-size: 1.3rem; animation: twinkleCosmic 3.5s infinite 1.5s;">✦</div>
+    <div style="position: absolute; bottom: 22%; right: 24%; color: #fde047; font-size: 1.6rem; animation: twinkleCosmic 2.8s infinite 0.5s;">✨</div>
 
-  (moon.forms || []).forEach(form => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.style.cssText = `
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
-      border: 2.5px solid ${moon.color || '#f59e0b'};
-      color: #fff;
-      padding: 0.9rem 2.2rem;
-      border-radius: 40px;
-      font-size: 1.35rem;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      transition: all 0.25s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    `;
-    btn.innerHTML = `
-      <span style="font-size: 1.55rem; color: #fde047;">${form.sample}</span>
-      <span style="font-size: 0.82rem; color: #94a3b8; font-weight: normal;">${form.label}</span>
-    `;
-    btn.onmouseover = () => {
-      btn.style.transform = 'scale(1.08)';
-      btn.style.boxShadow = `0 0 35px ${moon.color || '#f59e0b'}`;
-    };
-    btn.onmouseout = () => {
-      btn.style.transform = 'none';
-      btn.style.boxShadow = '0 0 20px rgba(0,0,0,0.5)';
-    };
-    btn.onclick = () => selectFormAndLaunch(form.val);
-    container.appendChild(btn);
-  });
-}
+    <!-- المحتوى الرئيسي -->
+    <div style="position: relative; z-index: 10; width: 100%; max-width: 980px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.4rem;">
 
-// دالة اختيار الفعل والانتقال المباشر لشمس الجذر
-function selectFormAndLaunch(rootKey) {
-  const galaxyModal = document.getElementById('galaxyModal');
-  if (galaxyModal) galaxyModal.style.display = 'none';
+      <div style="animation: floatCosmicSlow 5s ease-in-out infinite; display: flex; flex-direction: column; align-items: center;">
+        <div style="position: relative; width: 135px; height: 135px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ffffff 0%, #fde047 30%, #f59e0b 70%, #d97706 100%); display: flex; align-items: center; justify-content: center; font-size: 4.8rem; box-shadow: 0 0 75px rgba(245, 158, 11, 0.95), inset -6px -6px 18px rgba(0,0,0,0.35); border: 4px solid #fffdf0; animation: pulseSolar 4s infinite;">
+          ☀️
+          <span style="position: absolute; font-size: 1.9rem; animation: orbitPlanet 8s linear infinite;">🚀</span>
+        </div>
+      </div>
 
-  if (typeof loadRadialWorld === 'function') {
-    loadRadialWorld(rootKey);
-  }
-}
+      <div>
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 1.8rem; border-radius: 50px; background: rgba(255, 255, 255, 0.1); border: 1.5px solid rgba(251, 191, 36, 0.7); color: #fde047; font-size: 1rem; font-weight: bold; letter-spacing: 1px; backdrop-filter: blur(6px); box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);">
+          <span>🚀</span>
+          <span>رِحْلَةُ الاشْتِقَاقِ الصَّرْفِيِّ فِي فَضَاءِ اللُّغَةِ</span>
+        </div>
+        <h1 style="font-size: clamp(3rem, 6vw, 4.4rem); font-weight: 900; margin: 0.7rem 0 0.3rem 0; background: linear-gradient(180deg, #ffffff 15%, #fef08a 50%, #f59e0b 95%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 5px 25px rgba(245, 158, 11, 0.7)); letter-spacing: 1px;">
+          عَالَمُ الجُذُورِ
+        </h1>
+        <p style="color: #f1f5f9; font-size: clamp(1.1rem, 2.2vw, 1.35rem); font-weight: 600; margin: 0.4rem auto 0 auto; max-width: 880px; line-height: 1.9; text-shadow: 0 2px 12px rgba(0,0,0,0.9);">
+          مَرْحَباً بِكَ يَا رَائِدَ اللُّغَةِ! هَيَّا نَنْطَلِقْ فِي رِحْلَةٍ كَوْنِيَّةٍ؛<br>
+          نَسْتَكْشِفُ فِيهَا الجُذُورَ، نَجْتَازُ مَحَطَّاتِ الأَوْزَانِ، وَنَصْنَعُ رَوَائِعَ المُشْتَقَّاتِ.
+        </p>
+      </div>
 
-// دوال الرجوع السلسة
-function backToPlanets() {
-  const lvl1 = document.getElementById('cosmicLevel1');
-  const lvl2 = document.getElementById('cosmicLevel2');
-  if (lvl2) lvl2.style.display = 'none';
-  if (lvl1) lvl1.style.display = 'block';
-  document.body.classList.remove('in-level-2');
-}
+      <!-- بوابات المحطات الكونية الخمس -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; width: 100%; max-width: 1050px; margin-top: 0.4rem;">
+        <div class="space-station-card" style="padding: 1.2rem 0.8rem; border-color: rgba(251, 191, 36, 0.6); box-shadow: 0 6px 22px rgba(251, 191, 36, 0.2);" onclick="switchMainTab('radialMap'); startAdventure();">
+          <div style="font-size: 2.3rem; margin-bottom: 0.35rem;">☀️</div>
+          <div style="color: #fde047; font-weight: 900; font-size: 1.15rem;">شَمْسُ الجِذْرِ</div>
+          <div style="color: #f8fafc; font-weight: 600; font-size: 0.88rem; margin-top: 0.3rem;">اكْتَشِفْ نَوَاةَ المَعْنَى</div>
+        </div>
 
-function backToMoons() {
-  const lvl2 = document.getElementById('cosmicLevel2');
-  const lvl3 = document.getElementById('cosmicLevel3');
-  if (lvl3) lvl3.style.display = 'none';
-  if (lvl2) lvl2.style.display = 'block';
-}
+        <div class="space-station-card" style="padding: 1.2rem 0.8rem; border-color: rgba(56, 189, 248, 0.6); box-shadow: 0 6px 22px rgba(56, 189, 248, 0.2);" onclick="switchMainTab('storyTab'); startAdventure();">
+          <div style="font-size: 2.3rem; margin-bottom: 0.35rem;">📖</div>
+          <div style="color: #38bdf8; font-weight: 900; font-size: 1.15rem;">سَحَابَةُ الحِكَايَةِ</div>
+          <div style="color: #f8fafc; font-weight: 600; font-size: 0.88rem; margin-top: 0.3rem;">الصَّرْفُ فِي السِّيَاقِ</div>
+        </div>
 
-  function openPlanetLevel(planetKey) {
-    currentSelectedPlanet = planetKey;
-    const planet = cosmicNavTree[planetKey];
-    if (!planet) return;
+        <div class="space-station-card" style="padding: 1.2rem 0.8rem; border-color: rgba(99, 102, 241, 0.6); box-shadow: 0 6px 22px rgba(99, 102, 241, 0.2);" onclick="switchMainTab('labTab'); startAdventure();">
+          <div style="font-size: 2.3rem; margin-bottom: 0.35rem;">⚙️</div>
+          <div style="color: #a5b4fc; font-weight: 900; font-size: 1.15rem;">أَقْرَاصُ التَّرْكِيبِ</div>
+          <div style="color: #f8fafc; font-weight: 600; font-size: 0.88rem; margin-top: 0.3rem;">مُخْتَبَرُ صِيَاغَةِ الأَوْزَانِ</div>
+        </div>
 
-    document.getElementById('cosmicLevel1').style.display = 'none';
-    document.getElementById('cosmicLevel2').style.display = 'block';
-    document.getElementById('cosmicLevel3').style.display = 'none';
+        <div class="space-station-card" style="padding: 1.2rem 0.8rem; border-color: rgba(168, 85, 247, 0.6); box-shadow: 0 6px 22px rgba(168, 85, 247, 0.2);" onclick="switchMainTab('challengeTab'); startAdventure();">
+          <div style="font-size: 2.3rem; margin-bottom: 0.35rem;">🚀</div>
+          <div style="color: #d8b4fe; font-weight: 900; font-size: 1.15rem;">مَرْكَبَةُ الصَّرْفِ</div>
+          <div style="color: #f8fafc; font-weight: 600; font-size: 0.88rem; margin-top: 0.3rem;">تَحَدِّيَاتُ القِيَاسِ الفَضَائِيِّ</div>
+        </div>
 
-    document.getElementById('planetMoonTitle').textContent = `🌙 أَقْمَارُ ${planet.name}`;
-    const container = document.getElementById('moonsCardsContainer');
-    container.innerHTML = '';
+        <div class="space-station-card" style="padding: 1.2rem 0.8rem; border-color: rgba(244, 63, 94, 0.6); box-shadow: 0 6px 22px rgba(244, 63, 94, 0.2);" onclick="switchMainTab('freeChallengeTab'); startAdventure();">
+          <div style="font-size: 2.3rem; margin-bottom: 0.35rem;">✍️</div>
+          <div style="color: #fda4af; font-weight: 900; font-size: 1.15rem;">الإِنْتَاجُ الحُرُّ</div>
+          <div style="color: #f8fafc; font-weight: 600; font-size: 0.88rem; margin-top: 0.3rem;">إِبْدَاعُكَ اللُّغَوِيُّ الخَاصُّ</div>
+        </div>
+      </div>
 
-    planet.moons.forEach(moon => {
-      const card = document.createElement('div');
-      card.style.cssText = `background: rgba(30, 41, 59, 0.9); border: 2.5px solid ${moon.color}; border-radius: 20px; padding: 20px 24px; cursor: pointer; text-align: center; min-width: 175px; transition: all 0.3s; box-shadow: 0 8px 24px rgba(0,0,0,0.4);`;
-      card.onmouseover = () => { card.style.transform = 'translateY(-6px) scale(1.04)'; card.style.boxShadow = `0 12px 30px ${moon.color}55`; };
-      card.onmouseout = () => { card.style.transform = 'none'; card.style.boxShadow = '0 8px 24px rgba(0,0,0,0.4)'; };
-      card.onclick = () => openMoonLevel(moon);
+      <!-- زر الانطلاق المتوهج -->
+      <button onclick="openGalaxyChooser()" style="margin-top: 0.6rem; padding: 1.15rem 4.4rem; border-radius: 60px; background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%); border: 3.5px solid #fffdf0; color: #090a0f; font-size: 1.5rem; font-weight: 900; cursor: pointer; box-shadow: 0 0 45px rgba(245, 158, 11, 0.9), 0 15px 30px rgba(0, 0, 0, 0.6); display: inline-flex; align-items: center; gap: 1.1rem; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='scale(1.08) translateY(-4px)'; this.style.boxShadow='0 0 70px rgba(245, 158, 11, 1), 0 20px 40px rgba(0, 0, 0, 0.8)';" onmouseout="this.style.transform='scale(1) translateY(0)'; this.style.boxShadow='0 0 45px rgba(245, 158, 11, 0.9), 0 15px 30px rgba(0, 0, 0, 0.6)';">
+        <span>انْطَلِقْ فِي الرِّحْلَةِ الكَوْنِيَّةِ</span>
+        <span style="font-size: 2rem; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));">🚀</span>
+      </button>
 
-      card.innerHTML = `<div style="font-size: 2.5rem; filter: drop-shadow(0 0 10px ${moon.color});">${moon.icon}</div><h4 style="color: ${moon.color}; font-size: 1.1rem; font-weight: bold; margin-top: 10px;">${moon.name}</h4>`;
-      container.appendChild(card);
-    });
-  }
+    </div>
+  </div>
 
-  function openMoonLevel(moon) {
-    document.getElementById('cosmicLevel2').style.display = 'none';
-    document.getElementById('cosmicLevel3').style.display = 'block';
+  <!-- 🪐 فضاء كواكب الأفعال الكونية -->
+  <div id="galaxyModal" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 35%, #1e1b4b 0%, #0c1024 50%, #030712 100%); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; backdrop-filter: blur(14px); overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif;">
 
-    document.getElementById('moonFormTitle').textContent = `🌟 صِيَغُ وَأَمْثِلَةُ ${moon.name}`;
-    const container = document.getElementById('formsButtonsContainer');
-    container.innerHTML = '';
+    <!-- سُدم الفضاء الغامرة -->
+    <div class="cosmic-decor-item" style="position: absolute; width: 750px; height: 750px; background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%); top: -120px; left: -80px; filter: blur(80px); pointer-events: none;"></div>
+    <div class="cosmic-decor-item" style="position: absolute; width: 850px; height: 850px; background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 75%); bottom: -180px; right: -120px; filter: blur(85px); pointer-events: none;"></div>
+    <div class="cosmic-decor-item" style="position: absolute; width: 650px; height: 650px; background: radial-gradient(circle, rgba(245, 158, 11, 0.16) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); filter: blur(70px); pointer-events: none;"></div>
 
-    moon.forms.forEach(item => {
-      const btn = document.createElement('div');
-      btn.style.cssText = `background: #1e293b; border: 2px solid ${moon.color}; border-radius: 16px; padding: 14px 24px; cursor: pointer; text-align: center; min-width: 150px; transition: all 0.25s; box-shadow: 0 6px 18px rgba(0,0,0,0.4);`;
-      btn.onmouseover = () => { btn.style.background = moon.color; btn.style.color = '#0f172a'; btn.style.transform = 'scale(1.06)'; };
-      btn.onmouseout = () => { btn.style.background = '#1e293b'; btn.style.color = '#ffffff'; btn.style.transform = 'none'; };
+    <!-- شهاب ناري يعبر المجرة -->
+    <div class="cosmic-decor-item" style="position: absolute; top: 12%; width: 170px; height: 3px; background: linear-gradient(90deg, #fff, rgba(253, 224, 71, 0.9), transparent); border-radius: 50%; animation: shootingStarGalaxy 8.5s linear infinite; pointer-events: none;"></div>
+
+    <!-- أجرام فضائية تسبح في الأفق -->
+    <div class="cosmic-decor-item" style="position: absolute; top: 8%; left: 8%; font-size: 3.5rem; filter: drop-shadow(0 0 22px rgba(244, 63, 94, 0.7)); animation: planetFloatA 7s ease-in-out infinite; pointer-events: none;">🪐</div>
+    <div class="cosmic-decor-item" style="position: absolute; top: 12%; right: 9%; font-size: 3.2rem; filter: drop-shadow(0 0 25px rgba(168, 85, 247, 0.8)); animation: planetFloatB 8s ease-in-out infinite 1s; pointer-events: none;">🌌</div>
+    <div class="cosmic-decor-item" style="position: absolute; bottom: 12%; left: 8%; font-size: 3rem; filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.8)); animation: planetFloatA 6.5s ease-in-out infinite 0.5s; pointer-events: none;">🌍</div>
+    <div class="cosmic-decor-item" style="position: absolute; bottom: 10%; right: 8%; font-size: 3rem; filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.8)); animation: planetFloatB 6s ease-in-out infinite 1.5s; pointer-events: none;">🛸</div>
+
+    <!-- رائد فضاء عائم -->
+    <div class="floating-astronaut" style="position: absolute; top: 18%; left: 22%; font-size: 3.2rem; filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.7)); animation: spacewalkerGalaxy 8s ease-in-out infinite; pointer-events: none;">🧑‍🚀</div>
+
+    <!-- النجوم المتلألئة -->
+    <div class="cosmic-decor-item" style="position: absolute; top: 22%; right: 24%; color: #fef08a; font-size: 1.6rem; animation: twinkleGalaxy 3s infinite; pointer-events: none;">✨</div>
+    <div class="cosmic-decor-item" style="position: absolute; bottom: 25%; left: 28%; color: #38bdf8; font-size: 1.8rem; animation: twinkleGalaxy 4.5s infinite 1s; pointer-events: none;">⭐</div>
+    <div class="cosmic-decor-item" style="position: absolute; bottom: 20%; right: 26%; color: #f472b6; font-size: 1.4rem; animation: twinkleGalaxy 3.5s infinite 1.5s; pointer-events: none;">✦</div>
+
+    <!-- زر إغلاق الفضاء والعودة -->
+    <button type="button" onclick="document.getElementById('galaxyModal').style.display='none';" style="position: absolute; top: 28px; left: 32px; background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.3); color: #cbd5e1; border-radius: 50%; width: 44px; height: 44px; cursor: pointer; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; transition: all 0.25s; z-index: 100;" onmouseover="this.style.color='#f87171'; this.style.borderColor='#f87171'; this.style.transform='scale(1.1)';" onmouseout="this.style.color='#cbd5e1'; this.style.borderColor='rgba(255,255,255,0.3)'; this.style.transform='scale(1)';">✕</button>
+
+    <!-- المستوى 1: كواكب الأفعال المقوسة العائمة -->
+    <div id="cosmicLevel1" style="width: 100%; max-width: 1100px; text-align: center; position: relative; z-index: 50; padding: 0 1.5rem;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; padding: 0.45rem 1.8rem; border-radius: 40px; background: rgba(245, 158, 11, 0.15); border: 1.5px solid #f59e0b; color: #fde047; font-size: 1.05rem; font-weight: bold; margin-bottom: 12px; box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);">
+        <span>🪐</span><span>فَضَاءُ الأَفْعَالِ الكَوْنِيَّةِ</span>
+      </div>
       
-      btn.onclick = () => {
-        document.getElementById('galaxyModal').style.display = 'none';
-        if (typeof startAdventure === 'function') startAdventure();
-        if (typeof loadRadialWorld === 'function') loadRadialWorld(item.val);
-      };
+      <h2 style="color: #ffffff; margin: 0 0 8px 0; font-size: clamp(2.4rem, 4.5vw, 3.4rem); font-weight: 900; text-shadow: 0 4px 20px rgba(0,0,0,0.9); background: linear-gradient(180deg, #ffffff 20%, #fde047 60%, #f59e0b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        كَوَاكِبُ الأَفْعَالِ الكُبْرَى
+      </h2>
+      
+      <p style="color: #bae6fd; margin: 0 auto 30px auto; font-size: clamp(1.1rem, 2vw, 1.3rem); font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
+        انْقُرْ عَلَى الكَوْكَبِ لِلغَوْصِ فِي مَدَارَاتِهِ وَأَقْمَارِهِ:
+      </p>
+      
+      <!-- حزام الكواكب المقوس المتباعد -->
+      <div style="display: flex; justify-content: center; align-items: center; gap: clamp(45px, 6vw, 90px); flex-wrap: wrap; margin-top: 30px; padding: 20px 10px; width: 100%;">
+        
+        <!-- 1. كوكب الثلاثي -->
+        <div style="margin-top: -65px;">
+          <div onclick="openPlanetLevel('triadic')" class="cosmic-sphere-card planet-triadic">
+            <div class="planet-ring" style="border-color: rgba(125, 211, 252, 0.75);"></div>
+            <div style="font-size: 2.6rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));">📚</div>
+            <div style="color: #ffffff; font-weight: 900; font-size: 1.3rem; margin-top: 4px; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">الثُّلَاثِيُّ</div>
+            <div style="color: #e0f2fe; font-size: 0.78rem; font-weight: bold; background: rgba(0,0,0,0.4); padding: 2px 10px; border-radius: 12px; margin-top: 3px;">(المُجَرَّدُ)</div>
+          </div>
+        </div>
 
-      btn.innerHTML = `<div style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 4px;">${item.label}</div><div style="font-size: 1.45rem; font-weight: 900;">${item.sample}</div>`;
-      container.appendChild(btn);
-    });
-  }
+        <!-- 2. كوكب الرباعي -->
+        <div style="margin-top: 45px;">
+          <div onclick="openPlanetLevel('quadric')" class="cosmic-sphere-card planet-quadric">
+            <div class="planet-ring" style="border-color: rgba(110, 231, 183, 0.75);"></div>
+            <div style="font-size: 2.6rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));">🌀</div>
+            <div style="color: #ffffff; font-weight: 900; font-size: 1.3rem; margin-top: 4px; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">الرُّبَاعِيُّ</div>
+            <div style="color: #d1fae5; font-size: 0.78rem; font-weight: bold; background: rgba(0,0,0,0.4); padding: 2px 10px; border-radius: 12px; margin-top: 3px;">(المُجَرَّدُ)</div>
+          </div>
+        </div>
 
-  function backToPlanets() {
-    document.getElementById('cosmicLevel1').style.display = 'block';
-    document.getElementById('cosmicLevel2').style.display = 'none';
-    document.getElementById('cosmicLevel3').style.display = 'none';
-  }
+        <!-- 3. كوكب المعتل -->
+        <div style="margin-top: 55px;">
+          <div onclick="openPlanetLevel('weak')" class="cosmic-sphere-card planet-weak">
+            <div class="planet-ring" style="border-color: rgba(192, 132, 252, 0.75);"></div>
+            <div style="font-size: 2.6rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));">🌙</div>
+            <div style="color: #ffffff; font-weight: 900; font-size: 1.3rem; margin-top: 4px; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">المُعْتَلُّ</div>
+            <div style="color: #f3e8ff; font-size: 0.78rem; font-weight: bold; background: rgba(0,0,0,0.4); padding: 2px 10px; border-radius: 12px; margin-top: 3px;">(حُرُوفُ العِلَّةِ)</div>
+          </div>
+        </div>
 
-  function backToMoons() {
-    if (currentSelectedPlanet) openPlanetLevel(currentSelectedPlanet);
-    else backToPlanets();
-  }
+        <!-- 4. كوكب المزيد -->
+        <div style="margin-top: -65px;">
+          <div onclick="openPlanetLevel('augmented')" class="cosmic-sphere-card planet-augmented">
+            <div class="planet-ring" style="border-color: rgba(253, 224, 71, 0.85);"></div>
+            <div style="font-size: 2.6rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));">☀️</div>
+            <div style="color: #ffffff; font-weight: 900; font-size: 1.3rem; margin-top: 4px; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">المَزِيدُ</div>
+            <div style="color: #fef9c3; font-size: 0.78rem; font-weight: bold; background: rgba(0,0,0,0.4); padding: 2px 10px; border-radius: 12px; margin-top: 3px;">(بِحَرْفٍ / أَكْثَرَ)</div>
+          </div>
+        </div>
 
-  function openGalaxyChooser() {
-    backToPlanets();
-    document.getElementById('galaxyModal').style.display = 'flex';
-  }
+      </div>
+    </div>
+
+    <!-- المستوى 2: فضاء المدارات الفلكية الدقيقة للأقمار -->
+    <div id="cosmicLevel2" style="display: none; width: 100%; text-align: center; position: relative; z-index: 60; padding: 0 1rem;">
+      <div class="galaxy-starfield"></div>
+
+      <h2 id="planetMoonTitle" style="color: #7dd3fc; margin-bottom: 6px; font-size: clamp(2rem, 3.5vw, 2.7rem); font-weight: 900; text-shadow: 0 0 25px rgba(56, 189, 248, 0.7); position: relative; z-index: 10;">
+        🌙 الفِعْلُ الثُّلَاثِيُّ (الصَّحِيحُ)
+      </h2>
+      <p style="color: #cbd5e1; margin-bottom: 10px; font-size: 1.05rem; position: relative; z-index: 10;">
+        اخْتَرِ القَمَرَ لِتَسْتَكْشِفَ صِيَغَهُ المُمَيَّزَةَ فِي مَدَارِهِ:
+      </p>
+
+      <div class="orbit-stage-container">
+        <div class="inner-orbit-track"></div>
+        <div class="master-orbit-track"></div>
+        <div id="moonsCardsContainer"></div>
+      </div>
+
+      <button type="button" onclick="backToPlanets()" style="margin-top: 15px; background: rgba(15, 23, 42, 0.85); border: 2px solid #38bdf8; color: #bae6fd; padding: 9px 30px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: all 0.25s; box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); position: relative; z-index: 10;" onmouseover="this.style.background='#38bdf8'; this.style.color='#0f172a'; this.style.transform='scale(1.05)';" onmouseout="this.style.background='rgba(15, 23, 42, 0.85)'; this.style.color='#bae6fd'; this.style.transform='none';">
+        ⟵ عَوْدَةٌ لِفَضَاءِ الكَوَاكِبِ
+      </button>
+    </div>
+
+    <!-- المستوى 3: الصيغ والأمثلة الدقيقة -->
+    <div id="cosmicLevel3" style="display: none; width: 100%; max-width: 1000px; text-align: center; position: relative; z-index: 60; padding: 0 1.5rem;">
+      <h2 id="moonFormTitle" style="color: #fde047; margin-bottom: 8px; font-size: clamp(2rem, 3.8vw, 2.8rem); font-weight: 900; text-shadow: 0 3px 15px rgba(0,0,0,0.8);">🌟 الصِّيَغُ وَالأَمْثِلَةُ</h2>
+      <p style="color: #cbd5e1; margin-bottom: 30px; font-size: 1.1rem;">انْقُرْ عَلَى الفِعْلِ لِلانْطِلَاقِ نَحْوَ شَمْسِ الجَذْرِ:</p>
+      <div id="formsButtonsContainer" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;"></div>
+      <button type="button" onclick="backToMoons()" style="margin-top: 35px; background: rgba(255,255,255,0.08); border: 2px solid #64748b; color: #cbd5e1; padding: 9px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: all 0.25s;" onmouseover="this.style.borderColor='#fde047'; this.style.color='#fde047'; this.style.transform='scale(1.05)';" onmouseout="this.style.borderColor='#64748b'; this.style.color='#cbd5e1'; this.style.transform='none';">⟵ عَوْدَةٌ لِلأَقْمَارِ</button>
+    </div>
+
+  </div>
+
+  <header>
+    <div class="brand-box">
+      <div style="font-size: 2.2rem; filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.8));">☀️</div>
+      <div class="brand-texts">
+        <h1 style="color: #fde047; font-weight: 900; margin: 0;">عَالَمُ الجُذُورِ 🚀</h1>
+        <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">رِحْلَةُ الِاشْتِقَاقِ الصَّرْفِيِّ فِي فَضَاءِ اللُّغَةِ</p>
+      </div>
+    </div>
+
+    <div style="display:none;">
+      <select id="rootSelect" onchange="loadRadialWorld(this.value)">
+        <option value="كتب">كتب</option>
+        <option value="قرأ">قرأ</option>
+        <option value="مدد">مدد</option>
+        <option value="دحرج">دحرج</option>
+        <option value="زلزل">زلزل</option>
+        <option value="وقف">وقف</option>
+        <option value="قول">قول</option>
+        <option value="رمي">رمي</option>
+        <option value="درس">درس</option>
+      </select>
+    </div>
+      
+    <div class="score-badge">
+      <span>⭐ النُّجُومُ:</span>
+      <span id="starsScore">0</span>
+    </div>
+  </header>
+
+  <nav class="nav-tabs-container">
+    <button class="tab-pill active" onclick="switchMainTab('radialMap', this)">☀️ شَمْسُ الجَذْرِ</button>
+    <button class="tab-pill" onclick="switchMainTab('storyTab', this)">📖 سَحَابَةُ الحِكَايَةِ</button>
+    <button class="tab-pill" onclick="switchMainTab('labTab', this)">🛸 أَقْرَاصُ التَّرْكِيبِ</button>
+    <button class="tab-pill" onclick="switchMainTab('challengeTab', this)">🚀 مَرْكَبَةُ الصَّرْفِ</button>
+    <button class="tab-pill" onclick="switchMainTab('freeChallengeTab', this)">🎯 مَحَطَّةُ الإِنْتَاجِ الحُرِّ</button>
+  </nav>
+
+  <main>
+    <div id="radialMap" class="tab-view active">
+      <div class="space-system-arena" id="starsSky">
+        <div class="orbit-ellipse-wide"></div>
+        <div class="cartoon-sun-core">
+          <div class="sun-root-letters" id="coreLetters">[ ك - ت - ب ]</div>
+          <div class="sun-badge-desc" id="coreConcept">صَحِيحٌ سَالِمٌ</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const database = window.db || (typeof db !== 'undefined' ? db : {});
+
+    const cosmicNavTree = {
+      // 📚 1. كوكب الثلاثي المجرد
+      triadic: {
+        name: "الفِعْلُ الثُّلَاثِيُّ (الصَّحِيحُ)",
+        moons: [
+          {
+            id: "salim",
+            name: "قَمَرُ السَّالِمِ",
+            symbol: "🛡️",
+            color: "#38bdf8",
+            desc: "مَا خَلَتْ حُرُوفُهُ الأَصْلِيَّةُ مِنَ الهَمْزِ وَالتَّضْعِيفِ",
+            moonBase: "radial-gradient(circle at 35% 30%, #f8fafc 0%, #cbd5e1 45%, #64748b 80%, #334155 100%)",
+            glowColor: "rgba(203, 213, 225, 0.75)",
+            forms: [
+              { label: "صَحِيحٌ سَالِمٌ (نَصّ)", val: "درس", sample: "دَرَسَ" },
+              { label: "صَحِيحٌ سَالِمٌ (تَطْبِيق)", val: "فرح", sample: "فَرِحَ" },
+              { label: "سَالِمٌ (أَصْلِيّ)", val: "كتب", sample: "كَتَبَ" }
+            ]
+          },
+          {
+            id: "mudaaf",
+            name: "قَمَرُ المُضَعَّفِ",
+            symbol: "🪢",
+            color: "#0284c7",
+            desc: "مَا كَانَ حَرْفَانِ مِنْ أُصُولِهِ مِنْ جِنْسٍ وَاحِدٍ",
+            moonBase: "radial-gradient(circle at 35% 30%, #e0f2fe 0%, #93c5fd 40%, #3b82f6 75%, #1e3a8a 100%)",
+            glowColor: "rgba(147, 197, 253, 0.8)",
+            forms: [
+              { label: "صَحِيحٌ مُضَعَّفٌ (نَصّ)", val: "مرر", sample: "مَرَّ" },
+              { label: "مُضَعَّفٌ (تَطْبِيق)", val: "فكك", sample: "فَكَّ" },
+              { label: "مُضَعَّفٌ (مَدَّ)", val: "مدد", sample: "مَدَّ" }
+            ]
+          },
+          {
+            id: "hamzouz",
+            name: "قَمَرُ المَهْمُوزِ",
+            symbol: "⚡",
+            color: "#f59e0b",
+            desc: "مَا كَانَ أَحَدُ أَحْرُفِهِ الأَصْلِيَّةِ هَمْزَةً",
+            moonBase: "radial-gradient(circle at 35% 30%, #fef9c3 0%, #fde047 40%, #ca8a04 75%, #713f12 100%)",
+            glowColor: "rgba(253, 224, 71, 0.8)",
+            forms: [
+              { label: "مَهْمُوزُ اللَّامِ (نَصّ)", val: "ملأ", sample: "مَلَأَ" },
+              { label: "مَهْمُوزُ الفَاءِ (أَخَذَ)", val: "أخذ", sample: "أَخَذَ" },
+              { label: "مَهْمُوزُ العَيْنِ (سَأَلَ)", val: "سأل", sample: "سَأَلَ" }
+            ]
+          }
+        ]
+      },
+
+      // 🌀 2. كوكب الرباعي المجرد
+      quadric: {
+        name: "الفِعْلُ الرُّبَاعِيُّ (المُجَرَّدُ)",
+        moons: [
+          {
+            id: "quad_salim",
+            name: "رُبَاعِيٌّ سَالِمٌ",
+            symbol: "🌀",
+            color: "#34d399",
+            desc: "أَرْبَعَةُ أَحْرُفٍ أُصُولٌ عَلَى وَزْنِ فَعْلَلَ",
+            forms: [
+              { label: "صِيغَةُ (فَعْلَلَ)", val: "دحرج", sample: "دَحْرَجَ" },
+              { label: "رُبَاعِيٌّ سَالِمٌ", val: "بعثر", sample: "بَعْثَرَ" }
+            ]
+          },
+          {
+            id: "quad_mudaaf",
+            name: "رُبَاعِيٌّ مُضَعَّفٌ",
+            symbol: "⚡",
+            color: "#059669",
+            desc: "فَاؤُهُ وَلَامُهُ الأُولَى مِنْ جِنْسٍ، وَعَيْنُهُ وَلَامُهُ الثَّانِيَةُ مِنْ جِنْسٍ",
+            forms: [
+              { label: "رُبَاعِيٌّ مُضَعَّفٌ", val: "زلزل", sample: "زَلْزَلَ" }
+            ]
+          }
+        ]
+      },
+
+      // 🌙 3. كوكب المعتل
+      weak: {
+        name: "الفِعْلُ المُعْتَلُّ",
+        moons: [
+          {
+            id: "mithal",
+            name: "المِثَالُ",
+            symbol: "🚏",
+            color: "#c084fc",
+            desc: "مَا كَانَتْ فَاؤُهُ (أَوَّلُهُ) حَرْفَ عِلَّةٍ",
+            forms: [
+              { label: "مُعْتَلُّ الفَاءِ (وَضَعَ)", val: "وضع", sample: "وَضَعَ" },
+              { label: "مِثَالٌ يَائِيٌّ (يَبِسَ)", val: "يبس", sample: "يَبِسَ" },
+              { label: "مِثَالٌ (وَقَفَ)", val: "وقف", sample: "وَقَفَ" }
+            ]
+          },
+          {
+            id: "ajwaf",
+            name: "الأَجْوَفُ",
+            symbol: "🎙️",
+            color: "#a855f7",
+            desc: "مَا كَانَتْ عَيْنُهُ (وَسَطُهُ) حَرْفَ عِلَّةٍ",
+            forms: [
+              { label: "مُعْتَلُّ العَيْنِ (نَالَ)", val: "نال", sample: "نَالَ" },
+              { label: "أَجْوَفُ (قَالَ)", val: "قول", sample: "قَالَ" }
+            ]
+          },
+          {
+            id: "naqis",
+            name: "النَّاقِصُ",
+            symbol: "🎯",
+            color: "#9333ea",
+            desc: "مَا كَانَتْ لَامُهُ (آخِرُهُ) حَرْفَ عِلَّةٍ",
+            forms: [
+              { label: "مُعْتَلُّ اللَّامِ (سَعَى)", val: "سعى", sample: "سَعَى" },
+              { label: "نَاقِصٌ (رَمَى)", val: "رمي", sample: "رَمَى" }
+            ]
+          }
+        ]
+      },
+
+      // ☀️ 4. كوكب المزيد
+      augmented: {
+        name: "الفِعْلُ المَزِيدُ",
+        moons: [
+          {
+            id: "aug_one",
+            name: "مَزِيدٌ بِحَرْفٍ وَاحِدٍ",
+            symbol: "☀️",
+            color: "#fde047",
+            desc: "زِيدَ فِيهِ حَرْفٌ وَاحِدٌ عَلَى أَحْرُفِهِ الأَصْلِيَّةِ",
+            forms: [
+              { label: "مَزِيدٌ بِالأَلِفِ (تَابَعَ)", val: "تابع", sample: "تَابَعَ" },
+              { label: "مَزِيدٌ بِالهَمْزَةِ (أَكْرَمَ)", val: "أكرم", sample: "أَكْرَمَ" },
+              { label: "مَزِيدٌ بِالتَّضْعِيفِ (دَرَّسَ)", val: "درس", sample: "دَرَّسَ" }
+            ]
+          },
+          {
+            id: "aug_two",
+            name: "مَزِيدٌ بِحَرْفَيْنِ",
+            symbol: "✨",
+            color: "#fbbf24",
+            desc: "زِيدَ فِيهِ حَرْفَانِ عَلَى أَحْرُفِهِ الأَصْلِيَّةِ",
+            forms: [
+              { label: "بِالتَّاءِ وَالأَلِفِ (تَعَاظَمَ)", val: "تعاظم", sample: "تَعَاظَمَ" },
+              { label: "بِالأَلِفِ وَالتَّاءِ (انْتَقَلَ)", val: "انتقل", sample: "انْتَقَلَ" },
+              { label: "بِالأَلِفِ وَالنُّونِ (انْكَسَرَ)", val: "كشف", sample: "انْكَسَرَ" }
+            ]
+          },
+          {
+            id: "aug_three",
+            name: "مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ",
+            symbol: "🚀",
+            color: "#f59e0b",
+            desc: "زِيدَتْ فِيهِ ثَلَاثَةُ أَحْرُفٍ عَلَى أَحْرُفِهِ الأَصْلِيَّةِ",
+            forms: [
+              { label: "اسْتَفْعَلَ (اسْتَقْبَلَ)", val: "استقبل", sample: "اسْتَقْبَلَ" },
+              { label: "اسْتَفْعَلَ (اسْتَخْرَجَ)", val: "خرج", sample: "اسْتَخْرَجَ" }
+            ]
+          }
+        ]
+      }
+    };
+
+    let currentPlanetKey = null;
+    let currentSelectedMoon = null;
+
+    // دوال النوافذ الرئيسية
+    function openGalaxyChooser() {
+      const modal = document.getElementById('galaxyModal');
+      if (modal) modal.style.display = 'flex';
+      backToPlanets();
+    }
 
     function startAdventure() {
       const welcome = document.getElementById('welcomeScreen');
@@ -1390,18 +930,15 @@ function backToMoons() {
     }
 
     function openWelcomeScreen() {
-      // إغلاق نافذة الكواكب إذا كانت مفتوحة لكي لا تحجب الواجهة
       const galaxyModal = document.getElementById('galaxyModal');
       if (galaxyModal) galaxyModal.style.display = 'none';
 
-      // إغلاق النوافذ الإرشادية والنهائية
       const guide = document.getElementById('guideModalBox');
       if (guide) guide.style.display = 'none';
 
       const endScreen = document.getElementById('endJourneyScreen');
       if (endScreen) endScreen.style.display = 'none';
 
-      // إظهار الشاشة الترحيبية
       const welcome = document.getElementById('welcomeScreen');
       if (welcome) {
         welcome.style.display = 'flex';
@@ -1410,452 +947,344 @@ function backToMoons() {
       }
     }
 
-// الزر الثاني: دليل التوجيه الذكي المتكيف
-  function toggleGuideModal() {
-    const modal = document.getElementById('guideModalBox');
-    if (!modal) return;
+    // فتح المستوى الثاني (توزيع الأقمار كأجرام كروية على المدارات)
+    function openPlanetLevel(planetKey) {
+      const planet = cosmicNavTree[planetKey];
+      if (!planet) return;
+      currentPlanetKey = planetKey;
 
-    const isVisible = modal.style.display === 'flex';
-    if (isVisible) {
-      modal.style.display = 'none';
-      return;
-    }
+      const lvl1 = document.getElementById('cosmicLevel1');
+      const lvl2 = document.getElementById('cosmicLevel2');
+      const lvl3 = document.getElementById('cosmicLevel3');
+      const title = document.getElementById('planetMoonTitle');
+      const container = document.getElementById('moonsCardsContainer');
 
-    // فحص هل نافذة كواكب الأفعال مفتوحة حالياً؟
-    const galaxyModal = document.getElementById('galaxyModal');
-    const isGalaxyOpen = galaxyModal && galaxyModal.style.display === 'flex';
+      if (lvl1) lvl1.style.display = 'none';
+      if (lvl3) lvl3.style.display = 'none';
+      if (lvl2) lvl2.style.display = 'block';
 
-    const contentLang = document.getElementById('guideContentLanguage');
-    const contentVerbs = document.getElementById('guideContentVerbs');
+      document.body.classList.add('in-level-2');
 
-    if (isGalaxyOpen) {
-      // إظهار خارطة كواكب الأفعال
-      if (contentLang) contentLang.style.display = 'none';
-      if (contentVerbs) contentVerbs.style.display = 'block';
-    } else {
-      // إظهار خارطة المسار الصرفي لمحطات اللغة
-      if (contentLang) contentLang.style.display = 'block';
-      if (contentVerbs) contentVerbs.style.display = 'none';
-    }
-
-    modal.style.display = 'flex';
-  }
-
-// الزر الثالث: وسام رائد الصرف (ختام الرحلة)
-function triggerEndJourney() {
-  const endScreen = document.getElementById('endJourneyScreen');
-  if (endScreen) {
-    endScreen.style.display = 'flex';
-    try {
-      if (typeof playVictorySound === 'function') {
-        playVictorySound();
+      if (title) {
+        title.innerHTML = `🌙 ${planet.name}`;
       }
-    } catch (e) {
-      console.log("الصوت اختياري:", e);
-    }
-  } else {
-    console.warn("عنصر endJourneyScreen غير موجود في HTML");
-  }
-}
 
-    function closeModal(e) {
-      if (!e || e.target.id === 'morphModal' || e.target.classList.contains('modal-close')) {
-        document.getElementById('morphModal').classList.remove('open');
+      if (!container) return;
+      container.innerHTML = '';
+      container.style.cssText = 'position: relative; width: 100%; height: 100%;';
+
+      // إحداثيات مدروسة هندسياً لاستقرار الأقمار على خط المدار البيضاوي المائل
+      const orbitPositions = [
+        { top: "18px", right: "215px" },  // 1. أعلى اليمين (السالم)
+        { top: "140px", left: "45px" },   // 2. أقصى اليسار (المضعف)
+        { bottom: "12px", left: "435px" } // 3. أسفل المدار (المهموز)
+      ];
+
+      const moonsList = planet.moons || [];
+
+      moonsList.forEach((moon, idx) => {
+        const pos = orbitPositions[idx] || { top: "40%", left: "40%" };
+        const moonWrapper = document.createElement('div');
+        moonWrapper.style.cssText = `
+          position: absolute !important;
+          top: ${pos.top || 'auto'};
+          bottom: ${pos.bottom || 'auto'};
+          left: ${pos.left || 'auto'};
+          right: ${pos.right || 'auto'};
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          cursor: pointer;
+          z-index: 30;
+          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          animation: planetFloatA ${5 + idx * 1.1}s ease-in-out infinite ${idx * 0.4}s;
+        `;
+
+        const moonSphere = document.createElement('div');
+        const moonColor = moon.color || '#38bdf8';
+        moonSphere.style.cssText = `
+          width: 125px;
+          height: 125px;
+          border-radius: 50%;
+          background: ${moon.moonBase || 'radial-gradient(circle at 35% 30%, #f8fafc 0%, #cbd5e1 45%, #64748b 80%, #334155 100%)'};
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          border: 3px solid rgba(255, 255, 255, 0.95);
+          box-shadow: 0 0 35px ${moon.glowColor || moonColor}, inset -10px -10px 20px rgba(0,0,0,0.65);
+          overflow: hidden;
+          transition: all 0.35s ease;
+        `;
+
+        const crater1 = `<div style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: rgba(0,0,0,0.15); top: 14px; left: 18px; box-shadow: inset 2px 2px 4px rgba(0,0,0,0.3);"></div>`;
+        const crater2 = `<div style="position: absolute; width: 14px; height: 14px; border-radius: 50%; background: rgba(0,0,0,0.12); bottom: 18px; right: 22px; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);"></div>`;
+
+        moonSphere.innerHTML = `
+          ${crater1}
+          ${crater2}
+          <div style="font-size: 2.2rem; z-index: 2; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.6));">${moon.symbol || '🌙'}</div>
+          <span style="color: #ffffff; font-weight: 900; font-size: 1.05rem; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">${moon.name.replace('قَمَرُ ', '')}</span>
+        `;
+
+        const descBox = document.createElement('div');
+        descBox.style.cssText = `
+          background: rgba(15, 23, 42, 0.9);
+          border: 1.5px solid ${moonColor};
+          backdrop-filter: blur(8px);
+          padding: 6px 12px;
+          border-radius: 14px;
+          text-align: center;
+          max-width: 175px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        `;
+        descBox.innerHTML = `
+          <div style="color: #f1f5f9; font-size: 0.78rem; font-weight: 600; line-height: 1.4;">${moon.desc || ''}</div>
+        `;
+
+        moonWrapper.appendChild(moonSphere);
+        moonWrapper.appendChild(descBox);
+
+        moonWrapper.onmouseover = () => {
+          moonWrapper.style.transform = 'scale(1.12) translateY(-6px)';
+          moonSphere.style.boxShadow = `0 0 50px ${moon.glowColor || moonColor}, inset -4px -4px 12px rgba(0,0,0,0.45)`;
+          moonSphere.style.borderColor = '#ffffff';
+        };
+        moonWrapper.onmouseout = () => {
+          moonWrapper.style.transform = 'none';
+          moonSphere.style.boxShadow = `0 0 35px ${moon.glowColor || moonColor}, inset -10px -10px 20px rgba(0,0,0,0.65)`;
+          moonSphere.style.borderColor = 'rgba(255, 255, 255, 0.95)';
+        };
+
+        moonWrapper.onclick = () => openMoonForms(moon);
+        container.appendChild(moonWrapper);
+      });
+    }
+
+    // فتح المستوى الثالث (الصيغ والأمثلة)
+    function openMoonForms(moon) {
+      currentSelectedMoon = moon;
+      const lvl2 = document.getElementById('cosmicLevel2');
+      const lvl3 = document.getElementById('cosmicLevel3');
+      const title = document.getElementById('moonFormTitle');
+      const container = document.getElementById('formsButtonsContainer');
+
+      if (lvl2) lvl2.style.display = 'none';
+      if (lvl3) lvl3.style.display = 'block';
+
+      if (title) title.innerText = `🌟 صِيَغُ وَأَمْثِلَةُ: ${moon.name}`;
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      (moon.forms || []).forEach(form => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.style.cssText = `
+          background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+          border: 2.5px solid ${moon.color || '#f59e0b'};
+          color: #fff;
+          padding: 0.9rem 2.2rem;
+          border-radius: 40px;
+          font-size: 1.35rem;
+          font-weight: 900;
+          cursor: pointer;
+          box-shadow: 0 0 20px rgba(0,0,0,0.5);
+          transition: all 0.25s;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
+        `;
+        btn.innerHTML = `
+          <span style="font-size: 1.55rem; color: #fde047;">${form.sample}</span>
+          <span style="font-size: 0.82rem; color: #94a3b8; font-weight: normal;">${form.label}</span>
+        `;
+        btn.onmouseover = () => {
+          btn.style.transform = 'scale(1.08)';
+          btn.style.boxShadow = `0 0 35px ${moon.color || '#f59e0b'}`;
+        };
+        btn.onmouseout = () => {
+          btn.style.transform = 'none';
+          btn.style.boxShadow = '0 0 20px rgba(0,0,0,0.5)';
+        };
+        btn.onclick = () => selectFormAndLaunch(form.val);
+        container.appendChild(btn);
+      });
+    }
+
+    // الانتقال المباشر لشمس الجذر
+    function selectFormAndLaunch(rootKey) {
+      const galaxyModal = document.getElementById('galaxyModal');
+      if (galaxyModal) galaxyModal.style.display = 'none';
+      startAdventure();
+
+      const sel = document.getElementById('rootSelect');
+      if (sel) sel.value = rootKey;
+
+      if (typeof loadRadialWorld === 'function') {
+        loadRadialWorld(rootKey);
       }
     }
 
-    function openMorphModal(idx) {
-      document.getElementById('morphModal').classList.add('open');
+    // دوال الرجوع
+    function backToPlanets() {
+      const lvl1 = document.getElementById('cosmicLevel1');
+      const lvl2 = document.getElementById('cosmicLevel2');
+      const lvl3 = document.getElementById('cosmicLevel3');
+      if (lvl2) lvl2.style.display = 'none';
+      if (lvl3) lvl3.style.display = 'none';
+      if (lvl1) lvl1.style.display = 'block';
+      document.body.classList.remove('in-level-2');
     }
 
-    function openRootModal() {
-      document.getElementById('morphModal').classList.add('open');
+    function backToMoons() {
+      const lvl2 = document.getElementById('cosmicLevel2');
+      const lvl3 = document.getElementById('cosmicLevel3');
+      if (lvl3) lvl3.style.display = 'none';
+      if (lvl2) lvl2.style.display = 'block';
+    }
+
+    // زر التوجيه الذكي
+    function toggleGuideModal() {
+      const modal = document.getElementById('guideModalBox');
+      if (!modal) return;
+
+      const isVisible = modal.style.display === 'flex';
+      if (isVisible) {
+        modal.style.display = 'none';
+        return;
+      }
+
+      const galaxyModal = document.getElementById('galaxyModal');
+      const isGalaxyOpen = galaxyModal && galaxyModal.style.display === 'flex';
+
+      const contentLang = document.getElementById('guideContentLanguage');
+      const contentVerbs = document.getElementById('guideContentVerbs');
+
+      if (isGalaxyOpen) {
+        if (contentLang) contentLang.style.display = 'none';
+        if (contentVerbs) contentVerbs.style.display = 'block';
+      } else {
+        if (contentLang) contentLang.style.display = 'block';
+        if (contentVerbs) contentVerbs.style.display = 'none';
+      }
+
+      modal.style.display = 'flex';
+    }
+
+    // وسام ختام الرحلة
+    function triggerEndJourney() {
+      const endScreen = document.getElementById('endJourneyScreen');
+      if (endScreen) {
+        endScreen.style.display = 'flex';
+      }
     }
 
     function switchMainTab(tabId, el) {
+      startAdventure();
       document.querySelectorAll('.tab-pill').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.tab-view').forEach(v => { v.classList.remove('active'); v.style.display = 'none'; });
       if (el) el.classList.add('active');
       const activeView = document.getElementById(tabId);
       if (activeView) { activeView.classList.add('active'); activeView.style.display = 'block'; }
     }
-// 🪐 مصفوفة بيانات الأقمار والصيغ الصرفية للكواكب الأربعة
-const cosmicData = {
-  triadic: {
-    title: '🌙 أَقْمَارُ كَوْكَبِ الثُّلَاثِيِّ (المُجَرَّد)',
-    moons: [
-      { name: 'قَمَرُ الصَّحِيحِ السَّالِمِ', desc: 'خَلَتْ حُرُوفُهُ مِنَ العِلَّةِ وَالهَمْزِ وَالتَّضْعِيفِ', root: 'كتب', examples: ['كَتَبَ', 'شَرِبَ', 'رَسَمَ', 'فَهِمَ'] },
-      { name: 'قَمَرُ المَهْمُوزِ', desc: 'أَحَدُ حُرُوفِهِ الأَصْلِيَّةِ هَمْزَةٌ', root: 'قرأ', examples: ['قَرَأَ', 'أَخَذَ', 'سَأَلَ', 'بَدَأَ'] },
-      { name: 'قَمَرُ المُضَعَّفِ', desc: 'عَيْنُهُ وَلَامُهُ مِنْ جِنْسٍ وَاحِدٍ', root: 'مدد', examples: ['مَدَّ', 'شَدَّ', 'عَدَّ', 'رَدَّ'] }
-    ]
-  },
-  quadric: {
-    title: '🌙 أَقْمَارُ كَوْكَبِ الرُّبَاعِيِّ (المُجَرَّد)',
-    moons: [
-      { name: 'قَمَرُ الرُّبَاعِيِّ السَّالِمِ', desc: 'أَرْبَعَةُ أَحْرُفٍ أُصُولٌ عَلَى وَزْنِ فَعْلَلَ', root: 'دحرج', examples: ['دَحْرَجَ', 'بَعْثَرَ', 'طَمْأَنَ'] },
-      { name: 'قَمَرُ الرُّبَاعِيِّ المُضَعَّفِ', desc: 'فَاؤُهُ وَلَامُهُ الأُولَى مِنْ جِنْسٍ، وَعَيْنُهُ وَلَامُهُ الثَّانِيَةُ مِنْ جِنْسٍ', root: 'زلزل', examples: ['زَلْزَلَ', 'عَسْعَسَ', 'وَسْوَسَ'] }
-    ]
-  },
-  weak: {
-    title: '🌙 أَقْمَارُ كَوْكَبِ المُعْتَلِّ',
-    moons: [
-      { name: 'قَمَرُ المِثَالِ', desc: 'فَاؤُهُ (أَوَّلُهُ) حَرْفُ عِلَّةٍ', root: 'وقف', examples: ['وَقَفَ', 'وَصَلَ', 'يَبِسَ'] },
-      { name: 'قَمَرُ الأَجْوَفِ', desc: 'عَيْنُهُ (وَسَطُهُ) حَرْفُ عِلَّةٍ', root: 'قول', examples: ['قَالَ', 'صَامَ', 'بَاعَ'] },
-      { name: 'قَمَرُ النَّاقِصِ', desc: 'لَامُهُ (آخِرُهُ) حَرْفُ عِلَّةٍ', root: 'رمي', examples: ['رَمَى', 'دَعَا', 'سَعَى'] }
-    ]
-  },
-  augmented: {
-    title: '🌙 أَقْمَارُ كَوْكَبِ المَزِيدِ',
-    moons: [
-      { name: 'مَزِيدٌ بِحَرْفٍ وَاحِدٍ', desc: 'عَلَى أَوْزَانِ: فَعَّلَ، أَفْعَلَ، فَاعَلَ', root: 'درس', examples: ['دَرَّسَ', 'أَكْرَمَ', 'سَابَقَ'] },
-      { name: 'مَزِيدٌ بِحَرْفَيْنِ', desc: 'عَلَى أَوْزَانِ: انْفَعَلَ، افْتَعَلَ، تَفَاعَلَ', root: 'كشف', examples: ['انْكَسَرَ', 'اجْتَمَعَ', 'تَعَاوَنَ'] },
-      { name: 'مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ', desc: 'عَلَى وَزْنِ: اسْتَفْعَلَ', root: 'خرج', examples: ['اسْتَخْرَجَ', 'اسْتَغْفَرَ'] }
-    ]
-  }
-};
 
-let currentSelectedMoon = null;
-
-// دالة فتح وتوليد أقمار الكوكب كأجرام قمرية واقعية موزعة على خطوط المدار
-function openPlanetLevel(planetKey) {
-  const planet = cosmicNavTree[planetKey];
-  if (!planet) return;
-  currentPlanetKey = planetKey;
-
-  const lvl1 = document.getElementById('cosmicLevel1');
-  const lvl2 = document.getElementById('cosmicLevel2');
-  const lvl3 = document.getElementById('cosmicLevel3');
-  const title = document.getElementById('planetMoonTitle');
-  const container = document.getElementById('moonsCardsContainer');
-
-  if (lvl1) lvl1.style.display = 'none';
-  if (lvl3) lvl3.style.display = 'none';
-  if (lvl2) lvl2.style.display = 'block';
-
-  // تفعيل إخفاء الزينة الكرتونية
-  document.body.classList.add('in-level-2');
-
-  if (title) {
-    title.innerHTML = `🌙 ${planet.name}`;
-    title.style.color = '#7dd3fc';
-    title.style.textShadow = '0 0 25px rgba(56, 189, 248, 0.6)';
-  }
-
-  if (!container) return;
-  container.innerHTML = '';
-  // تفريغ أي نمط flex لتمكين التموضع المداري الحر
-  container.style.cssText = 'position: relative; width: 100%; height: 100%;';
-
-  // بيانات الأقمار الثلاثة بتصميم قمر واقعي ورموز بصرية معبّرة
-  const moonsRefined = [
-    {
-      id: "salim",
-      name: "قَمَرُ السَّالِمِ",
-      symbol: "🛡️",
-      symbolDesc: "سَلِمَ مِنَ العِلَّةِ وَالهَمْزِ وَالشِّدَّةِ",
-      desc: "مَا خَلَتْ حُرُوفُهُ الأَصْلِيَّةُ مِنَ الهَمْزِ وَالتَّضْعِيفِ",
-      moonBase: "radial-gradient(circle at 35% 30%, #f8fafc 0%, #cbd5e1 45%, #64748b 80%, #334155 100%)",
-      glowColor: "rgba(203, 213, 225, 0.7)",
-      forms: [
-        { label: "صَحِيحٌ سَالِمٌ (نَصّ)", val: "درس", sample: "دَرَسَ" },
-        { label: "صَحِيحٌ سَالِمٌ (تَطْبِيق)", val: "فرح", sample: "فَرِحَ" },
-        { label: "سَالِمٌ (أَصْلِيّ)", val: "كتب", sample: "كَتَبَ" }
-      ]
-    },
-    {
-      id: "mudaaf",
-      name: "قَمَرُ المُضَعَّفِ",
-      symbol: "🪢",
-      symbolDesc: "حَرْفَانِ انْدَمَجَا فِي شِدَّةٍ وَاحِدَةٍ",
-      desc: "مَا كَانَ حَرْفَانِ مِنْ أُصُولِهِ مِنْ جِنْسٍ وَاحِدٍ",
-      moonBase: "radial-gradient(circle at 35% 30%, #e0f2fe 0%, #93c5fd 40%, #3b82f6 75%, #1e3a8a 100%)",
-      glowColor: "rgba(147, 197, 253, 0.75)",
-      forms: [
-        { label: "صَحِيحٌ مُضَعَّفٌ (نَصّ)", val: "مرر", sample: "مَرَّ" },
-        { label: "مُضَعَّفٌ (تَطْبِيق)", val: "فكك", sample: "فَكَّ" },
-        { label: "مُضَعَّفٌ (مَدَّ)", val: "مدد", sample: "مَدَّ" }
-      ]
-    },
-    {
-      id: "hamzouz",
-      name: "قَمَرُ المَهْمُوزِ",
-      symbol: "⚡",
-      symbolDesc: "تَتَوَهَّجُ فِيهِ نَبْرَةُ الهَمْزَةِ الأَصْلِيَّةِ",
-      desc: "مَا كَانَ أَحَدُ أَحْرُفِهِ الأَصْلِيَّةِ هَمْزَةً",
-      moonBase: "radial-gradient(circle at 35% 30%, #fef9c3 0%, #fde047 40%, #ca8a04 75%, #713f12 100%)",
-      glowColor: "rgba(253, 224, 71, 0.75)",
-      forms: [
-        { label: "مَهْمُوزُ اللَّامِ (نَصّ)", val: "ملأ", sample: "مَلَأَ" },
-        { label: "مَهْمُوزُ الفَاءِ (أَخَذَ)", val: "أخذ", sample: "أَخَذَ" },
-        { label: "مَهْمُوزُ العَيْنِ (سَأَلَ)", val: "سأل", sample: "سَأَلَ" }
-      ]
+    function loadRadialWorld(rootKey) {
+      const data = database[rootKey] || database['كتب'];
+      if (!data) return;
+      const lettersEl = document.getElementById('coreLetters');
+      const conceptEl = document.getElementById('coreConcept');
+      if (lettersEl && data.letters) lettersEl.textContent = `[ ${data.letters.join(' - ')} ]`;
+      if (conceptEl && data.concept) conceptEl.textContent = data.concept || '';
     }
-  ];
 
-  const currentMoons = (planetKey === 'triadic') ? moonsRefined : (planet.moons || []);
-
-  // إحداثيات توزيع الأقمار على خطوط المدار الإهليلجي
-  const orbitPositions = [
-    { top: "18px", right: "215px" },  // 1. أعلى اليمين (السالم)
-    { top: "140px", left: "45px" },   // 2. أقصى اليسار (المضعف)
-    { bottom: "12px", left: "435px" } // 3. أسفل المدار (المهموز)
-  ];
-
-  currentMoons.forEach((moon, idx) => {
-    const pos = orbitPositions[idx] || { top: "40%", left: "40%" };
-    const moonWrapper = document.createElement('div');
-    moonWrapper.style.cssText = `
-      position: absolute !important;
-      top: ${pos.top || 'auto'};
-      bottom: ${pos.bottom || 'auto'};
-      left: ${pos.left || 'auto'};
-      right: ${pos.right || 'auto'};
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      z-index: 30;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      animation: planetFloatA ${5 + idx * 1.1}s ease-in-out infinite ${idx * 0.4}s;
-    `;
-
-    // الجرم القمري الكروي
-    const moonSphere = document.createElement('div');
-    moonSphere.style.cssText = `
-      width: 125px;
-      height: 125px;
-      border-radius: 50%;
-      background: ${moon.moonBase || 'radial-gradient(circle at 35% 30%, #f8fafc 0%, #cbd5e1 45%, #64748b 80%, #334155 100%)'};
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 3px solid rgba(255, 255, 255, 0.95);
-      box-shadow: 0 0 35px ${moon.glowColor || 'rgba(56,189,248,0.7)'}, inset -10px -10px 20px rgba(0,0,0,0.65);
-      overflow: hidden;
-      transition: all 0.35s ease;
-    `;
-
-    const crater1 = `<div style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: rgba(0,0,0,0.15); top: 14px; left: 18px; box-shadow: inset 2px 2px 4px rgba(0,0,0,0.3);"></div>`;
-    const crater2 = `<div style="position: absolute; width: 14px; height: 14px; border-radius: 50%; background: rgba(0,0,0,0.12); bottom: 18px; right: 22px; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);"></div>`;
-
-    moonSphere.innerHTML = `
-      ${crater1}
-      ${crater2}
-      <div style="font-size: 2.1rem; z-index: 2; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));">${moon.symbol || '🌙'}</div>
-      <span style="color: #ffffff; font-weight: 900; font-size: 1.05rem; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">${moon.name.replace('قَمَرُ ', '')}</span>
-    `;
-
-    // بطاقة التعريف الصرفي
-    const descBox = document.createElement('div');
-    descBox.style.cssText = `
-      background: rgba(15, 23, 42, 0.9);
-      border: 1.5px solid rgba(56, 189, 248, 0.4);
-      backdrop-filter: blur(8px);
-      padding: 6px 12px;
-      border-radius: 14px;
-      text-align: center;
-      max-width: 170px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    `;
-    descBox.innerHTML = `
-      <div style="color: #f1f5f9; font-size: 0.76rem; font-weight: 600; line-height: 1.4;">${moon.desc || ''}</div>
-    `;
-
-    moonWrapper.appendChild(moonSphere);
-    moonWrapper.appendChild(descBox);
-
-    // تأثير التمرير
-    moonWrapper.onmouseover = () => {
-      moonWrapper.style.transform = 'scale(1.12) translateY(-6px)';
-      moonSphere.style.boxShadow = `0 0 50px ${moon.glowColor || 'rgba(56,189,248,0.9)'}, inset -4px -4px 12px rgba(0,0,0,0.45)`;
-      moonSphere.style.borderColor = '#ffffff';
+    window.onload = function() {
+      if (typeof loadRadialWorld === 'function') {
+        loadRadialWorld('كتب');
+      }
     };
-    moonWrapper.onmouseout = () => {
-      moonWrapper.style.transform = 'none';
-      moonSphere.style.boxShadow = `0 0 35px ${moon.glowColor || 'rgba(56,189,248,0.7)'}, inset -10px -10px 20px rgba(0,0,0,0.65)`;
-      moonSphere.style.borderColor = 'rgba(255, 255, 255, 0.95)';
-    };
+  </script>
 
-    moonWrapper.onclick = () => openMoonForms(moon);
-    container.appendChild(moonWrapper);
-  });
-}
+  <!-- 🧭 نافذة التوجيه الذكية -->
+  <div id="guideModalBox" style="display: none; position: fixed; inset: 0; background: rgba(3, 7, 18, 0.88); backdrop-filter: blur(10px); z-index: 2147483647; align-items: center; justify-content: center; padding: 1.2rem; font-family: 'Segoe UI', Tahoma, sans-serif;">
+    <div style="background: rgba(15, 23, 42, 0.98); border: 2.5px solid #38bdf8; border-radius: 26px; max-width: 590px; width: 92%; padding: 2rem; color: #fff; text-align: right; box-shadow: 0 0 45px rgba(56, 189, 248, 0.4); position: relative;">
+      
+      <button type="button" onclick="toggleGuideModal()" style="position: absolute; top: 16px; left: 18px; background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.2); color: #cbd5e1; border-radius: 50%; width: 34px; height: 34px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center;">✕</button>
 
-// دالة فتح المستوى الثالث (الصيغ والأمثلة)
-function openMoonForms(moon) {
-  currentSelectedMoon = moon;
-  const lvl2 = document.getElementById('cosmicLevel2');
-  const lvl3 = document.getElementById('cosmicLevel3');
-  const title = document.getElementById('moonFormTitle');
-  const container = document.getElementById('formsButtonsContainer');
-
-  if (lvl2) lvl2.style.display = 'none';
-  if (lvl3) lvl3.style.display = 'block';
-
-  if (title) title.innerText = `🌟 صِيَغُ وَأَمْثِلَةُ: ${moon.name}`;
-  if (!container) return;
-
-  container.innerHTML = '';
-
-  const itemsList = moon.forms || moon.examples || [];
-
-  itemsList.forEach(item => {
-    const isObject = typeof item === 'object';
-    const sampleText = isObject ? item.sample : item;
-    const labelText = isObject ? item.label : '';
-    const rootVal = isObject ? item.val : (moon.root || 'كتب');
-
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.style.cssText = `
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
-      border: 2.5px solid #f59e0b;
-      color: #fff;
-      padding: 0.9rem 2.2rem;
-      border-radius: 40px;
-      font-size: 1.35rem;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      transition: all 0.25s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    `;
-    btn.innerHTML = `
-      <span style="font-size: 1.55rem; color: #fde047;">${sampleText}</span>
-      ${labelText ? `<span style="font-size: 0.82rem; color: #94a3b8; font-weight: normal;">${labelText}</span>` : ''}
-    `;
-
-    btn.onmouseover = () => {
-      btn.style.transform = 'scale(1.08)';
-      btn.style.boxShadow = '0 0 35px #f59e0b';
-    };
-    btn.onmouseout = () => {
-      btn.style.transform = 'none';
-      btn.style.boxShadow = '0 0 20px rgba(0,0,0,0.5)';
-    };
-
-    btn.onclick = () => selectVerbAndLaunch(sampleText, rootVal);
-    container.appendChild(btn);
-  });
-}
-
-// اختيار الفعل والانطلاق المباشر إلى شمس الجذر
-function selectVerbAndLaunch(verb, root) {
-  const galaxyModal = document.getElementById('galaxyModal');
-  if (galaxyModal) galaxyModal.style.display = 'none';
-
-  if (typeof loadRadialWorld === 'function') {
-    loadRadialWorld(root || 'كتب');
-  }
-}
-
-// دوال الرجوع
-function backToPlanets() {
-  const lvl1 = document.getElementById('cosmicLevel1');
-  const lvl2 = document.getElementById('cosmicLevel2');
-  if (lvl2) lvl2.style.display = 'none';
-  if (lvl1) lvl1.style.display = 'block';
-  document.body.classList.remove('in-level-2');
-}
-
-function backToMoons() {
-  const lvl2 = document.getElementById('cosmicLevel2');
-  const lvl3 = document.getElementById('cosmicLevel3');
-  if (lvl3) lvl3.style.display = 'none';
-  if (lvl2) lvl2.style.display = 'block';
-}
-
-window.onload = function() {
-  if (typeof loadRadialWorld === 'function') {
-    loadRadialWorld('كتب');
-  }
-};
-</script>
-
-<!-- 🧭 نافذة التوجيه الذكية المتكيفة مع سياق الفضاء -->
-<div id="guideModalBox" style="display: none; position: fixed; inset: 0; background: rgba(3, 7, 18, 0.88); backdrop-filter: blur(10px); z-index: 2147483647; align-items: center; justify-content: center; padding: 1.2rem; font-family: 'Segoe UI', Tahoma, sans-serif;">
-  <div style="background: rgba(15, 23, 42, 0.98); border: 2.5px solid #38bdf8; border-radius: 26px; max-width: 590px; width: 92%; padding: 2rem; color: #fff; text-align: right; box-shadow: 0 0 45px rgba(56, 189, 248, 0.4); position: relative;">
-    
-    <!-- زر الإغلاق -->
-    <button type="button" onclick="toggleGuideModal()" style="position: absolute; top: 16px; left: 18px; background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.2); color: #cbd5e1; border-radius: 50%; width: 34px; height: 34px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center;">✕</button>
-
-    <!-- 🌌 المحتوى الأول: خَارِطَةُ المَسَارِ الصَّرْفِيِّ (خاص بشاشة فضاء اللغة) -->
-    <div id="guideContentLanguage" style="display: block;">
-      <div style="display: flex; align-items: center; gap: 0.6rem; border-bottom: 1.5px solid rgba(56, 189, 248, 0.25); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
-        <span style="font-size: 1.8rem;">🧭</span>
-        <div>
-          <h3 style="margin: 0; color: #38bdf8; font-size: 1.35rem; font-weight: 900;">خَارِطَةُ المَسَارِ الصَّرْفِيِّ</h3>
-          <p style="margin: 2px 0 0; color: #94a3b8; font-size: 0.85rem;">مَحَطَّاتُ الرِّحْلَةِ الكَوْنِيَّةِ فِي فَضَاءِ اللُّغَةِ</p>
+      <!-- خارطة المسار الصرفي -->
+      <div id="guideContentLanguage" style="display: block;">
+        <div style="display: flex; align-items: center; gap: 0.6rem; border-bottom: 1.5px solid rgba(56, 189, 248, 0.25); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
+          <span style="font-size: 1.8rem;">🧭</span>
+          <div>
+            <h3 style="margin: 0; color: #38bdf8; font-size: 1.35rem; font-weight: 900;">خَارِطَةُ المَسَارِ الصَّرْفِيِّ</h3>
+            <p style="margin: 2px 0 0; color: #94a3b8; font-size: 0.85rem;">مَحَطَّاتُ الرِّحْلَةِ الكَوْنِيَّةِ فِي فَضَاءِ اللُّغَةِ</p>
+          </div>
         </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem; line-height: 1.7; color: #cbd5e1;">
+          <div style="background: rgba(251, 191, 36, 0.08); border-right: 4px solid #fbbf24; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            ☀️ <strong style="color: #fde047;">1. شَمْسُ الجِذْرِ:</strong> اكْتَشِفْ نَوَاةَ المَعْنَى وَالمُشْتَقَّاتِ الَّتِي تَدُورُ حَوْلَهَا.
+          </div>
+          <div style="background: rgba(56, 189, 248, 0.08); border-right: 4px solid #38bdf8; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            📖 <strong style="color: #38bdf8;">2. سَحَابَةُ الحِكَايَةِ:</strong> اقْرَأِ القِصَّةَ وَتَعَرَّفْ عَلَى المُشْتَقَّاتِ فِي سِيَاقِهَا التَّوَاصُلِيِّ.
+          </div>
+          <div style="background: rgba(99, 102, 241, 0.08); border-right: 4px solid #818cf8; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            ⚙️ <strong style="color: #a5b4fc;">3. أَقْرَاصُ التَّرْكِيبِ:</strong> قُمْ بِتَرْكِيبِ حُرُوفِ الجِذْرِ عَلَى مِيزَانِ الصَّرْفِ.
+          </div>
+          <div style="background: rgba(168, 85, 247, 0.08); border-right: 4px solid #c084fc; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            🚀 <strong style="color: #d8b4fe;">4. مَرْكَبَةُ الصَّرْفِ:</strong> اخْتَبِرْ سُرْعَتَكَ فِي تَحَدِّيَاتِ الأَوْزَانِ الفَضَائِيَّةِ.
+          </div>
+          <div style="background: rgba(244, 63, 94, 0.08); border-right: 4px solid #fb7185; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            ✍️ <strong style="color: #fda4af;">5. الإِنْتَاجُ الحُرُّ:</strong> شَيِّدْ جُمَلاً مُفِيدَةً بِالمُشْتَقَّاتِ الَّتِي بَنَيْتَهَا.
+          </div>
+        </div>
+
+        <button type="button" onclick="toggleGuideModal()" style="margin-top: 1.3rem; width: 100%; padding: 0.8rem; border-radius: 50px; background: linear-gradient(90deg, #0284c7, #38bdf8); border: none; color: #04101e; font-weight: 900; font-size: 1.05rem; cursor: pointer; box-shadow: 0 4px 18px rgba(56, 189, 248, 0.4);">
+          مُوَافِقْ، لِنُوَاصِلِ الرِّحْلَةَ! 🚀
+        </button>
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem; line-height: 1.7; color: #cbd5e1;">
-        <div style="background: rgba(251, 191, 36, 0.08); border-right: 4px solid #fbbf24; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
-          ☀️ <strong style="color: #fde047;">1. شَمْسُ الجِذْرِ:</strong> اكْتَشِفْ نَوَاةَ المَعْنَى وَالمُشْتَقَّاتِ الَّتِي تَدُورُ حَوْلَهَا.
+      <!-- دليل كواكب الأفعال -->
+      <div id="guideContentVerbs" style="display: none;">
+        <div style="display: flex; align-items: center; gap: 0.6rem; border-bottom: 1.5px solid rgba(56, 189, 248, 0.25); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
+          <span style="font-size: 1.8rem;">🪐</span>
+          <div>
+            <h3 style="margin: 0; color: #38bdf8; font-size: 1.35rem; font-weight: 900;">بَوْصَلَةُ المَلَاحَةِ فِي مَجَرَّةِ الأَفْعَالِ</h3>
+            <p style="margin: 2px 0 0; color: #94a3b8; font-size: 0.85rem;">دَلِيلُكَ لِلتَّعَرُّفِ عَلَى مَدَارَاتِ وَأَوْزَانِ الكَوَاكِبِ الأَرْبَعَةِ</p>
+          </div>
         </div>
-        <div style="background: rgba(56, 189, 248, 0.08); border-right: 4px solid #38bdf8; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
-          📖 <strong style="color: #38bdf8;">2. سَحَابَةُ الحِكَايَةِ:</strong> اقْرَأِ القِصَّةَ وَتَعَرَّفْ عَلَى المُشْتَقَّاتِ فِي سِيَاقِهَا التَّوَاصُلِيِّ.
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.92rem; line-height: 1.65; color: #cbd5e1;">
+          <div style="background: rgba(2, 132, 199, 0.12); border-right: 4px solid #38bdf8; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #38bdf8;">📚 1. كَوْكَبُ الثُّلَاثِيِّ (المُجَرَّد):</strong><br>
+            أَصْلُ الأَفْعَالِ وَأَبْسَطُهَا؛ يَشْمَلُ <span style="color: #fde047;">الصَّحِيحَ</span> (كَتَبَ، شَرِبَ)، و<span style="color: #fde047;">المَهْمُوزَ</span> (أَخَذَ، سَأَلَ)، و<span style="color: #fde047;">المُضَعَّفَ</span> (مَدَّ).
+          </div>
+          <div style="background: rgba(5, 150, 105, 0.12); border-right: 4px solid #34d399; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #34d399;">🌀 2. كَوْكَبُ الرُّبَاعِيِّ (المُجَرَّد):</strong><br>
+            أَفْعَالٌ حُرُوفُهَا الأَصْلِيَّةُ أَرْبَعَةٌ؛ مِثْلُ: <span style="color: #a7f3d0;">دَحْرَجَ</span> (فَعْلَلَ - سَالِمٌ) وَ<span style="color: #a7f3d0;">زَلْزَلَ</span> (مُضَعَّفٌ).
+          </div>
+          <div style="background: rgba(217, 119, 6, 0.12); border-right: 4px solid #fbbf24; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #fbbf24;">☀️ 3. كَوْكَبُ المَزِيدِ (الأَفْعَالُ النَّامِيَة):</strong><br>
+            أَفْعَالٌ زِيدَتْ عَلَى أُصُولِهَا؛ <span style="color: #fef08a;">بِحَرْفٍ</span> (دَرَّسَ، سَابَقَ) أَوْ <span style="color: #fef08a;">بِحَرْفَيْنِ وَأَكْثَرَ</span> (اكْتَشَفَ، اسْتَخْرَجَ).
+          </div>
+          <div style="background: rgba(124, 58, 237, 0.12); border-right: 4px solid #c084fc; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #c084fc;">🌙 4. كَوْكَبُ المُعْتَلِّ (سِرُّ حُرُوفِ العِلَّة):</strong><br>
+            أَفْعَالٌ أَحَدُ حُرُوفِهَا حَرْفُ عِلَّةٍ (و - ا - ي)؛ يَضُمُّ: <span style="color: #e9d5ff;">المِثَالَ</span> (وَقَفَ)، <span style="color: #e9d5ff;">الأَجْوَفَ</span> (قَالَ)، و<span style="color: #e9d5ff;">النَّاقِصَ</span> (رَمَى).
+          </div>
         </div>
-        <div style="background: rgba(99, 102, 241, 0.08); border-right: 4px solid #818cf8; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
-          ⚙️ <strong style="color: #a5b4fc;">3. أَقْرَاصُ التَّرْكِيبِ:</strong> قُمْ بِتَرْكِيبِ حُرُوفِ الجِذْرِ عَلَى مِيزَانِ الصَّرْفِ.
-        </div>
-        <div style="background: rgba(168, 85, 247, 0.08); border-right: 4px solid #c084fc; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
-          🚀 <strong style="color: #d8b4fe;">4. مَرْكَبَةُ الصَّرْفِ:</strong> اخْتَبِرْ سُرْعَتَكَ فِي تَحَدِّيَاتِ الأَوْزَانِ الفَضَائِيَّةِ.
-        </div>
-        <div style="background: rgba(244, 63, 94, 0.08); border-right: 4px solid #fb7185; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
-          ✍️ <strong style="color: #fda4af;">5. الإِنْتَاجُ الحُرُّ:</strong> شَيِّدْ جُمَلاً مُفِيدَةً بِالمُشْتَقَّاتِ الَّتِي بَنَيْتَهَا.
-        </div>
+
+        <button type="button" onclick="toggleGuideModal()" style="margin-top: 1.3rem; width: 100%; padding: 0.8rem; border-radius: 50px; background: linear-gradient(90deg, #0284c7, #38bdf8); border: none; color: #04101e; font-weight: 900; font-size: 1.05rem; cursor: pointer; box-shadow: 0 4px 18px rgba(56, 189, 248, 0.4);">
+          فَهِمْتُ المَسَارَ، لِنُوَاصِلِ الاسْتِكْشَافَ! 🚀
+        </button>
       </div>
 
-      <button type="button" onclick="toggleGuideModal()" style="margin-top: 1.3rem; width: 100%; padding: 0.8rem; border-radius: 50px; background: linear-gradient(90deg, #0284c7, #38bdf8); border: none; color: #04101e; font-weight: 900; font-size: 1.05rem; cursor: pointer; box-shadow: 0 4px 18px rgba(56, 189, 248, 0.4);">
-        مُوَافِقْ، لِنُوَاصِلِ الرِّحْلَةَ! 🚀
-      </button>
     </div>
-
-    <!-- 🪐 المحتوى الثاني: بَوْصَلَةُ المَلَاحَةِ فِي مَجَرَّةِ الأَفْعَالِ (خاص بنافذة كواكب الأفعال الكونية) -->
-    <div id="guideContentVerbs" style="display: none;">
-      <div style="display: flex; align-items: center; gap: 0.6rem; border-bottom: 1.5px solid rgba(56, 189, 248, 0.25); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
-        <span style="font-size: 1.8rem;">🪐</span>
-        <div>
-          <h3 style="margin: 0; color: #38bdf8; font-size: 1.35rem; font-weight: 900;">بَوْصَلَةُ المَلَاحَةِ فِي مَجَرَّةِ الأَفْعَالِ</h3>
-          <p style="margin: 2px 0 0; color: #94a3b8; font-size: 0.85rem;">دَلِيلُكَ لِلتَّعَرُّفِ عَلَى مَدَارَاتِ وَأَوْزَانِ الكَوَاكِبِ الأَرْبَعَةِ</p>
-        </div>
-      </div>
-
-      <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.92rem; line-height: 1.65; color: #cbd5e1;">
-        <div style="background: rgba(2, 132, 199, 0.12); border-right: 4px solid #38bdf8; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
-          <strong style="color: #38bdf8;">📚 1. كَوْكَبُ الثُّلَاثِيِّ (المُجَرَّد):</strong><br>
-          أَصْلُ الأَفْعَالِ وَأَبْسَطُهَا؛ يَشْمَلُ <span style="color: #fde047;">الصَّحِيحَ</span> (كَتَبَ، شَرِبَ)، و<span style="color: #fde047;">المَهْمُوزَ</span> (أَخَذَ، سَأَلَ)، و<span style="color: #fde047;">المُضَعَّفَ</span> (مَدَّ).
-        </div>
-        <div style="background: rgba(5, 150, 105, 0.12); border-right: 4px solid #34d399; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
-          <strong style="color: #34d399;">🌀 2. كَوْكَبُ الرُّبَاعِيِّ (المُجَرَّد):</strong><br>
-          أَفْعَالٌ حُرُوفُهَا الأَصْلِيَّةُ أَرْبَعَةٌ؛ مِثْلُ: <span style="color: #a7f3d0;">دَحْرَجَ</span> (فَعْلَلَ - سَالِمٌ) وَ<span style="color: #a7f3d0;">زَلْزَلَ</span> (مُضَعَّفٌ).
-        </div>
-        <div style="background: rgba(217, 119, 6, 0.12); border-right: 4px solid #fbbf24; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
-          <strong style="color: #fbbf24;">☀️ 3. كَوْكَبُ المَزِيدِ (الأَفْعَالُ النَّامِيَة):</strong><br>
-          أَفْعَالٌ زِيدَتْ عَلَى أُصُولِهَا؛ <span style="color: #fef08a;">بِحَرْفٍ</span> (دَرَّسَ، سَابَقَ) أَوْ <span style="color: #fef08a;">بِحَرْفَيْنِ وَأَكْثَرَ</span> (اكْتَشَفَ، اسْتَخْرَجَ).
-        </div>
-        <div style="background: rgba(124, 58, 237, 0.12); border-right: 4px solid #c084fc; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
-          <strong style="color: #c084fc;">🌙 4. كَوْكَبُ المُعْتَلِّ (سِرُّ حُرُوفِ العِلَّة):</strong><br>
-          أَفْعَالٌ أَحَدُ حُرُوفِهَا حَرْفُ عِلَّةٍ (و - ا - ي)؛ يَضُمُّ: <span style="color: #e9d5ff;">المِثَالَ</span> (وَقَفَ)، <span style="color: #e9d5ff;">الأَجْوَفَ</span> (قَالَ)، و<span style="color: #e9d5ff;">النَّاقِصَ</span> (رَمَى).
-        </div>
-      </div>
-
-      <button type="button" onclick="toggleGuideModal()" style="margin-top: 1.3rem; width: 100%; padding: 0.8rem; border-radius: 50px; background: linear-gradient(90deg, #0284c7, #38bdf8); border: none; color: #04101e; font-weight: 900; font-size: 1.05rem; cursor: pointer; box-shadow: 0 4px 18px rgba(56, 189, 248, 0.4);">
-        فَهِمْتُ المَسَارَ، لِنُوَاصِلِ الاسْتِكْشَافَ! 🚀
-      </button>
-    </div>
-
   </div>
-</div>
 
-  <!-- 🏆 وسام رائد الصرف (ختام الرحلة) -->
+  <!-- 🏆 وسام رائد الصرف -->
   <div id="endJourneyScreen" style="display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 30%, #1e1b4b 0%, #0b0f19 50%, #030712 100%); z-index: 99999999; align-items: center; justify-content: center; overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif;">
     <div style="position: relative; z-index: 10; width: 100%; max-width: 780px; padding: 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.2rem;">
       <div style="width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff, #fde047 35%, #f59e0b 75%, #b45309 100%); display: flex; align-items: center; justify-content: center; font-size: 4.2rem; box-shadow: 0 0 60px rgba(245, 158, 11, 0.95); border: 4px solid #fffdf0;">🏆</div>
