@@ -767,12 +767,21 @@
   pointer-events: none;
   z-index: 0;
 }
-    /* إخفاء عناصر الزوايا المشوشة بالكامل في المستوى الثاني */
+/* إخفاء تام لجميع الرسوم الجانبية والكرتونية في المستوى الثاني */
 body.in-level-2 .cosmic-decor,
 body.in-level-2 .floating-decor,
-body.in-level-2 img[src*="astronaut"],
-body.in-level-2 img[src*="ufo"] {
+body.in-level-2 .cosmic-floating-decor,
+body.in-level-2 img,
+body.in-level-2 [class*="astronaut"],
+body.in-level-2 [class*="ufo"],
+body.in-level-2 [class*="planet-decor"] {
   display: none !important;
+}
+
+/* استثناء بطاقات الأقمار وعناصرها من الإخفاء لتظهر بوضوح */
+body.in-level-2 #cosmicLevel2 img,
+body.in-level-2 #moonsCardsContainer * {
+  display: flex !important;
 }
 
 /* فضاء النجوم اللامعة الكثيفة */
@@ -803,13 +812,14 @@ body.in-level-2 img[src*="ufo"] {
   100% { opacity: 1; transform: scale(1.02); }
 }
 
-/* حاوية النظام المداري المستقل */
+/* حاوية النظام المداري المستقل الموزع */
+#moonsCardsContainer.orbital-galaxy-system,
 .orbital-galaxy-system {
-  position: relative;
-  width: 100%;
-  max-width: 1100px;
-  height: 520px;
-  margin: 10px auto 0;
+  position: relative !important;
+  width: 100% !important;
+  max-width: 1100px !important;
+  height: 480px !important;
+  margin: 10px auto 0 !important;
 }
   </style>
 
@@ -1556,21 +1566,21 @@ function openPlanetLevel(planetKey) {
 
   const currentMoons = (planetKey === 'triadic') ? moonsRefined : (planet.moons || []);
 
-// تفعيل إخفاء الزينة الكرتونية المشوشة
+// تفعيل إخفاء الرسوم والزينة الكرتونية
   document.body.classList.add('in-level-2');
 
-  // إحداثيات ومواقع مدارية متفرقة لكل قمر كأجرام المجرة
+  // إحداثيات الأقمار الثلاثة وفق الدوائر المحددة بدقة على المدارات
   const orbitalPositions = [
-    { top: "12%", right: "12%" }, // قمر السالم: أعلى اليمين
-    { top: "42%", left: "42%" },  // قمر المضعف: في المركز
-    { bottom: "14%", left: "14%" } // قمر المهموز: أسفل اليسار
+    { top: "-15px", right: "22%" },   // 1. الدائرة العليا: قمر السالم
+    { top: "155px", left: "6%" },     // 2. الدائرة اليسرى: قمر المهموز
+    { bottom: "-10px", right: "38%" } // 3. الدائرة السفلى: قمر المضعف
   ];
 
   currentMoons.forEach((moon, idx) => {
-    const pos = orbitalPositions[idx] || { top: "50%", left: "50%" };
+    const pos = orbitalPositions[idx] || { top: "40%", left: "40%" };
     const moonWrapper = document.createElement('div');
     moonWrapper.style.cssText = `
-      position: absolute;
+      position: absolute !important;
       top: ${pos.top || 'auto'};
       bottom: ${pos.bottom || 'auto'};
       left: ${pos.left || 'auto'};
@@ -1578,18 +1588,18 @@ function openPlanetLevel(planetKey) {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       cursor: pointer;
-      z-index: 15;
+      z-index: 25;
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      animation: planetFloatA ${5 + idx * 1.2}s ease-in-out infinite ${idx * 0.5}s;
+      animation: planetFloatA ${5 + idx * 1.1}s ease-in-out infinite ${idx * 0.4}s;
     `;
 
-    // الجرم القمري الكروي الواقعي
+    // الجرم القمري الكروي
     const moonSphere = document.createElement('div');
     moonSphere.style.cssText = `
-      width: 145px;
-      height: 145px;
+      width: 130px;
+      height: 130px;
       border-radius: 50%;
       background: ${moon.moonBase};
       position: relative;
@@ -1597,51 +1607,51 @@ function openPlanetLevel(planetKey) {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border: 3px solid rgba(255, 255, 255, 0.85);
-      box-shadow: 0 0 35px ${moon.glowColor}, inset -10px -10px 22px rgba(0,0,0,0.65);
+      border: 3px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 35px ${moon.glowColor}, inset -10px -10px 20px rgba(0,0,0,0.65);
       overflow: hidden;
       transition: all 0.35s ease;
     `;
 
-    const crater1 = `<div style="position: absolute; width: 24px; height: 24px; border-radius: 50%; background: rgba(0,0,0,0.15); top: 18px; left: 24px; box-shadow: inset 2px 2px 4px rgba(0,0,0,0.3);"></div>`;
-    const crater2 = `<div style="position: absolute; width: 16px; height: 16px; border-radius: 50%; background: rgba(0,0,0,0.12); bottom: 25px; right: 28px; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);"></div>`;
+    const crater1 = `<div style="position: absolute; width: 22px; height: 22px; border-radius: 50%; background: rgba(0,0,0,0.15); top: 16px; left: 20px; box-shadow: inset 2px 2px 4px rgba(0,0,0,0.3);"></div>`;
+    const crater2 = `<div style="position: absolute; width: 14px; height: 14px; border-radius: 50%; background: rgba(0,0,0,0.12); bottom: 22px; right: 24px; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);"></div>`;
 
     moonSphere.innerHTML = `
       ${crater1}
       ${crater2}
-      <div style="font-size: 2.4rem; z-index: 2; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.5));">${moon.symbol}</div>
-      <span style="color: #ffffff; font-weight: 900; font-size: 1.15rem; z-index: 2; text-shadow: 0 2px 10px rgba(0,0,0,0.9);">${moon.name.replace('قَمَرُ ', '')}</span>
+      <div style="font-size: 2.2rem; z-index: 2; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));">${moon.symbol}</div>
+      <span style="color: #ffffff; font-weight: 900; font-size: 1.1rem; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">${moon.name.replace('قَمَرُ ', '')}</span>
     `;
 
-    // بطاقة التعريف
+    // بطاقة التعريف الصرفي المقتصرة على المفهوم
     const descBox = document.createElement('div');
     descBox.style.cssText = `
-      background: rgba(15, 23, 42, 0.85);
-      border: 1.5px solid rgba(56, 189, 248, 0.35);
+      background: rgba(15, 23, 42, 0.88);
+      border: 1.5px solid rgba(56, 189, 248, 0.4);
       backdrop-filter: blur(8px);
-      padding: 8px 14px;
-      border-radius: 16px;
+      padding: 6px 12px;
+      border-radius: 14px;
       text-align: center;
-      max-width: 190px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.45);
+      max-width: 175px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     `;
     descBox.innerHTML = `
-      <div style="color: #f1f5f9; font-size: 0.82rem; font-weight: 600; line-height: 1.5;">${moon.desc}</div>
+      <div style="color: #f1f5f9; font-size: 0.78rem; font-weight: 600; line-height: 1.4;">${moon.desc}</div>
     `;
 
     moonWrapper.appendChild(moonSphere);
     moonWrapper.appendChild(descBox);
 
-    // تفاعل التمرير بالفأرة
+    // تأثير التمرير بالفأرة
     moonWrapper.onmouseover = () => {
-      moonWrapper.style.transform = 'scale(1.12) translateY(-8px)';
-      moonSphere.style.boxShadow = `0 0 50px ${moon.glowColor}, inset -4px -4px 15px rgba(0,0,0,0.45)`;
+      moonWrapper.style.transform = 'scale(1.12) translateY(-6px)';
+      moonSphere.style.boxShadow = `0 0 50px ${moon.glowColor}, inset -4px -4px 12px rgba(0,0,0,0.45)`;
       moonSphere.style.borderColor = '#ffffff';
     };
     moonWrapper.onmouseout = () => {
       moonWrapper.style.transform = 'none';
-      moonSphere.style.boxShadow = `0 0 35px ${moon.glowColor}, inset -10px -10px 22px rgba(0,0,0,0.65)`;
-      moonSphere.style.borderColor = 'rgba(255, 255, 255, 0.85)';
+      moonSphere.style.boxShadow = `0 0 35px ${moon.glowColor}, inset -10px -10px 20px rgba(0,0,0,0.65)`;
+      moonSphere.style.borderColor = 'rgba(255, 255, 255, 0.9)';
     };
 
     moonWrapper.onclick = () => openMoonForms(moon);
