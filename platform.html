@@ -425,25 +425,25 @@
       100% { opacity: 1; }
     }
 
-    /* مسرح المدار الفلكي للأقمار */
+    /* مسرح المدار الفلكي الموسّع للأقمار */
     .orbit-stage-container {
       position: relative;
-      width: 1000px;
-      max-width: 95vw;
-      height: 520px;
-      margin: 15px auto 0;
+      width: 1180px;
+      max-width: 96vw;
+      height: 560px;
+      margin: 10px auto 0;
     }
 
     .master-orbit-track {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) rotate(-12deg);
-      width: 880px;
-      height: 380px;
+      transform: translate(-50%, -50%) rotate(-10deg);
+      width: 1080px;
+      height: 440px;
       border-radius: 50%;
-      border: 2px dashed rgba(125, 211, 252, 0.45);
-      box-shadow: 0 0 25px rgba(56, 189, 248, 0.15), inset 0 0 25px rgba(56, 189, 248, 0.08);
+      border: 2.5px dashed rgba(125, 211, 252, 0.48);
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.22), inset 0 0 35px rgba(56, 189, 248, 0.08);
       pointer-events: none;
       z-index: 2;
     }
@@ -452,11 +452,11 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) rotate(-12deg);
-      width: 580px;
-      height: 220px;
+      transform: translate(-50%, -50%) rotate(-10deg);
+      width: 720px;
+      height: 270px;
       border-radius: 50%;
-      border: 1.5px solid rgba(56, 189, 248, 0.25);
+      border: 1.5px solid rgba(56, 189, 248, 0.22);
       pointer-events: none;
       z-index: 2;
     }
@@ -763,9 +763,9 @@
             moonBase: "radial-gradient(circle at 35% 30%, #f8fafc 0%, #cbd5e1 45%, #64748b 80%, #334155 100%)",
             glowColor: "rgba(203, 213, 225, 0.75)",
             forms: [
-              { label: "صَحِيحٌ سَالِمٌ (نَصّ)", val: "درس", sample: "دَرَسَ" },
-              { label: "صَحِيحٌ سَالِمٌ (تَطْبِيق)", val: "فرح", sample: "فَرِحَ" },
-              { label: "سَالِمٌ (أَصْلِيّ)", val: "كتب", sample: "كَتَبَ" }
+              { label: "وَزْنُ (فَعَلَ) - بِفَتْحِ العَيْنِ", val: "كتب", sample: "كَتَبَ" },
+              { label: "وَزْنُ (فَعِلَ) - بِكَسْرِ العَيْنِ", val: "درس", sample: "فَرِحَ" },
+              { label: "وَزْنُ (فَعُلَ) - بِضَمِّ العَيْنِ", val: "كتب", sample: "كَرُمَ" }
             ]
           },
           {
@@ -973,11 +973,11 @@
       container.innerHTML = '';
       container.style.cssText = 'position: relative; width: 100%; height: 100%;';
 
-      // إحداثيات مدروسة هندسياً لاستقرار الأقمار على خط المدار البيضاوي المائل
+      // إحداثيات مدروسة هندسياً لاستقرار الأقمار على خط المدار الموسّع
       const orbitPositions = [
-        { top: "18px", right: "215px" },  // 1. أعلى اليمين (السالم)
-        { top: "140px", left: "45px" },   // 2. أقصى اليسار (المضعف)
-        { bottom: "12px", left: "435px" } // 3. أسفل المدار (المهموز)
+        { top: "12px", right: "260px" },  // 1. أعلى اليمين (السالم)
+        { top: "175px", left: "25px" },   // 2. أقصى اليسار (المضعف)
+        { bottom: "8px", left: "540px" }  // 3. أسفل المدار (المهموز)
       ];
 
       const moonsList = planet.moons || [];
@@ -1147,33 +1147,36 @@
       if (lvl2) lvl2.style.display = 'block';
     }
 
-    // زر التوجيه الذكي
-    function toggleGuideModal() {
-      const modal = document.getElementById('guideModalBox');
-      if (!modal) return;
+    // زر التوجيه الذكي المتكيف مع سياق الفضاء المعروض
+function toggleGuideModal() {
+  const modal = document.getElementById('guideModalBox');
+  if (!modal) return;
 
-      const isVisible = modal.style.display === 'flex';
-      if (isVisible) {
-        modal.style.display = 'none';
-        return;
-      }
+  const isVisible = modal.style.display === 'flex';
+  if (isVisible) {
+    modal.style.display = 'none';
+    return;
+  }
 
-      const galaxyModal = document.getElementById('galaxyModal');
-      const isGalaxyOpen = galaxyModal && galaxyModal.style.display === 'flex';
+  // فحص هل نافذة الكواكب أو الأقمار مفتوحة حالياً بأي من حالات العرض
+  const galaxyModal = document.getElementById('galaxyModal');
+  const isGalaxyOpen = galaxyModal && (galaxyModal.style.display === 'flex' || galaxyModal.style.display === 'block' || (galaxyModal.offsetParent !== null && galaxyModal.style.display !== 'none'));
 
-      const contentLang = document.getElementById('guideContentLanguage');
-      const contentVerbs = document.getElementById('guideContentVerbs');
+  const contentLang = document.getElementById('guideContentLanguage');
+  const contentVerbs = document.getElementById('guideContentVerbs');
 
-      if (isGalaxyOpen) {
-        if (contentLang) contentLang.style.display = 'none';
-        if (contentVerbs) contentVerbs.style.display = 'block';
-      } else {
-        if (contentLang) contentLang.style.display = 'block';
-        if (contentVerbs) contentVerbs.style.display = 'none';
-      }
+  if (isGalaxyOpen) {
+    // إظهار بوصلة الملاحة الخاصة بالأفعال والكواكب
+    if (contentLang) contentLang.style.display = 'none';
+    if (contentVerbs) contentVerbs.style.display = 'block';
+  } else {
+    // إظهار خارطة المسار الصرفي لمحطات المنصة
+    if (contentLang) contentLang.style.display = 'block';
+    if (contentVerbs) contentVerbs.style.display = 'none';
+  }
 
-      modal.style.display = 'flex';
-    }
+  modal.style.display = 'flex';
+}
 
     // وسام ختام الرحلة
     function triggerEndJourney() {
