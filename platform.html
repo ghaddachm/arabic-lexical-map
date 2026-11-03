@@ -1758,13 +1758,7 @@ function backToPlanets() {
   const lvl2 = document.getElementById('cosmicLevel2');
   if (lvl2) lvl2.style.display = 'none';
   if (lvl1) lvl1.style.display = 'block';
-
-  // إلغاء صنف إخفاء المستوى الثاني وإعادة إظهار كل الرسومات
   document.body.classList.remove('in-level-2');
-  document.querySelectorAll('img, .cosmic-decor, .floating-decor, .stars-decor').forEach(el => {
-    el.style.opacity = '1';
-    el.style.visibility = 'visible';
-  });
 }
 
 function backToMoons() {
