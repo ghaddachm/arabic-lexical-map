@@ -1063,7 +1063,7 @@
       });
     }
 
-    // فتح المستوى الثالث (الصيغ والأمثلة)
+// فتح المستوى الثالث: أقراص الأوزان والصيغ التفاعلية
     function openMoonForms(moon) {
       currentSelectedMoon = moon;
       const lvl2 = document.getElementById('cosmicLevel2');
@@ -1074,47 +1074,61 @@
       if (lvl2) lvl2.style.display = 'none';
       if (lvl3) lvl3.style.display = 'block';
 
-      if (title) title.innerText = `🌟 صِيَغُ وَأَمْثِلَةُ: ${moon.name}`;
+      if (title) {
+        title.innerHTML = `🌟 صِيَغُ وَأَوْزَانُ: <span style="color:#38bdf8;">${moon.name}</span>`;
+      }
       if (!container) return;
 
       container.innerHTML = '';
 
-      (moon.forms || []).forEach(form => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.style.cssText = `
-          background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
-          border: 2.5px solid ${moon.color || '#f59e0b'};
-          color: #fff;
-          padding: 0.9rem 2.2rem;
-          border-radius: 40px;
-          font-size: 1.35rem;
-          font-weight: 900;
-          cursor: pointer;
-          box-shadow: 0 0 20px rgba(0,0,0,0.5);
-          transition: all 0.25s;
+      (moon.forms || []).forEach((form, idx) => {
+        const card = document.createElement('div');
+        card.style.cssText = `
+          background: radial-gradient(circle at 35% 30%, rgba(30, 41, 59, 0.98), rgba(15, 23, 42, 0.98));
+          border: 2.5px solid ${moon.color || '#38bdf8'};
+          border-radius: 28px;
+          padding: 1.4rem 2rem;
+          min-width: 220px;
+          max-width: 260px;
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 4px;
+          gap: 10px;
+          cursor: pointer;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.5), inset 0 0 15px rgba(56, 189, 248, 0.08);
+          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          animation: popTab 0.35s ease ${idx * 0.1}s both;
         `;
-        btn.innerHTML = `
-          <span style="font-size: 1.55rem; color: #fde047;">${form.sample}</span>
-          <span style="font-size: 0.82rem; color: #94a3b8; font-weight: normal;">${form.label}</span>
+
+        // إبراز الحركات الصرفية (الفتحة، الكسرة، الضمة) بلون ذهبي متوهج لتركيز الانتباه الديداكتيكي
+        const coloredSample = (form.sample || '').replace(/([َُِ])/g, '<span style="color:#fde047;">$1</span>');
+
+        card.innerHTML = `
+          <div style="font-size: 2.2rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));">${moon.symbol || '⚖️'}</div>
+          <div style="font-size: 2.1rem; font-weight: 900; color: #ffffff; letter-spacing: 1px; text-shadow: 0 0 15px rgba(253, 224, 71, 0.5);">${coloredSample}</div>
+          <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 14px; font-size: 0.82rem; color: #94a3b8; font-weight: 600;">${form.label || ''}</div>
+          <div style="margin-top: 6px; font-size: 0.85rem; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 4px;">
+            <span>انْطَلِقْ لِلشَّمْسِ</span> ⟵
+          </div>
         `;
-        btn.onmouseover = () => {
-          btn.style.transform = 'scale(1.08)';
-          btn.style.boxShadow = `0 0 35px ${moon.color || '#f59e0b'}`;
+
+        card.onmouseover = () => {
+          card.style.transform = 'translateY(-10px) scale(1.06)';
+          card.style.borderColor = '#fde047';
+          card.style.boxShadow = `0 15px 35px rgba(245, 158, 11, 0.4), inset 0 0 20px rgba(253, 224, 71, 0.2)`;
         };
-        btn.onmouseout = () => {
-          btn.style.transform = 'none';
-          btn.style.boxShadow = '0 0 20px rgba(0,0,0,0.5)';
+
+        card.onmouseout = () => {
+          card.style.transform = 'none';
+          card.style.borderColor = moon.color || '#38bdf8';
+          card.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5), inset 0 0 15px rgba(56, 189, 248, 0.08)';
         };
-        btn.onclick = () => selectFormAndLaunch(form.val);
-        container.appendChild(btn);
+
+        card.onclick = () => selectFormAndLaunch(form.val);
+        container.appendChild(card);
       });
     }
-
+    
     // الانتقال المباشر لشمس الجذر
     function selectFormAndLaunch(rootKey) {
       const galaxyModal = document.getElementById('galaxyModal');
