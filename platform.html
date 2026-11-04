@@ -578,8 +578,7 @@
   </div>
 
   <!-- 🪐 فضاء كواكب الأفعال الكونية -->
-  <div id="galaxyModal" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 35%, #1e1b4b 0%, #0c1024 50%, #030712 100%); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; backdrop-filter: blur(14px); overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif;">
-
+<div id="galaxyModal" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 20%, #2e1065 0%, #0f172a 50%, #030712 100%); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; backdrop-filter: blur(14px); overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif;">
     <!-- سُدم الفضاء الغامرة -->
     <div class="cosmic-decor-item" style="position: absolute; width: 750px; height: 750px; background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%); top: -120px; left: -80px; filter: blur(80px); pointer-events: none;"></div>
     <div class="cosmic-decor-item" style="position: absolute; width: 850px; height: 850px; background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 75%); bottom: -180px; right: -120px; filter: blur(85px); pointer-events: none;"></div>
@@ -1063,126 +1062,153 @@
       });
     }
 
-// فتح المستوى الثالث: نجوم الصيغ والأوزان المضيئة بالرسوم الدلالية
-    function openMoonForms(moon) {
-      currentSelectedMoon = moon;
-      const lvl2 = document.getElementById('cosmicLevel2');
-      const lvl3 = document.getElementById('cosmicLevel3');
-      const title = document.getElementById('moonFormTitle');
-      const container = document.getElementById('formsButtonsContainer');
+// فتح المستوى الثالث: نجوم الأوزان والصيغ التفاعلية ذات التوهج الفضائي
+function openMoonForms(moon) {
+  currentSelectedMoon = moon;
+  const lvl2 = document.getElementById('cosmicLevel2');
+  const lvl3 = document.getElementById('cosmicLevel3');
+  const title = document.getElementById('moonFormTitle');
+  const container = document.getElementById('formsButtonsContainer');
 
-      if (lvl2) lvl2.style.display = 'none';
-      if (lvl3) lvl3.style.display = 'block';
+  if (lvl2) lvl2.style.display = 'none';
+  if (lvl3) lvl3.style.display = 'block';
 
-      if (title) {
-        title.innerHTML = `🌟 صِيَغُ وَأَوْزَانُ الفِعْلِ الصَّحِيحِ السَّالِمِ`;
-        title.style.color = '#fde047';
-        title.style.textShadow = '0 0 25px rgba(250, 204, 21, 0.7)';
-      }
-      if (!container) return;
+  // التسمية الدقيقة
+  if (title) {
+    title.innerHTML = `⭐ صِيَغُ وَأَوْزَانُ الفِعْلِ الصَّحِيحِ السَّالِمِ`;
+    title.style.color = '#fde047';
+    title.style.textShadow = '0 0 30px rgba(250, 204, 21, 0.8), 0 0 10px #f59e0b';
+  }
+  if (!container) return;
 
-      container.innerHTML = '';
-      container.style.cssText = 'display: flex; gap: clamp(25px, 4vw, 45px); justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 25px; padding: 10px;';
+  container.innerHTML = '';
+  container.style.cssText = 'display: flex; gap: clamp(25px, 4vw, 55px); justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 35px; padding: 20px 10px;';
 
-      const visualForms = [
-        {
-          sample: "كَتَبَ",
-          label: "وَزْنُ (فَعَلَ) - بِفَتْحِ العَيْنِ",
-          val: "كتب",
-          icon: "✍️",
-          illu: "📜",
-          meaning: "تَدْوِينُ الكَلِمَاتِ وَالحُرُوفِ",
-          starColor: "#38bdf8",
-          glowColor: "rgba(56, 189, 248, 0.65)"
-        },
-        {
-          sample: "فَرِحَ",
-          label: "وَزْنُ (فَعِلَ) - بِكَسْرِ العَيْنِ",
-          val: "درس",
-          icon: "😄",
-          illu: "🎉",
-          meaning: "الشُّعُورُ بِالسَّعَادَةِ وَالبَهْجَةِ",
-          starColor: "#fbbf24",
-          glowColor: "rgba(251, 191, 36, 0.7)"
-        },
-        {
-          sample: "كَرُمَ",
-          label: "وَزْنُ (فَعُلَ) - بِضَمِّ العَيْنِ",
-          val: "كتب",
-          icon: "🤲",
-          illu: "🎁",
-          meaning: "الجُودُ وَالسَّخَاءُ وَحُسْنُ الخُلُقِ",
-          starColor: "#34d399",
-          glowColor: "rgba(52, 211, 153, 0.7)"
-        }
-      ];
-
-      const formsList = (moon && moon.id === 'salim') ? visualForms : (moon.forms || []);
-
-      formsList.forEach((form, idx) => {
-        const starCard = document.createElement('div');
-        starCard.style.cssText = `
-          position: relative;
-          width: 250px;
-          min-height: 290px;
-          background: radial-gradient(circle at 40% 30%, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
-          border: 2.5px solid ${form.starColor || '#38bdf8'};
-          border-radius: 36px;
-          padding: 1.5rem 1.2rem;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: space-between;
-          text-align: center;
-          cursor: pointer;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px ${form.glowColor || 'rgba(56,189,248,0.3)'};
-          transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          animation: popTab 0.4s ease ${idx * 0.12}s both;
-        `;
-
-        const starGlint = `
-          <div style="position: absolute; top: -14px; font-size: 1.6rem; filter: drop-shadow(0 0 8px ${form.starColor});">⭐</div>
-        `;
-
-        const coloredSample = (form.sample || '').replace(/([َُِ])/g, '<span style="color:#fde047; font-size: 2.3rem;">$1</span>');
-
-        starCard.innerHTML = `
-          ${starGlint}
-          <div style="background: rgba(255, 255, 255, 0.06); border: 1.5px solid rgba(255, 255, 255, 0.15); border-radius: 20px; padding: 8px 14px; width: 85%; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 6px;">
-            <span style="font-size: 2rem;">${form.icon || '✨'}</span>
-            <span style="font-size: 1.8rem;">${form.illu || '🌟'}</span>
-          </div>
-
-          <div style="margin: 10px 0 4px 0;">
-            <div style="font-size: 2.2rem; font-weight: 900; color: #ffffff; letter-spacing: 1px; text-shadow: 0 0 20px ${form.glowColor};">${coloredSample}</div>
-            <div style="color: ${form.starColor}; font-weight: 800; font-size: 0.85rem; margin-top: 4px;">${form.label}</div>
-          </div>
-
-          <div style="background: rgba(15, 23, 42, 0.7); border: 1px dashed rgba(255,255,255,0.2); border-radius: 12px; padding: 5px 10px; font-size: 0.75rem; color: #cbd5e1; font-weight: 600; width: 92%;">
-            💡 ${form.meaning || 'صِيغَةٌ ثُلَاثِيَّةٌ صَحِيحَةٌ'}
-          </div>
-
-          <div style="margin-top: 8px; background: linear-gradient(90deg, ${form.starColor}, #38bdf8); color: #090a0f; font-weight: 900; font-size: 0.82rem; padding: 6px 18px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
-            انْطَلِقْ لِلشَّمْسِ ⟵
-          </div>
-        `;
-
-        starCard.onmouseover = () => {
-          starCard.style.transform = 'translateY(-12px) scale(1.06)';
-          starCard.style.boxShadow = `0 18px 45px rgba(0, 0, 0, 0.8), 0 0 45px ${form.starColor}`;
-          starCard.style.borderColor = '#ffffff';
-        };
-
-        starCard.onmouseout = () => {
-          starCard.style.transform = 'none';
-          starCard.style.boxShadow = `0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px ${form.glowColor}`;
-          starCard.style.borderColor = form.starColor;
-        };
-
-        starCard.onclick = () => selectFormAndLaunch(form.val);
-        container.appendChild(starCard);
-      });
+  // بيانات النجوم الثلاثة: صور تعبيرية، حركات ملونة، ومعانٍ تقرب المفهوم
+  const starData = [
+    {
+      sample: "كَتَبَ",
+      label: "فَعَلَ (بِفَتْحِ العَيْنِ)",
+      val: "كتب",
+      icon: "✍️",
+      illu: "📜",
+      meaning: "تَدْوِينُ وَخَطُّ الحُرُوفِ",
+      baseGrad: "radial-gradient(circle at 35% 30%, #38bdf8 0%, #0284c7 50%, #082f49 100%)",
+      glowColor: "rgba(56, 189, 248, 0.9)",
+      badgeBg: "rgba(56, 189, 248, 0.2)"
+    },
+    {
+      sample: "فَرِحَ",
+      label: "فَعِلَ (بِكَسْرِ العَيْنِ)",
+      val: "درس",
+      icon: "😄",
+      illu: "🎉",
+      meaning: "السَّعَادَةُ وَانْشِرَاحُ الصَّدْرِ",
+      baseGrad: "radial-gradient(circle at 35% 30%, #fef08a 0%, #f59e0b 55%, #78350f 100%)",
+      glowColor: "rgba(245, 158, 11, 0.95)",
+      badgeBg: "rgba(245, 158, 11, 0.25)"
+    },
+    {
+      sample: "كَرُمَ",
+      label: "فَعُلَ (بِضَمِّ العَيْنِ)",
+      val: "كتب",
+      icon: "🤲",
+      illu: "🎁",
+      meaning: "الجُودُ وَالسَّخَاءُ وَالفَضْلُ",
+      baseGrad: "radial-gradient(circle at 35% 30%, #6ee7b7 0%, #059669 55%, #064e3b 100%)",
+      glowColor: "rgba(16, 185, 129, 0.9)",
+      badgeBg: "rgba(16, 185, 129, 0.2)"
     }
+  ];
+
+  starData.forEach((st, idx) => {
+    // الحاوية الكلية للنجم
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = `
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: popTab 0.4s ease ${idx * 0.15}s both;
+    `;
+
+    // جسم النجم الخماسي المشع هندسياً
+    const starBody = document.createElement('div');
+    starBody.style.cssText = `
+      position: relative;
+      width: 190px;
+      height: 190px;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      background: ${st.baseGrad};
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 0 25px ${st.glowColor});
+      transition: transform 0.4s ease, filter 0.4s ease;
+    `;
+
+    // القلب المركزي للنجم ليحتوي الفعل والرسوم
+    const innerCore = document.createElement('div');
+    innerCore.style.cssText = `
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(2px);
+      z-index: 5;
+    `;
+
+    // تلوين عين الفعل بالأصفر المشع
+    const coloredSample = st.sample.replace(/([َُِ])/g, '<span style="color:#ffffff; text-shadow: 0 0 10px #ffffff;">$1</span>');
+
+    innerCore.innerHTML = `
+      <div style="display: flex; gap: 4px; font-size: 1.55rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));">
+        <span>${st.icon}</span><span>${st.illu}</span>
+      </div>
+      <div style="font-size: 2.1rem; font-weight: 900; color: #fffbeb; text-shadow: 0 2px 10px rgba(0,0,0,0.8); margin-top: -2px;">
+        ${coloredSample}
+      </div>
+    `;
+    starBody.appendChild(innerCore);
+
+    // بطاقة الشرح المرافقة أسفل النجم
+    const descPill = document.createElement('div');
+    descPill.style.cssText = `
+      background: rgba(15, 23, 42, 0.9);
+      border: 1.5px solid ${st.glowColor};
+      border-radius: 20px;
+      padding: 8px 16px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      max-width: 220px;
+    `;
+    descPill.innerHTML = `
+      <div style="color: #fef08a; font-weight: 900; font-size: 0.92rem;">${st.label}</div>
+      <div style="color: #cbd5e1; font-size: 0.76rem; font-weight: 600; margin-top: 3px;">💡 ${st.meaning}</div>
+      <div style="color: #38bdf8; font-weight: 800; font-size: 0.78rem; margin-top: 5px;">انْطَلِقْ لِلشَّمْسِ ⟵</div>
+    `;
+
+    wrapper.appendChild(starBody);
+    wrapper.appendChild(descPill);
+
+    // تفاعل التمرير (التحليق والتوهج)
+    wrapper.onmouseover = () => {
+      wrapper.style.transform = 'translateY(-14px) scale(1.1)';
+      starBody.style.filter = `drop-shadow(0 0 45px ${st.glowColor}) drop-shadow(0 0 15px #fff)`;
+    };
+    wrapper.onmouseout = () => {
+      wrapper.style.transform = 'none';
+      starBody.style.filter = `drop-shadow(0 0 25px ${st.glowColor})`;
+    };
+
+    wrapper.onclick = () => selectFormAndLaunch(st.val);
+    container.appendChild(wrapper);
+  });
+}
     
     // الانتقال المباشر لشمس الجذر
     function selectFormAndLaunch(rootKey) {
