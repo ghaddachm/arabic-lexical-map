@@ -1147,7 +1147,7 @@
       if (lvl2) lvl2.style.display = 'block';
     }
 
-    // زر التوجيه الذكي المتكيف مع سياق الفضاء المعروض
+// زر التوجيه الذكي المتكيف سياقياً مع المستوى المفتوح
 function toggleGuideModal() {
   const modal = document.getElementById('guideModalBox');
   if (!modal) return;
@@ -1158,21 +1158,35 @@ function toggleGuideModal() {
     return;
   }
 
-  // فحص هل نافذة الكواكب أو الأقمار مفتوحة حالياً بأي من حالات العرض
   const galaxyModal = document.getElementById('galaxyModal');
-  const isGalaxyOpen = galaxyModal && (galaxyModal.style.display === 'flex' || galaxyModal.style.display === 'block' || (galaxyModal.offsetParent !== null && galaxyModal.style.display !== 'none'));
+  const isGalaxyOpen = galaxyModal && (galaxyModal.style.display === 'flex' || galaxyModal.style.display === 'block');
 
+  const lvl2 = document.getElementById('cosmicLevel2');
+  const isLevel2Open = isGalaxyOpen && lvl2 && (lvl2.style.display === 'block' || lvl2.style.display === 'flex');
+
+  // عناصر المحتوى الثلاثة
   const contentLang = document.getElementById('guideContentLanguage');
   const contentVerbs = document.getElementById('guideContentVerbs');
+  const contentTriadic = document.getElementById('guideContentTriadic');
 
-  if (isGalaxyOpen) {
-    // إظهار بوصلة الملاحة الخاصة بالأفعال والكواكب
-    if (contentLang) contentLang.style.display = 'none';
+  // إخفاء كل المحتويات أولاً لتفادي أي تداخل
+  if (contentLang) contentLang.style.display = 'none';
+  if (contentVerbs) contentVerbs.style.display = 'none';
+  if (contentTriadic) contentTriadic.style.display = 'none';
+
+  if (isLevel2Open) {
+    // 1. مدار أقمار الفعل الثلاثي (الشاشة الحالية)
+    if (contentTriadic) {
+      contentTriadic.style.display = 'block';
+    } else if (contentVerbs) {
+      contentVerbs.style.display = 'block';
+    }
+  } else if (isGalaxyOpen) {
+    // 2. واجهة اختيار الكواكب الكبرى الأربعة
     if (contentVerbs) contentVerbs.style.display = 'block';
   } else {
-    // إظهار خارطة المسار الصرفي لمحطات المنصة
+    // 3. الواجهة الرئيسية للمنصة (محطات اللغة)
     if (contentLang) contentLang.style.display = 'block';
-    if (contentVerbs) contentVerbs.style.display = 'none';
   }
 
   modal.style.display = 'flex';
@@ -1211,13 +1225,13 @@ function toggleGuideModal() {
     };
   </script>
 
-  <!-- 🧭 نافذة التوجيه الذكية -->
+<!-- 🧭 نافذة التوجيه الذكية -->
   <div id="guideModalBox" style="display: none; position: fixed; inset: 0; background: rgba(3, 7, 18, 0.88); backdrop-filter: blur(10px); z-index: 2147483647; align-items: center; justify-content: center; padding: 1.2rem; font-family: 'Segoe UI', Tahoma, sans-serif;">
     <div style="background: rgba(15, 23, 42, 0.98); border: 2.5px solid #38bdf8; border-radius: 26px; max-width: 590px; width: 92%; padding: 2rem; color: #fff; text-align: right; box-shadow: 0 0 45px rgba(56, 189, 248, 0.4); position: relative;">
       
       <button type="button" onclick="toggleGuideModal()" style="position: absolute; top: 16px; left: 18px; background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.2); color: #cbd5e1; border-radius: 50%; width: 34px; height: 34px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center;">✕</button>
 
-      <!-- خارطة المسار الصرفي -->
+      <!-- 1. خارطة المسار الصرفي (خاص بالواجهة الرئيسية) -->
       <div id="guideContentLanguage" style="display: block;">
         <div style="display: flex; align-items: center; gap: 0.6rem; border-bottom: 1.5px solid rgba(56, 189, 248, 0.25); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
           <span style="font-size: 1.8rem;">🧭</span>
@@ -1250,7 +1264,7 @@ function toggleGuideModal() {
         </button>
       </div>
 
-      <!-- دليل كواكب الأفعال -->
+      <!-- 2. بوصلة كواكب الأفعال (خاص بواجهة اختيار الكواكب الكبرى الأربعة) -->
       <div id="guideContentVerbs" style="display: none;">
         <div style="display: flex; align-items: center; gap: 0.6rem; border-bottom: 1.5px solid rgba(56, 189, 248, 0.25); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
           <span style="font-size: 1.8rem;">🪐</span>
@@ -1281,6 +1295,36 @@ function toggleGuideModal() {
 
         <button type="button" onclick="toggleGuideModal()" style="margin-top: 1.3rem; width: 100%; padding: 0.8rem; border-radius: 50px; background: linear-gradient(90deg, #0284c7, #38bdf8); border: none; color: #04101e; font-weight: 900; font-size: 1.05rem; cursor: pointer; box-shadow: 0 4px 18px rgba(56, 189, 248, 0.4);">
           فَهِمْتُ المَسَارَ، لِنُوَاصِلِ الاسْتِكْشَافَ! 🚀
+        </button>
+      </div>
+
+      <!-- 3. بطاقة مدار الفعل الثلاثي (خاص بمدار الأقمار المفتوح حالياً) -->
+      <div id="guideContentTriadic" style="display: none;">
+        <div style="display: flex; align-items: center; gap: 0.6rem; border-bottom: 1.5px solid rgba(56, 189, 248, 0.25); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
+          <span style="font-size: 1.8rem;">🌙</span>
+          <div>
+            <h3 style="margin: 0; color: #38bdf8; font-size: 1.35rem; font-weight: 900;">مَدَارُ الفِعْلِ الثُّلَاثِيِّ (الصَّحِيحُ)</h3>
+            <p style="margin: 2px 0 0; color: #94a3b8; font-size: 0.85rem;">دَلِيلُ اسْتِكْشَافِ الأَقْمَارِ وَالأَوْزَانِ الثُّلَاثِيَّةِ</p>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.92rem; line-height: 1.65; color: #cbd5e1;">
+          <div style="background: rgba(56, 189, 248, 0.12); border-right: 4px solid #38bdf8; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #38bdf8;">🛡️ قَمَرُ السَّالِمِ (الأَوْزَانُ الأَصْلِيَّةُ):</strong><br>
+            مَا سَلِمَتْ أُصُولُهُ مِنَ الهَمْزِ وَالتَّضْعِيفِ؛ وَيَتَمَثَّلُ فِي الأَوْزَانِ الثَّلَاثَةِ المشهورة: <span style="color: #fde047;">فَعَلَ</span> (كَتَبَ)، <span style="color: #fde047;">فَعِلَ</span> (فَرِحَ)، و<span style="color: #fde047;">فَعُلَ</span> (كَرُمَ).
+          </div>
+          <div style="background: rgba(2, 132, 199, 0.12); border-right: 4px solid #0284c7; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #60a5fa;">🪢 قَمَرُ المُضَعَّفِ (الشِّدَّةُ وَالإِدْغَامُ):</strong><br>
+            مَا كَانَ حَرْفَانِ مِنْ أُصُولِهِ مِنْ جِنْسٍ وَاحِدٍ انْدَمَجَا فِي حَرْفٍ مُشَدَّدٍ؛ مِثْلُ: <span style="color: #bae6fd;">مَدَّ (مَدَدَ)</span> وَ<span style="color: #bae6fd;">شَدَّ</span>.
+          </div>
+          <div style="background: rgba(245, 158, 11, 0.12); border-right: 4px solid #f59e0b; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #fbbf24;">⚡ قَمَرُ المَهْمُوزِ (نَبْرَةُ الهَمْزَةِ):</strong><br>
+            مَا كَانَ أَحَدُ حُرُوفِهِ الأَصْلِيَّةِ هَمْزَةً، سَوَاءً فِي الفَاءِ: <span style="color: #fef08a;">أَخَذَ</span>، أَوْ فِي العَيْنِ: <span style="color: #fef08a;">سَأَلَ</span>، أَوْ فِي اللَّامِ: <span style="color: #fef08a;">قَرَأَ</span>.
+          </div>
+        </div>
+
+        <button type="button" onclick="toggleGuideModal()" style="margin-top: 1.3rem; width: 100%; padding: 0.8rem; border-radius: 50px; background: linear-gradient(90deg, #0284c7, #38bdf8); border: none; color: #04101e; font-weight: 900; font-size: 1.05rem; cursor: pointer; box-shadow: 0 4px 18px rgba(56, 189, 248, 0.4);">
+          وَاضِحٌ، لِنُكْمِلِ اسْتِكْشَافَ المَدَارِ! 🚀
         </button>
       </div>
 
