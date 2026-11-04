@@ -1063,7 +1063,7 @@
       });
     }
 
-// فتح المستوى الثالث: أقراص الأوزان والصيغ التفاعلية
+// فتح المستوى الثالث: نجوم الصيغ والأوزان المضيئة بالرسوم الدلالية
     function openMoonForms(moon) {
       currentSelectedMoon = moon;
       const lvl2 = document.getElementById('cosmicLevel2');
@@ -1075,57 +1075,112 @@
       if (lvl3) lvl3.style.display = 'block';
 
       if (title) {
-        title.innerHTML = `🌟 صِيَغُ وَأَوْزَانُ: <span style="color:#38bdf8;">${moon.name}</span>`;
+        title.innerHTML = `🌟 صِيَغُ وَأَوْزَانُ الفِعْلِ الصَّحِيحِ السَّالِمِ`;
+        title.style.color = '#fde047';
+        title.style.textShadow = '0 0 25px rgba(250, 204, 21, 0.7)';
       }
       if (!container) return;
 
       container.innerHTML = '';
+      container.style.cssText = 'display: flex; gap: clamp(25px, 4vw, 45px); justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 25px; padding: 10px;';
 
-      (moon.forms || []).forEach((form, idx) => {
-        const card = document.createElement('div');
-        card.style.cssText = `
-          background: radial-gradient(circle at 35% 30%, rgba(30, 41, 59, 0.98), rgba(15, 23, 42, 0.98));
-          border: 2.5px solid ${moon.color || '#38bdf8'};
-          border-radius: 28px;
-          padding: 1.4rem 2rem;
-          min-width: 220px;
-          max-width: 260px;
+      const visualForms = [
+        {
+          sample: "كَتَبَ",
+          label: "وَزْنُ (فَعَلَ) - بِفَتْحِ العَيْنِ",
+          val: "كتب",
+          icon: "✍️",
+          illu: "📜",
+          meaning: "تَدْوِينُ الكَلِمَاتِ وَالحُرُوفِ",
+          starColor: "#38bdf8",
+          glowColor: "rgba(56, 189, 248, 0.65)"
+        },
+        {
+          sample: "فَرِحَ",
+          label: "وَزْنُ (فَعِلَ) - بِكَسْرِ العَيْنِ",
+          val: "درس",
+          icon: "😄",
+          illu: "🎉",
+          meaning: "الشُّعُورُ بِالسَّعَادَةِ وَالبَهْجَةِ",
+          starColor: "#fbbf24",
+          glowColor: "rgba(251, 191, 36, 0.7)"
+        },
+        {
+          sample: "كَرُمَ",
+          label: "وَزْنُ (فَعُلَ) - بِضَمِّ العَيْنِ",
+          val: "كتب",
+          icon: "🤲",
+          illu: "🎁",
+          meaning: "الجُودُ وَالسَّخَاءُ وَحُسْنُ الخُلُقِ",
+          starColor: "#34d399",
+          glowColor: "rgba(52, 211, 153, 0.7)"
+        }
+      ];
+
+      const formsList = (moon && moon.id === 'salim') ? visualForms : (moon.forms || []);
+
+      formsList.forEach((form, idx) => {
+        const starCard = document.createElement('div');
+        starCard.style.cssText = `
+          position: relative;
+          width: 250px;
+          min-height: 290px;
+          background: radial-gradient(circle at 40% 30%, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+          border: 2.5px solid ${form.starColor || '#38bdf8'};
+          border-radius: 36px;
+          padding: 1.5rem 1.2rem;
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 10px;
+          justify-content: space-between;
+          text-align: center;
           cursor: pointer;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.5), inset 0 0 15px rgba(56, 189, 248, 0.08);
-          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          animation: popTab 0.35s ease ${idx * 0.1}s both;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px ${form.glowColor || 'rgba(56,189,248,0.3)'};
+          transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          animation: popTab 0.4s ease ${idx * 0.12}s both;
         `;
 
-        // إبراز الحركات الصرفية (الفتحة، الكسرة، الضمة) بلون ذهبي متوهج لتركيز الانتباه الديداكتيكي
-        const coloredSample = (form.sample || '').replace(/([َُِ])/g, '<span style="color:#fde047;">$1</span>');
+        const starGlint = `
+          <div style="position: absolute; top: -14px; font-size: 1.6rem; filter: drop-shadow(0 0 8px ${form.starColor});">⭐</div>
+        `;
 
-        card.innerHTML = `
-          <div style="font-size: 2.2rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));">${moon.symbol || '⚖️'}</div>
-          <div style="font-size: 2.1rem; font-weight: 900; color: #ffffff; letter-spacing: 1px; text-shadow: 0 0 15px rgba(253, 224, 71, 0.5);">${coloredSample}</div>
-          <div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 14px; font-size: 0.82rem; color: #94a3b8; font-weight: 600;">${form.label || ''}</div>
-          <div style="margin-top: 6px; font-size: 0.85rem; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 4px;">
-            <span>انْطَلِقْ لِلشَّمْسِ</span> ⟵
+        const coloredSample = (form.sample || '').replace(/([َُِ])/g, '<span style="color:#fde047; font-size: 2.3rem;">$1</span>');
+
+        starCard.innerHTML = `
+          ${starGlint}
+          <div style="background: rgba(255, 255, 255, 0.06); border: 1.5px solid rgba(255, 255, 255, 0.15); border-radius: 20px; padding: 8px 14px; width: 85%; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 6px;">
+            <span style="font-size: 2rem;">${form.icon || '✨'}</span>
+            <span style="font-size: 1.8rem;">${form.illu || '🌟'}</span>
+          </div>
+
+          <div style="margin: 10px 0 4px 0;">
+            <div style="font-size: 2.2rem; font-weight: 900; color: #ffffff; letter-spacing: 1px; text-shadow: 0 0 20px ${form.glowColor};">${coloredSample}</div>
+            <div style="color: ${form.starColor}; font-weight: 800; font-size: 0.85rem; margin-top: 4px;">${form.label}</div>
+          </div>
+
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px dashed rgba(255,255,255,0.2); border-radius: 12px; padding: 5px 10px; font-size: 0.75rem; color: #cbd5e1; font-weight: 600; width: 92%;">
+            💡 ${form.meaning || 'صِيغَةٌ ثُلَاثِيَّةٌ صَحِيحَةٌ'}
+          </div>
+
+          <div style="margin-top: 8px; background: linear-gradient(90deg, ${form.starColor}, #38bdf8); color: #090a0f; font-weight: 900; font-size: 0.82rem; padding: 6px 18px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+            انْطَلِقْ لِلشَّمْسِ ⟵
           </div>
         `;
 
-        card.onmouseover = () => {
-          card.style.transform = 'translateY(-10px) scale(1.06)';
-          card.style.borderColor = '#fde047';
-          card.style.boxShadow = `0 15px 35px rgba(245, 158, 11, 0.4), inset 0 0 20px rgba(253, 224, 71, 0.2)`;
+        starCard.onmouseover = () => {
+          starCard.style.transform = 'translateY(-12px) scale(1.06)';
+          starCard.style.boxShadow = `0 18px 45px rgba(0, 0, 0, 0.8), 0 0 45px ${form.starColor}`;
+          starCard.style.borderColor = '#ffffff';
         };
 
-        card.onmouseout = () => {
-          card.style.transform = 'none';
-          card.style.borderColor = moon.color || '#38bdf8';
-          card.style.boxShadow = '0 10px 25px rgba(0,0,0,0.5), inset 0 0 15px rgba(56, 189, 248, 0.08)';
+        starCard.onmouseout = () => {
+          starCard.style.transform = 'none';
+          starCard.style.boxShadow = `0 10px 30px rgba(0, 0, 0, 0.6), 0 0 25px ${form.glowColor}`;
+          starCard.style.borderColor = form.starColor;
         };
 
-        card.onclick = () => selectFormAndLaunch(form.val);
-        container.appendChild(card);
+        starCard.onclick = () => selectFormAndLaunch(form.val);
+        container.appendChild(starCard);
       });
     }
     
