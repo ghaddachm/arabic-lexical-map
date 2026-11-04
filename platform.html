@@ -1062,7 +1062,7 @@
       });
     }
 
-// فتح المستوى الثالث: نجوم الأوزان والصيغ التفاعلية ذات التوهج الفضائي
+// فتح المستوى الثالث: بطاقات الأوزان الفضائية الأنيقة مع إبراز عين الفعل بالأحمر
 function openMoonForms(moon) {
   currentSelectedMoon = moon;
   const lvl2 = document.getElementById('cosmicLevel2');
@@ -1073,140 +1073,129 @@ function openMoonForms(moon) {
   if (lvl2) lvl2.style.display = 'none';
   if (lvl3) lvl3.style.display = 'block';
 
-  // التسمية الدقيقة
   if (title) {
     title.innerHTML = `⭐ صِيَغُ وَأَوْزَانُ الفِعْلِ الصَّحِيحِ السَّالِمِ`;
     title.style.color = '#fde047';
-    title.style.textShadow = '0 0 30px rgba(250, 204, 21, 0.8), 0 0 10px #f59e0b';
+    title.style.fontSize = 'clamp(1.9rem, 3.2vw, 2.6rem)';
+    title.style.textShadow = '0 0 25px rgba(250, 204, 21, 0.6)';
   }
   if (!container) return;
 
   container.innerHTML = '';
-  container.style.cssText = 'display: flex; gap: clamp(25px, 4vw, 55px); justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 35px; padding: 20px 10px;';
+  container.style.cssText = 'display: flex; gap: clamp(20px, 3.5vw, 40px); justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 35px; padding: 10px;';
 
-  // بيانات النجوم الثلاثة: صور تعبيرية، حركات ملونة، ومعانٍ تقرب المفهوم
-  const starData = [
+  // البيانات الصرفية المحددة بدقة دون أي حشو
+  const cleanForms = [
     {
-      sample: "كَتَبَ",
-      label: "فَعَلَ (بِفَتْحِ العَيْنِ)",
+      formattedVerb: `كَـ<span style="color:#ef4444; font-size: 2.7rem; font-weight: 900; text-shadow: 0 0 16px rgba(239, 68, 68, 0.8);">تَـ</span>بَ`,
+      weightText: "كَتَبَ عَلَى وَزْنِ فَعَلَ بِفَتْحِ العَيْنِ",
       val: "كتب",
-      icon: "✍️",
-      illu: "📜",
-      meaning: "تَدْوِينُ وَخَطُّ الحُرُوفِ",
-      baseGrad: "radial-gradient(circle at 35% 30%, #38bdf8 0%, #0284c7 50%, #082f49 100%)",
-      glowColor: "rgba(56, 189, 248, 0.9)",
-      badgeBg: "rgba(56, 189, 248, 0.2)"
+      themeColor: "#38bdf8",
+      glowColor: "rgba(56, 189, 248, 0.45)"
     },
     {
-      sample: "فَرِحَ",
-      label: "فَعِلَ (بِكَسْرِ العَيْنِ)",
+      formattedVerb: `فَـ<span style="color:#ef4444; font-size: 2.7rem; font-weight: 900; text-shadow: 0 0 16px rgba(239, 68, 68, 0.8);">رِ</span>حَ`,
+      weightText: "فَرِحَ عَلَى وَزْنِ فَعِلَ بِكَسْرِ العَيْنِ",
       val: "درس",
-      icon: "😄",
-      illu: "🎉",
-      meaning: "السَّعَادَةُ وَانْشِرَاحُ الصَّدْرِ",
-      baseGrad: "radial-gradient(circle at 35% 30%, #fef08a 0%, #f59e0b 55%, #78350f 100%)",
-      glowColor: "rgba(245, 158, 11, 0.95)",
-      badgeBg: "rgba(245, 158, 11, 0.25)"
+      themeColor: "#f59e0b",
+      glowColor: "rgba(245, 158, 11, 0.45)"
     },
     {
-      sample: "كَرُمَ",
-      label: "فَعُلَ (بِضَمِّ العَيْنِ)",
+      formattedVerb: `كَـ<span style="color:#ef4444; font-size: 2.7rem; font-weight: 900; text-shadow: 0 0 16px rgba(239, 68, 68, 0.8);">رُ</span>مَ`,
+      weightText: "كَرُمَ عَلَى وَزْنِ فَعُلَ بِضَمِّ العَيْنِ",
       val: "كتب",
-      icon: "🤲",
-      illu: "🎁",
-      meaning: "الجُودُ وَالسَّخَاءُ وَالفَضْلُ",
-      baseGrad: "radial-gradient(circle at 35% 30%, #6ee7b7 0%, #059669 55%, #064e3b 100%)",
-      glowColor: "rgba(16, 185, 129, 0.9)",
-      badgeBg: "rgba(16, 185, 129, 0.2)"
+      themeColor: "#10b981",
+      glowColor: "rgba(16, 185, 129, 0.45)"
     }
   ];
 
-  starData.forEach((st, idx) => {
-    // الحاوية الكلية للنجم
-    const wrapper = document.createElement('div');
-    wrapper.style.cssText = `
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      animation: popTab 0.4s ease ${idx * 0.15}s both;
-    `;
-
-    // جسم النجم الخماسي المشع هندسياً
-    const starBody = document.createElement('div');
-    starBody.style.cssText = `
+  cleanForms.forEach((st, idx) => {
+    const card = document.createElement('div');
+    card.style.cssText = `
       position: relative;
-      width: 190px;
-      height: 190px;
-      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-      background: ${st.baseGrad};
+      width: 250px;
+      min-height: 230px;
+      background: linear-gradient(160deg, rgba(22, 27, 54, 0.95) 0%, rgba(10, 14, 35, 0.98) 100%);
+      border: 2px solid ${st.themeColor};
+      border-radius: 28px;
+      padding: 1.8rem 1.2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      filter: drop-shadow(0 0 25px ${st.glowColor});
-      transition: transform 0.4s ease, filter 0.4s ease;
-    `;
-
-    // القلب المركزي للنجم ليحتوي الفعل والرسوم
-    const innerCore = document.createElement('div');
-    innerCore.style.cssText = `
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transform: translateY(2px);
-      z-index: 5;
-    `;
-
-    // تلوين عين الفعل بالأصفر المشع
-    const coloredSample = st.sample.replace(/([َُِ])/g, '<span style="color:#ffffff; text-shadow: 0 0 10px #ffffff;">$1</span>');
-
-    innerCore.innerHTML = `
-      <div style="display: flex; gap: 4px; font-size: 1.55rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));">
-        <span>${st.icon}</span><span>${st.illu}</span>
-      </div>
-      <div style="font-size: 2.1rem; font-weight: 900; color: #fffbeb; text-shadow: 0 2px 10px rgba(0,0,0,0.8); margin-top: -2px;">
-        ${coloredSample}
-      </div>
-    `;
-    starBody.appendChild(innerCore);
-
-    // بطاقة الشرح المرافقة أسفل النجم
-    const descPill = document.createElement('div');
-    descPill.style.cssText = `
-      background: rgba(15, 23, 42, 0.9);
-      border: 1.5px solid ${st.glowColor};
-      border-radius: 20px;
-      padding: 8px 16px;
+      gap: 16px;
       text-align: center;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-      max-width: 220px;
-    `;
-    descPill.innerHTML = `
-      <div style="color: #fef08a; font-weight: 900; font-size: 0.92rem;">${st.label}</div>
-      <div style="color: #cbd5e1; font-size: 0.76rem; font-weight: 600; margin-top: 3px;">💡 ${st.meaning}</div>
-      <div style="color: #38bdf8; font-weight: 800; font-size: 0.78rem; margin-top: 5px;">انْطَلِقْ لِلشَّمْسِ ⟵</div>
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55), 0 0 20px ${st.glowColor};
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: popTab 0.4s ease ${idx * 0.12}s both;
     `;
 
-    wrapper.appendChild(starBody);
-    wrapper.appendChild(descPill);
+    // نجمة ذهبية ناعمة تزين أعلى البطاقة
+    const topStar = document.createElement('div');
+    topStar.style.cssText = `
+      font-size: 1.8rem;
+      filter: drop-shadow(0 0 10px #fde047);
+      margin-bottom: -6px;
+    `;
+    topStar.innerText = "⭐";
 
-    // تفاعل التمرير (التحليق والتوهج)
-    wrapper.onmouseover = () => {
-      wrapper.style.transform = 'translateY(-14px) scale(1.1)';
-      starBody.style.filter = `drop-shadow(0 0 45px ${st.glowColor}) drop-shadow(0 0 15px #fff)`;
-    };
-    wrapper.onmouseout = () => {
-      wrapper.style.transform = 'none';
-      starBody.style.filter = `drop-shadow(0 0 25px ${st.glowColor})`;
+    // الفعل بحركاته مع اللون الأحمر لعين الفعل
+    const verbBox = document.createElement('div');
+    verbBox.style.cssText = `
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 1px;
+    `;
+    verbBox.innerHTML = st.formattedVerb;
+
+    // العبارة الوزنية الصافية
+    const weightBox = document.createElement('div');
+    weightBox.style.cssText = `
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 6px 12px;
+      color: #e2e8f0;
+      font-size: 0.88rem;
+      font-weight: 700;
+      line-height: 1.5;
+    `;
+    weightBox.innerText = st.weightText;
+
+    // زر الانطلاق الصغير لشمس الجذر
+    const launchBtn = document.createElement('div');
+    launchBtn.style.cssText = `
+      margin-top: 4px;
+      color: ${st.themeColor};
+      font-size: 0.85rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    `;
+    launchBtn.innerHTML = `<span>انْطَلِقْ لِلشَّمْسِ</span> ⟵`;
+
+    card.appendChild(topStar);
+    card.appendChild(verbBox);
+    card.appendChild(weightBox);
+    card.appendChild(launchBtn);
+
+    card.onmouseover = () => {
+      card.style.transform = 'translateY(-10px) scale(1.04)';
+      card.style.borderColor = '#ffffff';
+      card.style.boxShadow = `0 18px 40px rgba(0, 0, 0, 0.7), 0 0 30px ${st.themeColor}`;
     };
 
-    wrapper.onclick = () => selectFormAndLaunch(st.val);
-    container.appendChild(wrapper);
+    card.onmouseout = () => {
+      card.style.transform = 'none';
+      card.style.borderColor = st.themeColor;
+      card.style.boxShadow = `0 12px 30px rgba(0, 0, 0, 0.55), 0 0 20px ${st.glowColor}`;
+    };
+
+    card.onclick = () => selectFormAndLaunch(st.val);
+    container.appendChild(card);
   });
 }
     
