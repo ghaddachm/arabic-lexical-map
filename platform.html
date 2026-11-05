@@ -578,8 +578,7 @@
   </div>
 
   <!-- 🪐 فضاء كواكب الأفعال الكونية -->
-<div id="galaxyModal" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 15%, #3b1d75 0%, #1e1b4b 35%, #0f172a 70%, #030712 100%); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; backdrop-filter: blur(14px); overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif;">    <!-- سُدم الفضاء الغامرة -->
-    <div class="cosmic-decor-item" style="position: absolute; width: 750px; height: 750px; background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%); top: -120px; left: -80px; filter: blur(80px); pointer-events: none;"></div>
+<div id="galaxyModal" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 18%, #281457 0%, #0f1738 45%, #050816 100%); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; backdrop-filter: blur(16px); overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif;">    <div class="cosmic-decor-item" style="position: absolute; width: 750px; height: 750px; background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%); top: -120px; left: -80px; filter: blur(80px); pointer-events: none;"></div>
     <div class="cosmic-decor-item" style="position: absolute; width: 850px; height: 850px; background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 75%); bottom: -180px; right: -120px; filter: blur(85px); pointer-events: none;"></div>
     <div class="cosmic-decor-item" style="position: absolute; width: 650px; height: 650px; background: radial-gradient(circle, rgba(245, 158, 11, 0.16) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); filter: blur(70px); pointer-events: none;"></div>
 
@@ -1061,7 +1060,7 @@
       });
     }
 
-// فتح المستوى الثالث: أقراص الأوزان البلورية المريحة ديداكتيكياً
+// المستوى الثالث: فضاء النجوم الكريستالية المتوهجة والأوزان القياسية
 function openMoonForms(moon) {
   currentSelectedMoon = moon;
   const lvl2 = document.getElementById('cosmicLevel2');
@@ -1072,84 +1071,139 @@ function openMoonForms(moon) {
   if (lvl2) lvl2.style.display = 'none';
   if (lvl3) lvl3.style.display = 'block';
 
+  // عنوان الواجهة بهوية سديمية براقة
   if (title) {
-    title.innerHTML = `صِيَغُ وَأَوْزَانُ الفِعْلِ الصَّحِيحِ السَّالِمِ`;
-    title.style.color = '#fde047';
-    title.style.fontSize = 'clamp(1.8rem, 3vw, 2.4rem)';
-    title.style.textShadow = '0 0 20px rgba(253, 224, 71, 0.5)';
+    title.innerHTML = `✨ صِيَغُ وَأَوْزَانُ الفِعْلِ الصَّحِيحِ السَّالِمِ ✨`;
+    title.style.cssText = `
+      color: #fff;
+      font-size: clamp(2rem, 3.8vw, 2.9rem);
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 20px rgba(254, 240, 138, 0.6), 0 0 45px rgba(245, 158, 11, 0.4);
+    `;
   }
   if (!container) return;
 
   container.innerHTML = '';
-  container.style.cssText = 'display: flex; gap: clamp(20px, 3.5vw, 45px); justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 30px; padding: 10px;';
+  container.style.cssText = `
+    display: flex;
+    gap: clamp(24px, 4.5vw, 60px);
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 25px;
+    padding: 20px;
+    perspective: 1000px;
+  `;
 
-  const formsData = [
+  // الأوزان الثلاثة مع التلوين الحصري لعين الفعل بالأحمر الياقوتي المتوهج
+  const stars = [
     {
-      formattedVerb: `كَـ<span style="color:#ef4444; font-size: 2.6rem; font-weight: 900;">تَـ</span>بَ`,
-      weightText: "كَتَبَ عَلَى وَزْنِ فَعَلَ بِفَتْحِ العَيْنِ",
+      verbHtml: `كَـ<span style="color:#ff2a55; text-shadow:0 0 18px rgba(255,42,85,0.9); font-weight:900;">تَـ</span>بَ`,
+      text: "كَتَبَ عَلَى وَزْنِ فَعَلَ بِفَتْحِ العَيْنِ",
       val: "كتب",
-      accent: "#38bdf8",
-      glow: "rgba(56, 189, 248, 0.35)"
+      hue: "205", // أزرق سماوي
+      glow: "rgba(56, 189, 248, 0.5)",
+      accent: "#38bdf8"
     },
     {
-      formattedVerb: `فَـ<span style="color:#ef4444; font-size: 2.6rem; font-weight: 900;">رِ</span>حَ`,
-      weightText: "فَرِحَ عَلَى وَزْنِ فَعِلَ بِكَسْرِ العَيْنِ",
+      verbHtml: `فَـ<span style="color:#ff2a55; text-shadow:0 0 18px rgba(255,42,85,0.9); font-weight:900;">رِ</span>حَ`,
+      text: "فَرِحَ عَلَى وَزْنِ فَعِلَ بِكَسْرِ العَيْنِ",
       val: "درس",
-      accent: "#f59e0b",
-      glow: "rgba(245, 158, 11, 0.35)"
+      hue: "42", // ذهبي ساطع
+      glow: "rgba(251, 191, 36, 0.55)",
+      accent: "#fbbf24"
     },
     {
-      formattedVerb: `كَـ<span style="color:#ef4444; font-size: 2.6rem; font-weight: 900;">رُ</span>مَ`,
-      weightText: "كَرُمَ عَلَى وَزْنِ فَعُلَ بِضَمِّ العَيْنِ",
+      verbHtml: `كَـ<span style="color:#ff2a55; text-shadow:0 0 18px rgba(255,42,85,0.9); font-weight:900;">رُ</span>مَ`,
+      text: "كَرُمَ عَلَى وَزْنِ فَعُلَ بِضَمِّ العَيْنِ",
       val: "كتب",
-      accent: "#10b981",
-      glow: "rgba(16, 185, 129, 0.35)"
+      hue: "155", // زمردي كوني
+      glow: "rgba(52, 211, 153, 0.5)",
+      accent: "#34d399"
     }
   ];
 
-  formsData.forEach((item, idx) => {
+  stars.forEach((st, idx) => {
     const card = document.createElement('div');
     card.style.cssText = `
-      width: 240px;
-      min-height: 250px;
-      background: radial-gradient(circle at 50% 20%, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
-      border: 2px solid ${item.accent};
-      border-radius: 28px;
-      padding: 1.8rem 1.2rem;
+      position: relative;
+      width: 260px;
+      min-height: 310px;
+      background: radial-gradient(120% 100% at 50% 0%, rgba(30, 41, 75, 0.75) 0%, rgba(13, 17, 38, 0.95) 100%);
+      border: 1.8px solid rgba(255, 255, 255, 0.15);
+      border-top: 2px solid ${st.accent};
+      border-radius: 36px;
+      padding: 1.8rem 1.4rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      text-align: center;
       cursor: pointer;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px ${item.glow};
-      transition: all 0.3s ease;
-      animation: popTab 0.35s ease ${idx * 0.1}s both;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 35px ${st.glow}, inset 0 1px 1px rgba(255,255,255,0.3);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: popTab 0.45s ease ${idx * 0.12}s both;
     `;
 
-    card.innerHTML = `
-      <div style="font-size: 1.6rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));">⭐</div>
-      <div style="font-size: 2.4rem; font-weight: 900; color: #ffffff; letter-spacing: 1px;">
-        ${item.formattedVerb}
-      </div>
-      <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 14px; padding: 6px 10px; color: #e2e8f0; font-size: 0.85rem; font-weight: 700; line-height: 1.5; width: 100%;">
-        ${item.weightText}
-      </div>
-      <div style="color: ${item.accent}; font-size: 0.82rem; font-weight: 800; display: flex; align-items: center; gap: 4px; margin-top: 4px;">
-        <span>انْطَلِقْ لِلشَّمْسِ</span> ⟵
+    // النجمة الكريستالية المجسمة في الأعلى
+    const starIcon = `
+      <div style="position: relative; width: 84px; height: 84px; display: flex; align-items: center; justify-content: center;">
+        <div style="position: absolute; inset: -6px; background: radial-gradient(circle, ${st.glow} 0%, transparent 70%); border-radius: 50%; filter: blur(6px); animation: pulse 2.5s infinite alternate;"></div>
+        <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.5));">
+          <defs>
+            <linearGradient id="starGrad${idx}" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="45%" stop-color="${st.accent}"/>
+              <stop offset="100%" stop-color="#0f172a"/>
+            </linearGradient>
+          </defs>
+          <!-- نجمة مجسمة مشعة -->
+          <polygon points="50,5 64,36 98,38 72,61 80,95 50,76 20,95 28,61 2,38 36,36" fill="url(#starGrad${idx})" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="50" cy="50" r="14" fill="#ffffff" opacity="0.9" filter="blur(3px)"/>
+        </svg>
       </div>
     `;
 
-    card.onmouseover = () => {
-      card.style.transform = 'translateY(-8px)';
-      card.style.boxShadow = `0 16px 36px rgba(0, 0, 0, 0.7), 0 0 28px ${item.accent}`;
+    // الفعل بحركاته مع إبراز العين بالأحمر
+    const verbContainer = `
+      <div style="font-size: 2.7rem; font-weight: 900; color: #ffffff; letter-spacing: 2px; text-shadow: 0 3px 12px rgba(0,0,0,0.7); margin: 6px 0;">
+        ${st.verbHtml}
+      </div>
+    `;
+
+    // شريط الوزن الصرفي الزجاجي
+    const weightBadge = `
+      <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 7px 14px; color: #f1f5f9; font-size: 0.92rem; font-weight: 800; text-align: center; line-height: 1.5; width: 100%; box-shadow: inset 0 1px 2px rgba(255,255,255,0.1);">
+        ${st.text}
+      </div>
+    `;
+
+    // زر الانطلاق الصغير لشمس الجذر
+    const launchTag = `
+      <div style="margin-top: 10px; display: inline-flex; align-items: center; gap: 6px; padding: 6px 18px; border-radius: 50px; background: linear-gradient(90deg, ${st.accent}, #ffffff); color: #020617; font-weight: 900; font-size: 0.85rem; box-shadow: 0 4px 15px ${st.glow};">
+        <span>انْطَلِقْ لِلشَّمْسِ</span> 🚀
+      </div>
+    `;
+
+    card.innerHTML = `${starIcon}${verbContainer}${weightBadge}${launchTag}`;
+
+    card.onmouseenter = () => {
+      card.style.transform = 'translateY(-14px) scale(1.04)';
+      card.style.borderColor = st.accent;
+      card.style.boxShadow = `0 30px 60px rgba(0, 0, 0, 0.8), 0 0 50px ${st.accent}, inset 0 1px 2px rgba(255,255,255,0.6)`;
     };
-    card.onmouseout = () => {
-      card.style.transform = 'none';
-      card.style.boxShadow = `0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px ${item.glow}`;
+    card.onmouseleave = () => {
+      card.style.transform = 'translateY(0) scale(1)';
+      card.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+      card.style.borderTop = `2px solid ${st.accent}`;
+      card.style.boxShadow = `0 20px 45px rgba(0, 0, 0, 0.6), 0 0 35px ${st.glow}, inset 0 1px 1px rgba(255,255,255,0.3)`;
     };
 
-    card.onclick = () => selectFormAndLaunch(item.val);
+    card.onclick = () => selectFormAndLaunch(st.val);
     container.appendChild(card);
   });
 }
