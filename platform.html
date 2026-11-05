@@ -578,8 +578,7 @@
   </div>
 
   <!-- 🪐 فضاء كواكب الأفعال الكونية -->
-<div id="galaxyModal" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 20%, #2e1065 0%, #0f172a 50%, #030712 100%); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; backdrop-filter: blur(14px); overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif;">
-    <!-- سُدم الفضاء الغامرة -->
+<div id="galaxyModal" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 15%, #3b1d75 0%, #1e1b4b 35%, #0f172a 70%, #030712 100%); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; backdrop-filter: blur(14px); overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif;">    <!-- سُدم الفضاء الغامرة -->
     <div class="cosmic-decor-item" style="position: absolute; width: 750px; height: 750px; background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%); top: -120px; left: -80px; filter: blur(80px); pointer-events: none;"></div>
     <div class="cosmic-decor-item" style="position: absolute; width: 850px; height: 850px; background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 75%); bottom: -180px; right: -120px; filter: blur(85px); pointer-events: none;"></div>
     <div class="cosmic-decor-item" style="position: absolute; width: 650px; height: 650px; background: radial-gradient(circle, rgba(245, 158, 11, 0.16) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); filter: blur(70px); pointer-events: none;"></div>
@@ -1062,7 +1061,7 @@
       });
     }
 
-// فتح المستوى الثالث: بطاقات الأوزان الفضائية الأنيقة مع إبراز عين الفعل بالأحمر
+// فتح المستوى الثالث: نجوم الأوزان والصيغ التفاعلية بدون صناديق جامدة
 function openMoonForms(moon) {
   currentSelectedMoon = moon;
   const lvl2 = document.getElementById('cosmicLevel2');
@@ -1074,128 +1073,110 @@ function openMoonForms(moon) {
   if (lvl3) lvl3.style.display = 'block';
 
   if (title) {
-    title.innerHTML = `⭐ صِيَغُ وَأَوْزَانُ الفِعْلِ الصَّحِيحِ السَّالِمِ`;
-    title.style.color = '#fde047';
-    title.style.fontSize = 'clamp(1.9rem, 3.2vw, 2.6rem)';
-    title.style.textShadow = '0 0 25px rgba(250, 204, 21, 0.6)';
+    title.innerHTML = `✨ صِيَغُ وَأَوْزَانُ الفِعْلِ الصَّحِيحِ السَّالِمِ ✨`;
+    title.style.color = '#fef08a';
+    title.style.fontSize = 'clamp(2rem, 3.5vw, 2.7rem)';
+    title.style.textShadow = '0 0 35px rgba(250, 204, 21, 0.9), 0 0 12px #f59e0b';
   }
   if (!container) return;
 
   container.innerHTML = '';
-  container.style.cssText = 'display: flex; gap: clamp(20px, 3.5vw, 40px); justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 35px; padding: 10px;';
+  container.style.cssText = 'display: flex; gap: clamp(30px, 5vw, 65px); justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 25px; padding: 20px 10px;';
 
-  // البيانات الصرفية المحددة بدقة دون أي حشو
-  const cleanForms = [
+  const starData = [
     {
-      formattedVerb: `كَـ<span style="color:#ef4444; font-size: 2.7rem; font-weight: 900; text-shadow: 0 0 16px rgba(239, 68, 68, 0.8);">تَـ</span>بَ`,
+      formattedVerb: `كَـ<span style="color:#ef4444; font-size: 2.8rem; font-weight: 900; text-shadow: 0 0 16px rgba(239,68,68,0.9);">تَـ</span>بَ`,
       weightText: "كَتَبَ عَلَى وَزْنِ فَعَلَ بِفَتْحِ العَيْنِ",
       val: "كتب",
-      themeColor: "#38bdf8",
-      glowColor: "rgba(56, 189, 248, 0.45)"
+      starGlow: "rgba(56, 189, 248, 0.8)",
+      starColor: "#38bdf8",
+      btnGrad: "linear-gradient(135deg, #0284c7, #38bdf8)"
     },
     {
-      formattedVerb: `فَـ<span style="color:#ef4444; font-size: 2.7rem; font-weight: 900; text-shadow: 0 0 16px rgba(239, 68, 68, 0.8);">رِ</span>حَ`,
+      formattedVerb: `فَـ<span style="color:#ef4444; font-size: 2.8rem; font-weight: 900; text-shadow: 0 0 16px rgba(239,68,68,0.9);">رِ</span>حَ`,
       weightText: "فَرِحَ عَلَى وَزْنِ فَعِلَ بِكَسْرِ العَيْنِ",
       val: "درس",
-      themeColor: "#f59e0b",
-      glowColor: "rgba(245, 158, 11, 0.45)"
+      starGlow: "rgba(251, 191, 36, 0.9)",
+      starColor: "#fbbf24",
+      btnGrad: "linear-gradient(135deg, #d97706, #fbbf24)"
     },
     {
-      formattedVerb: `كَـ<span style="color:#ef4444; font-size: 2.7rem; font-weight: 900; text-shadow: 0 0 16px rgba(239, 68, 68, 0.8);">رُ</span>مَ`,
+      formattedVerb: `كَـ<span style="color:#ef4444; font-size: 2.8rem; font-weight: 900; text-shadow: 0 0 16px rgba(239,68,68,0.9);">رُ</span>مَ`,
       weightText: "كَرُمَ عَلَى وَزْنِ فَعُلَ بِضَمِّ العَيْنِ",
       val: "كتب",
-      themeColor: "#10b981",
-      glowColor: "rgba(16, 185, 129, 0.45)"
+      starGlow: "rgba(52, 211, 153, 0.8)",
+      starColor: "#34d399",
+      btnGrad: "linear-gradient(135deg, #059669, #34d399)"
     }
   ];
 
-  cleanForms.forEach((st, idx) => {
-    const card = document.createElement('div');
-    card.style.cssText = `
+  starData.forEach((st, idx) => {
+    const starCard = document.createElement('div');
+    starCard.style.cssText = `
       position: relative;
-      width: 250px;
-      min-height: 230px;
-      background: linear-gradient(160deg, rgba(22, 27, 54, 0.95) 0%, rgba(10, 14, 35, 0.98) 100%);
-      border: 2px solid ${st.themeColor};
-      border-radius: 28px;
-      padding: 1.8rem 1.2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       gap: 16px;
-      text-align: center;
       cursor: pointer;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55), 0 0 20px ${st.glowColor};
-      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       animation: popTab 0.4s ease ${idx * 0.12}s both;
     `;
 
-    // نجمة ذهبية ناعمة تزين أعلى البطاقة
-    const topStar = document.createElement('div');
-    topStar.style.cssText = `
-      font-size: 1.8rem;
-      filter: drop-shadow(0 0 10px #fde047);
-      margin-bottom: -6px;
+    // مجسم النجم المشع الحقيقي بـ SVG بدلاً من المربعات الحادة
+    const starGraphic = `
+      <div style="position: relative; width: 210px; height: 210px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 0 30px ${st.starGlow});">
+        <svg viewBox="0 0 100 100" style="position: absolute; inset: 0; width: 100%; height: 100%; fill: url(#grad-${idx}); filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6));">
+          <defs>
+            <radialGradient id="grad-${idx}" cx="40%" cy="35%" r="65%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+              <stop offset="45%" stop-color="${st.starColor}" />
+              <stop offset="100%" stop-color="#090d24" />
+            </radialGradient>
+          </defs>
+          <path d="M50 2 L63 35 L98 35 L70 56 L81 90 L50 69 L19 90 L30 56 L2 35 L37 35 Z" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round" />
+        </svg>
+        <div style="position: relative; z-index: 5; text-align: center; margin-top: 14px;">
+          <div style="font-size: 2.6rem; font-weight: 900; color: #ffffff; letter-spacing: 1px; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.9));">
+            ${st.formattedVerb}
+          </div>
+        </div>
+      </div>
     `;
-    topStar.innerText = "⭐";
 
-    // الفعل بحركاته مع اللون الأحمر لعين الفعل
-    const verbBox = document.createElement('div');
-    verbBox.style.cssText = `
-      font-size: 2.5rem;
-      font-weight: 900;
-      color: #ffffff;
-      letter-spacing: 1px;
+    // بطاقة الوزن الأنيقة أسفل النجم
+    const descPill = document.createElement('div');
+    descPill.style.cssText = `
+      background: rgba(15, 23, 42, 0.88);
+      border: 2px solid ${st.starColor};
+      border-radius: 24px;
+      padding: 10px 18px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      max-width: 250px;
     `;
-    verbBox.innerHTML = st.formattedVerb;
-
-    // العبارة الوزنية الصافية
-    const weightBox = document.createElement('div');
-    weightBox.style.cssText = `
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 16px;
-      padding: 6px 12px;
-      color: #e2e8f0;
-      font-size: 0.88rem;
-      font-weight: 700;
-      line-height: 1.5;
+    descPill.innerHTML = `
+      <div style="color: #ffffff; font-weight: 900; font-size: 0.95rem; line-height: 1.5;">${st.weightText}</div>
+      <div style="margin-top: 8px; background: ${st.btnGrad}; color: #04101e; font-weight: 900; font-size: 0.82rem; padding: 5px 16px; border-radius: 20px; display: inline-flex; align-items: center; gap: 4px;">
+        <span>انْطَلِقْ لِلشَّمْسِ</span> 🚀
+      </div>
     `;
-    weightBox.innerText = st.weightText;
 
-    // زر الانطلاق الصغير لشمس الجذر
-    const launchBtn = document.createElement('div');
-    launchBtn.style.cssText = `
-      margin-top: 4px;
-      color: ${st.themeColor};
-      font-size: 0.85rem;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    `;
-    launchBtn.innerHTML = `<span>انْطَلِقْ لِلشَّمْسِ</span> ⟵`;
+    starCard.innerHTML = starGraphic;
+    starCard.appendChild(descPill);
 
-    card.appendChild(topStar);
-    card.appendChild(verbBox);
-    card.appendChild(weightBox);
-    card.appendChild(launchBtn);
-
-    card.onmouseover = () => {
-      card.style.transform = 'translateY(-10px) scale(1.04)';
-      card.style.borderColor = '#ffffff';
-      card.style.boxShadow = `0 18px 40px rgba(0, 0, 0, 0.7), 0 0 30px ${st.themeColor}`;
+    starCard.onmouseover = () => {
+      starCard.style.transform = 'translateY(-14px) scale(1.1)';
+      starCard.querySelector('svg').style.filter = `drop-shadow(0 0 25px #ffffff) drop-shadow(0 0 45px ${st.starColor})`;
+    };
+    starCard.onmouseout = () => {
+      starCard.style.transform = 'none';
+      starCard.querySelector('svg').style.filter = 'drop-shadow(0 4px 10px rgba(0,0,0,0.6))';
     };
 
-    card.onmouseout = () => {
-      card.style.transform = 'none';
-      card.style.borderColor = st.themeColor;
-      card.style.boxShadow = `0 12px 30px rgba(0, 0, 0, 0.55), 0 0 20px ${st.glowColor}`;
-    };
-
-    card.onclick = () => selectFormAndLaunch(st.val);
-    container.appendChild(card);
+    starCard.onclick = () => selectFormAndLaunch(st.val);
+    container.appendChild(starCard);
   });
 }
     
