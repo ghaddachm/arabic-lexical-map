@@ -750,6 +750,7 @@
       // 📚 1. كوكب الثلاثي المجرد
       triadic: {
         name: "الفِعْلُ الثُّلَاثِيُّ (الصَّحِيحُ)",
+        icon: "🌙",
         moons: [
           {
             id: "salim",
@@ -757,8 +758,7 @@
             symbol: "🛡️",
             color: "#38bdf8",
             desc: "مَا خَلَتْ حُرُوفُهُ الأَصْلِيَّةُ مِنَ الهَمْزِ وَالتَّضْعِيفِ",
-            moonBase: "radial-gradient(circle at 35% 30%, #f8fafc 0%, #cbd5e1 45%, #64748b 80%, #334155 100%)",
-            glowColor: "rgba(203, 213, 225, 0.75)",
+            x: 590, y: 70,
             forms: [
               { label: "وَزْنُ (فَعَلَ) - بِفَتْحِ العَيْنِ", val: "كتب", sample: "كَتَبَ" },
               { label: "وَزْنُ (فَعِلَ) - بِكَسْرِ العَيْنِ", val: "درس", sample: "فَرِحَ" },
@@ -771,8 +771,7 @@
             symbol: "🪢",
             color: "#0284c7",
             desc: "مَا كَانَ حَرْفَانِ مِنْ أُصُولِهِ مِنْ جِنْسٍ وَاحِدٍ",
-            moonBase: "radial-gradient(circle at 35% 30%, #e0f2fe 0%, #93c5fd 40%, #3b82f6 75%, #1e3a8a 100%)",
-            glowColor: "rgba(147, 197, 253, 0.8)",
+            x: 180, y: 220,
             forms: [
               { label: "صَحِيحٌ مُضَعَّفٌ (نَصّ)", val: "مرر", sample: "مَرَّ" },
               { label: "مُضَعَّفٌ (تَطْبِيق)", val: "فكك", sample: "فَكَّ" },
@@ -785,8 +784,7 @@
             symbol: "⚡",
             color: "#f59e0b",
             desc: "مَا كَانَ أَحَدُ أَحْرُفِهِ الأَصْلِيَّةِ هَمْزَةً",
-            moonBase: "radial-gradient(circle at 35% 30%, #fef9c3 0%, #fde047 40%, #ca8a04 75%, #713f12 100%)",
-            glowColor: "rgba(253, 224, 71, 0.8)",
+            x: 590, y: 370,
             forms: [
               { label: "مَهْمُوزُ اللَّامِ (نَصّ)", val: "ملأ", sample: "مَلَأَ" },
               { label: "مَهْمُوزُ الفَاءِ (أَخَذَ)", val: "أخذ", sample: "أَخَذَ" },
@@ -799,13 +797,15 @@
       // 🌀 2. كوكب الرباعي المجرد
       quadric: {
         name: "الفِعْلُ الرُّبَاعِيُّ (المُجَرَّدُ)",
+        icon: "🌀",
         moons: [
           {
             id: "quad_salim",
             name: "رُبَاعِيٌّ سَالِمٌ",
-            symbol: "🌀",
+            symbol: "💠",
             color: "#34d399",
             desc: "أَرْبَعَةُ أَحْرُفٍ أُصُولٌ عَلَى وَزْنِ فَعْلَلَ",
+            x: 280, y: 220,
             forms: [
               { label: "صِيغَةُ (فَعْلَلَ)", val: "دحرج", sample: "دَحْرَجَ" },
               { label: "رُبَاعِيٌّ سَالِمٌ", val: "بعثر", sample: "بَعْثَرَ" }
@@ -814,9 +814,10 @@
           {
             id: "quad_mudaaf",
             name: "رُبَاعِيٌّ مُضَعَّفٌ",
-            symbol: "⚡",
+            symbol: "🔄",
             color: "#059669",
             desc: "فَاؤُهُ وَلَامُهُ الأُولَى مِنْ جِنْسٍ، وَعَيْنُهُ وَلَامُهُ الثَّانِيَةُ مِنْ جِنْسٍ",
+            x: 900, y: 220,
             forms: [
               { label: "رُبَاعِيٌّ مُضَعَّفٌ", val: "زلزل", sample: "زَلْزَلَ" }
             ]
@@ -826,14 +827,16 @@
 
       // 🌙 3. كوكب المعتل
       weak: {
-        name: "الفِعْلُ المُعْتَلُّ",
+        name: "الفِعْلُ المُعْتَلُّ (حُرُوفُ العِلَّةِ)",
+        icon: "🌙",
         moons: [
           {
             id: "mithal",
             name: "المِثَالُ",
-            symbol: "🚏",
+            symbol: "🌟",
             color: "#c084fc",
             desc: "مَا كَانَتْ فَاؤُهُ (أَوَّلُهُ) حَرْفَ عِلَّةٍ",
+            x: 180, y: 220,
             forms: [
               { label: "مُعْتَلُّ الفَاءِ (وَضَعَ)", val: "وضع", sample: "وَضَعَ" },
               { label: "مِثَالٌ يَائِيٌّ (يَبِسَ)", val: "يبس", sample: "يَبِسَ" },
@@ -843,9 +846,10 @@
           {
             id: "ajwaf",
             name: "الأَجْوَفُ",
-            symbol: "🎙️",
+            symbol: "💫",
             color: "#a855f7",
             desc: "مَا كَانَتْ عَيْنُهُ (وَسَطُهُ) حَرْفَ عِلَّةٍ",
+            x: 590, y: 70,
             forms: [
               { label: "مُعْتَلُّ العَيْنِ (نَالَ)", val: "نال", sample: "نَالَ" },
               { label: "أَجْوَفُ (قَالَ)", val: "قول", sample: "قَالَ" }
@@ -854,9 +858,10 @@
           {
             id: "naqis",
             name: "النَّاقِصُ",
-            symbol: "🎯",
+            symbol: "🪐",
             color: "#9333ea",
             desc: "مَا كَانَتْ لَامُهُ (آخِرُهُ) حَرْفَ عِلَّةٍ",
+            x: 1000, y: 220,
             forms: [
               { label: "مُعْتَلُّ اللَّامِ (سَعَى)", val: "سعى", sample: "سَعَى" },
               { label: "نَاقِصٌ (رَمَى)", val: "رمي", sample: "رَمَى" }
@@ -867,14 +872,16 @@
 
       // ☀️ 4. كوكب المزيد
       augmented: {
-        name: "الفِعْلُ المَزِيدُ",
+        name: "الفِعْلُ المَزِيدُ (الأَفْعَالُ النَّامِيَةُ)",
+        icon: "☀️",
         moons: [
           {
             id: "aug_one",
             name: "مَزِيدٌ بِحَرْفٍ وَاحِدٍ",
-            symbol: "☀️",
+            symbol: "🌱",
             color: "#fde047",
             desc: "زِيدَ فِيهِ حَرْفٌ وَاحِدٌ عَلَى أَحْرُفِهِ الأَصْلِيَّةِ",
+            x: 230, y: 140,
             forms: [
               { label: "مَزِيدٌ بِالأَلِفِ (تَابَعَ)", val: "تابع", sample: "تَابَعَ" },
               { label: "مَزِيدٌ بِالهَمْزَةِ (أَكْرَمَ)", val: "أكرم", sample: "أَكْرَمَ" },
@@ -884,9 +891,10 @@
           {
             id: "aug_two",
             name: "مَزِيدٌ بِحَرْفَيْنِ",
-            symbol: "✨",
+            symbol: "🌿",
             color: "#fbbf24",
             desc: "زِيدَ فِيهِ حَرْفَانِ عَلَى أَحْرُفِهِ الأَصْلِيَّةِ",
+            x: 950, y: 140,
             forms: [
               { label: "بِالتَّاءِ وَالأَلِفِ (تَعَاظَمَ)", val: "تعاظم", sample: "تَعَاظَمَ" },
               { label: "بِالأَلِفِ وَالتَّاءِ (انْتَقَلَ)", val: "انتقل", sample: "انْتَقَلَ" },
@@ -896,9 +904,10 @@
           {
             id: "aug_three",
             name: "مَزِيدٌ بِثَلَاثَةِ أَحْرُفٍ",
-            symbol: "🚀",
+            symbol: "🌳",
             color: "#f59e0b",
             desc: "زِيدَتْ فِيهِ ثَلَاثَةُ أَحْرُفٍ عَلَى أَحْرُفِهِ الأَصْلِيَّةِ",
+            x: 590, y: 370,
             forms: [
               { label: "اسْتَفْعَلَ (اسْتَقْبَلَ)", val: "استقبل", sample: "اسْتَقْبَلَ" },
               { label: "اسْتَفْعَلَ (اسْتَخْرَجَ)", val: "خرج", sample: "اسْتَخْرَجَ" }
@@ -907,7 +916,6 @@
         ]
       }
     };
-
     let currentPlanetKey = null;
     let currentSelectedMoon = null;
 
@@ -944,121 +952,114 @@
       }
     }
 
-    // فتح المستوى الثاني (توزيع الأقمار كأجرام كروية على المدارات)
-    function openPlanetLevel(planetKey) {
-      const planet = cosmicNavTree[planetKey];
-      if (!planet) return;
-      currentPlanetKey = planetKey;
+   // فتح المستوى الثاني (توزيع الأقمار كأجرام كروية على المدارات لجميع الكواكب)
+function openPlanetLevel(planetKey) {
+  const planet = cosmicNavTree[planetKey];
+  if (!planet) return;
+  currentPlanetKey = planetKey;
 
-      const lvl1 = document.getElementById('cosmicLevel1');
-      const lvl2 = document.getElementById('cosmicLevel2');
-      const lvl3 = document.getElementById('cosmicLevel3');
-      const title = document.getElementById('planetMoonTitle');
-      const container = document.getElementById('moonsCardsContainer');
+  const lvl1 = document.getElementById('cosmicLevel1');
+  const lvl2 = document.getElementById('cosmicLevel2');
+  const lvl3 = document.getElementById('cosmicLevel3');
+  const title = document.getElementById('planetMoonTitle');
+  const container = document.getElementById('moonsCardsContainer');
 
-      if (lvl1) lvl1.style.display = 'none';
-      if (lvl3) lvl3.style.display = 'none';
-      if (lvl2) lvl2.style.display = 'block';
+  if (lvl1) lvl1.style.display = 'none';
+  if (lvl3) lvl3.style.display = 'none';
+  if (lvl2) lvl2.style.display = 'block';
 
-      document.body.classList.add('in-level-2');
+  document.body.classList.add('in-level-2');
 
-      if (title) {
-        title.innerHTML = `🌙 ${planet.name}`;
-      }
+  // تحديث العنوان مع أيقونة الكوكب المختار
+  if (title) {
+    title.innerHTML = `${planet.icon || '🪐'} ${planet.name}`;
+  }
 
-      if (!container) return;
-      container.innerHTML = '';
-      container.style.cssText = 'position: relative; width: 100%; height: 100%;';
+  if (!container) return;
+  container.innerHTML = '';
+  container.style.cssText = 'position: relative; width: 100%; height: 100%;';
 
-      // إحداثيات مدروسة هندسياً لاستقرار الأقمار على خط المدار الموسّع
-      const orbitPositions = [
-        { top: "12px", right: "260px" },  // 1. أعلى اليمين (السالم)
-        { top: "175px", left: "25px" },   // 2. أقصى اليسار (المضعف)
-        { bottom: "8px", left: "540px" }  // 3. أسفل المدار (المهموز)
-      ];
+  const moonsList = planet.moons || [];
 
-      const moonsList = planet.moons || [];
+  moonsList.forEach((moon, idx) => {
+    // تحديد موقع القمر اعتماداً على إحداثيات الكوكب المختار في cosmicNavTree
+    const moonWrapper = document.createElement('div');
+    moonWrapper.style.cssText = `
+      position: absolute !important;
+      left: ${moon.x !== undefined ? moon.x + 'px' : '50%'};
+      top: ${moon.y !== undefined ? moon.y + 'px' : '50%'};
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      z-index: 30;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: planetFloatA ${5 + idx * 1.1}s ease-in-out infinite ${idx * 0.4}s;
+    `;
 
-      moonsList.forEach((moon, idx) => {
-        const pos = orbitPositions[idx] || { top: "40%", left: "40%" };
-        const moonWrapper = document.createElement('div');
-        moonWrapper.style.cssText = `
-          position: absolute !important;
-          top: ${pos.top || 'auto'};
-          bottom: ${pos.bottom || 'auto'};
-          left: ${pos.left || 'auto'};
-          right: ${pos.right || 'auto'};
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 8px;
-          cursor: pointer;
-          z-index: 30;
-          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          animation: planetFloatA ${5 + idx * 1.1}s ease-in-out infinite ${idx * 0.4}s;
-        `;
+    const moonSphere = document.createElement('div');
+    const moonColor = moon.color || '#38bdf8';
+    moonSphere.style.cssText = `
+      width: 125px;
+      height: 125px;
+      border-radius: 50%;
+      background: ${moon.moonBase || `radial-gradient(circle at 35% 30%, #ffffff 0%, ${moonColor} 65%, #0f172a 100%)`};
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 35px ${moon.glowColor || moonColor}, inset -10px -10px 20px rgba(0,0,0,0.65);
+      overflow: hidden;
+      transition: all 0.35s ease;
+    `;
 
-        const moonSphere = document.createElement('div');
-        const moonColor = moon.color || '#38bdf8';
-        moonSphere.style.cssText = `
-          width: 125px;
-          height: 125px;
-          border-radius: 50%;
-          background: ${moon.moonBase || 'radial-gradient(circle at 35% 30%, #f8fafc 0%, #cbd5e1 45%, #64748b 80%, #334155 100%)'};
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          border: 3px solid rgba(255, 255, 255, 0.95);
-          box-shadow: 0 0 35px ${moon.glowColor || moonColor}, inset -10px -10px 20px rgba(0,0,0,0.65);
-          overflow: hidden;
-          transition: all 0.35s ease;
-        `;
+    const crater1 = `<div style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: rgba(0,0,0,0.15); top: 14px; left: 18px; box-shadow: inset 2px 2px 4px rgba(0,0,0,0.3);"></div>`;
+    const crater2 = `<div style="position: absolute; width: 14px; height: 14px; border-radius: 50%; background: rgba(0,0,0,0.12); bottom: 18px; right: 22px; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);"></div>`;
 
-        const crater1 = `<div style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: rgba(0,0,0,0.15); top: 14px; left: 18px; box-shadow: inset 2px 2px 4px rgba(0,0,0,0.3);"></div>`;
-        const crater2 = `<div style="position: absolute; width: 14px; height: 14px; border-radius: 50%; background: rgba(0,0,0,0.12); bottom: 18px; right: 22px; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);"></div>`;
+    moonSphere.innerHTML = `
+      ${crater1}
+      ${crater2}
+      <div style="font-size: 2.2rem; z-index: 2; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.6));">${moon.symbol || '🌙'}</div>
+      <span style="color: #ffffff; font-weight: 900; font-size: 1.05rem; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">${moon.name.replace('قَمَرُ ', '')}</span>
+    `;
 
-        moonSphere.innerHTML = `
-          ${crater1}
-          ${crater2}
-          <div style="font-size: 2.2rem; z-index: 2; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.6));">${moon.symbol || '🌙'}</div>
-          <span style="color: #ffffff; font-weight: 900; font-size: 1.05rem; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">${moon.name.replace('قَمَرُ ', '')}</span>
-        `;
+    const descBox = document.createElement('div');
+    descBox.style.cssText = `
+      background: rgba(15, 23, 42, 0.9);
+      border: 1.5px solid ${moonColor};
+      backdrop-filter: blur(8px);
+      padding: 6px 12px;
+      border-radius: 14px;
+      text-align: center;
+      max-width: 185px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    `;
+    descBox.innerHTML = `
+      <div style="color: #f1f5f9; font-size: 0.78rem; font-weight: 600; line-height: 1.4;">${moon.desc || ''}</div>
+    `;
 
-        const descBox = document.createElement('div');
-        descBox.style.cssText = `
-          background: rgba(15, 23, 42, 0.9);
-          border: 1.5px solid ${moonColor};
-          backdrop-filter: blur(8px);
-          padding: 6px 12px;
-          border-radius: 14px;
-          text-align: center;
-          max-width: 175px;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-        `;
-        descBox.innerHTML = `
-          <div style="color: #f1f5f9; font-size: 0.78rem; font-weight: 600; line-height: 1.4;">${moon.desc || ''}</div>
-        `;
+    moonWrapper.appendChild(moonSphere);
+    moonWrapper.appendChild(descBox);
 
-        moonWrapper.appendChild(moonSphere);
-        moonWrapper.appendChild(descBox);
+    moonWrapper.onmouseover = () => {
+      moonWrapper.style.transform = 'translate(-50%, -50%) scale(1.12) translateY(-6px)';
+      moonSphere.style.boxShadow = `0 0 50px ${moon.glowColor || moonColor}, inset -4px -4px 12px rgba(0,0,0,0.45)`;
+      moonSphere.style.borderColor = '#ffffff';
+    };
+    moonWrapper.onmouseout = () => {
+      moonWrapper.style.transform = 'translate(-50%, -50%) scale(1)';
+      moonSphere.style.boxShadow = `0 0 35px ${moon.glowColor || moonColor}, inset -10px -10px 20px rgba(0,0,0,0.65)`;
+      moonSphere.style.borderColor = 'rgba(255, 255, 255, 0.95)';
+    };
 
-        moonWrapper.onmouseover = () => {
-          moonWrapper.style.transform = 'scale(1.12) translateY(-6px)';
-          moonSphere.style.boxShadow = `0 0 50px ${moon.glowColor || moonColor}, inset -4px -4px 12px rgba(0,0,0,0.45)`;
-          moonSphere.style.borderColor = '#ffffff';
-        };
-        moonWrapper.onmouseout = () => {
-          moonWrapper.style.transform = 'none';
-          moonSphere.style.boxShadow = `0 0 35px ${moon.glowColor || moonColor}, inset -10px -10px 20px rgba(0,0,0,0.65)`;
-          moonSphere.style.borderColor = 'rgba(255, 255, 255, 0.95)';
-        };
-
-        moonWrapper.onclick = () => openMoonForms(moon);
-        container.appendChild(moonWrapper);
-      });
-    }
+    moonWrapper.onclick = () => openMoonForms(moon);
+    container.appendChild(moonWrapper);
+  });
+}
 
 // المستوى الثالث: فضاء النجوم الكريستالية المتوهجة والأوزان القياسية
 function openMoonForms(moon) {
