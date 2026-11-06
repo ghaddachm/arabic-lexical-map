@@ -1078,7 +1078,7 @@ function openPlanetLevel(planetKey) {
   });
 }
 
-// فتح المستوى الثالث: عرض صيغ وأوزان القمر المختار ديناميكياً لجميع الكواكب
+// المستوى الثالث: عرض البطاقات وقراءة التلوين الصرفي الدقيق والمحدد سلفاً
 function openMoonForms(moon) {
   currentSelectedMoon = moon;
   const lvl2 = document.getElementById('cosmicLevel2');
@@ -1089,19 +1089,15 @@ function openMoonForms(moon) {
   if (lvl2) lvl2.style.display = 'none';
   if (lvl3) lvl3.style.display = 'block';
 
-  // تحديث العنوان ليتطابق بدقة مع اسم القمر المضغوط عليه
   if (title) {
     title.innerHTML = `⭐ صِيَغُ وَأَوْزَانُ: <span style="color:#38bdf8;">${moon.name}</span>`;
     title.style.color = '#fde047';
-    title.style.fontSize = 'clamp(1.8rem, 3.2vw, 2.5rem)';
-    title.style.textShadow = '0 0 25px rgba(250, 204, 21, 0.6)';
   }
   if (!container) return;
 
   container.innerHTML = '';
   container.style.cssText = 'display: flex; gap: clamp(20px, 3.5vw, 40px); justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 35px; padding: 10px;';
 
-  // قراءة الأفعال الخاصة بهذا القمر مباشرة من قاعدة البيانات
   const formsList = moon.forms || [];
 
   formsList.forEach((st, idx) => {
@@ -1128,19 +1124,10 @@ function openMoonForms(moon) {
       animation: popTab 0.4s ease ${idx * 0.12}s both;
     `;
 
-    // تمييز حركة عين الفعل (الحرف الأوسط) بالأحمر الياقوتي تلقائياً
-    let formattedVerb = st.sample || '';
-    if (formattedVerb.length >= 3) {
-      // إبراز حركة الوسط بالأحمر الديداكتيكي
-      formattedVerb = formattedVerb.replace(/([َُِّْ])/, '$1').replace(/(.{1}[َُِّْ]?)(.{1}[َُِّْ]?)(.*)/, function(m, p1, p2, p3) {
-        return `${p1}<span style="color:#ef4444; font-size: 2.7rem; font-weight: 900; text-shadow: 0 0 14px rgba(239, 68, 68, 0.8);">${p2}</span>${p3}`;
-      });
-    }
-
     card.innerHTML = `
       <div style="font-size: 1.8rem; filter: drop-shadow(0 0 10px #fde047); margin-bottom: -6px;">⭐</div>
-      <div style="font-size: 2.5rem; font-weight: 900; color: #ffffff; letter-spacing: 1px;">
-        ${formattedVerb}
+      <div style="font-size: 2.6rem; font-weight: 900; color: #ffffff; letter-spacing: 1px;">
+        ${st.display || st.sample}
       </div>
       <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 16px; padding: 6px 12px; color: #e2e8f0; font-size: 0.88rem; font-weight: 700; line-height: 1.5; width: 100%;">
         ${st.label || ''}
@@ -1162,11 +1149,10 @@ function openMoonForms(moon) {
       card.style.boxShadow = `0 12px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(56, 189, 248, 0.25)`;
     };
 
-    card.onclick = () => selectFormAndLaunch(st.val);
+    card.onclick = () => selectFormAndLaunch(st.val, st.sample);
     container.appendChild(card);
   });
-}
-    
+}    
     // الانتقال المباشر لشمس الجذر
     function selectFormAndLaunch(rootKey) {
       const galaxyModal = document.getElementById('galaxyModal');
