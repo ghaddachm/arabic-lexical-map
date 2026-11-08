@@ -1275,7 +1275,7 @@ function openMoonForms(moon) {
       if (lvl2) lvl2.style.display = 'block';
     }
 
-// زر التوجيه الذكي المتكيف سياقياً مع المستوى المفتوح
+// زر التوجيه الذكي المتكيف سياقياً مع المستوى والكوكب المفتوح
 function toggleGuideModal() {
   const modal = document.getElementById('guideModalBox');
   if (!modal) return;
@@ -1292,28 +1292,39 @@ function toggleGuideModal() {
   const lvl2 = document.getElementById('cosmicLevel2');
   const isLevel2Open = isGalaxyOpen && lvl2 && (lvl2.style.display === 'block' || lvl2.style.display === 'flex');
 
-  // عناصر المحتوى الثلاثة
+  // جلب كافة حاويات الأدلة
   const contentLang = document.getElementById('guideContentLanguage');
   const contentVerbs = document.getElementById('guideContentVerbs');
   const contentTriadic = document.getElementById('guideContentTriadic');
+  const contentQuadric = document.getElementById('guideContentQuadric');
+  const contentWeak = document.getElementById('guideContentWeak');
+  const contentAugmented = document.getElementById('guideContentAugmented');
 
   // إخفاء كل المحتويات أولاً لتفادي أي تداخل
-  if (contentLang) contentLang.style.display = 'none';
-  if (contentVerbs) contentVerbs.style.display = 'none';
-  if (contentTriadic) contentTriadic.style.display = 'none';
+  [contentLang, contentVerbs, contentTriadic, contentQuadric, contentWeak, contentAugmented].forEach(el => {
+    if (el) el.style.display = 'none';
+  });
 
   if (isLevel2Open) {
-    // 1. مدار أقمار الفعل الثلاثي (الشاشة الحالية)
-    if (contentTriadic) {
-      contentTriadic.style.display = 'block';
+    // خريطة ربط مفتاح الكوكب النشط بالحاوية الخاصة به
+    const planetGuideMap = {
+      triadic: contentTriadic,
+      quadric: contentQuadric,
+      weak: contentWeak,
+      augmented: contentAugmented
+    };
+
+    const targetGuide = planetGuideMap[currentPlanetKey] || contentTriadic;
+    if (targetGuide) {
+      targetGuide.style.display = 'block';
     } else if (contentVerbs) {
       contentVerbs.style.display = 'block';
     }
   } else if (isGalaxyOpen) {
-    // 2. واجهة اختيار الكواكب الكبرى الأربعة
+    // واجهة اختيار الكواكب الكبرى الأربعة
     if (contentVerbs) contentVerbs.style.display = 'block';
   } else {
-    // 3. الواجهة الرئيسية للمنصة (محطات اللغة)
+    // الواجهة الرئيسية للمنصة (محطات اللغة)
     if (contentLang) contentLang.style.display = 'block';
   }
 
@@ -1392,7 +1403,7 @@ function toggleGuideModal() {
         </button>
       </div>
 
-      <!-- 2. بوصلة كواكب الأفعال (خاص بواجهة اختيار الكواكب الكبرى الأربعة) -->
+<!-- 2. بوصلة كواكب الأفعال (خاص بواجهة اختيار الكواكب الكبرى الأربعة) -->
       <div id="guideContentVerbs" style="display: none;">
         <div style="display: flex; align-items: center; gap: 0.6rem; border-bottom: 1.5px solid rgba(56, 189, 248, 0.25); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
           <span style="font-size: 1.8rem;">🪐</span>
@@ -1403,21 +1414,28 @@ function toggleGuideModal() {
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.92rem; line-height: 1.65; color: #cbd5e1;">
+          <!-- 1. كوكب الثلاثي -->
           <div style="background: rgba(2, 132, 199, 0.12); border-right: 4px solid #38bdf8; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
             <strong style="color: #38bdf8;">📚 1. كَوْكَبُ الثُّلَاثِيِّ (المُجَرَّد):</strong><br>
-            أَصْلُ الأَفْعَالِ وَأَبْسَطُهَا؛ يَشْمَلُ <span style="color: #fde047;">الصَّحِيحَ</span> (كَتَبَ، شَرِبَ)، و<span style="color: #fde047;">المَهْمُوزَ</span> (أَخَذَ، سَأَلَ)، و<span style="color: #fde047;">المُضَعَّفَ</span> (مَدَّ).
+            أَصْلُ الأَفْعَالِ وَأَبْسَطُهَا؛ يَشْمَلُ: <span style="color: #fde047; font-weight: 700;">السَّالِمَ</span> (كَتَبَ، فَرِحَ، كَرُمَ)، وَ<span style="color: #fde047; font-weight: 700;">المَهْمُوزَ</span> (أَخَذَ، سَأَلَ، مَلَأَ)، وَ<span style="color: #fde047; font-weight: 700;">المُضَعَّفَ</span> (مَرَّ، فَكَّ، مَدَّ).
           </div>
+
+          <!-- 2. كوكب الرباعي -->
           <div style="background: rgba(5, 150, 105, 0.12); border-right: 4px solid #34d399; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
             <strong style="color: #34d399;">🌀 2. كَوْكَبُ الرُّبَاعِيِّ (المُجَرَّد):</strong><br>
-            أَفْعَالٌ حُرُوفُهَا الأَصْلِيَّةُ أَرْبَعَةٌ؛ مِثْلُ: <span style="color: #a7f3d0;">دَحْرَجَ</span> (فَعْلَلَ - سَالِمٌ) وَ<span style="color: #a7f3d0;">زَلْزَلَ</span> (مُضَعَّفٌ).
+            أَفْعَالٌ حُرُوفُهَا الأَصْلِيَّةُ أَرْبَعَةٌ؛ مِثْلُ: <span style="color: #a7f3d0; font-weight: 700;">دَحْرَجَ، بَعْثَرَ</span> (سَالِمٌ - فَعْلَلَ) وَ<span style="color: #a7f3d0; font-weight: 700;">زَلْزَلَ، وَسْوَسَ</span> (مُضَعَّفٌ).
           </div>
-          <div style="background: rgba(217, 119, 6, 0.12); border-right: 4px solid #fbbf24; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
-            <strong style="color: #fbbf24;">☀️ 3. كَوْكَبُ المَزِيدِ (الأَفْعَالُ النَّامِيَة):</strong><br>
-            أَفْعَالٌ زِيدَتْ عَلَى أُصُولِهَا؛ <span style="color: #fef08a;">بِحَرْفٍ</span> (دَرَّسَ، سَابَقَ) أَوْ <span style="color: #fef08a;">بِحَرْفَيْنِ وَأَكْثَرَ</span> (اكْتَشَفَ، اسْتَخْرَجَ).
-          </div>
+
+          <!-- 3. كوكب المعتل -->
           <div style="background: rgba(124, 58, 237, 0.12); border-right: 4px solid #c084fc; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
-            <strong style="color: #c084fc;">🌙 4. كَوْكَبُ المُعْتَلِّ (سِرُّ حُرُوفِ العِلَّة):</strong><br>
-            أَفْعَالٌ أَحَدُ حُرُوفِهَا حَرْفُ عِلَّةٍ (و - ا - ي)؛ يَضُمُّ: <span style="color: #e9d5ff;">المِثَالَ</span> (وَقَفَ)، <span style="color: #e9d5ff;">الأَجْوَفَ</span> (قَالَ)، و<span style="color: #e9d5ff;">النَّاقِصَ</span> (رَمَى).
+            <strong style="color: #c084fc;">🌙 3. كَوْكَبُ المُعْتَلِّ (حُرُوفُ العِلَّة):</strong><br>
+            أَفْعَالٌ أَحَدُ حُرُوفِهَا عِلَّةٌ (و - ا - ي)؛ تَضُمُّ: <span style="color: #e9d5ff; font-weight: 700;">المِثَالَ</span> (وَضَعَ، يَبِسَ)، وَ<span style="color: #e9d5ff; font-weight: 700;">الأَجْوَفَ</span> (قَالَ، نَالَ)، وَ<span style="color: #e9d5ff; font-weight: 700;">النَّاقِصَ</span> (سَعَى، دَنَا)، وَ<span style="color: #e9d5ff; font-weight: 700;">اللَّفِيفَ</span> (وَعَى، طَوَى).
+          </div>
+
+          <!-- 4. كوكب المزيد -->
+          <div style="background: rgba(217, 119, 6, 0.12); border-right: 4px solid #fbbf24; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #fbbf24;">☀️ 4. كَوْكَبُ المَزِيدِ (الأَفْعَالُ النَّامِيَة):</strong><br>
+            أَفْعَالٌ زِيدَتْ عَلَى أُصُولِهَا؛ <span style="color: #fef08a; font-weight: 700;">بِحَرْفٍ</span> (تَابَعَ، أَكْرَمَ، كَسَّرَ)، أَوْ <span style="color: #fef08a; font-weight: 700;">بِحَرْفَيْنِ</span> (انْتَقَلَ، تَعَاظَمَ، انْكَسَرَ)، أَوْ <span style="color: #fef08a; font-weight: 700;">بِثَلَاثَةِ أَحْرُفٍ</span> (اسْتَقْبَلَ، اسْتَخْرَجَ).
           </div>
         </div>
 
@@ -1426,10 +1444,10 @@ function toggleGuideModal() {
         </button>
       </div>
 
-      <!-- 3. بطاقة مدار الفعل الثلاثي (خاص بمدار الأقمار المفتوح حالياً) -->
+     <!-- 3. بطاقة مدار الفعل الثلاثي (خاص بمدار الأقمار المفتوح حالياً) -->
       <div id="guideContentTriadic" style="display: none;">
         <div style="display: flex; align-items: center; gap: 0.6rem; border-bottom: 1.5px solid rgba(56, 189, 248, 0.25); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
-          <span style="font-size: 1.8rem;">🌙</span>
+          <span style="font-size: 1.8rem;">📚</span>
           <div>
             <h3 style="margin: 0; color: #38bdf8; font-size: 1.35rem; font-weight: 900;">مَدَارُ الفِعْلِ الثُّلَاثِيِّ (الصَّحِيحُ)</h3>
             <p style="margin: 2px 0 0; color: #94a3b8; font-size: 0.85rem;">دَلِيلُ اسْتِكْشَافِ الأَقْمَارِ وَالأَوْزَانِ الثُّلَاثِيَّةِ</p>
@@ -1439,18 +1457,97 @@ function toggleGuideModal() {
         <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.92rem; line-height: 1.65; color: #cbd5e1;">
           <div style="background: rgba(56, 189, 248, 0.12); border-right: 4px solid #38bdf8; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
             <strong style="color: #38bdf8;">🛡️ قَمَرُ السَّالِمِ (الأَوْزَانُ الأَصْلِيَّةُ):</strong><br>
-            مَا سَلِمَتْ أُصُولُهُ مِنَ الهَمْزِ وَالتَّضْعِيفِ؛ وَيَتَمَثَّلُ فِي الأَوْزَانِ الثَّلَاثَةِ المشهورة: <span style="color: #fde047;">فَعَلَ</span> (كَتَبَ)، <span style="color: #fde047;">فَعِلَ</span> (فَرِحَ)، و<span style="color: #fde047;">فَعُلَ</span> (كَرُمَ).
-          </div>
-          <div style="background: rgba(2, 132, 199, 0.12); border-right: 4px solid #0284c7; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
-            <strong style="color: #60a5fa;">🪢 قَمَرُ المُضَعَّفِ (الشِّدَّةُ وَالإِدْغَامُ):</strong><br>
-            مَا كَانَ حَرْفَانِ مِنْ أُصُولِهِ مِنْ جِنْسٍ وَاحِدٍ انْدَمَجَا فِي حَرْفٍ مُشَدَّدٍ؛ مِثْلُ: <span style="color: #bae6fd;">مَدَّ (مَدَدَ)</span> وَ<span style="color: #bae6fd;">شَدَّ</span>.
+            مَا سَلِمَتْ أُصُولُهُ مِنَ الهَمْزِ وَالتَّضْعِيفِ؛ وَيَتَمَثَّلُ فِي الأَوْزَانِ الثَّلَاثَةِ: <span style="color: #fde047;">فَعَلَ</span> (كَتَبَ)، <span style="color: #fde047;">فَعِلَ</span> (فَرِحَ)، وَ<span style="color: #fde047;">فَعُلَ</span> (كَرُمَ).
           </div>
           <div style="background: rgba(245, 158, 11, 0.12); border-right: 4px solid #f59e0b; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
             <strong style="color: #fbbf24;">⚡ قَمَرُ المَهْمُوزِ (نَبْرَةُ الهَمْزَةِ):</strong><br>
-            مَا كَانَ أَحَدُ حُرُوفِهِ الأَصْلِيَّةِ هَمْزَةً، سَوَاءً فِي الفَاءِ: <span style="color: #fef08a;">أَخَذَ</span>، أَوْ فِي العَيْنِ: <span style="color: #fef08a;">سَأَلَ</span>، أَوْ فِي اللَّامِ: <span style="color: #fef08a;">قَرَأَ</span>.
+            مَا كَانَ أَحَدُ حُرُوفِهِ الأَصْلِيَّةِ هَمْزَةً: فِي الفَاءِ (<span style="color: #fef08a;">أَخَذَ</span>)، أَوْ فِي العَيْنِ (<span style="color: #fef08a;">سَأَلَ</span>)، أَوْ فِي اللَّامِ (<span style="color: #fef08a;">مَلَأَ</span>).
+          </div>
+          <div style="background: rgba(2, 132, 199, 0.12); border-right: 4px solid #0284c7; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #60a5fa;">🪢 قَمَرُ المُضَعَّفِ (الشِّدَّةُ وَالإِدْغَامُ):</strong><br>
+            مَا كَانَ حَرْفَانِ مِنْ أُصُولِهِ مِنْ جِنْسٍ وَاحِدٍ انْدَمَجَا فِي حَرْفٍ مُشَدَّدٍ؛ مِثْلُ: <span style="color: #bae6fd;">مَرَّ (مَرَرَ)</span>، <span style="color: #bae6fd;">فَكَّ (فَكَكَ)</span>، وَ<span style="color: #bae6fd;">مَدَّ (مَدَدَ)</span>.
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. بطاقة مدار الفعل الرباعي المجرد -->
+      <div id="guideContentQuadric" style="display: none;">
+        <div style="display: flex; align-items: center; gap: 0.6rem; border-bottom: 1.5px solid rgba(52, 211, 153, 0.25); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
+          <span style="font-size: 1.8rem;">🌀</span>
+          <div>
+            <h3 style="margin: 0; color: #34d399; font-size: 1.35rem; font-weight: 900;">مَدَارُ الفِعْلِ الرُّبَاعِيِّ (المُجَرَّدُ)</h3>
+            <p style="margin: 2px 0 0; color: #94a3b8; font-size: 0.85rem;">دَلِيلُ اسْتِكْشَافِ صِيَغِ وَأَوْزَانِ الرُّبَاعِيِّ</p>
           </div>
         </div>
 
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.92rem; line-height: 1.65; color: #cbd5e1;">
+          <div style="background: rgba(5, 150, 105, 0.12); border-right: 4px solid #34d399; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #34d399;">💠 قَمَرُ الرُّبَاعِيِّ السَّالِمِ:</strong><br>
+            أَرْبَعَةُ أَحْرُفٍ أُصُولٍ سَلِمَتْ مِنَ التَّضْعِيفِ عَلَى وَزْنِ (فَعْلَلَ)؛ مِثْلُ: <span style="color: #a7f3d0;">دَحْرَجَ</span> وَ<span style="color: #a7f3d0;">بَعْثَرَ</span>.
+          </div>
+          <div style="background: rgba(4, 120, 87, 0.15); border-right: 4px solid #059669; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #6ee7b7;">🔄 قَمَرُ الرُّبَاعِيِّ المُضَعَّفِ:</strong><br>
+            فَاؤُهُ وَلَامُهُ الأُولَى مِنْ جِنْسٍ، وَعَيْنُهُ وَلَامُهُ الثَّانِيَةُ مِنْ جِنْسٍ؛ مِثْلُ: <span style="color: #a7f3d0;">زَلْزَلَ</span> وَ<span style="color: #a7f3d0;">وَسْوَسَ</span>.
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. بطاقة مدار الفعل المعتل -->
+      <div id="guideContentWeak" style="display: none;">
+        <div style="display: flex; align-items: center; gap: 0.6rem; border-bottom: 1.5px solid rgba(192, 132, 252, 0.25); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
+          <span style="font-size: 1.8rem;">🌙</span>
+          <div>
+            <h3 style="margin: 0; color: #c084fc; font-size: 1.35rem; font-weight: 900;">مَدَارُ الفِعْلِ المُعْتَلِّ (حُرُوفُ العِلَّةِ)</h3>
+            <p style="margin: 2px 0 0; color: #94a3b8; font-size: 0.85rem;">دَلِيلُ اسْتِكْشَافِ أَقْمَارِ حُرُوفِ العِلَّةِ (و - ا - ي)</p>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.92rem; line-height: 1.65; color: #cbd5e1;">
+          <div style="background: rgba(168, 85, 247, 0.12); border-right: 4px solid #c084fc; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #c084fc;">🌟 قَمَرُ المِثَالِ (عِلَّةُ الفَاءِ):</strong><br>
+            مَا كَانَ أَوَّلُهُ حَرْفَ عِلَّةٍ؛ وَاوِيّاً مِثْلُ: <span style="color: #e9d5ff;">وَضَعَ</span>، أَوْ يَائِيّاً مِثْلُ: <span style="color: #e9d5ff;">يَبِسَ</span>.
+          </div>
+          <div style="background: rgba(147, 51, 234, 0.12); border-right: 4px solid #a855f7; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #d8b4fe;">💫 قَمَرُ الأَجْوَفِ (عِلَّةُ العَيْنِ):</strong><br>
+            مَا كَانَ وَسَطُهُ حَرْفَ عِلَّةٍ؛ وَاوِيّاً مِثْلُ: <span style="color: #e9d5ff;">قَالَ</span>، أَوْ يَائِيّاً مِثْلُ: <span style="color: #e9d5ff;">نَالَ</span>.
+          </div>
+          <div style="background: rgba(126, 34, 206, 0.12); border-right: 4px solid #9333ea; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #c084fc;">🪐 قَمَرُ النَّاقِصِ (عِلَّةُ اللَّامِ):</strong><br>
+            مَا كَانَ آخِرُهُ حَرْفَ عِلَّةٍ؛ مَقْصُوراً مِثْلُ: <span style="color: #e9d5ff;">سَعَى</span>، أَوْ مَمْدُوداً مِثْلُ: <span style="color: #e9d5ff;">دَنَا</span>.
+          </div>
+          <div style="background: rgba(88, 28, 135, 0.15); border-right: 4px solid #7e22ce; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #d8b4fe;">🌌 قَمَرُ اللَّفِيفِ (اجْتِمَاعُ عِلَّتَيْنِ):</strong><br>
+            مَا اشْتَمَلَ عَلَى حَرْفَيْ عِلَّةٍ؛ مَفْرُوقٌ: <span style="color: #e9d5ff;">وَعَى</span>، أَوْ مَقْرُونٌ: <span style="color: #e9d5ff;">طَوَى</span>.
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. بطاقة مدار الفعل المزيد -->
+      <div id="guideContentAugmented" style="display: none;">
+        <div style="display: flex; align-items: center; gap: 0.6rem; border-bottom: 1.5px solid rgba(251, 191, 36, 0.25); padding-bottom: 0.8rem; margin-bottom: 1.2rem;">
+          <span style="font-size: 1.8rem;">☀️</span>
+          <div>
+            <h3 style="margin: 0; color: #fbbf24; font-size: 1.35rem; font-weight: 900;">مَدَارُ الفِعْلِ المَزِيدِ (الأَفْعَالُ النَّامِيَةُ)</h3>
+            <p style="margin: 2px 0 0; color: #94a3b8; font-size: 0.85rem;">دَلِيلُ اسْتِكْشَافِ صِيَغِ وَأَحْرُفِ الزِّيَادَةِ</p>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.92rem; line-height: 1.65; color: #cbd5e1;">
+          <div style="background: rgba(245, 158, 11, 0.12); border-right: 4px solid #fde047; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #fde047;">🌱 قَمَرُ المَزِيدِ بِحَرْفٍ:</strong><br>
+            زِيدَ فِيهِ حَرْفٌ وَاحِدٌ: بِالأَلِفِ (<span style="color: #fef08a;">تَابَعَ</span>)، بِالهَمْزَةِ (<span style="color: #fef08a;">أَكْرَمَ</span>)، أَوْ بِالتَّضْعِيفِ (<span style="color: #fef08a;">كَسَّرَ</span>).
+          </div>
+          <div style="background: rgba(217, 119, 6, 0.12); border-right: 4px solid #fbbf24; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #fbbf24;">🌿 قَمَرُ المَزِيدِ بِحَرْفَيْنِ:</strong><br>
+            زِيدَ فِيهِ حَرْفَانِ: افْتَعَلَ (<span style="color: #fef08a;">انْتَقَلَ</span>)، تَفَاعَلَ (<span style="color: #fef08a;">تَعَاظَمَ</span>)، أَوْ انْفَعَلَ (<span style="color: #fef08a;">انْكَسَرَ</span>).
+          </div>
+          <div style="background: rgba(180, 83, 9, 0.15); border-right: 4px solid #f59e0b; padding: 0.55rem 0.85rem; border-radius: 0 12px 12px 0;">
+            <strong style="color: #fcd34d;">🌳 قَمَرُ المَزِيدِ بِثَلَاثَةِ أَحْرُفٍ:</strong><br>
+            زِيدَتْ فِيهِ ثَلَاثَةُ أَحْرُفٍ عَلَى وَزْنِ اسْتَفْعَلَ؛ مِثْلُ: <span style="color: #fef08a;">اسْتَقْبَلَ</span> وَ<span style="color: #fef08a;">اسْتَخْرَجَ</span>.
+          </div>
+        </div>
+      </div>
+      
         <button type="button" onclick="toggleGuideModal()" style="margin-top: 1.3rem; width: 100%; padding: 0.8rem; border-radius: 50px; background: linear-gradient(90deg, #0284c7, #38bdf8); border: none; color: #04101e; font-weight: 900; font-size: 1.05rem; cursor: pointer; box-shadow: 0 4px 18px rgba(56, 189, 248, 0.4);">
           وَاضِحٌ، لِنُكْمِلِ اسْتِكْشَافَ المَدَارِ! 🚀
         </button>
