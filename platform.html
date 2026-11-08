@@ -477,11 +477,12 @@
 </head>
 <body>
 
-  <!-- 🧭 أزرار التوجيه الجانبية العائمة -->
+ <!-- 🧭 أزرار التوجيه الجانبية العائمة -->
   <div class="floating-side-controls">
     <button type="button" class="side-control-btn" style="border: 2px solid #f59e0b;" onclick="openWelcomeScreen()" title="شاشة البداية">🚀</button>
     <button type="button" class="side-control-btn" style="border: 2px solid #38bdf8;" onclick="toggleGuideModal()" title="دليل التوجيه">🧭</button>
-    <button type="button" class="side-control-btn" style="border: 2px solid #ec4899;" onclick="triggerEndJourney()" title="وسام ختام الرحلة">🏆</button>
+    <!-- زر الاحتفال والوسام: مخفي افتراضياً ولا يظهر إلا في شمس الجذر -->
+    <button id="celebrateBtn" type="button" class="side-control-btn" style="border: 2px solid #ec4899; display: none;" onclick="triggerEndJourney()" title="وسام ختام الرحلة">🏆</button>
   </div>
 
   <!-- 🌌 شاشة البداية الترحيبية الأصلية -->
@@ -1179,6 +1180,14 @@ function openMoonForms(moon) {
   if (lvl2) lvl2.style.display = 'none';
   if (lvl3) lvl3.style.display = 'block';
 
+  // 1. إخفاء عناصر التحكم العلوية (البوصلة والإغلاق) في شاشة الصيغ
+  const topControls = document.getElementById('galaxyTopControls');
+  if (topControls) topControls.style.display = 'none';
+
+  // 2. ضمان إخفاء زر الاحتفال
+  const celebrateBtn = document.getElementById('celebrateBtn');
+  if (celebrateBtn) celebrateBtn.style.display = 'none';
+
   if (title) {
     title.innerHTML = `⭐ صِيَغُ وَأَوْزَانُ: <span style="color:#38bdf8;">${moon.name}</span>`;
     title.style.color = '#fde047';
@@ -1247,6 +1256,11 @@ function openMoonForms(moon) {
     function selectFormAndLaunch(rootKey) {
       const galaxyModal = document.getElementById('galaxyModal');
       if (galaxyModal) galaxyModal.style.display = 'none';
+
+      // إظهار زر الاحتفال حصرياً عند الوصول لشمس الجذر
+      const celebrateBtn = document.getElementById('celebrateBtn');
+      if (celebrateBtn) celebrateBtn.style.display = 'flex';
+
       startAdventure();
 
       const sel = document.getElementById('rootSelect');
@@ -1269,11 +1283,15 @@ function openMoonForms(moon) {
     }
 
     function backToMoons() {
-      const lvl2 = document.getElementById('cosmicLevel2');
-      const lvl3 = document.getElementById('cosmicLevel3');
-      if (lvl3) lvl3.style.display = 'none';
-      if (lvl2) lvl2.style.display = 'block';
-    }
+  const lvl2 = document.getElementById('cosmicLevel2');
+  const lvl3 = document.getElementById('cosmicLevel3');
+  if (lvl3) lvl3.style.display = 'none';
+  if (lvl2) lvl2.style.display = 'block';
+
+  // إعادة إظهار عناصر التحكم العلوية في المستوى الثاني
+  const topControls = document.getElementById('galaxyTopControls');
+  if (topControls) topControls.style.display = 'flex';
+}
 
 // زر التوجيه الذكي المتكيف سياقياً مع المستوى والكوكب المفتوح
 function toggleGuideModal() {
