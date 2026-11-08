@@ -752,91 +752,43 @@ const cosmicNavTree = {
         name: "الفِعْلُ الثُّلَاثِيُّ (الصَّحِيحُ)",
         icon: "📚",
         moons: [
-          // 1. السالم (يمين المدار)
           {
             id: "salim",
             name: "قَمَرُ السَّالِمِ",
             symbol: "🛡️",
             color: "#38bdf8",
             desc: "مَا خَلَتْ حُرُوفُهُ الأَصْلِيَّةُ مِنَ الهَمْزِ وَالتَّضْعِيفِ",
-            x: 880, y: 130,
+            left: "80%", top: "35%",
             forms: [
-              { 
-                sample: "كَتَبَ", 
-                display: `كَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">تَـ</span>بَ`,
-                label: "كَتَبَ عَلَى وَزْنِ فَعَلَ (بِفَتْحِ العَيْنِ)", 
-                val: "كتب" 
-              },
-              { 
-                sample: "فَرِحَ", 
-                display: `فَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">رِ</span>حَ`,
-                label: "فَرِحَ عَلَى وَزْنِ فَعِلَ (بِكَسْرِ العَيْنِ)", 
-                val: "فرح" 
-              },
-              { 
-                sample: "كَرُمَ", 
-                display: `كَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">رُ</span>مَ`,
-                label: "كَرُمَ عَلَى وَزْنِ فَعُلَ (بِضَمِّ العَيْنِ)", 
-                val: "كرم" 
-              }
+              { sample: "كَتَبَ", display: `كَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">تَـ</span>بَ`, label: "كَتَبَ عَلَى وَزْنِ فَعَلَ (بِفَتْحِ العَيْنِ)", val: "كتب" },
+              { sample: "فَرِحَ", display: `فَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">رِ</span>حَ`, label: "فَرِحَ عَلَى وَزْنِ فَعِلَ (بِكَسْرِ العَيْنِ)", val: "فرح" },
+              { sample: "كَرُمَ", display: `كَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">رُ</span>مَ`, label: "كَرُمَ عَلَى وَزْنِ فَعُلَ (بِضَمِّ العَيْنِ)", val: "كرم" }
             ]
           },
-          // 2. المهموز (أسفل المدار)
           {
             id: "hamzouz",
             name: "قَمَرُ المَهْمُوزِ",
             symbol: "⚡",
             color: "#f59e0b",
             desc: "مَا كَانَ أَحَدُ أَحْرُفِهِ الأَصْلِيَّةِ هَمْزَةً",
-            x: 590, y: 395,
+            left: "50%", top: "78%",
             forms: [
-              { 
-                sample: "أَخَذَ", 
-                display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">أَ</span>خَـذَ`,
-                label: "أَخَذَ عَلَى وَزْنِ فَعَلَ (مَهْمُوزُ الفَاءِ)", 
-                val: "أخذ" 
-              },
-              { 
-                sample: "سَأَلَ", 
-                display: `سَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">أَ</span>لَ`,
-                label: "سَأَلَ عَلَى وَزْنِ فَعَلَ (مَهْمُوزُ العَيْنِ)", 
-                val: "سأل" 
-              },
-              { 
-                sample: "مَلَأَ", 
-                display: `مَـلَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">أَ</span>`,
-                label: "مَلَأَ عَلَى وَزْنِ فَعَلَ (مَهْمُوزُ اللَّامِ)", 
-                val: "ملأ" 
-              }
+              { sample: "أَخَذَ", display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">أَ</span>خَـذَ`, label: "أَخَذَ عَلَى وَزْنِ فَعَلَ (مَهْمُوزُ الفَاءِ)", val: "أخذ" },
+              { sample: "سَأَلَ", display: `سَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">أَ</span>لَ`, label: "سَأَلَ عَلَى وَزْنِ فَعَلَ (مَهْمُوزُ العَيْنِ)", val: "سأل" },
+              { sample: "مَلَأَ", display: `مَـلَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">أَ</span>`, label: "مَلَأَ عَلَى وَزْنِ فَعَلَ (مَهْمُوزُ اللَّامِ)", val: "ملأ" }
             ]
           },
-          // 3. المضعف (يسار المدار)
           {
             id: "mudaaf",
             name: "قَمَرُ المُضَعَّفِ",
             symbol: "🪢",
             color: "#0284c7",
             desc: "مَا كَانَ حَرْفَانِ مِنْ أُصُولِهِ مِنْ جِنْسٍ وَاحِدٍ",
-            x: 200, y: 230,
+            left: "20%", top: "50%",
             forms: [
-              { 
-                sample: "مَرَّ", 
-                display: `مَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">رَّ</span>`,
-                label: "مَرَّ عَلَى وَزْنِ فَعَلَ (مَرَرَ)", 
-                val: "مرر" 
-              },
-              { 
-                sample: "فَكَّ", 
-                display: `فَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">كَّ</span>`,
-                label: "فَكَّ عَلَى وَزْنِ فَعَلَ (فَكَكَ)", 
-                val: "فكك" 
-              },
-              { 
-                sample: "مَدَّ", 
-                display: `مَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">دَّ</span>`,
-                label: "مَدَّ عَلَى وَزْنِ فَعَلَ (مَدَدَ)", 
-                val: "مدد" 
-              }
+              { sample: "مَرَّ", display: `مَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">رَّ</span>`, label: "مَرَّ عَلَى وَزْنِ فَعَلَ (مَرَرَ)", val: "مرر" },
+              { sample: "فَكَّ", display: `فَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">كَّ</span>`, label: "فَكَّ عَلَى وَزْنِ فَعَلَ (فَكَكَ)", val: "فكك" },
+              { sample: "مَدَّ", display: `مَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">دَّ</span>`, label: "مَدَّ عَلَى وَزْنِ فَعَلَ (مَدَدَ)", val: "مدد" }
             ]
           }
         ]
@@ -847,50 +799,28 @@ const cosmicNavTree = {
         name: "الفِعْلُ الرُّبَاعِيُّ (المُجَرَّدُ)",
         icon: "🌀",
         moons: [
-          // 1. الرباعي السالم (يمين المدار)
           {
             id: "quad_salim",
             name: "قَمَرُ الرُّبَاعِيِّ السَّالِمِ",
             symbol: "💠",
             color: "#34d399",
             desc: "أَرْبَعَةُ أَحْرُفٍ أُصُولٍ سَلِمَتْ مِنَ التَّضْعِيفِ",
-            x: 920, y: 220,
+            left: "78%", top: "45%",
             forms: [
-              { 
-                sample: "دَحْرَجَ", 
-                display: `دَحْرَجَ`,
-                label: "دَحْرَجَ عَلَى وَزْنِ فَعْلَلَ (أُصُولٌ أَرْبَعَةٌ)", 
-                val: "دحرج" 
-              },
-              { 
-                sample: "بَعْثَرَ", 
-                display: `بَعْثَرَ`,
-                label: "بَعْثَرَ عَلَى وَزْنِ فَعْلَلَ (أُصُولٌ أَرْبَعَةٌ)", 
-                val: "بعثر" 
-              }
+              { sample: "دَحْرَجَ", display: `دَحْرَجَ`, label: "دَحْرَجَ عَلَى وَزْنِ فَعْلَلَ (أُصُولٌ أَرْبَعَةٌ)", val: "دحرج" },
+              { sample: "بَعْثَرَ", display: `بَعْثَرَ`, label: "بَعْثَرَ عَلَى وَزْنِ فَعْلَلَ (أُصُولٌ أَرْبَعَةٌ)", val: "بعثر" }
             ]
           },
-          // 2. الرباعي المضعف (يسار المدار)
           {
             id: "quad_mudaaf",
             name: "قَمَرُ الرُّبَاعِيِّ المُضَعَّفِ",
             symbol: "🔄",
             color: "#059669",
             desc: "فَاؤُهُ وَلَامُهُ الأُولَى مِنْ جِنْسٍ، وَعَيْنُهُ وَلَامُهُ الثَّانِيَةُ مِنْ جِنْسٍ",
-            x: 230, y: 220,
+            left: "22%", top: "52%",
             forms: [
-              { 
-                sample: "زَلْزَلَ", 
-                display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">زَ</span>لْـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">زَ</span>لَ`,
-                label: "زَلْزَلَ عَلَى وَزْنِ فَعْلَلَ (مُضَعَّفٌ رُبَاعِيٌّ)", 
-                val: "زلزل" 
-              },
-              { 
-                sample: "وَسْوَسَ", 
-                display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">وَ</span>سْـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">وَ</span>سَ`,
-                label: "وَسْوَسَ عَلَى وَزْنِ فَعْلَلَ (مُضَعَّفٌ رُبَاعِيٌّ)", 
-                val: "وسوس" 
-              }
+              { sample: "زَلْزَلَ", display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">زَ</span>لْـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">زَ</span>لَ`, label: "زَلْزَلَ عَلَى وَزْنِ فَعْلَلَ (مُضَعَّفٌ رُبَاعِيٌّ)", val: "زلزل" },
+              { sample: "وَسْوَسَ", display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">وَ</span>سْـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">وَ</span>سَ`, label: "وَسْوَسَ عَلَى وَزْنِ فَعْلَلَ (مُضَعَّفٌ رُبَاعِيٌّ)", val: "وسوس" }
             ]
           }
         ]
@@ -901,96 +831,52 @@ const cosmicNavTree = {
         name: "الفِعْلُ المُعْتَلُّ (حُرُوفُ العِلَّةِ)",
         icon: "🌙",
         moons: [
-          // 1. المثال (يمين المدار)
           {
             id: "mithal",
             name: "قَمَرُ المِثَالِ",
             symbol: "🌟",
             color: "#c084fc",
             desc: "مَا كَانَتْ فَاؤُهُ (أَوَّلُهُ) حَرْفَ عِلَّةٍ",
-            x: 950, y: 200,
+            left: "82%", top: "42%",
             forms: [
-              { 
-                sample: "وَضَعَ", 
-                display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">وَ</span>ضَـعَ`,
-                label: "وَضَعَ (مِثَالٌ وَاوِيٌّ)", 
-                val: "وضع" 
-              },
-              { 
-                sample: "يَبِسَ", 
-                display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">يَـ</span>بِـسَ`,
-                label: "يَبِسَ (مِثَالٌ يَائِيٌّ)", 
-                val: "يبس" 
-              }
+              { sample: "وَضَعَ", display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">وَ</span>ضَـعَ`, label: "وَضَعَ (مِثَالٌ وَاوِيٌّ)", val: "وضع" },
+              { sample: "يَبِسَ", display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">يَـ</span>بِـسَ`, label: "يَبِسَ (مِثَالٌ يَائِيٌّ)", val: "يبس" }
             ]
           },
-          // 2. الأجوف (أعلى المدار)
           {
             id: "ajwaf",
             name: "قَمَرُ الأَجْوَفِ",
             symbol: "💫",
             color: "#a855f7",
             desc: "مَا كَانَتْ عَيْنُهُ (وَسَطُهُ) حَرْفَ عِلَّةٍ",
-            x: 590, y: 65,
+            left: "50%", top: "20%",
             forms: [
-              { 
-                sample: "قَالَ", 
-                display: `قَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">ا</span>لَ`,
-                label: "قَالَ (أَجْوَفُ وَاوِيٌّ: قَوَلَ)", 
-                val: "قال" 
-              },
-              { 
-                sample: "نَالَ", 
-                display: `نَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">ا</span>لَ`,
-                label: "نَالَ (أَجْوَفُ يَائِيٌّ: نَيَلَ)", 
-                val: "نال" 
-              }
+              { sample: "قَالَ", display: `قَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">ا</span>لَ`, label: "قَالَ (أَجْوَفُ وَاوِيٌّ: قَوَلَ)", val: "قال" },
+              { sample: "نَالَ", display: `نَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">ا</span>لَ`, label: "نَالَ (أَجْوَفُ يَائِيٌّ: نَيَلَ)", val: "نال" }
             ]
           },
-          // 3. الناقص (يسار المدار)
           {
             id: "naqis",
             name: "قَمَرُ النَّاقِصِ",
             symbol: "🪐",
             color: "#9333ea",
             desc: "مَا كَانَتْ لَامُهُ (آخِرُهُ) حَرْفَ عِلَّةٍ",
-            x: 200, y: 220,
+            left: "18%", top: "48%",
             forms: [
-              { 
-                sample: "سَعَى", 
-                display: `سَعَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">ى</span>`,
-                label: "سَعَى (نَاقِصٌ يَائِيٌّ: أَلِفٌ مَقْصُورَةٌ)", 
-                val: "سعى" 
-              },
-              { 
-                sample: "دَنَا", 
-                display: `دَنَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">ا</span>`,
-                label: "دَنَا (نَاقِصٌ وَاوِيٌّ: أَلِفٌ مَمْدُودَةٌ)", 
-                val: "دنا" 
-              }
+              { sample: "سَعَى", display: `سَعَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">ى</span>`, label: "سَعَى (نَاقِصٌ يَائِيٌّ: أَلِفٌ مَقْصُورَةٌ)", val: "سعى" },
+              { sample: "دَنَا", display: `دَنَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">ا</span>`, label: "دَنَا (نَاقِصٌ وَاوِيٌّ: أَلِفٌ مَمْدُودَةٌ)", val: "دنا" }
             ]
           },
-          // 4. اللفيف (أسفل المدار)
           {
             id: "lafeef",
             name: "قَمَرُ اللَّفِيفِ",
             symbol: "🌌",
             color: "#7e22ce",
             desc: "مَا اشْتَمَلَ عَلَى حَرْفَيْ عِلَّةٍ (مَفْرُوقٌ أَوْ مَقْرُونٌ)",
-            x: 590, y: 395,
+            left: "50%", top: "80%",
             forms: [
-              { 
-                sample: "وَعَى", 
-                display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">وَ</span>عَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">ى</span>`,
-                label: "وَعَى (لَفِيفٌ مَفْرُوقٌ: افْتَرَقَ حَرْفَا العِلَّةِ)", 
-                val: "وعى" 
-              },
-              { 
-                sample: "طَوَى", 
-                display: `طَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">وَى</span>`,
-                label: "طَوَى (لَفِيفٌ مَقْرُونٌ: اقْتَرَنَ حَرْفَا العِلَّةِ)", 
-                val: "طوى" 
-              }
+              { sample: "وَعَى", display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">وَ</span>عَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">ى</span>`, label: "وَعَى (لَفِيفٌ مَفْرُوقٌ: افْتَرَقَ حَرْفَا العِلَّةِ)", val: "وعى" },
+              { sample: "طَوَى", display: `طَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">وَى</span>`, label: "طَوَى (لَفِيفٌ مَقْرُونٌ: اقْتَرَنَ حَرْفَا العِلَّةِ)", val: "طوى" }
             ]
           }
         ]
@@ -1001,85 +887,42 @@ const cosmicNavTree = {
         name: "الفِعْلُ المَزِيدُ (الأَفْعَالُ النَّامِيَةُ)",
         icon: "☀️",
         moons: [
-          // 1. مزيد بحرف (يمين المدار)
           {
             id: "aug_one",
             name: "قَمَرُ المَزِيدِ بِحَرْفٍ",
             symbol: "🌱",
             color: "#fde047",
             desc: "زِيدَ فِيهِ حَرْفٌ (الهَمْزَةُ أَوِ الأَلِفُ أَوِ التَّضْعِيفُ)",
-            x: 930, y: 170,
+            left: "80%", top: "38%",
             forms: [
-              { 
-                sample: "تَابَعَ", 
-                display: `تَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">ا</span>بَـعَ`,
-                label: "تَابَعَ عَلَى وَزْنِ فَاعَلَ (مَزِيدٌ بِالأَلِفِ)", 
-                val: "تابع" 
-              },
-              { 
-                sample: "أَكْرَمَ", 
-                display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">أَ</span>كْـرَمَ`,
-                label: "أَكْرَمَ عَلَى وَزْنِ أَفْعَلَ (مَزِيدٌ بِالهَمْزَةِ)", 
-                val: "أكرم" 
-              },
-              { 
-                sample: "كَسَّرَ", 
-                display: `كَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">سَّ</span>ـرَ`,
-                label: "كَسَّرَ عَلَى وَزْنِ فَعَّلَ (مَزِيدٌ بِالتَّضْعِيفِ)", 
-                val: "كسر" 
-              }
+              { sample: "تَابَعَ", display: `تَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">ا</span>بَـعَ`, label: "تَابَعَ عَلَى وَزْنِ فَاعَلَ (مَزِيدٌ بِالأَلِفِ)", val: "تابع" },
+              { sample: "أَكْرَمَ", display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">أَ</span>كْـرَمَ`, label: "أَكْرَمَ عَلَى وَزْنِ أَفْعَلَ (مَزِيدٌ بِالهَمْزَةِ)", val: "أكرم" },
+              { sample: "كَسَّرَ", display: `كَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">سَّ</span>ـرَ`, label: "كَسَّرَ عَلَى وَزْنِ فَعَّلَ (مَزِيدٌ بِالتَّضْعِيفِ)", val: "كسر" }
             ]
           },
-          // 2. مزيد بحرفين (يسار المدار)
           {
             id: "aug_two",
             name: "قَمَرُ المَزِيدِ بِحَرْفَيْنِ",
             symbol: "🌿",
             color: "#fbbf24",
             desc: "زِيدَ فِيهِ حَرْفَانِ (افْتَعَلَ، تَفَاعَلَ، انْفَعَلَ)",
-            x: 210, y: 200,
+            left: "20%", top: "50%",
             forms: [
-              { 
-                sample: "انْتَقَلَ", 
-                display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">اِ</span>نْـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">تَـ</span>قَـلَ`,
-                label: "انْتَقَلَ عَلَى وَزْنِ افْتَعَلَ (مَزِيدٌ بِالأَلِفِ وَالتَّاءِ)", 
-                val: "انتقل" 
-              },
-              { 
-                sample: "تَعَاظَمَ", 
-                display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">تَـ</span>عَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">ا</span>ظَـمَ`,
-                label: "تَعَاظَمَ عَلَى وَزْنِ تَفَاعَلَ (مَزِيدٌ بِالتَّاءِ وَالأَلِفِ)", 
-                val: "تعاظم" 
-              },
-              { 
-                sample: "انْكَسَرَ", 
-                display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">اِ</span><span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">نْـ</span>كَـسَـرَ`,
-                label: "انْكَسَرَ عَلَى وَزْنِ انْفَعَلَ (مَزِيدٌ بِالأَلِفِ وَالنُّونِ)", 
-                val: "انكسر" 
-              }
+              { sample: "انْتَقَلَ", display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">اِ</span>نْـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">تَـ</span>قَـلَ`, label: "انْتَقَلَ عَلَى وَزْنِ افْتَعَلَ (مَزِيدٌ بِالأَلِفِ وَالتَّاءِ)", val: "انتقل" },
+              { sample: "تَعَاظَمَ", display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">تَـ</span>عَـ<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">ا</span>ظَـمَ`, label: "تَعَاظَمَ عَلَى وَزْنِ تَفَاعَلَ (مَزِيدٌ بِالتَّاءِ وَالأَلِفِ)", val: "تعاظم" },
+              { sample: "انْكَسَرَ", display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">اِ</span><span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">نْـ</span>كَـسَـرَ`, label: "انْكَسَرَ عَلَى وَزْنِ انْفَعَلَ (مَزِيدٌ بِالأَلِفِ وَالنُّونِ)", val: "انكسر" }
             ]
           },
-          // 3. مزيد بثلاثة أحرف (أسفل المدار)
           {
             id: "aug_three",
             name: "قَمَرُ المَزِيدِ بِثَلَاثَةِ أَحْرُفٍ",
             symbol: "🌳",
             color: "#f59e0b",
             desc: "زِيدَتْ فِيهِ ثَلَاثَةُ أَحْرُفٍ عَلَى وَزْنِ اسْتَفْعَلَ",
-            x: 590, y: 395,
+            left: "50%", top: "78%",
             forms: [
-              { 
-                sample: "اسْتَقْبَلَ", 
-                display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">اِسْـتَـ</span>قْـبَـلَ`,
-                label: "اسْتَقْبَلَ عَلَى وَزْنِ اسْتَفْعَلَ (مَزِيدٌ بِالأَلِفِ وَالسِّينِ وَالتَّاءِ)", 
-                val: "استقبل" 
-              },
-              { 
-                sample: "اسْتَخْرَجَ", 
-                display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">اِسْـتَـ</span>خْـرَجَ`,
-                label: "اسْتَخْرَجَ عَلَى وَزْنِ اسْتَفْعَلَ (مَزِيدٌ بِالأَلِفِ وَالسِّينِ وَالتَّاءِ)", 
-                val: "خرج" 
-              }
+              { sample: "اسْتَقْبَلَ", display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">اِسْـتَـ</span>قْـبَـلَ`, label: "اسْتَقْبَلَ عَلَى وَزْنِ اسْتَفْعَلَ (مَزِيدٌ بِالأَلِفِ وَالسِّينِ وَالتَّاءِ)", val: "استقبل" },
+              { sample: "اسْتَخْرَجَ", display: `<span style="color:#ef4444; text-shadow:0 0 14px rgba(239,68,68,0.9);">اِسْـتَـ</span>خْـرَجَ`, label: "اسْتَخْرَجَ عَلَى وَزْنِ اسْتَفْعَلَ (مَزِيدٌ بِالأَلِفِ وَالسِّينِ وَالتَّاءِ)", val: "خرج" }
             ]
           }
         ]
@@ -1122,7 +965,7 @@ const cosmicNavTree = {
       }
     }
 
-   // فتح المستوى الثاني (توزيع الأقمار كأجرام كروية على المدارات لجميع الكواكب)
+// فتح المستوى الثاني (تثبيت الأقمار بدقة هندسية فوق خط المدار المنقط)
 function openPlanetLevel(planetKey) {
   const planet = cosmicNavTree[planetKey];
   if (!planet) return;
@@ -1152,28 +995,28 @@ function openPlanetLevel(planetKey) {
   const moonsList = planet.moons || [];
 
   moonsList.forEach((moon, idx) => {
-    // تحديد موقع القمر اعتماداً على إحداثيات الكوكب المختار في cosmicNavTree
+    // تحديد موقع القمر اعتماداً على النسب المئوية مع إلغاء حركة الطفو الرأسية
     const moonWrapper = document.createElement('div');
     moonWrapper.style.cssText = `
       position: absolute !important;
-      left: ${moon.x !== undefined ? moon.x + 'px' : '50%'};
-      top: ${moon.y !== undefined ? moon.y + 'px' : '50%'};
+      left: ${moon.left || (moon.x !== undefined ? moon.x + 'px' : '50%')};
+      top: ${moon.top || (moon.y !== undefined ? moon.y + 'px' : '50%')};
       transform: translate(-50%, -50%);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       cursor: pointer;
       z-index: 30;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      animation: planetFloatA ${5 + idx * 1.1}s ease-in-out infinite ${idx * 0.4}s;
+      transition: transform 0.3s ease;
+      animation: none !important;
     `;
 
     const moonSphere = document.createElement('div');
     const moonColor = moon.color || '#38bdf8';
     moonSphere.style.cssText = `
-      width: 125px;
-      height: 125px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
       background: ${moon.moonBase || `radial-gradient(circle at 35% 30%, #ffffff 0%, ${moonColor} 65%, #0f172a 100%)`};
       position: relative;
@@ -1182,9 +1025,9 @@ function openPlanetLevel(planetKey) {
       align-items: center;
       justify-content: center;
       border: 3px solid rgba(255, 255, 255, 0.95);
-      box-shadow: 0 0 35px ${moon.glowColor || moonColor}, inset -10px -10px 20px rgba(0,0,0,0.65);
+      box-shadow: 0 0 25px ${moon.glowColor || moonColor}, inset -8px -8px 16px rgba(0,0,0,0.65);
       overflow: hidden;
-      transition: all 0.35s ease;
+      transition: all 0.3s ease;
     `;
 
     const crater1 = `<div style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: rgba(0,0,0,0.15); top: 14px; left: 18px; box-shadow: inset 2px 2px 4px rgba(0,0,0,0.3);"></div>`;
@@ -1193,36 +1036,37 @@ function openPlanetLevel(planetKey) {
     moonSphere.innerHTML = `
       ${crater1}
       ${crater2}
-      <div style="font-size: 2.2rem; z-index: 2; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.6));">${moon.symbol || '🌙'}</div>
-      <span style="color: #ffffff; font-weight: 900; font-size: 1.05rem; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">${moon.name.replace('قَمَرُ ', '')}</span>
+      <div style="font-size: 2rem; z-index: 2; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.6));">${moon.symbol || '🌙'}</div>
+      <span style="color: #ffffff; font-weight: 900; font-size: 0.95rem; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">${moon.name.replace('قَمَرُ ', '')}</span>
     `;
 
     const descBox = document.createElement('div');
     descBox.style.cssText = `
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.92);
       border: 1.5px solid ${moonColor};
       backdrop-filter: blur(8px);
-      padding: 6px 12px;
-      border-radius: 14px;
+      padding: 4px 10px;
+      border-radius: 12px;
       text-align: center;
-      max-width: 185px;
+      max-width: 160px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     `;
     descBox.innerHTML = `
-      <div style="color: #f1f5f9; font-size: 0.78rem; font-weight: 600; line-height: 1.4;">${moon.desc || ''}</div>
+      <div style="color: #f1f5f9; font-size: 0.72rem; font-weight: 600; line-height: 1.3;">${moon.desc || ''}</div>
     `;
 
     moonWrapper.appendChild(moonSphere);
     moonWrapper.appendChild(descBox);
 
+    // تكبير موضعي لطيف دون إزاحة رأسية للمركز
     moonWrapper.onmouseover = () => {
-      moonWrapper.style.transform = 'translate(-50%, -50%) scale(1.12) translateY(-6px)';
-      moonSphere.style.boxShadow = `0 0 50px ${moon.glowColor || moonColor}, inset -4px -4px 12px rgba(0,0,0,0.45)`;
+      moonWrapper.style.transform = 'translate(-50%, -50%) scale(1.1)';
+      moonSphere.style.boxShadow = `0 0 35px ${moon.glowColor || moonColor}, inset -4px -4px 10px rgba(0,0,0,0.45)`;
       moonSphere.style.borderColor = '#ffffff';
     };
     moonWrapper.onmouseout = () => {
       moonWrapper.style.transform = 'translate(-50%, -50%) scale(1)';
-      moonSphere.style.boxShadow = `0 0 35px ${moon.glowColor || moonColor}, inset -10px -10px 20px rgba(0,0,0,0.65)`;
+      moonSphere.style.boxShadow = `0 0 25px ${moon.glowColor || moonColor}, inset -8px -8px 16px rgba(0,0,0,0.65)`;
       moonSphere.style.borderColor = 'rgba(255, 255, 255, 0.95)';
     };
 
