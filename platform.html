@@ -577,8 +577,9 @@
     </div>
   </div>
 
-  <!-- 🪐 فضاء كواكب الأفعال الكونية -->
-<div id="galaxyModal" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 18%, #281457 0%, #0f1738 45%, #050816 100%); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; backdrop-filter: blur(16px); overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif;">    <div class="cosmic-decor-item" style="position: absolute; width: 750px; height: 750px; background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%); top: -120px; left: -80px; filter: blur(80px); pointer-events: none;"></div>
+ <!-- 🪐 فضاء كواكب الأفعال الكونية -->
+  <div id="galaxyModal" style="position: fixed; inset: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at 50% 18%, #281457 0%, #0f1738 45%, #050816 100%); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 999999; backdrop-filter: blur(16px); overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif;">
+    <div class="cosmic-decor-item" style="position: absolute; width: 750px; height: 750px; background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%); top: -120px; left: -80px; filter: blur(80px); pointer-events: none;"></div>
     <div class="cosmic-decor-item" style="position: absolute; width: 850px; height: 850px; background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 75%); bottom: -180px; right: -120px; filter: blur(85px); pointer-events: none;"></div>
     <div class="cosmic-decor-item" style="position: absolute; width: 650px; height: 650px; background: radial-gradient(circle, rgba(245, 158, 11, 0.16) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); filter: blur(70px); pointer-events: none;"></div>
 
@@ -599,8 +600,74 @@
     <div class="cosmic-decor-item" style="position: absolute; bottom: 25%; left: 28%; color: #38bdf8; font-size: 1.8rem; animation: twinkleGalaxy 4.5s infinite 1s; pointer-events: none;">⭐</div>
     <div class="cosmic-decor-item" style="position: absolute; bottom: 20%; right: 26%; color: #f472b6; font-size: 1.4rem; animation: twinkleGalaxy 3.5s infinite 1.5s; pointer-events: none;">✦</div>
 
-    <!-- زر إغلاق الفضاء والعودة -->
-    <button type="button" onclick="document.getElementById('galaxyModal').style.display='none';" style="position: absolute; top: 28px; left: 32px; background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.3); color: #cbd5e1; border-radius: 50%; width: 44px; height: 44px; cursor: pointer; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; transition: all 0.25s; z-index: 100;" onmouseover="this.style.color='#f87171'; this.style.borderColor='#f87171'; this.style.transform='scale(1.1)';" onmouseout="this.style.color='#cbd5e1'; this.style.borderColor='rgba(255,255,255,0.3)'; this.style.transform='scale(1)';">✕</button>
+    <!-- أزرار التحكم العلوية: بوصلة الملاحة وزر الإغلاق -->
+    <div style="position: absolute; top: 28px; left: 32px; display: flex; align-items: center; gap: 12px; z-index: 100;">
+      <!-- زر إغلاق الفضاء -->
+      <button type="button" onclick="document.getElementById('galaxyModal').style.display='none';" style="background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.3); color: #cbd5e1; border-radius: 50%; width: 44px; height: 44px; cursor: pointer; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; transition: all 0.25s;" onmouseover="this.style.color='#f87171'; this.style.borderColor='#f87171'; this.style.transform='scale(1.1)';" onmouseout="this.style.color='#cbd5e1'; this.style.borderColor='rgba(255,255,255,0.3)'; this.style.transform='scale(1)';" title="إغلاق">✕</button>
+
+      <!-- زر بوصلة الملاحة -->
+      <button type="button" onclick="document.getElementById('compassModal').style.display='flex';" style="background: rgba(56, 189, 248, 0.15); border: 2px solid #38bdf8; color: #fde047; border-radius: 30px; padding: 7px 18px; cursor: pointer; font-size: 0.95rem; font-weight: bold; display: flex; align-items: center; gap: 8px; transition: all 0.25s; box-shadow: 0 0 15px rgba(56, 189, 248, 0.35);" onmouseover="this.style.background='#38bdf8'; this.style.color='#0f172a'; this.style.transform='scale(1.05)';" onmouseout="this.style.background='rgba(56, 189, 248, 0.15)'; this.style.color='#fde047'; this.style.transform='none';">
+        <span style="font-size: 1.2rem;">🧭</span>
+        <span>بَوْصَلَةُ المَلَاحَةِ</span>
+      </button>
+    </div>
+
+    <!-- نافذة بوصلة الملاحة المنقحة ديداكتيكياً -->
+    <div id="compassModal" style="position: absolute; inset: 0; background: rgba(5, 8, 22, 0.85); backdrop-filter: blur(14px); display: none; align-items: center; justify-content: center; z-index: 200;">
+      <div style="background: rgba(15, 23, 56, 0.96); border: 2px solid #38bdf8; border-radius: 24px; padding: 2rem; max-width: 650px; width: 90%; box-shadow: 0 0 40px rgba(56, 189, 248, 0.4); text-align: center; position: relative;">
+        
+        <!-- زر إغلاق البوصلة -->
+        <button type="button" onclick="document.getElementById('compassModal').style.display='none';" style="position: absolute; top: 16px; left: 16px; background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.3); color: #cbd5e1; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.color='#f87171'; this.style.borderColor='#f87171';" onmouseout="this.style.color='#cbd5e1'; this.style.borderColor='rgba(255,255,255,0.3)';">✕</button>
+
+        <div style="font-size: 2.8rem; margin-bottom: 6px; filter: drop-shadow(0 0 15px rgba(253, 224, 71, 0.8));">🧭</div>
+        <h3 style="color: #38bdf8; font-size: 1.6rem; font-weight: 900; margin: 0 0 4px 0;">بَوْصَلَةُ المَلَاحَةِ فِي مَجَرَّةِ الأَفْعَالِ</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem; margin: 0 0 18px 0;">دَلِيلُكَ لِلتَّعَرُّفِ عَلَى مَدَارَاتِ وَأَوْزَانِ الكَوَاكِبِ الأَرْبَعَةِ</p>
+
+        <!-- 1. كوكب الثلاثي المجرد -->
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1.5px solid rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 0.85rem 1rem; margin-bottom: 0.7rem; text-align: right;">
+          <div style="color: #38bdf8; font-weight: 800; font-size: 1rem; margin-bottom: 0.2rem;">
+            📚 1. كَوْكَبُ الثُّلَاثِيِّ (المُجَرَّدُ الصَّحِيحُ):
+          </div>
+          <div style="color: #cbd5e1; font-size: 0.85rem; line-height: 1.5;">
+            أَصْلُ الأَفْعَالِ وَأَبْسَطُهَا، يَشْمَلُ: <span style="color: #fde047; font-weight: 700;">السَّالِمَ</span> (كَتَبَ، فَرِحَ)، وَ<span style="color: #fde047; font-weight: 700;">المَهْمُوزَ</span> (أَخَذَ، سَأَلَ)، وَ<span style="color: #fde047; font-weight: 700;">المُضَعَّفَ</span> (مَرَّ، مَدَّ).
+          </div>
+        </div>
+
+        <!-- 2. كوكب الرباعي المجرد -->
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1.5px solid rgba(52, 211, 153, 0.4); border-radius: 14px; padding: 0.85rem 1rem; margin-bottom: 0.7rem; text-align: right;">
+          <div style="color: #34d399; font-weight: 800; font-size: 1rem; margin-bottom: 0.2rem;">
+            🌀 2. كَوْكَبُ الرُّبَاعِيِّ (المُجَرَّدُ):
+          </div>
+          <div style="color: #cbd5e1; font-size: 0.85rem; line-height: 1.5;">
+            أَفْعَالٌ حُرُوفُهَا الأَصْلِيَّةُ أَرْبَعَةٌ عَلَى وَزْنِ (فَعْلَلَ): <span style="color: #fde047; font-weight: 700;">سَالِمٌ</span> (دَحْرَجَ)، وَ<span style="color: #fde047; font-weight: 700;">مُضَعَّفٌ</span> (زَلْزَلَ، وَسْوَسَ).
+          </div>
+        </div>
+
+        <!-- 3. كوكب المعتل -->
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1.5px solid rgba(192, 132, 252, 0.4); border-radius: 14px; padding: 0.85rem 1rem; margin-bottom: 0.7rem; text-align: right;">
+          <div style="color: #c084fc; font-weight: 800; font-size: 1rem; margin-bottom: 0.2rem;">
+            🌙 3. كَوْكَبُ المُعْتَلِّ (حُرُوفُ العِلَّةِ):
+          </div>
+          <div style="color: #cbd5e1; font-size: 0.85rem; line-height: 1.5;">
+            أَحَدُ حُرُوفِهِ الأَصْلِيَّةِ عِلَّةٌ (و - ا - ي): يَضُمُّ <span style="color: #fde047; font-weight: 700;">المِثَالَ</span> (وَضَعَ)، وَ<span style="color: #fde047; font-weight: 700;">الأَجْوَفَ</span> (قَالَ)، وَ<span style="color: #fde047; font-weight: 700;">النَّاقِصَ</span> (سَعَى)، وَ<span style="color: #fde047; font-weight: 700;">اللَّفِيفَ</span> (وَعَى، طَوَى).
+          </div>
+        </div>
+
+        <!-- 4. كوكب المزيد -->
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1.5px solid rgba(251, 191, 36, 0.4); border-radius: 14px; padding: 0.85rem 1rem; margin-bottom: 1.2rem; text-align: right;">
+          <div style="color: #fbbf24; font-weight: 800; font-size: 1rem; margin-bottom: 0.2rem;">
+            ☀️ 4. كَوْكَبُ المَزِيدِ (الأَفْعَالُ النَّامِيَةُ):
+          </div>
+          <div style="color: #cbd5e1; font-size: 0.85rem; line-height: 1.5;">
+            أَفْعَالٌ زِيدَتْ عَلَى أُصُولِهَا: <span style="color: #fde047; font-weight: 700;">بِحَرْفٍ</span> (تَابَعَ، أَكْرَمَ)، أَوْ <span style="color: #fde047; font-weight: 700;">بِحَرْفَيْنِ</span> (انْتَقَلَ، تَعَاظَمَ)، أَوْ <span style="color: #fde047; font-weight: 700;">بِثَلَاثَةِ أَحْرُفٍ</span> (اسْتَقْبَلَ).
+          </div>
+        </div>
+
+        <button type="button" onclick="document.getElementById('compassModal').style.display='none';" style="background: linear-gradient(135deg, #0284c7, #38bdf8); border: none; color: #ffffff; padding: 10px 32px; border-radius: 30px; font-weight: 900; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
+          🚀 فَهِمْتُ المَسَارَ، لِنُوَاصِلِ الِاسْتِكْشَافَ!
+        </button>
+      </div>
+    </div>
 
     <!-- المستوى 1: كواكب الأفعال المقوسة العائمة -->
     <div id="cosmicLevel1" style="width: 100%; max-width: 1100px; text-align: center; position: relative; z-index: 50; padding: 0 1.5rem;">
@@ -616,7 +683,7 @@
         انْقُرْ عَلَى الكَوْكَبِ لِلغَوْصِ فِي مَدَارَاتِهِ وَأَقْمَارِهِ:
       </p>
       
-     <!-- حزام الكواكب المقوس المتباعد -->
+      <!-- حزام الكواكب المقوس المتباعد -->
       <div style="display: flex; justify-content: center; align-items: center; gap: clamp(45px, 6vw, 90px); flex-wrap: wrap; margin-top: 30px; padding: 20px 10px; width: 100%;">
         
         <!-- 1. كوكب الثلاثي -->
@@ -703,17 +770,36 @@
       </div>
     </div>
 
+    <!-- قائمة الجذور المعتمدة بالكامل من الكتاب المدرسي -->
     <div style="display:none;">
       <select id="rootSelect" onchange="loadRadialWorld(this.value)">
         <option value="كتب">كتب</option>
-        <option value="قرأ">قرأ</option>
+        <option value="فرح">فرح</option>
+        <option value="كرم">كرم</option>
+        <option value="أخذ">أخذ</option>
+        <option value="سأل">سأل</option>
+        <option value="ملأ">ملأ</option>
+        <option value="مرر">مرر</option>
+        <option value="فكك">فكك</option>
         <option value="مدد">مدد</option>
         <option value="دحرج">دحرج</option>
+        <option value="بعثر">بعثر</option>
         <option value="زلزل">زلزل</option>
-        <option value="وقف">وقف</option>
+        <option value="وسوس">وسوس</option>
+        <option value="وضع">وضع</option>
+        <option value="يبس">يبس</option>
         <option value="قول">قول</option>
-        <option value="رمي">رمي</option>
-        <option value="درس">درس</option>
+        <option value="نيل">نيل</option>
+        <option value="سعي">سعي</option>
+        <option value="دنو">دنو</option>
+        <option value="وعي">وعي</option>
+        <option value="طوي">طوي</option>
+        <option value="تبع">تبع</option>
+        <option value="عظم">عظم</option>
+        <option value="كسر">كسر</option>
+        <option value="نقل">نقل</option>
+        <option value="قبل">قبل</option>
+        <option value="خرج">خرج</option>
       </select>
     </div>
       
