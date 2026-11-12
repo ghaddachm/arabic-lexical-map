@@ -477,9 +477,10 @@
 </head>
 <body>
 
- <!-- 🧭 أزرار التوجيه الجانبية العائمة -->
+<!-- 🧭 أزرار التوجيه الجانبية العائمة -->
   <div class="floating-side-controls">
     <button id="welcomeBtn" type="button" class="side-control-btn" style="border: 2px solid #f59e0b; display: none !important;" onclick="openWelcomeScreen()" title="شاشة البداية">🚀</button>
+    <button id="backToFormsBtn" type="button" class="side-control-btn" style="border: 2px solid #a855f7; display: none !important;" onclick="returnToMoonForms()" title="العودة لصيغ القمر">🪐</button>
     <button id="sideGuideBtn" type="button" class="side-control-btn" style="border: 2px solid #38bdf8;" onclick="toggleGuideModal()" title="دليل التوجيه">🧭</button>
     <!-- زر الاحتفال والوسام: مخفي افتراضياً ولا يظهر إلا في شمس الجذر -->
     <button id="celebrateBtn" type="button" class="side-control-btn" style="border: 2px solid #ec4899; display: none !important;" onclick="triggerEndJourney()" title="وسام ختام الرحلة">🏆</button>
@@ -998,13 +999,16 @@ const cosmicNavTree = {
       }
     }
 
-  function openWelcomeScreen() {
-      // إخفاء زر الاحتفال وزر العودة للبداية فور العودة لشاشة البداية
+ function openWelcomeScreen() {
+      // إخفاء زر الاحتفال وزر العودة للبداية والعودة لصيغ القمر فور العودة لشاشة البداية
       const celebrateBtn = document.getElementById('celebrateBtn');
       if (celebrateBtn) celebrateBtn.style.setProperty('display', 'none', 'important');
 
       const welcomeBtn = document.getElementById('welcomeBtn');
       if (welcomeBtn) welcomeBtn.style.setProperty('display', 'none', 'important');
+
+      const backToFormsBtn = document.getElementById('backToFormsBtn');
+      if (backToFormsBtn) backToFormsBtn.style.setProperty('display', 'none', 'important');
 
       // إعادة إظهار زر دليل التوجيه الجانبي في شاشة البداية
       const sideGuideBtn = document.getElementById('sideGuideBtn');
@@ -1228,17 +1232,20 @@ function openMoonForms(moon) {
     container.appendChild(card);
   });
 }    
-   // الانتقال المباشر لشمس الجذر
+  // الانتقال المباشر لشمس الجذر
     function selectFormAndLaunch(rootKey) {
       const galaxyModal = document.getElementById('galaxyModal');
       if (galaxyModal) galaxyModal.style.display = 'none';
 
-      // إظهار أزرار التوجيه الجانبية الثلاثة عند الوصول لشمس الجذر
+      // إظهار أزرار التوجيه الجانبية الأربعة عند الوصول لشمس الجذر
       const celebrateBtn = document.getElementById('celebrateBtn');
       if (celebrateBtn) celebrateBtn.style.setProperty('display', 'flex', 'important');
 
       const welcomeBtn = document.getElementById('welcomeBtn');
       if (welcomeBtn) welcomeBtn.style.setProperty('display', 'flex', 'important');
+
+      const backToFormsBtn = document.getElementById('backToFormsBtn');
+      if (backToFormsBtn) backToFormsBtn.style.setProperty('display', 'flex', 'important');
 
       const sideGuideBtn = document.getElementById('sideGuideBtn');
       if (sideGuideBtn) sideGuideBtn.style.setProperty('display', 'flex', 'important');
