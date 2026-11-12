@@ -984,6 +984,9 @@ const cosmicNavTree = {
       const welcomeBtn = document.getElementById('welcomeBtn');
       if (welcomeBtn) welcomeBtn.style.setProperty('display', 'none', 'important');
 
+      const backToFormsBtn = document.getElementById('backToFormsBtn');
+      if (backToFormsBtn) backToFormsBtn.style.setProperty('display', 'none', 'important');
+
       const sideGuideBtn = document.getElementById('sideGuideBtn');
       if (sideGuideBtn) sideGuideBtn.style.setProperty('display', 'none', 'important');
 
@@ -999,7 +1002,7 @@ const cosmicNavTree = {
       }
     }
 
- function openWelcomeScreen() {
+function openWelcomeScreen() {
       // إخفاء زر الاحتفال وزر العودة للبداية والعودة لصيغ القمر فور العودة لشاشة البداية
       const celebrateBtn = document.getElementById('celebrateBtn');
       if (celebrateBtn) celebrateBtn.style.setProperty('display', 'none', 'important');
@@ -1028,6 +1031,39 @@ const cosmicNavTree = {
         welcome.style.display = 'flex';
         welcome.style.opacity = '1';
         welcome.style.transform = 'scale(1)';
+      }
+    }
+
+    // العودة المباشرة من شمس الجذر إلى شاشة صيغ وأوزان القمر السابقة
+    function returnToMoonForms() {
+      const celebrateBtn = document.getElementById('celebrateBtn');
+      if (celebrateBtn) celebrateBtn.style.setProperty('display', 'none', 'important');
+
+      const welcomeBtn = document.getElementById('welcomeBtn');
+      if (welcomeBtn) welcomeBtn.style.setProperty('display', 'none', 'important');
+
+      const backToFormsBtn = document.getElementById('backToFormsBtn');
+      if (backToFormsBtn) backToFormsBtn.style.setProperty('display', 'none', 'important');
+
+      const sideGuideBtn = document.getElementById('sideGuideBtn');
+      if (sideGuideBtn) sideGuideBtn.style.setProperty('display', 'none', 'important');
+
+      const modal = document.getElementById('galaxyModal');
+      if (modal) {
+        modal.style.setProperty('display', 'flex', 'important');
+        modal.style.opacity = '1';
+      }
+
+      const lvl1 = document.getElementById('cosmicLevel1');
+      const lvl2 = document.getElementById('cosmicLevel2');
+      const lvl3 = document.getElementById('cosmicLevel3');
+
+      if (lvl1) lvl1.style.display = 'none';
+      if (lvl2) lvl2.style.display = 'none';
+      if (lvl3) lvl3.style.display = 'block';
+
+      if (typeof currentSelectedMoon !== 'undefined' && currentSelectedMoon && typeof openMoonForms === 'function') {
+        openMoonForms(currentSelectedMoon);
       }
     }
 
