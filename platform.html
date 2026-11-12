@@ -971,8 +971,8 @@ const cosmicNavTree = {
 
     // دوال النوافذ الرئيسية
     function openGalaxyChooser() {
-      const modal = document.getElementById('galaxyModal');
-      if (modal) modal.style.display = 'flex';
+      const celebrateBtn = document.getElementById('celebrateBtn');
+  if (celebrateBtn) celebrateBtn.style.setProperty('display', 'none', 'important');
       backToPlanets();
     }
 
@@ -1004,6 +1004,8 @@ const cosmicNavTree = {
 
 // فتح المستوى الثاني (تثبيت الأقمار بدقة هندسية فوق خط المدار المنقط)
 function openPlanetLevel(planetKey) {
+  const celebrateBtn = document.getElementById('celebrateBtn');
+if (celebrateBtn) celebrateBtn.style.setProperty('display', 'none', 'important');
   const planet = cosmicNavTree[planetKey];
   if (!planet) return;
   currentPlanetKey = planetKey;
@@ -1127,9 +1129,9 @@ function openMoonForms(moon) {
   const topControls = document.getElementById('galaxyTopControls');
   if (topControls) topControls.style.display = 'none';
 
-  // 2. ضمان إخفاء زر الاحتفال
+  // 2. ضمان إخفاء زر الاحتفال بقوة لتجاوز قاعدة CSS
   const celebrateBtn = document.getElementById('celebrateBtn');
-  if (celebrateBtn) celebrateBtn.style.display = 'none';
+  if (celebrateBtn) celebrateBtn.style.setProperty('display', 'none', 'important');
 
   if (title) {
     title.innerHTML = `⭐ صِيَغُ وَأَوْزَانُ: <span style="color:#38bdf8;">${moon.name}</span>`;
@@ -1200,9 +1202,9 @@ function openMoonForms(moon) {
       const galaxyModal = document.getElementById('galaxyModal');
       if (galaxyModal) galaxyModal.style.display = 'none';
 
-      // إظهار زر الاحتفال حصرياً عند الوصول لشمس الجذر
+    // إظهار زر الاحتفال حصرياً عند الوصول لشمس الجذر وتجاوز قاعدة CSS
       const celebrateBtn = document.getElementById('celebrateBtn');
-      if (celebrateBtn) celebrateBtn.style.display = 'flex';
+      if (celebrateBtn) celebrateBtn.style.setProperty('display', 'flex', 'important');
 
       startAdventure();
 
