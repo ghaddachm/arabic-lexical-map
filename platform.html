@@ -479,8 +479,9 @@
 
  <!-- 🧭 أزرار التوجيه الجانبية العائمة -->
   <div class="floating-side-controls">
-    <button type="button" class="side-control-btn" style="border: 2px solid #f59e0b;" onclick="openWelcomeScreen()" title="شاشة البداية">🚀</button>
-   <!-- زر الاحتفال والوسام: مخفي افتراضياً ولا يظهر إلا في شمس الجذر -->
+    <button id="welcomeBtn" type="button" class="side-control-btn" style="border: 2px solid #f59e0b; display: none !important;" onclick="openWelcomeScreen()" title="شاشة البداية">🚀</button>
+    <button id="sideGuideBtn" type="button" class="side-control-btn" style="border: 2px solid #38bdf8;" onclick="toggleGuideModal()" title="دليل التوجيه">🧭</button>
+    <!-- زر الاحتفال والوسام: مخفي افتراضياً ولا يظهر إلا في شمس الجذر -->
     <button id="celebrateBtn" type="button" class="side-control-btn" style="border: 2px solid #ec4899; display: none !important;" onclick="triggerEndJourney()" title="وسام ختام الرحلة">🏆</button>
   </div>
 
@@ -989,13 +990,17 @@ const cosmicNavTree = {
       }
     }
 
-   function openWelcomeScreen() {
+  function openWelcomeScreen() {
       // إخفاء زر الاحتفال وزر العودة للبداية فور العودة لشاشة البداية
       const celebrateBtn = document.getElementById('celebrateBtn');
       if (celebrateBtn) celebrateBtn.style.setProperty('display', 'none', 'important');
 
       const welcomeBtn = document.getElementById('welcomeBtn');
       if (welcomeBtn) welcomeBtn.style.setProperty('display', 'none', 'important');
+
+      // إعادة إظهار زر دليل التوجيه الجانبي في شاشة البداية
+      const sideGuideBtn = document.getElementById('sideGuideBtn');
+      if (sideGuideBtn) sideGuideBtn.style.setProperty('display', 'flex', 'important');
 
       const galaxyModal = document.getElementById('galaxyModal');
       if (galaxyModal) galaxyModal.style.display = 'none';
@@ -1214,12 +1219,15 @@ function openMoonForms(moon) {
       const galaxyModal = document.getElementById('galaxyModal');
       if (galaxyModal) galaxyModal.style.display = 'none';
 
-      // إظهار زر الاحتفال وزر العودة للبداية عند الوصول لشمس الجذر
+      // إظهار أزرار التوجيه الجانبية الثلاثة عند الوصول لشمس الجذر
       const celebrateBtn = document.getElementById('celebrateBtn');
       if (celebrateBtn) celebrateBtn.style.setProperty('display', 'flex', 'important');
 
       const welcomeBtn = document.getElementById('welcomeBtn');
       if (welcomeBtn) welcomeBtn.style.setProperty('display', 'flex', 'important');
+
+      const sideGuideBtn = document.getElementById('sideGuideBtn');
+      if (sideGuideBtn) sideGuideBtn.style.setProperty('display', 'flex', 'important');
 
       startAdventure();
 
