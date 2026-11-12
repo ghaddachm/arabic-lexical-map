@@ -974,9 +974,11 @@ const cosmicNavTree = {
       const celebrateBtn = document.getElementById('celebrateBtn');
       if (celebrateBtn) celebrateBtn.style.setProperty('display', 'none', 'important');
 
-      // إظهار زر العودة للبداية فور مغادرة الشاشة الترحيبية
       const welcomeBtn = document.getElementById('welcomeBtn');
-      if (welcomeBtn) welcomeBtn.style.setProperty('display', 'flex', 'important');
+      if (welcomeBtn) welcomeBtn.style.setProperty('display', 'none', 'important');
+
+      const sideGuideBtn = document.getElementById('sideGuideBtn');
+      if (sideGuideBtn) sideGuideBtn.style.setProperty('display', 'none', 'important');
 
       const modal = document.getElementById('galaxyModal');
       if (modal) modal.style.display = 'flex';
