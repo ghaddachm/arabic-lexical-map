@@ -696,11 +696,17 @@
     </div>
 
     <!-- المستوى 3: الصيغ والأمثلة الدقيقة -->
-    <div id="cosmicLevel3" style="display: none; width: 100%; max-width: 1000px; text-align: center; position: relative; z-index: 60; padding: 0 1.5rem;">
-      <h2 id="moonFormTitle" style="color: #fde047; margin-bottom: 8px; font-size: clamp(2rem, 3.8vw, 2.8rem); font-weight: 900; text-shadow: 0 3px 15px rgba(0,0,0,0.8);">🌟 الصِّيَغُ وَالأَمْثِلَةُ</h2>
-      <p style="color: #cbd5e1; margin-bottom: 30px; font-size: 1.1rem;">انْقُرْ عَلَى الفِعْلِ لِلانْطِلَاقِ نَحْوَ شَمْسِ الجَذْرِ:</p>
-      <div id="formsButtonsContainer" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;"></div>
-      <button type="button" onclick="backToMoons()" style="margin-top: 35px; background: rgba(255,255,255,0.08); border: 2px solid #64748b; color: #cbd5e1; padding: 9px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: all 0.25s;" onmouseover="this.style.borderColor='#fde047'; this.style.color='#fde047'; this.style.transform='scale(1.05)';" onmouseout="this.style.borderColor='#64748b'; this.style.color='#cbd5e1'; this.style.transform='none';">⟵ عَوْدَةٌ لِلأَقْمَارِ</button>
+    <div id="cosmicLevel3" style="display: none; width: 100%; height: 100%; text-align: center; position: relative; z-index: 60; padding: 2rem 1.5rem; overflow: hidden;">
+      <!-- سماء النجوم المتلألئة + هالة سديمية متغيرة بلون القمر -->
+      <div class="galaxy-starfield" style="opacity: 0.85;"></div>
+      <div id="level3NebulaGlow" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 720px; height: 420px; background: radial-gradient(circle, rgba(56, 189, 248, 0.22) 0%, rgba(168, 85, 247, 0.12) 45%, transparent 75%); filter: blur(45px); pointer-events: none; z-index: 1;"></div>
+
+      <div style="position: relative; z-index: 10; max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 85vh;">
+        <h2 id="moonFormTitle" style="color: #fde047; margin-bottom: 8px; font-size: clamp(2rem, 3.8vw, 2.8rem); font-weight: 900; text-shadow: 0 3px 15px rgba(0,0,0,0.8);">🌟 الصِّيَغُ وَالأَمْثِلَةُ</h2>
+        <p style="color: #cbd5e1; margin-bottom: 30px; font-size: 1.1rem;">انْقُرْ عَلَى الفِعْلِ لِلانْطِلَاقِ نَحْوَ شَمْسِ الجَذْرِ:</p>
+        <div id="formsButtonsContainer" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;"></div>
+        <button type="button" onclick="backToMoons()" style="margin-top: 35px; background: rgba(255,255,255,0.08); border: 2px solid #64748b; color: #cbd5e1; padding: 9px 28px; border-radius: 30px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: all 0.25s;" onmouseover="this.style.borderColor='#fde047'; this.style.color='#fde047'; this.style.transform='scale(1.05)';" onmouseout="this.style.borderColor='#64748b'; this.style.color='#cbd5e1'; this.style.transform='none';">⟵ عَوْدَةٌ لِلأَقْمَارِ</button>
+      </div>
     </div>
 
   </div>
@@ -1143,6 +1149,12 @@ function openMoonForms(moon) {
 
   if (lvl2) lvl2.style.display = 'none';
   if (lvl3) lvl3.style.display = 'block';
+
+  // تلوين الهالة السديمية خلف البطاقات تلقائياً بلون القمر المختار
+  const nebula = document.getElementById('level3NebulaGlow');
+  if (nebula && moon.color) {
+    nebula.style.background = `radial-gradient(circle, ${moon.color}40 0%, rgba(15, 23, 42, 0.1) 55%, transparent 78%)`;
+  }
 
   // 1. إخفاء عناصر التحكم العلوية (البوصلة والإغلاق) في شاشة الصيغ
   const topControls = document.getElementById('galaxyTopControls');
