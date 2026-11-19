@@ -479,6 +479,7 @@
 
 <!-- 🧭 أزرار التوجيه الجانبية العائمة -->
   <div class="floating-side-controls">
+    <button id="soundToggleBtn" type="button" class="side-control-btn" style="border: 2px solid #22c55e;" onclick="toggleSoundSystem()" title="تشغيل/كتم الصوت">🔊</button>
     <button id="welcomeBtn" type="button" class="side-control-btn" style="border: 2px solid #f59e0b; display: none !important;" onclick="openWelcomeScreen()" title="شاشة البداية">🚀</button>
     <button id="backToFormsBtn" type="button" class="side-control-btn" style="border: 2px solid #a855f7; display: none !important;" onclick="returnToMoonForms()" title="العودة لصيغ القمر">🪐</button>
     <button id="sideGuideBtn" type="button" class="side-control-btn" style="border: 2px solid #38bdf8;" onclick="toggleGuideModal()" title="دليل التوجيه">🧭</button>
@@ -782,7 +783,112 @@
 
   <script>
     const database = window.db || (typeof db !== 'undefined' ? db : {});
+// 🔊 محرك الصوت الكوني المستقل (يعمل 100% بدون إنترنت)
+    let isSoundEnabled = true;
+    let cosmicAudioCtx = null;
 
+    // قاموس النطق البشري المدمج (Base64) - جاهز لإضافة المقاطع الصوتية لاحقاً
+    const rootAudioMap = {
+      // مثال مستقبلي: "كتب": "data:audio/mp3;base64,..."
+    };
+
+    function getAudioContext() {
+      if (!cosmicAudioCtx) {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtx) cosmicAudioCtx = new AudioCtx();
+      }
+      if (cosmicAudioCtx && cosmicAudioCtx.state === 'suspended') {
+        cosmicAudioCtx.resume();
+      }
+      return cosmicAudioCtx;
+    }
+
+    function toggleSoundSystem() {
+      isSoundEnabled = !isSoundEnabled;
+      const btn = document.getElementById('soundToggleBtn');
+      if (btn) {
+        btn.textContent = isSoundEnabled ? '🔊' : '🔇';
+        btn.style.borderColor = isSoundEnabled ? '#22c55e' : '#64748b';
+      }
+      if (isSoundEnabled) playCosmicSound('click');
+    }
+
+    function playCosmicSound(type) {
+      if (!isSoundEnabled) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      if (type === 'click') {
+        // نقرة فضائية ناعمة
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(520, now);
+        osc.frequency.exponentialRampToValueAtTime(780, now + 0.08);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+        osc.start(now);
+        osc.stop(now + 0.09);
+      } else if (type === 'launch') {
+        // انطلاق الصاروخ نحو شمس الجذر
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(220, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.35);
+        gain.gain.setValueAtTime(0.18, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+        osc.start(now);
+        osc.stop(now + 0.38);
+      } else if (type === 'star') {
+        // رنين كسب نجمة / إجابة صحيحة
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, now); // D5
+        osc.frequency.setValueAtTime(880, now + 0.1); // A5
+        gain.gain.setValueAtTime(0.16, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+        osc.start(now);
+        osc.stop(now + 0.3);
+      } else if (type === 'retry') {
+        // تنبيه لطيف لإعادة المحاولة
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(300, now);
+        osc.frequency.linearRampToValueAtTime(240, now + 0.2);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+        osc.start(now);
+        osc.stop(now + 0.22);
+      } else if (type === 'victory') {
+        // لحن وسام ختام الرحلة
+        const notes = [523.25, 659.25, 783.99, 1046.5];
+        notes.forEach((freq, idx) => {
+          const o = ctx.createOscillator();
+          const g = ctx.createGain();
+          o.type = 'triangle';
+          o.frequency.setValueAtTime(freq, now + idx * 0.11);
+          g.gain.setValueAtTime(0.15, now + idx * 0.11);
+          g.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.11 + 0.35);
+          o.connect(g);
+          g.connect(ctx.destination);
+          o.start(now + idx * 0.11);
+          o.stop(now + idx * 0.11 + 0.35);
+        });
+      }
+    }
+
+    // دالة تشغيل النطق البشري المدمج عند توفره
+    function playRootPronunciation(key) {
+      if (!isSoundEnabled) return;
+      if (rootAudioMap[key]) {
+        const audio = new Audio(rootAudioMap[key]);
+        audio.play().catch(() => {});
+      } else {
+        playCosmicSound('click');
+      }
+    }
+    
 const cosmicNavTree = {
   // 📚 1. كوكب الثلاثي المجرد (الصحيح)
   triadic: {
@@ -976,8 +1082,9 @@ const cosmicNavTree = {
     let currentPlanetKey = null;
     let currentSelectedMoon = null;
 
-   // دوال النوافذ الرئيسية
+ // دوال النوافذ الرئيسية
     function openGalaxyChooser() {
+      playCosmicSound('click');
       const celebrateBtn = document.getElementById('celebrateBtn');
       if (celebrateBtn) celebrateBtn.style.setProperty('display', 'none', 'important');
 
@@ -994,6 +1101,7 @@ const cosmicNavTree = {
       if (modal) modal.style.display = 'flex';
       backToPlanets();
     }
+
     function startAdventure() {
       const welcome = document.getElementById('welcomeScreen');
       if (welcome) {
@@ -1002,7 +1110,8 @@ const cosmicNavTree = {
       }
     }
 
-function openWelcomeScreen() {
+    function openWelcomeScreen() {
+      playCosmicSound('click');
       // إخفاء زر الاحتفال وزر العودة للبداية والعودة لصيغ القمر فور العودة لشاشة البداية
       const celebrateBtn = document.getElementById('celebrateBtn');
       if (celebrateBtn) celebrateBtn.style.setProperty('display', 'none', 'important');
@@ -1036,6 +1145,7 @@ function openWelcomeScreen() {
 
     // العودة المباشرة من شمس الجذر إلى شاشة صيغ وأوزان القمر السابقة
     function returnToMoonForms() {
+      playCosmicSound('click');
       const celebrateBtn = document.getElementById('celebrateBtn');
       if (celebrateBtn) celebrateBtn.style.setProperty('display', 'none', 'important');
 
@@ -1067,209 +1177,213 @@ function openWelcomeScreen() {
       }
     }
 
-// فتح المستوى الثاني (تثبيت الأقمار بدقة هندسية فوق خط المدار المنقط)
-function openPlanetLevel(planetKey) {
-  const celebrateBtn = document.getElementById('celebrateBtn');
-if (celebrateBtn) celebrateBtn.style.setProperty('display', 'none', 'important');
-  const planet = cosmicNavTree[planetKey];
-  if (!planet) return;
-  currentPlanetKey = planetKey;
+    // فتح المستوى الثاني (تثبيت الأقمار بدقة هندسية فوق خط المدار المنقط)
+    function openPlanetLevel(planetKey) {
+      playCosmicSound('click');
+      const celebrateBtn = document.getElementById('celebrateBtn');
+      if (celebrateBtn) celebrateBtn.style.setProperty('display', 'none', 'important');
+      const planet = cosmicNavTree[planetKey];
+      if (!planet) return;
+      currentPlanetKey = planetKey;
 
-  const lvl1 = document.getElementById('cosmicLevel1');
-  const lvl2 = document.getElementById('cosmicLevel2');
-  const lvl3 = document.getElementById('cosmicLevel3');
-  const title = document.getElementById('planetMoonTitle');
-  const container = document.getElementById('moonsCardsContainer');
+      const lvl1 = document.getElementById('cosmicLevel1');
+      const lvl2 = document.getElementById('cosmicLevel2');
+      const lvl3 = document.getElementById('cosmicLevel3');
+      const title = document.getElementById('planetMoonTitle');
+      const container = document.getElementById('moonsCardsContainer');
 
-  if (lvl1) lvl1.style.display = 'none';
-  if (lvl3) lvl3.style.display = 'none';
-  if (lvl2) lvl2.style.display = 'block';
+      if (lvl1) lvl1.style.display = 'none';
+      if (lvl3) lvl3.style.display = 'none';
+      if (lvl2) lvl2.style.display = 'block';
 
-  document.body.classList.add('in-level-2');
+      document.body.classList.add('in-level-2');
 
-  // تحديث العنوان مع أيقونة الكوكب المختار
-  if (title) {
-    title.innerHTML = `${planet.icon || '🪐'} ${planet.name}`;
-  }
+      // تحديث العنوان مع أيقونة الكوكب المختار
+      if (title) {
+        title.innerHTML = `${planet.icon || '🪐'} ${planet.name}`;
+      }
 
-  if (!container) return;
-  container.innerHTML = '';
-  container.style.cssText = 'position: relative; width: 100%; height: 100%;';
+      if (!container) return;
+      container.innerHTML = '';
+      container.style.cssText = 'position: relative; width: 100%; height: 100%;';
 
-  const moonsList = planet.moons || [];
+      const moonsList = planet.moons || [];
 
-  moonsList.forEach((moon, idx) => {
-    // تحديد موقع القمر اعتماداً على النسب المئوية مع إلغاء حركة الطفو الرأسية
-    const moonWrapper = document.createElement('div');
-    moonWrapper.style.cssText = `
-      position: absolute !important;
-      left: ${moon.left || (moon.x !== undefined ? moon.x + 'px' : '50%')};
-      top: ${moon.top || (moon.y !== undefined ? moon.y + 'px' : '50%')};
-      transform: translate(-50%, -50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      z-index: 30;
-      transition: transform 0.3s ease;
-      animation: none !important;
-    `;
+      moonsList.forEach((moon, idx) => {
+        // تحديد موقع القمر اعتماداً على النسب المئوية مع إلغاء حركة الطفو الرأسية
+        const moonWrapper = document.createElement('div');
+        moonWrapper.style.cssText = `
+          position: absolute !important;
+          left: ${moon.left || (moon.x !== undefined ? moon.x + 'px' : '50%')};
+          top: ${moon.top || (moon.y !== undefined ? moon.y + 'px' : '50%')};
+          transform: translate(-50%, -50%);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 6px;
+          cursor: pointer;
+          z-index: 30;
+          transition: transform 0.3s ease;
+          animation: none !important;
+        `;
 
-    const moonSphere = document.createElement('div');
-    const moonColor = moon.color || '#38bdf8';
-    moonSphere.style.cssText = `
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      background: ${moon.moonBase || `radial-gradient(circle at 35% 30%, #ffffff 0%, ${moonColor} 65%, #0f172a 100%)`};
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 3px solid rgba(255, 255, 255, 0.95);
-      box-shadow: 0 0 25px ${moon.glowColor || moonColor}, inset -8px -8px 16px rgba(0,0,0,0.65);
-      overflow: hidden;
-      transition: all 0.3s ease;
-    `;
+        const moonSphere = document.createElement('div');
+        const moonColor = moon.color || '#38bdf8';
+        moonSphere.style.cssText = `
+          width: 110px;
+          height: 110px;
+          border-radius: 50%;
+          background: ${moon.moonBase || `radial-gradient(circle at 35% 30%, #ffffff 0%, ${moonColor} 65%, #0f172a 100%)`};
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          border: 3px solid rgba(255, 255, 255, 0.95);
+          box-shadow: 0 0 25px ${moon.glowColor || moonColor}, inset -8px -8px 16px rgba(0,0,0,0.65);
+          overflow: hidden;
+          transition: all 0.3s ease;
+        `;
 
-    const crater1 = `<div style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: rgba(0,0,0,0.15); top: 14px; left: 18px; box-shadow: inset 2px 2px 4px rgba(0,0,0,0.3);"></div>`;
-    const crater2 = `<div style="position: absolute; width: 14px; height: 14px; border-radius: 50%; background: rgba(0,0,0,0.12); bottom: 18px; right: 22px; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);"></div>`;
+        const crater1 = `<div style="position: absolute; width: 20px; height: 20px; border-radius: 50%; background: rgba(0,0,0,0.15); top: 14px; left: 18px; box-shadow: inset 2px 2px 4px rgba(0,0,0,0.3);"></div>`;
+        const crater2 = `<div style="position: absolute; width: 14px; height: 14px; border-radius: 50%; background: rgba(0,0,0,0.12); bottom: 18px; right: 22px; box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);"></div>`;
 
-    moonSphere.innerHTML = `
-      ${crater1}
-      ${crater2}
-      <div style="font-size: 2rem; z-index: 2; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.6));">${moon.symbol || '🌙'}</div>
-      <span style="color: #ffffff; font-weight: 900; font-size: 0.95rem; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">${moon.name.replace('قَمَرُ ', '')}</span>
-    `;
+        moonSphere.innerHTML = `
+          ${crater1}
+          ${crater2}
+          <div style="font-size: 2rem; z-index: 2; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.6));">${moon.symbol || '🌙'}</div>
+          <span style="color: #ffffff; font-weight: 900; font-size: 0.95rem; z-index: 2; text-shadow: 0 2px 8px rgba(0,0,0,0.9);">${moon.name.replace('قَمَرُ ', '')}</span>
+        `;
 
-    const descBox = document.createElement('div');
-    descBox.style.cssText = `
-      background: rgba(15, 23, 42, 0.92);
-      border: 1.5px solid ${moonColor};
-      backdrop-filter: blur(8px);
-      padding: 4px 10px;
-      border-radius: 12px;
-      text-align: center;
-      max-width: 160px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    `;
-    descBox.innerHTML = `
-      <div style="color: #f1f5f9; font-size: 0.72rem; font-weight: 600; line-height: 1.3;">${moon.desc || ''}</div>
-    `;
+        const descBox = document.createElement('div');
+        descBox.style.cssText = `
+          background: rgba(15, 23, 42, 0.92);
+          border: 1.5px solid ${moonColor};
+          backdrop-filter: blur(8px);
+          padding: 4px 10px;
+          border-radius: 12px;
+          text-align: center;
+          max-width: 160px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        `;
+        descBox.innerHTML = `
+          <div style="color: #f1f5f9; font-size: 0.72rem; font-weight: 600; line-height: 1.3;">${moon.desc || ''}</div>
+        `;
 
-    moonWrapper.appendChild(moonSphere);
-    moonWrapper.appendChild(descBox);
+        moonWrapper.appendChild(moonSphere);
+        moonWrapper.appendChild(descBox);
 
-    // تكبير موضعي لطيف دون إزاحة رأسية للمركز
-    moonWrapper.onmouseover = () => {
-      moonWrapper.style.transform = 'translate(-50%, -50%) scale(1.1)';
-      moonSphere.style.boxShadow = `0 0 35px ${moon.glowColor || moonColor}, inset -4px -4px 10px rgba(0,0,0,0.45)`;
-      moonSphere.style.borderColor = '#ffffff';
-    };
-    moonWrapper.onmouseout = () => {
-      moonWrapper.style.transform = 'translate(-50%, -50%) scale(1)';
-      moonSphere.style.boxShadow = `0 0 25px ${moon.glowColor || moonColor}, inset -8px -8px 16px rgba(0,0,0,0.65)`;
-      moonSphere.style.borderColor = 'rgba(255, 255, 255, 0.95)';
-    };
+        // تكبير موضعي لطيف دون إزاحة رأسية للمركز
+        moonWrapper.onmouseover = () => {
+          moonWrapper.style.transform = 'translate(-50%, -50%) scale(1.1)';
+          moonSphere.style.boxShadow = `0 0 35px ${moon.glowColor || moonColor}, inset -4px -4px 10px rgba(0,0,0,0.45)`;
+          moonSphere.style.borderColor = '#ffffff';
+        };
+        moonWrapper.onmouseout = () => {
+          moonWrapper.style.transform = 'translate(-50%, -50%) scale(1)';
+          moonSphere.style.boxShadow = `0 0 25px ${moon.glowColor || moonColor}, inset -8px -8px 16px rgba(0,0,0,0.65)`;
+          moonSphere.style.borderColor = 'rgba(255, 255, 255, 0.95)';
+        };
 
-    moonWrapper.onclick = () => openMoonForms(moon);
-    container.appendChild(moonWrapper);
-  });
-}
+        moonWrapper.onclick = () => openMoonForms(moon);
+        container.appendChild(moonWrapper);
+      });
+    }
 
-// المستوى الثالث: عرض البطاقات وقراءة التلوين الصرفي الدقيق والمحدد سلفاً
-function openMoonForms(moon) {
-  currentSelectedMoon = moon;
-  const lvl2 = document.getElementById('cosmicLevel2');
-  const lvl3 = document.getElementById('cosmicLevel3');
-  const title = document.getElementById('moonFormTitle');
-  const container = document.getElementById('formsButtonsContainer');
+    // المستوى الثالث: عرض البطاقات وقراءة التلوين الصرفي الدقيق والمحدد سلفاً
+    function openMoonForms(moon) {
+      playCosmicSound('click');
+      currentSelectedMoon = moon;
+      const lvl2 = document.getElementById('cosmicLevel2');
+      const lvl3 = document.getElementById('cosmicLevel3');
+      const title = document.getElementById('moonFormTitle');
+      const container = document.getElementById('formsButtonsContainer');
 
-  if (lvl2) lvl2.style.display = 'none';
-  if (lvl3) lvl3.style.display = 'block';
+      if (lvl2) lvl2.style.display = 'none';
+      if (lvl3) lvl3.style.display = 'block';
 
-  // تلوين الهالة السديمية خلف البطاقات تلقائياً بلون القمر المختار
-  const nebula = document.getElementById('level3NebulaGlow');
-  if (nebula && moon.color) {
-    nebula.style.background = `radial-gradient(circle, ${moon.color}40 0%, rgba(15, 23, 42, 0.1) 55%, transparent 78%)`;
-  }
+      // تلوين الهالة السديمية خلف البطاقات تلقائياً بلون القمر المختار
+      const nebula = document.getElementById('level3NebulaGlow');
+      if (nebula && moon.color) {
+        nebula.style.background = `radial-gradient(circle, ${moon.color}40 0%, rgba(15, 23, 42, 0.1) 55%, transparent 78%)`;
+      }
 
-  // 1. إخفاء عناصر التحكم العلوية (البوصلة والإغلاق) في شاشة الصيغ
-  const topControls = document.getElementById('galaxyTopControls');
-  if (topControls) topControls.style.display = 'none';
+      // 1. إخفاء عناصر التحكم العلوية (البوصلة والإغلاق) في شاشة الصيغ
+      const topControls = document.getElementById('galaxyTopControls');
+      if (topControls) topControls.style.display = 'none';
 
-  // 2. ضمان إخفاء زر الاحتفال بقوة لتجاوز قاعدة CSS
-  const celebrateBtn = document.getElementById('celebrateBtn');
-  if (celebrateBtn) celebrateBtn.style.setProperty('display', 'none', 'important');
+      // 2. ضمان إخفاء زر الاحتفال بقوة لتجاوز قاعدة CSS
+      const celebrateBtn = document.getElementById('celebrateBtn');
+      if (celebrateBtn) celebrateBtn.style.setProperty('display', 'none', 'important');
 
-  if (title) {
-    title.innerHTML = `⭐ صِيَغُ وَأَوْزَانُ: <span style="color:#38bdf8;">${moon.name}</span>`;
-    title.style.color = '#fde047';
-  }
-  if (!container) return;
+      if (title) {
+        title.innerHTML = `⭐ صِيَغُ وَأَوْزَانُ: <span style="color:#38bdf8;">${moon.name}</span>`;
+        title.style.color = '#fde047';
+      }
+      if (!container) return;
 
-  container.innerHTML = '';
-  container.style.cssText = 'display: flex; gap: clamp(20px, 3.5vw, 40px); justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 35px; padding: 10px;';
+      container.innerHTML = '';
+      container.style.cssText = 'display: flex; gap: clamp(20px, 3.5vw, 40px); justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 35px; padding: 10px;';
 
-  const formsList = moon.forms || [];
+      const formsList = moon.forms || [];
 
-  formsList.forEach((st, idx) => {
-    const card = document.createElement('div');
-    const themeColor = moon.color || '#38bdf8';
+      formsList.forEach((st, idx) => {
+        const card = document.createElement('div');
+        const themeColor = moon.color || '#38bdf8';
 
-    card.style.cssText = `
-      position: relative;
-      width: 250px;
-      min-height: 230px;
-      background: linear-gradient(160deg, rgba(22, 27, 54, 0.95) 0%, rgba(10, 14, 35, 0.98) 100%);
-      border: 2px solid ${themeColor};
-      border-radius: 28px;
-      padding: 1.8rem 1.2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      text-align: center;
-      cursor: pointer;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(56, 189, 248, 0.25);
-      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      animation: popTab 0.4s ease ${idx * 0.12}s both;
-    `;
+        card.style.cssText = `
+          position: relative;
+          width: 250px;
+          min-height: 230px;
+          background: linear-gradient(160deg, rgba(22, 27, 54, 0.95) 0%, rgba(10, 14, 35, 0.98) 100%);
+          border: 2px solid ${themeColor};
+          border-radius: 28px;
+          padding: 1.8rem 1.2rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          text-align: center;
+          cursor: pointer;
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(56, 189, 248, 0.25);
+          transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          animation: popTab 0.4s ease ${idx * 0.12}s both;
+        `;
 
-    card.innerHTML = `
-      <div style="font-size: 1.8rem; filter: drop-shadow(0 0 10px #fde047); margin-bottom: -6px;">⭐</div>
-      <div style="font-size: 2.6rem; font-weight: 900; color: #ffffff; letter-spacing: 1px;">
-        ${st.display || st.sample}
-      </div>
-      <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 16px; padding: 6px 12px; color: #e2e8f0; font-size: 0.88rem; font-weight: 700; line-height: 1.5; width: 100%;">
-        ${st.label || ''}
-      </div>
-      <div style="margin-top: 4px; color: ${themeColor}; font-size: 0.85rem; font-weight: 800; display: flex; align-items: center; gap: 4px;">
-        <span>انْطَلِقْ لِلشَّمْسِ</span> ⟵
-      </div>
-    `;
+        card.innerHTML = `
+          <div style="font-size: 1.8rem; filter: drop-shadow(0 0 10px #fde047); margin-bottom: -6px;">⭐</div>
+          <div style="font-size: 2.6rem; font-weight: 900; color: #ffffff; letter-spacing: 1px;">
+            ${st.display || st.sample}
+          </div>
+          <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 16px; padding: 6px 12px; color: #e2e8f0; font-size: 0.88rem; font-weight: 700; line-height: 1.5; width: 100%;">
+            ${st.label || ''}
+          </div>
+          <div style="margin-top: 4px; color: ${themeColor}; font-size: 0.85rem; font-weight: 800; display: flex; align-items: center; gap: 4px;">
+            <span>انْطَلِقْ لِلشَّمْسِ</span> ⟵
+          </div>
+        `;
 
-    card.onmouseover = () => {
-      card.style.transform = 'translateY(-10px) scale(1.04)';
-      card.style.borderColor = '#ffffff';
-      card.style.boxShadow = `0 18px 40px rgba(0, 0, 0, 0.7), 0 0 30px ${themeColor}`;
-    };
+        card.onmouseover = () => {
+          card.style.transform = 'translateY(-10px) scale(1.04)';
+          card.style.borderColor = '#ffffff';
+          card.style.boxShadow = `0 18px 40px rgba(0, 0, 0, 0.7), 0 0 30px ${themeColor}`;
+        };
 
-    card.onmouseout = () => {
-      card.style.transform = 'none';
-      card.style.borderColor = themeColor;
-      card.style.boxShadow = `0 12px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(56, 189, 248, 0.25)`;
-    };
+        card.onmouseout = () => {
+          card.style.transform = 'none';
+          card.style.borderColor = themeColor;
+          card.style.boxShadow = `0 12px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(56, 189, 248, 0.25)`;
+        };
 
-    card.onclick = () => selectFormAndLaunch(st.val, st.sample);
-    container.appendChild(card);
-  });
-}    
-  // الانتقال المباشر لشمس الجذر
+        card.onclick = () => selectFormAndLaunch(st.val, st.sample);
+        container.appendChild(card);
+      });
+    }
+
+    // الانتقال المباشر لشمس الجذر
     function selectFormAndLaunch(rootKey) {
+      playCosmicSound('launch');
       const galaxyModal = document.getElementById('galaxyModal');
       if (galaxyModal) galaxyModal.style.display = 'none';
 
@@ -1298,6 +1412,7 @@ function openMoonForms(moon) {
 
     // دوال الرجوع
     function backToPlanets() {
+      playCosmicSound('click');
       const lvl1 = document.getElementById('cosmicLevel1');
       const lvl2 = document.getElementById('cosmicLevel2');
       const lvl3 = document.getElementById('cosmicLevel3');
@@ -1308,74 +1423,77 @@ function openMoonForms(moon) {
     }
 
     function backToMoons() {
-  const lvl2 = document.getElementById('cosmicLevel2');
-  const lvl3 = document.getElementById('cosmicLevel3');
-  if (lvl3) lvl3.style.display = 'none';
-  if (lvl2) lvl2.style.display = 'block';
+      playCosmicSound('click');
+      const lvl2 = document.getElementById('cosmicLevel2');
+      const lvl3 = document.getElementById('cosmicLevel3');
+      if (lvl3) lvl3.style.display = 'none';
+      if (lvl2) lvl2.style.display = 'block';
 
-  // إعادة إظهار عناصر التحكم العلوية في المستوى الثاني
-  const topControls = document.getElementById('galaxyTopControls');
-  if (topControls) topControls.style.display = 'flex';
-}
-
-// زر التوجيه الذكي المتكيف سياقياً مع المستوى والكوكب المفتوح
-function toggleGuideModal() {
-  const modal = document.getElementById('guideModalBox');
-  if (!modal) return;
-
-  const isVisible = modal.style.display === 'flex';
-  if (isVisible) {
-    modal.style.display = 'none';
-    return;
-  }
-
-  const galaxyModal = document.getElementById('galaxyModal');
-  const isGalaxyOpen = galaxyModal && (galaxyModal.style.display === 'flex' || galaxyModal.style.display === 'block');
-
-  const lvl2 = document.getElementById('cosmicLevel2');
-  const isLevel2Open = isGalaxyOpen && lvl2 && (lvl2.style.display === 'block' || lvl2.style.display === 'flex');
-
-  // جلب كافة حاويات الأدلة
-  const contentLang = document.getElementById('guideContentLanguage');
-  const contentVerbs = document.getElementById('guideContentVerbs');
-  const contentTriadic = document.getElementById('guideContentTriadic');
-  const contentQuadric = document.getElementById('guideContentQuadric');
-  const contentWeak = document.getElementById('guideContentWeak');
-  const contentAugmented = document.getElementById('guideContentAugmented');
-
-  // إخفاء كل المحتويات أولاً لتفادي أي تداخل
-  [contentLang, contentVerbs, contentTriadic, contentQuadric, contentWeak, contentAugmented].forEach(el => {
-    if (el) el.style.display = 'none';
-  });
-
-  if (isLevel2Open) {
-    // خريطة ربط مفتاح الكوكب النشط بالحاوية الخاصة به
-    const planetGuideMap = {
-      triadic: contentTriadic,
-      quadric: contentQuadric,
-      weak: contentWeak,
-      augmented: contentAugmented
-    };
-
-    const targetGuide = planetGuideMap[currentPlanetKey] || contentTriadic;
-    if (targetGuide) {
-      targetGuide.style.display = 'block';
-    } else if (contentVerbs) {
-      contentVerbs.style.display = 'block';
+      // إعادة إظهار عناصر التحكم العلوية في المستوى الثاني
+      const topControls = document.getElementById('galaxyTopControls');
+      if (topControls) topControls.style.display = 'flex';
     }
-  } else if (isGalaxyOpen) {
-    // واجهة اختيار الكواكب الكبرى الأربعة
-    if (contentVerbs) contentVerbs.style.display = 'block';
-  } else {
-    // الواجهة الرئيسية للمنصة (محطات اللغة)
-    if (contentLang) contentLang.style.display = 'block';
-  }
 
-  modal.style.display = 'flex';
-}
+    // زر التوجيه الذكي المتكيف سياقياً مع المستوى والكوكب المفتوح
+    function toggleGuideModal() {
+      playCosmicSound('click');
+      const modal = document.getElementById('guideModalBox');
+      if (!modal) return;
+
+      const isVisible = modal.style.display === 'flex';
+      if (isVisible) {
+        modal.style.display = 'none';
+        return;
+      }
+
+      const galaxyModal = document.getElementById('galaxyModal');
+      const isGalaxyOpen = galaxyModal && (galaxyModal.style.display === 'flex' || galaxyModal.style.display === 'block');
+
+      const lvl2 = document.getElementById('cosmicLevel2');
+      const isLevel2Open = isGalaxyOpen && lvl2 && (lvl2.style.display === 'block' || lvl2.style.display === 'flex');
+
+      // جلب كافة حاويات الأدلة
+      const contentLang = document.getElementById('guideContentLanguage');
+      const contentVerbs = document.getElementById('guideContentVerbs');
+      const contentTriadic = document.getElementById('guideContentTriadic');
+      const contentQuadric = document.getElementById('guideContentQuadric');
+      const contentWeak = document.getElementById('guideContentWeak');
+      const contentAugmented = document.getElementById('guideContentAugmented');
+
+      // إخفاء كل المحتويات أولاً لتفادي أي تداخل
+      [contentLang, contentVerbs, contentTriadic, contentQuadric, contentWeak, contentAugmented].forEach(el => {
+        if (el) el.style.display = 'none';
+      });
+
+      if (isLevel2Open) {
+        // خريطة ربط مفتاح الكوكب النشط بالحاوية الخاصة به
+        const planetGuideMap = {
+          triadic: contentTriadic,
+          quadric: contentQuadric,
+          weak: contentWeak,
+          augmented: contentAugmented
+        };
+
+        const targetGuide = planetGuideMap[currentPlanetKey] || contentTriadic;
+        if (targetGuide) {
+          targetGuide.style.display = 'block';
+        } else if (contentVerbs) {
+          contentVerbs.style.display = 'block';
+        }
+      } else if (isGalaxyOpen) {
+        // واجهة اختيار الكواكب الكبرى الأربعة
+        if (contentVerbs) contentVerbs.style.display = 'block';
+      } else {
+        // الواجهة الرئيسية للمنصة (محطات اللغة)
+        if (contentLang) contentLang.style.display = 'block';
+      }
+
+      modal.style.display = 'flex';
+    }
 
     // وسام ختام الرحلة
     function triggerEndJourney() {
+      playCosmicSound('victory');
       const endScreen = document.getElementById('endJourneyScreen');
       if (endScreen) {
         endScreen.style.display = 'flex';
@@ -1383,6 +1501,7 @@ function toggleGuideModal() {
     }
 
     function switchMainTab(tabId, el) {
+      playCosmicSound('click');
       startAdventure();
       document.querySelectorAll('.tab-pill').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.tab-view').forEach(v => { v.classList.remove('active'); v.style.display = 'none'; });
@@ -1390,7 +1509,6 @@ function toggleGuideModal() {
       const activeView = document.getElementById(tabId);
       if (activeView) { activeView.classList.add('active'); activeView.style.display = 'block'; }
     }
-
     function loadRadialWorld(rootKey) {
       const data = database[rootKey] || database['كتب'];
       if (!data) return;
