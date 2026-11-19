@@ -792,13 +792,10 @@
       // مثال مستقبلي: "كتب": "data:audio/mp3;base64,..."
     };
 
-    function getAudioContext() {
+   function getAudioContext() {
       if (!cosmicAudioCtx) {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
         if (AudioCtx) cosmicAudioCtx = new AudioCtx();
-      }
-      if (cosmicAudioCtx && cosmicAudioCtx.state === 'suspended') {
-        cosmicAudioCtx.resume();
       }
       return cosmicAudioCtx;
     }
@@ -810,7 +807,7 @@
         btn.textContent = isSoundEnabled ? '🔊' : '🔇';
         btn.style.borderColor = isSoundEnabled ? '#22c55e' : '#64748b';
       }
-      if (isSoundEnabled) playCosmicSound('click');
+      if (isSoundEnabled) playCosmicSound('star');
     }
 
     function playCosmicSound(type) {
@@ -818,63 +815,71 @@
       const ctx = getAudioContext();
       if (!ctx) return;
 
-      const now = ctx.currentTime;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
+      const triggerTone = () => {
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
 
-      if (type === 'click') {
-        // نقرة فضائية ناعمة
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(520, now);
-        osc.frequency.exponentialRampToValueAtTime(780, now + 0.08);
-        gain.gain.setValueAtTime(0.12, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
-        osc.start(now);
-        osc.stop(now + 0.09);
-      } else if (type === 'launch') {
-        // انطلاق الصاروخ نحو شمس الجذر
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(220, now);
-        osc.frequency.exponentialRampToValueAtTime(880, now + 0.35);
-        gain.gain.setValueAtTime(0.18, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
-        osc.start(now);
-        osc.stop(now + 0.38);
-      } else if (type === 'star') {
-        // رنين كسب نجمة / إجابة صحيحة
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(587.33, now); // D5
-        osc.frequency.setValueAtTime(880, now + 0.1); // A5
-        gain.gain.setValueAtTime(0.16, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
-        osc.start(now);
-        osc.stop(now + 0.3);
-      } else if (type === 'retry') {
-        // تنبيه لطيف لإعادة المحاولة
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(300, now);
-        osc.frequency.linearRampToValueAtTime(240, now + 0.2);
-        gain.gain.setValueAtTime(0.12, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
-        osc.start(now);
-        osc.stop(now + 0.22);
-      } else if (type === 'victory') {
-        // لحن وسام ختام الرحلة
-        const notes = [523.25, 659.25, 783.99, 1046.5];
-        notes.forEach((freq, idx) => {
-          const o = ctx.createOscillator();
-          const g = ctx.createGain();
-          o.type = 'triangle';
-          o.frequency.setValueAtTime(freq, now + idx * 0.11);
-          g.gain.setValueAtTime(0.15, now + idx * 0.11);
-          g.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.11 + 0.35);
-          o.connect(g);
-          g.connect(ctx.destination);
-          o.start(now + idx * 0.11);
-          o.stop(now + idx * 0.11 + 0.35);
-        });
+        if (type === 'click') {
+          // نغمة فضائية واضحة ورنانة
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, now); // D5
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.16); // A5
+          gain.gain.setValueAtTime(0.32, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+          osc.start(now);
+          osc.stop(now + 0.19);
+        } else if (type === 'launch') {
+          // انطلاق الصاروخ نحو شمس الجذر (صعود نغمي ممتد)
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(261.63, now); // C4
+          osc.frequency.exponentialRampToValueAtTime(1046.5, now + 0.45); // C6
+          gain.gain.setValueAtTime(0.38, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.48);
+          osc.start(now);
+          osc.stop(now + 0.5);
+        } else if (type === 'star') {
+          // رنين كسب نجمة / إجابة صحيحة
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(659.25, now); // E5
+          osc.frequency.setValueAtTime(987.77, now + 0.12); // B5
+          gain.gain.setValueAtTime(0.35, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+          osc.start(now);
+          osc.stop(now + 0.4);
+        } else if (type === 'retry') {
+          // تنبيه لطيف لإعادة المحاولة
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(329.63, now);
+          osc.frequency.linearRampToValueAtTime(246.94, now + 0.25);
+          gain.gain.setValueAtTime(0.28, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        } else if (type === 'victory') {
+          // لحن وسام ختام الرحلة الاحتفالي
+          const notes = [523.25, 659.25, 783.99, 1046.5];
+          notes.forEach((freq, idx) => {
+            const o = ctx.createOscillator();
+            const g = ctx.createGain();
+            o.type = 'triangle';
+            o.frequency.setValueAtTime(freq, now + idx * 0.13);
+            g.gain.setValueAtTime(0.32, now + idx * 0.13);
+            g.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.13 + 0.45);
+            o.connect(g);
+            g.connect(ctx.destination);
+            o.start(now + idx * 0.13);
+            o.stop(now + idx * 0.13 + 0.48);
+          });
+        }
+      };
+
+      if (ctx.state === 'suspended') {
+        ctx.resume().then(triggerTone);
+      } else {
+        triggerTone();
       }
     }
 
